@@ -118,7 +118,7 @@
     const leftBefore = toRateLeft(g), strandBefore = strandLeft(e, g);
     S.ratings.set(k, { framework: e.f, code: e.c, grade: g, level, team: S.team.name, updated_at: new Date().toISOString() });
     S.flash = k; rerender(); S.flash = null;
-    const leftAfter = toRateLeft(g), undo = [["Change answer", () => reviseAnswer(e, g)], ["Undo", () => undoRating(e, g)]];
+    const leftAfter = toRateLeft(g), undo = [["Change answer", () => reviseAnswer(e, g)], ["Undo", () => undoRating(e, g, before)]];
     const finished = Object.keys(leftAfter).find((sb) => leftBefore[sb] > 0 && leftAfter[sb] === 0);
     const party = finished ? `Every ${finished} standard for ${gname(g)} is rated!` : strandBefore > 0 && strandLeft(e, g) === 0 ? `${e.s}: every standard rated` : "";
     try {
@@ -132,13 +132,16 @@
   }
 
   // Undo takes the rating off straight away: the standard goes back to "Still to do".
-  async function undoRating(e, g) {
+  async function undoRating(e, g, before) {
     const k = rkey(e.f, e.c, g), now = S.ratings.get(k);
-    S.ratings.delete(k); rerender();
+    // Until migration 005 is in the database, undo still restores the previous answer, so show that.
+    if (!S.canClear && before) S.ratings.set(k, before); else S.ratings.delete(k);
+    rerender();
     try {
       await rpc("undo_my_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_device: S.device });
-      toast(`${e.c} taken off. It is back in Still to do.`); if (S.view === "activity") { await loadEvents(); rerender(); }
+      toast(S.canClear || !before ? `${e.c} taken off. It is back in Still to do.` : "Undone"); if (S.view === "activity") { await loadEvents(); rerender(); }
     } catch (err) {
+      if (!S.canClear) { if (now) S.ratings.set(k, now); rerender(); toast("Could not undo: " + err.message); return; }
       // Too old to undo, or made on another device: remove it instead (same result, logged as a removal).
       try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${e.c} taken off. It is back in Still to do.`); }
       catch (err2) { if (now) S.ratings.set(k, now); rerender(); toast("Could not take it off: " + err2.message); }
@@ -263,7 +266,7 @@
     const k = rkey(e.f, e.c, g);
     return `<div class="std set-${SET(e.f).style} ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}"><div><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></div>
       <div><div class="txt">${esc(e.t)}${e.t.length >= 220 ? "…" : ""}</div><div class="tags">${tags.join("")}</div></div>
-      <div>${segFor(e, g)}</div>${r ? `<div class="who">${esc(r.team)} · ${new Date(r.updated_at).toLocaleDateString()} · <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}">Remove</button></div>` : ""}</div>`;
+      <div>${segFor(e, g)}</div>${r ? `<div class="who">${esc(r.team)} · ${new Date(r.updated_at).toLocaleDateString()} ${S.canClear ? `· <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}">Remove</button>` : ""}</div>` : ""}</div>`;
   }
   function groupByStrand(list, g, noteFn) {
     let html = "", last = null;
@@ -448,7 +451,7 @@
         <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(e.c)}</button></h2>
         <p class="card-text">${esc(fullText(e))}</p>
         <p class="card-meta">${links.length ? `Linked to ${links.slice(0, 3).map(esc).join(", ")}${links.length > 3 ? " and " + (links.length - 3) + " more" : ""} · ` : ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
-        <p class="card-q">${r ? `Your answer: <b>${LEVEL[r.level]}</b>. Choose another answer to switch it, or <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}">remove it</button>.` : `How is this taught in ${esc(gname(g))} this year?`}</p>
+        <p class="card-q">${r ? `Your answer: <b>${LEVEL[r.level]}</b>. Choose another answer to switch it${S.canClear ? `, or <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}">remove it</button>` : ""}.` : `How is this taught in ${esc(gname(g))} this year?`}</p>
         <div class="choices">${[0, 1, 2].map((l) => `<button type="button" class="choice c${l} ${r && r.level === l ? "on" : ""}" data-act="flow-rate" data-k="${esc(e.f + "|" + e.c)}" data-l="${l}">
           <kbd>${l + 1}</kbd><b>${["Not taught", "Introduced", "Taught in depth"][l]}</b><small>${["We do not teach this", "Touched on, not a main focus", "Taught, practised and assessed"][l]}</small></button>`).join("")}</div>
         <div class="card-foot">
@@ -868,7 +871,7 @@
       try { await rpc("add_comment", { p_framework: e.f, p_code: e.c, p_grade: teamGrade(), p_team: S.team.name, p_author: $("#c-author").value.trim(), p_body: body });
         await loadComments(); openDetail(b.dataset.k); toast("Comment posted"); } catch (err) { toast("Could not post: " + err.message); }
     } else if (act === "undo") {
-      if (!confirm("Undo this change? The rating is taken off and the standard goes back to Still to do. The change stays in the history.")) return;
+      if (!confirm(S.canClear ? "Undo this change? The rating is taken off and the standard goes back to Still to do. The change stays in the history." : "Undo this change? The rating goes back to what it was before. The change stays in the history.")) return;
       try { await rpc("undo_change", { p_event_id: +b.dataset.id }); await Promise.all([loadRatings(true), loadEvents()]); rerender(); toast("Change undone"); }
       catch (err) { toast("Could not undo: " + err.message); }
     } else if (act === "hide") {
@@ -991,6 +994,8 @@
     const v = store.get("va_view");
     if (mode() === "full" && v && v !== "flow" && $(`.tabs [data-view="${v}"]`)) $(`.tabs [data-view="${v}"]`).click();
     else { showView(mode() === "full" ? "rate" : "flow"); refreshFilterOptions(); rerender(); }
+    // Remove needs clear_rating (migration 005). Probe it with a team that does not exist: nothing is written either way.
+    rpc("clear_rating", { p_framework: "", p_code: "", p_grade: "", p_team: "", p_device: "" }).then(() => {}, (err) => { S.canClear = /unknown team/i.test(err.message); if (S.canClear) rerender(); });
     try { await Promise.all([loadRatings(true), loadEvents(), loadComments(), loadTeamSets()]); syncNote("Up to date"); rerender(); }
     catch (err) { syncNote("Offline: ratings could not load"); }
     let n = 0;
