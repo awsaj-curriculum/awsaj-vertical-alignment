@@ -201,18 +201,45 @@
     if (S.lock && S.team) { $("#whoami").innerHTML = `<span class="who-team">${esc(S.team.name)}${S.lock.subject ? " · " + esc(S.lock.subject) : ""}</span> ${hb("locked")}`; return; }
     $("#whoami").innerHTML = m === "welcome" ? "" : `<span class="who-team">${esc(S.team.name)}</span>
       ${m === "teacher" ? `<button type="button" class="ghost sm" data-act="explore">Explore the K-12 map</button>` : !isCommittee() ? `<button type="button" class="sm" data-act="back-to-flow">Back to rating</button>` : ""}
-      ${isCommittee() ? `<button type="button" class="ghost sm" data-act="links">Team links</button>` : ""}
+      ${isCommittee() ? `<button type="button" class="ghost sm" data-act="links">Team progress</button>` : ""}
       <button type="button" class="linkish" data-act="switch-team">Change team</button>`;
   }
-  // Links that open the site locked to one team (and optionally one subject), for sending to teachers.
-  function teamLinks() {
+  // Team progress (committee): every team and subject, how much is rated in the team's chosen sets, when it last rated,
+  // and its locked link with a ready-made reminder. Unfinished first, so the committee knows who to remind.
+  function teamProgressRows() {
     const base = location.origin + location.pathname, url = (t, s) => base + "?team=" + encodeURIComponent(t) + (s ? "&subject=" + encodeURIComponent(s) : "");
-    const row = (label, u) => `<li><span>${esc(label)}</span><input readonly value="${esc(u)}" onclick="this.select()"><button type="button" class="ghost sm" data-act="copy" data-u="${esc(u)}">Copy</button></li>`;
-    const teams = S.teams.filter((t) => t.name !== "Vertical Alignment Committee");
-    $("#d-eyebrow").textContent = "Committee"; $("#d-title").textContent = "Team links";
-    $("#d-body").innerHTML = `<p class="lede">Send each team its own link. The link opens the site for that team only: teachers see and rate their own grade (and subject, if the link names one), with no team picker and no other grades. ${hb("links")}</p>
-      ${["Elementary", "Middle", "High"].map((d) => `<h3 class="pick-h">${d === "Elementary" ? "Elementary" : d === "Middle" ? "Middle school" : "High school"}</h3><ul class="links">${teams.filter((t) => DIV[d].includes(t.grades[0])).map((t) =>
-        row(t.name + (t.subjects.length > 1 ? " (all subjects)" : ""), url(t.name)) + (t.subjects.length > 1 ? t.subjects.map((s) => row(t.name + " · " + s, url(t.name, s))).join("") : "")).join("")}</ul>`).join("")}`;
+    const rows = [];
+    for (const t of S.teams.filter((x) => x.name !== "Vertical Alignment Committee")) {
+      const g = t.grades[0];
+      for (const subject of t.subjects) {
+        const sl = S.meta.subjects.find((x) => x.name === subject).slug, fws = setsFor(subject, g, t);
+        const list = S.idx[sl].filter((e) => e.pl.includes(g) && fws.includes(e.f));
+        let done = 0, last = "";
+        for (const e of list) { const r = rating(e.f, e.c, g); if (r) { done++; if (r.updated_at > last) last = r.updated_at; } }
+        const u = url(t.name, t.subjects.length > 1 ? subject : "");
+        rows.push({ t, subject, g, fws, total: list.length, done, last, u, status: !done ? 0 : done < list.length ? 1 : 2 });
+      }
+    }
+    return rows.sort((a, b) => a.status - b.status || GRADES.indexOf(a.g) - GRADES.indexOf(b.g) || a.t.name.localeCompare(b.t.name));
+  }
+  const reminderText = (x) => `Hello ${x.t.name} team. Please finish rating your ${x.subject} standards for the K-12 Vertical Alignment audit (${x.done} of ${x.total} done so far). Your team's link: ${x.u}`;
+  function teamLinks() {
+    const rows = teamProgressRows(), f = S.progFilter || "todo";
+    const shown = rows.filter((x) => (f === "todo" ? x.status < 2 : f === "done" ? x.status === 2 : true));
+    const counts = [0, 1, 2].map((k) => rows.filter((x) => x.status === k).length);
+    const STATUS = ["Not started", "In progress", "Done"];
+    $("#d-eyebrow").textContent = "Committee"; $("#d-title").textContent = "Team progress and links";
+    $("#d-body").innerHTML = `<p class="lede">Who has finished, and who needs a reminder. Each row is one team and subject, counted in the standard sets that team chose. Send the link (or the ready-made reminder) to any team that is not done. ${hb("links")}</p>
+      <div class="prog-sum"><span class="ps ps0"><b>${counts[0]}</b> not started</span><span class="ps ps1"><b>${counts[1]}</b> in progress</span><span class="ps ps2"><b>${counts[2]}</b> done</span></div>
+      <div class="prog-bar-row"><div class="lib-tabs">${[["todo", "Need a reminder"], ["done", "Done"], ["all", "All"]].map(([k, l]) => `<button type="button" class="lib-t ${f === k ? "on" : ""}" data-act="prog-filter" data-f="${k}">${l}</button>`).join("")}</div>
+        ${counts[0] + counts[1] ? `<button type="button" class="sm" data-act="copy-all-reminders">Copy reminders for all ${counts[0] + counts[1]} unfinished</button>` : ""}</div>
+      <table class="prog"><thead><tr><th>Team</th><th>Sets</th><th>Progress</th><th>Status</th><th>Last rated</th><th></th></tr></thead><tbody>
+      ${shown.map((x, i) => `<tr class="st${x.status}"><td><b>${esc(x.t.name)}</b>${x.t.subjects.length > 1 ? ` · ${esc(x.subject)}` : ""}</td><td>${x.fws.map(badge).join(" ")}</td>
+        <td><div class="pbar"><i style="width:${x.total ? (x.done / x.total) * 100 : 0}%"></i></div><small>${x.done} of ${x.total}</small></td>
+        <td><span class="stat s${x.status}">${STATUS[x.status]}</span></td><td class="muted">${x.last ? new Date(x.last).toLocaleDateString() : "Never"}</td>
+        <td class="prog-act"><button type="button" class="ghost sm" data-act="copy" data-u="${esc(x.u)}">Copy link</button>${x.status < 2 ? ` <button type="button" class="ghost sm" data-act="copy" data-u="${esc(reminderText(x))}">Copy reminder</button>` : ""}</td></tr>`).join("") || `<tr><td colspan="6" class="muted">${f === "done" ? "No team has finished yet." : "Every team is done."}</td></tr>`}
+      </tbody></table>
+      <p class="muted" style="margin-top:10px">Elementary links open one subject; use the team name alone (${esc(location.origin + location.pathname)}?team=Grade%205) to give a team all its subjects.</p>`;
     if (!$("#detail").open) $("#detail").showModal();
   }
   function rerender() {
@@ -801,7 +828,9 @@
     else if (act === "open") openDetail(b.dataset.k);
     else if (act === "team") { setTeam(b.dataset.t); store.set("va_team", b.dataset.t); $("#team").value = b.dataset.t; }
     else if (act === "links") teamLinks();
-    else if (act === "copy") { try { await navigator.clipboard.writeText(b.dataset.u); toast("Link copied"); } catch (err) { toast("Select the link and copy it"); } }
+    else if (act === "prog-filter") { S.progFilter = b.dataset.f; teamLinks(); }
+    else if (act === "copy-all-reminders") { const t = teamProgressRows().filter((x) => x.status < 2).map(reminderText).join("\n\n"); try { await navigator.clipboard.writeText(t); toast("Reminders copied"); } catch (err) { toast("Could not copy"); } }
+    else if (act === "copy") { try { await navigator.clipboard.writeText(b.dataset.u); toast(b.dataset.u.startsWith("http") ? "Link copied" : "Reminder copied"); } catch (err) { toast("Select the link and copy it"); } }
     else if (act === "clear") { const e = findItem(b.dataset.k); if (e) clearRating(e, b.dataset.g || teamGrade()); }
     else if (act === "lib") { S.flow.lib = S.flow.lib === b.dataset.t ? "" : b.dataset.t; rerender(); }
     else if (act === "lib-open") { const e = findItem(b.dataset.k); if (e) { S.flow.back = rkey(e.f, e.c, teamGrade()); S.flow.set = null; rerender(); scrollTo({ top: 0, behavior: "smooth" }); } }
