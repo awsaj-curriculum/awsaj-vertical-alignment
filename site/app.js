@@ -100,12 +100,12 @@
   const pickGrade = (el, what) => { el.innerHTML = `<div class="panel empty">Choose a grade with the Grade filter above to see ${what}.</div>`; };
 
   const hb = (k) => `<button type="button" class="help" data-help="${k}" aria-label="What is this?">?</button>`;
-  // action: optional [label, fn] shown as a button in the toast (used for Undo), which then stays up longer.
+  // action: optional [label, fn], or a list of them, shown as buttons in the toast (Change answer, Undo); it then stays up longer.
   function toast(msg, action) {
     const t = $("#toast"); t.textContent = msg; t.hidden = false;
-    if (action) {
-      const b = document.createElement("button"); b.type = "button"; b.textContent = action[0];
-      b.addEventListener("click", () => { t.hidden = true; action[1](); }); t.append(" ", b);
+    for (const a of action ? (Array.isArray(action[0]) ? action : [action]) : []) {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = a[0];
+      b.addEventListener("click", () => { t.hidden = true; a[1](); }); t.append(" ", b);
     }
     clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), action ? 10000 : 2600);
   }
@@ -118,7 +118,7 @@
     const leftBefore = toRateLeft(g), strandBefore = strandLeft(e, g);
     S.ratings.set(k, { framework: e.f, code: e.c, grade: g, level, team: S.team.name, updated_at: new Date().toISOString() });
     S.flash = k; rerender(); S.flash = null;
-    const leftAfter = toRateLeft(g), undo = ["Undo", () => undoRating(e, g, before)];
+    const leftAfter = toRateLeft(g), undo = [["Change answer", () => reviseAnswer(e, g)], ["Undo", () => undoRating(e, g)]];
     const finished = Object.keys(leftAfter).find((sb) => leftBefore[sb] > 0 && leftAfter[sb] === 0);
     const party = finished ? `Every ${finished} standard for ${gname(g)} is rated!` : strandBefore > 0 && strandLeft(e, g) === 0 ? `${e.s}: every standard rated` : "";
     try {
@@ -131,17 +131,31 @@
     }
   }
 
-  // Take back this device's latest rating (no passcode; the database allows it for 15 minutes).
-  async function undoRating(e, g, before) {
+  // Undo takes the rating off straight away: the standard goes back to "Still to do".
+  async function undoRating(e, g) {
     const k = rkey(e.f, e.c, g), now = S.ratings.get(k);
-    if (before) S.ratings.set(k, before); else S.ratings.delete(k);
-    rerender();
+    S.ratings.delete(k); rerender();
     try {
       await rpc("undo_my_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_device: S.device });
-      toast("Undone"); if (S.view === "activity") { await loadEvents(); rerender(); }
+      toast(`${e.c} taken off. It is back in Still to do.`); if (S.view === "activity") { await loadEvents(); rerender(); }
     } catch (err) {
-      if (now) S.ratings.set(k, now); rerender(); toast("Could not undo: " + err.message);
+      // Too old to undo, or made on another device: remove it instead (same result, logged as a removal).
+      try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${e.c} taken off. It is back in Still to do.`); }
+      catch (err2) { if (now) S.ratings.set(k, now); rerender(); toast("Could not take it off: " + err2.message); }
     }
+  }
+  // Remove any answer (not only the latest): the standard goes back to "Still to do".
+  async function clearRating(e, g) {
+    if (!S.team || !canEdit(g)) { toast(S.team ? `Your team rates ${S.team.grades.map(gname).join(", ")}.` : "Choose your team first."); return; }
+    const k = rkey(e.f, e.c, g), now = S.ratings.get(k); if (!now) return;
+    S.ratings.delete(k); rerender();
+    try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${e.c} removed. It is back in Still to do.`); }
+    catch (err) { S.ratings.set(k, now); rerender(); toast("Could not remove: " + err.message); }
+  }
+  // Bring an answered standard back on screen with its answer showing, so it can be switched.
+  function reviseAnswer(e, g) {
+    if (mode() === "teacher") { S.flow.subject = S.meta.subjects.find((s) => S.idx[s.slug].includes(e)).name; S.flow.set = null; S.flow.back = rkey(e.f, e.c, g); showView("flow"); rerender(); }
+    else openDetail(e.f + "|" + e.c);
   }
 
   /* ---------------- filters UI ---------------- */
@@ -184,9 +198,22 @@
   }
   function renderWho() {
     const m = mode();
+    if (S.lock && S.team) { $("#whoami").innerHTML = `<span class="who-team">${esc(S.team.name)}${S.lock.subject ? " · " + esc(S.lock.subject) : ""}</span> ${hb("locked")}`; return; }
     $("#whoami").innerHTML = m === "welcome" ? "" : `<span class="who-team">${esc(S.team.name)}</span>
       ${m === "teacher" ? `<button type="button" class="ghost sm" data-act="explore">Explore the K-12 map</button>` : !isCommittee() ? `<button type="button" class="sm" data-act="back-to-flow">Back to rating</button>` : ""}
+      ${isCommittee() ? `<button type="button" class="ghost sm" data-act="links">Team links</button>` : ""}
       <button type="button" class="linkish" data-act="switch-team">Change team</button>`;
+  }
+  // Links that open the site locked to one team (and optionally one subject), for sending to teachers.
+  function teamLinks() {
+    const base = location.origin + location.pathname, url = (t, s) => base + "?team=" + encodeURIComponent(t) + (s ? "&subject=" + encodeURIComponent(s) : "");
+    const row = (label, u) => `<li><span>${esc(label)}</span><input readonly value="${esc(u)}" onclick="this.select()"><button type="button" class="ghost sm" data-act="copy" data-u="${esc(u)}">Copy</button></li>`;
+    const teams = S.teams.filter((t) => t.name !== "Vertical Alignment Committee");
+    $("#d-eyebrow").textContent = "Committee"; $("#d-title").textContent = "Team links";
+    $("#d-body").innerHTML = `<p class="lede">Send each team its own link. The link opens the site for that team only: teachers see and rate their own grade (and subject, if the link names one), with no team picker and no other grades. ${hb("links")}</p>
+      ${["Elementary", "Middle", "High"].map((d) => `<h3 class="pick-h">${d === "Elementary" ? "Elementary" : d === "Middle" ? "Middle school" : "High school"}</h3><ul class="links">${teams.filter((t) => DIV[d].includes(t.grades[0])).map((t) =>
+        row(t.name + (t.subjects.length > 1 ? " (all subjects)" : ""), url(t.name)) + (t.subjects.length > 1 ? t.subjects.map((s) => row(t.name + " · " + s, url(t.name, s))).join("") : "")).join("")}</ul>`).join("")}`;
+    if (!$("#detail").open) $("#detail").showModal();
   }
   function rerender() {
     const v = S.view;
@@ -209,7 +236,7 @@
     const k = rkey(e.f, e.c, g);
     return `<div class="std set-${SET(e.f).style} ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}"><div><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></div>
       <div><div class="txt">${esc(e.t)}${e.t.length >= 220 ? "…" : ""}</div><div class="tags">${tags.join("")}</div></div>
-      <div>${segFor(e, g)}</div>${r ? `<div class="who">${esc(r.team)} · ${new Date(r.updated_at).toLocaleDateString()}</div>` : ""}</div>`;
+      <div>${segFor(e, g)}</div>${r ? `<div class="who">${esc(r.team)} · ${new Date(r.updated_at).toLocaleDateString()} · <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}">Remove</button></div>` : ""}</div>`;
   }
   function groupByStrand(list, g, noteFn) {
     let html = "", last = null;
@@ -394,7 +421,7 @@
         <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(e.c)}</button></h2>
         <p class="card-text">${esc(fullText(e))}</p>
         <p class="card-meta">${links.length ? `Linked to ${links.slice(0, 3).map(esc).join(", ")}${links.length > 3 ? " and " + (links.length - 3) + " more" : ""} · ` : ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
-        <p class="card-q">How is this taught in ${esc(gname(g))} this year?</p>
+        <p class="card-q">${r ? `Your answer: <b>${LEVEL[r.level]}</b>. Choose another answer to switch it, or <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}">remove it</button>.` : `How is this taught in ${esc(gname(g))} this year?`}</p>
         <div class="choices">${[0, 1, 2].map((l) => `<button type="button" class="choice c${l} ${r && r.level === l ? "on" : ""}" data-act="flow-rate" data-k="${esc(e.f + "|" + e.c)}" data-l="${l}">
           <kbd>${l + 1}</kbd><b>${["Not taught", "Introduced", "Taught in depth"][l]}</b><small>${["We do not teach this", "Touched on, not a main focus", "Taught, practised and assessed"][l]}</small></button>`).join("")}</div>
         <div class="card-foot">
@@ -404,7 +431,17 @@
       </article>`;
     }
     el.innerHTML = `<div class="flow-wrap">${head}${body}
+      ${library(list, g)}
       <p class="flow-more"><button type="button" class="linkish" data-act="review">See the whole list</button> ${hb("review")}</p></div>`;
+  }
+  // The library: every standard in this subject's chosen sets, split into "Still to do" and "Done". Click one to open it.
+  function library(list, g) {
+    const todo = list.filter((e) => !rating(e.f, e.c, g)), done = list.filter((e) => rating(e.f, e.c, g)), tab = S.flow.lib || "";
+    const item = (e) => { const r = rating(e.f, e.c, g); return `<li><button type="button" class="lib-i" data-act="lib-open" data-k="${esc(e.f + "|" + e.c)}">${badge(e.f)} <b>${esc(e.c)}</b> <span>${esc(e.t.slice(0, 90))}${e.t.length > 90 ? "…" : ""}</span>${r ? `<i class="pill"><i class="lv lv-${r.level}"></i>${LEVEL_SHORT[r.level]}</i>` : ""}</button></li>`; };
+    return `<div class="library"><div class="lib-tabs">
+        <button type="button" class="lib-t ${tab === "todo" ? "on" : ""}" data-act="lib" data-t="todo">Still to do <span>${todo.length}</span></button>
+        <button type="button" class="lib-t ${tab === "done" ? "on" : ""}" data-act="lib" data-t="done">Done <span>${done.length}</span></button> ${hb("library")}</div>
+      ${tab ? `<ul class="lib-list">${(tab === "todo" ? todo : done).map(item).join("") || `<li class="muted">${tab === "todo" ? "Nothing left. Well done." : "Nothing answered yet."}</li>`}</ul>` : ""}</div>`;
   }
   async function flowRate(k, level) {
     const g = teamGrade(), e = findItem(k); if (!e) return;
@@ -591,7 +628,7 @@
     const el = $("#view-activity");
     const rows = S.events.slice(0, 200).map((ev) => `<tr class="${ev.undone ? "undone" : ""}"><td>${new Date(ev.created_at).toLocaleString()}</td><td>${esc(ev.team)}</td>
       <td>${badge(ev.framework)} <button class="code" data-act="open" data-k="${esc(ev.framework + "|" + ev.code)}">${esc(ev.code)}</button></td><td>${gl(ev.grade)}</td>
-      <td>${ev.old_level == null ? "Not rated" : LEVEL_SHORT[ev.old_level]} → ${LEVEL_SHORT[ev.new_level]}</td>
+      <td>${ev.old_level == null ? "Not rated" : LEVEL_SHORT[ev.old_level]} → ${ev.new_level == null ? "Removed" : LEVEL_SHORT[ev.new_level]}</td>
       <td>${ev.undone ? "Undone" : `<button class="ghost" data-act="undo" data-id="${ev.id}">Undo</button>`}</td></tr>`).join("");
     const crow = S.comments.slice(0, 50).map((c) => `<tr><td>${new Date(c.created_at).toLocaleString()}</td><td>${esc(c.team)}${c.author ? " · " + esc(c.author) : ""}</td>
       <td><button class="code" data-act="open" data-k="${esc(c.framework + "|" + c.code)}">${esc(c.code)}</button></td><td colspan="2">${esc(c.body)}</td>
@@ -710,7 +747,7 @@
           <textarea id="c-body" maxlength="2000" ${S.team ? "" : "disabled"}></textarea>
           <input id="c-author" placeholder="Your name (optional)" style="margin-top:6px;width:100%" ${S.team ? "" : "disabled"}>
           <div class="row-end"><button data-act="comment" data-k="${esc(k)}" ${S.team ? "" : "disabled"}>Post comment</button></div></div>
-        <div class="box"><h3>History ${hb("d_history")}</h3><ul class="comments">${hist.map((ev) => `<li>${gl(ev.grade)}: ${ev.old_level == null ? "Not rated" : LEVEL_SHORT[ev.old_level]} → ${LEVEL_SHORT[ev.new_level]}<div class="meta">${esc(ev.team)} · ${new Date(ev.created_at).toLocaleString()}${ev.undone ? " · undone" : ""}</div></li>`).join("") || "<li class='muted'>No changes yet.</li>"}</ul>
+        <div class="box"><h3>History ${hb("d_history")}</h3><ul class="comments">${hist.map((ev) => `<li>${gl(ev.grade)}: ${ev.old_level == null ? "Not rated" : LEVEL_SHORT[ev.old_level]} → ${ev.new_level == null ? "Removed" : LEVEL_SHORT[ev.new_level]}<div class="meta">${esc(ev.team)} · ${new Date(ev.created_at).toLocaleString()}${ev.undone ? " · undone" : ""}</div></li>`).join("") || "<li class='muted'>No changes yet.</li>"}</ul>
           <h3 style="margin-top:12px">Curriculum evidence ${hb("d_evidence")}</h3>${evidenceFor(e)}</div>
       </div>
       <p class="muted" style="margin-top:12px;font-size:12px">Source: ${esc(d.source || "")}</p>`;
@@ -726,7 +763,7 @@
     const gs = S.view === "rate" || S.view === "dashboard" ? [S.view === "rate" ? teamGrade() : S.f.grade] : visibleGrades();
     const list = S.view === "activity" ? null : filtered({ ignoreDivision: S.view === "rate" || S.view === "dashboard" });
     let rows;
-    if (!list) rows = [["When", "Team", "Framework", "Code", "Grade", "From", "To", "Undone"], ...S.events.map((e) => [e.created_at, e.team, e.framework, e.code, e.grade, e.old_level == null ? "" : LEVEL[e.old_level], LEVEL[e.new_level], e.undone])];
+    if (!list) rows = [["When", "Team", "Framework", "Code", "Grade", "From", "To", "Undone"], ...S.events.map((e) => [e.created_at, e.team, e.framework, e.code, e.grade, e.old_level == null ? "" : LEVEL[e.old_level], e.new_level == null ? "Removed" : LEVEL[e.new_level], e.undone])];
     else rows = [["Subject", "Framework", "Code", "Strand", "Suggested grade(s)", "Standard", ...gs.map(gname)],
       ...list.map((e) => [S.f.subject, e.f, e.c, e.s, e.pl.join(" "), e.t, ...gs.map((g) => { const r = rating(e.f, e.c, g); return r ? LEVEL[r.level] : ""; })])];
     download(`awsaj-${S.view}-${S.f.subject.replace(/\s/g, "")}.csv`, new Blob(["﻿" + rows.map((r) => r.map(csvCell).join(",")).join("\n")], { type: "text/csv" }));
@@ -763,7 +800,13 @@
     if (act === "rate") { const e = findItem(b.dataset.k); const l = +b.dataset.l; const cur = rating(e.f, e.c, b.dataset.g); if (cur && cur.level === l) return; setRating(e, b.dataset.g, l); }
     else if (act === "open") openDetail(b.dataset.k);
     else if (act === "team") { setTeam(b.dataset.t); store.set("va_team", b.dataset.t); $("#team").value = b.dataset.t; }
+    else if (act === "links") teamLinks();
+    else if (act === "copy") { try { await navigator.clipboard.writeText(b.dataset.u); toast("Link copied"); } catch (err) { toast("Select the link and copy it"); } }
+    else if (act === "clear") { const e = findItem(b.dataset.k); if (e) clearRating(e, b.dataset.g || teamGrade()); }
+    else if (act === "lib") { S.flow.lib = S.flow.lib === b.dataset.t ? "" : b.dataset.t; rerender(); }
+    else if (act === "lib-open") { const e = findItem(b.dataset.k); if (e) { S.flow.back = rkey(e.f, e.c, teamGrade()); S.flow.set = null; rerender(); scrollTo({ top: 0, behavior: "smooth" }); } }
     else if (act === "switch-team") { S.explore = false; setTeam(""); store.set("va_team", ""); $("#team").value = ""; }
+    else if (act === "explore" && S.lock) { /* locked links stay on the team's own standards */ }
     else if (act === "explore") { S.explore = true; showView("heatmap"); refreshFilterOptions(); rerender(); }
     else if (act === "back-to-flow") { S.explore = false; showView("flow"); rerender(); }
     else if (act === "review") { S.f.subject = S.flow.subject || S.f.subject; S.f.framework = ""; S.f.strand = ""; S.f.search = ""; $("#f-search").value = ""; showView("rate"); refreshFilterOptions(); rerender(); }
@@ -796,7 +839,7 @@
       try { await rpc("add_comment", { p_framework: e.f, p_code: e.c, p_grade: teamGrade(), p_team: S.team.name, p_author: $("#c-author").value.trim(), p_body: body });
         await loadComments(); openDetail(b.dataset.k); toast("Comment posted"); } catch (err) { toast("Could not post: " + err.message); }
     } else if (act === "undo") {
-      if (!confirm("Undo this change? The rating goes back to what it was before. The change stays in the history.")) return;
+      if (!confirm("Undo this change? The rating is taken off and the standard goes back to Still to do. The change stays in the history.")) return;
       try { await rpc("undo_change", { p_event_id: +b.dataset.id }); await Promise.all([loadRatings(true), loadEvents()]); rerender(); toast("Change undone"); }
       catch (err) { toast("Could not undo: " + err.message); }
     } else if (act === "hide") {
@@ -868,6 +911,7 @@
 
   function setTeam(name) {
     S.team = S.teams.find((t) => t.name === name) || null;
+    if (S.team && S.lock && S.lock.subject && S.team.subjects.includes(S.lock.subject)) S.team = { ...S.team, subjects: [S.lock.subject] };
     S.flow = { subject: null, skipped: new Set(), back: null, history: [] };
     $("#toast").hidden = true;
     if (S.team && !isCommittee()) {
@@ -911,7 +955,10 @@
     const groups = { "Committee": [], "Elementary": [], "Middle school": [], "High school": [] };
     S.teams.forEach((t) => (t.name === "Vertical Alignment Committee" ? groups.Committee : DIV.Elementary.includes(t.grades[0]) ? groups.Elementary : DIV.Middle.includes(t.grades[0]) ? groups["Middle school"] : groups["High school"]).push(t));
     $("#team").innerHTML = `<option value="">Choose your team</option>` + Object.entries(groups).map(([g, ts]) => `<optgroup label="${g}">${ts.map((t) => `<option>${esc(t.name)}</option>`).join("")}</optgroup>`).join("");
-    const saved = store.get("va_team"); if (saved && S.teams.some((t) => t.name === saved)) { $("#team").value = saved; setTeam(saved); }
+    // A team link (?team=...&subject=...) locks the site to that team: no team picker, no other grades.
+    const qp = new URLSearchParams(location.search), lt = S.teams.find((t) => t.name === qp.get("team") && t.name !== "Vertical Alignment Committee");
+    if (lt) { const ls = qp.get("subject"); S.lock = { team: lt.name, subject: lt.subjects.includes(ls) ? ls : null }; document.body.dataset.lock = "1"; setTeam(lt.name); }
+    else { const saved = store.get("va_team"); if (saved && S.teams.some((t) => t.name === saved)) { $("#team").value = saved; setTeam(saved); } }
     const v = store.get("va_view");
     if (mode() === "full" && v && v !== "flow" && $(`.tabs [data-view="${v}"]`)) $(`.tabs [data-view="${v}"]`).click();
     else { showView(mode() === "full" ? "rate" : "flow"); refreshFilterOptions(); rerender(); }
