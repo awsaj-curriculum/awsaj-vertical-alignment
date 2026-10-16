@@ -9,7 +9,17 @@
   const LEVEL = ["Not taught", "Introduced / exposed", "Taught in depth"];
   const LEVEL_SHORT = ["Not taught", "Introduced", "In depth"];
   const FW_NAME = { "WI-CC-MATH": "Wisconsin Math (CC)", "WI-CC-ELA": "Wisconsin ELA (CC)", "NGSS": "NGSS",
-    "WI-SCI": "Wisconsin Science", "AERO-SCI": "AERO Science", "WI-SS": "Wisconsin Social Studies", "AERO-SS": "AERO Social Studies" };
+    "WI-SCI": "Wisconsin Science", "AERO-SCI": "AERO Science", "WI-SS": "Wisconsin Social Studies", "AERO-SS": "AERO Social Studies",
+    "WI-EE-MATH": "Essential Elements (Math)", "WI-EE-ELA": "Essential Elements (ELA)", "WI-EE-SCI": "Essential Elements (Science)", "WI-EE-SS": "Essential Elements (Social Studies)" };
+  // Standard sets: each has a short badge and its own badge style, so Common Core, EE, NGSS, AERO and Wisconsin never look
+  // alike. Set styles use shape and line (solid, dashed, dotted, double), not the rating colours.
+  const SET = (f) => (f.startsWith("WI-EE-") ? { abbr: "EE", name: "Essential Elements", style: "ee" }
+    : f.startsWith("WI-CC-") ? { abbr: "CC", name: "Common Core", style: "cc" }
+    : f === "NGSS" ? { abbr: "NGSS", name: "NGSS", style: "ngss" }
+    : f.startsWith("AERO-") ? { abbr: "AERO", name: "AERO", style: "aero" }
+    : { abbr: "WI", name: f === "WI-SS" ? "Wisconsin Social Studies" : "Wisconsin Science", style: "wi" });
+  const SET_ORDER = (f) => (f.startsWith("WI-EE-") ? 9 : f.startsWith("WI-CC-") ? 0 : f.startsWith("AERO-") ? 1 : f === "NGSS" ? 2 : 3);
+  const badge = (f) => { const x = SET(f); return `<span class="setb set-${x.style}" title="${esc(FW_NAME[f] || x.name)}">${x.abbr}</span>`; };
   // Awsaj brand: ratings use three of the four symbol ribbons (orange is kept for highlights so it never sits next to lime).
   const COLORS = { none: "#FFFFFF", 0: "#D00070", placed: "#024638", 1: "#0092BC", 2: "#78BE21", maroon: "#024638", accent: "#ED8B00", line: "#D9E1E2", ink: "#1E2324" };
 
@@ -26,7 +36,7 @@
 
   const S = {
     meta: null, idx: {}, detail: {}, ratings: new Map(), events: [], comments: [], teams: [],
-    team: null, view: "rate", explore: false, flow: { subject: null, skipped: new Set(), back: null, history: [] }, lastSync: null, device: null, pending: null,
+    team: null, teamSets: {}, view: "rate", explore: false, flow: { subject: null, skipped: new Set(), back: null, history: [] }, lastSync: null, device: null, pending: null,
     f: { subject: "Math", framework: "", division: "all", grade: "", strand: "", search: "" },
   };
 
@@ -145,7 +155,8 @@
     fillSelect($("#f-subject"), subs.map((s) => [s, s]), S.f.subject);
     const fws = subj().frameworks;
     if (S.f.framework && !fws.includes(S.f.framework)) S.f.framework = "";
-    fillSelect($("#f-framework"), [["", fws.length > 1 ? "All frameworks" : FW_NAME[fws[0]]], ...(fws.length > 1 ? fws.map((f) => [f, FW_NAME[f] || f]) : [])], S.f.framework);
+    const sorted = fws.slice().sort((a, b) => SET_ORDER(a) - SET_ORDER(b));
+    fillSelect($("#f-framework"), [["", "All sets (" + sorted.map((f) => SET(f).abbr).join(", ") + ")"], ...sorted.map((f) => [f, SET(f).abbr + ": " + (FW_NAME[f] || f)])], S.f.framework);
     const gs = visibleGrades();
     if (!gs.includes(S.f.grade)) S.f.grade = "";
     fillSelect($("#f-grade"), [["", "Choose a grade"], ...gs.map((g) => [g, gname(g)])], S.f.grade);
@@ -191,21 +202,22 @@
   function stdRow(e, g, note) {
     const r = rating(e.f, e.c, g);
     const tags = [];
-    if (subj().frameworks.length > 1) tags.push(`<span class="tag">${esc(FW_NAME[e.f] || e.f)}</span>`);
+    tags.push(badge(e.f));
+    if (e.lk && e.lk.length) tags.push(`<span class="tag">Linked to ${esc(e.lk[0].split(":")[1])}${e.lk.length > 1 ? " +" + (e.lk.length - 1) : ""}</span>`);
     if (e.ee) { const ee = e.ee.split(";")[0].trim(); tags.push(`<span class="tag">${/^(M\.)?EE/.test(ee) || ee.startsWith("SS.EE") ? "" : "EE "}${esc(ee)}</span>`); }
     if (note) tags.push(`<span class="tag sg">${esc(note)}</span>`);
     const k = rkey(e.f, e.c, g);
-    return `<div class="std ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}"><div><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></div>
+    return `<div class="std set-${SET(e.f).style} ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}"><div><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></div>
       <div><div class="txt">${esc(e.t)}${e.t.length >= 220 ? "…" : ""}</div><div class="tags">${tags.join("")}</div></div>
       <div>${segFor(e, g)}</div>${r ? `<div class="who">${esc(r.team)} · ${new Date(r.updated_at).toLocaleDateString()}</div>` : ""}</div>`;
   }
   function groupByStrand(list, g, noteFn) {
     let html = "", last = null;
     for (const e of list) {
-      if (e.s !== last) {
-        const inS = list.filter((x) => x.s === e.s), c = countLevels(inS, g), done = inS.length - c[3];
-        html += `<div class="strand ${c[3] ? "" : "done"}"><span>${esc(e.s || "Standards")}</span>${miniBar(c, `${done} of ${inS.length} rated`)}<span class="strand-n">${c[3] ? `${done}/${inS.length}` : "✓ all rated"}</span></div>`;
-        last = e.s;
+      if (e.f + e.s !== last) {
+        const inS = list.filter((x) => x.s === e.s && x.f === e.f), c = countLevels(inS, g), done = inS.length - c[3];
+        html += `<div class="strand ${c[3] ? "" : "done"}"><span>${badge(e.f)} ${esc(e.s || "Standards")}</span>${miniBar(c, `${done} of ${inS.length} rated`)}<span class="strand-n">${c[3] ? `${done}/${inS.length}` : "✓ all rated"}</span></div>`;
+        last = e.f + e.s;
       }
       html += stdRow(e, g, noteFn && noteFn(e));
     }
@@ -260,13 +272,28 @@
   function countFramework(subject, g) {
     if (subject === "Science") return DIV.Elementary.includes(g) ? "AERO-SCI" : "NGSS";
     if (subject === "Social Studies") return "WI-SS";
-    return null;
+    return subject === "Math" ? "WI-CC-MATH" : subject === "ELA" ? "WI-CC-ELA" : null;
   }
-  const defaultFramework = (subject, g) => (subject === "Science" && (!g || DIV.Elementary.includes(g)) ? "" : countFramework(subject, g) || "");
+  // The team that rates a subject in grade g, and the standard sets it chose (saved for the whole team in team_sets).
+  // Until a team chooses, it works through the default set above.
+  const teamOf = (g, subject) => S.teams.find((t) => t.name !== "Vertical Alignment Committee" && t.grades.includes(g) && t.subjects.includes(subject));
+  function setsFor(subject, g, team) {
+    const t = team || teamOf(g, subject), saved = t && S.teamSets[t.name] && S.teamSets[t.name][subject];
+    const fws = S.meta.subjects.find((x) => x.name === subject).frameworks;
+    const list = (saved && saved.filter((f) => fws.includes(f)).length ? saved.filter((f) => fws.includes(f)) : [countFramework(subject, g)]).filter(Boolean);
+    return list.sort((a, b) => SET_ORDER(a) - SET_ORDER(b));
+  }
+  const chosen = (subject, team) => !!(team && S.teamSets[team.name] && S.teamSets[team.name][subject]);
+  async function loadTeamSets() {
+    const rows = await getAll("team_sets?select=*"); S.teamSets = {};
+    for (const r of rows) (S.teamSets[r.team] ||= {})[r.subject] = r.frameworks;
+    S.setsLoaded = true;
+  }
+  const defaultFramework = (subject, g) => (subject === "Math" || subject === "ELA" || (subject === "Science" && (!g || DIV.Elementary.includes(g))) ? "" : countFramework(subject, g) || "");
   // Unrated grade-level standards per subject (counted framework only), and unrated standards left in e's strand.
   function toRateLeft(g) {
     const out = {};
-    for (const s of S.meta.subjects) { const fw = countFramework(s.name, g); out[s.name] = S.idx[s.slug].filter((e) => e.pl.includes(g) && (!fw || e.f === fw) && !rating(e.f, e.c, g)).length; }
+    for (const s of S.meta.subjects) { const fws = setsFor(s.name, g); out[s.name] = S.idx[s.slug].filter((e) => e.pl.includes(g) && fws.includes(e.f) && !rating(e.f, e.c, g)).length; }
     return out;
   }
   const strandLeft = (e, g) => items().filter((x) => x.s === e.s && x.f === e.f && x.pl.includes(g) && !rating(x.f, x.c, g)).length;
@@ -275,20 +302,34 @@
     const subs = S.team.name === "Vertical Alignment Committee" ? S.meta.subjects.map((s) => s.name) : S.team.subjects;
     const chips = subs.map((name) => {
       const sl = S.meta.subjects.find((s) => s.name === name).slug;
-      const fw = countFramework(name, g);
-      const list = S.idx[sl].filter((e) => e.pl.includes(g) && (!fw || e.f === fw));
+      const fws = setsFor(name, g);
+      const list = S.idx[sl].filter((e) => e.pl.includes(g) && fws.includes(e.f));
       const left = list.filter((e) => !rating(e.f, e.c, g)).length;
-      return `<button type="button" class="torate ${left ? "" : "done"} ${name === S.f.subject ? "on" : ""}" data-act="subject" data-s="${esc(name)}" data-fw="${esc(fw || "")}"
-        title="${left} of ${list.length} ${esc(name)} standards for ${esc(gname(g))} not rated yet${fw ? " (" + esc(FW_NAME[fw]) + ")" : ""}"><b>${left}</b> ${esc(name)}${left ? "" : " ✓"}</button>`;
+      return `<button type="button" class="torate ${left ? "" : "done"} ${name === S.f.subject ? "on" : ""}" data-act="subject" data-s="${esc(name)}" data-fw=""
+        title="${left} of ${list.length} ${esc(name)} standards for ${esc(gname(g))} not rated yet (${fws.map((f) => esc(FW_NAME[f] || f)).join(" + ")})"><b>${left}</b> ${esc(name)} ${fws.map(badge).join("")}${left ? "" : " ✓"}</button>`;
     }).join("");
     return `<div class="torate-row"><span class="muted">Still to rate in ${esc(gname(g))}:</span> ${chips} ${hb("torate")}</div>`;
   }
 
   /* ---------------- teacher flow: one standard at a time ---------------- */
   // The grade-level list a teacher works through for one subject, in document order (strand by strand).
-  function flowList(subject, g) {
-    const sl = S.meta.subjects.find((s) => s.name === subject).slug, fw = countFramework(subject, g);
-    return S.idx[sl].filter((e) => e.pl.includes(g) && (!fw || e.f === fw));
+  // Chosen sets are worked through one after another (all Common Core, then all Essential Elements, and so on).
+  function flowList(subject, g, onlySet) {
+    const sl = S.meta.subjects.find((s) => s.name === subject).slug, fws = setsFor(subject, g, S.team);
+    return fws.filter((f) => !onlySet || f === onlySet).flatMap((f) => S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)));
+  }
+  // Set chooser: which standard sets the team works through for this subject (saved for everyone on the team).
+  function setChooser(subject, g, first) {
+    const sl = S.meta.subjects.find((s) => s.name === subject).slug, fws = S.meta.subjects.find((s) => s.name === subject).frameworks.slice().sort((a, b) => SET_ORDER(a) - SET_ORDER(b));
+    const cur = setsFor(subject, g, S.team);
+    const DESC = { cc: "The grade-level Common Core standards.", ee: "The alternate standards for students with significant cognitive disabilities, one for each linked standard.",
+      ngss: "Next Generation Science Standards performance expectations.", aero: "The AERO framework the school uses now.", wi: "Wisconsin's own standards." };
+    return `<div class="card set-card"><h2>${first ? "Which standards is your team working through?" : "Change your standard sets"} ${hb("sets")}</h2>
+      <p class="lede">${esc(subject)} for ${esc(gname(g))}. Tick one or more. If you tick more than one, you rate them one set at a time, and every card shows which set it belongs to. This choice is shared by everyone on your team.</p>
+      <div class="set-opts">${fws.map((f) => { const n = S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)).length; const x = SET(f);
+        return n ? `<label class="set-opt set-${x.style}"><input type="checkbox" value="${esc(f)}" ${cur.includes(f) ? "checked" : ""}> ${badge(f)} <span><b>${esc(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}. ${DESC[x.style]}</small></span></label>` : ""; }).join("")}</div>
+      <div class="done-actions" style="justify-content:flex-start"><button type="button" data-act="sets-save" data-s="${esc(subject)}">Save and start</button>
+        ${first ? "" : `<button type="button" class="ghost" data-act="sets-cancel">Cancel</button>`}</div></div>`;
   }
   // Index rows trim long standards; the card shows the full text from the detail file once it has loaded.
   function fullText(e) {
@@ -315,16 +356,24 @@
     if (!S.team) return welcome(el);
     const g = teamGrade(), F = S.flow;
     if (!F.subject || !S.team.subjects.includes(F.subject)) F.subject = S.team.subjects.find((s) => flowList(s, g).some((e) => !rating(e.f, e.c, g))) || S.team.subjects[0];
+    if (F.choose === F.subject || (S.setsLoaded && !chosen(F.subject, S.team))) {
+      el.innerHTML = `<div class="flow-wrap">${S.team.subjects.length > 1 ? `<div class="subj-pills">${S.team.subjects.map((s) => `<button type="button" role="tab" aria-selected="${s === F.subject}" class="subj" data-act="flow-subject" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>` : ""}${setChooser(F.subject, g, !chosen(F.subject, S.team))}</div>`;
+      return;
+    }
     const list = flowList(F.subject, g), done = list.filter((e) => rating(e.f, e.c, g)).length, left = list.length - done;
+    const fwsNow = setsFor(F.subject, g, S.team);
     const pills = S.team.subjects.length > 1 ? `<div class="subj-pills" role="tablist" aria-label="Subjects">${S.team.subjects.map((s) => {
       const l = flowList(s, g), n = l.filter((e) => !rating(e.f, e.c, g)).length;
       return `<button type="button" role="tab" aria-selected="${s === F.subject}" class="subj ${n ? "" : "done"}" data-act="flow-subject" data-s="${esc(s)}">${esc(s)} <span>${n ? n + " left" : "✓"}</span></button>`;
     }).join("")}</div>` : "";
     const pct = list.length ? (done / list.length) * 100 : 100;
-    const head = `<div class="flow-head">${pills}
+    const setPills = `<div class="set-pills"><span class="muted">Standards:</span> ${fwsNow.map((f) => { const l = flowList(F.subject, g, f), n = l.filter((e) => !rating(e.f, e.c, g)).length;
+        return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(FW_NAME[f] || f)}">${badge(f)} ${esc(SET(f).name)} <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
+      <button type="button" class="linkish" data-act="sets-change">Change ${hb("sets")}</button></div>`;
+    const head = `<div class="flow-head">${pills}${setPills}
       <div class="flow-progress"><div class="fp-bar"><i style="width:${pct}%"></i></div>
       <span><b>${done}</b> of ${list.length} rated · <b>${left}</b> left ${hb("flow")}</span></div></div>`;
-    const e = flowCurrent(list, g);
+    const e = flowCurrent(F.set ? flowList(F.subject, g, F.set) : list, g) || flowCurrent(list, g);
     let body;
     if (!e) {
       const next = S.team.subjects.find((s) => flowList(s, g).some((x) => !rating(x.f, x.c, g)));
@@ -335,14 +384,16 @@
         <div class="done-actions">${next ? `<button type="button" data-act="flow-subject" data-s="${esc(next)}">Next: ${esc(next)} →</button>` : `<button type="button" data-act="explore">See your grade on the K-12 map</button>`}
         <button type="button" class="ghost" data-act="review">Review my answers</button></div></div>`;
     } else {
-      const k = rkey(e.f, e.c, g), r = rating(e.f, e.c, g), pos = list.indexOf(e) + 1;
+      const k = rkey(e.f, e.c, g), r = rating(e.f, e.c, g), inSet = list.filter((x) => x.f === e.f), pos = inSet.indexOf(e) + 1, sx = SET(e.f);
+      const newSet = F.lastSet && F.lastSet !== e.f; F.lastSet = e.f;
+      const links = (e.lk || []).map((x) => x.split(":")[1]);
       const ee = e.ee ? e.ee.split(";")[0].trim() : "";
       const fresh = S.flow.lastKey !== k; S.flow.lastKey = k;
-      body = `<article class="card std-card ${fresh ? "enter" : ""}" data-k="${esc(k)}">
-        <div class="card-top"><span class="eyebrow">${esc(e.s || F.subject)}</span><span class="muted">${pos} of ${list.length}</span></div>
+      body = `${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${esc(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
+        <div class="card-top"><span class="eyebrow">${badge(e.f)} ${esc(sx.name)} · ${esc(e.s || F.subject)}</span><span class="muted">${pos} of ${inSet.length}</span></div>
         <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(e.c)}</button></h2>
         <p class="card-text">${esc(fullText(e))}</p>
-        <p class="card-meta">${ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
+        <p class="card-meta">${links.length ? `Linked to ${links.slice(0, 3).map(esc).join(", ")}${links.length > 3 ? " and " + (links.length - 3) + " more" : ""} · ` : ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
         <p class="card-q">How is this taught in ${esc(gname(g))} this year?</p>
         <div class="choices">${[0, 1, 2].map((l) => `<button type="button" class="choice c${l} ${r && r.level === l ? "on" : ""}" data-act="flow-rate" data-k="${esc(e.f + "|" + e.c)}" data-l="${l}">
           <kbd>${l + 1}</kbd><b>${["Not taught", "Introduced", "Taught in depth"][l]}</b><small>${["We do not teach this", "Touched on, not a main focus", "Taught, practised and assessed"][l]}</small></button>`).join("")}</div>
@@ -375,7 +426,8 @@
     }
     const g = teamGrade();
     if (!g) return pickGrade(el, "its standards");
-    const all = filtered({ ignoreDivision: true });
+    let all = filtered({ ignoreDivision: true });
+    if (mode() === "teacher") { const fws = setsFor(S.f.subject, g, S.team); all = all.filter((e) => fws.includes(e.f)).sort((a, b) => SET_ORDER(a.f) - SET_ORDER(b.f)); }
     const placed = all.filter((e) => e.pl.includes(g));
     const band = all.filter((e) => !e.pl.includes(g) && e.sg && e.div.includes(divOf(g)));
     const committee = S.team.name === "Vertical Alignment Committee";
@@ -417,7 +469,7 @@
       const [fw, sname] = multi ? key.split("\u0001") : [null, key];
       const inS = list.filter((e) => (e.s || "Standards") === sname && (!fw || e.f === fw));
       const cells = gs.map((g) => tile(inS, g, sname)).join("");
-      return `<tr><th class="cm-row" scope="row"><span>${esc(sname)}</span>${multi ? `<small>${esc(FW_NAME[fw] || fw)}</small>` : ""}</th>${cells}</tr>`;
+      return `<tr class="${multi ? "set-" + SET(fw).style : ""}"><th class="cm-row" scope="row"><span>${multi ? badge(fw) + " " : ""}${esc(sname)}</span>${multi ? `<small>${esc(FW_NAME[fw] || fw)}</small>` : ""}</th>${cells}</tr>`;
     }).join("");
     const head = gs.map((g) => {
       const mine = list.filter((e) => e.pl.includes(g)), c = countLevels(mine, g), pct = mine.length ? Math.round(((mine.length - c[3]) / mine.length) * 100) : 0;
@@ -434,7 +486,7 @@
     let rows = "", last = null;
     for (const e of list) {
       const head = (subj().frameworks.length > 1 ? (FW_NAME[e.f] || e.f) + " · " : "") + (e.s || "");
-      if (head !== last) { rows += `<tr class="strand-row"><td colspan="${gs.length + 1}">${esc(head)}</td></tr>`; last = head; }
+      if (head !== last) { rows += `<tr class="strand-row"><td colspan="${gs.length + 1}">${badge(e.f)} ${esc(head)}</td></tr>`; last = head; }
       rows += `<tr><td class="rowh"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="${esc(e.t)}">${esc(e.c)}</button></td>` +
         gs.map((g) => {
           const r = rating(e.f, e.c, g), placed = e.pl.includes(g), inPlan = !!ev(e.f, e.c, g);
@@ -461,7 +513,7 @@
     }
     return out;
   }
-  function li(e, extra) { return `<li><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button> ${extra || ""} <span class="muted">${esc(e.t.slice(0, 90))}${e.t.length > 90 ? "…" : ""}</span></li>`; }
+  function li(e, extra) { return `<li>${badge(e.f)} <button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button> ${extra || ""} <span class="muted">${esc(e.t.slice(0, 90))}${e.t.length > 90 ? "…" : ""}</span></li>`; }
   function renderGaps() {
     const el = $("#view-gaps"), list = filtered(), a = analyse(list), n = list.length;
     const pct = (x) => (n ? Math.round((x / n) * 100) : 0);
@@ -526,7 +578,7 @@
     const rungs = gs.map((g) => {
       const here = list.filter((e) => e.pl.includes(g));
       const moved = list.filter((e) => !e.pl.includes(g) && (rating(e.f, e.c, g)?.level || 0) > 0);
-      const chip = (e, m) => { const r = rating(e.f, e.c, g); return `<button class="chip ${r ? "l" + r.level : ""}" data-act="open" data-k="${esc(e.f + "|" + e.c)}" style="${m ? "border-style:dashed" : ""}">${esc(e.c)}<small>${esc(e.t.slice(0, 60))}${e.t.length > 60 ? "…" : ""}</small></button>`; };
+      const chip = (e, m) => { const r = rating(e.f, e.c, g); return `<button class="chip ${r ? "l" + r.level : ""}" data-act="open" data-k="${esc(e.f + "|" + e.c)}" style="${m ? "border-style:dashed" : ""}">${badge(e.f)} ${esc(e.c)}<small>${esc(e.t.slice(0, 60))}${e.t.length > 60 ? "…" : ""}</small></button>`; };
       const c = countLevels(here, g);
       return `<div class="rung div-${divOf(g)} ${g === g0 ? "sel" : ""}"><h4>${esc(gname(g))} <span class="muted">(${here.length})</span></h4>${here.length ? miniBar(c, `${here.length - c[3]} of ${here.length} rated`) : ""}${here.map((e) => chip(e)).join("")}${moved.length ? `<div class="muted" style="font-size:11px;margin:6px 0 4px">Also taught here</div>${moved.map((e) => chip(e, true)).join("")}` : ""}</div>`;
     }).join("");
@@ -538,7 +590,7 @@
   function renderActivity() {
     const el = $("#view-activity");
     const rows = S.events.slice(0, 200).map((ev) => `<tr class="${ev.undone ? "undone" : ""}"><td>${new Date(ev.created_at).toLocaleString()}</td><td>${esc(ev.team)}</td>
-      <td><button class="code" data-act="open" data-k="${esc(ev.framework + "|" + ev.code)}">${esc(ev.code)}</button></td><td>${gl(ev.grade)}</td>
+      <td>${badge(ev.framework)} <button class="code" data-act="open" data-k="${esc(ev.framework + "|" + ev.code)}">${esc(ev.code)}</button></td><td>${gl(ev.grade)}</td>
       <td>${ev.old_level == null ? "Not rated" : LEVEL_SHORT[ev.old_level]} → ${LEVEL_SHORT[ev.new_level]}</td>
       <td>${ev.undone ? "Undone" : `<button class="ghost" data-act="undo" data-id="${ev.id}">Undo</button>`}</td></tr>`).join("");
     const crow = S.comments.slice(0, 50).map((c) => `<tr><td>${new Date(c.created_at).toLocaleString()}</td><td>${esc(c.team)}${c.author ? " · " + esc(c.author) : ""}</td>
@@ -629,7 +681,10 @@
     const relList = (g) => { const r = rel(g); return r.length ? r.map((x) => `<li><button class="code" data-act="open" data-k="${esc(x.f + "|" + x.c)}">${esc(x.c)}</button> <span class="muted">${esc(x.t.slice(0, 80))}…</span></li>`).join("") : "<li class='muted'>None in this strand.</li>"; };
     const comments = S.comments.filter((c) => c.framework === e.f && c.code === e.c);
     const hist = S.events.filter((ev) => ev.framework === e.f && ev.code === e.c).slice(0, 12);
-    $("#d-eyebrow").textContent = `${FW_NAME[e.f] || e.f} · ${e.s || ""}`;
+    $("#d-eyebrow").innerHTML = `${badge(e.f)} ${esc(FW_NAME[e.f] || e.f)} · ${esc(e.s || "")}`;
+    const eeFw = "WI-EE-" + ({ Math: "MATH", ELA: "ELA", Science: "SCI", "Social Studies": "SS" })[sub.name];
+    const eeItem = e.ee ? S.idx[sub.slug].find((x) => x.f === eeFw && x.c === e.ee.split(";")[0].trim()) : null;
+    const linkBtn = (x) => { const [f, c] = x.split(":"); return `<button class="code" data-act="open" data-k="${esc(f + "|" + c)}">${badge(f)} ${esc(c)}</button>`; };
     $("#d-title").textContent = e.c;
     $("#d-body").innerHTML = `
       <p class="stdtext">${esc(d.text || e.t)}</p>
@@ -639,8 +694,9 @@
       ${d.descriptor_flag ? `<div class="flagbox">${hb("d_flag")} <b>Committee review:</b> ${esc(d.descriptor_flag)}. A suggested version is shown beside the school descriptor.</div>` : ""}
       <div class="grid2" style="margin-top:14px">
         <div class="box"><h3>"I can" levels ${hb("d_levels")} ${d.descriptor_source === "draft" ? '<span class="tag flag">draft</span>' : '<span class="tag">school</span>'}</h3>${lvl(desc)}</div>
-        <div class="box"><h3>Essential Element ${esc(e.ee || "")} ${hb("d_ee")}</h3><p>${esc(d.ee_text || "No Essential Element for this standard.")}</p>
-          ${desc.ee_at_target && !String(desc.ee_at_target).startsWith("Not applicable") ? `<dl class="levels"><dt>EE at target</dt><dd>${esc(desc.ee_at_target)}</dd></dl>` : ""}</div>
+        ${e.lk ? `<div class="box"><h3>Linked standards ${hb("d_ee")}</h3><p>This Essential Element is the alternate version of:</p><p>${e.lk.map(linkBtn).join(" ")}</p></div>` :
+        `<div class="box"><h3>Essential Element ${eeItem ? `<button class="code" data-act="open" data-k="${esc(eeFw + "|" + eeItem.c)}">${badge(eeFw)} ${esc(e.ee)}</button>` : esc(e.ee || "")} ${hb("d_ee")}</h3><p>${esc(d.ee_text || "No Essential Element for this standard.")}</p>
+          ${desc.ee_at_target && !String(desc.ee_at_target).startsWith("Not applicable") ? `<dl class="levels"><dt>EE at target</dt><dd>${esc(desc.ee_at_target)}</dd></dl>` : ""}</div>`}
       </div>
       ${d.descriptors_suggested ? `<div class="box" style="margin-top:14px"><h3>Suggested "I can" levels <span class="tag flag">draft</span></h3>${lvl(d.descriptors_suggested)}</div>` : ""}
       <div class="grid2 related" style="margin-top:14px">
@@ -710,8 +766,18 @@
     else if (act === "switch-team") { S.explore = false; setTeam(""); store.set("va_team", ""); $("#team").value = ""; }
     else if (act === "explore") { S.explore = true; showView("heatmap"); refreshFilterOptions(); rerender(); }
     else if (act === "back-to-flow") { S.explore = false; showView("flow"); rerender(); }
-    else if (act === "review") { S.f.subject = S.flow.subject || S.f.subject; S.f.framework = defaultFramework(S.f.subject, teamGrade()); S.f.strand = ""; S.f.search = ""; $("#f-search").value = ""; showView("rate"); refreshFilterOptions(); rerender(); }
-    else if (act === "flow-subject") { S.flow.subject = b.dataset.s; S.flow.back = null; S.flow.skipped.clear(); showView("flow"); rerender(); }
+    else if (act === "review") { S.f.subject = S.flow.subject || S.f.subject; S.f.framework = ""; S.f.strand = ""; S.f.search = ""; $("#f-search").value = ""; showView("rate"); refreshFilterOptions(); rerender(); }
+    else if (act === "flow-set") { S.flow.set = S.flow.set === b.dataset.f ? null : b.dataset.f; S.flow.back = null; rerender(); }
+    else if (act === "sets-change") { S.flow.choose = S.flow.subject; rerender(); }
+    else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
+    else if (act === "sets-save") {
+      const fws = $$(".set-opt input:checked").map((x) => x.value), subject = b.dataset.s;
+      if (!fws.length) { toast("Tick at least one set of standards."); return; }
+      try { await rpc("set_team_sets", { p_team: S.team.name, p_subject: subject, p_frameworks: fws });
+        (S.teamSets[S.team.name] ||= {})[subject] = fws; S.flow.choose = null; S.flow.set = null; S.flow.lastSet = null; rerender(); toast("Saved for your whole team"); }
+      catch (err) { toast("Could not save: " + err.message); }
+    }
+    else if (act === "flow-subject") { S.flow.subject = b.dataset.s; S.flow.set = null; S.flow.choose = null; S.flow.back = null; S.flow.skipped.clear(); showView("flow"); rerender(); }
     else if (act === "flow-rate") flowRate(b.dataset.k, +b.dataset.l);
     else if (act === "flow-skip") flowSkip();
     else if (act === "flow-back") flowBack();
@@ -849,7 +915,7 @@
     const v = store.get("va_view");
     if (mode() === "full" && v && v !== "flow" && $(`.tabs [data-view="${v}"]`)) $(`.tabs [data-view="${v}"]`).click();
     else { showView(mode() === "full" ? "rate" : "flow"); refreshFilterOptions(); rerender(); }
-    try { await Promise.all([loadRatings(true), loadEvents(), loadComments()]); syncNote("Up to date"); rerender(); }
+    try { await Promise.all([loadRatings(true), loadEvents(), loadComments(), loadTeamSets()]); syncNote("Up to date"); rerender(); }
     catch (err) { syncNote("Offline: ratings could not load"); }
     let n = 0;
     setInterval(async () => {

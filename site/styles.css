@@ -423,3 +423,48 @@ table.cm td.xcol .cm-none { background-color: var(--accent-tint); }
 .cell.inplan { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--lv-1); }
 .cell.placed.inplan { box-shadow: 0 0 0 2px var(--placed), 0 0 0 4px var(--lv-1); }
 .ring-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--lv-1); margin: 0 4px; }
+
+/* ---------------- standard sets: badges and set styles (shape and line, never the rating colours) ---------------- */
+.setb { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 18px; padding: 0 5px; border-radius: 4px;
+  font: 700 10px/1 var(--font); letter-spacing: .04em; vertical-align: 1px; white-space: nowrap; }
+.setb.set-cc { background: var(--brand); color: #fff; border: 1.5px solid var(--brand); }
+.setb.set-ee { background: #fff; color: var(--brand); border: 1.5px dashed var(--brand); border-radius: 9px; }
+.setb.set-ngss { background: var(--ink-2); color: #fff; border: 1.5px solid var(--ink-2); border-radius: 2px; }
+.setb.set-aero { background: #fff; color: var(--ink-2); border: 1.5px dotted var(--ink-2); }
+.setb.set-wi { background: var(--chip); color: var(--ink); border: 3px double var(--muted); height: 20px; }
+/* set chooser */
+.set-card h2 { font-size: 24px; }
+.set-opts { display: grid; gap: 10px; margin: 16px 0 20px; }
+.set-opt { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1.5px solid var(--line-2); border-radius: 12px; cursor: pointer; background: #fff; }
+.set-opt:hover { border-color: var(--brand); }
+.set-opt input { width: 20px; height: 20px; margin: 0; accent-color: var(--brand); flex: none; }
+.set-opt .setb { margin-top: 1px; }
+.set-opt b { display: block; } .set-opt small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+.set-opt.set-ee { border-style: dashed; }
+.set-opt:has(input:checked) { border-color: var(--brand); background: var(--brand-tint); }
+/* set pills in the flow */
+.set-pills { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 12px; font-size: 13px; }
+.setp { background: #fff; color: var(--ink-2); border: 1px solid var(--line); border-radius: 99px; padding: 4px 12px 4px 6px; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+.setp span { color: var(--muted); font-weight: 500; }
+.setp:hover { background: #fff; border-color: var(--brand); color: var(--brand); }
+.setp.on { border-color: var(--brand); box-shadow: 0 0 0 2px var(--brand-tint); }
+.setp.done span { color: var(--lv-2-text); font-weight: 700; }
+.set-switch { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; padding: 10px 14px; border-radius: 10px; background: var(--accent-tint); color: var(--ink); font-size: 14px; animation: cardIn .3s ease-out; }
+/* cards and rows take the set's line style, so a CC card and an EE card never look the same */
+.std-card.set-ee { border: 2px dashed var(--brand); background: linear-gradient(#F6FAF8, #fff 120px); }
+.std-card.set-aero { border: 2px dotted var(--ink-2); }
+.std-card.set-ngss { border-top: 6px solid var(--ink-2); }
+.std-card.set-wi { border: 4px double var(--line-2); }
+.std-card.set-cc { border-top: 6px solid var(--brand); }
+.std-card .eyebrow .setb { margin-right: 4px; }
+.std.set-ee { background: repeating-linear-gradient(135deg, transparent 0 10px, #F4F8F6 10px 11px); }
+.chip .setb { height: 15px; min-width: 20px; font-size: 9px; margin-right: 2px; }
+.strand .setb { margin-right: 6px; }
+.torate .setb { margin-left: 3px; height: 15px; min-width: 20px; font-size: 9px; }
+.legend-sets { display: inline-flex; align-items: center; gap: 6px; margin-left: 8px; padding-left: 14px; border-left: 1px solid var(--line-2); }
+.ring-box { flex: 0 0 auto; }
+.ring-key { min-width: 220px; }
+.rate-head > div:first-child { flex: 1 1 380px; }
+table.cm tr.set-ee .cm-tile, table.cm tr.set-aero .cm-tile { outline: 2px dashed var(--brand); outline-offset: -4px; }
+table.cm tr.set-aero .cm-tile { outline-style: dotted; outline-color: var(--ink-2); }
+table.cm tr.set-wi .cm-tile { outline: 3px double var(--muted); outline-offset: -5px; }
