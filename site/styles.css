@@ -468,3 +468,43 @@ table.cm td.xcol .cm-none { background-color: var(--accent-tint); }
 table.cm tr.set-ee .cm-tile, table.cm tr.set-aero .cm-tile { outline: 2px dashed var(--brand); outline-offset: -4px; }
 table.cm tr.set-aero .cm-tile { outline-style: dotted; outline-color: var(--ink-2); }
 table.cm tr.set-wi .cm-tile { outline: 3px double var(--muted); outline-offset: -5px; }
+
+/* ---------------- library (Still to do / Done) and team links ---------------- */
+.library { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.lib-tabs { display: flex; align-items: center; gap: 8px; }
+.lib-t { background: #fff; color: var(--ink-2); border: 1px solid var(--line); border-radius: 99px; padding: 5px 14px; font-weight: 600; }
+.lib-t span { margin-left: 4px; color: var(--muted); font-weight: 700; }
+.lib-t:hover { background: #fff; border-color: var(--brand); color: var(--brand); }
+.lib-t.on { background: var(--brand); border-color: var(--brand); color: #fff; } .lib-t.on span { color: #BFE0D6; }
+.lib-list { list-style: none; margin: 10px 0 0; padding: 0; max-height: 320px; overflow: auto; }
+.lib-list li { border-top: 1px solid var(--line); }
+.lib-i { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; background: none; border: 0; border-radius: 6px; color: var(--ink); padding: 8px 6px; font-weight: 400; font-size: 14px; }
+.lib-i:hover { background: var(--brand-tint); color: var(--ink); }
+.lib-i .setb { flex: none; }
+.lib-i > span:not(.setb) { flex: 1; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lib-i .pill { font-style: normal; white-space: nowrap; }
+.card-q .linkish { font-weight: 600; }
+ul.links { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 6px; }
+ul.links li { display: grid; grid-template-columns: minmax(150px, 220px) 1fr auto; gap: 8px; align-items: center; font-size: 14px; }
+ul.links input { width: 100%; font-size: 12px; color: var(--ink-2); }
+body[data-lock="1"] .team-pick { display: none !important; }
+@media (max-width: 760px) { ul.links li { grid-template-columns: 1fr; } }
+
+/* ---------------- team progress (committee) ---------------- */
+.prog-sum { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+.ps { border-radius: 10px; padding: 8px 14px; font-size: 14px; background: var(--chip); }
+.ps b { font-size: 20px; margin-right: 4px; }
+.ps0 { background: var(--lv-0-tint); } .ps0 b { color: var(--lv-0); }
+.ps1 { background: var(--lv-1-tint); } .ps1 b { color: #006F8F; }
+.ps2 { background: var(--lv-2-tint); } .ps2 b { color: var(--lv-2-text); }
+.prog-bar-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+table.prog { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.prog th { text-align: left; font-size: 12px; color: var(--ink-2); padding: 6px 8px; border-bottom: 1px solid var(--line); }
+table.prog td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+table.prog .pbar { width: 120px; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+table.prog .pbar i { display: block; height: 100%; background: var(--brand); }
+table.prog small { color: var(--muted); }
+.stat { font-size: 12px; font-weight: 700; border-radius: 99px; padding: 2px 10px; white-space: nowrap; }
+.stat.s0 { background: var(--lv-0-tint); color: var(--lv-0); } .stat.s1 { background: var(--lv-1-tint); color: #006F8F; } .stat.s2 { background: var(--lv-2-tint); color: var(--lv-2-text); }
+.prog-act { white-space: nowrap; text-align: right; }
+@media (max-width: 760px) { table.prog th:nth-child(2), table.prog td:nth-child(2), table.prog th:nth-child(5), table.prog td:nth-child(5) { display: none; } .prog-act { white-space: normal; } }
