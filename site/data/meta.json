@@ -4,17 +4,19 @@
    "name": "Math",
    "slug": "math",
    "frameworks": [
-    "WI-CC-MATH"
+    "WI-CC-MATH",
+    "WI-EE-MATH"
    ],
-   "count": 406
+   "count": 693
   },
   {
    "name": "ELA",
    "slug": "ela",
    "frameworks": [
-    "WI-CC-ELA"
+    "WI-CC-ELA",
+    "WI-EE-ELA"
    ],
-   "count": 562
+   "count": 1114
   },
   {
    "name": "Science",
@@ -22,18 +24,20 @@
    "frameworks": [
     "AERO-SCI",
     "NGSS",
+    "WI-EE-SCI",
     "WI-SCI"
    ],
-   "count": 539
+   "count": 582
   },
   {
    "name": "Social Studies",
    "slug": "social_studies",
    "frameworks": [
     "AERO-SS",
+    "WI-EE-SS",
     "WI-SS"
    ],
-   "count": 351
+   "count": 377
   }
  ],
  "grades": [
@@ -51,7 +55,7 @@
   "11",
   "12"
  ],
- "built": "2026-10-09",
+ "built": "2026-10-16",
  "teams": [
   {
    "name": "Vertical Alignment Committee",
