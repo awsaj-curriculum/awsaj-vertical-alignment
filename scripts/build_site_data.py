@@ -6,6 +6,8 @@ Usage: python3 scripts/build_site_data.py
 """
 import json, collections
 rows = json.load(open("data/standards/all_standards.json"))
+# Essential Elements as their own standard sets (built by scripts/build_ee_rows.py)
+rows += json.load(open("data/standards/essential_elements.json"))
 GORDER = ["K"] + [str(g) for g in range(1, 13)]
 slug = {"Math": "math", "ELA": "ela", "Science": "science", "Social Studies": "social_studies"}
 by_sub = collections.defaultdict(list)
@@ -20,6 +22,11 @@ for sub, rs in by_sub.items():
         e = idx.setdefault(k, {"f": r["framework"], "c": r["code"], "s": r["strand"], "cl": r["cluster"],
                                "t": r["text"][:220], "ee": r["ee_code"], "pl": [], "sg": False, "band": r["grade_band"],
                                "div": [], "crs": []})
+        if r["framework"].startswith("WI-EE-"):
+            e.setdefault("lk", [])
+            for x in r["crosswalk"]:
+                if x not in e["lk"]:
+                    e["lk"].append(x)
         if r["grade"] not in e["pl"]:
             e["pl"].append(r["grade"])
         e["sg"] = e["sg"] or r["grade_is_suggested"]

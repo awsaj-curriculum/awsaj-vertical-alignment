@@ -54,6 +54,15 @@ plans = Introduced, 3+ weeks = Taught in depth.
 
 Teachers use one guided flow (view "flow": one standard at a time); the committee and "Explore" get the full tabs.
 
+## Standard sets
+Each set is a framework: CC (WI-CC-MATH, WI-CC-ELA), EE (WI-EE-MATH, WI-EE-ELA, WI-EE-SCI, WI-EE-SS: Essential Elements
+as their own rows, built by `scripts/build_ee_rows.py` into `data/standards/essential_elements.json`, `crosswalk`/`lk` =
+linked standards), NGSS, AERO (AERO-SCI, AERO-SS) and WI (WI-SCI, WI-SS). Each team chooses its sets per subject
+(`team_sets`, written by `set_team_sets`, migration 004); until it chooses, it gets the default (CC for Math/ELA, AERO K-5 /
+NGSS 6-12 for Science, WI-SS for Social Studies). Teachers rate chosen sets one at a time (CC first, EE last). Every set
+has a badge with its own line style (CC solid green, EE dashed, NGSS solid grey, AERO dotted, WI double line); sets never
+use the rating colours.
+
 ## Testing
 Use Playwright (Chromium) against the local server, and check every view (Rate, Heatmap, Gaps, Dashboard,
 Progressions, Activity, Vertical Alignment Audit) plus a standard popup. Do not leave test ratings in the live database:
