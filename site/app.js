@@ -338,11 +338,11 @@
   }
 
   // The default framework for a subject and grade, also the one each "still to rate" count uses so a standard
-  // listed in two frameworks is not counted twice. Social Studies is Wisconsin (with EEs) in every grade;
-  // Science is NGSS in every grade (teams can still choose AERO).
+  // listed in two frameworks is not counted twice. Social Studies is AERO in K-5 (the only grades AERO covers) and
+  // Wisconsin in 6-12; Science is NGSS in every grade. Teams can still choose other sets.
   function countFramework(subject, g) {
     if (subject === "Science") return "NGSS";
-    if (subject === "Social Studies") return "WI-SS";
+    if (subject === "Social Studies") return DIV.Elementary.includes(g) ? "AERO-SS" : "WI-SS";
     return subject === "Math" ? "WI-CC-MATH" : subject === "ELA" ? "WI-CC-ELA" : null;
   }
   // The team that rates a subject in grade g, and the standard sets it chose (saved for the whole team in team_sets).
@@ -360,7 +360,7 @@
     for (const r of rows) (S.teamSets[r.team] ||= {})[r.subject] = r.frameworks;
     S.setsLoaded = true;
   }
-  const defaultFramework = (subject, g) => (subject === "Math" || subject === "ELA" ? "" : countFramework(subject, g) || "");
+  const defaultFramework = (subject, g) => (subject === "Math" || subject === "ELA" || (subject === "Social Studies" && !g) ? "" : countFramework(subject, g) || "");
   // Unrated grade-level standards per subject (counted framework only), and unrated standards left in e's strand.
   function toRateLeft(g) {
     const out = {};
