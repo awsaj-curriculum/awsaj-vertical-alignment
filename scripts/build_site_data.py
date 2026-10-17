@@ -22,6 +22,8 @@ for sub, rs in by_sub.items():
         e = idx.setdefault(k, {"f": r["framework"], "c": r["code"], "s": r["strand"], "cl": r["cluster"],
                                "t": r["text"][:220], "ee": r["ee_code"], "pl": [], "sg": False, "band": r["grade_band"],
                                "div": [], "crs": []})
+        if r["framework"] == "WI-CC-ELA" and r["crosswalk"]:
+            e["cw"] = r["crosswalk"]          # Common Core codes (RL/RI) behind a Wisconsin 2020 Reading code
         if r["framework"].startswith("WI-EE-"):
             e.setdefault("lk", [])
             for x in r["crosswalk"]:

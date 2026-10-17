@@ -270,12 +270,16 @@
     return `<div class="seg" role="group" aria-label="Rating for ${esc(e.c)} in ${esc(gname(g))}">` +
       [0, 1, 2].map((l) => `<button data-act="rate" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}" data-l="${l}" aria-pressed="${r && r.level === l}">${LEVEL_SHORT[l]}</button>`).join("") + `</div>`;
   }
+  // ELA planners use Common Core codes in K-9 (RL.6.1, RI.6.1); the site's ELA set is Wisconsin 2020, which joins
+  // them into one Reading code (R.6.1). Show the Common Core codes beside it so teachers recognise them.
+  const ccss = (e, g) => (e.cw && (g ? GRADES.indexOf(g) <= 9 : GRADES.indexOf(e.pl[0]) <= 9) ? e.cw : null);
   function stdRow(e, g, note) {
     const r = rating(e.f, e.c, g);
     const tags = [];
     tags.push(badge(e.f));
     if (e.lk && e.lk.length) tags.push(`<span class="tag">Linked to ${esc(e.lk[0].split(":")[1])}${e.lk.length > 1 ? " +" + (e.lk.length - 1) : ""}</span>`);
     if (e.ee) { const ee = e.ee.split(";")[0].trim(); tags.push(`<span class="tag">${/^(M\.)?EE/.test(ee) || ee.startsWith("SS.EE") ? "" : "EE "}${esc(ee)}</span>`); }
+    if (ccss(e, g)) tags.push(`<span class="tag cw" title="Common Core codes in your planners">CCSS ${ccss(e, g).map(esc).join(", ")}</span>`);
     if (note) tags.push(`<span class="tag sg">${esc(note)}</span>`);
     const k = rkey(e.f, e.c, g);
     return `<div class="std set-${SET(e.f).style} ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}"><div><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></div>
@@ -466,7 +470,7 @@
       const fresh = S.flow.lastKey !== k; S.flow.lastKey = k;
       body = `${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${esc(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
         <div class="card-top"><span class="eyebrow">${badge(e.f)} ${esc(sx.name)} · ${esc(e.s || F.subject)}</span><span class="muted">${pos} of ${inSet.length}</span></div>
-        <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(e.c)}</button></h2>
+        <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(e.c)}</button>${ccss(e, g) ? ` <span class="cw-code">Common Core: ${ccss(e, g).map(esc).join(", ")} ${hb("ccss")}</span>` : ""}</h2>
         <p class="card-text">${esc(fullText(e))}</p>
         <p class="card-meta">${links.length ? `Linked to ${links.slice(0, 3).map(esc).join(", ")}${links.length > 3 ? " and " + (links.length - 3) + " more" : ""} · ` : ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
         <p class="card-q">${r ? `Your answer: <b>${LEVEL[r.level]}</b>. Choose another answer to switch it${S.canClear ? `, or <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}">remove it</button>` : ""}.` : `How is this taught in ${esc(gname(g))} this year?`}</p>
@@ -770,7 +774,7 @@
     const eeFw = "WI-EE-" + ({ Math: "MATH", ELA: "ELA", Science: "SCI", "Social Studies": "SS" })[sub.name];
     const eeItem = e.ee ? S.idx[sub.slug].find((x) => x.f === eeFw && x.c === e.ee.split(";")[0].trim()) : null;
     const linkBtn = (x) => { const [f, c] = x.split(":"); return `<button class="code" data-act="open" data-k="${esc(f + "|" + c)}">${badge(f)} ${esc(c)}</button>`; };
-    $("#d-title").textContent = e.c;
+    $("#d-title").textContent = e.c + (ccss(e, teamGrade()) ? ` (Common Core: ${ccss(e, teamGrade()).join(", ")})` : "");
     $("#d-body").innerHTML = `
       <p class="stdtext">${esc(d.text || e.t)}</p>
       <p class="muted">Suggested for ${e.pl.map(gname).join(", ")}${e.sg ? " (a suggestion: teachers confirm the grade in Part 1)" : ""}${d.course ? " · " + esc(d.course) : ""}${d.cluster ? " · " + esc(d.cluster) : ""}</p>
