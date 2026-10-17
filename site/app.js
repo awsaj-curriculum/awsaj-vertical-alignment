@@ -18,7 +18,7 @@
     : f === "NGSS" ? { abbr: "NGSS", name: "NGSS", style: "ngss" }
     : f.startsWith("AERO-") ? { abbr: "AERO", name: "AERO", style: "aero" }
     : { abbr: "WI", name: f === "WI-SS" ? "Wisconsin Social Studies" : "Wisconsin Science", style: "wi" });
-  const SET_ORDER = (f) => (f.startsWith("WI-EE-") ? 9 : f.startsWith("WI-CC-") ? 0 : f.startsWith("AERO-") ? 1 : f === "NGSS" ? 2 : 3);
+  const SET_ORDER = (f) => (f.startsWith("WI-EE-") ? 9 : f.startsWith("WI-CC-") ? 0 : f === "NGSS" ? 1 : f.startsWith("AERO-") ? 2 : 3);
   const badge = (f) => { const x = SET(f); return `<span class="setb set-${x.style}" title="${esc(FW_NAME[f] || x.name)}">${x.abbr}</span>`; };
   // Awsaj brand: ratings use three of the four symbol ribbons (orange is kept for highlights so it never sits next to lime).
   const COLORS = { none: "#FFFFFF", 0: "#D00070", placed: "#024638", 1: "#0092BC", 2: "#78BE21", maroon: "#024638", accent: "#ED8B00", line: "#D9E1E2", ink: "#1E2324" };
@@ -201,7 +201,7 @@
   }
   function renderWho() {
     const m = mode();
-    if (S.lock && S.team) { $("#whoami").innerHTML = `<span class="who-team">${esc(S.team.name)}${S.lock.subject ? " · " + esc(S.lock.subject) : ""}</span> ${hb("locked")}`; return; }
+    if (S.lock && S.team) { $("#whoami").innerHTML = `<span class="who-team">${esc(S.lock.grade ? gname(S.lock.grade) : S.team.name)}${S.lock.subject ? " · " + esc(S.lock.subject) : ""}</span> ${hb("locked")}`; return; }
     $("#whoami").innerHTML = m === "welcome" ? "" : `<span class="who-team">${esc(S.team.name)}</span>
       ${m === "teacher" ? `<button type="button" class="ghost sm" data-act="explore">Explore the K-12 map</button>` : !isCommittee() ? `<button type="button" class="sm" data-act="back-to-flow">Back to rating</button>` : ""}
       ${isCommittee() ? `<button type="button" class="ghost sm" data-act="links">Team progress</button>` : ""}
@@ -226,23 +226,37 @@
     return rows.sort((a, b) => a.status - b.status || GRADES.indexOf(a.g) - GRADES.indexOf(b.g) || a.t.name.localeCompare(b.t.name));
   }
   const reminderText = (x) => `Hello ${x.t.name} team. Please finish rating your ${x.subject} standards for the K-12 Vertical Alignment audit (${x.done} of ${x.total} done so far). Your team's link: ${x.u}`;
+  // One row per grade: every subject in that grade added up, with the grade link (?grade=6) that opens all of them.
+  function gradeProgressRows() {
+    const base = location.origin + location.pathname;
+    return GRADES.map((g) => {
+      const parts = teamProgressRows().filter((x) => x.g === g).sort((a, b) => S.meta.subjects.findIndex((s) => s.name === a.subject) - S.meta.subjects.findIndex((s) => s.name === b.subject));
+      const total = parts.reduce((n, x) => n + x.total, 0), done = parts.reduce((n, x) => n + x.done, 0), last = parts.reduce((m, x) => (x.last > m ? x.last : m), "");
+      return { g, parts, total, done, last, u: base + "?grade=" + g, status: !done ? 0 : done < total ? 1 : 2 };
+    }).filter((x) => x.parts.length);
+  }
+  const gradeReminder = (x) => `Hello ${gname(x.g)} teachers. Please finish rating your standards for the K-12 Vertical Alignment audit. Still to do: ${x.parts.filter((p) => p.done < p.total).map((p) => `${p.subject} ${p.total - p.done} of ${p.total}`).join(", ")}. You can stop and come back any time. Your grade's link (all subjects): ${x.u}`;
   function teamLinks() {
-    const rows = teamProgressRows(), f = S.progFilter || "todo";
+    const by = S.progBy || "grade", rows = by === "grade" ? gradeProgressRows() : teamProgressRows(), f = S.progFilter || "todo";
     const shown = rows.filter((x) => (f === "todo" ? x.status < 2 : f === "done" ? x.status === 2 : true));
     const counts = [0, 1, 2].map((k) => rows.filter((x) => x.status === k).length);
     const STATUS = ["Not started", "In progress", "Done"];
+    const bar = (x) => `<td><div class="pbar"><i style="width:${x.total ? (x.done / x.total) * 100 : 0}%"></i></div><small>${x.done} of ${x.total}</small></td>
+        <td><span class="stat s${x.status}">${STATUS[x.status]}</span></td><td class="muted">${x.last ? new Date(x.last).toLocaleDateString() : "Never"}</td>`;
+    const copy = (x, msg) => `<td class="prog-act"><button type="button" class="ghost sm" data-act="copy" data-u="${esc(x.u)}">Copy link</button>${x.status < 2 ? ` <button type="button" class="ghost sm" data-act="copy" data-u="${esc(msg)}">Copy reminder</button>` : ""}</td>`;
+    const row = by === "grade"
+      ? (x) => `<tr class="st${x.status}"><td><b>${esc(gname(x.g))}</b></td><td class="prog-subj">${x.parts.map((p) => `<span class="ps-s ${p.done === p.total ? "ok" : ""}" title="${esc(p.t.name)}">${esc(p.subject)} <b>${p.done === p.total ? "✓" : `${p.done}/${p.total}`}</b></span>`).join("")}</td>${bar(x)}${copy(x, gradeReminder(x))}</tr>`
+      : (x) => `<tr class="st${x.status}"><td><b>${esc(x.t.name)}</b>${x.t.subjects.length > 1 ? ` · ${esc(x.subject)}` : ""}</td><td>${x.fws.map(badge).join(" ")}</td>${bar(x)}${copy(x, reminderText(x))}</tr>`;
     $("#d-eyebrow").textContent = "Committee"; $("#d-title").textContent = "Team progress and links";
-    $("#d-body").innerHTML = `<p class="lede">Who has finished, and who needs a reminder. Each row is one team and subject, counted in the standard sets that team chose. Send the link (or the ready-made reminder) to any team that is not done. ${hb("links")}</p>
+    $("#d-body").innerHTML = `<p class="lede">Who has finished, and who needs a reminder. <b>By grade</b> adds up every subject in a grade and gives one link that opens all of them. <b>By team</b> shows each team and subject on its own. ${hb("links")}</p>
+      <div class="lib-tabs prog-by">${[["grade", "By grade"], ["team", "By team"]].map(([k, l]) => `<button type="button" class="lib-t ${by === k ? "on" : ""}" data-act="prog-by" data-b="${k}">${l}</button>`).join("")}</div>
       <div class="prog-sum"><span class="ps ps0"><b>${counts[0]}</b> not started</span><span class="ps ps1"><b>${counts[1]}</b> in progress</span><span class="ps ps2"><b>${counts[2]}</b> done</span></div>
       <div class="prog-bar-row"><div class="lib-tabs">${[["todo", "Need a reminder"], ["done", "Done"], ["all", "All"]].map(([k, l]) => `<button type="button" class="lib-t ${f === k ? "on" : ""}" data-act="prog-filter" data-f="${k}">${l}</button>`).join("")}</div>
         ${counts[0] + counts[1] ? `<button type="button" class="sm" data-act="copy-all-reminders">Copy reminders for all ${counts[0] + counts[1]} unfinished</button>` : ""}</div>
-      <table class="prog"><thead><tr><th>Team</th><th>Sets</th><th>Progress</th><th>Status</th><th>Last rated</th><th></th></tr></thead><tbody>
-      ${shown.map((x, i) => `<tr class="st${x.status}"><td><b>${esc(x.t.name)}</b>${x.t.subjects.length > 1 ? ` · ${esc(x.subject)}` : ""}</td><td>${x.fws.map(badge).join(" ")}</td>
-        <td><div class="pbar"><i style="width:${x.total ? (x.done / x.total) * 100 : 0}%"></i></div><small>${x.done} of ${x.total}</small></td>
-        <td><span class="stat s${x.status}">${STATUS[x.status]}</span></td><td class="muted">${x.last ? new Date(x.last).toLocaleDateString() : "Never"}</td>
-        <td class="prog-act"><button type="button" class="ghost sm" data-act="copy" data-u="${esc(x.u)}">Copy link</button>${x.status < 2 ? ` <button type="button" class="ghost sm" data-act="copy" data-u="${esc(reminderText(x))}">Copy reminder</button>` : ""}</td></tr>`).join("") || `<tr><td colspan="6" class="muted">${f === "done" ? "No team has finished yet." : "Every team is done."}</td></tr>`}
+      <table class="prog"><thead><tr><th>${by === "grade" ? "Grade" : "Team"}</th><th>${by === "grade" ? "Subjects" : "Sets"}</th><th>Progress</th><th>Status</th><th>Last rated</th><th></th></tr></thead><tbody>
+      ${shown.map(row).join("") || `<tr><td colspan="6" class="muted">${f === "done" ? (by === "grade" ? "No grade has finished yet." : "No team has finished yet.") : "Everyone is done."}</td></tr>`}
       </tbody></table>
-      <p class="muted" style="margin-top:10px">Elementary links open one subject; use the team name alone (${esc(location.origin + location.pathname)}?team=Grade%205) to give a team all its subjects.</p>`;
+      <p class="muted" style="margin-top:10px">A grade link (for example ${esc(location.origin + location.pathname)}?grade=6) opens every subject in that grade. Teachers can do the subjects in any order, stop, and come back: each subject shows how many are left.</p>`;
     if (!$("#detail").open) $("#detail").showModal();
   }
   function rerender() {
@@ -256,12 +270,16 @@
     return `<div class="seg" role="group" aria-label="Rating for ${esc(e.c)} in ${esc(gname(g))}">` +
       [0, 1, 2].map((l) => `<button data-act="rate" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}" data-l="${l}" aria-pressed="${r && r.level === l}">${LEVEL_SHORT[l]}</button>`).join("") + `</div>`;
   }
+  // ELA planners use Common Core codes in K-9 (RL.6.1, RI.6.1); the site's ELA set is Wisconsin 2020, which joins
+  // them into one Reading code (R.6.1). Show the Common Core codes beside it so teachers recognise them.
+  const ccss = (e, g) => (e.cw && (g ? GRADES.indexOf(g) <= 9 : GRADES.indexOf(e.pl[0]) <= 9) ? e.cw : null);
   function stdRow(e, g, note) {
     const r = rating(e.f, e.c, g);
     const tags = [];
     tags.push(badge(e.f));
     if (e.lk && e.lk.length) tags.push(`<span class="tag">Linked to ${esc(e.lk[0].split(":")[1])}${e.lk.length > 1 ? " +" + (e.lk.length - 1) : ""}</span>`);
     if (e.ee) { const ee = e.ee.split(";")[0].trim(); tags.push(`<span class="tag">${/^(M\.)?EE/.test(ee) || ee.startsWith("SS.EE") ? "" : "EE "}${esc(ee)}</span>`); }
+    if (ccss(e, g)) tags.push(`<span class="tag cw" title="Common Core codes in your planners">CCSS ${ccss(e, g).map(esc).join(", ")}</span>`);
     if (note) tags.push(`<span class="tag sg">${esc(note)}</span>`);
     const k = rkey(e.f, e.c, g);
     return `<div class="std set-${SET(e.f).style} ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}"><div><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></div>
@@ -324,11 +342,11 @@
   }
 
   // The default framework for a subject and grade, also the one each "still to rate" count uses so a standard
-  // listed in two frameworks is not counted twice. Social Studies is Wisconsin (with EEs) in every grade;
-  // Science is AERO in K-5 (the school's current framework) and NGSS in 6-12.
+  // listed in two frameworks is not counted twice. Social Studies is AERO in K-5 (the only grades AERO covers) and
+  // Wisconsin in 6-12; Science is NGSS in every grade. Teams can still choose other sets.
   function countFramework(subject, g) {
-    if (subject === "Science") return DIV.Elementary.includes(g) ? "AERO-SCI" : "NGSS";
-    if (subject === "Social Studies") return "WI-SS";
+    if (subject === "Science") return "NGSS";
+    if (subject === "Social Studies") return DIV.Elementary.includes(g) ? "AERO-SS" : "WI-SS";
     return subject === "Math" ? "WI-CC-MATH" : subject === "ELA" ? "WI-CC-ELA" : null;
   }
   // The team that rates a subject in grade g, and the standard sets it chose (saved for the whole team in team_sets).
@@ -346,7 +364,7 @@
     for (const r of rows) (S.teamSets[r.team] ||= {})[r.subject] = r.frameworks;
     S.setsLoaded = true;
   }
-  const defaultFramework = (subject, g) => (subject === "Math" || subject === "ELA" || (subject === "Science" && (!g || DIV.Elementary.includes(g))) ? "" : countFramework(subject, g) || "");
+  const defaultFramework = (subject, g) => (subject === "Math" || subject === "ELA" || (subject === "Social Studies" && !g) ? "" : countFramework(subject, g) || "");
   // Unrated grade-level standards per subject (counted framework only), and unrated standards left in e's strand.
   function toRateLeft(g) {
     const out = {};
@@ -369,10 +387,13 @@
   }
 
   /* ---------------- teacher flow: one standard at a time ---------------- */
+  // A grade link (?grade=6) opens every subject in that grade. Each subject is rated as its own team (Grade 6 Math, ...).
+  const flowSubjects = () => (S.lock && S.lock.grade ? S.meta.subjects.map((s) => s.name).filter((s) => teamOf(S.lock.grade, s)) : S.team.subjects);
+  const subjTeam = (subject, g) => (S.team.subjects.includes(subject) ? S.team : teamOf(g, subject) || S.team);
   // The grade-level list a teacher works through for one subject, in document order (strand by strand).
   // Chosen sets are worked through one after another (all Common Core, then all Essential Elements, and so on).
   function flowList(subject, g, onlySet) {
-    const sl = S.meta.subjects.find((s) => s.name === subject).slug, fws = setsFor(subject, g, S.team);
+    const sl = S.meta.subjects.find((s) => s.name === subject).slug, fws = setsFor(subject, g, subjTeam(subject, g));
     return fws.filter((f) => !onlySet || f === onlySet).flatMap((f) => S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)));
   }
   // Set chooser: which standard sets the team works through for this subject (saved for everyone on the team).
@@ -411,18 +432,19 @@
   function renderFlow() {
     const el = $("#view-flow");
     if (!S.team) return welcome(el);
-    const g = teamGrade(), F = S.flow;
-    if (!F.subject || !S.team.subjects.includes(F.subject)) F.subject = S.team.subjects.find((s) => flowList(s, g).some((e) => !rating(e.f, e.c, g))) || S.team.subjects[0];
+    const g = teamGrade(), F = S.flow, subs = flowSubjects();
+    if (!F.subject || !subs.includes(F.subject)) F.subject = subs.find((s) => flowList(s, g).some((e) => !rating(e.f, e.c, g))) || subs[0];
+    if (S.lock && S.lock.grade) S.team = teamOf(g, F.subject);
+    const pills = subs.length > 1 ? `<div class="subj-pills" role="tablist" aria-label="Subjects">${subs.map((s) => {
+      const l = flowList(s, g), n = l.filter((e) => !rating(e.f, e.c, g)).length;
+      return `<button type="button" role="tab" aria-selected="${s === F.subject}" class="subj ${n ? "" : "done"}" data-act="flow-subject" data-s="${esc(s)}">${esc(s)} <span>${n ? n + " left" : "✓"}</span></button>`;
+    }).join("")}</div>` : "";
     if (F.choose === F.subject || (S.setsLoaded && !chosen(F.subject, S.team))) {
-      el.innerHTML = `<div class="flow-wrap">${S.team.subjects.length > 1 ? `<div class="subj-pills">${S.team.subjects.map((s) => `<button type="button" role="tab" aria-selected="${s === F.subject}" class="subj" data-act="flow-subject" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>` : ""}${setChooser(F.subject, g, !chosen(F.subject, S.team))}</div>`;
+      el.innerHTML = `<div class="flow-wrap">${pills}${setChooser(F.subject, g, !chosen(F.subject, S.team))}</div>`;
       return;
     }
     const list = flowList(F.subject, g), done = list.filter((e) => rating(e.f, e.c, g)).length, left = list.length - done;
     const fwsNow = setsFor(F.subject, g, S.team);
-    const pills = S.team.subjects.length > 1 ? `<div class="subj-pills" role="tablist" aria-label="Subjects">${S.team.subjects.map((s) => {
-      const l = flowList(s, g), n = l.filter((e) => !rating(e.f, e.c, g)).length;
-      return `<button type="button" role="tab" aria-selected="${s === F.subject}" class="subj ${n ? "" : "done"}" data-act="flow-subject" data-s="${esc(s)}">${esc(s)} <span>${n ? n + " left" : "✓"}</span></button>`;
-    }).join("")}</div>` : "";
     const pct = list.length ? (done / list.length) * 100 : 100;
     const setPills = `<div class="set-pills"><span class="muted">Standards:</span> ${fwsNow.map((f) => { const l = flowList(F.subject, g, f), n = l.filter((e) => !rating(e.f, e.c, g)).length;
         return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(FW_NAME[f] || f)}">${badge(f)} ${esc(SET(f).name)} <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
@@ -433,11 +455,11 @@
     const e = flowCurrent(F.set ? flowList(F.subject, g, F.set) : list, g) || flowCurrent(list, g);
     let body;
     if (!e) {
-      const next = S.team.subjects.find((s) => flowList(s, g).some((x) => !rating(x.f, x.c, g)));
-      const all = !next && S.team.subjects.length > 1;
-      const total = S.team.subjects.reduce((n, s) => n + flowList(s, g).length, 0);
+      const next = subs.find((s) => flowList(s, g).some((x) => !rating(x.f, x.c, g)));
+      const all = !next && subs.length > 1;
+      const total = subs.reduce((n, s) => n + flowList(s, g).length, 0);
       body = `<div class="card done-card"><div class="big-tick">✓</div><h2>${all ? `${esc(gname(g))} is done` : `${esc(F.subject)} is done`}</h2>
-        <p class="lede">${all ? `All ${total} standards in ${S.team.subjects.map(esc).join(", ")} are rated. The committee can now see your grade on the map. Thank you.` : `All ${list.length} ${esc(F.subject)} standards for ${esc(gname(g))} are rated. Thank you.`}</p>
+        <p class="lede">${all ? `All ${total} standards in ${subs.map(esc).join(", ")} are rated. The committee can now see your grade on the map. Thank you.` : `All ${list.length} ${esc(F.subject)} standards for ${esc(gname(g))} are rated. Thank you.`}</p>
         <div class="done-actions">${next ? `<button type="button" data-act="flow-subject" data-s="${esc(next)}">Next: ${esc(next)} →</button>` : `<button type="button" data-act="explore">See your grade on the K-12 map</button>`}
         <button type="button" class="ghost" data-act="review">Review my answers</button></div></div>`;
     } else {
@@ -448,7 +470,7 @@
       const fresh = S.flow.lastKey !== k; S.flow.lastKey = k;
       body = `${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${esc(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
         <div class="card-top"><span class="eyebrow">${badge(e.f)} ${esc(sx.name)} · ${esc(e.s || F.subject)}</span><span class="muted">${pos} of ${inSet.length}</span></div>
-        <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(e.c)}</button></h2>
+        <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(e.c)}</button>${ccss(e, g) ? ` <span class="cw-code">Common Core: ${ccss(e, g).map(esc).join(", ")} ${hb("ccss")}</span>` : ""}</h2>
         <p class="card-text">${esc(fullText(e))}</p>
         <p class="card-meta">${links.length ? `Linked to ${links.slice(0, 3).map(esc).join(", ")}${links.length > 3 ? " and " + (links.length - 3) + " more" : ""} · ` : ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
         <p class="card-q">${r ? `Your answer: <b>${LEVEL[r.level]}</b>. Choose another answer to switch it${S.canClear ? `, or <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}">remove it</button>` : ""}.` : `How is this taught in ${esc(gname(g))} this year?`}</p>
@@ -752,7 +774,7 @@
     const eeFw = "WI-EE-" + ({ Math: "MATH", ELA: "ELA", Science: "SCI", "Social Studies": "SS" })[sub.name];
     const eeItem = e.ee ? S.idx[sub.slug].find((x) => x.f === eeFw && x.c === e.ee.split(";")[0].trim()) : null;
     const linkBtn = (x) => { const [f, c] = x.split(":"); return `<button class="code" data-act="open" data-k="${esc(f + "|" + c)}">${badge(f)} ${esc(c)}</button>`; };
-    $("#d-title").textContent = e.c;
+    $("#d-title").textContent = e.c + (ccss(e, teamGrade()) ? ` (Common Core: ${ccss(e, teamGrade()).join(", ")})` : "");
     $("#d-body").innerHTML = `
       <p class="stdtext">${esc(d.text || e.t)}</p>
       <p class="muted">Suggested for ${e.pl.map(gname).join(", ")}${e.sg ? " (a suggestion: teachers confirm the grade in Part 1)" : ""}${d.course ? " · " + esc(d.course) : ""}${d.cluster ? " · " + esc(d.cluster) : ""}</p>
@@ -832,7 +854,8 @@
     else if (act === "team") { setTeam(b.dataset.t); store.set("va_team", b.dataset.t); $("#team").value = b.dataset.t; }
     else if (act === "links") teamLinks();
     else if (act === "prog-filter") { S.progFilter = b.dataset.f; teamLinks(); }
-    else if (act === "copy-all-reminders") { const t = teamProgressRows().filter((x) => x.status < 2).map(reminderText).join("\n\n"); try { await navigator.clipboard.writeText(t); toast("Reminders copied"); } catch (err) { toast("Could not copy"); } }
+    else if (act === "prog-by") { S.progBy = b.dataset.b; teamLinks(); }
+    else if (act === "copy-all-reminders") { const t = S.progBy === "team" ? teamProgressRows().filter((x) => x.status < 2).map(reminderText).join("\n\n") : gradeProgressRows().filter((x) => x.status < 2).map(gradeReminder).join("\n\n"); try { await navigator.clipboard.writeText(t); toast("Reminders copied"); } catch (err) { toast("Could not copy"); } }
     else if (act === "copy") { try { await navigator.clipboard.writeText(b.dataset.u); toast(b.dataset.u.startsWith("http") ? "Link copied" : "Reminder copied"); } catch (err) { toast("Select the link and copy it"); } }
     else if (act === "clear") { const e = findItem(b.dataset.k); if (e) clearRating(e, b.dataset.g || teamGrade()); }
     else if (act === "lib") { S.flow.lib = S.flow.lib === b.dataset.t ? "" : b.dataset.t; rerender(); }
@@ -988,8 +1011,11 @@
     S.teams.forEach((t) => (t.name === "Vertical Alignment Committee" ? groups.Committee : DIV.Elementary.includes(t.grades[0]) ? groups.Elementary : DIV.Middle.includes(t.grades[0]) ? groups["Middle school"] : groups["High school"]).push(t));
     $("#team").innerHTML = `<option value="">Choose your team</option>` + Object.entries(groups).map(([g, ts]) => `<optgroup label="${g}">${ts.map((t) => `<option>${esc(t.name)}</option>`).join("")}</optgroup>`).join("");
     // A team link (?team=...&subject=...) locks the site to that team: no team picker, no other grades.
+    // A grade link (?grade=6) locks it to one grade with every subject of that grade.
     const qp = new URLSearchParams(location.search), lt = S.teams.find((t) => t.name === qp.get("team") && t.name !== "Vertical Alignment Committee");
+    const lg = (qp.get("grade") || "").toUpperCase(), lgTeam = !lt && GRADES.includes(lg) && S.meta.subjects.map((s) => teamOf(lg, s.name)).find(Boolean);
     if (lt) { const ls = qp.get("subject"); S.lock = { team: lt.name, subject: lt.subjects.includes(ls) ? ls : null }; document.body.dataset.lock = "1"; setTeam(lt.name); }
+    else if (lgTeam) { S.lock = { grade: lg }; document.body.dataset.lock = "1"; setTeam(lgTeam.name); }
     else { const saved = store.get("va_team"); if (saved && S.teams.some((t) => t.name === saved)) { $("#team").value = saved; setTeam(saved); } }
     const v = store.get("va_view");
     if (mode() === "full" && v && v !== "flow" && $(`.tabs [data-view="${v}"]`)) $(`.tabs [data-view="${v}"]`).click();

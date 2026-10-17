@@ -504,7 +504,14 @@ table.prog td { padding: 8px; border-bottom: 1px solid var(--line); vertical-ali
 table.prog .pbar { width: 120px; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
 table.prog .pbar i { display: block; height: 100%; background: var(--brand); }
 table.prog small { color: var(--muted); }
+.prog-by { margin-bottom: 10px; }
+.prog-subj { display: flex; flex-wrap: wrap; gap: 4px; }
+.ps-s { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--chip); border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
+.ps-s b { color: var(--ink); font-weight: 600; }
+.ps-s.ok { background: var(--lv-2-tint); border-color: transparent; } .ps-s.ok b { color: var(--lv-2-text); }
 .stat { font-size: 12px; font-weight: 700; border-radius: 99px; padding: 2px 10px; white-space: nowrap; }
 .stat.s0 { background: var(--lv-0-tint); color: var(--lv-0); } .stat.s1 { background: var(--lv-1-tint); color: #006F8F; } .stat.s2 { background: var(--lv-2-tint); color: var(--lv-2-text); }
 .prog-act { white-space: nowrap; text-align: right; }
 @media (max-width: 760px) { table.prog th:nth-child(2), table.prog td:nth-child(2), table.prog th:nth-child(5), table.prog td:nth-child(5) { display: none; } .prog-act { white-space: normal; } }
+.cw-code { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-left: 6px; white-space: nowrap; }
+.tag.cw { background: var(--brand-tint); color: var(--brand-ink); }

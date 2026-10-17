@@ -53,13 +53,15 @@ outline = suggested grade; dot = taught in a grade other than the suggested one.
 plans = Introduced, 3+ weeks = Taught in depth.
 
 Teachers use one guided flow (view "flow": one standard at a time); the committee and "Explore" get the full tabs.
+Locked links: `?team=<name>` (optionally `&subject=`) for one team, `?grade=<K-12>` for every subject in a grade (each subject
+is rated as that subject's own team). The committee's Team progress dialog lists both, by grade or by team.
 
 ## Standard sets
 Each set is a framework: CC (WI-CC-MATH, WI-CC-ELA), EE (WI-EE-MATH, WI-EE-ELA, WI-EE-SCI, WI-EE-SS: Essential Elements
 as their own rows, built by `scripts/build_ee_rows.py` into `data/standards/essential_elements.json`, `crosswalk`/`lk` =
 linked standards), NGSS, AERO (AERO-SCI, AERO-SS) and WI (WI-SCI, WI-SS). Each team chooses its sets per subject
-(`team_sets`, written by `set_team_sets`, migration 004); until it chooses, it gets the default (CC for Math/ELA, AERO K-5 /
-NGSS 6-12 for Science, WI-SS for Social Studies). Teachers rate chosen sets one at a time (CC first, EE last). Every set
+(`team_sets`, written by `set_team_sets`, migration 004); until it chooses, it gets the default (CC for Math/ELA, NGSS for
+Science in every grade, AERO-SS K-5 / WI-SS 6-12 for Social Studies; other sets stay selectable). Teachers rate chosen sets one at a time (CC first, EE last). Every set
 has a badge with its own line style (CC solid green, EE dashed, NGSS solid grey, AERO dotted, WI double line); sets never
 use the rating colours.
 
