@@ -270,12 +270,19 @@
     return `<div class="seg" role="group" aria-label="Rating for ${esc(e.c)} in ${esc(gname(g))}">` +
       [0, 1, 2].map((l) => `<button data-act="rate" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}" data-l="${l}" aria-pressed="${r && r.level === l}">${LEVEL_SHORT[l]}</button>`).join("") + `</div>`;
   }
-  // ELA planners use Common Core codes in K-9 (RL.6.1, RI.6.1); the site's ELA set is Wisconsin 2020, which joins
-  // them into one Reading code (R.6.1). Show the Common Core codes beside it so teachers recognise them.
-  const ccss = (e, g) => (e.cw && (g ? GRADES.indexOf(g) <= 9 : GRADES.indexOf(e.pl[0]) <= 9) ? e.cw : null);
-  // The code to show: Common Core codes first, with the Wisconsin code small and in italics underneath.
-  const codeText = (e, g) => (ccss(e, g) ? ccss(e, g).join(" · ") : e.c);
-  const wiNote = (e, g) => (ccss(e, g) ? `<span class="wi-code">Wisconsin ${esc(e.c)}</span>` : "");
+  // Planners use Common Core codes. The site's Math and ELA sets are Wisconsin's versions, so show the Common Core code
+  // first with the Wisconsin code small and in italics underneath. Math: M.5.MD.A.1 is 5.MD.A.1, M.A.APR.A.1 is
+  // HSA-APR.A.1 (Wisconsin's SP is Common Core's S). ELA: Wisconsin 2020 joins RL and RI into one Reading code (R.6.1);
+  // other ELA codes are the same in both, so they show as they are.
+  function ccss(e) {
+    if (e.cw) return e.cw;
+    const m = e.f === "WI-CC-MATH" && e.c.match(/^M\.([K0-9]+|N|A|F|G|SP)\.([A-Z]{1,4})\.([A-D])\.(\d+)(?:\.([a-z]))?$/);
+    if (!m) return null;
+    const [, d, dom, clu, n, sub] = m, tail = `${clu}.${n}${sub || ""}`;
+    return [/^[K0-9]+$/.test(d) ? `${d}.${dom}.${tail}` : `HS${d === "SP" ? "S" : d}-${dom}.${tail}`];
+  }
+  const codeText = (e) => (ccss(e) ? ccss(e).join(" · ") : e.c);
+  const wiNote = (e) => (ccss(e) ? `<span class="wi-code">Wisconsin ${esc(e.c)}</span>` : "");
   function stdRow(e, g, note) {
     const r = rating(e.f, e.c, g);
     const tags = [];
@@ -491,7 +498,7 @@
   // The library: every standard in this subject's chosen sets, split into "Still to do" and "Done". Click one to open it.
   function library(list, g) {
     const todo = list.filter((e) => !rating(e.f, e.c, g)), done = list.filter((e) => rating(e.f, e.c, g)), tab = S.flow.lib || "";
-    const item = (e) => { const r = rating(e.f, e.c, g); return `<li><button type="button" class="lib-i" data-act="lib-open" data-k="${esc(e.f + "|" + e.c)}">${badge(e.f)} <b>${esc(e.c)}</b> <span>${esc(e.t.slice(0, 90))}${e.t.length > 90 ? "…" : ""}</span>${r ? `<i class="pill"><i class="lv lv-${r.level}"></i>${LEVEL_SHORT[r.level]}</i>` : ""}</button></li>`; };
+    const item = (e) => { const r = rating(e.f, e.c, g); return `<li><button type="button" class="lib-i" data-act="lib-open" data-k="${esc(e.f + "|" + e.c)}">${badge(e.f)} <b>${esc(codeText(e))}</b> <span>${esc(e.t.slice(0, 90))}${e.t.length > 90 ? "…" : ""}</span>${r ? `<i class="pill"><i class="lv lv-${r.level}"></i>${LEVEL_SHORT[r.level]}</i>` : ""}</button></li>`; };
     return `<div class="library"><div class="lib-tabs">
         <button type="button" class="lib-t ${tab === "todo" ? "on" : ""}" data-act="lib" data-t="todo">Still to do <span>${todo.length}</span></button>
         <button type="button" class="lib-t ${tab === "done" ? "on" : ""}" data-act="lib" data-t="done">Done <span>${done.length}</span></button> ${hb("library")}</div>
@@ -578,7 +585,7 @@
     for (const e of list) {
       const head = (subj().frameworks.length > 1 ? (FW_NAME[e.f] || e.f) + " · " : "") + (e.s || "");
       if (head !== last) { rows += `<tr class="strand-row"><td colspan="${gs.length + 1}">${badge(e.f)} ${esc(head)}</td></tr>`; last = head; }
-      rows += `<tr><td class="rowh"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="${esc(e.t)}">${esc(e.c)}</button></td>` +
+      rows += `<tr><td class="rowh"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="${esc(e.t)}">${esc(codeText(e))}</button>${wiNote(e)}</td>` +
         gs.map((g) => {
           const r = rating(e.f, e.c, g), placed = e.pl.includes(g), inPlan = !!ev(e.f, e.c, g);
           const cls = ["cell", r ? "l" + r.level : "", placed ? "placed" : "", r && r.level > 0 && !placed ? "off" : "", inPlan ? "inplan" : ""].join(" ");
@@ -604,7 +611,7 @@
     }
     return out;
   }
-  function li(e, extra) { return `<li>${badge(e.f)} <button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button> ${extra || ""} <span class="muted">${esc(e.t.slice(0, 90))}${e.t.length > 90 ? "…" : ""}</span></li>`; }
+  function li(e, extra) { return `<li>${badge(e.f)} <button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(codeText(e))}</button> ${extra || ""} <span class="muted">${esc(e.t.slice(0, 90))}${e.t.length > 90 ? "…" : ""}</span></li>`; }
   function renderGaps() {
     const el = $("#view-gaps"), list = filtered(), a = analyse(list), n = list.length;
     const pct = (x) => (n ? Math.round((x / n) * 100) : 0);
@@ -669,7 +676,7 @@
     const rungs = gs.map((g) => {
       const here = list.filter((e) => e.pl.includes(g));
       const moved = list.filter((e) => !e.pl.includes(g) && (rating(e.f, e.c, g)?.level || 0) > 0);
-      const chip = (e, m) => { const r = rating(e.f, e.c, g); return `<button class="chip ${r ? "l" + r.level : ""}" data-act="open" data-k="${esc(e.f + "|" + e.c)}" style="${m ? "border-style:dashed" : ""}">${badge(e.f)} ${esc(e.c)}<small>${esc(e.t.slice(0, 60))}${e.t.length > 60 ? "…" : ""}</small></button>`; };
+      const chip = (e, m) => { const r = rating(e.f, e.c, g); return `<button class="chip ${r ? "l" + r.level : ""}" data-act="open" data-k="${esc(e.f + "|" + e.c)}" style="${m ? "border-style:dashed" : ""}">${badge(e.f)} ${esc(codeText(e))}<small>${esc(e.t.slice(0, 60))}${e.t.length > 60 ? "…" : ""}</small></button>`; };
       const c = countLevels(here, g);
       return `<div class="rung div-${divOf(g)} ${g === g0 ? "sel" : ""}"><h4>${esc(gname(g))} <span class="muted">(${here.length})</span></h4>${here.length ? miniBar(c, `${here.length - c[3]} of ${here.length} rated`) : ""}${here.map((e) => chip(e)).join("")}${moved.length ? `<div class="muted" style="font-size:11px;margin:6px 0 4px">Also taught here</div>${moved.map((e) => chip(e, true)).join("")}` : ""}</div>`;
     }).join("");
@@ -718,7 +725,7 @@
         const note = said == null ? "Plans show it; the team has not rated it yet." : said > 0 && !x ? "Not yet recorded in plans." :
           said === 0 && x ? "Plans include it, but the team marked it not taught. Worth a quick check." :
           said > shown ? "Taught more than the plans show." : "Plans show more time than the rating suggests.";
-        svsRows += `<tr><td><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></td>
+        svsRows += `<tr><td><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(codeText(e))}</button>${wiNote(e)}</td>
           <td>${said == null ? pill(null, "Not rated") : pill(said, LEVEL_SHORT[said])}</td><td>${x ? pill(x.level, LEVEL_SHORT[x.level] + " · " + x.weeks + " wk") : pill(null, "Not in plans")}</td><td>${note}</td></tr>`;
       }
       off = Object.entries(S.evidence.items).filter(([k]) => k.endsWith("|" + g)).map(([k, x]) => { const [f, c] = k.split("|"); return { e: findItem(f + "|" + c), x }; })
@@ -741,7 +748,7 @@
       <tbody>${ready ? svsRows || empty(4, "No differences in this view.") : empty(4, "Fills in when Part 2 runs.")}</tbody></table></div>
     <div class="panel"><h2>Below and above grade in the plans ${hb("p_offgrade")}</h2><p class="lede">Standards from other grades that appear in ${esc(gname(g))}'s plans.</p>
       <table class="svs"><thead><tr><th>Standard</th><th>Suggested grade</th><th>Weeks in ${esc(gname(g))} plans</th><th>Below or above</th></tr></thead>
-      <tbody>${ready ? off.map(({ e, x }) => `<tr><td><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></td><td>${e.pl.map(gl).join(", ")}</td><td>${x.weeks} (${x.match})</td>
+      <tbody>${ready ? off.map(({ e, x }) => `<tr><td><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(codeText(e))}</button>${wiNote(e)}</td><td>${e.pl.map(gl).join(", ")}</td><td>${x.weeks} (${x.match})</td>
         <td>${GRADES.indexOf(e.pl[0]) < GRADES.indexOf(g) ? "Below grade (review or remediation)" : "Above grade (extension)"}</td></tr>`).join("") || empty(4, "None found.") : empty(4, "Fills in when Part 2 runs.")}</tbody></table></div>
     <div class="panel"><h2>Each standard across K-12 ${hb("p_heat")}</h2>
       <p class="lede">One row per ${esc(S.f.subject)} standard${S.f.strand ? " in " + esc(S.f.strand) : ""}. Colour is what each grade said in Part 1; a <span class="ring-key"></span> ring marks a grade whose plans include it${ready ? "" : " (rings appear when the audit runs)"}. This is where repetition and gaps between grades show up.</p>
@@ -769,7 +776,7 @@
     }).join("");
     const pg = GRADES.indexOf(e.pl[0]);
     const rel = (g) => (g ? items().filter((x) => x.f === e.f && x.s === e.s && x.pl.includes(g)).slice(0, 6) : []);
-    const relList = (g) => { const r = rel(g); return r.length ? r.map((x) => `<li><button class="code" data-act="open" data-k="${esc(x.f + "|" + x.c)}">${esc(x.c)}</button> <span class="muted">${esc(x.t.slice(0, 80))}…</span></li>`).join("") : "<li class='muted'>None in this strand.</li>"; };
+    const relList = (g) => { const r = rel(g); return r.length ? r.map((x) => `<li><button class="code" data-act="open" data-k="${esc(x.f + "|" + x.c)}">${esc(codeText(x))}</button> <span class="muted">${esc(x.t.slice(0, 80))}…</span></li>`).join("") : "<li class='muted'>None in this strand.</li>"; };
     const comments = S.comments.filter((c) => c.framework === e.f && c.code === e.c);
     const hist = S.events.filter((ev) => ev.framework === e.f && ev.code === e.c).slice(0, 12);
     $("#d-eyebrow").innerHTML = `${badge(e.f)} ${esc(FW_NAME[e.f] || e.f)} · ${esc(e.s || "")}`;
@@ -947,7 +954,7 @@
     const c = ev.target.closest("[data-tip],[data-tip-text]"); if (!c) { tip.hidden = true; return; }
     if (c.dataset.tipText) tip.innerHTML = esc(c.dataset.tipText);
     else { const e = findItem(c.dataset.k), g = c.dataset.g, r = rating(e.f, e.c, g);
-      tip.innerHTML = `<b>${esc(e.c)}</b> · ${esc(gname(g))}<br>${r ? LEVEL[r.level] + " · " + esc(r.team) : "Not rated"}${e.pl.includes(g) ? "<br>Suggested grade" : ""}<br><span style="opacity:.8">${esc(e.t.slice(0, 120))}…</span>`; }
+      tip.innerHTML = `<b>${esc(codeText(e))}</b> · ${esc(gname(g))}<br>${r ? LEVEL[r.level] + " · " + esc(r.team) : "Not rated"}${e.pl.includes(g) ? "<br>Suggested grade" : ""}<br><span style="opacity:.8">${esc(e.t.slice(0, 120))}…</span>`; }
     tip.hidden = false;
   });
   document.addEventListener("mousemove", (ev) => { if (!tip.hidden) { tip.style.left = Math.min(ev.clientX + 14, innerWidth - 360) + "px"; tip.style.top = ev.clientY + 14 + "px"; } });
