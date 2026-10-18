@@ -513,5 +513,4 @@ table.prog small { color: var(--muted); }
 .stat.s0 { background: var(--lv-0-tint); color: var(--lv-0); } .stat.s1 { background: var(--lv-1-tint); color: #006F8F; } .stat.s2 { background: var(--lv-2-tint); color: var(--lv-2-text); }
 .prog-act { white-space: nowrap; text-align: right; }
 @media (max-width: 760px) { table.prog th:nth-child(2), table.prog td:nth-child(2), table.prog th:nth-child(5), table.prog td:nth-child(5) { display: none; } .prog-act { white-space: normal; } }
-.cw-code { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-left: 6px; white-space: nowrap; }
-.tag.cw { background: var(--brand-tint); color: var(--brand-ink); }
+.wi-code { display: block; font-size: 12px; font-style: italic; font-weight: 400; color: var(--muted); margin-top: 2px; }

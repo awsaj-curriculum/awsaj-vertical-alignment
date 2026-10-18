@@ -273,16 +273,18 @@
   // ELA planners use Common Core codes in K-9 (RL.6.1, RI.6.1); the site's ELA set is Wisconsin 2020, which joins
   // them into one Reading code (R.6.1). Show the Common Core codes beside it so teachers recognise them.
   const ccss = (e, g) => (e.cw && (g ? GRADES.indexOf(g) <= 9 : GRADES.indexOf(e.pl[0]) <= 9) ? e.cw : null);
+  // The code to show: Common Core codes first, with the Wisconsin code small and in italics underneath.
+  const codeText = (e, g) => (ccss(e, g) ? ccss(e, g).join(" · ") : e.c);
+  const wiNote = (e, g) => (ccss(e, g) ? `<span class="wi-code">Wisconsin ${esc(e.c)}</span>` : "");
   function stdRow(e, g, note) {
     const r = rating(e.f, e.c, g);
     const tags = [];
     tags.push(badge(e.f));
     if (e.lk && e.lk.length) tags.push(`<span class="tag">Linked to ${esc(e.lk[0].split(":")[1])}${e.lk.length > 1 ? " +" + (e.lk.length - 1) : ""}</span>`);
     if (e.ee) { const ee = e.ee.split(";")[0].trim(); tags.push(`<span class="tag">${/^(M\.)?EE/.test(ee) || ee.startsWith("SS.EE") ? "" : "EE "}${esc(ee)}</span>`); }
-    if (ccss(e, g)) tags.push(`<span class="tag cw" title="Common Core codes in your planners">CCSS ${ccss(e, g).map(esc).join(", ")}</span>`);
     if (note) tags.push(`<span class="tag sg">${esc(note)}</span>`);
     const k = rkey(e.f, e.c, g);
-    return `<div class="std set-${SET(e.f).style} ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}"><div><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(e.c)}</button></div>
+    return `<div class="std set-${SET(e.f).style} ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}"><div><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}">${esc(codeText(e, g))}</button>${wiNote(e, g)}</div>
       <div><div class="txt">${esc(e.t)}${e.t.length >= 220 ? "…" : ""}</div><div class="tags">${tags.join("")}</div></div>
       <div>${segFor(e, g)}</div>${r ? `<div class="who">${esc(r.team)} · ${new Date(r.updated_at).toLocaleDateString()} ${S.canClear ? `· <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}">Remove</button>` : ""}</div>` : ""}</div>`;
   }
@@ -343,9 +345,9 @@
 
   // The default framework for a subject and grade, also the one each "still to rate" count uses so a standard
   // listed in two frameworks is not counted twice. Social Studies is AERO in K-5 (the only grades AERO covers) and
-  // Wisconsin in 6-12; Science is NGSS in every grade. Teams can still choose other sets.
+  // Wisconsin in 6-12; Science is AERO in K-5 (NGSS is not offered there) and NGSS in 6-12. Teams can still choose other sets.
   function countFramework(subject, g) {
-    if (subject === "Science") return "NGSS";
+    if (subject === "Science") return DIV.Elementary.includes(g) ? "AERO-SCI" : "NGSS";
     if (subject === "Social Studies") return DIV.Elementary.includes(g) ? "AERO-SS" : "WI-SS";
     return subject === "Math" ? "WI-CC-MATH" : subject === "ELA" ? "WI-CC-ELA" : null;
   }
@@ -364,7 +366,7 @@
     for (const r of rows) (S.teamSets[r.team] ||= {})[r.subject] = r.frameworks;
     S.setsLoaded = true;
   }
-  const defaultFramework = (subject, g) => (subject === "Math" || subject === "ELA" || (subject === "Social Studies" && !g) ? "" : countFramework(subject, g) || "");
+  const defaultFramework = (subject, g) => (subject === "Math" || subject === "ELA" || ((subject === "Social Studies" || subject === "Science") && !g) ? "" : countFramework(subject, g) || "");
   // Unrated grade-level standards per subject (counted framework only), and unrated standards left in e's strand.
   function toRateLeft(g) {
     const out = {};
@@ -470,7 +472,7 @@
       const fresh = S.flow.lastKey !== k; S.flow.lastKey = k;
       body = `${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${esc(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
         <div class="card-top"><span class="eyebrow">${badge(e.f)} ${esc(sx.name)} · ${esc(e.s || F.subject)}</span><span class="muted">${pos} of ${inSet.length}</span></div>
-        <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(e.c)}</button>${ccss(e, g) ? ` <span class="cw-code">Common Core: ${ccss(e, g).map(esc).join(", ")} ${hb("ccss")}</span>` : ""}</h2>
+        <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(codeText(e, g))}</button>${ccss(e, g) ? ` ${hb("ccss")}${wiNote(e, g)}` : ""}</h2>
         <p class="card-text">${esc(fullText(e))}</p>
         <p class="card-meta">${links.length ? `Linked to ${links.slice(0, 3).map(esc).join(", ")}${links.length > 3 ? " and " + (links.length - 3) + " more" : ""} · ` : ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
         <p class="card-q">${r ? `Your answer: <b>${LEVEL[r.level]}</b>. Choose another answer to switch it${S.canClear ? `, or <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}">remove it</button>` : ""}.` : `How is this taught in ${esc(gname(g))} this year?`}</p>
@@ -774,7 +776,7 @@
     const eeFw = "WI-EE-" + ({ Math: "MATH", ELA: "ELA", Science: "SCI", "Social Studies": "SS" })[sub.name];
     const eeItem = e.ee ? S.idx[sub.slug].find((x) => x.f === eeFw && x.c === e.ee.split(";")[0].trim()) : null;
     const linkBtn = (x) => { const [f, c] = x.split(":"); return `<button class="code" data-act="open" data-k="${esc(f + "|" + c)}">${badge(f)} ${esc(c)}</button>`; };
-    $("#d-title").textContent = e.c + (ccss(e, teamGrade()) ? ` (Common Core: ${ccss(e, teamGrade()).join(", ")})` : "");
+    $("#d-title").innerHTML = esc(codeText(e, teamGrade())) + wiNote(e, teamGrade());
     $("#d-body").innerHTML = `
       <p class="stdtext">${esc(d.text || e.t)}</p>
       <p class="muted">Suggested for ${e.pl.map(gname).join(", ")}${e.sg ? " (a suggestion: teachers confirm the grade in Part 1)" : ""}${d.course ? " · " + esc(d.course) : ""}${d.cluster ? " · " + esc(d.cluster) : ""}</p>
@@ -1006,6 +1008,8 @@
     S.meta = await (await fetch("data/meta.json")).json();
     S.teams = S.meta.teams;
     await Promise.all(S.meta.subjects.map(async (s) => (S.idx[s.slug] = await (await fetch(`data/index_${s.slug}.json`)).json())));
+    // Elementary science uses AERO, so NGSS is not offered in K-5: drop its K-5 grades (and rows that only had K-5).
+    S.idx.science = S.idx.science.filter((e) => e.f !== "NGSS" || (e.pl = e.pl.filter((g) => !DIV.Elementary.includes(g))).length);
     try { const r = await fetch("data/evidence.json"); S.evidence = r.ok ? await r.json() : null; } catch (e) { S.evidence = null; }
     const groups = { "Committee": [], "Elementary": [], "Middle school": [], "High school": [] };
     S.teams.forEach((t) => (t.name === "Vertical Alignment Committee" ? groups.Committee : DIV.Elementary.includes(t.grades[0]) ? groups.Elementary : DIV.Middle.includes(t.grades[0]) ? groups["Middle school"] : groups["High school"]).push(t));
