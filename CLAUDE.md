@@ -60,10 +60,12 @@ is rated as that subject's own team). The committee's Team progress dialog lists
 Each set is a framework: CC (WI-CC-MATH, WI-CC-ELA), EE (WI-EE-MATH, WI-EE-ELA, WI-EE-SCI, WI-EE-SS: Essential Elements
 as their own rows, built by `scripts/build_ee_rows.py` into `data/standards/essential_elements.json`, `crosswalk`/`lk` =
 linked standards), NGSS, AERO (AERO-SCI, AERO-SS) and WI (WI-SCI, WI-SS). Each team chooses its sets per subject
-(`team_sets`, written by `set_team_sets`, migration 004); until it chooses, it gets the default (CC for Math/ELA, NGSS for
-Science in every grade, AERO-SS K-5 / WI-SS 6-12 for Social Studies; other sets stay selectable). Teachers rate chosen sets one at a time (CC first, EE last). Every set
+(`team_sets`, written by `set_team_sets`, migration 004); until it chooses, it gets the default (CC for Math/ELA, AERO-SCI K-5 /
+NGSS 6-12 for Science (NGSS is hidden in K-5 by the client), AERO-SS K-5 / WI-SS 6-12 for Social Studies; other sets stay selectable). Teachers rate chosen sets one at a time (CC first, EE last). Every set
 has a badge with its own line style (CC solid green, EE dashed, NGSS solid grey, AERO dotted, WI double line); sets never
 use the rating colours.
+Codes: Math and ELA show the Common Core code first and the Wisconsin code small and italic underneath (`ccss()` in
+app.js: M.5.MD.A.1 -> 5.MD.A.1, M.A.APR.A.1 -> HSA-APR.A.1, SP -> S; ELA uses the `cw` crosswalk, e.g. R.6.1 -> RL.6.1 · RI.6.1).
 
 ## Testing
 Use Playwright (Chromium) against the local server, and check every view (Rate, Heatmap, Gaps, Dashboard,
