@@ -274,8 +274,18 @@
   // first with the Wisconsin code small and in italics underneath. Math: M.5.MD.A.1 is 5.MD.A.1, M.A.APR.A.1 is
   // HSA-APR.A.1 (Wisconsin's SP is Common Core's S). ELA: Wisconsin 2020 joins RL and RI into one Reading code (R.6.1);
   // other ELA codes are the same in both, so they show as they are.
+  // Essential Elements follow the same pattern: M.EE.6.NS.5 is EE.6.NS.5, M.EE.A.CED.1 is EE.A-CED.1, and an ELA
+  // Reading EE (EE.R.6.1) takes the Common Core codes of the standard it links to (EE.RL.6.1 · EE.RI.6.1).
   function ccss(e) {
     if (e.cw) return e.cw;
+    if (e.f === "WI-EE-MATH") {
+      const k = e.c.match(/^M\.EE\.([K0-9]+)\.(.+)$/), h = e.c.match(/^M\.EE\.(N|A|F|G|SP|S)\.([A-Z]+)\.(.+)$/);
+      return k ? [`EE.${k[1]}.${k[2]}`] : h ? [`EE.${h[1] === "SP" ? "S" : h[1]}-${h[2]}.${h[3]}`] : null;
+    }
+    if (e.f === "WI-EE-ELA" && e.c.startsWith("EE.R.") && e.lk) {
+      const base = S.idx.ela.find((x) => x.f === "WI-CC-ELA" && "WI-CC-ELA:" + x.c === e.lk[0]);
+      return base && base.cw ? base.cw.map((c) => "EE." + c) : null;
+    }
     const m = e.f === "WI-CC-MATH" && e.c.match(/^M\.([K0-9]+|N|A|F|G|SP)\.([A-Z]{1,4})\.([A-D])\.(\d+)(?:\.([a-z]))?$/);
     if (!m) return null;
     const [, d, dom, clu, n, sub] = m, tail = `${clu}.${n}${sub || ""}`;

@@ -24,8 +24,11 @@ for sub, rs in by_sub.items():
                                "div": [], "crs": []})
         if r["framework"] == "WI-CC-ELA" and r["crosswalk"]:
             e["cw"] = r["crosswalk"]          # Common Core codes (RL/RI) behind a Wisconsin 2020 Reading code
-        if r["framework"] == "AERO-SS" and r["crosswalk"]:
-            e["wi"] = r["crosswalk"]          # suggested Wisconsin Social Studies matches for an AERO standard
+        if r["framework"] in ("AERO-SS", "NGSS", "AERO-SCI") and r["crosswalk"]:
+            # Wisconsin matches shown in italics under the code (Social Studies: suggested matches; Science: WI-SCI)
+            wi = [x.split(":", 1)[1] for x in r["crosswalk"] if x.startswith("WI-")] if r["subject"] == "Science" else r["crosswalk"]
+            if wi:
+                e["wi"] = wi
         if r["framework"].startswith("WI-EE-"):
             e.setdefault("lk", [])
             for x in r["crosswalk"]:
