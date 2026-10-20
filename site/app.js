@@ -359,12 +359,14 @@
     return subject === "Math" ? "WI-CC-MATH" : subject === "ELA" ? "WI-CC-ELA" : null;
   }
   // The team that rates a subject in grade g, and the standard sets it chose (saved for the whole team in team_sets).
-  // Until a team chooses, it works through the default set above (6-12 Science: NGSS and its Essential Elements).
+  // Until a team chooses, it works through the default set above plus its Essential Elements (ticked by default).
   const teamOf = (g, subject) => S.teams.find((t) => t.name !== "Vertical Alignment Committee" && t.grades.includes(g) && t.subjects.includes(subject));
   function setsFor(subject, g, team) {
     const t = team || teamOf(g, subject), saved = t && S.teamSets[t.name] && S.teamSets[t.name][subject];
     const fws = S.meta.subjects.find((x) => x.name === subject).frameworks;
-    const deflt = subject === "Science" && !DIV.Elementary.includes(g) ? ["NGSS", "WI-EE-SCI"] : [countFramework(subject, g)];
+    // Default: the main set plus its Essential Elements, when the grade has any.
+    const sl = S.meta.subjects.find((x) => x.name === subject).slug, ee = fws.find((f) => f.startsWith("WI-EE-"));
+    const deflt = [countFramework(subject, g), ee && S.idx[sl].some((e) => e.f === ee && e.pl.includes(g)) ? ee : null];
     const list = (saved && saved.filter((f) => fws.includes(f)).length ? saved.filter((f) => fws.includes(f)) : deflt).filter(Boolean);
     return list.sort((a, b) => SET_ORDER(a) - SET_ORDER(b));
   }
@@ -1016,10 +1018,11 @@
     S.meta = await (await fetch("data/meta.json")).json();
     S.teams = S.meta.teams;
     await Promise.all(S.meta.subjects.map(async (s) => (S.idx[s.slug] = await (await fetch(`data/index_${s.slug}.json`)).json())));
-    // Science sets by grade: K-5 uses AERO (no NGSS); 6-12 uses NGSS and its Essential Elements (no Wisconsin Science).
-    // Drop those grades from the rows (and rows left with no grade).
-    const sciOff = { NGSS: (g) => DIV.Elementary.includes(g), "WI-SCI": (g) => !DIV.Elementary.includes(g) };
+    // Science sets: K-5 uses AERO (no NGSS), 6-12 uses NGSS. Wisconsin Science is not offered in any grade (the data is
+    // kept). Drop those grades from the rows, rows left with no grade, and the Wisconsin Science set itself.
+    const sciOff = { NGSS: (g) => DIV.Elementary.includes(g), "WI-SCI": () => true };
     S.idx.science = S.idx.science.filter((e) => !sciOff[e.f] || (e.pl = e.pl.filter((g) => !sciOff[e.f](g))).length);
+    const sciMeta = S.meta.subjects.find((s) => s.slug === "science"); sciMeta.frameworks = sciMeta.frameworks.filter((f) => f !== "WI-SCI");
     try { const r = await fetch("data/evidence.json"); S.evidence = r.ok ? await r.json() : null; } catch (e) { S.evidence = null; }
     const groups = { "Committee": [], "Elementary": [], "Middle school": [], "High school": [] };
     S.teams.forEach((t) => (t.name === "Vertical Alignment Committee" ? groups.Committee : DIV.Elementary.includes(t.grades[0]) ? groups.Elementary : DIV.Middle.includes(t.grades[0]) ? groups["Middle school"] : groups["High school"]).push(t));
