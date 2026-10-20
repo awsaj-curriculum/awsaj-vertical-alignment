@@ -359,12 +359,13 @@
     return subject === "Math" ? "WI-CC-MATH" : subject === "ELA" ? "WI-CC-ELA" : null;
   }
   // The team that rates a subject in grade g, and the standard sets it chose (saved for the whole team in team_sets).
-  // Until a team chooses, it works through the default set above.
+  // Until a team chooses, it works through the default set above (6-12 Science: NGSS and its Essential Elements).
   const teamOf = (g, subject) => S.teams.find((t) => t.name !== "Vertical Alignment Committee" && t.grades.includes(g) && t.subjects.includes(subject));
   function setsFor(subject, g, team) {
     const t = team || teamOf(g, subject), saved = t && S.teamSets[t.name] && S.teamSets[t.name][subject];
     const fws = S.meta.subjects.find((x) => x.name === subject).frameworks;
-    const list = (saved && saved.filter((f) => fws.includes(f)).length ? saved.filter((f) => fws.includes(f)) : [countFramework(subject, g)]).filter(Boolean);
+    const deflt = subject === "Science" && !DIV.Elementary.includes(g) ? ["NGSS", "WI-EE-SCI"] : [countFramework(subject, g)];
+    const list = (saved && saved.filter((f) => fws.includes(f)).length ? saved.filter((f) => fws.includes(f)) : deflt).filter(Boolean);
     return list.sort((a, b) => SET_ORDER(a) - SET_ORDER(b));
   }
   const chosen = (subject, team) => !!(team && S.teamSets[team.name] && S.teamSets[team.name][subject]);
@@ -1015,8 +1016,10 @@
     S.meta = await (await fetch("data/meta.json")).json();
     S.teams = S.meta.teams;
     await Promise.all(S.meta.subjects.map(async (s) => (S.idx[s.slug] = await (await fetch(`data/index_${s.slug}.json`)).json())));
-    // Elementary science uses AERO, so NGSS is not offered in K-5: drop its K-5 grades (and rows that only had K-5).
-    S.idx.science = S.idx.science.filter((e) => e.f !== "NGSS" || (e.pl = e.pl.filter((g) => !DIV.Elementary.includes(g))).length);
+    // Science sets by grade: K-5 uses AERO (no NGSS); 6-12 uses NGSS and its Essential Elements (no Wisconsin Science).
+    // Drop those grades from the rows (and rows left with no grade).
+    const sciOff = { NGSS: (g) => DIV.Elementary.includes(g), "WI-SCI": (g) => !DIV.Elementary.includes(g) };
+    S.idx.science = S.idx.science.filter((e) => !sciOff[e.f] || (e.pl = e.pl.filter((g) => !sciOff[e.f](g))).length);
     try { const r = await fetch("data/evidence.json"); S.evidence = r.ok ? await r.json() : null; } catch (e) { S.evidence = null; }
     const groups = { "Committee": [], "Elementary": [], "Middle school": [], "High school": [] };
     S.teams.forEach((t) => (t.name === "Vertical Alignment Committee" ? groups.Committee : DIV.Elementary.includes(t.grades[0]) ? groups.Elementary : DIV.Middle.includes(t.grades[0]) ? groups["Middle school"] : groups["High school"]).push(t));
