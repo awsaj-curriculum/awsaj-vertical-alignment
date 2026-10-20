@@ -282,7 +282,8 @@
     return [/^[K0-9]+$/.test(d) ? `${d}.${dom}.${tail}` : `HS${d === "SP" ? "S" : d}-${dom}.${tail}`];
   }
   const codeText = (e) => (ccss(e) ? ccss(e).join(" · ") : e.c);
-  const wiNote = (e) => (ccss(e) ? `<span class="wi-code">Wisconsin ${esc(e.c)}</span>` : "");
+  // AERO Social Studies rows carry their suggested Wisconsin matches (e.wi), shown the same way.
+  const wiNote = (e) => (ccss(e) ? `<span class="wi-code">Wisconsin ${esc(e.c)}</span>` : e.wi ? `<span class="wi-code">Wisconsin ${e.wi.map(esc).join(" · ")}</span>` : "");
   function stdRow(e, g, note) {
     const r = rating(e.f, e.c, g);
     const tags = [];
@@ -482,7 +483,7 @@
       const fresh = S.flow.lastKey !== k; S.flow.lastKey = k;
       body = `${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${esc(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
         <div class="card-top"><span class="eyebrow">${badge(e.f)} ${esc(sx.name)} · ${esc(e.s || F.subject)}</span><span class="muted">${pos} of ${inSet.length}</span></div>
-        <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(codeText(e, g))}</button>${ccss(e, g) ? ` ${hb("ccss")}${wiNote(e, g)}` : ""}</h2>
+        <h2 class="card-code"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${esc(codeText(e, g))}</button>${ccss(e) ? ` ${hb("ccss")}` : e.wi ? ` ${hb("aero_wi")}` : ""}${wiNote(e)}</h2>
         <p class="card-text">${esc(fullText(e))}</p>
         <p class="card-meta">${links.length ? `Linked to ${links.slice(0, 3).map(esc).join(", ")}${links.length > 3 ? " and " + (links.length - 3) + " more" : ""} · ` : ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
         <p class="card-q">${r ? `Your answer: <b>${LEVEL[r.level]}</b>. Choose another answer to switch it${S.canClear ? `, or <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}">remove it</button>` : ""}.` : `How is this taught in ${esc(gname(g))} this year?`}</p>
@@ -1023,6 +1024,8 @@
     const sciOff = { NGSS: (g) => DIV.Elementary.includes(g), "WI-SCI": () => true };
     S.idx.science = S.idx.science.filter((e) => !sciOff[e.f] || (e.pl = e.pl.filter((g) => !sciOff[e.f](g))).length);
     const sciMeta = S.meta.subjects.find((s) => s.slug === "science"); sciMeta.frameworks = sciMeta.frameworks.filter((f) => f !== "WI-SCI");
+    // K-5 Social Studies uses AERO; Wisconsin is shown only as the italic match under each AERO code, not as a set.
+    S.idx.social_studies = S.idx.social_studies.filter((e) => e.f !== "WI-SS" || (e.pl = e.pl.filter((g) => !DIV.Elementary.includes(g))).length);
     try { const r = await fetch("data/evidence.json"); S.evidence = r.ok ? await r.json() : null; } catch (e) { S.evidence = null; }
     const groups = { "Committee": [], "Elementary": [], "Middle school": [], "High school": [] };
     S.teams.forEach((t) => (t.name === "Vertical Alignment Committee" ? groups.Committee : DIV.Elementary.includes(t.grades[0]) ? groups.Elementary : DIV.Middle.includes(t.grades[0]) ? groups["Middle school"] : groups["High school"]).push(t));
