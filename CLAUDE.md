@@ -61,7 +61,7 @@ Each set is a framework: CC (WI-CC-MATH, WI-CC-ELA), EE (WI-EE-MATH, WI-EE-ELA, 
 as their own rows, built by `scripts/build_ee_rows.py` into `data/standards/essential_elements.json`, `crosswalk`/`lk` =
 linked standards), NGSS, AERO (AERO-SCI, AERO-SS) and WI (WI-SCI, WI-SS). Each team chooses its sets per subject
 (`team_sets`, written by `set_team_sets`, migration 004); until it chooses, it gets the default (CC for Math/ELA, AERO-SCI K-5 /
-NGSS 6-12 for Science (NGSS is hidden in K-5 by the client), AERO-SS K-5 / WI-SS 6-12 for Social Studies; other sets stay selectable). Teachers rate chosen sets one at a time (CC first, EE last). Every set
+NGSS 6-12 for Science (the client hides NGSS in K-5 and WI-SCI in every grade; the data is kept), AERO-SS K-5 (WI-SS hidden in K-5; its suggested matches show in italics under each AERO code from the `wi` index field) / WI-SS 6-12 for Social Studies; other sets stay selectable). The default also ticks the subject's Essential Elements set when the grade has any. Teachers rate chosen sets one at a time (CC first, EE last). Every set
 has a badge with its own line style (CC solid green, EE dashed, NGSS solid grey, AERO dotted, WI double line); sets never
 use the rating colours.
 Codes: Math and ELA show the Common Core code first and the Wisconsin code small and italic underneath (`ccss()` in
