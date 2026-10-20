@@ -65,7 +65,9 @@ NGSS 6-12 for Science (the client hides NGSS in K-5 and WI-SCI in every grade; t
 has a badge with its own line style (CC solid green, EE dashed, NGSS solid grey, AERO dotted, WI double line); sets never
 use the rating colours.
 Codes: Math and ELA show the Common Core code first and the Wisconsin code small and italic underneath (`ccss()` in
-app.js: M.5.MD.A.1 -> 5.MD.A.1, M.A.APR.A.1 -> HSA-APR.A.1, SP -> S; ELA uses the `cw` crosswalk, e.g. R.6.1 -> RL.6.1 · RI.6.1).
+app.js: M.5.MD.A.1 -> 5.MD.A.1, M.A.APR.A.1 -> HSA-APR.A.1, SP -> S; ELA uses the `cw` crosswalk, e.g. R.6.1 -> RL.6.1 · RI.6.1). EE rows too (M.EE.6.NS.5 -> EE.6.NS.5,
+M.EE.A.CED.1 -> EE.A-CED.1, EE.R.6.1 -> EE.RL.6.1 · EE.RI.6.1). NGSS and AERO Science rows show their WI-SCI matches in
+italics (`wi` index field).
 
 ## Testing
 Use Playwright (Chromium) against the local server, and check every view (Rate, Heatmap, Gaps, Dashboard,
