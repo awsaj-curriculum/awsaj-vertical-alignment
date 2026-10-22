@@ -52,6 +52,11 @@
       if (rows.length < 1000) return out;
     }
   }
+  // The first database reads start at once, alongside the standards files, instead of waiting for them.
+  const early = new Map();
+  function prefetch(path) { const p = getAll(path); p.catch(() => {}); early.set(path, p); }
+  function getAllOnce(path) { const p = early.get(path); early.delete(path); return p || getAll(path); }
+  const Q = { ratings: "ratings?select=*", events: "rating_events?select=*&order=created_at.desc&limit=300", comments: "comments?select=*&order=created_at.desc", sets: "team_sets?select=*" };
   async function rpc(fn, body) {
     const r = await fetch(`${CFG.supabaseUrl}/rest/v1/rpc/${fn}`, { method: "POST", headers: { ...H, "Content-Type": "application/json" }, body: JSON.stringify(body) });
     if (!r.ok) { let m = await r.text(); try { m = JSON.parse(m).message || m; } catch (e) { /* keep text */ } throw new Error(m); }
@@ -61,8 +66,8 @@
   function rating(f, c, g) { return S.ratings.get(rkey(f, c, g)); }
 
   async function loadRatings(full) {
-    const q = !full && S.lastSync ? `ratings?select=*&updated_at=gt.${encodeURIComponent(S.lastSync)}` : "ratings?select=*";
-    const rows = await getAll(q);
+    const q = !full && S.lastSync ? `ratings?select=*&updated_at=gt.${encodeURIComponent(S.lastSync)}` : Q.ratings;
+    const rows = await getAllOnce(q);
     if (full) S.ratings.clear();
     for (const r of rows) {
       S.ratings.set(rkey(r.framework, r.code, r.grade), r);
@@ -70,11 +75,13 @@
     }
     return rows.length;
   }
-  async function loadEvents() { S.events = await getAll("rating_events?select=*&order=created_at.desc&limit=300"); }
-  async function loadComments() { S.comments = await getAll("comments?select=*&order=created_at.desc"); }
+  async function loadEvents() { S.events = await getAllOnce(Q.events); }
+  async function loadComments() { S.comments = await getAllOnce(Q.comments); }
+  // Full text and "I can" levels, one file per subject. Kept as a promise so two callers never download it twice.
+  const detailP = {};
   async function loadDetail(slug) {
-    if (!S.detail[slug]) S.detail[slug] = await (await fetch(`data/detail_${slug}.json`)).json();
-    return S.detail[slug];
+    if (!detailP[slug]) detailP[slug] = fetch(`data/detail_${slug}.json`).then((r) => r.json()).then((d) => (S.detail[slug] = d)).catch((e) => { delete detailP[slug]; throw e; });
+    return detailP[slug];
   }
 
   /* ---------------- helpers over standards ---------------- */
@@ -383,7 +390,7 @@
   }
   const chosen = (subject, team) => !!(team && S.teamSets[team.name] && S.teamSets[team.name][subject]);
   async function loadTeamSets() {
-    const rows = await getAll("team_sets?select=*"); S.teamSets = {};
+    const rows = await getAllOnce(Q.sets); S.teamSets = {};
     for (const r of rows) (S.teamSets[r.team] ||= {})[r.subject] = r.frameworks;
     S.setsLoaded = true;
   }
@@ -594,9 +601,13 @@
 
   // Standard by standard across K-12 (used by the Vertical Alignment Audit). Colour = what each grade said in Part 1;
   // a blue ring marks a grade whose plans include the standard (Part 2).
+  // Drawing every standard x 13 grades at once is slow (tens of thousands of cells), so the grid starts with GRID_ROWS
+  // rows and offers the rest on request.
+  const GRID_ROWS = 120;
   function standardGrid(list, gs) {
     let rows = "", last = null;
-    for (const e of list) {
+    const all = list.length, shown = S.gridAll ? list : list.slice(0, GRID_ROWS);
+    for (const e of shown) {
       const head = (subj().frameworks.length > 1 ? (FW_NAME[e.f] || e.f) + " · " : "") + (e.s || "");
       if (head !== last) { rows += `<tr class="strand-row"><td colspan="${gs.length + 1}">${badge(e.f)} ${esc(head)}</td></tr>`; last = head; }
       rows += `<tr><td class="rowh"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="${esc(e.t)}">${esc(codeText(e))}</button>${wiNote(e)}</td>` +
@@ -607,7 +618,7 @@
             aria-label="${esc(e.c)}, ${esc(gname(g))}: ${r ? LEVEL[r.level] : "not rated"}${placed ? ", suggested grade" : ""}${inPlan ? ", in plans" : ""}"></button></td>`;
         }).join("") + `</tr>`;
     }
-    return `<div class="hm-wrap"><table class="hm" data-sel="${esc(S.f.grade)}"><thead><tr><th class="rowh">Standard</th>${gs.map((g) => `<th data-gi="${g}" class="${S.f.grade === g ? "sel" : ""}"><span class="colh">${gl(g)}</span></th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>`;
+    return `<div class="hm-wrap"><table class="hm" data-sel="${esc(S.f.grade)}"><thead><tr><th class="rowh">Standard</th>${gs.map((g) => `<th data-gi="${g}" class="${S.f.grade === g ? "sel" : ""}"><span class="colh">${gl(g)}</span></th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>${all > shown.length ? `<p class="grid-more"><button type="button" class="ghost" data-act="grid-all">Show all ${all} standards</button> <span class="muted">Showing the first ${shown.length}. Showing all can take a few seconds. ${hb("grid_more")}</span></p>` : ""}`;
   }
 
   function analyse(list) {
@@ -874,6 +885,7 @@
     const act = b.dataset.act;
     if (act === "rate") { const e = findItem(b.dataset.k); const l = +b.dataset.l; const cur = rating(e.f, e.c, b.dataset.g); if (cur && cur.level === l) return; setRating(e, b.dataset.g, l); }
     else if (act === "open") openDetail(b.dataset.k);
+    else if (act === "grid-all") { S.gridAll = true; rerender(); }
     else if (act === "team") { setTeam(b.dataset.t); store.set("va_team", b.dataset.t); $("#team").value = b.dataset.t; }
     else if (act === "links") teamLinks();
     else if (act === "prog-filter") { S.progFilter = b.dataset.f; teamLinks(); }
@@ -979,7 +991,7 @@
     if (S.view === "activity") Promise.all([loadEvents(), loadComments()]).then(rerender);
   }));
   const bindF = (id, key) => $(id).addEventListener(id === "#f-search" ? "input" : "change", (ev) => {
-    S.f[key] = ev.target.value;
+    S.f[key] = ev.target.value; S.gridAll = false;
     if (key === "subject") S.f.framework = defaultFramework(S.f.subject, teamGrade());
     refreshFilterOptions(); rerender();
   });
@@ -1026,6 +1038,7 @@
   async function start() {
     $("#f-search").value = "";
     S.device = store.get("va_device") || Math.random().toString(36).slice(2, 12); store.set("va_device", S.device);
+    Object.values(Q).forEach(prefetch);
     S.meta = await (await fetch("data/meta.json")).json();
     S.teams = S.meta.teams;
     await Promise.all(S.meta.subjects.map(async (s) => (S.idx[s.slug] = await (await fetch(`data/index_${s.slug}.json`)).json())));
@@ -1054,6 +1067,9 @@
     rpc("clear_rating", { p_framework: "", p_code: "", p_grade: "", p_team: "", p_device: "" }).then(() => {}, (err) => { S.canClear = /unknown team/i.test(err.message); if (S.canClear) rerender(); });
     try { await Promise.all([loadRatings(true), loadEvents(), loadComments(), loadTeamSets()]); syncNote("Up to date"); rerender(); }
     catch (err) { syncNote("Offline: ratings could not load"); }
+    // Once everything is showing, fetch the current subject's full text in the background so the first popup opens at once.
+    const idle = window.requestIdleCallback || ((f) => setTimeout(f, 1500));
+    idle(() => { const sub = subj(); if (sub) loadDetail(sub.slug).catch(() => {}); });
     let n = 0;
     setInterval(async () => {
       if (document.hidden) return;
