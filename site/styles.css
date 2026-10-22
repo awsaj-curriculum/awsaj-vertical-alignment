@@ -514,3 +514,4 @@ table.prog small { color: var(--muted); }
 .prog-act { white-space: nowrap; text-align: right; }
 @media (max-width: 760px) { table.prog th:nth-child(2), table.prog td:nth-child(2), table.prog th:nth-child(5), table.prog td:nth-child(5) { display: none; } .prog-act { white-space: normal; } }
 .wi-code { display: block; font-size: 12px; font-style: italic; font-weight: 400; color: var(--muted); margin-top: 2px; }
+.grid-more { margin: 10px 0 0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
