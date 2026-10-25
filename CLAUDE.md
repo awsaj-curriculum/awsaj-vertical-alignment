@@ -26,7 +26,12 @@ Read `docs/HANDOFF.md` first (current status and next steps), then `docs/spec.md
   Run locally: `cd site && python3 -m http.server 8765`.
 - `data/standards/` one JSON per subject plus `all_standards.json` (2,557 rows, schema in
   `docs/standards_team_brief.md`). `data/teams.json` team list.
-- `scripts/` parsers and builders. Math: `parse_wi_math.py`, `parse_wi_ee_math.py`, `build_math_master.py`,
+- `scripts/` parsers and builders. `standards_codes.py` reads standard codes in any style from plan text;
+  `ela_crosswalk.py` builds `data/standards/ela_crosswalk_2010_2020.json` from DPI's official 2010/2020 ELA comparison;
+  `audit/plan_marks.py` builds `data/standards/plan_marks.json` (in plans / priority per grade) from the school's
+  documents in `data/source/ma3loomat/` (6-12) and `data/source/hub/` (K-5); `audit/audit_secondary.py` writes the
+  secondary audit to `outputs/`. Rebuild order: ela_crosswalk, plan_marks, build_site_data.
+  Math: `parse_wi_math.py`, `parse_wi_ee_math.py`, `build_math_master.py`,
   `build_math_json.py`, `build_math_xlsx.py`. Other subjects: `scripts/ela|science|social_studies/`.
   `build_site_data.py` regenerates `site/data/` from `data/standards/`. `load_supabase.py` loads standards and
   teams. `part2/match_plans.py` (written, not yet run) finds standard codes in plan text.
@@ -49,7 +54,8 @@ and the four symbol ribbons: orange #ED8B00, blue #0092BC, magenta #D00070, lime
 the school uses DIN Next and QF, which are licensed). Ratings: 0 Not taught (magenta #D00070), 1 Introduced / exposed
 (blue #0092BC), 2 Taught in depth (lime #78BE21), unrated white. Orange is only for highlights (selection, focus,
 celebrations): never make orange and lime two rating levels, colour-blind readers cannot tell them apart. Dark green
-outline = suggested grade; dot = taught in a grade other than the suggested one. Part 2 uses the same scale: 1-2 weeks in
+outline = suggested grade; dot = taught in a grade other than the suggested one; dashed ring = in that grade's plans;
+orange corner = priority / power in that grade. Part 2 uses the same scale: 1-2 weeks in
 plans = Introduced, 3+ weeks = Taught in depth.
 
 Teachers use one guided flow (view "flow": one standard at a time); the committee and "Explore" get the full tabs.
@@ -64,10 +70,24 @@ linked standards), NGSS, AERO (AERO-SCI, AERO-SS) and WI (WI-SCI, WI-SS). Each t
 NGSS 6-12 for Science (the client hides NGSS in K-5 and WI-SCI in every grade; the data is kept), AERO-SS K-5 (WI-SS hidden in K-5; its suggested matches show in italics under each AERO code from the `wi` index field) / WI-SS 6-12 for Social Studies; other sets stay selectable). The default also ticks the subject's Essential Elements set when the grade has any. Teachers rate chosen sets one at a time (CC first, EE last). Every set
 has a badge with its own line style (CC solid green, EE dashed, NGSS solid grey, AERO dotted, WI double line); sets never
 use the rating colours.
-Codes: Math and ELA show the Common Core code first and the Wisconsin code small and italic underneath (`ccss()` in
-app.js: M.5.MD.A.1 -> 5.MD.A.1, M.A.APR.A.1 -> HSA-APR.A.1, SP -> S; ELA uses the `cw` crosswalk, e.g. R.6.1 -> RL.6.1 · RI.6.1). EE rows too (M.EE.6.NS.5 -> EE.6.NS.5,
-M.EE.A.CED.1 -> EE.A-CED.1, EE.R.6.1 -> EE.RL.6.1 · EE.RI.6.1). NGSS and AERO Science rows show their WI-SCI matches in
-italics (`wi` index field).
+Codes: every standard everywhere (cards, lists, tables, popup, tips, CSV) shows the main code in bold with one small italic
+line underneath (`codeHTML()` / `codeParts()` in app.js; never print `e.c` on its own). Math and ELA: Common Core code
+first, Wisconsin code underneath (M.5.MD.A.1 -> 5.MD.A.1, M.A.APR.A.1 -> HSA-APR.A.1, SP -> S; ELA uses `cw`, the
+Common Core 2010 code(s) from DPI's comparison: R.6.1 -> RL.6.1 · RI.6.1, W.6.2.a -> W.6.1, L.6.5.a -> L.6.1; Wisconsin
+renumbered W/L/SL in 2020, they are NOT the same codes). Rows new in Wisconsin 2020 show their Wisconsin code with "new
+in 2020". EE rows follow their linked standard (M.EE.6.NS.5 -> EE.6.NS.5, EE.W.6.2.a -> EE.W.6.1). NGSS, AERO Science and
+AERO Social Studies show their Wisconsin matches underneath (`wi` field) or "No Wisconsin match"; Wisconsin Social
+Studies 6-12 shows its set name.
+
+## Plans and priority standards
+`plan_marks.json` -> index fields `pn` (grades whose curriculum documents cite the standard), `pr` (grades that name it a
+Priority standard, 6-12, from Ma3loomat curriculum maps and scope & sequence; or a Power standard, K-5, from the K-5 ELA
+Power Standards PDF and the Curriculum Hub grade Standards lists) and `pa` (grades added to the placement because their
+plans cite it: high school Math and middle school Science rate cited standards plus their current placement, as Tim
+decided). Marks: "★ Priority" / "★ Power" pill (orange, a highlight) and "✓ In plans" pill (dark green outline); on the
+K-12 grid an orange top-left corner and a dashed ring. Committee filters: Standards (all / priority / in plans / not in
+plans) and Order (curriculum order / priority first / in plans first, within each strand). Teachers get Priority and In
+plans tabs in their library. Gaps, Dashboard and the Audit page have priority / in-plans sections.
 
 ## Testing
 Use Playwright (Chromium) against the local server, and check every view (Rate, Heatmap, Gaps, Dashboard,

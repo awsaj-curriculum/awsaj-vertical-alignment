@@ -2,10 +2,20 @@
 
 index_<subject>.json: one entry per unique (framework, code) with the grades it is placed in.
 detail_<subject>.json: full text, EE and descriptors keyed by "framework|code|grade".
+Index fields from the school's documents (data/standards/plan_marks.json, built by scripts/audit/plan_marks.py):
+  pn = grades whose plans cite the standard; pr = grades that name it a priority (6-12) or power (K-5) standard;
+  pa = grades added to the placement because their plans cite it (high school Math and middle school Science rate the
+  standards their documents cite plus their current placement).
+ELA cw = the Common Core 2010 code(s) of each Wisconsin 2020 row, from DPI's official comparison
+(data/standards/ela_crosswalk_2010_2020.json, built by scripts/ela_crosswalk.py).
 Usage: python3 scripts/build_site_data.py
 """
-import json, collections
+import json, collections, os
 rows = json.load(open("data/standards/all_standards.json"))
+XW = json.load(open("data/standards/ela_crosswalk_2010_2020.json"))["to2010"]
+MARKS = json.load(open("data/standards/plan_marks.json"))["marks"] if os.path.exists("data/standards/plan_marks.json") else {}
+# Placement from plans: which sets and grades take the standards their documents cite (same school division only).
+FROM_PLANS = {"WI-CC-MATH": ["9", "10", "11", "12"], "WI-EE-MATH": ["9", "10", "11", "12"], "NGSS": ["6", "7", "8"], "WI-EE-SCI": ["6", "7", "8"]}
 # Essential Elements as their own standard sets (built by scripts/build_ee_rows.py)
 rows += json.load(open("data/standards/essential_elements.json"))
 GORDER = ["K"] + [str(g) for g in range(1, 13)]
@@ -22,8 +32,8 @@ for sub, rs in by_sub.items():
         e = idx.setdefault(k, {"f": r["framework"], "c": r["code"], "s": r["strand"], "cl": r["cluster"],
                                "t": r["text"][:220], "ee": r["ee_code"], "pl": [], "sg": False, "band": r["grade_band"],
                                "div": [], "crs": []})
-        if r["framework"] == "WI-CC-ELA" and r["crosswalk"]:
-            e["cw"] = r["crosswalk"]          # Common Core codes (RL/RI) behind a Wisconsin 2020 Reading code
+        if r["framework"] == "WI-CC-ELA" and (XW.get(r["code"]) or r["crosswalk"]):
+            e["cw"] = XW.get(r["code"]) or r["crosswalk"]   # Common Core 2010 code(s) behind a Wisconsin 2020 code
         if r["framework"] in ("AERO-SS", "NGSS", "AERO-SCI") and r["crosswalk"]:
             # Wisconsin matches shown in italics under the code (Social Studies: suggested matches; Science: WI-SCI)
             wi = [x.split(":", 1)[1] for x in r["crosswalk"] if x.startswith("WI-")] if r["subject"] == "Science" else r["crosswalk"]
@@ -45,6 +55,16 @@ for sub, rs in by_sub.items():
                                                            "descriptor_flag", "descriptors_suggested", "crosswalk", "source",
                                                            "grade_band", "grade_is_suggested", "course", "cluster")}
     for e in idx.values():
+        m = MARKS.get(e["f"] + "|" + e["c"], {})
+        if m.get("plans"):
+            e["pn"] = m["plans"]
+        if m.get("priority"):
+            e["pr"] = m["priority"]
+        add = [g for g in m.get("plans", []) if g in FROM_PLANS.get(e["f"], []) and g not in e["pl"] and any(p in FROM_PLANS[e["f"]] for p in e["pl"])]
+        if add:
+            for g in add:                     # the popup reads the detail of a standard's first grade
+                detail[f"{e['f']}|{e['c']}|{g}"] = detail[f"{e['f']}|{e['c']}|{e['pl'][0]}"]
+            e["pa"] = add; e["pl"] += add; e["sg"] = True
         e["pl"].sort(key=GORDER.index)
     items = sorted(idx.values(), key=lambda e: (e["f"], GORDER.index(e["pl"][0]), e["s"], e["c"]))
     json.dump(items, open(f"site/data/index_{slug[sub]}.json", "w"), ensure_ascii=False, separators=(",", ":"))
