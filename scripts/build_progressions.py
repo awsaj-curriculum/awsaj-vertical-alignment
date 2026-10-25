@@ -107,7 +107,10 @@ for e in ela:
 for (kind, num), es in sorted(groups.items(), key=lambda x: (list(STRAND).index(x[0][0]), x[0][1])):
     ref = next((e for e in es if home(e)[0] in ("6", "5", "4")), es[0])
     short = re.split(r"(?<=[a-z])[.;:]\s", ref["t"])[0]
+    short = re.sub(r"\s+[a-z]$", "", short.strip())            # a part letter left at the end ("... (phonemes). a")
     short = short if len(short) <= 90 else short[:90].rsplit(" ", 1)[0].rstrip(" ,") + "…"
+    # The name quotes one grade's standard (Grade 4-6 where there is one), so it says which grade.
+    short += f" (Grade {home(ref)[0]} wording)" if home(ref)[0] != "K" else " (Kindergarten wording)"
     # Wisconsin renumbered Writing, Language and Speaking and Listening in 2020, so their anchor numbers are Wisconsin's.
     label = f"{STRAND[kind]} {num}" + (" (Wisconsin numbering)" if kind in ("W", "L", "SL") else "")
     lanes.append(lane("ELA", f"ELA-{kind}{num}", f"{label}: {short}", f"{STRAND[kind]} · {ref['cl'] or ''}".rstrip(" ·"), "anchor", es, sim))
