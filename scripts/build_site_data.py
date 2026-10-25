@@ -7,12 +7,16 @@ Index fields from the school's documents (data/standards/plan_marks.json, built 
   pa = grades added to the placement because their plans cite it (high school Math and middle school Science rate the
   standards their documents cite plus their current placement).
 ELA cw = the Common Core 2010 code(s) of each Wisconsin 2020 row, from DPI's official comparison
-(data/standards/ela_crosswalk_2010_2020.json, built by scripts/ela_crosswalk.py).
+(data/standards/ela_crosswalk_2010_2020.json, built by scripts/ela_crosswalk.py). Math cw = the Common Core code(s) of
+the few Wisconsin 2021 rows that were renumbered, or [] when new in Wisconsin (data/standards/math_ccss_crosswalk.json).
 Usage: python3 scripts/build_site_data.py
 """
 import json, collections, os
 rows = json.load(open("data/standards/all_standards.json"))
 XW = json.load(open("data/standards/ela_crosswalk_2010_2020.json"))["to2010"]
+# Math rows Wisconsin 2021 renumbered or added: their Common Core code(s), or [] when new in Wisconsin.
+_mx = json.load(open("data/standards/math_ccss_crosswalk.json"))
+MXW = {**_mx["wi_to_ccss"], **_mx.get("wi_parts_to_ccss_parent", {})}
 MARKS = json.load(open("data/standards/plan_marks.json"))["marks"] if os.path.exists("data/standards/plan_marks.json") else {}
 # Placement from plans: which sets and grades take the standards their documents cite (same school division only).
 FROM_PLANS = {"WI-CC-MATH": ["9", "10", "11", "12"], "WI-EE-MATH": ["9", "10", "11", "12"], "NGSS": ["6", "7", "8"], "WI-EE-SCI": ["6", "7", "8"]}
@@ -32,6 +36,8 @@ for sub, rs in by_sub.items():
         e = idx.setdefault(k, {"f": r["framework"], "c": r["code"], "s": r["strand"], "cl": r["cluster"],
                                "t": r["text"][:220], "ee": r["ee_code"], "pl": [], "sg": False, "band": r["grade_band"],
                                "div": [], "crs": []})
+        if r["framework"] == "WI-CC-MATH" and r["code"] in MXW:
+            e["cw"] = MXW[r["code"]]
         if r["framework"] == "WI-CC-ELA" and (XW.get(r["code"]) or r["crosswalk"]):
             e["cw"] = XW.get(r["code"]) or r["crosswalk"]   # Common Core 2010 code(s) behind a Wisconsin 2020 code
         if r["framework"] in ("AERO-SS", "NGSS", "AERO-SCI") and r["crosswalk"]:

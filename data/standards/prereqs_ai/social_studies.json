@@ -1,0 +1,3837 @@
+{
+ "AERO-SS|1.2.b": [
+  [
+   "AERO-SS|1.2.a",
+   "concept",
+   "Stories about the past give the first sense of long ago"
+  ]
+ ],
+ "AERO-SS|1.2.c": [
+  [
+   "AERO-SS|1.2.a",
+   "same",
+   "Builds on identifying stories about past events, people and places"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Telling past from present is needed to relate stories to both"
+  ],
+  [
+   "AERO-SS|4.2.a",
+   "concept",
+   "Folk stories and songs are early examples of stories about the past"
+  ]
+ ],
+ "AERO-SS|1.5.a": [
+  [
+   "AERO-SS|1.2.c",
+   "concept",
+   "Relating past stories to the present prepares comparing views across time"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Students must separate past and present before comparing views across time"
+  ],
+  [
+   "AERO-SS|4.2.d",
+   "concept",
+   "Comparing cultures shows that people in different places live differently"
+  ],
+  [
+   "AERO-SS|4.2.e",
+   "concept",
+   "Seeing that cultures expect different behaviour supports differing worldviews"
+  ],
+  [
+   "AERO-SS|3.2.f",
+   "concept",
+   "Shows that cultures think differently about the same environment"
+  ]
+ ],
+ "AERO-SS|1.5.b": [
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Sorting past and present is the basis for describing change over time"
+  ],
+  [
+   "AERO-SS|1.2.c",
+   "concept",
+   "Relating past stories to the present shows how life has changed"
+  ],
+  [
+   "AERO-SS|8.2.b",
+   "concept",
+   "Tools changing lives is an early example of change in society"
+  ]
+ ],
+ "AERO-SS|1.5.c": [
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Placing events in time order is needed to see causes before effects"
+  ],
+  [
+   "AERO-SS|1.2.c",
+   "concept",
+   "Relating past events to the present introduces how the past shapes today"
+  ],
+  [
+   "AERO-SS|2.2.b",
+   "concept",
+   "Naming what causes conflict is early cause and effect thinking"
+  ],
+  [
+   "AERO-SS|8.2.b",
+   "concept",
+   "Tools changing lives gives simple examples of cause and effect"
+  ]
+ ],
+ "AERO-SS|1.5.d": [
+  [
+   "AERO-SS|1.2.c",
+   "procedure",
+   "Using stories to understand the past leads into using real sources"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Telling past from present is needed to examine both with sources"
+  ],
+  [
+   "AERO-SS|1.5.a",
+   "concept",
+   "Knowing people saw the world differently helps judge a source"
+  ],
+  [
+   "AERO-SS|3.5.b",
+   "procedure",
+   "Using resources to find and interpret information is a related research skill"
+  ],
+  [
+   "AERO-SS|3.2.c",
+   "procedure",
+   "Reading maps, tables and diagrams prepares reading sources as evidence"
+  ]
+ ],
+ "AERO-SS|2.2.b": [
+  [
+   "AERO-SS|2.2.a",
+   "same",
+   "Giving examples of conflict and cooperation comes before naming their causes"
+  ]
+ ],
+ "AERO-SS|2.2.c": [
+  [
+   "AERO-SS|2.2.b",
+   "concept",
+   "Knowing what causes conflict helps judge ways to settle it"
+  ],
+  [
+   "AERO-SS|2.2.a",
+   "concept",
+   "Recognising conflict and cooperation comes before comparing ways to resolve it"
+  ],
+  [
+   "AERO-SS|5.2.d",
+   "concept",
+   "Judging behaviour choices supports judging which responses to disagreement work"
+  ]
+ ],
+ "AERO-SS|2.5.a": [
+  [
+   "AERO-SS|7.2.a",
+   "prereq",
+   "Students must tell needs from wants before tracing their wider effects"
+  ],
+  [
+   "AERO-SS|7.2.e",
+   "concept",
+   "Explaining choices about wants and needs leads to their effects on others"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Depending on other workers shows our needs involve other people"
+  ],
+  [
+   "AERO-SS|5.2.e",
+   "concept",
+   "Living in groups to meet needs links personal wants to others"
+  ]
+ ],
+ "AERO-SS|2.5.b": [
+  [
+   "AERO-SS|2.2.b",
+   "same",
+   "Extends factors of cooperation and conflict to societies and nations"
+  ],
+  [
+   "AERO-SS|2.5.a",
+   "concept",
+   "Needs reaching beyond the self help explain economic causes of conflict"
+  ],
+  [
+   "AERO-SS|4.2.d",
+   "concept",
+   "Comparing cultures shows differences that can lead to cooperation or conflict"
+  ],
+  [
+   "AERO-SS|3.2.e",
+   "concept",
+   "How geography shapes groups supports geographic causes of conflict"
+  ]
+ ],
+ "AERO-SS|2.5.c": [
+  [
+   "AERO-SS|2.5.b",
+   "concept",
+   "Causes of cooperation between nations underpin how nations interact"
+  ],
+  [
+   "AERO-SS|7.2.g",
+   "prereq",
+   "Knowing how goods are exchanged is needed to understand trade between nations"
+  ],
+  [
+   "AERO-SS|7.5.c",
+   "concept",
+   "Changes in transport and communication explain growing links between societies"
+  ],
+  [
+   "AERO-SS|4.5.a",
+   "concept",
+   "Knowing how cultures differ explains why cultural exchanges matter"
+  ]
+ ],
+ "AERO-SS|3.2.a": [
+  [
+   "AERO-SS|7.2.a",
+   "prereq",
+   "Knowing basic needs helps explain how the environment meets them"
+  ],
+  [
+   "AERO-SS|5.2.a",
+   "concept",
+   "Connecting self to place begins thinking about where people live"
+  ]
+ ],
+ "AERO-SS|3.2.b": [
+  [
+   "AERO-SS|5.2.a",
+   "concept",
+   "Thinking about their place in the world starts the idea of location"
+  ]
+ ],
+ "AERO-SS|3.2.c": [
+  [
+   "AERO-SS|3.2.b",
+   "prereq",
+   "Understanding location is needed to read where things are on maps"
+  ]
+ ],
+ "AERO-SS|3.2.d": [
+  [
+   "AERO-SS|3.2.b",
+   "prereq",
+   "Locating landforms depends on understanding the idea of location"
+  ],
+  [
+   "AERO-SS|3.2.a",
+   "concept",
+   "Noticing the physical environment comes before naming its landforms"
+  ]
+ ],
+ "AERO-SS|3.2.e": [
+  [
+   "AERO-SS|3.2.a",
+   "concept",
+   "People depending on the environment explains why landforms shape settlement"
+  ],
+  [
+   "AERO-SS|4.2.c",
+   "concept",
+   "How cultures use resources and shelter connects land to culture"
+  ],
+  [
+   "AERO-SS|3.2.b",
+   "prereq",
+   "The concept of location is needed to see where people settle"
+  ]
+ ],
+ "AERO-SS|3.2.f": [
+  [
+   "AERO-SS|4.2.c",
+   "same",
+   "Builds on how cultures use resources, shelter and transport"
+  ],
+  [
+   "AERO-SS|3.2.a",
+   "concept",
+   "Depending on the environment is the basis for adapting to it"
+  ]
+ ],
+ "AERO-SS|3.5.a": [
+  [
+   "AERO-SS|3.2.c",
+   "same",
+   "Builds on reading and displaying information with maps"
+  ],
+  [
+   "AERO-SS|3.2.b",
+   "prereq",
+   "Location is needed to use grids, keys and directions on maps"
+  ],
+  [
+   "AERO-SS|3.2.d",
+   "concept",
+   "Recognising landforms helps read physical features shown on maps and globes"
+  ]
+ ],
+ "AERO-SS|3.5.b": [
+  [
+   "AERO-SS|3.2.c",
+   "same",
+   "Extends reading maps, graphs and tables to choosing geographic tools"
+  ],
+  [
+   "AERO-SS|3.2.b",
+   "prereq",
+   "Location is the basic idea behind geographic tools"
+  ],
+  [
+   "AERO-SS|3.2.d",
+   "concept",
+   "Knowing landforms gives content to interpret with geographic tools"
+  ]
+ ],
+ "AERO-SS|3.5.c": [
+  [
+   "AERO-SS|3.2.b",
+   "same",
+   "Extends the concept of location to distance, direction, scale and region"
+  ],
+  [
+   "AERO-SS|3.5.a",
+   "prereq",
+   "Map elements like scale and compass rose are needed to apply these"
+  ],
+  [
+   "AERO-SS|3.5.b",
+   "procedure",
+   "Using geographic tools supports applying spatial concepts"
+  ],
+  [
+   "AERO-SS|3.2.c",
+   "procedure",
+   "Reading maps is the method used to apply spatial concepts"
+  ]
+ ],
+ "AERO-SS|3.5.d": [
+  [
+   "AERO-SS|3.2.d",
+   "prereq",
+   "Students must recognise landforms before describing how they change"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Separating past and present is needed to describe change over time"
+  ],
+  [
+   "AERO-SS|3.2.e",
+   "concept",
+   "Landforms shaping people links physical and human features"
+  ],
+  [
+   "AERO-SS|8.2.b",
+   "concept",
+   "Tools changing lives explains many human made changes to places"
+  ]
+ ],
+ "AERO-SS|3.5.e": [
+  [
+   "AERO-SS|3.2.e",
+   "same",
+   "Builds on how landforms and features influence where people live"
+  ],
+  [
+   "AERO-SS|3.5.c",
+   "prereq",
+   "Concepts of location and movement are needed to explain migration"
+  ],
+  [
+   "AERO-SS|3.2.a",
+   "concept",
+   "People depending on the environment explains where populations settle"
+  ],
+  [
+   "AERO-SS|7.5.a",
+   "concept",
+   "Where resources are found helps explain where people choose to live"
+  ],
+  [
+   "AERO-SS|3.5.a",
+   "procedure",
+   "Using maps shows where populations live and how they move"
+  ]
+ ],
+ "AERO-SS|3.5.f": [
+  [
+   "AERO-SS|3.2.e",
+   "concept",
+   "Landforms influencing population is the basis for settlement patterns"
+  ],
+  [
+   "AERO-SS|7.5.a",
+   "concept",
+   "Resource locations and uses shape how land is used"
+  ],
+  [
+   "AERO-SS|3.5.d",
+   "concept",
+   "Changes in human made features show how settlements develop"
+  ],
+  [
+   "AERO-SS|3.5.c",
+   "prereq",
+   "Location, scale and region are needed to describe settlement patterns"
+  ],
+  [
+   "AERO-SS|3.5.a",
+   "procedure",
+   "Reading maps is how settlement and land use patterns are seen"
+  ]
+ ],
+ "AERO-SS|3.5.g": [
+  [
+   "AERO-SS|3.2.b",
+   "concept",
+   "Understanding location is the starting point for explaining site choices"
+  ],
+  [
+   "AERO-SS|3.2.e",
+   "concept",
+   "Landforms influence where people live and what they do there"
+  ],
+  [
+   "AERO-SS|7.5.a",
+   "concept",
+   "Resource locations explain why activities happen in certain places"
+  ],
+  [
+   "AERO-SS|3.2.a",
+   "concept",
+   "People depend on their environment for daily activities"
+  ]
+ ],
+ "AERO-SS|3.5.h": [
+  [
+   "AERO-SS|3.5.c",
+   "same",
+   "Applying the concept of region comes before defining regions by features"
+  ],
+  [
+   "AERO-SS|3.2.d",
+   "prereq",
+   "Distinguishing landforms gives the physical characteristics of regions"
+  ],
+  [
+   "AERO-SS|4.5.a",
+   "concept",
+   "Comparing cultures of regions gives the human characteristics"
+  ],
+  [
+   "AERO-SS|3.5.a",
+   "procedure",
+   "Map and globe skills are used to show and define regions"
+  ]
+ ],
+ "AERO-SS|4.2.b": [
+  [
+   "AERO-SS|5.2.c",
+   "concept",
+   "Knowing people belong to groups comes before seeing how groups interact"
+  ],
+  [
+   "AERO-SS|2.2.a",
+   "concept",
+   "Cooperation and conflict examples show how people in groups interact"
+  ]
+ ],
+ "AERO-SS|4.2.c": [
+  [
+   "AERO-SS|7.2.a",
+   "prereq",
+   "Basic needs like shelter explain why people use their environment"
+  ],
+  [
+   "AERO-SS|8.2.a",
+   "concept",
+   "Tools and techniques are part of how people use the environment"
+  ]
+ ],
+ "AERO-SS|4.2.d": [
+  [
+   "AERO-SS|4.2.b",
+   "concept",
+   "How people interact in families and schools gives points to compare"
+  ],
+  [
+   "AERO-SS|5.2.b",
+   "concept",
+   "Seeing differences between people prepares comparing cultures"
+  ],
+  [
+   "AERO-SS|4.2.a",
+   "concept",
+   "Local stories and songs give a first look at one's own culture"
+  ]
+ ],
+ "AERO-SS|4.2.e": [
+  [
+   "AERO-SS|5.2.d",
+   "same",
+   "Builds on recognising culturally appropriate and inappropriate behaviour"
+  ],
+  [
+   "AERO-SS|6.2.a",
+   "concept",
+   "Responsibilities in a group are early expectations for behaviour"
+  ],
+  [
+   "AERO-SS|4.2.b",
+   "concept",
+   "Interaction in institutions shows behaviour rules in different settings"
+  ]
+ ],
+ "AERO-SS|4.5.a": [
+  [
+   "AERO-SS|4.2.d",
+   "same",
+   "Extends comparing social environments of different cultures"
+  ],
+  [
+   "AERO-SS|4.2.c",
+   "concept",
+   "How cultures use resources and shelter is one characteristic compared"
+  ],
+  [
+   "AERO-SS|4.2.e",
+   "concept",
+   "Comparing behaviour expectations across cultures is part of this comparison"
+  ],
+  [
+   "AERO-SS|3.2.f",
+   "concept",
+   "How cultures adapt to environments feeds into comparing regions"
+  ]
+ ],
+ "AERO-SS|4.5.b": [
+  [
+   "AERO-SS|7.2.a",
+   "prereq",
+   "Students must know basic needs before comparing how cultures meet them"
+  ],
+  [
+   "AERO-SS|4.2.d",
+   "same",
+   "Builds on comparing social environments in different cultures"
+  ],
+  [
+   "AERO-SS|4.2.c",
+   "concept",
+   "How cultures use resources, shelter and transport shows needs being met"
+  ],
+  [
+   "AERO-SS|7.2.e",
+   "concept",
+   "Choices about satisfying needs and wants vary between cultures"
+  ]
+ ],
+ "AERO-SS|4.5.c": [
+  [
+   "AERO-SS|4.2.a",
+   "same",
+   "Builds on identifying regional folk heroes, stories and songs"
+  ],
+  [
+   "AERO-SS|1.2.c",
+   "concept",
+   "Relating stories to the past supports finding their main ideas"
+  ],
+  [
+   "AERO-SS|1.2.a",
+   "concept",
+   "Identifying stories about past people and events comes first"
+  ]
+ ],
+ "AERO-SS|4.5.d": [
+  [
+   "AERO-SS|4.5.a",
+   "prereq",
+   "Knowing cultural characteristics of groups is needed to see their contributions"
+  ],
+  [
+   "AERO-SS|4.2.a",
+   "concept",
+   "Folk heroes and songs show how stories build a shared identity"
+  ],
+  [
+   "AERO-SS|4.5.c",
+   "concept",
+   "Traditions in legends and songs carry cultural contributions"
+  ]
+ ],
+ "AERO-SS|4.5.e": [
+  [
+   "AERO-SS|4.5.a",
+   "prereq",
+   "Comparing cultural characteristics gives examples for naming elements of culture"
+  ],
+  [
+   "AERO-SS|4.2.e",
+   "concept",
+   "Behaviour expectations introduce the idea of cultural norms"
+  ],
+  [
+   "AERO-SS|4.5.b",
+   "concept",
+   "Different ways of meeting needs show values at work in cultures"
+  ],
+  [
+   "AERO-SS|5.5.e",
+   "concept",
+   "Seeing culture shape daily life prepares explaining its elements"
+  ]
+ ],
+ "AERO-SS|4.5.f": [
+  [
+   "AERO-SS|4.5.a",
+   "concept",
+   "Comparing beliefs and customs across cultures introduces belief systems"
+  ],
+  [
+   "AERO-SS|4.5.c",
+   "concept",
+   "Myths and traditions are early contact with beliefs and rituals"
+  ],
+  [
+   "AERO-SS|5.5.d",
+   "concept",
+   "Religious institutions show the community side of a belief system"
+  ],
+  [
+   "AERO-SS|4.2.e",
+   "concept",
+   "Expected behaviour in a culture links to a belief system's code"
+  ]
+ ],
+ "AERO-SS|4.5.g": [
+  [
+   "AERO-SS|4.5.a",
+   "concept",
+   "Comparing beliefs and customs prepares study of one religion"
+  ],
+  [
+   "AERO-SS|5.5.d",
+   "concept",
+   "Knowing how religious institutions influence people gives context"
+  ],
+  [
+   "AERO-SS|6.2.i",
+   "concept",
+   "Religious institutions in their own lives give a starting point"
+  ],
+  [
+   "AERO-SS|4.5.c",
+   "concept",
+   "Stories and traditions often carry a religion's teachings"
+  ]
+ ],
+ "AERO-SS|4.5.h": [
+  [
+   "AERO-SS|4.5.a",
+   "prereq",
+   "Comparing cultures is needed before weighing the effects of diversity"
+  ],
+  [
+   "AERO-SS|4.5.d",
+   "concept",
+   "Groups adding to national identity shows a benefit of diversity"
+  ],
+  [
+   "AERO-SS|2.5.b",
+   "concept",
+   "Culture as a cause of cooperation and conflict informs pros and cons"
+  ],
+  [
+   "AERO-SS|5.5.e",
+   "concept",
+   "Culture shaping daily life shows how diverse groups differ"
+  ]
+ ],
+ "AERO-SS|4.5.i": [
+  [
+   "AERO-SS|4.5.a",
+   "prereq",
+   "Students must compare cultures before tracing how traits spread"
+  ],
+  [
+   "AERO-SS|7.5.c",
+   "concept",
+   "Transport and communication changes are main routes of cultural spread"
+  ],
+  [
+   "AERO-SS|4.5.d",
+   "concept",
+   "Groups adding to national identity is diffusion within a country"
+  ],
+  [
+   "AERO-SS|3.5.c",
+   "concept",
+   "The concept of movement explains how ideas travel between places"
+  ]
+ ],
+ "AERO-SS|5.2.d": [
+  [
+   "AERO-SS|6.2.a",
+   "concept",
+   "Responsibilities in a group set early expectations for behaviour"
+  ],
+  [
+   "AERO-SS|5.2.c",
+   "concept",
+   "Belonging to a group is why behaviour affects others"
+  ],
+  [
+   "AERO-SS|2.2.a",
+   "concept",
+   "Conflict and cooperation examples show effects of behaviour choices"
+  ]
+ ],
+ "AERO-SS|5.2.e": [
+  [
+   "AERO-SS|5.2.c",
+   "same",
+   "Builds on recognising that individuals are part of a group"
+  ],
+  [
+   "AERO-SS|7.2.a",
+   "concept",
+   "Meeting needs is a key reason people live together"
+  ],
+  [
+   "AERO-SS|2.2.a",
+   "concept",
+   "Cooperation among people shows a benefit of living in groups"
+  ]
+ ],
+ "AERO-SS|5.2.f": [
+  [
+   "AERO-SS|5.2.c",
+   "concept",
+   "Knowing people belong to groups comes before naming roles within them"
+  ],
+  [
+   "AERO-SS|5.2.d",
+   "concept",
+   "Recognising appropriate behaviour supports describing behaviour in groups"
+  ],
+  [
+   "AERO-SS|6.2.d",
+   "concept",
+   "Leader qualities are one example of a role in groups"
+  ],
+  [
+   "AERO-SS|6.2.b",
+   "concept",
+   "Authority figures show roles people play in groups"
+  ]
+ ],
+ "AERO-SS|5.2.g": [
+  [
+   "AERO-SS|5.2.b",
+   "prereq",
+   "Seeing oneself as an individual comes before choosing parts of identity"
+  ],
+  [
+   "AERO-SS|5.2.a",
+   "same",
+   "Builds on linking who they are to their place in the world"
+  ],
+  [
+   "AERO-SS|5.2.d",
+   "concept",
+   "Behaviour choices show that people make choices about themselves"
+  ]
+ ],
+ "AERO-SS|5.5.a": [
+  [
+   "AERO-SS|6.2.e",
+   "same",
+   "Builds on describing how families and schools affect their lives"
+  ],
+  [
+   "AERO-SS|5.2.e",
+   "concept",
+   "Families as a social group explain their influence"
+  ],
+  [
+   "AERO-SS|4.2.b",
+   "concept",
+   "How people interact in families shows family influence at work"
+  ]
+ ],
+ "AERO-SS|5.5.b": [
+  [
+   "AERO-SS|5.2.g",
+   "concept",
+   "Thinking about identity choices prepares seeing what shapes identity"
+  ],
+  [
+   "AERO-SS|5.2.b",
+   "concept",
+   "Seeing oneself as different from others is the starting point"
+  ],
+  [
+   "AERO-SS|4.2.e",
+   "concept",
+   "Cultural expectations show how background shapes reactions"
+  ]
+ ],
+ "AERO-SS|5.5.c": [
+  [
+   "AERO-SS|5.2.e",
+   "prereq",
+   "Knowing why people live in groups explains groups meeting needs"
+  ],
+  [
+   "AERO-SS|7.2.a",
+   "prereq",
+   "Needs and wants must be clear before comparing how groups meet them"
+  ],
+  [
+   "AERO-SS|4.2.d",
+   "concept",
+   "Comparing social environments in cultures is a similar comparison"
+  ],
+  [
+   "AERO-SS|4.2.c",
+   "concept",
+   "How cultures use resources and shelter shows needs being met"
+  ]
+ ],
+ "AERO-SS|5.5.d": [
+  [
+   "AERO-SS|4.2.b",
+   "same",
+   "Builds on how people in families, schools and clubs interact"
+  ],
+  [
+   "AERO-SS|6.2.i",
+   "same",
+   "Builds on how religious and civic groups affect their lives"
+  ],
+  [
+   "AERO-SS|6.2.e",
+   "concept",
+   "Families and schools affecting their lives is the first example"
+  ]
+ ],
+ "AERO-SS|5.5.e": [
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Background shaping perceptions leads to culture shaping daily life"
+  ],
+  [
+   "AERO-SS|4.5.a",
+   "concept",
+   "Comparing cultural characteristics shows differences in daily life"
+  ],
+  [
+   "AERO-SS|4.2.e",
+   "concept",
+   "Cultural behaviour expectations are part of daily life"
+  ],
+  [
+   "AERO-SS|4.5.b",
+   "concept",
+   "Different ways cultures meet needs show culture in daily routines"
+  ]
+ ],
+ "AERO-SS|5.5.f": [
+  [
+   "AERO-SS|5.5.d",
+   "prereq",
+   "Knowing institutions influence individuals is needed to see them shape identity"
+  ],
+  [
+   "AERO-SS|5.5.a",
+   "concept",
+   "Family influence on the individual is one social system at work"
+  ],
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Background shaping perceptions links identity to social circumstances"
+  ],
+  [
+   "AERO-SS|5.5.e",
+   "concept",
+   "Culture shaping daily life shows how identity is learned"
+  ]
+ ],
+ "AERO-SS|5.5.g": [
+  [
+   "AERO-SS|5.2.g",
+   "same",
+   "Builds on identifying choices in personal identity"
+  ],
+  [
+   "AERO-SS|5.5.a",
+   "concept",
+   "Family influence is the first example of socialisation"
+  ],
+  [
+   "AERO-SS|5.5.d",
+   "concept",
+   "Institutions influencing individuals is the core of socialisation"
+  ],
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Social circumstances shaping perceptions is part of socialisation"
+  ]
+ ],
+ "AERO-SS|5.5.h": [
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Understanding varied perceptions helps students see why acceptance matters"
+  ],
+  [
+   "AERO-SS|4.5.a",
+   "concept",
+   "Comparing cultures gives the differences people accept or tolerate"
+  ],
+  [
+   "AERO-SS|5.5.e",
+   "concept",
+   "Seeing culture shape daily lives builds understanding of others"
+  ],
+  [
+   "AERO-SS|4.2.e",
+   "concept",
+   "Comparing behaviour expectations across cultures builds respect for difference"
+  ]
+ ],
+ "AERO-SS|6.2.c": [
+  [
+   "AERO-SS|6.2.a",
+   "same",
+   "Moves from identifying to describing rights, responsibilities and good citizenship"
+  ],
+  [
+   "AERO-SS|5.2.c",
+   "concept",
+   "Belonging to a group is where rights and responsibilities apply"
+  ]
+ ],
+ "AERO-SS|6.2.d": [
+  [
+   "AERO-SS|6.2.b",
+   "prereq",
+   "Knowing who holds authority comes before describing what leaders need"
+  ],
+  [
+   "AERO-SS|6.2.a",
+   "concept",
+   "Good citizen traits overlap with qualities of good leaders"
+  ]
+ ],
+ "AERO-SS|6.2.e": [
+  [
+   "AERO-SS|5.2.c",
+   "concept",
+   "Knowing they belong to groups like families comes first"
+  ],
+  [
+   "AERO-SS|6.2.b",
+   "concept",
+   "Parents and teachers as authority figures show family and school influence"
+  ],
+  [
+   "AERO-SS|5.2.a",
+   "concept",
+   "Connecting who they are to their place supports seeing influences on them"
+  ]
+ ],
+ "AERO-SS|6.2.f": [
+  [
+   "AERO-SS|6.2.c",
+   "same",
+   "Moves from describing to explaining rights and responsibilities"
+  ],
+  [
+   "AERO-SS|6.2.a",
+   "same",
+   "Continues the K to 2 progression on good citizenship"
+  ],
+  [
+   "AERO-SS|5.2.d",
+   "concept",
+   "Behaviour choices and their impact explain why responsibilities matter"
+  ]
+ ],
+ "AERO-SS|6.2.g": [
+  [
+   "AERO-SS|6.2.d",
+   "concept",
+   "Knowing qualities leaders need supports explaining why leadership matters"
+  ],
+  [
+   "AERO-SS|6.2.b",
+   "concept",
+   "Purposes of authority help explain why leaders are needed"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Depending on other people's work shows the value of service"
+  ]
+ ],
+ "AERO-SS|6.2.h": [
+  [
+   "AERO-SS|2.2.b",
+   "concept",
+   "Factors in cooperation and conflict relate to fair decision making"
+  ],
+  [
+   "AERO-SS|6.2.c",
+   "concept",
+   "Individual responsibility is one decision making principle"
+  ],
+  [
+   "AERO-SS|5.2.d",
+   "concept",
+   "Weighing behaviour choices is an early form of decision making"
+  ],
+  [
+   "AERO-SS|2.2.a",
+   "concept",
+   "Examples of cooperation introduce cooperation as a principle"
+  ]
+ ],
+ "AERO-SS|6.2.i": [
+  [
+   "AERO-SS|6.2.e",
+   "same",
+   "Extends impact of families and schools to wider institutions"
+  ],
+  [
+   "AERO-SS|4.2.b",
+   "concept",
+   "How people in institutions interact prepares seeing their impact"
+  ],
+  [
+   "AERO-SS|6.2.b",
+   "concept",
+   "Sources of authority include government and community leaders"
+  ]
+ ],
+ "AERO-SS|6.5.a": [
+  [
+   "AERO-SS|6.2.f",
+   "same",
+   "Extends rights and responsibilities from the group to wider society"
+  ],
+  [
+   "AERO-SS|5.2.f",
+   "concept",
+   "Roles in group situations lead to roles in society"
+  ],
+  [
+   "AERO-SS|6.2.h",
+   "concept",
+   "Fairness principles help students reason about rights issues"
+  ]
+ ],
+ "AERO-SS|6.5.b": [
+  [
+   "AERO-SS|6.2.i",
+   "prereq",
+   "Knowing government agencies affect lives prepares explaining what institutions do"
+  ],
+  [
+   "AERO-SS|7.2.a",
+   "prereq",
+   "Needs versus wants must be understood before this standard"
+  ],
+  [
+   "AERO-SS|6.2.b",
+   "concept",
+   "Purposes of authority explain why political institutions exist"
+  ]
+ ],
+ "AERO-SS|6.5.c": [
+  [
+   "AERO-SS|6.2.b",
+   "same",
+   "Extends identifying sources of authority to government and world leaders"
+  ],
+  [
+   "AERO-SS|6.2.d",
+   "concept",
+   "Knowing leader qualities gives meaning to identifying real leaders"
+  ],
+  [
+   "AERO-SS|6.2.g",
+   "concept",
+   "Understanding why leadership matters supports learning about leaders"
+  ]
+ ],
+ "AERO-SS|6.5.d": [
+  [
+   "AERO-SS|6.5.b",
+   "prereq",
+   "Knowing what political institutions do comes before comparing systems"
+  ],
+  [
+   "AERO-SS|6.2.b",
+   "concept",
+   "Sources of authority, like rulers, connect to types of government"
+  ],
+  [
+   "AERO-SS|6.5.c",
+   "concept",
+   "Knowing leaders and officials gives examples of political systems"
+  ]
+ ],
+ "AERO-SS|6.5.e": [
+  [
+   "AERO-SS|6.5.c",
+   "prereq",
+   "Identifying local and national officials prepares describing government levels"
+  ],
+  [
+   "AERO-SS|6.5.b",
+   "concept",
+   "Institutions meeting needs explain government responsibilities"
+  ],
+  [
+   "AERO-SS|6.2.i",
+   "concept",
+   "Government agencies in their lives are examples of government work"
+  ]
+ ],
+ "AERO-SS|6.5.f": [
+  [
+   "AERO-SS|6.2.f",
+   "same",
+   "Builds on explaining rights, responsibilities and good citizens"
+  ],
+  [
+   "AERO-SS|6.5.a",
+   "concept",
+   "Rights and roles in society are the core of citizenship"
+  ]
+ ],
+ "AERO-SS|6.5.g": [
+  [
+   "AERO-SS|6.5.b",
+   "prereq",
+   "Knowing what government institutions do is needed to monitor them"
+  ],
+  [
+   "AERO-SS|6.5.a",
+   "concept",
+   "Rights and responsibilities in society include influencing government"
+  ],
+  [
+   "AERO-SS|6.2.g",
+   "concept",
+   "Service and leadership are early forms of civic participation"
+  ],
+  [
+   "AERO-SS|6.5.c",
+   "concept",
+   "Knowing government officials shows who citizens can influence"
+  ]
+ ],
+ "AERO-SS|6.5.h": [
+  [
+   "AERO-SS|6.2.b",
+   "concept",
+   "Sources and purposes of authority explain why laws exist"
+  ],
+  [
+   "AERO-SS|6.2.h",
+   "concept",
+   "Fairness in decision making underlies the work of courts"
+  ],
+  [
+   "AERO-SS|6.5.a",
+   "concept",
+   "Rights and responsibilities in society are protected by laws"
+  ],
+  [
+   "AERO-SS|2.2.c",
+   "concept",
+   "Better ways to settle disagreements lead to courts resolving disputes"
+  ]
+ ],
+ "AERO-SS|6.5.i": [
+  [
+   "AERO-SS|6.5.d",
+   "same",
+   "Builds on identifying elements of major political systems"
+  ],
+  [
+   "AERO-SS|6.5.e",
+   "concept",
+   "Levels and responsibilities of government give points to compare"
+  ],
+  [
+   "AERO-SS|6.5.f",
+   "concept",
+   "Citizenship differs between political systems"
+  ]
+ ],
+ "AERO-SS|6.5.j": [
+  [
+   "AERO-SS|2.2.c",
+   "same",
+   "Builds on judging which ways of handling disagreements work better"
+  ],
+  [
+   "AERO-SS|2.5.b",
+   "prereq",
+   "Knowing causes of conflict is needed to choose strategies to resolve it"
+  ],
+  [
+   "AERO-SS|6.2.h",
+   "concept",
+   "Fairness and cooperation principles guide conflict resolution"
+  ],
+  [
+   "AERO-SS|6.5.h",
+   "concept",
+   "Courts and judges are one formal way to resolve conflict"
+  ]
+ ],
+ "AERO-SS|7.2.b": [
+  [
+   "AERO-SS|7.2.a",
+   "prereq",
+   "Needs and wants explain why people use resources every day"
+  ]
+ ],
+ "AERO-SS|7.2.c": [
+  [
+   "AERO-SS|7.2.a",
+   "concept",
+   "Meeting needs and wants explains why we rely on workers"
+  ],
+  [
+   "AERO-SS|5.2.c",
+   "concept",
+   "Being part of a group shows people depend on each other"
+  ]
+ ],
+ "AERO-SS|7.2.d": [
+  [
+   "AERO-SS|7.2.a",
+   "concept",
+   "Needs and wants are met by goods and services"
+  ]
+ ],
+ "AERO-SS|7.2.e": [
+  [
+   "AERO-SS|7.2.a",
+   "same",
+   "Builds on telling needs from wants"
+  ],
+  [
+   "AERO-SS|7.2.b",
+   "concept",
+   "Knowing the role of resources helps explain why choices are needed"
+  ],
+  [
+   "AERO-SS|7.2.d",
+   "concept",
+   "Goods and services are what people choose between"
+  ]
+ ],
+ "AERO-SS|7.2.f": [
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Specialised jobs introduce businesses and workers in an economy"
+  ],
+  [
+   "AERO-SS|7.2.d",
+   "concept",
+   "Goods and services are what economic institutions provide"
+  ],
+  [
+   "AERO-SS|4.2.b",
+   "concept",
+   "How people in institutions interact prepares naming economic institutions"
+  ]
+ ],
+ "AERO-SS|7.2.g": [
+  [
+   "AERO-SS|7.2.d",
+   "prereq",
+   "Students must tell goods from services before describing their exchange"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Depending on specialised workers is why people exchange"
+  ],
+  [
+   "AERO-SS|7.2.a",
+   "concept",
+   "People exchange goods and services to meet needs and wants"
+  ]
+ ],
+ "AERO-SS|7.5.a": [
+  [
+   "AERO-SS|7.2.b",
+   "same",
+   "Builds on the roles resources play in daily life"
+  ],
+  [
+   "AERO-SS|3.2.a",
+   "concept",
+   "People depending on the environment explains why resources need managing"
+  ],
+  [
+   "AERO-SS|3.2.b",
+   "prereq",
+   "The concept of location is needed to describe where resources are"
+  ],
+  [
+   "AERO-SS|4.2.c",
+   "concept",
+   "How cultures use resources gives examples of resource use"
+  ]
+ ],
+ "AERO-SS|7.5.b": [
+  [
+   "AERO-SS|7.2.b",
+   "prereq",
+   "Knowing what resources do comes before sorting them into types"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Specialised workers are examples of human resources"
+  ],
+  [
+   "AERO-SS|8.2.a",
+   "concept",
+   "Tools are an early example of capital resources"
+  ]
+ ],
+ "AERO-SS|7.5.c": [
+  [
+   "AERO-SS|7.2.g",
+   "prereq",
+   "Knowing how goods are exchanged is needed to understand trade"
+  ],
+  [
+   "AERO-SS|8.2.b",
+   "concept",
+   "Tools changing lives includes changes in transport and communication"
+  ],
+  [
+   "AERO-SS|4.2.c",
+   "concept",
+   "How cultures use transport introduces how people move goods"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Separating past and present is needed to describe these changes"
+  ]
+ ],
+ "AERO-SS|7.5.d": [
+  [
+   "AERO-SS|7.2.e",
+   "same",
+   "Builds on why people make choices to satisfy needs and wants"
+  ],
+  [
+   "AERO-SS|7.2.d",
+   "prereq",
+   "Goods and services must be clear before explaining their production"
+  ],
+  [
+   "AERO-SS|7.5.b",
+   "prereq",
+   "Human, natural and capital resources are the inputs to production"
+  ],
+  [
+   "AERO-SS|4.5.b",
+   "concept",
+   "Cultures meeting needs differently supports comparing ways of production"
+  ]
+ ],
+ "AERO-SS|7.5.e": [
+  [
+   "AERO-SS|7.5.c",
+   "concept",
+   "Transport and communication changes explain how trade shapes work"
+  ],
+  [
+   "AERO-SS|7.2.g",
+   "prereq",
+   "Exchange of goods and services is the basis of trade"
+  ],
+  [
+   "AERO-SS|7.5.d",
+   "concept",
+   "Producing goods and services is how people earn a living"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Specialised jobs show the different ways people earn a living"
+  ]
+ ],
+ "AERO-SS|7.5.f": [
+  [
+   "AERO-SS|7.2.c",
+   "prereq",
+   "Specialised jobs are the idea behind division of labour"
+  ],
+  [
+   "AERO-SS|1.5.b",
+   "concept",
+   "Describing changes in society supports tracing changes in work"
+  ],
+  [
+   "AERO-SS|8.2.b",
+   "concept",
+   "Tools and techniques changing lives drove changes in how people work"
+  ],
+  [
+   "AERO-SS|3.2.a",
+   "concept",
+   "Depending on the environment explains hunting, gathering and farming"
+  ]
+ ],
+ "AERO-SS|7.5.g": [
+  [
+   "AERO-SS|7.5.c",
+   "concept",
+   "Transport and communication changes are causes of trade growth"
+  ],
+  [
+   "AERO-SS|7.5.a",
+   "concept",
+   "Uneven location of resources is a key cause of trade"
+  ],
+  [
+   "AERO-SS|7.2.g",
+   "prereq",
+   "Exchange of goods and services is the basis of trade"
+  ],
+  [
+   "AERO-SS|1.5.c",
+   "prereq",
+   "Cause and effect thinking is needed to explain causes of trade"
+  ]
+ ],
+ "AERO-SS|8.2.b": [
+  [
+   "AERO-SS|8.2.a",
+   "prereq",
+   "Knowing tools from techniques comes before describing their effects"
+  ]
+ ],
+ "AERO-SS|8.2.c": [
+  [
+   "AERO-SS|8.2.a",
+   "same",
+   "Builds on telling a tool from a technique"
+  ],
+  [
+   "AERO-SS|8.2.b",
+   "concept",
+   "Seeing tools change lives helps explain why people make them"
+  ],
+  [
+   "AERO-SS|7.2.a",
+   "concept",
+   "Needs and wants are reasons people make tools"
+  ]
+ ],
+ "AERO-SS|8.5.a": [
+  [
+   "AERO-SS|8.2.a",
+   "prereq",
+   "Knowing what tools and techniques are prepares defining technology"
+  ],
+  [
+   "AERO-SS|8.2.c",
+   "concept",
+   "Requirements for making tools connect knowledge to technology"
+  ]
+ ],
+ "AERO-SS|8.5.b": [
+  [
+   "AERO-SS|8.2.b",
+   "same",
+   "Builds on examples of tools and techniques changing lives"
+  ],
+  [
+   "AERO-SS|8.2.c",
+   "concept",
+   "Reasons for making tools include making tasks easier"
+  ],
+  [
+   "AERO-SS|8.2.a",
+   "prereq",
+   "Students must tell tools from techniques first"
+  ]
+ ],
+ "AERO-SS|8.5.c": [
+  [
+   "AERO-SS|8.2.b",
+   "same",
+   "Builds on how tools and techniques have changed lives"
+  ],
+  [
+   "AERO-SS|8.2.c",
+   "concept",
+   "Knowing why tools are made helps weigh their intended effects"
+  ]
+ ],
+ "AERO-SS|8.5.d": [
+  [
+   "AERO-SS|8.5.a",
+   "prereq",
+   "Telling science from technology is needed to describe changes in each"
+  ],
+  [
+   "AERO-SS|8.5.c",
+   "concept",
+   "Weighing effects of tools supports describing how changes affected a country"
+  ],
+  [
+   "AERO-SS|8.2.b",
+   "concept",
+   "Tools changing lives is the early local version of this idea"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Separating past and present is needed to describe change"
+  ]
+ ],
+ "AERO-SS|8.5.e": [
+  [
+   "AERO-SS|8.5.d",
+   "concept",
+   "Changes in science and technology are the starting point here"
+  ],
+  [
+   "AERO-SS|8.5.c",
+   "concept",
+   "Effects of tools prepare tracing effects on beliefs and attitudes"
+  ],
+  [
+   "AERO-SS|1.5.b",
+   "concept",
+   "Describing social and cultural change supports tracing changes in values"
+  ],
+  [
+   "AERO-SS|1.5.c",
+   "prereq",
+   "Cause and effect is needed to link technology to changing attitudes"
+  ]
+ ],
+ "WI-SS|SS.BH1.a.m": [
+  [
+   "AERO-SS|5.5.b",
+   "same",
+   "Builds on how background shapes perceptions and reactions to the world"
+  ],
+  [
+   "AERO-SS|5.5.a",
+   "concept",
+   "Family influence on the individual is one pattern to analyse"
+  ],
+  [
+   "AERO-SS|5.5.d",
+   "concept",
+   "Institutions like schools shaping individuals is a key influence"
+  ],
+  [
+   "AERO-SS|5.5.g",
+   "concept",
+   "Socialisation explains how culture and peers shape behaviour"
+  ],
+  [
+   "AERO-SS|5.5.e",
+   "concept",
+   "Culture shaping daily lives connects to culture shaping behaviour"
+  ]
+ ],
+ "WI-SS|SS.BH1.b.m": [
+  [
+   "AERO-SS|5.5.f",
+   "same",
+   "Builds on how social systems shape racial, ethnic and gender identities"
+  ],
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Background shaping perceptions leads into its effect on self image"
+  ],
+  [
+   "AERO-SS|5.5.g",
+   "concept",
+   "Socialisation and identity choices underpin analysing identity"
+  ],
+  [
+   "AERO-SS|5.5.h",
+   "concept",
+   "Acceptance and tolerance connect identity to interactions with others"
+  ]
+ ],
+ "WI-SS|SS.BH2.a.m": [
+  [
+   "AERO-SS|2.5.b",
+   "same",
+   "Extends causes of conflict and cooperation among groups and nations"
+  ],
+  [
+   "AERO-SS|4.5.e",
+   "prereq",
+   "Knowing the elements of culture is needed to analyse its role in behaviour"
+  ],
+  [
+   "AERO-SS|5.5.e",
+   "concept",
+   "Culture shaping daily lives shows its role in behaviour"
+  ],
+  [
+   "AERO-SS|4.5.h",
+   "concept",
+   "Weighing diversity shows how culture can unite or divide"
+  ],
+  [
+   "AERO-SS|2.2.b",
+   "same",
+   "Naming factors of cooperation and conflict began in grade 1"
+  ]
+ ],
+ "WI-SS|SS.BH2.b.m": [
+  [
+   "AERO-SS|5.5.g",
+   "concept",
+   "Socialisation explains how individuals learn their culture"
+  ],
+  [
+   "AERO-SS|4.5.e",
+   "prereq",
+   "Students need the elements of culture before modelling how they are learned"
+  ],
+  [
+   "AERO-SS|4.5.i",
+   "concept",
+   "Cultural diffusion shows how cultures spread through contact"
+  ],
+  [
+   "AERO-SS|5.5.a",
+   "concept",
+   "Families influencing individuals is the first way culture is learned"
+  ]
+ ],
+ "WI-SS|SS.BH3.a.m": [
+  [
+   "AERO-SS|2.5.a",
+   "concept",
+   "Wants and needs having wider effects is the seed of local global links"
+  ],
+  [
+   "AERO-SS|2.5.c",
+   "concept",
+   "How nations interact through trade and exchange links local and global"
+  ],
+  [
+   "AERO-SS|7.5.e",
+   "concept",
+   "Trade affecting how people earn a living shows global effects locally"
+  ],
+  [
+   "AERO-SS|4.5.i",
+   "concept",
+   "Cultural diffusion shows global patterns reaching local life"
+  ]
+ ],
+ "WI-SS|SS.BH4.a.m": [
+  [
+   "AERO-SS|8.5.c",
+   "same",
+   "Builds on positive and negative effects of tools and techniques"
+  ],
+  [
+   "AERO-SS|8.5.e",
+   "concept",
+   "Technology changing values and beliefs shows effects on culture"
+  ],
+  [
+   "AERO-SS|8.5.d",
+   "concept",
+   "Technology changes in their host country give real examples"
+  ],
+  [
+   "AERO-SS|1.5.c",
+   "prereq",
+   "Cause and effect is needed to trace consequences of technology"
+  ]
+ ],
+ "WI-SS|SS.Econ1.a.m": [
+  [
+   "AERO-SS|7.2.e",
+   "same",
+   "Builds on why people make choices to satisfy needs and wants"
+  ],
+  [
+   "AERO-SS|7.5.b",
+   "prereq",
+   "Knowing types of resources is needed to assess limited resources"
+  ],
+  [
+   "AERO-SS|7.2.a",
+   "prereq",
+   "Needs versus wants underpins every economic choice"
+  ],
+  [
+   "AERO-SS|2.5.a",
+   "concept",
+   "Wants and needs affecting others shows choices have wider costs"
+  ],
+  [
+   "AERO-SS|7.5.a",
+   "concept",
+   "Managing renewable and non renewable resources shows scarcity"
+  ]
+ ],
+ "WI-SS|SS.Econ1.b.m": [
+  [
+   "AERO-SS|7.2.e",
+   "prereq",
+   "Understanding why people make choices comes before analysing incentives"
+  ],
+  [
+   "AERO-SS|5.2.d",
+   "concept",
+   "Choices about behaviour and their impact introduce rewards and consequences"
+  ]
+ ],
+ "WI-SS|SS.Econ2.a.m": [
+  [
+   "AERO-SS|7.5.d",
+   "prereq",
+   "Production of goods and services is needed to understand producers"
+  ],
+  [
+   "AERO-SS|7.2.d",
+   "prereq",
+   "Goods versus services underpins product markets"
+  ],
+  [
+   "AERO-SS|7.2.g",
+   "concept",
+   "Exchange of goods and services is what happens in markets"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Specialised jobs show people as producers"
+  ]
+ ],
+ "WI-SS|SS.Econ2.b.m": [
+  [
+   "AERO-SS|7.2.g",
+   "prereq",
+   "Exchange of goods and services is needed before supply and demand"
+  ],
+  [
+   "AERO-SS|7.2.e",
+   "concept",
+   "Choices about wants and needs explain demand"
+  ],
+  [
+   "AERO-SS|7.5.d",
+   "concept",
+   "Production of goods and services explains supply"
+  ]
+ ],
+ "WI-SS|SS.Econ2.c.m": [
+  [
+   "AERO-SS|7.5.b",
+   "same",
+   "Builds on sorting human, natural and capital resources"
+  ],
+  [
+   "AERO-SS|7.5.d",
+   "prereq",
+   "Knowing how goods and services are produced comes first"
+  ],
+  [
+   "AERO-SS|7.2.f",
+   "concept",
+   "Businesses as economic institutions connect to profit and production"
+  ]
+ ],
+ "WI-SS|SS.Econ3.a.m": [
+  [
+   "AERO-SS|7.5.e",
+   "concept",
+   "How people earn a living prepares understanding unemployment"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Depending on jobs shows why unemployment matters"
+  ],
+  [
+   "AERO-SS|7.2.g",
+   "concept",
+   "Exchange of goods and services is the basis for understanding prices"
+  ]
+ ],
+ "WI-SS|SS.Econ3.b.m": [
+  [
+   "AERO-SS|7.2.g",
+   "prereq",
+   "Knowing how goods are exchanged explains money as a medium of exchange"
+  ],
+  [
+   "AERO-SS|7.2.f",
+   "concept",
+   "Economic institutions like banks are where interest rates apply"
+  ]
+ ],
+ "WI-SS|SS.Econ3.c.m": [
+  [
+   "AERO-SS|7.5.d",
+   "prereq",
+   "Production of goods and services is what GDP measures"
+  ],
+  [
+   "AERO-SS|7.2.d",
+   "prereq",
+   "Goods and services must be clear before measuring total output"
+  ],
+  [
+   "AERO-SS|7.5.e",
+   "concept",
+   "Trade and earnings differ between regions, which GDP compares"
+  ],
+  [
+   "AERO-SS|3.2.c",
+   "procedure",
+   "Reading graphs and tables is needed to compare GDP data"
+  ]
+ ],
+ "WI-SS|SS.Econ4.a.m": [
+  [
+   "AERO-SS|7.5.d",
+   "concept",
+   "Ways people produce goods and services differ between systems"
+  ],
+  [
+   "AERO-SS|7.5.f",
+   "concept",
+   "Shifts from hunting to farming to cities show traditional economies changing"
+  ],
+  [
+   "AERO-SS|6.5.d",
+   "concept",
+   "Political systems help explain command and market economies"
+  ],
+  [
+   "AERO-SS|7.2.f",
+   "concept",
+   "Economic institutions are part of any economic system"
+  ],
+  [
+   "AERO-SS|7.5.b",
+   "prereq",
+   "Resources are what economic systems allocate"
+  ]
+ ],
+ "WI-SS|SS.Econ4.b.m": [
+  [
+   "AERO-SS|7.2.f",
+   "same",
+   "Builds on identifying institutions that are part of economic systems"
+  ],
+  [
+   "AERO-SS|6.5.h",
+   "concept",
+   "Knowing the role of laws supports analysing consumer and worker protections"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Specialised workers connect to worker protections and unions"
+  ]
+ ],
+ "WI-SS|SS.Econ4.c.m": [
+  [
+   "AERO-SS|6.5.e",
+   "prereq",
+   "Knowing government responsibilities is needed to analyse its spending"
+  ],
+  [
+   "AERO-SS|6.5.b",
+   "concept",
+   "Institutions meeting needs shows why governments spend"
+  ],
+  [
+   "AERO-SS|6.2.i",
+   "concept",
+   "Government agencies in daily life show public spending at work"
+  ]
+ ],
+ "WI-SS|SS.Econ4.d.m": [
+  [
+   "AERO-SS|6.5.h",
+   "prereq",
+   "Knowing the role of laws comes before judging their side effects"
+  ],
+  [
+   "AERO-SS|2.5.a",
+   "concept",
+   "Needs and wants affecting others is the idea behind externalities"
+  ],
+  [
+   "AERO-SS|8.5.c",
+   "concept",
+   "Weighing positive and negative effects is the same reasoning"
+  ],
+  [
+   "AERO-SS|1.5.c",
+   "prereq",
+   "Cause and effect is needed to trace costs and benefits of policies"
+  ]
+ ],
+ "WI-SS|SS.Econ4.e.m": [
+  [
+   "AERO-SS|7.5.g",
+   "same",
+   "Builds on primary causes of world trade"
+  ],
+  [
+   "AERO-SS|7.2.c",
+   "concept",
+   "Depending on specialised jobs is the root of specialisation"
+  ],
+  [
+   "AERO-SS|7.5.e",
+   "concept",
+   "Trade shaping how regions earn a living links to specialisation"
+  ],
+  [
+   "AERO-SS|7.2.g",
+   "prereq",
+   "Exchange of goods and services is the basis of trade"
+  ]
+ ],
+ "WI-SS|SS.Geog1.a.m": [
+  [
+   "AERO-SS|3.5.a",
+   "same",
+   "Builds on explaining and using elements of maps and globes"
+  ],
+  [
+   "AERO-SS|3.5.c",
+   "prereq",
+   "Distance, direction and scale are needed to see projection distortion"
+  ],
+  [
+   "AERO-SS|3.5.b",
+   "procedure",
+   "Using geographic tools to interpret information leads to map inquiry"
+  ],
+  [
+   "AERO-SS|3.2.c",
+   "procedure",
+   "Reading maps for geographic information started in grade 2"
+  ]
+ ],
+ "WI-SS|SS.Geog1.b.m": [
+  [
+   "AERO-SS|3.2.c",
+   "same",
+   "Builds on using maps, graphs and tables for geographic information"
+  ],
+  [
+   "AERO-SS|3.5.b",
+   "procedure",
+   "Applying geographic tools to interpret information comes first"
+  ],
+  [
+   "AERO-SS|3.5.a",
+   "prereq",
+   "Map elements like keys and scale are needed to read thematic maps"
+  ],
+  [
+   "AERO-SS|3.5.f",
+   "concept",
+   "Settlement and land use patterns are early pattern reading"
+  ]
+ ],
+ "WI-SS|SS.Geog1.c.m": [
+  [
+   "AERO-SS|3.5.h",
+   "prereq",
+   "Defining regions by features is needed to map world regions"
+  ],
+  [
+   "AERO-SS|3.2.d",
+   "prereq",
+   "Recognising landforms is needed to place them on mental maps"
+  ],
+  [
+   "AERO-SS|3.5.c",
+   "concept",
+   "Location, direction and region are the basis of mental mapping"
+  ],
+  [
+   "AERO-SS|3.5.a",
+   "procedure",
+   "Map and globe skills support locating continents and oceans"
+  ]
+ ],
+ "WI-SS|SS.Geog2.a.m": [
+  [
+   "AERO-SS|3.5.e",
+   "same",
+   "Builds on factors that influence where human populations live"
+  ],
+  [
+   "AERO-SS|3.5.f",
+   "concept",
+   "Settlement patterns show how populations are distributed"
+  ],
+  [
+   "AERO-SS|3.5.c",
+   "prereq",
+   "Scale and region are needed to analyse patterns at various scales"
+  ],
+  [
+   "AERO-SS|3.2.e",
+   "concept",
+   "Landforms influencing population is an early cause of distribution"
+  ]
+ ],
+ "WI-SS|SS.Geog2.b.m": [
+  [
+   "AERO-SS|3.5.e",
+   "same",
+   "Builds on factors that influence human migration"
+  ],
+  [
+   "AERO-SS|3.5.c",
+   "prereq",
+   "The concept of movement is needed to analyse migration patterns"
+  ],
+  [
+   "AERO-SS|3.5.a",
+   "procedure",
+   "Map skills are used to trace migration routes and patterns"
+  ]
+ ],
+ "WI-SS|SS.Geog2.c.m": [
+  [
+   "AERO-SS|3.5.e",
+   "prereq",
+   "Knowing why people migrate comes before judging its impact"
+  ],
+  [
+   "AERO-SS|3.5.d",
+   "concept",
+   "How places change over time is the outcome studied here"
+  ],
+  [
+   "AERO-SS|3.5.h",
+   "prereq",
+   "Defining regions is needed to use regions in the analysis"
+  ],
+  [
+   "AERO-SS|4.5.i",
+   "concept",
+   "Cultural diffusion shows how migrants change places"
+  ]
+ ],
+ "WI-SS|SS.Geog2.d.m": [
+  [
+   "AERO-SS|3.5.f",
+   "same",
+   "Builds on types and patterns of settlement and land use"
+  ],
+  [
+   "AERO-SS|7.5.f",
+   "concept",
+   "The shift to urban societies is the start of urbanisation"
+  ],
+  [
+   "AERO-SS|3.5.e",
+   "concept",
+   "Factors in where people live explain movement to cities"
+  ],
+  [
+   "AERO-SS|3.5.d",
+   "concept",
+   "Human made features changing over time includes city growth"
+  ]
+ ],
+ "WI-SS|SS.Geog3.a.m": [
+  [
+   "AERO-SS|7.5.a",
+   "prereq",
+   "Knowing where resources are located is needed for this analysis"
+  ],
+  [
+   "AERO-SS|3.5.f",
+   "prereq",
+   "Settlement patterns must be understood before linking them to resources"
+  ],
+  [
+   "AERO-SS|3.5.g",
+   "concept",
+   "Why places are used for activities connects resources and settlement"
+  ],
+  [
+   "AERO-SS|3.5.e",
+   "concept",
+   "Factors influencing where people live include resources"
+  ]
+ ],
+ "WI-SS|SS.Geog3.b.m": [
+  [
+   "AERO-SS|7.5.c",
+   "concept",
+   "Transport and communication changes explain movement of products and ideas"
+  ],
+  [
+   "AERO-SS|4.5.i",
+   "concept",
+   "Cultural diffusion shows how ideas move between places"
+  ],
+  [
+   "AERO-SS|2.5.c",
+   "concept",
+   "Trade and cultural exchange are how nations connect"
+  ],
+  [
+   "AERO-SS|3.5.c",
+   "prereq",
+   "The concept of movement is needed to trace networks"
+  ],
+  [
+   "AERO-SS|7.5.e",
+   "concept",
+   "Trade affecting earnings links to uneven economic development"
+  ]
+ ],
+ "WI-SS|SS.Geog4.a.m": [
+  [
+   "AERO-SS|3.5.h",
+   "prereq",
+   "Human and physical characteristics of regions define a place"
+  ],
+  [
+   "AERO-SS|4.5.d",
+   "concept",
+   "Groups forming a national identity shows identity tied to place"
+  ],
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Background shaping perceptions explains different views of places"
+  ],
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Telling primary from secondary sources mirrors direct and indirect sources"
+  ],
+  [
+   "AERO-SS|5.2.a",
+   "concept",
+   "Linking who they are to their place begins place identity"
+  ]
+ ],
+ "WI-SS|SS.Geog5.a.m": [
+  [
+   "AERO-SS|8.5.c",
+   "concept",
+   "Positive and negative effects of tools include effects on nature"
+  ],
+  [
+   "AERO-SS|7.5.a",
+   "prereq",
+   "Knowing renewable and non renewable resources is needed here"
+  ],
+  [
+   "AERO-SS|3.5.d",
+   "concept",
+   "Human made changes to features show technology changing the land"
+  ],
+  [
+   "AERO-SS|3.2.f",
+   "concept",
+   "Ways cultures adapt to environments introduce human environment interaction"
+  ]
+ ],
+ "WI-SS|SS.Geog5.b.m": [
+  [
+   "AERO-SS|7.5.a",
+   "prereq",
+   "Knowing where resources are and how they are managed comes first"
+  ],
+  [
+   "AERO-SS|7.5.g",
+   "concept",
+   "Causes of world trade include uneven resources"
+  ],
+  [
+   "AERO-SS|2.5.b",
+   "concept",
+   "Economic and geographic causes of conflict lead to resource conflict"
+  ],
+  [
+   "AERO-SS|2.5.c",
+   "concept",
+   "Trade between nations is the commerce created by resources"
+  ]
+ ],
+ "WI-SS|SS.Hist1.a.m": [
+  [
+   "AERO-SS|1.5.c",
+   "same",
+   "Builds on identifying cause and effect relationships in history"
+  ],
+  [
+   "AERO-SS|1.5.a",
+   "concept",
+   "Different views across times and places are the multiple perspectives used"
+  ],
+  [
+   "AERO-SS|2.5.b",
+   "concept",
+   "Explaining causes of conflict across categories prepares historical causation"
+  ],
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Sources are the evidence used to explain causes"
+  ]
+ ],
+ "WI-SS|SS.Hist1.b.m": [
+  [
+   "AERO-SS|1.5.c",
+   "same",
+   "Builds on identifying cause and effect relationships in history"
+  ],
+  [
+   "AERO-SS|1.5.a",
+   "concept",
+   "Different views across times and places are the multiple perspectives used"
+  ],
+  [
+   "AERO-SS|1.5.b",
+   "concept",
+   "Changes in society are effects of earlier events"
+  ],
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Sources are the evidence used to explain effects"
+  ]
+ ],
+ "WI-SS|SS.Hist2.a.m": [
+  [
+   "AERO-SS|1.5.b",
+   "concept",
+   "Describing change prepares noticing what stays the same"
+  ],
+  [
+   "AERO-SS|1.2.c",
+   "concept",
+   "Relating past stories to the present shows what continues"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Separating past, present and future is needed to see continuity"
+  ],
+  [
+   "AERO-SS|4.5.c",
+   "concept",
+   "Traditions in stories are examples of continuity"
+  ]
+ ],
+ "WI-SS|SS.Hist2.b.m": [
+  [
+   "AERO-SS|1.5.b",
+   "same",
+   "Builds on describing political, social and cultural changes in society"
+  ],
+  [
+   "AERO-SS|3.5.d",
+   "concept",
+   "Changes in physical and human features are also change over time"
+  ],
+  [
+   "AERO-SS|8.5.d",
+   "concept",
+   "Science and technology changes are a pattern of change"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "prereq",
+   "Separating past and present is needed to see change"
+  ]
+ ],
+ "WI-SS|SS.Hist2.c.m": [
+  [
+   "AERO-SS|1.5.a",
+   "prereq",
+   "Knowing people in different times saw the world differently is context"
+  ],
+  [
+   "AERO-SS|1.5.b",
+   "concept",
+   "Students need examples of change before analysing its context"
+  ],
+  [
+   "AERO-SS|1.5.c",
+   "concept",
+   "Cause and effect helps explain why context shapes change"
+  ]
+ ],
+ "WI-SS|SS.Hist3.a.m": [
+  [
+   "AERO-SS|1.2.c",
+   "same",
+   "Builds on relating past stories to understanding the present"
+  ],
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Using sources to examine past and present supports comparison"
+  ],
+  [
+   "AERO-SS|1.5.c",
+   "concept",
+   "Cause and effect links past events to current issues"
+  ]
+ ],
+ "WI-SS|SS.Hist3.b.m": [
+  [
+   "AERO-SS|1.5.a",
+   "prereq",
+   "Understanding why people view the world differently underpins perspective"
+  ],
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Background shaping perceptions explains differing viewpoints"
+  ],
+  [
+   "AERO-SS|1.2.c",
+   "concept",
+   "Relating the past to the present comes before applying past perspectives"
+  ]
+ ],
+ "WI-SS|SS.Hist3.c.m": [
+  [
+   "AERO-SS|1.5.c",
+   "prereq",
+   "Cause and effect reasoning is needed to predict outcomes"
+  ],
+  [
+   "AERO-SS|1.2.c",
+   "concept",
+   "Relating the past to the present comes before predicting the future"
+  ],
+  [
+   "AERO-SS|1.2.b",
+   "concept",
+   "Thinking about past, present and future is the base for prediction"
+  ]
+ ],
+ "WI-SS|SS.Hist4.a.m": [
+  [
+   "AERO-SS|1.5.d",
+   "prereq",
+   "Identifying primary and secondary sources must come first"
+  ],
+  [
+   "AERO-SS|1.5.a",
+   "concept",
+   "Different times shaping views is the idea of historical context"
+  ]
+ ],
+ "WI-SS|SS.Hist4.b.m": [
+  [
+   "AERO-SS|1.5.d",
+   "prereq",
+   "Identifying primary and secondary sources must come first"
+  ]
+ ],
+ "WI-SS|SS.Hist4.c.m": [
+  [
+   "AERO-SS|1.5.d",
+   "prereq",
+   "Identifying primary and secondary sources must come first"
+  ]
+ ],
+ "WI-SS|SS.Hist4.d.m": [
+  [
+   "AERO-SS|1.5.d",
+   "prereq",
+   "Identifying primary and secondary sources must come first"
+  ],
+  [
+   "AERO-SS|1.5.a",
+   "concept",
+   "Knowing people see the world differently explains author point of view"
+  ],
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Background shaping perceptions explains an author's viewpoint"
+  ]
+ ],
+ "WI-SS|SS.Inq1.a.m": [
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Examining the past with sources involves asking questions"
+  ],
+  [
+   "AERO-SS|3.5.b",
+   "procedure",
+   "Interpreting information about the earth begins with geographic questions"
+  ]
+ ],
+ "WI-SS|SS.Inq1.b.m": [
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Knowing primary and secondary sources helps identify resources for inquiry"
+  ],
+  [
+   "AERO-SS|3.5.b",
+   "procedure",
+   "Choosing appropriate resources and tools is the same planning skill"
+  ]
+ ],
+ "WI-SS|SS.Inq2.a.m": [
+  [
+   "AERO-SS|1.5.d",
+   "same",
+   "Builds on identifying and using primary and secondary sources"
+  ],
+  [
+   "AERO-SS|1.5.a",
+   "concept",
+   "Different views across times and places are the perspectives sought"
+  ],
+  [
+   "AERO-SS|3.5.b",
+   "procedure",
+   "Using appropriate resources to gather information is an early version"
+  ]
+ ],
+ "WI-SS|SS.Inq2.b.m": [
+  [
+   "AERO-SS|1.5.d",
+   "prereq",
+   "Students must identify primary and secondary sources before judging them"
+  ],
+  [
+   "AERO-SS|1.5.a",
+   "concept",
+   "Knowing viewpoints differ helps judge source credibility"
+  ]
+ ],
+ "WI-SS|SS.Inq3.a.m": [
+  [
+   "AERO-SS|1.5.d",
+   "prereq",
+   "Using sources to examine the past gives the evidence for claims"
+  ],
+  [
+   "AERO-SS|1.5.c",
+   "concept",
+   "Cause and effect explanations are common claims in social studies"
+  ]
+ ],
+ "WI-SS|SS.Inq3.b.m": [
+  [
+   "AERO-SS|1.5.d",
+   "prereq",
+   "Using primary and secondary sources supplies the evidence for claims"
+  ],
+  [
+   "AERO-SS|3.2.c",
+   "procedure",
+   "Reading maps, graphs and tables gives evidence beyond written text"
+  ]
+ ],
+ "WI-SS|SS.Inq3.c.m": [
+  [
+   "AERO-SS|1.5.d",
+   "prereq",
+   "Using sources as evidence comes before weighing that evidence"
+  ]
+ ],
+ "WI-SS|SS.Inq4.a.m": [
+  [
+   "AERO-SS|3.2.c",
+   "procedure",
+   "Displaying information in maps and graphs is an early way to communicate"
+  ]
+ ],
+ "WI-SS|SS.Inq4.b.m": [
+  [
+   "AERO-SS|1.5.a",
+   "concept",
+   "Knowing viewpoints differ helps students notice bias"
+  ],
+  [
+   "AERO-SS|5.5.b",
+   "concept",
+   "Background shaping perceptions explains where bias comes from"
+  ],
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Checking claims against sources builds on using sources"
+  ]
+ ],
+ "WI-SS|SS.Inq5.a.m": [
+  [
+   "AERO-SS|6.5.g",
+   "concept",
+   "Ways citizens influence government are forms of civic engagement"
+  ],
+  [
+   "AERO-SS|6.2.g",
+   "concept",
+   "Understanding leadership and service motivates civic engagement"
+  ],
+  [
+   "AERO-SS|6.5.a",
+   "concept",
+   "Rights and responsibilities in society lead to taking part"
+  ],
+  [
+   "AERO-SS|6.5.f",
+   "concept",
+   "Understanding citizenship is the basis for civic engagement"
+  ]
+ ],
+ "WI-SS|SS.PS1.a.m": [
+  [
+   "AERO-SS|6.5.f",
+   "same",
+   "Builds on explaining what citizenship is"
+  ],
+  [
+   "AERO-SS|6.2.f",
+   "concept",
+   "Rights, responsibilities and good citizen traits underpin responsible citizenship"
+  ],
+  [
+   "AERO-SS|6.5.h",
+   "prereq",
+   "Knowing the role of laws and courts supports rule of law"
+  ]
+ ],
+ "WI-SS|SS.PS1.b.m": [
+  [
+   "AERO-SS|6.5.d",
+   "concept",
+   "Elements of political systems like democracy frame founding principles"
+  ],
+  [
+   "AERO-SS|6.5.h",
+   "prereq",
+   "Knowing laws and courts helps students read constitutional protections"
+  ],
+  [
+   "AERO-SS|6.5.c",
+   "concept",
+   "Identifying leaders prepares judging a person's political contribution"
+  ],
+  [
+   "AERO-SS|6.5.e",
+   "concept",
+   "Levels of government connect to federal and state constitutions"
+  ],
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Using primary sources prepares reading founding documents"
+  ]
+ ],
+ "WI-SS|SS.PS2.a.m": [
+  [
+   "AERO-SS|6.5.a",
+   "concept",
+   "Issues about rights in society lead to studying protections"
+  ],
+  [
+   "AERO-SS|6.5.h",
+   "prereq",
+   "Understanding laws and courts is needed to trace court decisions"
+  ],
+  [
+   "AERO-SS|6.5.g",
+   "concept",
+   "Ways citizens influence government include collective action"
+  ],
+  [
+   "AERO-SS|6.2.f",
+   "concept",
+   "Rights and responsibilities of individuals are the base"
+  ]
+ ],
+ "WI-SS|SS.PS2.b.m": [
+  [
+   "AERO-SS|6.5.f",
+   "same",
+   "Builds on explaining what citizenship is"
+  ],
+  [
+   "AERO-SS|6.5.i",
+   "prereq",
+   "Comparing political systems is needed to explain differing citizenship"
+  ],
+  [
+   "AERO-SS|6.2.f",
+   "same",
+   "Extends rights and responsibilities of good citizens"
+  ],
+  [
+   "AERO-SS|4.5.e",
+   "concept",
+   "Elements of culture are part of the cultural structures compared"
+  ]
+ ],
+ "WI-SS|SS.PS2.c.m": [
+  [
+   "AERO-SS|5.5.f",
+   "concept",
+   "How social systems shape identities connects to group status"
+  ],
+  [
+   "AERO-SS|6.5.a",
+   "concept",
+   "Rights issues in society introduce unequal treatment of groups"
+  ],
+  [
+   "AERO-SS|5.5.h",
+   "concept",
+   "Acceptance versus tolerance relates to how groups are treated"
+  ],
+  [
+   "AERO-SS|6.5.g",
+   "concept",
+   "Citizens influencing government is how groups gain rights"
+  ]
+ ],
+ "WI-SS|SS.PS3.a.m": [
+  [
+   "AERO-SS|6.5.g",
+   "prereq",
+   "Knowing how citizens influence government includes voting"
+  ],
+  [
+   "AERO-SS|6.5.e",
+   "prereq",
+   "Levels of government must be known to explain roles at each"
+  ],
+  [
+   "AERO-SS|6.5.f",
+   "concept",
+   "Citizenship gives the meaning of participation"
+  ]
+ ],
+ "WI-SS|SS.PS3.b.m": [
+  [
+   "AERO-SS|6.5.g",
+   "concept",
+   "Citizens monitoring and influencing government links people to government"
+  ],
+  [
+   "AERO-SS|6.2.i",
+   "concept",
+   "Civic groups affecting their lives introduces civic institutions"
+  ],
+  [
+   "AERO-SS|6.5.d",
+   "concept",
+   "Democracy as a political system frames elections and parties"
+  ]
+ ],
+ "WI-SS|SS.PS3.c.m": [
+  [
+   "AERO-SS|6.5.e",
+   "same",
+   "Builds on organisation and responsibilities of levels of government"
+  ],
+  [
+   "AERO-SS|6.5.d",
+   "concept",
+   "Elements of political systems shape government structure"
+  ],
+  [
+   "AERO-SS|6.5.h",
+   "concept",
+   "Courts and judges are one branch of government power"
+  ],
+  [
+   "AERO-SS|6.5.b",
+   "concept",
+   "How institutions meet needs explains government functions"
+  ]
+ ],
+ "WI-SS|SS.PS3.d.m": [
+  [
+   "AERO-SS|6.5.b",
+   "prereq",
+   "Knowing institutions meet needs explains why policy addresses problems"
+  ],
+  [
+   "AERO-SS|6.2.h",
+   "concept",
+   "Decision making principles connect to solving public problems"
+  ],
+  [
+   "AERO-SS|6.5.e",
+   "concept",
+   "Government responsibilities at each level shape policy"
+  ]
+ ],
+ "WI-SS|SS.PS4.a.m": [
+  [
+   "AERO-SS|1.5.d",
+   "procedure",
+   "Using primary and secondary sources supplies evidence for arguments"
+  ]
+ ],
+ "WI-SS|SS.PS4.b.m": [
+  [
+   "AERO-SS|6.5.j",
+   "same",
+   "Builds on strategies to resolve conflict"
+  ],
+  [
+   "AERO-SS|2.5.c",
+   "concept",
+   "How nations interact includes diplomacy and international organisations"
+  ],
+  [
+   "AERO-SS|2.2.c",
+   "concept",
+   "Judging which ways of handling disagreement work is the start"
+  ],
+  [
+   "AERO-SS|5.5.h",
+   "concept",
+   "Acceptance of difference underpins pluralism"
+  ],
+  [
+   "AERO-SS|2.5.b",
+   "concept",
+   "Causes of cooperation between groups lead to consensus building"
+  ]
+ ],
+ "WI-SS|SS.Geog1.a.h": [
+  [
+   "WI-SS|SS.Geog1.a.m",
+   "same",
+   "Builds on using paper and digital maps to answer geographic questions"
+  ],
+  [
+   "WI-SS|SS.Geog1.b.m",
+   "concept",
+   "Interpreting patterns in maps supports evaluating geographic data"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.m",
+   "concept",
+   "Judging credibility of sources supports evaluating geographic data"
+  ],
+  [
+   "AERO-SS|3.5.b",
+   "procedure",
+   "Applying geographic tools to interpret information is the early base"
+  ]
+ ],
+ "WI-SS|SS.Geog1.b.h": [
+  [
+   "WI-SS|SS.Geog1.b.m",
+   "same",
+   "Builds on interpreting patterns in many kinds of maps"
+  ],
+  [
+   "WI-SS|SS.Geog1.a.m",
+   "procedure",
+   "Asking geographic questions with maps frames problem analysis"
+  ],
+  [
+   "WI-SS|SS.Hist2.b.m",
+   "concept",
+   "Explaining patterns of change supports reading change on maps"
+  ]
+ ],
+ "WI-SS|SS.Geog1.c.h": [
+  [
+   "WI-SS|SS.Geog1.c.m",
+   "same",
+   "Builds on constructing and comparing mental maps of world regions"
+  ],
+  [
+   "WI-SS|SS.Geog1.a.m",
+   "procedure",
+   "Using digital maps supports building accurate mental maps"
+  ]
+ ],
+ "WI-SS|SS.Geog2.a.h": [
+  [
+   "WI-SS|SS.Geog2.a.m",
+   "same",
+   "Builds on why populations grow or shrink and their distribution"
+  ],
+  [
+   "WI-SS|SS.PS3.d.m",
+   "prereq",
+   "Understanding public policy is needed to evaluate population policies"
+  ],
+  [
+   "WI-SS|SS.Geog1.b.m",
+   "procedure",
+   "Reading population maps and graphs supports composition analysis"
+  ]
+ ],
+ "WI-SS|SS.Geog2.b.h": [
+  [
+   "WI-SS|SS.Geog2.b.m",
+   "same",
+   "Builds on analysing patterns of migration"
+  ],
+  [
+   "WI-SS|SS.Geog2.c.m",
+   "concept",
+   "Impact of migration on origin and settlement places is the base"
+  ],
+  [
+   "WI-SS|SS.Hist1.b.m",
+   "concept",
+   "Analysing effects across time supports judging migration impact"
+  ]
+ ],
+ "WI-SS|SS.Geog2.c.h": [
+  [
+   "WI-SS|SS.Geog2.c.m",
+   "same",
+   "Builds on evaluating the impact of migration on places"
+  ],
+  [
+   "WI-SS|SS.Geog2.b.m",
+   "prereq",
+   "Knowing migration patterns comes before analysing social impact"
+  ],
+  [
+   "WI-SS|SS.BH2.b.m",
+   "concept",
+   "Learning cultures through contact explains social effects of movement"
+  ]
+ ],
+ "WI-SS|SS.Geog2.d.h": [
+  [
+   "WI-SS|SS.Geog2.d.m",
+   "same",
+   "Builds on analysing rural decline and patterns of urbanisation"
+  ],
+  [
+   "WI-SS|SS.Geog3.b.m",
+   "concept",
+   "Uneven development patterns connect to spatial inequality"
+  ],
+  [
+   "WI-SS|SS.Geog2.a.m",
+   "concept",
+   "Population distribution helps explain urban growth"
+  ]
+ ],
+ "WI-SS|SS.Geog3.a.h": [
+  [
+   "WI-SS|SS.Geog3.a.m",
+   "same",
+   "Builds on how resource distribution relates to settlement"
+  ],
+  [
+   "WI-SS|SS.Geog5.b.m",
+   "concept",
+   "Unequal resource distribution leading to conflict is the base"
+  ],
+  [
+   "WI-SS|SS.Geog3.b.m",
+   "concept",
+   "Patterns of development explain differences between developed and developing countries"
+  ],
+  [
+   "WI-SS|SS.Econ1.a.m",
+   "concept",
+   "Limited resources shaping choices underlies competition for resources"
+  ]
+ ],
+ "WI-SS|SS.Geog3.b.h": [
+  [
+   "WI-SS|SS.Geog3.b.m",
+   "same",
+   "Builds on how people, products and ideas move between places"
+  ],
+  [
+   "WI-SS|SS.Econ4.e.m",
+   "concept",
+   "Specialisation and trade drive the global economy"
+  ],
+  [
+   "WI-SS|SS.PS4.b.m",
+   "concept",
+   "Diplomacy and consensus building explain supranational groups"
+  ],
+  [
+   "AERO-SS|2.5.c",
+   "concept",
+   "International organisations were first met as ways nations interact"
+  ]
+ ],
+ "WI-SS|SS.Geog4.a.h": [
+  [
+   "WI-SS|SS.Geog4.a.m",
+   "same",
+   "Builds on how place based identities form and change"
+  ],
+  [
+   "WI-SS|SS.BH1.b.m",
+   "concept",
+   "Identity factors like culture and religion shape views of places"
+  ],
+  [
+   "WI-SS|SS.Hist2.b.m",
+   "concept",
+   "Patterns of change support analysing culture on a place over time"
+  ],
+  [
+   "AERO-SS|3.5.h",
+   "prereq",
+   "Human and physical characteristics of regions must be understood first"
+  ]
+ ],
+ "WI-SS|SS.Geog5.a.h": [
+  [
+   "WI-SS|SS.Geog5.a.m",
+   "same",
+   "Builds on how technology interacts with the environment"
+  ],
+  [
+   "WI-SS|SS.BH4.a.m",
+   "concept",
+   "Intended and unintended consequences of technology apply here"
+  ],
+  [
+   "WI-SS|SS.BH3.a.m",
+   "concept",
+   "Local actions with global effects matches analysis at many scales"
+  ],
+  [
+   "WI-SS|SS.Econ4.d.m",
+   "concept",
+   "Unintended costs and benefits of policy are similar reasoning"
+  ]
+ ],
+ "WI-SS|SS.Geog5.b.h": [
+  [
+   "WI-SS|SS.BH3.a.m",
+   "same",
+   "Builds on how local actions can have global consequences"
+  ],
+  [
+   "WI-SS|SS.Geog5.b.m",
+   "concept",
+   "Resource distribution creating commerce links behaviour to global systems"
+  ],
+  [
+   "WI-SS|SS.Geog5.a.m",
+   "concept",
+   "Technology and resource use show human behaviour changing environments"
+  ],
+  [
+   "WI-SS|SS.Hist3.c.m",
+   "procedure",
+   "Hypothesising outcomes from evidence is the same reasoning skill"
+  ]
+ ],
+ "WI-SS|SS.Inq1.a.h": [
+  [
+   "WI-SS|SS.Inq1.a.m",
+   "same",
+   "Builds on formulating open ended questions for research"
+  ]
+ ],
+ "WI-SS|SS.Inq1.b.h": [
+  [
+   "WI-SS|SS.Inq1.b.m",
+   "same",
+   "Builds on identifying supporting questions and resources"
+  ],
+  [
+   "WI-SS|SS.Inq1.a.m",
+   "prereq",
+   "Forming an open ended question comes before planning around it"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.m",
+   "concept",
+   "Judging source credibility helps select sources for a proposal"
+  ]
+ ],
+ "WI-SS|SS.Inq2.a.h": [
+  [
+   "WI-SS|SS.Inq2.a.m",
+   "same",
+   "Builds on exploring evidence from multiple reliable sources"
+  ],
+  [
+   "WI-SS|SS.Hist4.d.m",
+   "concept",
+   "Author point of view helps students read multiple perspectives"
+  ],
+  [
+   "WI-SS|SS.Hist1.a.m",
+   "concept",
+   "Using multiple perspectives to explain causes is practised in history"
+  ]
+ ],
+ "WI-SS|SS.Inq2.b.h": [
+  [
+   "WI-SS|SS.Inq2.b.m",
+   "same",
+   "Builds on determining the credibility and applicability of a source"
+  ],
+  [
+   "WI-SS|SS.Hist4.a.m",
+   "prereq",
+   "Explaining the historical context of a source is needed here"
+  ],
+  [
+   "WI-SS|SS.Hist4.b.m",
+   "prereq",
+   "Explaining the intended audience of a source is needed here"
+  ],
+  [
+   "WI-SS|SS.Hist4.c.m",
+   "prereq",
+   "Explaining the purpose of a source is needed here"
+  ],
+  [
+   "WI-SS|SS.Hist4.d.m",
+   "prereq",
+   "Explaining the author's point of view is needed here"
+  ]
+ ],
+ "WI-SS|SS.Inq3.a.h": [
+  [
+   "WI-SS|SS.Inq3.a.m",
+   "same",
+   "Builds on developing a debatable and defensible claim"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.m",
+   "prereq",
+   "Evaluating sources comes before basing a claim on them"
+  ]
+ ],
+ "WI-SS|SS.Inq3.b.h": [
+  [
+   "WI-SS|SS.Inq3.b.m",
+   "same",
+   "Builds on supporting a claim with evidence from multiple sources"
+  ],
+  [
+   "WI-SS|SS.Inq2.a.m",
+   "procedure",
+   "Gathering evidence from varied sources supplies the support"
+  ],
+  [
+   "WI-SS|SS.PS4.a.m",
+   "concept",
+   "Assembling arguments from multiple sources is closely related"
+  ]
+ ],
+ "WI-SS|SS.Inq3.c.h": [
+  [
+   "WI-SS|SS.Inq3.c.m",
+   "same",
+   "Builds on judging whether evidence supports a claim and adjusting it"
+  ],
+  [
+   "WI-SS|SS.Inq3.b.m",
+   "prereq",
+   "Citing evidence for a claim comes before judging its strength"
+  ]
+ ],
+ "WI-SS|SS.Inq4.a.h": [
+  [
+   "WI-SS|SS.Inq4.a.m",
+   "same",
+   "Builds on communicating conclusions using a variety of media"
+  ],
+  [
+   "WI-SS|SS.Hist4.b.m",
+   "concept",
+   "Knowing how audience shapes a source helps plan for audiences"
+  ]
+ ],
+ "WI-SS|SS.Inq4.b.h": [
+  [
+   "WI-SS|SS.Inq4.b.m",
+   "same",
+   "Builds on evaluating the logic and accuracy of others' claims"
+  ],
+  [
+   "WI-SS|SS.Inq3.c.m",
+   "procedure",
+   "Weighing how evidence supports a claim is the core method"
+  ],
+  [
+   "WI-SS|SS.BH1.a.m",
+   "concept",
+   "Factors that shape perception explain the influences on viewpoints"
+  ]
+ ],
+ "WI-SS|SS.Inq5.a.h": [
+  [
+   "WI-SS|SS.Inq5.a.m",
+   "same",
+   "Builds on exploring opportunities for civic engagement"
+  ],
+  [
+   "WI-SS|SS.PS3.a.m",
+   "concept",
+   "Political participation is one form of civic engagement"
+  ],
+  [
+   "WI-SS|SS.PS1.a.m",
+   "concept",
+   "Responsible citizenship gives the reason to engage"
+  ]
+ ],
+ "WI-SS|SS.Hist1.a.h": [
+  [
+   "WI-SS|SS.Hist1.a.m",
+   "same",
+   "Builds on using multiple perspectives to explain causes"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.h",
+   "procedure",
+   "Weighing sources for reliability is needed to evaluate causes"
+  ],
+  [
+   "WI-SS|SS.Hist4.d.m",
+   "concept",
+   "Author point of view affects how sources explain causes"
+  ],
+  [
+   "WI-SS|SS.Hist2.c.m",
+   "concept",
+   "Context helps separate long and short term causes"
+  ]
+ ],
+ "WI-SS|SS.Hist1.b.h": [
+  [
+   "WI-SS|SS.Hist1.b.m",
+   "same",
+   "Builds on using multiple perspectives to explain effects"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.h",
+   "procedure",
+   "Weighing sources for reliability is needed to evaluate effects"
+  ],
+  [
+   "WI-SS|SS.BH4.a.m",
+   "concept",
+   "Intended and unintended consequences of technology model this thinking"
+  ],
+  [
+   "WI-SS|SS.Hist2.b.m",
+   "concept",
+   "Patterns of change are often long term effects"
+  ]
+ ],
+ "WI-SS|SS.Hist2.a.h": [
+  [
+   "WI-SS|SS.Hist2.a.m",
+   "same",
+   "Builds on explaining patterns of continuity over time"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.h",
+   "procedure",
+   "Evaluating sources is needed to analyse continuity with evidence"
+  ],
+  [
+   "WI-SS|SS.Hist2.c.m",
+   "concept",
+   "Context helps explain why patterns continue"
+  ]
+ ],
+ "WI-SS|SS.Hist2.b.h": [
+  [
+   "WI-SS|SS.Hist2.b.m",
+   "same",
+   "Builds on explaining patterns of change over time"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.h",
+   "procedure",
+   "Evaluating sources is needed to analyse change with evidence"
+  ],
+  [
+   "WI-SS|SS.Hist2.c.m",
+   "concept",
+   "Context helps explain why and how change happened"
+  ]
+ ],
+ "WI-SS|SS.Hist2.c.h": [
+  [
+   "WI-SS|SS.Hist2.c.m",
+   "same",
+   "Builds on analysing how context influenced continuity or change"
+  ],
+  [
+   "WI-SS|SS.Hist2.a.m",
+   "prereq",
+   "Recognising patterns of continuity comes before judging context"
+  ],
+  [
+   "WI-SS|SS.Hist2.b.m",
+   "prereq",
+   "Recognising patterns of change comes before judging context"
+  ],
+  [
+   "WI-SS|SS.Hist4.a.m",
+   "concept",
+   "Context shaping sources parallels context shaping events"
+  ]
+ ],
+ "WI-SS|SS.Hist3.a.h": [
+  [
+   "WI-SS|SS.Hist3.a.m",
+   "same",
+   "Builds on comparing past events to a current issue"
+  ],
+  [
+   "WI-SS|SS.Hist2.b.m",
+   "concept",
+   "Patterns of change link historical periods to the present"
+  ],
+  [
+   "WI-SS|SS.Hist1.b.m",
+   "concept",
+   "Effects of past events explain present issues"
+  ]
+ ],
+ "WI-SS|SS.Hist3.b.h": [
+  [
+   "WI-SS|SS.Hist3.b.m",
+   "same",
+   "Builds on applying historical perspectives to current events"
+  ],
+  [
+   "WI-SS|SS.PS4.a.m",
+   "procedure",
+   "Assembling arguments from sources is the method used"
+  ],
+  [
+   "WI-SS|SS.Inq3.b.h",
+   "procedure",
+   "Supporting claims with evidence from multiple perspectives is required"
+  ]
+ ],
+ "WI-SS|SS.Hist3.c.h": [
+  [
+   "WI-SS|SS.Hist3.c.m",
+   "same",
+   "Builds on hypothesising current outcomes based on the past"
+  ],
+  [
+   "WI-SS|SS.Hist1.b.m",
+   "prereq",
+   "Explaining effects of events supports predicting outcomes"
+  ],
+  [
+   "WI-SS|SS.Hist3.a.m",
+   "concept",
+   "Connecting past to present comes before predicting the future"
+  ]
+ ],
+ "WI-SS|SS.Hist4.a.h": [
+  [
+   "WI-SS|SS.Hist4.a.m",
+   "same",
+   "Builds on explaining how historical context influences a source"
+  ],
+  [
+   "WI-SS|SS.Hist2.c.m",
+   "concept",
+   "Understanding context of events supports reading context in sources"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.h",
+   "concept",
+   "Weighing source reliability includes considering its context"
+  ]
+ ],
+ "WI-SS|SS.Hist4.b.h": [
+  [
+   "WI-SS|SS.Hist4.b.m",
+   "same",
+   "Builds on explaining the significance of a source's audience"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.h",
+   "concept",
+   "Weighing source reliability includes considering its audience"
+  ]
+ ],
+ "WI-SS|SS.Hist4.c.h": [
+  [
+   "WI-SS|SS.Hist4.c.m",
+   "same",
+   "Builds on explaining the significance of a source's purpose"
+  ],
+  [
+   "WI-SS|SS.Inq2.b.h",
+   "concept",
+   "Weighing source reliability includes considering its purpose"
+  ]
+ ],
+ "WI-SS|SS.Hist4.d.h": [
+  [
+   "WI-SS|SS.Hist4.d.m",
+   "same",
+   "Builds on explaining how author point of view shapes a source"
+  ],
+  [
+   "WI-SS|SS.Inq2.a.h",
+   "concept",
+   "Exploring multiple perspectives helps notice missing voices"
+  ],
+  [
+   "WI-SS|SS.PS2.c.m",
+   "concept",
+   "Status of marginalised groups helps identify voices left out"
+  ],
+  [
+   "WI-SS|SS.Inq4.b.m",
+   "concept",
+   "Considering bias in claims supports analysing point of view"
+  ]
+ ],
+ "WI-SS|SS.Econ1.a.h": [
+  [
+   "WI-SS|SS.Econ1.a.m",
+   "same",
+   "Builds on predicting opportunity costs of decisions"
+  ],
+  [
+   "WI-SS|SS.Econ4.d.m",
+   "concept",
+   "Weighing costs and benefits of a policy is practised in middle school"
+  ]
+ ],
+ "WI-SS|SS.Econ1.b.h": [
+  [
+   "WI-SS|SS.Econ1.b.m",
+   "same",
+   "Builds on how incentives affect household decisions"
+  ],
+  [
+   "WI-SS|SS.Econ2.b.m",
+   "prereq",
+   "Supply, demand and competition must be understood first"
+  ],
+  [
+   "WI-SS|SS.Econ2.c.m",
+   "concept",
+   "Profits influencing sellers is an incentive at work"
+  ]
+ ],
+ "WI-SS|SS.Econ2.a.h": [
+  [
+   "WI-SS|SS.Econ2.a.m",
+   "same",
+   "Builds on the roles of consumers and producers in product markets"
+  ],
+  [
+   "WI-SS|SS.Econ2.c.m",
+   "prereq",
+   "Factors of production are what the factor market trades"
+  ],
+  [
+   "WI-SS|SS.Econ3.b.m",
+   "concept",
+   "Money and interest rates connect to financial markets"
+  ]
+ ],
+ "WI-SS|SS.Econ2.b.h": [
+  [
+   "WI-SS|SS.Econ2.b.m",
+   "same",
+   "Builds on supply, demand and competition in product markets"
+  ],
+  [
+   "WI-SS|SS.Econ2.a.m",
+   "prereq",
+   "Roles of consumers and producers explain demand and supply"
+  ],
+  [
+   "WI-SS|SS.Geog1.b.m",
+   "procedure",
+   "Interpreting charts and graphs is needed for supply and demand graphs"
+  ]
+ ],
+ "WI-SS|SS.Econ2.c.h": [
+  [
+   "WI-SS|SS.Econ2.c.m",
+   "same",
+   "Builds on factors of production and how profits influence sellers"
+  ],
+  [
+   "WI-SS|SS.Econ2.b.m",
+   "concept",
+   "Price and competition affect revenue and profit"
+  ]
+ ],
+ "WI-SS|SS.Econ3.a.h": [
+  [
+   "WI-SS|SS.Econ3.a.m",
+   "same",
+   "Builds on how inflation and unemployment affect different groups"
+  ],
+  [
+   "WI-SS|SS.Econ3.c.m",
+   "prereq",
+   "Knowing GDP is needed to use economic indicators"
+  ],
+  [
+   "WI-SS|SS.Econ2.a.m",
+   "concept",
+   "Roles of households and businesses drive spending and production"
+  ]
+ ],
+ "WI-SS|SS.Econ3.b.h": [
+  [
+   "WI-SS|SS.Econ3.b.m",
+   "same",
+   "Builds on the functions of money and interest rates"
+  ],
+  [
+   "WI-SS|SS.Econ4.b.m",
+   "concept",
+   "Banks as economic institutions are part of how money works"
+  ]
+ ],
+ "WI-SS|SS.Econ3.c.h": [
+  [
+   "WI-SS|SS.Econ3.c.m",
+   "same",
+   "Builds on defining GDP and comparing nations"
+  ],
+  [
+   "WI-SS|SS.Econ3.a.m",
+   "prereq",
+   "Inflation is needed to tell real from nominal GDP"
+  ]
+ ],
+ "WI-SS|SS.Econ4.a.h": [
+  [
+   "WI-SS|SS.Econ4.a.m",
+   "same",
+   "Builds on comparing traditional, command, market and mixed systems"
+  ],
+  [
+   "WI-SS|SS.PS2.b.m",
+   "concept",
+   "Linking government types and economic systems was done in middle school"
+  ],
+  [
+   "WI-SS|SS.Econ1.a.m",
+   "concept",
+   "Limited resources make allocation choices necessary"
+  ]
+ ],
+ "WI-SS|SS.Econ4.b.h": [
+  [
+   "WI-SS|SS.Econ4.b.m",
+   "same",
+   "Builds on the role of economic institutions and protective laws"
+  ],
+  [
+   "WI-SS|SS.Econ3.b.m",
+   "concept",
+   "Money and interest rates prepare study of the Federal Reserve"
+  ],
+  [
+   "WI-SS|SS.PS1.a.m",
+   "concept",
+   "Rule of law underpins property rights and legal systems"
+  ]
+ ],
+ "WI-SS|SS.Econ4.c.h": [
+  [
+   "WI-SS|SS.Econ4.c.m",
+   "same",
+   "Builds on the impact of taxation and government spending"
+  ],
+  [
+   "WI-SS|SS.Econ3.b.m",
+   "prereq",
+   "Interest rates are the main tool of monetary policy"
+  ],
+  [
+   "WI-SS|SS.Econ3.a.m",
+   "concept",
+   "Inflation and unemployment are what policy tries to steady"
+  ]
+ ],
+ "WI-SS|SS.Econ4.d.h": [
+  [
+   "WI-SS|SS.Econ4.d.m",
+   "same",
+   "Builds on unintended costs and benefits of a law or policy"
+  ],
+  [
+   "WI-SS|SS.Econ4.c.m",
+   "concept",
+   "Effects of taxing and spending prepare evaluating interventions"
+  ],
+  [
+   "WI-SS|SS.PS3.d.m",
+   "concept",
+   "The public policy process frames government interventions"
+  ]
+ ],
+ "WI-SS|SS.Econ4.e.h": [
+  [
+   "WI-SS|SS.Econ4.e.m",
+   "same",
+   "Builds on the role of specialisation in trade"
+  ],
+  [
+   "WI-SS|SS.Econ1.a.m",
+   "prereq",
+   "Opportunity cost is needed to understand comparative advantage"
+  ],
+  [
+   "WI-SS|SS.Geog3.b.h",
+   "concept",
+   "The evolution of the global economy gives context for trade"
+  ]
+ ],
+ "WI-SS|SS.BH1.a.h": [
+  [
+   "WI-SS|SS.BH1.a.m",
+   "same",
+   "Builds on patterns that influence cognition, perception and behaviour"
+  ],
+  [
+   "WI-SS|SS.Inq1.b.h",
+   "procedure",
+   "Planning an inquiry prepares conducting research on an issue"
+  ]
+ ],
+ "WI-SS|SS.BH1.b.h": [
+  [
+   "WI-SS|SS.BH1.b.m",
+   "same",
+   "Builds on how culture, race and gender affect identity"
+  ],
+  [
+   "WI-SS|SS.PS2.c.m",
+   "concept",
+   "Status of marginalised groups shows discrimination in action"
+  ]
+ ],
+ "WI-SS|SS.BH2.a.h": [
+  [
+   "WI-SS|SS.BH2.a.m",
+   "same",
+   "Builds on factors that contribute to cooperation and conflict"
+  ],
+  [
+   "WI-SS|SS.Geog5.b.m",
+   "concept",
+   "Unequal resources as a cause of conflict is one factor"
+  ],
+  [
+   "WI-SS|SS.Geog4.a.h",
+   "concept",
+   "Place identity shaping events links culture to group unity"
+  ]
+ ],
+ "WI-SS|SS.BH2.b.h": [
+  [
+   "AERO-SS|3.2.f",
+   "same",
+   "Ways cultures think about and adapt to environments began in grade 2"
+  ],
+  [
+   "WI-SS|SS.Geog5.a.m",
+   "concept",
+   "Technology and environment interaction is part of this critique"
+  ],
+  [
+   "WI-SS|SS.Geog5.a.h",
+   "concept",
+   "Human actions on the environment at many scales give context"
+  ],
+  [
+   "WI-SS|SS.Inq4.b.m",
+   "procedure",
+   "Critiquing others' claims is the method used here"
+  ]
+ ],
+ "WI-SS|SS.BH3.a.h": [
+  [
+   "WI-SS|SS.BH3.a.m",
+   "concept",
+   "Local and global connections show influences across societies"
+  ],
+  [
+   "WI-SS|SS.BH1.b.m",
+   "concept",
+   "Culture shaping identity and interactions underlies ethnocentrism"
+  ],
+  [
+   "WI-SS|SS.BH2.b.m",
+   "concept",
+   "Learning about other cultures through contact counters ethnocentrism"
+  ],
+  [
+   "WI-SS|SS.PS3.b.m",
+   "concept",
+   "Civic institutions influencing society is a related idea"
+  ]
+ ],
+ "WI-SS|SS.BH4.a.h": [
+  [
+   "WI-SS|SS.BH4.a.m",
+   "same",
+   "Builds on intended and unintended consequences of technology"
+  ],
+  [
+   "WI-SS|SS.Geog5.a.m",
+   "concept",
+   "Technology affecting resources shows consequences for societies"
+  ]
+ ],
+ "WI-SS|SS.PS1.a.h": [
+  [
+   "WI-SS|SS.PS1.a.m",
+   "same",
+   "Builds on rule of law and responsible citizenship"
+  ],
+  [
+   "WI-SS|SS.PS1.b.m",
+   "prereq",
+   "Constitutional principles must be known before analysing constitutionalism"
+  ],
+  [
+   "WI-SS|SS.PS3.c.m",
+   "concept",
+   "Powers and limits of government are what constitutions define"
+  ]
+ ],
+ "WI-SS|SS.PS1.b.h": [
+  [
+   "WI-SS|SS.PS1.b.m",
+   "same",
+   "Builds on founding principles and significant people in United States history"
+  ],
+  [
+   "WI-SS|SS.PS2.a.m",
+   "concept",
+   "Court decisions on rights were introduced in middle school"
+  ],
+  [
+   "WI-SS|SS.Hist4.d.h",
+   "procedure",
+   "Analysing point of view helps read founding era documents"
+  ]
+ ],
+ "WI-SS|SS.PS2.a.h": [
+  [
+   "WI-SS|SS.PS2.a.m",
+   "same",
+   "Builds on the scope of rights and how they evolved"
+  ],
+  [
+   "WI-SS|SS.PS2.c.m",
+   "concept",
+   "Groups advocating for rights connects to civil rights movements"
+  ],
+  [
+   "WI-SS|SS.Hist1.a.h",
+   "concept",
+   "Evaluating how groups contributed to events supports assessing movements"
+  ]
+ ],
+ "WI-SS|SS.PS2.b.h": [
+  [
+   "WI-SS|SS.PS2.b.m",
+   "same",
+   "Builds on rights and responsibilities of citizens"
+  ],
+  [
+   "WI-SS|SS.PS3.a.m",
+   "concept",
+   "Voter participation prepares the skills to take part in elections"
+  ],
+  [
+   "WI-SS|SS.PS2.a.m",
+   "concept",
+   "Constitutional protections were first analysed in middle school"
+  ]
+ ],
+ "WI-SS|SS.PS2.c.h": [
+  [
+   "WI-SS|SS.PS2.c.m",
+   "same",
+   "Builds on how groups have advocated for greater rights"
+  ],
+  [
+   "WI-SS|SS.PS2.a.m",
+   "concept",
+   "Court decisions and the evolution of rights are the base"
+  ],
+  [
+   "WI-SS|SS.Geog3.b.h",
+   "concept",
+   "Supranational organisations prepare study of international human rights bodies"
+  ]
+ ],
+ "WI-SS|SS.PS3.a.h": [
+  [
+   "WI-SS|SS.PS3.a.m",
+   "same",
+   "Builds on assessing voter participation in elections"
+  ],
+  [
+   "WI-SS|SS.PS3.d.m",
+   "concept",
+   "The public policy process supports creating participation solutions"
+  ]
+ ],
+ "WI-SS|SS.PS3.b.h": [
+  [
+   "WI-SS|SS.PS3.b.m",
+   "same",
+   "Builds on media, parties and civic institutions in government"
+  ],
+  [
+   "WI-SS|SS.PS3.a.m",
+   "concept",
+   "Voter participation connects people to the election process"
+  ],
+  [
+   "WI-SS|SS.Inq4.b.m",
+   "concept",
+   "Weighing bias in claims helps evaluate media in elections"
+  ]
+ ],
+ "WI-SS|SS.PS3.c.h": [
+  [
+   "WI-SS|SS.PS3.c.m",
+   "same",
+   "Builds on structure, powers and limits of government at each level"
+  ],
+  [
+   "WI-SS|SS.Geog3.b.h",
+   "concept",
+   "Supranational organisations were first analysed in geography"
+  ]
+ ],
+ "WI-SS|SS.PS3.d.h": [
+  [
+   "WI-SS|SS.PS3.d.m",
+   "same",
+   "Builds on how governments solve problems through public policy"
+  ],
+  [
+   "WI-SS|SS.Econ4.d.h",
+   "concept",
+   "Evaluating costs and benefits of policies applies here"
+  ],
+  [
+   "WI-SS|SS.Inq3.c.h",
+   "procedure",
+   "Weighing evidence is needed to judge policy effectiveness"
+  ]
+ ],
+ "WI-SS|SS.PS4.a.h": [
+  [
+   "WI-SS|SS.PS4.a.m",
+   "same",
+   "Builds on assembling an argument from multiple sources"
+  ],
+  [
+   "WI-SS|SS.Inq3.b.h",
+   "procedure",
+   "Supporting a claim with evidence from many perspectives is needed"
+  ],
+  [
+   "WI-SS|SS.Inq4.b.h",
+   "procedure",
+   "Examining strengths and weaknesses of claims prepares counterclaims"
+  ]
+ ],
+ "WI-SS|SS.PS4.b.h": [
+  [
+   "WI-SS|SS.PS4.b.m",
+   "same",
+   "Builds on examples of diplomacy, pluralism and consensus building"
+  ],
+  [
+   "WI-SS|SS.Hist1.b.h",
+   "procedure",
+   "Analysing long and short term effects is the method used"
+  ]
+ ]
+}

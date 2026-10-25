@@ -64,6 +64,20 @@ class Codes:
                 d, dom, clu, n, sub = m.groups(); sub = sub or ""
                 for k in (f"{d}.{dom}.{clu}.{n}{sub}", f"{d}.{dom}.{n}{sub}"):
                     self.math.setdefault(k, c)
+        # Wisconsin 2021 renumbered a few standards (CCSS 3.OA.B.5 is Wisconsin M.3.OA.B.4). For those rows, drop the short
+        # same-number key (3.OA.4 is CCSS 3.OA.A.4, which Wisconsin does not have), keep the cluster key when Common Core
+        # has no such code (3.OA.B.4 can only mean Wisconsin's), and point each Common Core code at its Wisconsin row.
+        mxw = os.path.join(root, "data/standards/math_ccss_crosswalk.json")
+        for wi, ccs in (json.load(open(mxw))["wi_to_ccss"].items() if os.path.exists(mxw) else []):
+            for k in [k for k, v in self.math.items() if v == wi and k.count(".") == 2]:
+                del self.math[k]
+        for wi, ccs in (json.load(open(mxw))["wi_to_ccss"].items() if os.path.exists(mxw) else []):
+            for cc in ccs:
+                m = re.match(r"^(?:HS([NAFGS])-|([K0-9]+)\.)([A-Z]+)\.([A-D])\.(\d+)([a-z]?)$", cc)
+                if m:
+                    hs, g, dom, clu, n, sub = m.groups(); d = g or ("SP" if hs == "S" else hs)
+                    for k in (f"{d}.{dom}.{clu}.{n}{sub}", f"{d}.{dom}.{n}{sub}"):
+                        self.math[k] = wi
         self.math_ee = {}                                    # "6.NS.2", "F.IF.1" -> M.EE.x
         for c in self.codes["WI-EE-MATH"]:
             m = re.match(r"M\.EE\.([K0-9]+|N|A|F|G|SP|S)\.([A-Z]+)\.(\d+)(?:\.([a-z]))?$", c)
@@ -164,6 +178,8 @@ class Codes:
                     res = self._ela(g[0], *g[1:5])
                 elif fam in ("math", "math_hs"):
                     ee = bool(g[1]) or bool(re.match(r"(?i)EE\.", m.group(0)))
-                    res = self._math(ee, *g[2:7])
+                    # "M.K.CC.C.7" (with M.) is a Wisconsin code: take that row as written before reading it as Common Core.
+                    wi = g[0] and not ee and g[4] and self.ci["WI-CC-MATH"].get(f"m.{g[2]}.{g[3]}.{g[4]}.{g[5]}{'.' + g[6] if g[6] else ''}".lower())
+                    res = [("WI-CC-MATH", wi)] if wi else self._math(ee, *g[2:7])
                 out.append((m.group(0), fam, res)); spans.append((m.start(), m.end()))
         return out

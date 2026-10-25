@@ -163,14 +163,14 @@ def build():
                 to2020[f"{e['code']}.{letter}"].add(r)
     to2010 = collections.defaultdict(set)
     for old, news in to2020.items():
-        if re.search(r"\.[a-z]$", old):
-            continue                                      # show parent 2010 codes only (W.6.1, not W.6.1.e)
+        if re.search(r"\.[a-z]$", old) or old.startswith("R."):
+            continue                                      # show parent 2010 codes only (W.6.1, not W.6.1.e); 2010 had no "R." codes
         for n in news:
             to2010[n].add(old)
     # A moved sub-item (2010 W.6.1.e "concluding statement" -> 2020 W.6.3.a) also names its parent on the 2020 row.
     for old, news in to2020.items():
         m = re.match(r"^(.*)\.([a-z])$", old)
-        if m:
+        if m and not old.startswith("R."):
             for n in news:
                 if m.group(1) not in to2010[n]:
                     to2010[n].add(old)

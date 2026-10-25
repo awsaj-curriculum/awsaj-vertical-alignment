@@ -1,0 +1,2961 @@
+{
+ "WI-CC-ELA|L.6.1.a": [
+  [
+   "WI-CC-ELA|L.5.1.a",
+   "same",
+   "Same understanding of standardized English as one dialect, applied more deeply"
+  ],
+  [
+   "WI-CC-ELA|L.5.1.c",
+   "concept",
+   "Comparing dialects and registers in literature builds awareness of language varieties"
+  ]
+ ],
+ "WI-CC-ELA|L.6.1.b": [
+  [
+   "WI-CC-ELA|L.4.1.b",
+   "same",
+   "Grade 4 first asked students to determine language demands of situations"
+  ],
+  [
+   "WI-CC-ELA|L.5.1.b",
+   "concept",
+   "Comparing how language is used in different contexts reveals language demands"
+  ],
+  [
+   "WI-CC-ELA|W.5.4",
+   "concept",
+   "Writing for task, purpose, and audience requires noticing language demands"
+  ]
+ ],
+ "WI-CC-ELA|L.6.1.c": [
+  [
+   "WI-CC-ELA|L.5.1.d",
+   "same",
+   "Expanding, combining, and reducing sentences continues from grade 5"
+  ],
+  [
+   "WI-CC-ELA|L.5.5.a",
+   "prereq",
+   "Using conjunctions correctly is needed to combine sentences"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.e",
+   "prereq",
+   "Writing compound and complex sentences is needed before combining and reducing them"
+  ]
+ ],
+ "WI-CC-ELA|L.6.1.d": [
+  [
+   "WI-CC-ELA|R.5.4",
+   "concept",
+   "Analyzing how words affect tone helps students keep tone consistent"
+  ],
+  [
+   "WI-CC-ELA|L.5.1.c",
+   "concept",
+   "Recognizing registers in literature helps students keep a consistent style"
+  ]
+ ],
+ "WI-CC-ELA|L.6.2.a": [
+  [
+   "WI-CC-ELA|L.4.2.a",
+   "procedure",
+   "Using context clues produces the preliminary meaning students then verify"
+  ],
+  [
+   "WI-CC-ELA|L.4.2.b",
+   "procedure",
+   "Consulting reference materials is the method used to verify meanings"
+  ],
+  [
+   "WI-CC-ELA|L.5.2.a",
+   "procedure",
+   "Using roots and affixes gives a first guess to verify"
+  ]
+ ],
+ "WI-CC-ELA|L.6.2.b": [
+  [
+   "WI-CC-ELA|L.5.2.a",
+   "same",
+   "Using Greek and Latin affixes and roots continues with grade 6 words"
+  ],
+  [
+   "WI-CC-ELA|L.3.2.b",
+   "prereq",
+   "Knowing how prefixes and suffixes change meaning comes first"
+  ]
+ ],
+ "WI-CC-ELA|L.6.3.a": [
+  [
+   "WI-CC-ELA|L.5.3.a",
+   "same",
+   "Determining meanings as used in text grows into denotation and connotation"
+  ],
+  [
+   "WI-CC-ELA|L.5.3.c",
+   "concept",
+   "Comparing related words prepares students to notice connotation differences"
+  ],
+  [
+   "WI-CC-ELA|R.5.4",
+   "concept",
+   "Analyzing word effect on tone and mood supports judging connotation"
+  ]
+ ],
+ "WI-CC-ELA|L.6.3.b": [
+  [
+   "WI-CC-ELA|L.5.3.b",
+   "same",
+   "Interpreting similes and metaphors extends to other figures of speech"
+  ],
+  [
+   "WI-CC-ELA|L.4.3.b",
+   "concept",
+   "Explaining idioms builds understanding that words can mean more than literal"
+  ]
+ ],
+ "WI-CC-ELA|L.6.3.c": [
+  [
+   "WI-CC-ELA|L.5.3.c",
+   "same",
+   "Comparing words with synonyms and antonyms leads to other word relationships"
+  ],
+  [
+   "WI-CC-ELA|L.5.4.a",
+   "concept",
+   "Knowing phrases that signal logical relationships supports seeing cause and effect pairs"
+  ]
+ ],
+ "WI-CC-ELA|L.6.3.d": [
+  [
+   "WI-CC-ELA|L.5.3.c",
+   "same",
+   "Comparing words to synonyms leads to distinguishing words with similar definitions"
+  ],
+  [
+   "WI-CC-ELA|L.3.3.b",
+   "concept",
+   "Distinguishing shades of meaning among words is the earliest form of this skill"
+  ]
+ ],
+ "WI-CC-ELA|L.6.4": [
+  [
+   "WI-CC-ELA|L.5.4.a",
+   "same",
+   "Building and using academic vocabulary continues with more intentional choices"
+  ],
+  [
+   "WI-CC-ELA|L.5.3.d",
+   "concept",
+   "Connecting new words to real life use helps students build vocabulary"
+  ],
+  [
+   "WI-CC-ELA|W.5.3.c",
+   "concept",
+   "Choosing words for emphasis in writing prepares intentional vocabulary choices"
+  ]
+ ],
+ "WI-CC-ELA|L.6.5.a": [
+  [
+   "WI-CC-ELA|L.5.5.d",
+   "same",
+   "Correct use of they and their leads to all pronoun cases"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.a",
+   "prereq",
+   "Using relative pronouns correctly is a step toward full pronoun control"
+  ]
+ ],
+ "WI-CC-ELA|L.6.5.b": [
+  [
+   "WI-CC-ELA|L.5.1.d",
+   "concept",
+   "Expanding and combining sentences is a strategy to improve expression"
+  ],
+  [
+   "WI-CC-ELA|L.5.5.b",
+   "prereq",
+   "Using verb tenses correctly is a basis for improving expression"
+  ],
+  [
+   "WI-CC-ELA|W.5.5",
+   "procedure",
+   "Revising and editing writing is where students apply expression strategies"
+  ]
+ ],
+ "WI-CC-ELA|L.6.6.a": [
+  [
+   "WI-CC-ELA|L.5.6.a",
+   "same",
+   "Commas for introductory elements and direct address lead to setting off elements"
+  ],
+  [
+   "WI-CC-ELA|L.4.6.c",
+   "prereq",
+   "Using commas in compound sentences comes before punctuating added elements"
+  ]
+ ],
+ "WI-CC-ELA|L.6.6.b": [
+  [
+   "WI-CC-ELA|L.5.6.c",
+   "same",
+   "Spelling grade level words with references continues at grade 6"
+  ],
+  [
+   "WI-CC-ELA|RF.5.3",
+   "concept",
+   "Knowing syllable patterns and roots supports spelling longer words"
+  ]
+ ],
+ "WI-CC-ELA|R.6.1": [
+  [
+   "WI-CC-ELA|R.5.1",
+   "same",
+   "Referring to details and making inferences grows into formal citation"
+  ],
+  [
+   "WI-CC-ELA|W.5.9",
+   "procedure",
+   "Drawing evidence from texts in writing prepares students to cite it"
+  ]
+ ],
+ "WI-CC-ELA|R.6.2": [
+  [
+   "WI-CC-ELA|R.5.2",
+   "same",
+   "Summarizing and linking theme to key details comes before tracing development"
+  ],
+  [
+   "WI-CC-ELA|R.5.1",
+   "prereq",
+   "Locating relevant details is needed to see how they support the theme"
+  ]
+ ],
+ "WI-CC-ELA|R.6.3": [
+  [
+   "WI-CC-ELA|R.5.3",
+   "same",
+   "Comparing characters and explaining relationships leads to tracing their development"
+  ],
+  [
+   "WI-CC-ELA|R.5.5",
+   "concept",
+   "Understanding how scenes fit together helps students follow how plot unfolds"
+  ],
+  [
+   "WI-CC-ELA|R.5.1",
+   "prereq",
+   "Using text details is needed to describe how characters respond and change"
+  ]
+ ],
+ "WI-CC-ELA|R.6.4": [
+  [
+   "WI-CC-ELA|R.5.4",
+   "same",
+   "Grade 5 already analyzes the effect of words on tone and mood"
+  ],
+  [
+   "WI-CC-ELA|L.5.3.b",
+   "concept",
+   "Interpreting similes and metaphors underpins figurative meaning in texts"
+  ],
+  [
+   "WI-CC-ELA|L.5.3.c",
+   "concept",
+   "Comparing related words builds the sense of nuance behind connotation"
+  ],
+  [
+   "WI-CC-ELA|L.5.2.a",
+   "procedure",
+   "Using roots and affixes is a method for working out unknown words"
+  ]
+ ],
+ "WI-CC-ELA|R.6.5": [
+  [
+   "WI-CC-ELA|R.5.5",
+   "same",
+   "Seeing how chapters and scenes fit together comes before analyzing one section"
+  ],
+  [
+   "WI-CC-ELA|R.5.2",
+   "prereq",
+   "Students must find the theme before judging how a section supports it"
+  ]
+ ],
+ "WI-CC-ELA|R.6.6": [
+  [
+   "WI-CC-ELA|R.5.6",
+   "same",
+   "Explaining narrator point of view and multiple accounts leads to analyzing perspective"
+  ],
+  [
+   "WI-CC-ELA|R.5.9",
+   "concept",
+   "Connecting texts to cultures and identities supports seeing how culture shapes perspective"
+  ],
+  [
+   "WI-CC-ELA|R.5.8",
+   "concept",
+   "Recognizing claims and support helps students identify where an author stands"
+  ]
+ ],
+ "WI-CC-ELA|R.6.7": [
+  [
+   "WI-CC-ELA|R.5.7",
+   "same",
+   "Analyzing how visuals and multimedia add meaning leads to comparing formats"
+  ],
+  [
+   "WI-CC-ELA|SL.5.2",
+   "concept",
+   "Summarizing information from diverse media prepares students to compare formats"
+  ]
+ ],
+ "WI-CC-ELA|R.6.8": [
+  [
+   "WI-CC-ELA|R.5.8",
+   "same",
+   "Matching reasons and evidence to claims comes before judging which claims are supported"
+  ],
+  [
+   "WI-CC-ELA|SL.5.3",
+   "concept",
+   "Explaining how a speaker supports claims builds the same reasoning skill"
+  ],
+  [
+   "WI-CC-ELA|W.5.2.a",
+   "concept",
+   "Writing opinions with supporting reasons shows how claims need support"
+  ]
+ ],
+ "WI-CC-ELA|R.6.9": [
+  [
+   "WI-CC-ELA|R.5.9",
+   "same",
+   "Making informed judgments and connections becomes evaluating text quality"
+  ]
+ ],
+ "WI-CC-ELA|SL.6.1.a": [
+  [
+   "WI-CC-ELA|SL.5.1.a",
+   "same",
+   "Coming prepared and drawing on texts grows into citing evidence in discussion"
+  ],
+  [
+   "WI-CC-ELA|R.5.1",
+   "prereq",
+   "Locating relevant text evidence is needed before referring to it in discussion"
+  ]
+ ],
+ "WI-CC-ELA|SL.6.1.b": [
+  [
+   "WI-CC-ELA|SL.5.1.b",
+   "same",
+   "Following agreed norms comes before helping set norms and goals"
+  ]
+ ],
+ "WI-CC-ELA|SL.6.1.c": [
+  [
+   "WI-CC-ELA|SL.5.1.c",
+   "same",
+   "Posing questions and elaborating on remarks continues with more detail"
+  ]
+ ],
+ "WI-CC-ELA|SL.6.1.d": [
+  [
+   "WI-CC-ELA|SL.5.1.d",
+   "same",
+   "Reviewing key ideas and drawing conclusions grows into weighing multiple perspectives"
+  ],
+  [
+   "WI-CC-ELA|R.5.6",
+   "concept",
+   "Comparing accounts with different points of view supports understanding multiple perspectives"
+  ],
+  [
+   "WI-CC-ELA|W.5.8",
+   "procedure",
+   "Paraphrasing information in notes prepares students to paraphrase speakers"
+  ]
+ ],
+ "WI-CC-ELA|SL.6.2": [
+  [
+   "WI-CC-ELA|SL.5.2",
+   "same",
+   "Summarizing information from diverse media leads to interpreting its contribution"
+  ],
+  [
+   "WI-CC-ELA|R.5.7",
+   "concept",
+   "Analyzing how visual and multimedia elements add meaning supports interpreting media"
+  ]
+ ],
+ "WI-CC-ELA|SL.6.3": [
+  [
+   "WI-CC-ELA|SL.5.3",
+   "same",
+   "Explaining how a speaker supports claims leads to evaluating that support"
+  ],
+  [
+   "WI-CC-ELA|R.5.8",
+   "concept",
+   "Linking reasons and evidence to claims in texts builds the same reasoning"
+  ]
+ ],
+ "WI-CC-ELA|SL.6.4": [
+  [
+   "WI-CC-ELA|SL.5.4",
+   "same",
+   "Reporting with logically sequenced facts grows into presenting claims and findings"
+  ],
+  [
+   "WI-CC-ELA|W.5.2.a",
+   "concept",
+   "Writing opinions supported by reasons prepares students to present claims"
+  ],
+  [
+   "WI-CC-ELA|L.5.1.b",
+   "concept",
+   "Comparing language across contexts helps explain the purpose of language choices"
+  ]
+ ],
+ "WI-CC-ELA|SL.6.5": [
+  [
+   "WI-CC-ELA|SL.5.5",
+   "same",
+   "Adding multimedia to develop main ideas continues to clarify information"
+  ],
+  [
+   "WI-CC-ELA|R.5.7",
+   "concept",
+   "Knowing how visuals add meaning helps students choose displays"
+  ]
+ ],
+ "WI-CC-ELA|W.6.1": [
+  [
+   "WI-CC-ELA|W.5.1",
+   "same",
+   "Same commitment to reflective, formal, and creative writing at grade 6"
+  ],
+  [
+   "WI-CC-ELA|W.5.4",
+   "concept",
+   "Matching writing to task, purpose, and audience underlies varied purposes"
+  ]
+ ],
+ "WI-CC-ELA|W.6.2.a": [
+  [
+   "WI-CC-ELA|W.5.2.a",
+   "same",
+   "Opinion writing with reasons grows into arguments supporting claims with evidence"
+  ],
+  [
+   "WI-CC-ELA|R.5.8",
+   "concept",
+   "Understanding how reasons and evidence support claims guides writing arguments"
+  ],
+  [
+   "WI-CC-ELA|W.5.9",
+   "procedure",
+   "Drawing evidence from texts supplies the evidence that arguments need"
+  ]
+ ],
+ "WI-CC-ELA|W.6.2.b": [
+  [
+   "WI-CC-ELA|W.5.2.b",
+   "same",
+   "Informative writing moves from grouping information to analyzing content"
+  ],
+  [
+   "WI-CC-ELA|W.5.8",
+   "procedure",
+   "Gathering and summarizing information from sources provides content to organize"
+  ]
+ ],
+ "WI-CC-ELA|W.6.2.c": [
+  [
+   "WI-CC-ELA|W.5.2.c",
+   "same",
+   "Narratives with dialogue, description, and pacing continue at grade 6"
+  ],
+  [
+   "WI-CC-ELA|R.5.5",
+   "concept",
+   "Seeing how scenes build a story helps students structure event sequences"
+  ]
+ ],
+ "WI-CC-ELA|W.6.3.a": [
+  [
+   "WI-CC-ELA|W.5.3.a",
+   "same",
+   "Introductions and conclusions suited to the mode continue from grade 5"
+  ],
+  [
+   "WI-CC-ELA|W.5.2.b",
+   "concept",
+   "Grouping related information logically is the basis for organizing ideas"
+  ]
+ ],
+ "WI-CC-ELA|W.6.3.b": [
+  [
+   "WI-CC-ELA|W.5.3.b",
+   "same",
+   "Using varied transitions to connect ideas comes before clarifying relationships"
+  ],
+  [
+   "WI-CC-ELA|L.5.4.a",
+   "concept",
+   "Knowing phrases that signal contrast and addition supports choosing transitions"
+  ],
+  [
+   "WI-CC-ELA|L.5.5.a",
+   "prereq",
+   "Using conjunctions correctly underpins linking ideas within and across sentences"
+  ]
+ ],
+ "WI-CC-ELA|W.6.3.c": [
+  [
+   "WI-CC-ELA|W.5.3.c",
+   "same",
+   "Choosing words for emphasis leads to precise and sensory language"
+  ],
+  [
+   "WI-CC-ELA|L.5.3.c",
+   "concept",
+   "Comparing related words helps students choose the most precise word"
+  ],
+  [
+   "WI-CC-ELA|R.5.4",
+   "concept",
+   "Analyzing how words affect tone and mood informs word choice in writing"
+  ]
+ ],
+ "WI-CC-ELA|W.6.4": [
+  [
+   "WI-CC-ELA|W.5.4",
+   "same",
+   "Clear writing suited to task and audience now adds attention to style"
+  ],
+  [
+   "WI-CC-ELA|W.5.3.a",
+   "prereq",
+   "Organizing with introductions and conclusions is needed for coherent writing"
+  ]
+ ],
+ "WI-CC-ELA|W.6.5": [
+  [
+   "WI-CC-ELA|W.5.5",
+   "same",
+   "Planning, revising, and editing with feedback continues with rewriting added"
+  ],
+  [
+   "WI-CC-ELA|L.5.6.c",
+   "procedure",
+   "Editing spelling with references is an early part of the editing process"
+  ]
+ ],
+ "WI-CC-ELA|W.6.6": [
+  [
+   "WI-CC-ELA|W.5.6",
+   "same",
+   "Using digital tools and keyboarding to publish grows from two to three pages"
+  ],
+  [
+   "WI-CC-ELA|SL.5.5",
+   "concept",
+   "Adding multimedia to presentations prepares students to present ideas with technology"
+  ]
+ ],
+ "WI-CC-ELA|W.6.7": [
+  [
+   "WI-CC-ELA|W.5.7",
+   "same",
+   "Short inquiry projects with several sources now answer a focused question"
+  ],
+  [
+   "WI-CC-ELA|W.5.8",
+   "procedure",
+   "Gathering and noting information from sources is the core of inquiry"
+  ]
+ ],
+ "WI-CC-ELA|W.6.8": [
+  [
+   "WI-CC-ELA|W.5.8",
+   "same",
+   "Gathering, paraphrasing, and listing sources grows into credible sourcing and citation"
+  ],
+  [
+   "WI-CC-ELA|R.5.9",
+   "concept",
+   "Making informed judgments about text quality prepares students to assess credibility"
+  ],
+  [
+   "WI-CC-ELA|R.5.2",
+   "prereq",
+   "Summarizing texts accurately is needed before paraphrasing others fairly"
+  ]
+ ],
+ "WI-CC-ELA|W.6.9": [
+  [
+   "WI-CC-ELA|W.5.9",
+   "same",
+   "Drawing evidence from texts continues using grade 6 reading skills"
+  ],
+  [
+   "WI-CC-ELA|R.5.1",
+   "prereq",
+   "Locating relevant details and evidence in texts comes before using them in writing"
+  ]
+ ],
+ "WI-CC-ELA|L.7.1.a": [
+  [
+   "WI-CC-ELA|L.6.1.a",
+   "same",
+   "Same understanding of standardized English as one dialect at grade 7"
+  ]
+ ],
+ "WI-CC-ELA|L.7.1.b": [
+  [
+   "WI-CC-ELA|L.6.1.b",
+   "same",
+   "Determining language demands continues with more varied situations"
+  ],
+  [
+   "WI-CC-ELA|L.6.1.d",
+   "concept",
+   "Keeping style and tone consistent supports responding to language demands"
+  ]
+ ],
+ "WI-CC-ELA|L.7.1.c": [
+  [
+   "WI-CC-ELA|L.6.1.d",
+   "same",
+   "Maintaining consistent style and tone continues from grade 6"
+  ],
+  [
+   "WI-CC-ELA|L.6.3.a",
+   "concept",
+   "Understanding connotation helps keep word choices consistent with tone"
+  ]
+ ],
+ "WI-CC-ELA|L.7.1.d": [
+  [
+   "WI-CC-ELA|L.6.1.c",
+   "procedure",
+   "Reducing sentences is the method used to cut wordiness and redundancy"
+  ],
+  [
+   "WI-CC-ELA|L.6.3.d",
+   "concept",
+   "Distinguishing similar words helps students spot redundant word choices"
+  ]
+ ],
+ "WI-CC-ELA|L.7.2.a": [
+  [
+   "WI-CC-ELA|L.6.2.a",
+   "same",
+   "Verifying inferred meanings in context or dictionary continues at grade 7"
+  ]
+ ],
+ "WI-CC-ELA|L.7.2.b": [
+  [
+   "WI-CC-ELA|L.6.2.b",
+   "same",
+   "Using Greek and Latin roots continues with grade 7 words"
+  ]
+ ],
+ "WI-CC-ELA|L.7.3": [
+  [
+   "WI-CC-ELA|L.6.3.a",
+   "same",
+   "Denotation and connotation analysis continues and adds sound devices"
+  ],
+  [
+   "WI-CC-ELA|L.6.3.b",
+   "concept",
+   "Interpreting figures of speech supports figurative meanings in texts"
+  ],
+  [
+   "WI-CC-ELA|R.6.4",
+   "concept",
+   "Analyzing impact of word choices on tone prepares analysis of sound effects"
+  ]
+ ],
+ "WI-CC-ELA|L.7.4": [
+  [
+   "WI-CC-ELA|L.6.4",
+   "same",
+   "Building academic vocabulary with intentional choices continues at grade 7"
+  ],
+  [
+   "WI-CC-ELA|L.6.2.b",
+   "procedure",
+   "Using Greek and Latin roots helps students learn new academic words"
+  ]
+ ],
+ "WI-CC-ELA|L.7.5.a": [
+  [
+   "WI-CC-ELA|L.6.1.c",
+   "prereq",
+   "Expanding and combining sentences builds awareness of phrases and clauses"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.b",
+   "prereq",
+   "Using prepositional phrases is the first step toward phrases in general"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.a",
+   "prereq",
+   "Relative pronouns introduce clauses, a foundation for clause use"
+  ]
+ ],
+ "WI-CC-ELA|L.7.5.b": [
+  [
+   "WI-CC-ELA|L.4.5.e",
+   "same",
+   "Grade 4 compound and complex sentences now signal relationships among ideas"
+  ],
+  [
+   "WI-CC-ELA|L.5.5.a",
+   "prereq",
+   "Using conjunctions correctly is needed to build compound and complex sentences"
+  ],
+  [
+   "WI-CC-ELA|L.6.1.c",
+   "procedure",
+   "Combining sentences is the method for building compound and complex sentences"
+  ]
+ ],
+ "WI-CC-ELA|L.7.5.c": [
+  [
+   "WI-CC-ELA|L.4.5.d",
+   "prereq",
+   "Knowing how adjectives and adverbs modify words comes before fixing misplaced modifiers"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.b",
+   "prereq",
+   "Understanding prepositional phrases helps students place modifying phrases correctly"
+  ]
+ ],
+ "WI-CC-ELA|L.7.6.a": [
+  [
+   "WI-CC-ELA|L.6.6.a",
+   "same",
+   "Using commas to set off elements leads to commas between adjectives"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.c",
+   "prereq",
+   "Knowing the order of adjectives is needed to spot coordinate adjectives"
+  ]
+ ],
+ "WI-CC-ELA|L.7.6.b": [
+  [
+   "WI-CC-ELA|L.6.6.b",
+   "same",
+   "Correct spelling continues with grade 7 vocabulary"
+  ],
+  [
+   "WI-CC-ELA|L.6.2.b",
+   "concept",
+   "Knowing Greek and Latin roots supports spelling academic words"
+  ]
+ ],
+ "WI-CC-ELA|R.7.1": [
+  [
+   "WI-CC-ELA|R.6.1",
+   "same",
+   "Same evidence and inference skill applied to more complex grade 7 texts"
+  ],
+  [
+   "WI-CC-ELA|W.6.9",
+   "procedure",
+   "Drawing evidence for written analysis reinforces citing it while reading"
+  ]
+ ],
+ "WI-CC-ELA|R.7.2": [
+  [
+   "WI-CC-ELA|R.6.2",
+   "same",
+   "Showing how details develop a theme becomes analyzing its development"
+  ],
+  [
+   "WI-CC-ELA|R.6.1",
+   "prereq",
+   "Citing evidence is needed to support claims about theme development"
+  ],
+  [
+   "WI-CC-ELA|R.6.5",
+   "concept",
+   "Seeing how sections contribute to theme supports tracing its development"
+  ]
+ ],
+ "WI-CC-ELA|R.7.3": [
+  [
+   "WI-CC-ELA|R.6.3",
+   "same",
+   "Describing how plot unfolds and characters change leads to analyzing plot elements"
+  ],
+  [
+   "WI-CC-ELA|R.6.5",
+   "concept",
+   "Knowing how parts fit the whole structure supports linking plot elements"
+  ]
+ ],
+ "WI-CC-ELA|R.7.4": [
+  [
+   "WI-CC-ELA|R.6.4",
+   "same",
+   "Same word meaning and word choice analysis with more complex texts"
+  ],
+  [
+   "WI-CC-ELA|L.6.3.a",
+   "concept",
+   "Distinguishing denotation from connotation is needed to judge word impact on tone"
+  ],
+  [
+   "WI-CC-ELA|L.6.3.b",
+   "concept",
+   "Interpreting figures of speech supports figurative meaning in texts"
+  ],
+  [
+   "WI-CC-ELA|L.6.2.a",
+   "procedure",
+   "Checking inferred word meanings in context supports determining meaning"
+  ]
+ ],
+ "WI-CC-ELA|R.7.5": [
+  [
+   "WI-CC-ELA|R.6.5",
+   "same",
+   "Analyzing how one section fits leads to analyzing overall structure"
+  ],
+  [
+   "WI-CC-ELA|R.6.2",
+   "prereq",
+   "Identifying theme and central idea is needed before linking structure to them"
+  ]
+ ],
+ "WI-CC-ELA|R.7.6": [
+  [
+   "WI-CC-ELA|R.6.6",
+   "same",
+   "Identifying point of view and bias leads to contrasting several perspectives"
+  ],
+  [
+   "WI-CC-ELA|R.6.3",
+   "concept",
+   "Understanding how characters respond and change supports contrasting their perspectives"
+  ]
+ ],
+ "WI-CC-ELA|R.7.7": [
+  [
+   "WI-CC-ELA|R.6.7",
+   "same",
+   "Comparing how formats aid understanding leads to analyzing techniques of each medium"
+  ],
+  [
+   "WI-CC-ELA|SL.6.2",
+   "concept",
+   "Interpreting information in diverse media supports comparing a text with its versions"
+  ]
+ ],
+ "WI-CC-ELA|R.7.8": [
+  [
+   "WI-CC-ELA|R.6.8",
+   "same",
+   "Separating supported from unsupported claims leads to judging validity and sufficiency"
+  ],
+  [
+   "WI-CC-ELA|SL.6.3",
+   "concept",
+   "Evaluating spoken arguments uses the same reasoning about claims and evidence"
+  ],
+  [
+   "WI-CC-ELA|W.6.2.a",
+   "concept",
+   "Writing arguments with reasons and evidence shows what sound support looks like"
+  ]
+ ],
+ "WI-CC-ELA|R.7.9": [
+  [
+   "WI-CC-ELA|R.6.9",
+   "same",
+   "Same evaluation and connection making applied to grade 7 texts"
+  ],
+  [
+   "WI-CC-ELA|R.6.6",
+   "concept",
+   "Understanding how culture shapes perspective deepens connections to cultures and identities"
+  ]
+ ],
+ "WI-CC-ELA|SL.7.1.a": [
+  [
+   "WI-CC-ELA|SL.6.1.a",
+   "same",
+   "Coming prepared and using evidence in discussion continues at grade 7"
+  ],
+  [
+   "WI-CC-ELA|R.6.1",
+   "prereq",
+   "Citing textual evidence is needed before referring to it in discussion"
+  ]
+ ],
+ "WI-CC-ELA|SL.7.1.b": [
+  [
+   "WI-CC-ELA|SL.6.1.b",
+   "same",
+   "Setting norms and goals grows into tracking them over time"
+  ]
+ ],
+ "WI-CC-ELA|SL.7.1.c": [
+  [
+   "WI-CC-ELA|SL.6.1.c",
+   "same",
+   "Posing and answering questions with detail grows into inviting elaboration"
+  ],
+  [
+   "WI-CC-ELA|SL.6.1.d",
+   "concept",
+   "Understanding multiple perspectives prepares students to promote them in discussion"
+  ]
+ ],
+ "WI-CC-ELA|SL.7.1.d": [
+  [
+   "WI-CC-ELA|SL.6.1.d",
+   "same",
+   "Reflecting on and paraphrasing perspectives extends to analyzing them"
+  ],
+  [
+   "WI-CC-ELA|R.6.6",
+   "concept",
+   "Analyzing point of view and bias in texts supports analyzing spoken perspectives"
+  ]
+ ],
+ "WI-CC-ELA|SL.7.2": [
+  [
+   "WI-CC-ELA|SL.6.2",
+   "same",
+   "Interpreting media information leads to analyzing its main ideas and details"
+  ],
+  [
+   "WI-CC-ELA|R.6.2",
+   "prereq",
+   "Determining central ideas and supporting details in texts comes first"
+  ],
+  [
+   "WI-CC-ELA|R.6.7",
+   "concept",
+   "Comparing how formats contribute to understanding supports analyzing media"
+  ]
+ ],
+ "WI-CC-ELA|SL.7.3": [
+  [
+   "WI-CC-ELA|SL.6.3",
+   "same",
+   "Separating supported from unsupported claims grows into judging soundness"
+  ],
+  [
+   "WI-CC-ELA|R.6.8",
+   "concept",
+   "Tracing and evaluating written arguments builds the same reasoning skills"
+  ]
+ ],
+ "WI-CC-ELA|SL.7.4": [
+  [
+   "WI-CC-ELA|SL.6.4",
+   "same",
+   "Presenting claims in logical order grows into emphasizing significant points"
+  ],
+  [
+   "WI-CC-ELA|W.6.2.a",
+   "concept",
+   "Writing arguments with clear reasons and evidence prepares spoken claims"
+  ]
+ ],
+ "WI-CC-ELA|SL.7.5": [
+  [
+   "WI-CC-ELA|SL.6.5",
+   "same",
+   "Using multimedia to clarify information now also emphasizes key points"
+  ],
+  [
+   "WI-CC-ELA|W.6.6",
+   "concept",
+   "Using technology to present relationships between ideas supports multimedia choices"
+  ]
+ ],
+ "WI-CC-ELA|W.7.1": [
+  [
+   "WI-CC-ELA|W.6.1",
+   "same",
+   "Same range of reflective, formal, and creative writing at grade 7"
+  ],
+  [
+   "WI-CC-ELA|W.6.4",
+   "concept",
+   "Matching writing to task, purpose, and audience underlies varied purposes"
+  ]
+ ],
+ "WI-CC-ELA|W.7.2.a": [
+  [
+   "WI-CC-ELA|W.6.2.a",
+   "same",
+   "Supporting claims with reasons and evidence extends to addressing opposing claims"
+  ],
+  [
+   "WI-CC-ELA|R.6.8",
+   "concept",
+   "Judging which claims are supported informs choosing sound reasons"
+  ],
+  [
+   "WI-CC-ELA|W.6.8",
+   "procedure",
+   "Assessing source credibility supplies the accurate sources arguments now require"
+  ],
+  [
+   "WI-CC-ELA|R.6.6",
+   "concept",
+   "Analyzing how authors distinguish their position helps acknowledge opposing claims"
+  ]
+ ],
+ "WI-CC-ELA|W.7.2.b": [
+  [
+   "WI-CC-ELA|W.6.2.b",
+   "same",
+   "Informative writing continues with richer facts, quotations, and broader categories"
+  ],
+  [
+   "WI-CC-ELA|W.6.8",
+   "procedure",
+   "Quoting and paraphrasing sources provides the facts and quotations to include"
+  ],
+  [
+   "WI-CC-ELA|W.6.3.a",
+   "concept",
+   "Organizing ideas and information underlies grouping content into categories"
+  ]
+ ],
+ "WI-CC-ELA|W.7.2.c": [
+  [
+   "WI-CC-ELA|W.6.2.c",
+   "same",
+   "Narrative techniques and event sequences extend to point of view and reflection"
+  ],
+  [
+   "WI-CC-ELA|R.6.6",
+   "concept",
+   "Understanding point of view in reading helps students establish one in narratives"
+  ]
+ ],
+ "WI-CC-ELA|W.7.3.a": [
+  [
+   "WI-CC-ELA|W.6.3.a",
+   "same",
+   "Introducing a topic and concluding grows into engaging introductions and clear structure"
+  ],
+  [
+   "WI-CC-ELA|R.6.5",
+   "concept",
+   "Seeing how sections fit an overall structure informs structuring own writing"
+  ]
+ ],
+ "WI-CC-ELA|W.7.3.b": [
+  [
+   "WI-CC-ELA|W.6.3.b",
+   "same",
+   "Using transitions to clarify relationships extends to a wider variety"
+  ],
+  [
+   "WI-CC-ELA|L.5.4.a",
+   "concept",
+   "Signal phrases for contrast and addition form a bank of transitions"
+  ]
+ ],
+ "WI-CC-ELA|W.7.3.c": [
+  [
+   "WI-CC-ELA|W.6.3.c",
+   "same",
+   "Precise and sensory language now also builds cohesion between ideas"
+  ],
+  [
+   "WI-CC-ELA|L.6.1.c",
+   "prereq",
+   "Expanding and combining sentences gives control of phrases and clauses for cohesion"
+  ],
+  [
+   "WI-CC-ELA|L.6.3.d",
+   "concept",
+   "Distinguishing similar words supports precise word choice"
+  ]
+ ],
+ "WI-CC-ELA|W.7.4": [
+  [
+   "WI-CC-ELA|W.6.4",
+   "same",
+   "Clear, coherent writing for task, purpose, and audience continues at grade 7"
+  ],
+  [
+   "WI-CC-ELA|W.6.3.a",
+   "prereq",
+   "Organizing ideas with introductions and conclusions underpins coherent writing"
+  ],
+  [
+   "WI-CC-ELA|L.6.1.d",
+   "concept",
+   "Keeping consistent style and tone supports writing suited to audience"
+  ]
+ ],
+ "WI-CC-ELA|W.7.5": [
+  [
+   "WI-CC-ELA|W.6.5",
+   "same",
+   "Planning and revising with support now focuses on purpose and audience"
+  ],
+  [
+   "WI-CC-ELA|W.6.4",
+   "concept",
+   "Understanding task, purpose, and audience gives a focus for revision"
+  ],
+  [
+   "WI-CC-ELA|L.6.5.b",
+   "procedure",
+   "Strategies to improve expression feed directly into editing and revising"
+  ]
+ ],
+ "WI-CC-ELA|W.7.6": [
+  [
+   "WI-CC-ELA|W.6.6",
+   "same",
+   "Producing and publishing with technology extends to linking and citing sources"
+  ],
+  [
+   "WI-CC-ELA|W.6.8",
+   "prereq",
+   "Providing bibliographic information is needed before linking and citing sources digitally"
+  ]
+ ],
+ "WI-CC-ELA|W.7.7": [
+  [
+   "WI-CC-ELA|W.6.7",
+   "same",
+   "Short inquiry projects now generate further questions instead of only refocusing"
+  ],
+  [
+   "WI-CC-ELA|W.6.8",
+   "procedure",
+   "Gathering credible information from sources drives each inquiry project"
+  ]
+ ],
+ "WI-CC-ELA|W.7.8": [
+  [
+   "WI-CC-ELA|W.6.8",
+   "same",
+   "Gathering credible sources and basic citation grow into effective searching and standard format"
+  ],
+  [
+   "WI-CC-ELA|R.6.9",
+   "concept",
+   "Evaluating text quality helps students judge accuracy of sources"
+  ]
+ ],
+ "WI-CC-ELA|W.7.9": [
+  [
+   "WI-CC-ELA|W.6.9",
+   "same",
+   "Drawing evidence for analysis continues using grade 7 reading skills"
+  ],
+  [
+   "WI-CC-ELA|R.6.1",
+   "prereq",
+   "Citing textual evidence in reading comes before using it in writing"
+  ]
+ ],
+ "WI-CC-ELA|L.8.1.a": [
+  [
+   "WI-CC-ELA|L.7.1.a",
+   "same",
+   "Same understanding of standardized English as one dialect at grade 8"
+  ]
+ ],
+ "WI-CC-ELA|L.8.1.b": [
+  [
+   "WI-CC-ELA|L.7.1.b",
+   "same",
+   "Determining and responding to language demands continues at grade 8"
+  ]
+ ],
+ "WI-CC-ELA|L.8.1.c": [
+  [
+   "WI-CC-ELA|L.5.5.b",
+   "prereq",
+   "Control of verb tenses is needed before using voice and mood"
+  ],
+  [
+   "WI-CC-ELA|L.7.5.a",
+   "prereq",
+   "Using clauses is needed for conditional sentences"
+  ],
+  [
+   "WI-CC-ELA|L.7.1.c",
+   "concept",
+   "Keeping style and tone consistent guides choosing voice and mood for effect"
+  ]
+ ],
+ "WI-CC-ELA|L.8.1.d": [
+  [
+   "WI-CC-ELA|SL.7.4",
+   "concept",
+   "Explaining the purpose of language choices in presentations starts this awareness"
+  ],
+  [
+   "WI-CC-ELA|L.7.5.b",
+   "concept",
+   "Explaining the purpose of sentence types builds awareness of language choices"
+  ],
+  [
+   "WI-CC-ELA|L.7.1.b",
+   "concept",
+   "Responding to language demands gives students reasons to explain their choices"
+  ]
+ ],
+ "WI-CC-ELA|L.8.2.a": [
+  [
+   "WI-CC-ELA|L.7.2.a",
+   "same",
+   "Verifying inferred meanings continues at grade 8"
+  ]
+ ],
+ "WI-CC-ELA|L.8.2.b": [
+  [
+   "WI-CC-ELA|L.7.2.b",
+   "same",
+   "Using Greek and Latin roots continues with grade 8 words"
+  ]
+ ],
+ "WI-CC-ELA|L.8.3": [
+  [
+   "WI-CC-ELA|L.7.3",
+   "same",
+   "Connotation and sound device analysis extends to analogies and allusions"
+  ],
+  [
+   "WI-CC-ELA|L.5.3.a",
+   "concept",
+   "Grade 5 introduced words that allude to significant characters"
+  ],
+  [
+   "WI-CC-ELA|R.7.4",
+   "concept",
+   "Analyzing word choice impact on tone in texts continues here"
+  ]
+ ],
+ "WI-CC-ELA|L.8.4": [
+  [
+   "WI-CC-ELA|L.7.4",
+   "same",
+   "Building academic vocabulary with intentional choices continues at grade 8"
+  ],
+  [
+   "WI-CC-ELA|L.7.2.b",
+   "procedure",
+   "Using Greek and Latin roots helps students learn new academic words"
+  ]
+ ],
+ "WI-CC-ELA|L.8.5.a": [
+  [
+   "WI-CC-ELA|L.5.5.b",
+   "prereq",
+   "Control of verb tenses is needed before using active and passive voice"
+  ],
+  [
+   "WI-CC-ELA|L.7.5.a",
+   "prereq",
+   "Knowing phrases and clauses helps students see how voice changes sentences"
+  ]
+ ],
+ "WI-CC-ELA|L.8.5.b": [
+  [
+   "WI-CC-ELA|L.5.5.b",
+   "prereq",
+   "Using verb tenses correctly is needed before working with verb moods"
+  ],
+  [
+   "WI-CC-ELA|L.7.5.b",
+   "concept",
+   "Using sentence types to signal relationships supports conditional and other moods"
+  ]
+ ],
+ "WI-CC-ELA|L.8.5.c": [
+  [
+   "WI-CC-ELA|L.5.5.b",
+   "prereq",
+   "Using verb tenses consistently comes before correcting voice and mood shifts"
+  ],
+  [
+   "WI-CC-ELA|L.7.5.c",
+   "procedure",
+   "Correcting dangling modifiers builds the habit of finding and fixing sentence errors"
+  ],
+  [
+   "WI-CC-ELA|L.7.1.c",
+   "concept",
+   "Keeping consistent style supports noticing unwanted shifts"
+  ]
+ ],
+ "WI-CC-ELA|L.8.6.a": [
+  [
+   "WI-CC-ELA|L.7.6.a",
+   "same",
+   "Using commas correctly leads to punctuation that signals a pause or break"
+  ],
+  [
+   "WI-CC-ELA|L.6.6.a",
+   "same",
+   "Grade 6 commas, parentheses, and dashes lead directly to marking breaks"
+  ],
+  [
+   "WI-CC-ELA|L.4.1.d",
+   "concept",
+   "Choosing punctuation for effect underlies using punctuation for pauses"
+  ]
+ ],
+ "WI-CC-ELA|L.8.6.b": [
+  [
+   "WI-CC-ELA|W.7.8",
+   "prereq",
+   "Quoting sources accurately is needed before showing omissions with ellipses"
+  ],
+  [
+   "WI-CC-ELA|L.4.6.b",
+   "prereq",
+   "Punctuating quotations correctly comes before marking omissions in them"
+  ]
+ ],
+ "WI-CC-ELA|L.8.6.c": [
+  [
+   "WI-CC-ELA|L.7.6.b",
+   "same",
+   "Correct spelling continues with grade 8 vocabulary"
+  ],
+  [
+   "WI-CC-ELA|L.7.2.b",
+   "concept",
+   "Knowing Greek and Latin roots supports spelling academic words"
+  ]
+ ],
+ "WI-CC-ELA|R.8.1": [
+  [
+   "WI-CC-ELA|R.7.1",
+   "same",
+   "Citing evidence now requires choosing the strongest support for analysis"
+  ],
+  [
+   "WI-CC-ELA|R.7.8",
+   "concept",
+   "Judging relevance and sufficiency of evidence helps pick strong support"
+  ],
+  [
+   "WI-CC-ELA|W.7.9",
+   "procedure",
+   "Drawing evidence for written analysis builds skill in citing it"
+  ]
+ ],
+ "WI-CC-ELA|R.8.2": [
+  [
+   "WI-CC-ELA|R.7.2",
+   "same",
+   "Analyzing how one theme develops extends to tracking several themes"
+  ],
+  [
+   "WI-CC-ELA|R.7.5",
+   "concept",
+   "Seeing how structure supports themes helps trace their development"
+  ],
+  [
+   "WI-CC-ELA|R.7.1",
+   "prereq",
+   "Citing evidence is needed to support claims about each theme"
+  ]
+ ],
+ "WI-CC-ELA|R.8.3": [
+  [
+   "WI-CC-ELA|R.7.3",
+   "same",
+   "Analyzing how plot elements interact narrows to the role of dialogue and events"
+  ],
+  [
+   "WI-CC-ELA|R.7.6",
+   "concept",
+   "Understanding character perspectives helps explain what dialogue reveals about character"
+  ],
+  [
+   "WI-CC-ELA|R.7.1",
+   "prereq",
+   "Citing specific lines as evidence supports analysis of dialogue and events"
+  ]
+ ],
+ "WI-CC-ELA|R.8.4": [
+  [
+   "WI-CC-ELA|R.7.4",
+   "same",
+   "Same word meaning and word choice analysis with grade 8 texts"
+  ],
+  [
+   "WI-CC-ELA|L.7.3",
+   "concept",
+   "Knowing connotation and sound devices supports analyzing word impact on tone"
+  ],
+  [
+   "WI-CC-ELA|L.7.2.a",
+   "procedure",
+   "Verifying word meanings in context supports determining meaning"
+  ]
+ ],
+ "WI-CC-ELA|R.8.5": [
+  [
+   "WI-CC-ELA|R.7.5",
+   "same",
+   "Analyzing structure in one text extends to comparing structures across texts"
+  ],
+  [
+   "WI-CC-ELA|R.5.5",
+   "same",
+   "Grade 5 first compared overall structure across two or more texts"
+  ],
+  [
+   "WI-CC-ELA|R.7.2",
+   "prereq",
+   "Identifying themes is needed to judge how structure contributes to them"
+  ]
+ ],
+ "WI-CC-ELA|R.8.6": [
+  [
+   "WI-CC-ELA|R.7.6",
+   "same",
+   "Contrasting character perspectives leads to analyzing how differences create tone"
+  ],
+  [
+   "WI-CC-ELA|R.7.4",
+   "concept",
+   "Understanding tone and mood is needed to explain effects of perspective"
+  ],
+  [
+   "WI-CC-ELA|R.7.8",
+   "concept",
+   "Evaluating arguments prepares students to see how authors address conflicting evidence"
+  ]
+ ],
+ "WI-CC-ELA|R.8.7": [
+  [
+   "WI-CC-ELA|R.7.7",
+   "same",
+   "Comparing a text with film or stage versions leads to judging faithfulness"
+  ],
+  [
+   "WI-CC-ELA|SL.7.2",
+   "concept",
+   "Analyzing ideas across diverse media supports weighing strengths of each medium"
+  ]
+ ],
+ "WI-CC-ELA|R.8.8": [
+  [
+   "WI-CC-ELA|R.7.8",
+   "same",
+   "Same argument evaluation applied to more complex grade 8 texts"
+  ],
+  [
+   "WI-CC-ELA|SL.7.3",
+   "concept",
+   "Evaluating soundness of spoken reasoning reinforces judging written arguments"
+  ],
+  [
+   "WI-CC-ELA|W.7.2.a",
+   "concept",
+   "Writing arguments with credible sources builds understanding of valid reasoning"
+  ]
+ ],
+ "WI-CC-ELA|R.8.9": [
+  [
+   "WI-CC-ELA|R.7.9",
+   "same",
+   "Evaluating text quality now requires students to build their own criteria"
+  ],
+  [
+   "WI-CC-ELA|R.7.8",
+   "concept",
+   "Judging validity and sufficiency gives students criteria for quality"
+  ]
+ ],
+ "WI-CC-ELA|SL.8.1.a": [
+  [
+   "WI-CC-ELA|SL.7.1.a",
+   "same",
+   "Coming prepared and using evidence in discussion continues at grade 8"
+  ],
+  [
+   "WI-CC-ELA|R.7.1",
+   "prereq",
+   "Citing textual evidence is needed before referring to it in discussion"
+  ]
+ ],
+ "WI-CC-ELA|SL.8.1.b": [
+  [
+   "WI-CC-ELA|SL.7.1.b",
+   "same",
+   "Setting and tracking norms with support grows into monitoring progress independently"
+  ]
+ ],
+ "WI-CC-ELA|SL.8.1.c": [
+  [
+   "WI-CC-ELA|SL.7.1.c",
+   "same",
+   "Inviting elaboration grows into questions that connect several speakers"
+  ],
+  [
+   "WI-CC-ELA|SL.7.1.a",
+   "concept",
+   "Preparing evidence before discussion lets students respond with it"
+  ]
+ ],
+ "WI-CC-ELA|SL.8.1.d": [
+  [
+   "WI-CC-ELA|SL.7.1.d",
+   "same",
+   "Analyzing multiple perspectives leads to qualifying own views using evidence"
+  ],
+  [
+   "WI-CC-ELA|SL.7.3",
+   "concept",
+   "Evaluating soundness of reasoning supports judging new information from others"
+  ]
+ ],
+ "WI-CC-ELA|SL.8.2": [
+  [
+   "WI-CC-ELA|SL.7.2",
+   "same",
+   "Analyzing media ideas and details extends to purposes and motives"
+  ],
+  [
+   "WI-CC-ELA|R.7.6",
+   "concept",
+   "Analyzing perspectives and possible biases supports judging motives behind media"
+  ]
+ ],
+ "WI-CC-ELA|SL.8.3": [
+  [
+   "WI-CC-ELA|SL.7.3",
+   "same",
+   "Judging soundness and sufficiency extends to spotting irrelevant evidence"
+  ],
+  [
+   "WI-CC-ELA|R.7.8",
+   "concept",
+   "Recognizing irrelevant evidence in written arguments transfers to listening"
+  ]
+ ],
+ "WI-CC-ELA|SL.8.4": [
+  [
+   "WI-CC-ELA|SL.7.4",
+   "same",
+   "Focused, coherent presentations now add valid reasoning and well chosen details"
+  ],
+  [
+   "WI-CC-ELA|W.7.2.a",
+   "concept",
+   "Writing logically organized arguments prepares students to present valid reasoning"
+  ]
+ ],
+ "WI-CC-ELA|SL.8.5": [
+  [
+   "WI-CC-ELA|SL.7.5",
+   "same",
+   "Using multimedia to emphasize points grows into integrating it to strengthen claims"
+  ],
+  [
+   "WI-CC-ELA|R.7.7",
+   "concept",
+   "Analyzing effects of techniques unique to each medium informs media choices"
+  ]
+ ],
+ "WI-CC-ELA|W.8.1": [
+  [
+   "WI-CC-ELA|W.7.1",
+   "same",
+   "Same range of reflective, formal, and creative writing at grade 8"
+  ],
+  [
+   "WI-CC-ELA|W.7.4",
+   "concept",
+   "Matching writing to task, purpose, and audience underlies varied purposes"
+  ]
+ ],
+ "WI-CC-ELA|W.8.2.a": [
+  [
+   "WI-CC-ELA|W.7.2.a",
+   "same",
+   "Acknowledging opposing claims grows into distinguishing own claims from them"
+  ],
+  [
+   "WI-CC-ELA|R.7.8",
+   "concept",
+   "Assessing valid reasoning and sufficient evidence guides building logical arguments"
+  ],
+  [
+   "WI-CC-ELA|W.7.8",
+   "procedure",
+   "Gathering accurate, credible sources supplies evidence for arguments"
+  ]
+ ],
+ "WI-CC-ELA|W.8.2.b": [
+  [
+   "WI-CC-ELA|W.7.2.b",
+   "same",
+   "Informative writing adds analysis of content to selection and organization"
+  ],
+  [
+   "WI-CC-ELA|W.7.8",
+   "procedure",
+   "Gathering and quoting credible sources provides content to analyze"
+  ],
+  [
+   "WI-CC-ELA|W.7.3.a",
+   "concept",
+   "Structuring text to support purpose underlies organizing ideas into categories"
+  ]
+ ],
+ "WI-CC-ELA|W.8.2.c": [
+  [
+   "WI-CC-ELA|W.7.2.c",
+   "same",
+   "Same narrative techniques and event sequences applied with more control"
+  ],
+  [
+   "WI-CC-ELA|R.7.3",
+   "concept",
+   "Analyzing how plot elements affect one another informs building a sequence"
+  ]
+ ],
+ "WI-CC-ELA|W.8.3.a": [
+  [
+   "WI-CC-ELA|W.7.3.a",
+   "same",
+   "Engaging introductions and clear structure extend to conclusions that give closure"
+  ],
+  [
+   "WI-CC-ELA|R.7.5",
+   "concept",
+   "Analyzing how structure develops ideas informs structuring an entire text"
+  ]
+ ],
+ "WI-CC-ELA|W.8.3.b": [
+  [
+   "WI-CC-ELA|W.7.3.b",
+   "same",
+   "Using a variety of transitions leads to varying them for cohesion"
+  ],
+  [
+   "WI-CC-ELA|W.7.3.c",
+   "concept",
+   "Using phrases and clauses for cohesion supports linking ideas with transitions"
+  ]
+ ],
+ "WI-CC-ELA|W.8.3.c": [
+  [
+   "WI-CC-ELA|W.7.3.c",
+   "same",
+   "Precise and sensory word choice grows into genre specific, engaging vocabulary"
+  ],
+  [
+   "WI-CC-ELA|L.7.3",
+   "concept",
+   "Understanding connotation and sound devices helps choose words that engage readers"
+  ],
+  [
+   "WI-CC-ELA|L.7.4",
+   "concept",
+   "Building academic and discipline vocabulary supplies genre specific words"
+  ]
+ ],
+ "WI-CC-ELA|W.8.4": [
+  [
+   "WI-CC-ELA|W.7.4",
+   "same",
+   "Clear, coherent writing for task, purpose, and audience continues at grade 8"
+  ],
+  [
+   "WI-CC-ELA|L.7.1.c",
+   "concept",
+   "Maintaining consistent style and tone supports writing suited to audience"
+  ],
+  [
+   "WI-CC-ELA|W.7.3.a",
+   "prereq",
+   "Structuring text to support purpose is needed for coherent writing"
+  ]
+ ],
+ "WI-CC-ELA|W.8.5": [
+  [
+   "WI-CC-ELA|W.7.5",
+   "same",
+   "Same revising process focused on purpose and audience, with more independence"
+  ],
+  [
+   "WI-CC-ELA|L.7.1.d",
+   "procedure",
+   "Eliminating wordiness and redundancy is a key revising move"
+  ]
+ ],
+ "WI-CC-ELA|W.8.6": [
+  [
+   "WI-CC-ELA|W.7.6",
+   "same",
+   "Using technology to publish and collaborate continues at grade 8"
+  ],
+  [
+   "WI-CC-ELA|SL.7.5",
+   "concept",
+   "Using multimedia in presentations supports presenting relationships between ideas digitally"
+  ]
+ ],
+ "WI-CC-ELA|W.8.7": [
+  [
+   "WI-CC-ELA|W.7.7",
+   "same",
+   "Generating related questions extends to self generated questions and multiple avenues"
+  ],
+  [
+   "WI-CC-ELA|W.7.8",
+   "procedure",
+   "Effective searching and assessing sources drives each inquiry"
+  ]
+ ],
+ "WI-CC-ELA|W.8.8": [
+  [
+   "WI-CC-ELA|W.7.8",
+   "same",
+   "Same searching, credibility checks, and standard citation with more complex sources"
+  ],
+  [
+   "WI-CC-ELA|R.7.8",
+   "concept",
+   "Judging relevance and sufficiency of evidence supports assessing source accuracy"
+  ]
+ ],
+ "WI-CC-ELA|W.8.9": [
+  [
+   "WI-CC-ELA|W.7.9",
+   "same",
+   "Drawing evidence for analysis continues using grade 8 reading skills"
+  ],
+  [
+   "WI-CC-ELA|R.7.1",
+   "prereq",
+   "Citing textual evidence in reading comes before using it in writing"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.1.a": [
+  [
+   "WI-CC-ELA|L.8.1.a",
+   "same",
+   "Same understanding of standardized English as one dialect in high school"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.1.b": [
+  [
+   "WI-CC-ELA|L.8.1.b",
+   "same",
+   "Determining language demands grows into full communicative competence"
+  ],
+  [
+   "WI-CC-ELA|L.8.1.d",
+   "concept",
+   "Explaining reasons for language choices supports matching language to situations"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.1.c": [
+  [
+   "WI-CC-ELA|L.8.1.d",
+   "same",
+   "Explaining reasons for language choices grows into justifying and evaluating them"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.1.d": [
+  [
+   "WI-CC-ELA|W.8.8",
+   "prereq",
+   "Following a standard citation format comes before following full style manuals"
+  ],
+  [
+   "WI-CC-ELA|W.8.5",
+   "procedure",
+   "Editing writing is the process used to conform to a style manual"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.2.a": [
+  [
+   "WI-CC-ELA|L.8.2.a",
+   "same",
+   "Verifying meanings with references grows into checking etymology and part of speech"
+  ],
+  [
+   "WI-CC-ELA|L.8.2.b",
+   "concept",
+   "Knowing Greek and Latin roots is the basis of understanding etymology"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.2.b": [
+  [
+   "WI-CC-ELA|L.8.2.b",
+   "concept",
+   "Knowing affixes and roots explains how word forms change"
+  ],
+  [
+   "WI-CC-ELA|RF.5.3",
+   "concept",
+   "Using morphology to read multisyllabic words supports seeing word change patterns"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.3.a": [
+  [
+   "WI-CC-ELA|L.8.3",
+   "same",
+   "Describing connotation differences grows into analyzing nuances of similar words"
+  ],
+  [
+   "WI-CC-ELA|L.6.3.d",
+   "concept",
+   "Distinguishing words with similar definitions is the root of this skill"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.3.b": [
+  [
+   "WI-CC-ELA|L.8.3",
+   "same",
+   "Analyzing impact of single word choices grows into their cumulative impact"
+  ],
+  [
+   "WI-CC-ELA|R.8.4",
+   "concept",
+   "Analyzing word choice impact on tone in texts supports cumulative analysis"
+  ],
+  [
+   "WI-CC-ELA|L.8.1.b",
+   "concept",
+   "Recognizing language demands supports judging formal and informal tone"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.4": [
+  [
+   "WI-CC-ELA|L.8.4",
+   "same",
+   "Building academic vocabulary with intentional choices continues in high school"
+  ],
+  [
+   "WI-CC-ELA|L.8.2.b",
+   "procedure",
+   "Using Greek and Latin roots helps students learn new academic words"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.5.a": [
+  [
+   "WI-CC-ELA|L.7.5.a",
+   "prereq",
+   "Recognizing phrases and clauses is needed to make them parallel"
+  ],
+  [
+   "WI-CC-ELA|L.5.5.c",
+   "prereq",
+   "Using correlative conjunctions correctly requires balanced, parallel sentence parts"
+  ],
+  [
+   "WI-CC-ELA|L.8.5.c",
+   "concept",
+   "Correcting shifts in voice and mood builds the consistency parallelism needs"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.5.b": [
+  [
+   "WI-CC-ELA|L.7.5.a",
+   "same",
+   "Using phrases and clauses correctly grows into using them for variety"
+  ],
+  [
+   "WI-CC-ELA|L.7.5.b",
+   "prereq",
+   "Building compound and complex sentences is needed before varying clause types"
+  ],
+  [
+   "WI-CC-ELA|L.6.1.c",
+   "procedure",
+   "Expanding and combining sentences is the method for adding variety"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.6.a": [
+  [
+   "WI-CC-ELA|L.7.5.b",
+   "prereq",
+   "Knowing independent clauses in compound sentences is needed to use semicolons"
+  ],
+  [
+   "WI-CC-ELA|L.4.6.c",
+   "prereq",
+   "Joining clauses with commas comes before joining them with semicolons"
+  ],
+  [
+   "WI-CC-ELA|L.8.6.a",
+   "concept",
+   "Using punctuation to show a pause or break leads to colons"
+  ]
+ ],
+ "WI-CC-ELA|L.9-10.6.b": [
+  [
+   "WI-CC-ELA|L.8.6.c",
+   "same",
+   "Correct spelling continues in high school"
+  ],
+  [
+   "WI-CC-ELA|L.8.2.b",
+   "concept",
+   "Knowing Greek and Latin roots supports spelling academic words"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.1": [
+  [
+   "WI-CC-ELA|R.8.1",
+   "same",
+   "Citing strong evidence continues, now with questions for further exploration"
+  ],
+  [
+   "WI-CC-ELA|W.8.7",
+   "concept",
+   "Generating related questions in inquiry supports developing questions from texts"
+  ],
+  [
+   "WI-CC-ELA|W.8.9",
+   "procedure",
+   "Drawing evidence for written analysis reinforces citing relevant evidence"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.2": [
+  [
+   "WI-CC-ELA|R.8.2",
+   "same",
+   "Analyzing theme development deepens to how details shape and refine it"
+  ],
+  [
+   "WI-CC-ELA|R.8.1",
+   "prereq",
+   "Citing strong evidence is needed to show how details shape themes"
+  ],
+  [
+   "WI-CC-ELA|R.8.5",
+   "concept",
+   "Seeing how structure contributes to theme supports tracing how themes emerge"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.3": [
+  [
+   "WI-CC-ELA|R.8.3",
+   "same",
+   "Analyzing how dialogue reveals character leads to tracing complex character development"
+  ],
+  [
+   "WI-CC-ELA|R.8.6",
+   "concept",
+   "Understanding differing character perspectives supports analyzing character interactions"
+  ],
+  [
+   "WI-CC-ELA|R.8.8",
+   "concept",
+   "Tracing an argument prepares students to analyze how authors unfold one"
+  ],
+  [
+   "WI-CC-ELA|R.8.2",
+   "prereq",
+   "Identifying themes is needed to explain how characters develop them"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.4": [
+  [
+   "WI-CC-ELA|R.8.4",
+   "same",
+   "Word meaning and word choice analysis extends to key terms and genres"
+  ],
+  [
+   "WI-CC-ELA|L.8.3",
+   "concept",
+   "Analyzing connotation, analogies, and allusions supports judging word choice impact"
+  ],
+  [
+   "WI-CC-ELA|L.8.2.a",
+   "procedure",
+   "Verifying word meanings is the method for determining unfamiliar terms"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.5": [
+  [
+   "WI-CC-ELA|R.8.5",
+   "same",
+   "Comparing how structures shape meaning leads to considering structure effects on readers"
+  ],
+  [
+   "WI-CC-ELA|R.8.6",
+   "concept",
+   "Understanding author perspective helps explain how intent shapes sections"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.6": [
+  [
+   "WI-CC-ELA|R.8.6",
+   "same",
+   "Analyzing point of view and cultural perspective leads to studying rhetorical purpose"
+  ],
+  [
+   "WI-CC-ELA|R.8.4",
+   "concept",
+   "Analyzing word choice and tone supports explaining how devices shape messages"
+  ],
+  [
+   "WI-CC-ELA|R.8.1",
+   "prereq",
+   "Making logical inferences is needed to uncover implicit messages"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.7": [
+  [
+   "WI-CC-ELA|R.8.7",
+   "same",
+   "Judging how faithful a production is leads to tracking altered details"
+  ],
+  [
+   "WI-CC-ELA|SL.8.2",
+   "concept",
+   "Analyzing purposes and motives of media helps explain what each format emphasizes"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.8": [
+  [
+   "WI-CC-ELA|R.8.8",
+   "same",
+   "Evaluating reasoning and evidence extends to identifying fallacies in key statements"
+  ],
+  [
+   "WI-CC-ELA|SL.8.3",
+   "concept",
+   "Evaluating spoken arguments for sound reasoning builds the same judgment"
+  ],
+  [
+   "WI-CC-ELA|W.8.2.a",
+   "concept",
+   "Writing arguments that distinguish opposing claims shows how arguments are built"
+  ]
+ ],
+ "WI-CC-ELA|R.9-10.9": [
+  [
+   "WI-CC-ELA|R.8.9",
+   "same",
+   "Developing criteria to evaluate quality continues with more complex texts"
+  ],
+  [
+   "WI-CC-ELA|R.8.6",
+   "concept",
+   "Understanding how culture shapes perspective supports connections to cultures and eras"
+  ]
+ ],
+ "WI-CC-ELA|SL.9-10.1.a": [
+  [
+   "WI-CC-ELA|SL.8.1.a",
+   "same",
+   "Preparing with evidence now includes research beyond the text"
+  ],
+  [
+   "WI-CC-ELA|W.8.7",
+   "procedure",
+   "Conducting inquiry projects provides research to draw on in discussion"
+  ]
+ ],
+ "WI-CC-ELA|SL.9-10.1.b": [
+  [
+   "WI-CC-ELA|SL.8.1.b",
+   "same",
+   "Setting and monitoring norms grows into shared decision making with peers"
+  ]
+ ],
+ "WI-CC-ELA|SL.9-10.1.c": [
+  [
+   "WI-CC-ELA|SL.8.1.c",
+   "same",
+   "Questions connecting speakers grow into questions linking to broader themes"
+  ],
+  [
+   "WI-CC-ELA|R.8.2",
+   "concept",
+   "Identifying themes in texts helps relate discussion to larger ideas"
+  ]
+ ],
+ "WI-CC-ELA|SL.9-10.1.d": [
+  [
+   "WI-CC-ELA|SL.8.1.d",
+   "same",
+   "Qualifying views using evidence extends to summarizing agreement and disagreement"
+  ],
+  [
+   "WI-CC-ELA|R.8.6",
+   "concept",
+   "Analyzing conflicting viewpoints in texts supports engaging diverse perspectives"
+  ]
+ ],
+ "WI-CC-ELA|SL.9-10.2": [
+  [
+   "WI-CC-ELA|SL.8.2",
+   "same",
+   "Evaluating media motives grows into judging credibility across several sources"
+  ],
+  [
+   "WI-CC-ELA|W.8.8",
+   "concept",
+   "Assessing source credibility and accuracy in research transfers to media sources"
+  ]
+ ],
+ "WI-CC-ELA|SL.9-10.3": [
+  [
+   "WI-CC-ELA|SL.8.3",
+   "same",
+   "Spotting irrelevant evidence grows into identifying fallacies and distorted evidence"
+  ],
+  [
+   "WI-CC-ELA|R.8.6",
+   "concept",
+   "Analyzing point of view and perspective in texts supports evaluating speakers"
+  ],
+  [
+   "WI-CC-ELA|R.8.8",
+   "concept",
+   "Evaluating written reasoning and evidence builds the same judgment"
+  ]
+ ],
+ "WI-CC-ELA|SL.9-10.4": [
+  [
+   "WI-CC-ELA|SL.8.4",
+   "same",
+   "Presenting with valid reasoning grows into presentations listeners can easily follow"
+  ],
+  [
+   "WI-CC-ELA|W.8.3.a",
+   "concept",
+   "Structuring writing with clear organization informs organizing presentations"
+  ],
+  [
+   "WI-CC-ELA|L.8.1.b",
+   "concept",
+   "Determining language demands of a situation guides presentation style"
+  ]
+ ],
+ "WI-CC-ELA|SL.9-10.5": [
+  [
+   "WI-CC-ELA|SL.8.5",
+   "same",
+   "Integrating multimedia grows into strategic choices about digital media"
+  ],
+  [
+   "WI-CC-ELA|W.8.6",
+   "concept",
+   "Using technology to present relationships between ideas supports digital media use"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.1": [
+  [
+   "WI-CC-ELA|W.8.1",
+   "same",
+   "Same range of reflective, formal, and creative writing in high school"
+  ],
+  [
+   "WI-CC-ELA|W.8.4",
+   "concept",
+   "Matching writing to task, purpose, and audience underlies varied purposes"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.2.a": [
+  [
+   "WI-CC-ELA|W.8.2.a",
+   "same",
+   "Distinguishing claims from opposing claims grows into developing counterclaims fairly"
+  ],
+  [
+   "WI-CC-ELA|R.8.8",
+   "concept",
+   "Assessing valid reasoning and sufficient evidence underpins writing valid arguments"
+  ],
+  [
+   "WI-CC-ELA|W.8.9",
+   "procedure",
+   "Drawing evidence from texts is the basis of literary analysis"
+  ],
+  [
+   "WI-CC-ELA|R.8.2",
+   "prereq",
+   "Analyzing theme development is needed before writing literary analysis"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.2.b": [
+  [
+   "WI-CC-ELA|W.8.2.b",
+   "same",
+   "Informative writing moves to complex ideas, connections, and distinctions"
+  ],
+  [
+   "WI-CC-ELA|W.8.8",
+   "procedure",
+   "Gathering and citing credible sources provides well chosen content"
+  ],
+  [
+   "WI-CC-ELA|W.8.3.a",
+   "concept",
+   "Structuring an entire text supports organizing complex ideas clearly"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.2.c": [
+  [
+   "WI-CC-ELA|W.8.2.c",
+   "same",
+   "Same narrative techniques and event sequences with greater sophistication"
+  ],
+  [
+   "WI-CC-ELA|R.8.3",
+   "concept",
+   "Analyzing how dialogue reveals character informs writing effective dialogue"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.3.a": [
+  [
+   "WI-CC-ELA|W.8.3.a",
+   "same",
+   "Clear structure and closure extend to organizing complex ideas and claims"
+  ],
+  [
+   "WI-CC-ELA|R.8.5",
+   "concept",
+   "Comparing how text structures shape meaning informs choosing a structure"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.3.b": [
+  [
+   "WI-CC-ELA|W.8.3.b",
+   "same",
+   "Varying transitions for cohesion extends to linking major sections"
+  ],
+  [
+   "WI-CC-ELA|L.7.5.b",
+   "prereq",
+   "Sentences that signal relationships among ideas underpin effective transitions"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.3.c": [
+  [
+   "WI-CC-ELA|W.8.3.c",
+   "same",
+   "Genre specific, engaging vocabulary grows into precise domain language and telling details"
+  ],
+  [
+   "WI-CC-ELA|L.8.4",
+   "concept",
+   "Building academic and discipline vocabulary supplies terms for complex topics"
+  ],
+  [
+   "WI-CC-ELA|L.8.1.b",
+   "concept",
+   "Determining language demands of a situation guides culturally sustaining word choice"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.4": [
+  [
+   "WI-CC-ELA|W.8.4",
+   "same",
+   "Clear, coherent writing for task, purpose, and audience continues in high school"
+  ],
+  [
+   "WI-CC-ELA|L.8.1.d",
+   "concept",
+   "Explaining reasons for language choices supports intentional style"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.5": [
+  [
+   "WI-CC-ELA|W.8.5",
+   "same",
+   "Revising for purpose and audience narrows to what is most significant"
+  ],
+  [
+   "WI-CC-ELA|L.8.5.c",
+   "procedure",
+   "Correcting shifts in verb voice and mood is part of editing"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.6": [
+  [
+   "WI-CC-ELA|W.8.6",
+   "same",
+   "Using technology to publish grows into intentional choices about each tool"
+  ],
+  [
+   "WI-CC-ELA|SL.8.5",
+   "concept",
+   "Integrating multimedia in presentations prepares students to match modes with ideas"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.7": [
+  [
+   "WI-CC-ELA|W.8.7",
+   "same",
+   "Short inquiry projects extend to sustained research that synthesizes sources"
+  ],
+  [
+   "WI-CC-ELA|W.8.8",
+   "procedure",
+   "Gathering and assessing sources is the basis of research"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.8": [
+  [
+   "WI-CC-ELA|W.8.8",
+   "same",
+   "Effective searching and citation grow into advanced searches and integration"
+  ],
+  [
+   "WI-CC-ELA|W.8.3.b",
+   "concept",
+   "Using transitions for cohesion helps integrate sources while keeping flow"
+  ]
+ ],
+ "WI-CC-ELA|W.9-10.9": [
+  [
+   "WI-CC-ELA|W.8.9",
+   "same",
+   "Drawing evidence for analysis continues using grades 9 and 10 reading skills"
+  ],
+  [
+   "WI-CC-ELA|R.8.1",
+   "prereq",
+   "Citing strong textual evidence in reading comes before using it in writing"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.1.a": [
+  [
+   "WI-CC-ELA|L.9-10.1.a",
+   "same",
+   "Same understanding of standardized English as one dialect in grades 11 and 12"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.1.b": [
+  [
+   "WI-CC-ELA|L.9-10.1.b",
+   "same",
+   "Communicative competence for varied situations continues in grades 11 and 12"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.1.c": [
+  [
+   "WI-CC-ELA|L.9-10.1.c",
+   "same",
+   "Justifying language choices extends to genre choices and appropriateness"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.1.d": [
+  [
+   "WI-CC-ELA|L.9-10.1.d",
+   "same",
+   "Writing to style manual expectations continues in grades 11 and 12"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.1.e": [
+  [
+   "WI-CC-ELA|L.9-10.5.b",
+   "prereq",
+   "Using varied phrases and clauses is needed before varying syntax for effect"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.5.a",
+   "prereq",
+   "Using parallel structure is a key syntax tool"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.6.a",
+   "prereq",
+   "Using colons and semicolons supports building varied sentence structures"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.2.a": [
+  [
+   "WI-CC-ELA|L.9-10.2.a",
+   "same",
+   "Checking pronunciation, meaning, and etymology adds standardized usage"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.2.b": [
+  [
+   "WI-CC-ELA|L.9-10.2.b",
+   "same",
+   "Using patterns of word changes continues with grades 11 and 12 words"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.3.a": [
+  [
+   "WI-CC-ELA|L.9-10.3.a",
+   "same",
+   "Analyzing nuances in similar words continues with more complex texts"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.3.b": [
+  [
+   "WI-CC-ELA|L.9-10.3.b",
+   "same",
+   "Cumulative word choice analysis extends to multiple meanings and linguistic diversity"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.1.a",
+   "concept",
+   "Seeing standardized English as one dialect supports valuing linguistic diversity"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.4": [
+  [
+   "WI-CC-ELA|L.9-10.4",
+   "same",
+   "Building academic vocabulary with intentional choices continues in grades 11 and 12"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.2.b",
+   "procedure",
+   "Using patterns of word changes helps students learn new academic words"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.5.a": [
+  [
+   "WI-CC-ELA|L.9-10.1.a",
+   "concept",
+   "Seeing standardized English as one dialect shows conventions are agreed upon"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.1.d",
+   "concept",
+   "Knowing style manuals differ by discipline shows conventions are agreed usage"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.5.b": [
+  [
+   "WI-CC-ELA|L.9-10.1.a",
+   "concept",
+   "Knowing the history and power of standardized English explains contested usage"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.1.d",
+   "concept",
+   "Knowing style manuals differ across disciplines shows how conventions vary"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.5.c": [
+  [
+   "WI-CC-ELA|L.9-10.2.a",
+   "procedure",
+   "Consulting print and digital references is the method used here"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.1.d",
+   "procedure",
+   "Using style manuals prepares students to consult usage guides"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.6.a": [
+  [
+   "WI-CC-ELA|L.9-10.6.a",
+   "same",
+   "Using colons and semicolons leads to more sophisticated punctuation"
+  ],
+  [
+   "WI-CC-ELA|L.8.6.b",
+   "prereq",
+   "Marking omissions in quotations comes before using brackets in research"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.1.d",
+   "concept",
+   "Following style manuals informs brackets and italics in research writing"
+  ],
+  [
+   "WI-CC-ELA|L.5.6.b",
+   "concept",
+   "Using italics and quotation marks for titles is an early form of these conventions"
+  ]
+ ],
+ "WI-CC-ELA|L.11-12.6.b": [
+  [
+   "WI-CC-ELA|L.9-10.6.b",
+   "same",
+   "Correct spelling continues in grades 11 and 12"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.2.a",
+   "concept",
+   "Knowing etymology supports spelling unfamiliar academic words"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.1": [
+  [
+   "WI-CC-ELA|R.9-10.1",
+   "same",
+   "Citing strong evidence extends to noticing where the text is ambiguous"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.3.a",
+   "concept",
+   "Analyzing nuances in word meaning helps students spot ambiguity"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.9",
+   "procedure",
+   "Drawing evidence for written analysis reinforces citing strong textual support"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.2": [
+  [
+   "WI-CC-ELA|R.9-10.2",
+   "same",
+   "Tracing how themes emerge extends to two or more themes in complex texts"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.3",
+   "concept",
+   "Analyzing how characters develop themes supports tracking several themes at once"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.1",
+   "prereq",
+   "Citing strong evidence is needed to show how details refine themes"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.3": [
+  [
+   "WI-CC-ELA|R.9-10.3",
+   "same",
+   "Analyzing character and idea development leads to judging author choices and interactions"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.5",
+   "concept",
+   "Considering how structure creates meaning supports analyzing the impact of author choices"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.6",
+   "concept",
+   "Knowing how authors use devices and purpose informs analysis of their choices"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.4": [
+  [
+   "WI-CC-ELA|R.9-10.4",
+   "same",
+   "Examining key terms leads to tracing how authors refine them over a text"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.3.b",
+   "concept",
+   "Analyzing cumulative impact of word choice supports tracing refined meanings"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.2.a",
+   "procedure",
+   "Using references to find precise meanings supports analysis of technical terms"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.5": [
+  [
+   "WI-CC-ELA|R.9-10.5",
+   "same",
+   "Considering structure effects moves to analyzing and evaluating them"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.8",
+   "concept",
+   "Evaluating arguments supports judging how structure makes an argument persuasive"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.6",
+   "concept",
+   "Understanding rhetorical strategies supports judging persuasive technique and audience appeal"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.6": [
+  [
+   "WI-CC-ELA|R.9-10.6",
+   "same",
+   "Same rhetorical analysis now extended to satire, irony, and understatement"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.1",
+   "prereq",
+   "Logical inference is needed to read meaning beyond what is stated"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.3.a",
+   "concept",
+   "Analyzing connotation and nuance supports recognizing sarcasm and understatement"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.7": [
+  [
+   "WI-CC-ELA|R.9-10.7",
+   "same",
+   "Analyzing a subject in two formats leads to evaluating multiple adaptations"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.7",
+   "procedure",
+   "Synthesizing sources in research prepares students to integrate sources on a topic"
+  ],
+  [
+   "WI-CC-ELA|SL.9-10.2",
+   "concept",
+   "Synthesizing media sources and judging credibility supports integrating sources"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.8": [
+  [
+   "WI-CC-ELA|R.9-10.8",
+   "same",
+   "Assessing validity and fallacy extends to applying lenses such as legal reasoning"
+  ],
+  [
+   "WI-CC-ELA|SL.9-10.3",
+   "concept",
+   "Identifying fallacious reasoning in speech builds the same evaluation skill"
+  ]
+ ],
+ "WI-CC-ELA|R.11-12.9": [
+  [
+   "WI-CC-ELA|R.9-10.9",
+   "same",
+   "Developing criteria and connections continues with complex texts and eras"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.6",
+   "concept",
+   "Explaining how culture and identity shape perspective supports cross cultural connections"
+  ]
+ ],
+ "WI-CC-ELA|SL.11-12.1.a": [
+  [
+   "WI-CC-ELA|SL.9-10.1.a",
+   "same",
+   "Preparing with text evidence and research continues in grades 11 and 12"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.7",
+   "procedure",
+   "Conducting research projects provides evidence to bring to discussion"
+  ]
+ ],
+ "WI-CC-ELA|SL.11-12.1.b": [
+  [
+   "WI-CC-ELA|SL.9-10.1.b",
+   "same",
+   "Shared norms and decision making grow into promoting civil, democratic discussion"
+  ]
+ ],
+ "WI-CC-ELA|SL.11-12.1.c": [
+  [
+   "WI-CC-ELA|SL.9-10.1.c",
+   "same",
+   "Linking talk to broader themes grows into probing reasoning and evidence"
+  ],
+  [
+   "WI-CC-ELA|SL.9-10.3",
+   "concept",
+   "Evaluating reasoning and spotting fallacies helps students probe the reasoning of others"
+  ]
+ ],
+ "WI-CC-ELA|SL.11-12.1.d": [
+  [
+   "WI-CC-ELA|SL.9-10.1.d",
+   "same",
+   "Summarizing agreement and disagreement grows into synthesizing all sides"
+  ],
+  [
+   "WI-CC-ELA|SL.9-10.2",
+   "concept",
+   "Synthesizing multiple sources prepares students to synthesize claims in discussion"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.7",
+   "concept",
+   "Narrowing or broadening research helps decide what further research is needed"
+  ]
+ ],
+ "WI-CC-ELA|SL.11-12.2": [
+  [
+   "WI-CC-ELA|SL.9-10.2",
+   "same",
+   "Synthesizing and judging credibility now serves decisions and notes discrepancies"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.8",
+   "concept",
+   "Assessing usefulness of sources supports evaluating credibility and accuracy"
+  ]
+ ],
+ "WI-CC-ELA|SL.11-12.3": [
+  [
+   "WI-CC-ELA|SL.9-10.3",
+   "same",
+   "Identifying fallacies grows into assessing premises, word choice, and tone"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.6",
+   "concept",
+   "Analyzing rhetorical strategies in texts supports evaluating spoken rhetoric"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.3.b",
+   "concept",
+   "Analyzing cumulative impact of word choice on tone transfers to speeches"
+  ]
+ ],
+ "WI-CC-ELA|SL.11-12.4": [
+  [
+   "WI-CC-ELA|SL.9-10.4",
+   "same",
+   "Presentations listeners can follow now also address opposing perspectives"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.2.a",
+   "concept",
+   "Developing claims and counterclaims fairly in writing prepares students to address opposing views"
+  ]
+ ],
+ "WI-CC-ELA|SL.11-12.5": [
+  [
+   "WI-CC-ELA|SL.9-10.5",
+   "same",
+   "Strategic use of digital media continues with more complex presentations"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.6",
+   "concept",
+   "Intentional technology choices for audiences inform digital media in presentations"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.1": [
+  [
+   "WI-CC-ELA|W.9-10.1",
+   "same",
+   "Same range of reflective, formal, and creative writing in grades 11 and 12"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.4",
+   "concept",
+   "Matching writing to task, purpose, and audience underlies varied purposes"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.2.a": [
+  [
+   "WI-CC-ELA|W.9-10.2.a",
+   "same",
+   "Developing claims and counterclaims fairly now adds establishing their significance"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.8",
+   "concept",
+   "Evaluating validity and fallacy underpins writing arguments with valid reasoning"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.9",
+   "procedure",
+   "Drawing textual evidence is the basis of literary analysis"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.2.b": [
+  [
+   "WI-CC-ELA|W.9-10.2.b",
+   "same",
+   "Conveying complex ideas extends to choosing the most significant information"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.8",
+   "procedure",
+   "Gathering and integrating authoritative sources supplies significant content"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.3.a",
+   "concept",
+   "Organizing complex ideas to make distinctions underpins clear informative writing"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.2.c": [
+  [
+   "WI-CC-ELA|W.9-10.2.c",
+   "same",
+   "Same narrative techniques and event sequences with greater sophistication"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.5",
+   "concept",
+   "Considering how structure creates meaning informs shaping narrative sequences"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.3.a": [
+  [
+   "WI-CC-ELA|W.9-10.3.a",
+   "same",
+   "Organizing complex ideas grows into structures where each part builds on the last"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.3.b",
+   "concept",
+   "Linking major sections with transitions supports building a unified whole"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.3.b": [
+  [
+   "WI-CC-ELA|W.9-10.3.b",
+   "same",
+   "Varied transitions linking sections extend to using syntax for cohesion"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.5.b",
+   "prereq",
+   "Using varied phrases and clauses is needed to vary syntax for cohesion"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.5.a",
+   "prereq",
+   "Parallel structure is a key syntax tool for linking ideas"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.3.c": [
+  [
+   "WI-CC-ELA|W.9-10.3.c",
+   "same",
+   "Domain specific language to manage complexity extends to metaphor and analogy"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.3.a",
+   "concept",
+   "Understanding figurative and connotative meanings supports using metaphor and analogy"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.4",
+   "concept",
+   "Building academic and discipline vocabulary supplies terms for complex topics"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.4": [
+  [
+   "WI-CC-ELA|W.9-10.4",
+   "same",
+   "Clear, coherent writing for task, purpose, and audience continues"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.1.b",
+   "concept",
+   "Responding to language demands of situations supports writing for audience"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.5": [
+  [
+   "WI-CC-ELA|W.9-10.5",
+   "same",
+   "Same revising process focused on what matters most, with more independence"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.1.c",
+   "concept",
+   "Evaluating the effectiveness of language choices guides revision decisions"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.6.a": [
+  [
+   "WI-CC-ELA|W.9-10.6",
+   "same",
+   "Choosing technology to connect writers and readers continues from grades 9 and 10"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.4",
+   "concept",
+   "Writing for a specific audience informs how technology connects writers and readers"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.6.b": [
+  [
+   "WI-CC-ELA|W.9-10.6",
+   "same",
+   "Choosing technology to make writing accessible continues from grades 9 and 10"
+  ],
+  [
+   "WI-CC-ELA|SL.9-10.5",
+   "concept",
+   "Strategic use of digital media builds judgment about reaching audiences"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.6.c": [
+  [
+   "WI-CC-ELA|W.9-10.6",
+   "same",
+   "Matching modes with ideas through technology continues from grades 9 and 10"
+  ],
+  [
+   "WI-CC-ELA|SL.9-10.5",
+   "concept",
+   "Using textual, visual, and audio elements strategically supports matching modes with ideas"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.7": [
+  [
+   "WI-CC-ELA|W.9-10.7",
+   "same",
+   "Same sustained research and synthesis with more complex questions"
+  ],
+  [
+   "WI-CC-ELA|W.9-10.8",
+   "procedure",
+   "Gathering and assessing authoritative sources is the basis of research"
+  ],
+  [
+   "WI-CC-ELA|SL.9-10.2",
+   "concept",
+   "Synthesizing multiple sources and judging credibility supports research synthesis"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.8": [
+  [
+   "WI-CC-ELA|W.9-10.8",
+   "same",
+   "Assessing source usefulness grows into weighing strengths and limitations"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.8",
+   "concept",
+   "Evaluating arguments and evidence supports judging limitations of sources"
+  ],
+  [
+   "WI-CC-ELA|L.9-10.1.d",
+   "procedure",
+   "Following style manuals such as MLA supports standard citation format"
+  ]
+ ],
+ "WI-CC-ELA|W.11-12.9": [
+  [
+   "WI-CC-ELA|W.9-10.9",
+   "same",
+   "Drawing evidence for analysis continues using grades 11 and 12 reading skills"
+  ],
+  [
+   "WI-CC-ELA|R.9-10.1",
+   "prereq",
+   "Citing strong textual evidence in reading comes before using it in writing"
+  ]
+ ]
+}
