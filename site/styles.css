@@ -652,7 +652,7 @@ mark { background: #FDE7B5; color: inherit; border-radius: 2px; padding: 0 1px; 
 ul.issues { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 6px; }
 ul.issues li { font-size: 14px; }
 .mk-flag { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 99px; padding: 1px 8px; border: 1px solid; white-space: nowrap; }
-.mk-flag.f-prereq, .mk-flag.f-break { color: var(--lv-0); border-color: var(--lv-0); background: var(--lv-0-tint); }
+.mk-flag.f-prereq, .mk-flag.f-break, .mk-flag.f-stop { color: var(--lv-0); border-color: var(--lv-0); background: var(--lv-0-tint); }
 .mk-flag.f-repeat, .mk-flag.f-same, .mk-flag.f-moved { color: var(--ink-2); border-color: var(--line-2); background: var(--chip); }
 .mk-flag { color: var(--ink-2); border-color: var(--line-2); }
 
@@ -892,3 +892,4 @@ table.ba tr.flash td { background: #fde7c4; transition: background .4s; }
   details > summary, h3, h4 { break-after: avoid; page-break-after: avoid; }
   .rev-list li, .gap-list li { break-inside: avoid; }
 }
+.pb-code { white-space: nowrap; }
