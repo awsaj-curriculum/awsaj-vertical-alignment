@@ -392,6 +392,31 @@ teaching" became "Most standards below in depth"), and no link is called weak or
 the end of each row: a dark bar where the progression has no later standard (no link expected), a dashed "?" where it
 does but none is linked to this one (a link may be missing), and the same "?" before a first square.
 
-## Round 9
+## Rounds 9 to 11 (none passed yet)
+
+Round 9's first reviewers were stopped by an interruption and replaced (S and T). Every count the reviewers recomputed
+matched in all three rounds. Pages that reached 8 on every criterion in at least one of these rounds: Gaps & repetition
+(S, U), Vertical Alignment Audit (S), standard popup (S, U, W), Grade dashboard (V). Still below 8 somewhere: coverage map
+(both views), Progressions, popup progression box, "see the links" dialog, Data sources panel, printing.
+
+| Round | Report | Pages at 8+ on every criterion |
+|---|---|---|
+| 9 | [S](round-9-S.md), [T](round-9-T.md) | Gaps, Audit, popup |
+| 10 | [U](round-10-U.md), [V](round-10-V.md) | Gaps, popup, dashboard |
+| 11 | [W](round-11-W.md), [X](round-11-X.md) | popup |
+
+Main changes in these rounds:
+- At Tim's request: a Data sources panel listing every document read (stating only what was read); the plan mark
+  renamed "In curriculum docs"; course names for Grades 6-12 (Grade 9 · Algebra 1) with a "Secondary (6-12): every
+  course" view.
+- Matched across grades: markers for where a link continues in another row or progression (arrow), where none is
+  linked ("?") and where the progression ends (bar).
+- Accuracy: band views keep findings whose prerequisite sits outside the band; dashboard counts split official and
+  suggested findings; AI-written reasons labelled everywhere; counts of distinct standards in Data sources; each
+  standard and grade counted once in rated shares.
+- Readability: a one-line verdict on each opened row; statuses with their count; official and suggested findings listed
+  apart; neutral wording throughout.
+
+## Round 12
 
 Results are added below when the round finishes.
