@@ -128,6 +128,8 @@
   async function setRating(e, g, level) {
     if (!S.team) { toast("Choose your team first (top right)."); $("#team").focus(); return; }
     if (!canEdit(g)) { toast(`Your team rates ${S.team.grades.map(gname).join(", ")}.`); return; }
+    // Teams rate only their own grade's standards (Tim, Oct 2026); only the committee can rate a standard placed elsewhere.
+    if (!isCommittee() && !e.pl.includes(g)) { toast(`Please rate only ${gname(g)}'s own standards. This one is for ${e.pl.map(gname).join(", ")}.`); return; }
     const k = rkey(e.f, e.c, g), before = S.ratings.get(k);
     const leftBefore = toRateLeft(g), strandBefore = strandLeft(e, g), allBefore = mode() === "teacher" ? teacherLeft(g) : 0;
     S.ratings.set(k, { framework: e.f, code: e.c, grade: g, level, team: S.team.name, updated_at: new Date().toISOString() });
@@ -772,7 +774,8 @@
     return `<div class="tlist-head lib-tabs">${chip("", "All")}${chip("todo", "Still to do")}${chip("done", "Done")}${chip("pr", "★ " + prName(g))}${chip("pn", "✓ In curriculum docs")} ${hb("library")}</div>
       <div class="tlist size-${size}">${html || `<div class="empty">${q ? "No standard matches your search." : f === "todo" ? "Nothing left. Well done." : "Nothing here yet."}</div>`}</div>
       <p class="flow-more"><button type="button" data-act="finish">Finish ${esc(S.flow.subject)}</button> <button type="button" class="ghost" data-act="results">See my results so far</button>
-        <button type="button" class="linkish" data-act="review">Also teach standards suggested for another grade?</button> ${hb("review")}</p>`;
+</p>
+      <p class="muted flow-note">You may also teach standards from other grades, for example prerequisites. Please rate only your own grade's standards. ${hb("review")}</p>`;
   }
   function trow(e, g, size, q) {
     const r = rating(e.f, e.c, g), k = rkey(e.f, e.c, g), mk = marks(e, g);
