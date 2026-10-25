@@ -780,7 +780,7 @@
     const btn = (l) => `<button type="button" class="tb c${l} ${r && r.level === l ? "on" : ""}" data-act="rate" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}" data-l="${l}" aria-pressed="${!!(r && r.level === l)}">${size === "l" ? `<b>${LEVEL[l]}</b><small>${LEVEL_HINT[l]}</small>` : LEVEL_SHORT[l]}</button>`;
     return `<div class="trow ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}" id="${rowId(k)}">
       <div class="tr-code"><span class="cd"><button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${hl(codeText(e), q)}</button><span class="wi-code">${hl(altText(e), q)}</span></span>${mk ? `<div class="mks">${mk}</div>` : ""}</div>
-      <div class="tr-text">${hl(text, q)}</div>
+      <div class="tr-text"${size === "s" ? ` data-full="${esc(fullText(e))}"` : ""}>${hl(text, q)}</div>
       <div class="tr-ans" role="group" aria-label="How is ${esc(codeText(e))} generally taught?">${btn(0)}${btn(1)}${btn(2)}</div></div>`;
   }
   // A popup listing every standard not answered yet, with a button to go straight to each one.
@@ -2194,6 +2194,8 @@
   $("#detail").addEventListener("close", () => { S.dlg = { cur: null, hist: [] }; rerender(); });
   // Remember which sections are open (Gaps, Audit, dashboard) so a redraw keeps them as the user left them.
   // Only the user's own clicks count (a redraw also fires "toggle" events, which would freeze the defaults).
+  // Small view: a standard cut off at the end of its line shows the whole standard in a popup on hover.
+  document.addEventListener("mouseover", (ev) => { const t = ev.target.closest && ev.target.closest(".tr-text[data-full]"); if (!t) return; t.title = t.scrollWidth > t.clientWidth + 1 ? t.dataset.full : ""; });
   document.addEventListener("click", (ev) => { const sm = ev.target.closest("details[data-sec] > summary"); if (sm && !ev.target.closest(".help")) { const d = sm.parentElement; S.open[d.dataset.sec] = !d.open; } }, true);
 
   // "?" explanations
