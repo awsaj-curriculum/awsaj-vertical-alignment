@@ -143,8 +143,10 @@ below `MIN_SIM` (0.12). Checks only use fully rated standards: break (whole midd
 moved (taught in another grade instead), prereq (in depth while every standard it links to is not taught anywhere;
 official on ELA anchor links, otherwise "Possible prerequisite gap" and only with similarity >= `PRE_SIM` 0.25; a
 gap a break explains is dropped; shown on both grades' dashboards), repeat (possible duplication) vs reinforce (in
-depth in 2+ of its own grades: placed grades plus the rest of its band, `ownGrades()`), same wording. Only breaks and official prereqs whose missing standard is in the same row make a row "Breaks down" (a split
-standard's parts share a `grp` in prereqs.json and count as one prerequisite, missing only when every part is); "Taught at
+depth in 2+ of its own grades: placed grades plus the rest of its band, `ownGrades()`), same wording. Row status is factual, by link source (Tim: present the facts, do not judge seriousness): "Not taught on an official
+link" (a settled break, last steps not taught, an official prerequisite not taught wherever it sits, or a row holding
+one; a split standard's parts share a `grp` in prereqs.json and count as one) vs "Not taught on a suggested link"
+(AI or wording links only); "Taught at
 every step" = 2+ grades, every standard rated and at least introduced. Run it after build_site_data.py.
 The committee's page and filters are kept in the address (`#view=gaps&subject=Math&grade=3`), so Back works and links
 can be shared; the popup has its own Back for standards opened from a list.

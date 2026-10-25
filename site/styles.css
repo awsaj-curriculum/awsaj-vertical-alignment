@@ -900,3 +900,6 @@ table.ba tr.flash td { background: #fde7c4; transition: background .4s; }
   body.print-findings .mstrip-key, body.print-findings .pl-key { display: none !important; }
 }
 .rows-view td.rowh { min-width: 230px; } .rows-view .tag.src { white-space: nowrap; }
+@media print {
+  body.print-findings #view-ladder > .panel:not(.insights), body.print-findings .pd-step { display: none !important; }
+}
