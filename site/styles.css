@@ -937,3 +937,9 @@ td > .ch-end { margin-left: 2px; }
   body.print-findings .dash-strands, body.print-findings .go-strand { display: none !important; }
 }
 @media print { body.print-findings .info-only { display: none !important; } }
+ul.rv-key { list-style: none; margin: 8px 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 4px 16px; font-size: 13px; }
+ul.rv-key li { display: flex; gap: 6px; align-items: center; }
+@media (max-width: 760px) { .rows-view td.rowh { min-width: 110px; max-width: 130px; font-size: 12px; } .rows-view .ch-to { font-size: 11px; } }
+ul.rv-key { list-style: none; margin: 8px 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 4px 16px; font-size: 13px; }
+ul.rv-key li { display: flex; gap: 6px; align-items: center; }
+@media (max-width: 760px) { .rows-view td.rowh { min-width: 110px; max-width: 130px; font-size: 12px; } .rows-view .ch-to { font-size: 11px; } }
