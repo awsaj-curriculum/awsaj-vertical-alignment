@@ -58,7 +58,11 @@ outline = suggested grade; dot = taught in a grade other than the suggested one;
 orange corner = priority / power in that grade. Part 2 uses the same scale: 1-2 weeks in
 plans = Introduced, 3+ weeks = Taught in depth.
 
-Teachers use one guided flow (view "flow": one standard at a time); the committee and "Explore" get the full tabs.
+Teachers use the "flow" view: all standards for a subject on one page by default (Small / Medium / Large, with Find,
+filter chips and a Finish button that lists anything unanswered), or One at a time (button toggle, remembered per device).
+The question is "How is this generally taught in Grade X?"; "What do these mean?" opens the three answer definitions.
+When a subject is complete the teacher sees a results page for it; confetti only when every subject on the link is done.
+The committee and "Explore" get the full tabs.
 Locked links: `?team=<name>` (optionally `&subject=`) for one team, `?grade=<K-12>` for every subject in a grade (each subject
 is rated as that subject's own team). The committee's Team progress dialog lists both, by grade or by team.
 
@@ -88,6 +92,17 @@ decided). Marks: "★ Priority" / "★ Power" pill (orange, a highlight) and "�
 K-12 grid an orange top-left corner and a dashed ring. Committee filters: Standards (all / priority / in plans / not in
 plans) and Order (curriculum order / priority first / in plans first, within each strand). Teachers get Priority and In
 plans tabs in their library. Gaps, Dashboard and the Audit page have priority / in-plans sections.
+
+## Analysis pages and progressions
+Every analysis page starts with findings computed live from the ratings (they fill in as teams rate), labels automatic
+checks, and never counts "not rated" as a gap. Coverage map: findings + tile dialog with the standards behind each tile.
+Gaps: confirmed gaps / priority below in depth / progression breaks / possible duplication (own grade + another) /
+only introduced / reinforcement (band standard in depth in 2+ of its grades) / unknown, each line with a K-12 strip.
+Grade dashboard: whole grade (every subject) + "What to review". Progressions: `scripts/build_progressions.py` writes
+`site/data/progressions.json` (lanes: ELA anchors, NGSS DCI components via WI-SCI codes, WI-SS standards with AERO K-5 via
+suggested matches = official; Math = Common Core topics by cluster = inferred; standard-to-standard links inferred by
+word overlap). Checks: break (middle step not taught), prerequisite gap (in depth after a not-taught step), repeated in
+depth. The popup shows the steps before and after. Run it after build_site_data.py.
 
 ## Testing
 Use Playwright (Chromium) against the local server, and check every view (Rate, Heatmap, Gaps, Dashboard,
