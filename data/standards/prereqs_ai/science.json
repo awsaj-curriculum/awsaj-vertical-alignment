@@ -1,0 +1,3372 @@
+{
+ "AERO-SCI|1-ESS1-1": [
+  [
+   "AERO-SCI|K-ESS2-1",
+   "procedure",
+   "Recording observations over time to find patterns, first done with weather"
+  ]
+ ],
+ "AERO-SCI|1-ESS1-2": [
+  [
+   "AERO-SCI|K-ESS2-1",
+   "procedure",
+   "Observing and recording changes over time, first done with local weather"
+  ],
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Noticing sunlight and its effects prepares students to track daylight"
+  ]
+ ],
+ "AERO-SCI|1-LS1-1": [
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Knowing what plants and animals need in order to survive"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-2",
+   "procedure",
+   "Sketching how the shape of an object helps it work"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-1",
+   "procedure",
+   "Defining a simple problem before designing a solution"
+  ]
+ ],
+ "AERO-SCI|1-LS1-2": [
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Knowing what animals need explains why parents help offspring survive"
+  ]
+ ],
+ "AERO-SCI|1-LS3-1": [
+  [
+   "AERO-SCI|K-LS1-1",
+   "procedure",
+   "Using observations of plants and animals to describe patterns"
+  ]
+ ],
+ "AERO-SCI|1-PS4-1": [
+  [
+   "AERO-SCI|K-PS2-1",
+   "procedure",
+   "Planning and conducting a simple investigation, first done with pushes and pulls"
+  ]
+ ],
+ "AERO-SCI|1-PS4-2": [
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Sunlight is the first light source students observe shining on things"
+  ]
+ ],
+ "AERO-SCI|1-PS4-3": [
+  [
+   "AERO-SCI|K-PS3-2",
+   "concept",
+   "Building shade showed that some materials block sunlight"
+  ],
+  [
+   "AERO-SCI|K-PS2-1",
+   "procedure",
+   "Planning and conducting a simple investigation to compare effects"
+  ],
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Observing that sunlight shines on and affects surfaces"
+  ]
+ ],
+ "AERO-SCI|1-PS4-4": [
+  [
+   "AERO-SCI|K-2-ETS1-1",
+   "procedure",
+   "Defining a simple problem that a new tool can solve"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-2",
+   "procedure",
+   "Sketching a design to show how its shape helps it work"
+  ],
+  [
+   "AERO-SCI|K-PS3-2",
+   "procedure",
+   "Earlier experience designing and building with tools and materials"
+  ]
+ ],
+ "AERO-SCI|2-ESS1-1": [
+  [
+   "AERO-SCI|K-ESS3-2",
+   "concept",
+   "Severe weather is an example of a fast Earth event"
+  ],
+  [
+   "AERO-SCI|K-ESS2-2",
+   "concept",
+   "Living things can change their surroundings, an early idea of change"
+  ]
+ ],
+ "AERO-SCI|2-ESS2-1": [
+  [
+   "AERO-SCI|K-2-ETS1-3",
+   "procedure",
+   "Comparing how well different designs work on the same problem"
+  ],
+  [
+   "AERO-SCI|K-ESS3-3",
+   "concept",
+   "Designing solutions that protect land and water from harm"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-1",
+   "procedure",
+   "Defining a simple problem, such as wind or water changing land"
+  ]
+ ],
+ "AERO-SCI|2-ESS2-2": [
+  [
+   "AERO-SCI|K-ESS3-1",
+   "procedure",
+   "Using a model to represent living things and the places they live"
+  ]
+ ],
+ "AERO-SCI|2-ESS2-3": [
+  [
+   "AERO-SCI|K-ESS2-1",
+   "concept",
+   "Weather observations of rain and clouds show water in different places"
+  ]
+ ],
+ "AERO-SCI|2-LS2-1": [
+  [
+   "AERO-SCI|K-LS1-1",
+   "same",
+   "What plants need to survive, now tested with an investigation"
+  ],
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Sunlight reaches and warms the ground where plants grow"
+  ],
+  [
+   "AERO-SCI|K-PS2-1",
+   "procedure",
+   "Planning and conducting a simple comparison investigation"
+  ]
+ ],
+ "AERO-SCI|2-LS2-2": [
+  [
+   "AERO-SCI|1-LS1-1",
+   "concept",
+   "External body parts help animals carry seeds and pollen"
+  ],
+  [
+   "AERO-SCI|K-ESS3-1",
+   "concept",
+   "Plants and animals depend on the places and living things around them"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-2",
+   "procedure",
+   "Building a simple physical model to show how something works"
+  ]
+ ],
+ "AERO-SCI|2-LS4-1": [
+  [
+   "AERO-SCI|K-ESS3-1",
+   "same",
+   "Plants and animals live in places that meet their needs"
+  ],
+  [
+   "AERO-SCI|K-LS1-1",
+   "procedure",
+   "Observing plants and animals closely to describe patterns"
+  ]
+ ],
+ "AERO-SCI|2-PS1-1": [
+  [
+   "AERO-SCI|1-PS4-3",
+   "concept",
+   "Sorting materials by how much light passes through them"
+  ],
+  [
+   "AERO-SCI|K-PS2-1",
+   "procedure",
+   "Planning and conducting a simple investigation with objects"
+  ]
+ ],
+ "AERO-SCI|2-PS1-2": [
+  [
+   "AERO-SCI|K-2-ETS1-3",
+   "procedure",
+   "Analysing test data to compare how well objects perform"
+  ],
+  [
+   "AERO-SCI|K-PS3-2",
+   "concept",
+   "Choosing the materials that work best to block sunlight"
+  ],
+  [
+   "AERO-SCI|1-PS4-3",
+   "concept",
+   "Different materials behave differently when tested with light"
+  ],
+  [
+   "AERO-SCI|K-PS2-2",
+   "procedure",
+   "Analysing data to decide if a design works as intended"
+  ]
+ ],
+ "AERO-SCI|2-PS1-3": [
+  [
+   "AERO-SCI|K-PS3-2",
+   "procedure",
+   "Building a structure from a set of pieces and materials"
+  ]
+ ],
+ "AERO-SCI|2-PS1-4": [
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Sunlight warming surfaces introduces heating as a cause of change"
+  ]
+ ],
+ "AERO-SCI|3-5-ETS1-1": [
+  [
+   "AERO-SCI|K-2-ETS1-1",
+   "same",
+   "Defining a simple problem, now with criteria and constraints"
+  ],
+  [
+   "AERO-SCI|1-PS4-4",
+   "procedure",
+   "Earlier design challenge that solved a real communication problem"
+  ]
+ ],
+ "AERO-SCI|3-5-ETS1-2": [
+  [
+   "AERO-SCI|K-2-ETS1-3",
+   "same",
+   "Comparing strengths and weaknesses of designs, now several solutions"
+  ],
+  [
+   "AERO-SCI|2-ESS2-1",
+   "same",
+   "Comparing multiple solutions to the same problem"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-2",
+   "procedure",
+   "Sketching ideas to show how a design would work"
+  ]
+ ],
+ "AERO-SCI|3-5-ETS1-3": [
+  [
+   "AERO-SCI|K-2-ETS1-3",
+   "same",
+   "Testing designs and analysing data, now as controlled fair tests"
+  ],
+  [
+   "AERO-SCI|K-PS2-1",
+   "procedure",
+   "Planning and conducting investigations that compare effects"
+  ],
+  [
+   "AERO-SCI|2-PS1-2",
+   "procedure",
+   "Testing materials and using the data to choose the best"
+  ]
+ ],
+ "AERO-SCI|3-ESS2-1": [
+  [
+   "AERO-SCI|K-ESS2-1",
+   "same",
+   "Local weather patterns, now organised in tables and graphs"
+  ],
+  [
+   "AERO-SCI|1-ESS1-2",
+   "concept",
+   "Daylight changes with the time of year, linking to seasons"
+  ]
+ ],
+ "AERO-SCI|3-ESS2-2": [
+  [
+   "AERO-SCI|K-ESS2-1",
+   "concept",
+   "Weather patterns over time lead to the idea of climate"
+  ],
+  [
+   "AERO-SCI|2-ESS2-2",
+   "procedure",
+   "Representing land and water in an area prepares students for maps"
+  ],
+  [
+   "AERO-SCI|2-LS4-1",
+   "concept",
+   "Different places have different conditions and living things"
+  ]
+ ],
+ "AERO-SCI|3-ESS3-1": [
+  [
+   "AERO-SCI|K-ESS3-2",
+   "same",
+   "Preparing for severe weather, now judging design solutions"
+  ],
+  [
+   "AERO-SCI|2-ESS2-1",
+   "procedure",
+   "Comparing solutions that protect land from wind and water"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-3",
+   "procedure",
+   "Judging how well a design solves a problem"
+  ]
+ ],
+ "AERO-SCI|3-LS1-1": [
+  [
+   "AERO-SCI|1-LS3-1",
+   "concept",
+   "Young plants and animals grow to resemble their parents"
+  ],
+  [
+   "AERO-SCI|1-LS1-2",
+   "concept",
+   "Parents and offspring behave in ways that help young survive"
+  ],
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Living things need food, water and air to grow"
+  ]
+ ],
+ "AERO-SCI|3-LS2-1": [
+  [
+   "AERO-SCI|1-LS1-2",
+   "same",
+   "Behaviours that help young survive, now group behaviours"
+  ],
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Animals need food and safety to survive"
+  ]
+ ],
+ "AERO-SCI|3-LS3-1": [
+  [
+   "AERO-SCI|1-LS3-1",
+   "same",
+   "Offspring are like but not exactly like parents, now with data"
+  ],
+  [
+   "AERO-SCI|2-LS4-1",
+   "procedure",
+   "Observing and comparing many kinds of plants and animals"
+  ]
+ ],
+ "AERO-SCI|3-LS3-2": [
+  [
+   "AERO-SCI|2-LS2-1",
+   "concept",
+   "Plant growth depends on sunlight and water in the surroundings"
+  ],
+  [
+   "AERO-SCI|1-LS3-1",
+   "concept",
+   "Offspring look similar to parents, so some traits come from parents"
+  ]
+ ],
+ "AERO-SCI|3-LS4-1": [
+  [
+   "AERO-SCI|2-ESS1-1",
+   "concept",
+   "Some Earth changes happen slowly over very long times"
+  ],
+  [
+   "AERO-SCI|2-LS4-1",
+   "concept",
+   "Different habitats support different kinds of living things"
+  ]
+ ],
+ "AERO-SCI|3-LS4-2": [
+  [
+   "AERO-SCI|1-LS3-1",
+   "concept",
+   "Individuals of the same kind are not exactly alike"
+  ],
+  [
+   "AERO-SCI|1-LS1-1",
+   "concept",
+   "Body parts help plants and animals survive and meet needs"
+  ]
+ ],
+ "AERO-SCI|3-LS4-3": [
+  [
+   "AERO-SCI|2-LS4-1",
+   "same",
+   "Different habitats hold different living things, now explained by survival"
+  ],
+  [
+   "AERO-SCI|K-ESS3-1",
+   "concept",
+   "Plants and animals live where their needs are met"
+  ],
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Knowing what living things need to survive"
+  ]
+ ],
+ "AERO-SCI|3-LS4-4": [
+  [
+   "AERO-SCI|K-ESS3-3",
+   "concept",
+   "Designing ways to reduce human harm to living things"
+  ],
+  [
+   "AERO-SCI|K-ESS2-2",
+   "concept",
+   "Living things can change the environment around them"
+  ],
+  [
+   "AERO-SCI|2-LS4-1",
+   "concept",
+   "Habitats differ in the living things they support"
+  ]
+ ],
+ "AERO-SCI|3-PS2-1": [
+  [
+   "AERO-SCI|K-PS2-1",
+   "same",
+   "Pushes and pulls change motion, now balanced and unbalanced forces"
+  ],
+  [
+   "AERO-SCI|K-PS2-2",
+   "concept",
+   "A push or pull can change speed or direction"
+  ]
+ ],
+ "AERO-SCI|3-PS2-2": [
+  [
+   "AERO-SCI|K-PS2-1",
+   "concept",
+   "Pushes and pulls cause changes in motion"
+  ],
+  [
+   "AERO-SCI|1-ESS1-1",
+   "concept",
+   "Using observed patterns to predict, first with the sun and moon"
+  ]
+ ],
+ "AERO-SCI|3-PS2-3": [
+  [
+   "AERO-SCI|K-PS2-1",
+   "concept",
+   "Forces as pushes and pulls, now acting without touching"
+  ]
+ ],
+ "AERO-SCI|3-PS2-4": [
+  [
+   "AERO-SCI|K-2-ETS1-1",
+   "procedure",
+   "Defining a simple problem that a design can solve"
+  ],
+  [
+   "AERO-SCI|K-PS2-2",
+   "concept",
+   "Designing a way to change motion with a push or pull"
+  ]
+ ],
+ "AERO-SCI|4-ESS1-1": [
+  [
+   "AERO-SCI|3-LS4-1",
+   "concept",
+   "Fossils give evidence of past organisms and environments"
+  ],
+  [
+   "AERO-SCI|2-ESS1-1",
+   "concept",
+   "Earth events can happen slowly over long periods"
+  ],
+  [
+   "AERO-SCI|2-ESS2-2",
+   "concept",
+   "Describing the shapes and kinds of land in an area"
+  ]
+ ],
+ "AERO-SCI|4-ESS2-1": [
+  [
+   "AERO-SCI|2-ESS2-1",
+   "same",
+   "Wind and water change the shape of land, now measured as erosion"
+  ],
+  [
+   "AERO-SCI|2-ESS1-1",
+   "same",
+   "Earth events happen quickly or slowly, such as erosion"
+  ]
+ ],
+ "AERO-SCI|4-ESS2-2": [
+  [
+   "AERO-SCI|2-ESS2-2",
+   "same",
+   "Modelling land and water in an area, now reading maps"
+  ],
+  [
+   "AERO-SCI|3-ESS2-2",
+   "procedure",
+   "Combining information about different regions of the world"
+  ]
+ ],
+ "AERO-SCI|4-ESS3-1": [
+  [
+   "AERO-SCI|K-ESS3-3",
+   "concept",
+   "Human activities affect land, water, air and living things"
+  ]
+ ],
+ "AERO-SCI|4-ESS3-2": [
+  [
+   "AERO-SCI|3-ESS3-1",
+   "same",
+   "Judging solutions to weather hazards, now other Earth processes"
+  ],
+  [
+   "AERO-SCI|2-ESS2-1",
+   "same",
+   "Comparing solutions that reduce wind and water damage"
+  ],
+  [
+   "AERO-SCI|3-5-ETS1-2",
+   "procedure",
+   "Generating and comparing multiple solutions against criteria"
+  ],
+  [
+   "AERO-SCI|K-ESS3-2",
+   "concept",
+   "Preparing for severe natural events protects people"
+  ]
+ ],
+ "AERO-SCI|4-LS1-1": [
+  [
+   "AERO-SCI|1-LS1-1",
+   "same",
+   "External parts help survival, now internal structures too"
+  ],
+  [
+   "AERO-SCI|3-LS4-2",
+   "concept",
+   "Different characteristics can help individuals survive and reproduce"
+  ],
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Plants and animals need certain things to survive"
+  ]
+ ],
+ "AERO-SCI|4-LS1-2": [
+  [
+   "AERO-SCI|1-PS4-2",
+   "concept",
+   "Seeing requires light, a kind of information the eyes receive"
+  ],
+  [
+   "AERO-SCI|1-PS4-1",
+   "concept",
+   "Sound is vibration, which ears can detect"
+  ],
+  [
+   "AERO-SCI|1-LS1-1",
+   "concept",
+   "Animals use external parts such as eyes and ears to survive"
+  ]
+ ],
+ "AERO-SCI|4-PS3-1": [
+  [
+   "AERO-SCI|3-PS2-2",
+   "procedure",
+   "Observing and measuring the motion of objects"
+  ],
+  [
+   "AERO-SCI|K-PS2-1",
+   "concept",
+   "Stronger pushes make objects move faster"
+  ],
+  [
+   "AERO-SCI|3-PS2-1",
+   "concept",
+   "Forces change the speed of moving objects"
+  ]
+ ],
+ "AERO-SCI|4-PS3-2": [
+  [
+   "AERO-SCI|1-PS4-1",
+   "concept",
+   "Sound makes materials vibrate, showing it carries energy"
+  ],
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Sunlight warms surfaces, showing light carries energy"
+  ],
+  [
+   "AERO-SCI|1-PS4-3",
+   "concept",
+   "Light travels and interacts with materials in its path"
+  ],
+  [
+   "AERO-SCI|3-PS2-3",
+   "concept",
+   "Electric interactions between objects introduce electricity"
+  ]
+ ],
+ "AERO-SCI|4-PS3-3": [
+  [
+   "AERO-SCI|K-PS2-1",
+   "concept",
+   "Pushes and collisions change how objects move"
+  ],
+  [
+   "AERO-SCI|3-PS2-1",
+   "concept",
+   "Forces change motion when objects interact"
+  ]
+ ],
+ "AERO-SCI|4-PS3-4": [
+  [
+   "AERO-SCI|3-5-ETS1-3",
+   "procedure",
+   "Testing and improving a prototype through fair tests"
+  ],
+  [
+   "AERO-SCI|3-5-ETS1-1",
+   "procedure",
+   "Defining a design problem with criteria and constraints"
+  ],
+  [
+   "AERO-SCI|1-PS4-4",
+   "procedure",
+   "Building a device that uses light or sound"
+  ]
+ ],
+ "AERO-SCI|4-PS4-1": [
+  [
+   "AERO-SCI|1-PS4-1",
+   "same",
+   "Vibrations and sound, now described as waves"
+  ]
+ ],
+ "AERO-SCI|4-PS4-2": [
+  [
+   "AERO-SCI|1-PS4-2",
+   "same",
+   "Objects are seen only when lit, now explained by reflection"
+  ],
+  [
+   "AERO-SCI|1-PS4-3",
+   "concept",
+   "Materials can reflect, block or let light through"
+  ]
+ ],
+ "AERO-SCI|4-PS4-3": [
+  [
+   "AERO-SCI|1-PS4-4",
+   "same",
+   "Communicating over a distance with light or sound, now coded patterns"
+  ],
+  [
+   "AERO-SCI|3-5-ETS1-2",
+   "procedure",
+   "Generating and comparing several possible solutions"
+  ]
+ ],
+ "AERO-SCI|5-ESS1-1": [
+  [
+   "AERO-SCI|1-ESS1-1",
+   "concept",
+   "Observing the sun and stars and their patterns in the sky"
+  ],
+  [
+   "AERO-SCI|4-PS4-2",
+   "concept",
+   "Light entering the eye allows objects to be seen"
+  ]
+ ],
+ "AERO-SCI|5-ESS1-2": [
+  [
+   "AERO-SCI|1-ESS1-1",
+   "same",
+   "Patterns of sun, moon and stars, now graphed and explained"
+  ],
+  [
+   "AERO-SCI|1-ESS1-2",
+   "same",
+   "Daylight changes with the seasons, now shown in graphs"
+  ],
+  [
+   "AERO-SCI|3-ESS2-1",
+   "procedure",
+   "Representing data in tables and graphs to reveal patterns"
+  ],
+  [
+   "AERO-SCI|1-PS4-3",
+   "concept",
+   "Objects block light and make shadows"
+  ]
+ ],
+ "AERO-SCI|5-ESS2-1": [
+  [
+   "AERO-SCI|4-ESS2-1",
+   "concept",
+   "Water, ice, wind and plants shape the land"
+  ],
+  [
+   "AERO-SCI|2-ESS2-1",
+   "concept",
+   "Wind and water change the shape of the land"
+  ],
+  [
+   "AERO-SCI|3-ESS2-2",
+   "concept",
+   "Climate describes long term patterns in the atmosphere"
+  ],
+  [
+   "AERO-SCI|K-ESS2-2",
+   "concept",
+   "Living things change the environment around them"
+  ]
+ ],
+ "AERO-SCI|5-ESS2-2": [
+  [
+   "AERO-SCI|2-ESS2-3",
+   "same",
+   "Where water is found on Earth, now measured and graphed"
+  ],
+  [
+   "AERO-SCI|2-ESS2-2",
+   "concept",
+   "Bodies of water in an area can be modelled and described"
+  ],
+  [
+   "AERO-SCI|3-ESS2-1",
+   "procedure",
+   "Organising data in graphs to show patterns"
+  ]
+ ],
+ "AERO-SCI|5-ESS3-1": [
+  [
+   "AERO-SCI|K-ESS3-3",
+   "same",
+   "Reducing human impact on the environment, now at community scale"
+  ],
+  [
+   "AERO-SCI|4-ESS3-1",
+   "concept",
+   "Using natural resources affects the environment"
+  ],
+  [
+   "AERO-SCI|3-LS4-4",
+   "concept",
+   "Environmental change affects which plants and animals can live there"
+  ]
+ ],
+ "AERO-SCI|5-LS1-1": [
+  [
+   "AERO-SCI|2-LS2-1",
+   "same",
+   "Plants need sunlight and water, now where their materials come from"
+  ],
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Plants need water, light and air to live"
+  ]
+ ],
+ "AERO-SCI|5-LS2-1": [
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Animals need food, and plants need water and light"
+  ],
+  [
+   "AERO-SCI|2-LS2-2",
+   "concept",
+   "Plants and animals depend on each other"
+  ],
+  [
+   "AERO-SCI|3-LS1-1",
+   "concept",
+   "All organisms die, leaving matter that decomposers break down"
+  ],
+  [
+   "AERO-SCI|2-LS4-1",
+   "concept",
+   "Many kinds of living things share a habitat"
+  ]
+ ],
+ "AERO-SCI|5-PS1-1": [
+  [
+   "AERO-SCI|2-PS1-3",
+   "concept",
+   "Objects are made of smaller pieces that can be rearranged"
+  ],
+  [
+   "AERO-SCI|2-PS1-1",
+   "concept",
+   "Materials have observable properties that a model must explain"
+  ],
+  [
+   "AERO-SCI|2-PS1-4",
+   "concept",
+   "Heating and cooling change materials, later explained by particles"
+  ]
+ ],
+ "AERO-SCI|5-PS1-2": [
+  [
+   "AERO-SCI|2-PS1-4",
+   "concept",
+   "Heating and cooling cause changes, some of them reversible"
+  ],
+  [
+   "AERO-SCI|2-PS1-3",
+   "concept",
+   "The same pieces can be rebuilt into a new object"
+  ],
+  [
+   "AERO-SCI|3-ESS2-1",
+   "procedure",
+   "Representing measured data in graphs"
+  ],
+  [
+   "AERO-SCI|3-PS2-2",
+   "procedure",
+   "Taking careful measurements to provide evidence"
+  ]
+ ],
+ "AERO-SCI|5-PS1-3": [
+  [
+   "AERO-SCI|2-PS1-1",
+   "same",
+   "Classifying materials by properties, now with measurements"
+  ],
+  [
+   "AERO-SCI|2-PS1-2",
+   "concept",
+   "Testing materials shows how their properties differ"
+  ]
+ ],
+ "AERO-SCI|5-PS1-4": [
+  [
+   "AERO-SCI|2-PS1-4",
+   "concept",
+   "Some changes cannot be reversed, hinting at new substances"
+  ],
+  [
+   "AERO-SCI|2-PS1-1",
+   "concept",
+   "Properties are used to tell materials apart"
+  ]
+ ],
+ "AERO-SCI|5-PS2-1": [
+  [
+   "AERO-SCI|3-PS2-3",
+   "concept",
+   "Some forces act between objects without touching"
+  ],
+  [
+   "AERO-SCI|3-PS2-1",
+   "concept",
+   "Forces have strength and direction and change motion"
+  ],
+  [
+   "AERO-SCI|K-PS2-1",
+   "concept",
+   "Pushes and pulls can act in different directions"
+  ]
+ ],
+ "AERO-SCI|5-PS3-1": [
+  [
+   "AERO-SCI|2-LS2-1",
+   "concept",
+   "Plants need sunlight to grow"
+  ],
+  [
+   "AERO-SCI|4-PS3-2",
+   "concept",
+   "Energy is transferred by light from place to place"
+  ],
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Sunlight provides energy that warms the Earth"
+  ],
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Animals need food to survive and grow"
+  ]
+ ],
+ "NGSS|MS-ESS1-1": [
+  [
+   "AERO-SCI|5-ESS1-2",
+   "same",
+   "Daily and seasonal sky patterns, now explained with an Earth, sun and moon model"
+  ],
+  [
+   "AERO-SCI|1-ESS1-1",
+   "same",
+   "Predictable patterns of the sun, moon and stars"
+  ],
+  [
+   "AERO-SCI|1-ESS1-2",
+   "same",
+   "Daylight changes with the time of year, now explained as seasons"
+  ],
+  [
+   "AERO-SCI|4-PS4-2",
+   "concept",
+   "Reflected light lets us see the moon and its phases"
+  ]
+ ],
+ "NGSS|MS-ESS2-1": [
+  [
+   "AERO-SCI|4-ESS2-1",
+   "concept",
+   "Weathering and erosion are parts of the rock cycle"
+  ],
+  [
+   "AERO-SCI|4-ESS1-1",
+   "concept",
+   "Rock layers record changes in Earth over time"
+  ],
+  [
+   "AERO-SCI|5-ESS2-1",
+   "concept",
+   "Earth systems interact to change Earth materials"
+  ],
+  [
+   "AERO-SCI|2-ESS1-1",
+   "concept",
+   "Earth processes can be fast or slow"
+  ]
+ ],
+ "NGSS|MS-ESS2-4": [
+  [
+   "AERO-SCI|5-ESS2-2",
+   "same",
+   "Where water is stored on Earth, now how it cycles"
+  ],
+  [
+   "AERO-SCI|5-PS2-1",
+   "prereq",
+   "Gravity pulls water down as rain and runoff"
+  ],
+  [
+   "AERO-SCI|2-ESS2-3",
+   "concept",
+   "Water on Earth can be solid or liquid"
+  ],
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Sunlight warms Earth, giving the energy for evaporation"
+  ],
+  [
+   "AERO-SCI|5-ESS2-1",
+   "concept",
+   "The hydrosphere and atmosphere interact as systems"
+  ]
+ ],
+ "NGSS|MS-ESS2-5": [
+  [
+   "AERO-SCI|3-ESS2-1",
+   "same",
+   "Collecting and representing weather data, now explaining changes"
+  ],
+  [
+   "AERO-SCI|K-ESS2-1",
+   "same",
+   "Observing local weather patterns over time"
+  ],
+  [
+   "AERO-SCI|5-ESS2-1",
+   "concept",
+   "The atmosphere interacts with other Earth systems"
+  ]
+ ],
+ "NGSS|MS-ESS2-6": [
+  [
+   "AERO-SCI|3-ESS2-2",
+   "same",
+   "Climates differ by region, now explained by circulation"
+  ],
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Sunlight warms Earth surfaces, the start of unequal heating"
+  ],
+  [
+   "AERO-SCI|5-ESS1-2",
+   "concept",
+   "Earth rotates, causing day and night"
+  ],
+  [
+   "AERO-SCI|5-ESS2-1",
+   "concept",
+   "Atmosphere and oceans interact as Earth systems"
+  ]
+ ],
+ "NGSS|MS-ESS3-1": [
+  [
+   "AERO-SCI|4-ESS3-1",
+   "same",
+   "Energy and fuels come from natural resources"
+  ],
+  [
+   "AERO-SCI|4-ESS2-2",
+   "concept",
+   "Maps show patterns in where Earth features are found"
+  ],
+  [
+   "AERO-SCI|4-ESS1-1",
+   "concept",
+   "Rock layers form through processes over long times"
+  ],
+  [
+   "AERO-SCI|5-ESS2-2",
+   "concept",
+   "Water, including groundwater, is unevenly distributed on Earth"
+  ]
+ ],
+ "NGSS|MS-ESS3-2": [
+  [
+   "AERO-SCI|4-ESS3-2",
+   "same",
+   "Reducing the impacts of natural Earth processes on people"
+  ],
+  [
+   "AERO-SCI|3-ESS3-1",
+   "same",
+   "Design solutions that reduce the impacts of weather hazards"
+  ],
+  [
+   "AERO-SCI|K-ESS3-2",
+   "concept",
+   "Forecasting helps people prepare for severe weather"
+  ],
+  [
+   "AERO-SCI|4-ESS2-2",
+   "procedure",
+   "Reading maps to find patterns such as earthquake zones"
+  ]
+ ],
+ "NGSS|MS-ESS3-3": [
+  [
+   "AERO-SCI|5-ESS3-1",
+   "same",
+   "Communities protect resources, now designing a monitoring method"
+  ],
+  [
+   "AERO-SCI|K-ESS3-3",
+   "same",
+   "Solutions that reduce human impact on the environment"
+  ],
+  [
+   "AERO-SCI|4-ESS3-1",
+   "concept",
+   "Resource use affects the environment"
+  ],
+  [
+   "AERO-SCI|3-5-ETS1-1",
+   "procedure",
+   "Defining a design problem with criteria and constraints"
+  ]
+ ],
+ "NGSS|MS-ESS3-5": [
+  [
+   "AERO-SCI|3-ESS2-2",
+   "concept",
+   "Climate describes typical conditions in a region"
+  ],
+  [
+   "AERO-SCI|4-ESS3-1",
+   "concept",
+   "Burning fuels from natural resources affects the environment"
+  ],
+  [
+   "AERO-SCI|5-ESS3-1",
+   "concept",
+   "Human activity affects the Earth and its resources"
+  ],
+  [
+   "AERO-SCI|K-PS3-1",
+   "concept",
+   "Sunlight warms the surface of the Earth"
+  ]
+ ],
+ "NGSS|MS-ETS1-1": [
+  [
+   "AERO-SCI|3-5-ETS1-1",
+   "same",
+   "Criteria and constraints, now stated with more precision"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-1",
+   "same",
+   "Defining a problem that a new object or tool can solve"
+  ]
+ ],
+ "NGSS|MS-ETS1-2": [
+  [
+   "AERO-SCI|3-5-ETS1-2",
+   "same",
+   "Comparing solutions against criteria, now with a systematic process"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-3",
+   "same",
+   "Comparing strengths and weaknesses of two designs"
+  ],
+  [
+   "AERO-SCI|4-ESS3-2",
+   "procedure",
+   "Generating and comparing solutions to a real problem"
+  ]
+ ],
+ "NGSS|MS-ETS1-3": [
+  [
+   "AERO-SCI|3-5-ETS1-3",
+   "same",
+   "Testing prototypes to find what can be improved"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-3",
+   "same",
+   "Analysing test data to compare the performance of designs"
+  ]
+ ],
+ "NGSS|MS-ETS1-4": [
+  [
+   "AERO-SCI|3-5-ETS1-3",
+   "same",
+   "Fair tests of a prototype, now repeated to optimise the design"
+  ],
+  [
+   "AERO-SCI|K-2-ETS1-2",
+   "procedure",
+   "Making a simple model of a design"
+  ],
+  [
+   "AERO-SCI|4-PS3-4",
+   "procedure",
+   "Designing, testing and refining a working device"
+  ]
+ ],
+ "NGSS|MS-LS1-1": [
+  [
+   "AERO-SCI|4-LS1-1",
+   "concept",
+   "Organisms have internal structures, now studied down to cells"
+  ],
+  [
+   "AERO-SCI|5-PS1-1",
+   "concept",
+   "Things too small to see can be studied with evidence and models"
+  ]
+ ],
+ "NGSS|MS-LS1-2": [
+  [
+   "AERO-SCI|4-LS1-1",
+   "same",
+   "Structures support functions, now inside a single cell"
+  ]
+ ],
+ "NGSS|MS-LS1-3": [
+  [
+   "AERO-SCI|4-LS1-1",
+   "same",
+   "Internal structures work together to support survival"
+  ],
+  [
+   "AERO-SCI|4-LS1-2",
+   "concept",
+   "Senses and the brain work together to respond"
+  ]
+ ],
+ "NGSS|MS-LS1-4": [
+  [
+   "AERO-SCI|2-LS2-2",
+   "same",
+   "Animals disperse seeds and pollinate plants"
+  ],
+  [
+   "AERO-SCI|4-LS1-1",
+   "concept",
+   "Structures support reproduction in plants and animals"
+  ],
+  [
+   "AERO-SCI|1-LS1-2",
+   "concept",
+   "Parent behaviours help offspring survive"
+  ],
+  [
+   "AERO-SCI|3-LS2-1",
+   "concept",
+   "Group behaviours help animals survive"
+  ],
+  [
+   "AERO-SCI|3-LS1-1",
+   "concept",
+   "Reproduction is part of every life cycle"
+  ]
+ ],
+ "NGSS|MS-LS1-5": [
+  [
+   "AERO-SCI|3-LS3-2",
+   "same",
+   "Environment influences traits, now with genetic factors too"
+  ],
+  [
+   "AERO-SCI|3-LS3-1",
+   "concept",
+   "Traits are inherited from parents"
+  ],
+  [
+   "AERO-SCI|2-LS2-1",
+   "concept",
+   "Plant growth depends on sunlight and water"
+  ],
+  [
+   "AERO-SCI|5-LS1-1",
+   "concept",
+   "Plants build their bodies mainly from air and water"
+  ]
+ ],
+ "NGSS|MS-LS1-8": [
+  [
+   "AERO-SCI|4-LS1-2",
+   "same",
+   "Senses send information to the brain, now as nerve messages"
+  ],
+  [
+   "AERO-SCI|4-PS4-2",
+   "concept",
+   "Light entering the eye is information the brain uses"
+  ]
+ ],
+ "NGSS|MS-LS3-2": [
+  [
+   "AERO-SCI|3-LS3-1",
+   "same",
+   "Traits are inherited and vary, now explained by reproduction"
+  ],
+  [
+   "AERO-SCI|1-LS3-1",
+   "same",
+   "Young are like but not exactly like their parents"
+  ],
+  [
+   "AERO-SCI|3-LS1-1",
+   "concept",
+   "Reproduction is part of every life cycle"
+  ],
+  [
+   "AERO-SCI|3-LS4-2",
+   "concept",
+   "Individuals of the same species vary in their characteristics"
+  ]
+ ],
+ "NGSS|MS-PS1-1": [
+  [
+   "AERO-SCI|5-PS1-1",
+   "same",
+   "Matter is made of tiny particles, now atoms and molecules"
+  ],
+  [
+   "AERO-SCI|2-PS1-3",
+   "concept",
+   "Larger things can be built from a small set of pieces"
+  ]
+ ],
+ "NGSS|MS-PS1-4": [
+  [
+   "AERO-SCI|5-PS1-1",
+   "same",
+   "Particle model of matter, now with particle motion"
+  ],
+  [
+   "AERO-SCI|2-PS1-4",
+   "concept",
+   "Heating and cooling cause reversible changes such as melting"
+  ],
+  [
+   "AERO-SCI|4-PS3-2",
+   "concept",
+   "Heat transfers energy from place to place"
+  ],
+  [
+   "AERO-SCI|2-ESS2-3",
+   "concept",
+   "Water can be found as a solid or a liquid"
+  ]
+ ],
+ "NGSS|MS-PS3-3": [
+  [
+   "AERO-SCI|K-PS3-2",
+   "same",
+   "Designing a structure to reduce warming, now controlling thermal energy"
+  ],
+  [
+   "AERO-SCI|4-PS3-2",
+   "concept",
+   "Heat moves energy from place to place"
+  ],
+  [
+   "AERO-SCI|4-PS3-4",
+   "procedure",
+   "Designing, testing and refining an energy device"
+  ],
+  [
+   "AERO-SCI|3-5-ETS1-3",
+   "procedure",
+   "Running fair tests to improve a prototype"
+  ]
+ ],
+ "NGSS|MS-PS3-4": [
+  [
+   "AERO-SCI|4-PS3-2",
+   "concept",
+   "Heat transfers energy between objects"
+  ],
+  [
+   "AERO-SCI|5-PS1-1",
+   "concept",
+   "Matter is made of particles too small to see"
+  ],
+  [
+   "AERO-SCI|3-5-ETS1-3",
+   "procedure",
+   "Planning fair tests with controlled variables"
+  ],
+  [
+   "AERO-SCI|5-PS1-2",
+   "procedure",
+   "Measuring and graphing quantities as evidence"
+  ]
+ ],
+ "NGSS|MS-PS3-5": [
+  [
+   "AERO-SCI|4-PS3-1",
+   "same",
+   "Faster objects have more energy"
+  ],
+  [
+   "AERO-SCI|4-PS3-3",
+   "same",
+   "Energy changes when objects collide"
+  ],
+  [
+   "AERO-SCI|4-PS3-2",
+   "concept",
+   "Energy can be transferred from place to place"
+  ]
+ ],
+ "NGSS|MS-ESS2-2": [
+  [
+   "NGSS|MS-ESS2-1",
+   "concept",
+   "Rock cycle processes that change Earth materials"
+  ],
+  [
+   "AERO-SCI|4-ESS2-1",
+   "same",
+   "Weathering and erosion change the land"
+  ],
+  [
+   "AERO-SCI|2-ESS1-1",
+   "same",
+   "Earth events happen quickly or slowly"
+  ],
+  [
+   "AERO-SCI|4-ESS1-1",
+   "same",
+   "Rock layers show changes in a landscape over time"
+  ]
+ ],
+ "NGSS|MS-ESS2-3": [
+  [
+   "AERO-SCI|4-ESS2-2",
+   "same",
+   "Maps show patterns of mountains, trenches and other features"
+  ],
+  [
+   "AERO-SCI|4-ESS1-1",
+   "concept",
+   "Rock layers and fossils record past changes"
+  ],
+  [
+   "AERO-SCI|3-LS4-1",
+   "concept",
+   "Fossils show where organisms and environments existed long ago"
+  ],
+  [
+   "NGSS|MS-ESS2-1",
+   "concept",
+   "Energy inside Earth drives the movement of materials"
+  ]
+ ],
+ "NGSS|MS-LS1-6": [
+  [
+   "AERO-SCI|5-LS1-1",
+   "same",
+   "Plants get materials from air and water, now through photosynthesis"
+  ],
+  [
+   "AERO-SCI|5-PS3-1",
+   "concept",
+   "Energy in food was once energy from the sun"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Atoms and molecules are needed to explain how sugar forms"
+  ],
+  [
+   "AERO-SCI|5-LS2-1",
+   "concept",
+   "Matter moves among plants, animals and the environment"
+  ],
+  [
+   "AERO-SCI|2-LS2-1",
+   "concept",
+   "Plants need sunlight and water to grow"
+  ]
+ ],
+ "NGSS|MS-LS1-7": [
+  [
+   "AERO-SCI|5-PS3-1",
+   "concept",
+   "Food gives animals energy for growth and motion"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Atoms combine into molecules that can be rearranged"
+  ],
+  [
+   "AERO-SCI|5-PS1-4",
+   "prereq",
+   "Mixing substances can make new substances"
+  ],
+  [
+   "AERO-SCI|5-LS2-1",
+   "concept",
+   "Matter moves from food into the bodies of animals"
+  ],
+  [
+   "NGSS|MS-LS1-3",
+   "concept",
+   "Body systems such as digestion work together"
+  ]
+ ],
+ "NGSS|MS-LS2-1": [
+  [
+   "AERO-SCI|3-LS4-3",
+   "same",
+   "Some organisms survive well in a habitat and others do not"
+  ],
+  [
+   "AERO-SCI|K-LS1-1",
+   "concept",
+   "Living things need resources such as food and water"
+  ],
+  [
+   "AERO-SCI|5-LS2-1",
+   "concept",
+   "Organisms depend on each other for matter"
+  ]
+ ],
+ "NGSS|MS-LS2-2": [
+  [
+   "AERO-SCI|2-LS2-2",
+   "concept",
+   "Animals and plants help each other, an example of mutualism"
+  ],
+  [
+   "AERO-SCI|3-LS2-1",
+   "concept",
+   "Animals in groups interact in ways that help survival"
+  ],
+  [
+   "AERO-SCI|5-LS2-1",
+   "concept",
+   "Food webs link plants, animals and decomposers"
+  ],
+  [
+   "AERO-SCI|3-LS4-3",
+   "concept",
+   "Organisms survive differently in the same habitat"
+  ]
+ ],
+ "NGSS|MS-LS2-3": [
+  [
+   "AERO-SCI|5-LS2-1",
+   "same",
+   "Movement of matter among organisms, now with energy flow"
+  ],
+  [
+   "AERO-SCI|5-PS3-1",
+   "same",
+   "Energy in food comes from the sun"
+  ],
+  [
+   "AERO-SCI|5-LS1-1",
+   "concept",
+   "Plants build matter from air and water"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Matter is made of atoms that are rearranged, not lost"
+  ]
+ ],
+ "NGSS|MS-LS2-4": [
+  [
+   "AERO-SCI|3-LS4-4",
+   "same",
+   "Environmental change changes which plants and animals live there"
+  ],
+  [
+   "AERO-SCI|3-LS4-3",
+   "concept",
+   "Habitat conditions affect how well organisms survive"
+  ],
+  [
+   "AERO-SCI|5-LS2-1",
+   "concept",
+   "Organisms in an ecosystem are connected through food"
+  ]
+ ],
+ "NGSS|MS-LS2-5": [
+  [
+   "AERO-SCI|3-LS4-4",
+   "same",
+   "Judging solutions to problems caused by environmental change"
+  ],
+  [
+   "NGSS|MS-ETS1-2",
+   "procedure",
+   "Evaluating competing design solutions systematically"
+  ],
+  [
+   "AERO-SCI|2-LS4-1",
+   "concept",
+   "Habitats contain a great diversity of living things"
+  ],
+  [
+   "AERO-SCI|5-ESS3-1",
+   "concept",
+   "Communities act to protect resources and the environment"
+  ]
+ ],
+ "NGSS|MS-LS4-4": [
+  [
+   "AERO-SCI|3-LS4-2",
+   "same",
+   "Variation in traits can help individuals survive and reproduce"
+  ],
+  [
+   "NGSS|MS-LS3-2",
+   "prereq",
+   "Sexual reproduction produces genetic variation"
+  ],
+  [
+   "AERO-SCI|3-LS3-1",
+   "concept",
+   "Traits are inherited and vary within a group"
+  ],
+  [
+   "AERO-SCI|3-LS4-3",
+   "concept",
+   "Some organisms survive better than others in a habitat"
+  ]
+ ],
+ "NGSS|MS-LS4-6": [
+  [
+   "AERO-SCI|3-LS4-2",
+   "concept",
+   "Traits that give an advantage help individuals survive"
+  ],
+  [
+   "NGSS|MS-LS3-2",
+   "prereq",
+   "Reproduction passes on traits and creates variation"
+  ],
+  [
+   "AERO-SCI|3-LS4-3",
+   "concept",
+   "Survival differs among organisms in the same habitat"
+  ],
+  [
+   "AERO-SCI|3-LS3-1",
+   "procedure",
+   "Analysing data about traits within a group"
+  ]
+ ],
+ "NGSS|MS-PS1-3": [
+  [
+   "AERO-SCI|5-PS1-4",
+   "concept",
+   "Mixing substances can make new substances"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Materials are made of molecules and structures of atoms"
+  ],
+  [
+   "AERO-SCI|4-ESS3-1",
+   "concept",
+   "Materials and fuels come from natural resources"
+  ],
+  [
+   "AERO-SCI|2-PS1-2",
+   "concept",
+   "Materials are chosen for properties suited to a purpose"
+  ]
+ ],
+ "NGSS|MS-PS1-6": [
+  [
+   "NGSS|MS-PS3-3",
+   "same",
+   "Designing a device that controls thermal energy transfer"
+  ],
+  [
+   "AERO-SCI|5-PS1-4",
+   "concept",
+   "Mixing substances can produce new substances"
+  ],
+  [
+   "NGSS|MS-PS1-4",
+   "concept",
+   "Adding or removing thermal energy changes temperature"
+  ],
+  [
+   "NGSS|MS-ETS1-4",
+   "procedure",
+   "Testing and modifying a design through repeated trials"
+  ]
+ ],
+ "NGSS|MS-ESS1-2": [
+  [
+   "AERO-SCI|5-PS2-1",
+   "same",
+   "Gravity pulls objects toward Earth, now across the solar system"
+  ],
+  [
+   "NGSS|MS-ESS1-1",
+   "same",
+   "Modelling the motions of the Earth, sun and moon"
+  ],
+  [
+   "AERO-SCI|5-ESS1-1",
+   "concept",
+   "The sun is one star among many at different distances"
+  ]
+ ],
+ "NGSS|MS-ESS1-3": [
+  [
+   "AERO-SCI|5-ESS1-1",
+   "concept",
+   "Distances between Earth, the sun and stars are vast"
+  ],
+  [
+   "NGSS|MS-ESS1-1",
+   "concept",
+   "A model of the Earth, sun and moon system"
+  ]
+ ],
+ "NGSS|MS-ESS1-4": [
+  [
+   "AERO-SCI|4-ESS1-1",
+   "same",
+   "Rock layers and fossils record change, now on a geologic time scale"
+  ],
+  [
+   "NGSS|MS-ESS2-2",
+   "concept",
+   "Geoscience processes act over very different time scales"
+  ],
+  [
+   "AERO-SCI|3-LS4-1",
+   "concept",
+   "Fossils give evidence of past life and environments"
+  ],
+  [
+   "NGSS|MS-ESS2-1",
+   "concept",
+   "Rock cycle processes form the rock layers"
+  ]
+ ],
+ "NGSS|MS-ESS3-4": [
+  [
+   "NGSS|MS-ESS3-3",
+   "same",
+   "Monitoring and reducing a human impact on the environment"
+  ],
+  [
+   "NGSS|MS-ESS3-1",
+   "concept",
+   "Natural resources are limited and unevenly distributed"
+  ],
+  [
+   "AERO-SCI|4-ESS3-1",
+   "concept",
+   "Using resources affects the environment"
+  ],
+  [
+   "AERO-SCI|5-ESS3-1",
+   "concept",
+   "Communities make choices that protect Earth resources"
+  ]
+ ],
+ "NGSS|MS-LS3-1": [
+  [
+   "NGSS|MS-LS3-2",
+   "same",
+   "Genetic information passed in reproduction, now changes in genes"
+  ],
+  [
+   "NGSS|MS-LS1-2",
+   "prereq",
+   "Cell parts and their functions, including where genes are"
+  ],
+  [
+   "AERO-SCI|3-LS3-1",
+   "concept",
+   "Traits are inherited from parents"
+  ],
+  [
+   "NGSS|MS-LS1-5",
+   "concept",
+   "Genetic factors influence how organisms grow"
+  ]
+ ],
+ "NGSS|MS-LS4-1": [
+  [
+   "AERO-SCI|3-LS4-1",
+   "same",
+   "Fossils give evidence of past life, now patterns across Earth history"
+  ],
+  [
+   "AERO-SCI|4-ESS1-1",
+   "same",
+   "Fossils in rock layers show change over time"
+  ],
+  [
+   "NGSS|MS-ESS2-3",
+   "concept",
+   "Fossils and rocks used as evidence of past events"
+  ]
+ ],
+ "NGSS|MS-LS4-2": [
+  [
+   "AERO-SCI|4-LS1-1",
+   "concept",
+   "Comparing internal and external structures of organisms"
+  ],
+  [
+   "AERO-SCI|3-LS4-1",
+   "concept",
+   "Fossils show organisms that lived long ago"
+  ],
+  [
+   "AERO-SCI|3-LS3-1",
+   "concept",
+   "Offspring inherit traits from their parents"
+  ]
+ ],
+ "NGSS|MS-LS4-3": [
+  [
+   "AERO-SCI|3-LS1-1",
+   "concept",
+   "Organisms go through stages of growth and development"
+  ],
+  [
+   "AERO-SCI|4-LS1-1",
+   "concept",
+   "Comparing structures across different organisms"
+  ]
+ ],
+ "NGSS|MS-LS4-5": [
+  [
+   "NGSS|MS-LS3-2",
+   "same",
+   "How reproduction passes genetic information to offspring"
+  ],
+  [
+   "NGSS|MS-LS4-4",
+   "concept",
+   "Traits that help survival become more common"
+  ],
+  [
+   "AERO-SCI|3-LS3-1",
+   "concept",
+   "Traits are inherited from parents"
+  ],
+  [
+   "NGSS|MS-LS1-5",
+   "concept",
+   "Genes and environment influence growth"
+  ]
+ ],
+ "NGSS|MS-PS1-2": [
+  [
+   "AERO-SCI|5-PS1-4",
+   "same",
+   "Mixing can make new substances, now identified by properties"
+  ],
+  [
+   "AERO-SCI|5-PS1-3",
+   "concept",
+   "Identifying materials by their measured properties"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Substances are made of atoms and molecules"
+  ],
+  [
+   "AERO-SCI|2-PS1-1",
+   "concept",
+   "Classifying materials by observable properties"
+  ]
+ ],
+ "NGSS|MS-PS1-5": [
+  [
+   "AERO-SCI|5-PS1-2",
+   "same",
+   "Total weight is conserved in changes, now explained by atoms"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Molecules are made of atoms"
+  ],
+  [
+   "AERO-SCI|5-PS1-1",
+   "concept",
+   "Matter is made of particles too small to see"
+  ]
+ ],
+ "NGSS|MS-PS2-1": [
+  [
+   "AERO-SCI|3-PS2-1",
+   "concept",
+   "Balanced and unbalanced forces change motion"
+  ],
+  [
+   "AERO-SCI|4-PS3-3",
+   "concept",
+   "Colliding objects change speed and energy"
+  ],
+  [
+   "NGSS|MS-ETS1-1",
+   "procedure",
+   "Defining criteria and constraints for a design problem"
+  ],
+  [
+   "AERO-SCI|K-PS2-2",
+   "procedure",
+   "Designing a way to change motion with a push or pull"
+  ]
+ ],
+ "NGSS|MS-PS2-2": [
+  [
+   "AERO-SCI|3-PS2-1",
+   "same",
+   "Balanced and unbalanced forces, now with sums of forces and mass"
+  ],
+  [
+   "AERO-SCI|K-PS2-1",
+   "same",
+   "Stronger pushes or pulls change motion more"
+  ],
+  [
+   "AERO-SCI|3-PS2-2",
+   "procedure",
+   "Measuring and recording the motion of objects"
+  ],
+  [
+   "AERO-SCI|3-5-ETS1-3",
+   "procedure",
+   "Planning fair tests with controlled variables"
+  ]
+ ],
+ "NGSS|MS-PS2-3": [
+  [
+   "AERO-SCI|3-PS2-3",
+   "same",
+   "Electric and magnetic interactions, now what affects their strength"
+  ],
+  [
+   "AERO-SCI|3-PS2-4",
+   "concept",
+   "Using what magnets do to solve problems"
+  ]
+ ],
+ "NGSS|MS-PS2-4": [
+  [
+   "AERO-SCI|5-PS2-1",
+   "same",
+   "Gravity pulls objects down, now depending on mass"
+  ],
+  [
+   "AERO-SCI|3-PS2-3",
+   "concept",
+   "Some forces act between objects without contact"
+  ]
+ ],
+ "NGSS|MS-PS2-5": [
+  [
+   "AERO-SCI|3-PS2-3",
+   "same",
+   "Forces act between objects not touching, now explained by fields"
+  ],
+  [
+   "AERO-SCI|5-PS2-1",
+   "concept",
+   "Gravity acts on objects without contact"
+  ],
+  [
+   "AERO-SCI|3-PS2-4",
+   "concept",
+   "Magnets push and pull at a distance"
+  ]
+ ],
+ "NGSS|MS-PS3-1": [
+  [
+   "AERO-SCI|4-PS3-1",
+   "same",
+   "Speed relates to energy, now with mass and graphs"
+  ],
+  [
+   "NGSS|MS-PS3-5",
+   "concept",
+   "Changes in kinetic energy involve energy transfer"
+  ],
+  [
+   "AERO-SCI|5-PS1-2",
+   "procedure",
+   "Measuring and graphing quantities to show relationships"
+  ]
+ ],
+ "NGSS|MS-PS3-2": [
+  [
+   "AERO-SCI|3-PS2-3",
+   "concept",
+   "Magnets and charges interact at a distance"
+  ],
+  [
+   "AERO-SCI|5-PS2-1",
+   "concept",
+   "Gravity pulls objects toward Earth"
+  ],
+  [
+   "NGSS|MS-PS3-5",
+   "concept",
+   "Energy is transferred when motion changes"
+  ],
+  [
+   "AERO-SCI|4-PS3-1",
+   "concept",
+   "Moving objects have energy, which can be contrasted with stored energy"
+  ]
+ ],
+ "NGSS|MS-PS4-1": [
+  [
+   "AERO-SCI|4-PS4-1",
+   "same",
+   "Wave amplitude and wavelength, now with energy and mathematics"
+  ],
+  [
+   "AERO-SCI|1-PS4-1",
+   "concept",
+   "Vibrating materials make sound waves"
+  ],
+  [
+   "AERO-SCI|4-PS3-2",
+   "concept",
+   "Sound and light transfer energy"
+  ]
+ ],
+ "NGSS|MS-PS4-2": [
+  [
+   "AERO-SCI|1-PS4-3",
+   "same",
+   "Materials block, reflect or let light through"
+  ],
+  [
+   "AERO-SCI|4-PS4-2",
+   "same",
+   "Light reflects from objects into the eye"
+  ],
+  [
+   "AERO-SCI|4-PS4-1",
+   "concept",
+   "A wave model with amplitude and wavelength"
+  ]
+ ],
+ "NGSS|MS-PS4-3": [
+  [
+   "AERO-SCI|4-PS4-3",
+   "same",
+   "Using patterns to transfer information, now digital signals"
+  ],
+  [
+   "AERO-SCI|1-PS4-4",
+   "same",
+   "Communicating over a distance with light or sound"
+  ],
+  [
+   "AERO-SCI|4-PS4-1",
+   "concept",
+   "Waves have patterns that can be used to carry information"
+  ]
+ ],
+ "NGSS|HS-ESS1-1": [
+  [
+   "AERO-SCI|5-ESS1-1",
+   "concept",
+   "The sun is a star that gives off light"
+  ],
+  [
+   "NGSS|MS-ESS1-2",
+   "concept",
+   "Gravity shapes the sun and the solar system"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Atoms and their parts are needed to understand fusion"
+  ],
+  [
+   "AERO-SCI|4-PS3-2",
+   "concept",
+   "Light carries energy from place to place"
+  ]
+ ],
+ "NGSS|HS-ESS1-2": [
+  [
+   "NGSS|MS-ESS1-2",
+   "same",
+   "Galaxies and gravity, now the origin of the universe"
+  ],
+  [
+   "NGSS|MS-PS4-2",
+   "concept",
+   "Light is a wave that interacts with matter"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "concept",
+   "Matter is made of atoms of different elements"
+  ],
+  [
+   "AERO-SCI|5-ESS1-1",
+   "concept",
+   "Stars are at vast and different distances"
+  ]
+ ],
+ "NGSS|HS-ESS1-3": [
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Elements are different kinds of atoms"
+  ],
+  [
+   "AERO-SCI|5-ESS1-1",
+   "concept",
+   "The sun is one of many stars"
+  ],
+  [
+   "NGSS|MS-ESS1-2",
+   "concept",
+   "Gravity holds stars and galaxies together"
+  ]
+ ],
+ "NGSS|HS-ESS1-4": [
+  [
+   "NGSS|MS-ESS1-2",
+   "same",
+   "Gravity controls orbits, now predicted with mathematics"
+  ],
+  [
+   "NGSS|MS-PS2-4",
+   "prereq",
+   "Gravitational attraction depends on the masses involved"
+  ],
+  [
+   "NGSS|MS-ESS1-3",
+   "concept",
+   "Scale and distances of solar system objects"
+  ],
+  [
+   "NGSS|MS-ESS1-1",
+   "concept",
+   "Earth and moon move in predictable patterns"
+  ]
+ ],
+ "NGSS|HS-ESS1-5": [
+  [
+   "NGSS|MS-ESS2-3",
+   "same",
+   "Evidence of past plate motions, now explaining rock ages"
+  ],
+  [
+   "NGSS|MS-ESS1-4",
+   "concept",
+   "Rock layers organise Earth history into a time scale"
+  ],
+  [
+   "NGSS|MS-ESS2-2",
+   "concept",
+   "Geoscience processes shape the surface over time"
+  ]
+ ],
+ "NGSS|HS-ESS1-6": [
+  [
+   "NGSS|MS-ESS1-4",
+   "same",
+   "Rock evidence of Earth history, now its formation"
+  ],
+  [
+   "NGSS|MS-ESS1-3",
+   "concept",
+   "Properties of other objects in the solar system"
+  ],
+  [
+   "NGSS|MS-ESS1-2",
+   "concept",
+   "Gravity formed and holds together the solar system"
+  ]
+ ],
+ "NGSS|HS-ESS2-1": [
+  [
+   "NGSS|MS-ESS2-2",
+   "same",
+   "Processes shape the surface at different scales"
+  ],
+  [
+   "NGSS|MS-ESS2-3",
+   "same",
+   "Plate motions explain continents and seafloor features"
+  ],
+  [
+   "NGSS|MS-ESS2-1",
+   "concept",
+   "Internal energy drives the cycling of Earth materials"
+  ],
+  [
+   "AERO-SCI|4-ESS2-2",
+   "concept",
+   "Maps reveal patterns of Earth features"
+  ]
+ ],
+ "NGSS|HS-ESS2-2": [
+  [
+   "AERO-SCI|5-ESS2-1",
+   "same",
+   "Earth systems interact, now with feedbacks"
+  ],
+  [
+   "NGSS|MS-ESS2-6",
+   "concept",
+   "Air and ocean circulation links Earth systems"
+  ],
+  [
+   "NGSS|MS-ESS2-4",
+   "concept",
+   "Water cycles through all Earth systems"
+  ],
+  [
+   "NGSS|MS-ESS3-5",
+   "concept",
+   "Rising temperatures show Earth systems changing"
+  ]
+ ],
+ "NGSS|HS-ESS2-3": [
+  [
+   "NGSS|MS-ESS2-1",
+   "same",
+   "Energy drives the cycling of Earth materials"
+  ],
+  [
+   "NGSS|MS-ESS2-3",
+   "concept",
+   "Evidence that plates have moved over time"
+  ],
+  [
+   "NGSS|MS-PS1-4",
+   "concept",
+   "Thermal energy changes particle motion and temperature"
+  ],
+  [
+   "NGSS|MS-PS3-4",
+   "concept",
+   "Thermal energy moves between materials at different temperatures"
+  ]
+ ],
+ "NGSS|HS-ESS2-4": [
+  [
+   "NGSS|MS-ESS2-6",
+   "same",
+   "Unequal heating shapes climates, now changes in energy balance"
+  ],
+  [
+   "NGSS|MS-ESS3-5",
+   "same",
+   "Factors behind rising global temperatures"
+  ],
+  [
+   "NGSS|MS-ESS1-1",
+   "concept",
+   "Positions of Earth and sun cause seasons"
+  ],
+  [
+   "NGSS|MS-PS4-2",
+   "concept",
+   "Light is reflected, absorbed or transmitted by materials"
+  ]
+ ],
+ "NGSS|HS-ESS2-5": [
+  [
+   "AERO-SCI|4-ESS2-1",
+   "same",
+   "Water and ice weather and erode rock"
+  ],
+  [
+   "NGSS|MS-ESS2-4",
+   "concept",
+   "Water cycles through Earth systems"
+  ],
+  [
+   "NGSS|MS-ESS2-2",
+   "concept",
+   "Surface processes change Earth over time"
+  ],
+  [
+   "NGSS|MS-PS1-4",
+   "concept",
+   "Thermal energy changes the state of water"
+  ]
+ ],
+ "NGSS|HS-ESS2-6": [
+  [
+   "NGSS|MS-LS2-3",
+   "concept",
+   "Matter cycles among living and nonliving parts"
+  ],
+  [
+   "NGSS|MS-LS1-6",
+   "concept",
+   "Photosynthesis moves carbon from air into organisms"
+  ],
+  [
+   "NGSS|MS-ESS2-1",
+   "concept",
+   "Earth materials cycle through Earth systems"
+  ],
+  [
+   "AERO-SCI|5-ESS2-1",
+   "concept",
+   "Geosphere, biosphere, hydrosphere and atmosphere interact"
+  ],
+  [
+   "NGSS|MS-PS1-5",
+   "prereq",
+   "Atoms are conserved as they move between forms"
+  ]
+ ],
+ "NGSS|HS-ESS2-7": [
+  [
+   "NGSS|MS-LS4-1",
+   "concept",
+   "The fossil record shows life changing over Earth history"
+  ],
+  [
+   "NGSS|MS-ESS1-4",
+   "concept",
+   "Geologic time organises Earth history"
+  ],
+  [
+   "AERO-SCI|5-ESS2-1",
+   "concept",
+   "The biosphere interacts with other Earth systems"
+  ],
+  [
+   "AERO-SCI|K-ESS2-2",
+   "same",
+   "Living things change their environment, now across Earth history"
+  ]
+ ],
+ "NGSS|HS-ESS3-1": [
+  [
+   "NGSS|MS-ESS3-1",
+   "same",
+   "Natural resources are unevenly distributed across Earth"
+  ],
+  [
+   "NGSS|MS-ESS3-2",
+   "same",
+   "Natural hazards and how people respond to them"
+  ],
+  [
+   "NGSS|MS-ESS2-6",
+   "concept",
+   "How regional climates are produced"
+  ],
+  [
+   "AERO-SCI|3-ESS2-2",
+   "concept",
+   "Climates differ in regions of the world"
+  ]
+ ],
+ "NGSS|HS-ESS3-2": [
+  [
+   "AERO-SCI|4-ESS3-1",
+   "same",
+   "Energy and fuels come from resources and affect the environment"
+  ],
+  [
+   "NGSS|MS-ESS3-1",
+   "concept",
+   "Energy and mineral resources are unevenly distributed"
+  ],
+  [
+   "NGSS|MS-ETS1-2",
+   "procedure",
+   "Evaluating competing solutions with a systematic process"
+  ]
+ ],
+ "NGSS|HS-ESS3-3": [
+  [
+   "NGSS|MS-ESS3-4",
+   "same",
+   "Population and consumption affect Earth systems"
+  ],
+  [
+   "NGSS|MS-LS2-5",
+   "concept",
+   "Maintaining biodiversity and ecosystem services"
+  ],
+  [
+   "NGSS|MS-LS2-1",
+   "concept",
+   "Resource availability affects the size of populations"
+  ],
+  [
+   "NGSS|MS-ESS3-3",
+   "concept",
+   "Monitoring and minimising human impacts"
+  ]
+ ],
+ "NGSS|HS-ESS3-4": [
+  [
+   "NGSS|MS-ESS3-3",
+   "same",
+   "Designing ways to reduce human impact, now evaluating and refining"
+  ],
+  [
+   "AERO-SCI|5-ESS3-1",
+   "concept",
+   "Communities use science to protect the environment"
+  ],
+  [
+   "NGSS|MS-ETS1-2",
+   "procedure",
+   "Evaluating designs against criteria and constraints"
+  ]
+ ],
+ "NGSS|HS-ESS3-5": [
+  [
+   "NGSS|MS-ESS3-5",
+   "same",
+   "Evidence for rising temperatures, now forecasting future change"
+  ],
+  [
+   "NGSS|MS-ESS3-2",
+   "procedure",
+   "Analysing data to forecast future events"
+  ],
+  [
+   "NGSS|MS-ESS2-6",
+   "concept",
+   "Circulation patterns shape regional climates"
+  ]
+ ],
+ "NGSS|HS-ESS3-6": [
+  [
+   "NGSS|MS-ESS3-4",
+   "same",
+   "Human activity has impacts on Earth systems"
+  ],
+  [
+   "NGSS|MS-ESS3-5",
+   "concept",
+   "Human factors in rising global temperatures"
+  ],
+  [
+   "AERO-SCI|5-ESS2-1",
+   "concept",
+   "Earth systems interact with each other"
+  ],
+  [
+   "NGSS|MS-ESS3-3",
+   "concept",
+   "Monitoring human impact on the environment"
+  ]
+ ],
+ "NGSS|HS-ETS1-1": [
+  [
+   "NGSS|MS-ETS1-1",
+   "same",
+   "Precise criteria and constraints, now for global challenges"
+  ]
+ ],
+ "NGSS|HS-ETS1-2": [
+  [
+   "NGSS|MS-ETS1-1",
+   "prereq",
+   "Defining criteria and constraints for each smaller problem"
+  ],
+  [
+   "NGSS|MS-ETS1-3",
+   "same",
+   "Combining the best features to improve a solution"
+  ],
+  [
+   "NGSS|MS-ETS1-4",
+   "procedure",
+   "Iterative testing and modification of designs"
+  ]
+ ],
+ "NGSS|HS-ETS1-3": [
+  [
+   "NGSS|MS-ETS1-2",
+   "same",
+   "Evaluating competing solutions, now with priorities and tradeoffs"
+  ],
+  [
+   "NGSS|MS-ETS1-1",
+   "concept",
+   "Criteria and constraints include impacts on people and nature"
+  ]
+ ],
+ "NGSS|HS-ETS1-4": [
+  [
+   "NGSS|MS-ETS1-4",
+   "same",
+   "Models generate data to test designs, now computer simulations"
+  ],
+  [
+   "NGSS|MS-ETS1-2",
+   "concept",
+   "Comparing how well solutions meet criteria"
+  ]
+ ],
+ "NGSS|HS-PS2-1": [
+  [
+   "NGSS|MS-PS2-2",
+   "same",
+   "Motion depends on net force and mass, now mathematically"
+  ],
+  [
+   "NGSS|MS-PS2-1",
+   "concept",
+   "Forces act between interacting objects"
+  ],
+  [
+   "NGSS|MS-PS3-1",
+   "procedure",
+   "Graphing and interpreting relationships between variables"
+  ]
+ ],
+ "NGSS|HS-PS2-2": [
+  [
+   "NGSS|MS-PS2-1",
+   "same",
+   "Forces in collisions, now as conservation of momentum"
+  ],
+  [
+   "NGSS|MS-PS2-2",
+   "concept",
+   "Motion changes depend on force and mass"
+  ],
+  [
+   "AERO-SCI|4-PS3-3",
+   "concept",
+   "Colliding objects change motion and energy"
+  ]
+ ],
+ "NGSS|HS-PS2-3": [
+  [
+   "NGSS|MS-PS2-1",
+   "same",
+   "Designing a solution for colliding objects"
+  ],
+  [
+   "NGSS|MS-PS2-2",
+   "concept",
+   "Force, mass and change in motion are related"
+  ],
+  [
+   "NGSS|MS-ETS1-4",
+   "procedure",
+   "Testing and refining a design with data"
+  ],
+  [
+   "NGSS|HS-ETS1-3",
+   "procedure",
+   "Evaluating designs against prioritised criteria and tradeoffs"
+  ]
+ ],
+ "NGSS|HS-PS2-4": [
+  [
+   "NGSS|MS-PS2-4",
+   "same",
+   "Gravitational attraction depends on mass"
+  ],
+  [
+   "NGSS|MS-PS2-3",
+   "same",
+   "Factors that affect the strength of electric forces"
+  ],
+  [
+   "NGSS|HS-ESS1-4",
+   "concept",
+   "Using mathematics to predict orbital motion"
+  ]
+ ],
+ "NGSS|HS-PS2-5": [
+  [
+   "NGSS|MS-PS2-3",
+   "same",
+   "Electric and magnetic forces and what affects them"
+  ],
+  [
+   "NGSS|MS-PS2-5",
+   "same",
+   "Fields exist between objects that interact at a distance"
+  ],
+  [
+   "AERO-SCI|3-PS2-3",
+   "concept",
+   "Electric and magnetic interactions without contact"
+  ]
+ ],
+ "NGSS|HS-PS2-6": [
+  [
+   "NGSS|MS-PS1-3",
+   "same",
+   "Synthetic materials come from natural resources"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Atomic composition of molecules and extended structures"
+  ],
+  [
+   "AERO-SCI|2-PS1-2",
+   "concept",
+   "Materials are chosen for properties suited to their purpose"
+  ]
+ ],
+ "NGSS|HS-PS3-1": [
+  [
+   "NGSS|MS-PS3-5",
+   "same",
+   "Energy transfers when kinetic energy changes"
+  ],
+  [
+   "NGSS|MS-PS3-1",
+   "concept",
+   "Kinetic energy depends on mass and speed"
+  ],
+  [
+   "NGSS|MS-PS3-2",
+   "concept",
+   "Potential energy depends on the arrangement of objects"
+  ],
+  [
+   "NGSS|MS-PS3-4",
+   "concept",
+   "Energy transferred relates to temperature change and mass"
+  ]
+ ],
+ "NGSS|HS-PS3-2": [
+  [
+   "NGSS|MS-PS3-1",
+   "same",
+   "Energy of motion, known as kinetic energy"
+  ],
+  [
+   "NGSS|MS-PS3-2",
+   "same",
+   "Energy of position, known as potential energy"
+  ],
+  [
+   "NGSS|MS-PS1-4",
+   "concept",
+   "Particle motion is related to temperature"
+  ],
+  [
+   "NGSS|MS-PS3-4",
+   "concept",
+   "Thermal energy and the average kinetic energy of particles"
+  ]
+ ],
+ "NGSS|HS-PS3-3": [
+  [
+   "AERO-SCI|4-PS3-4",
+   "same",
+   "Designing a device that converts energy from one form to another"
+  ],
+  [
+   "NGSS|MS-PS3-3",
+   "procedure",
+   "Designing and testing a thermal energy device"
+  ],
+  [
+   "NGSS|MS-ETS1-4",
+   "procedure",
+   "Iterative testing to improve a design"
+  ]
+ ],
+ "NGSS|HS-PS3-5": [
+  [
+   "NGSS|MS-PS3-2",
+   "same",
+   "Potential energy changes with the arrangement of objects"
+  ],
+  [
+   "NGSS|MS-PS2-5",
+   "same",
+   "Fields between objects that interact at a distance"
+  ],
+  [
+   "NGSS|MS-PS2-3",
+   "concept",
+   "Strength of electric and magnetic forces"
+  ]
+ ],
+ "NGSS|HS-PS4-1": [
+  [
+   "NGSS|MS-PS4-1",
+   "same",
+   "Simple wave model, now frequency, wavelength and speed"
+  ],
+  [
+   "AERO-SCI|4-PS4-1",
+   "same",
+   "Waves have amplitude and wavelength"
+  ]
+ ],
+ "NGSS|HS-PS4-2": [
+  [
+   "NGSS|MS-PS4-3",
+   "same",
+   "Digitized signals are more reliable than analog signals"
+  ],
+  [
+   "AERO-SCI|4-PS4-3",
+   "concept",
+   "Patterns can be used to transfer information"
+  ]
+ ],
+ "NGSS|HS-PS4-3": [
+  [
+   "NGSS|MS-PS4-2",
+   "same",
+   "Wave model of light, now compared with a particle model"
+  ],
+  [
+   "NGSS|MS-PS4-1",
+   "concept",
+   "Waves carry energy related to amplitude"
+  ]
+ ],
+ "NGSS|HS-PS4-4": [
+  [
+   "NGSS|MS-PS4-2",
+   "same",
+   "Light and other waves can be absorbed by materials"
+  ],
+  [
+   "NGSS|MS-PS4-1",
+   "concept",
+   "Waves carry energy that depends on amplitude"
+  ],
+  [
+   "NGSS|MS-PS3-4",
+   "concept",
+   "Absorbed energy changes the temperature of matter"
+  ]
+ ],
+ "NGSS|HS-PS4-5": [
+  [
+   "NGSS|MS-PS4-3",
+   "same",
+   "Devices encode and transmit information with waves"
+  ],
+  [
+   "NGSS|MS-PS4-2",
+   "concept",
+   "Waves are reflected, absorbed or transmitted"
+  ],
+  [
+   "AERO-SCI|4-PS4-3",
+   "concept",
+   "Patterns can be used to transfer information"
+  ]
+ ],
+ "NGSS|HS-LS1-1": [
+  [
+   "NGSS|MS-LS3-1",
+   "same",
+   "Genes code for proteins that affect traits"
+  ],
+  [
+   "NGSS|MS-LS1-2",
+   "prereq",
+   "Parts of the cell and their functions"
+  ],
+  [
+   "NGSS|MS-LS1-3",
+   "concept",
+   "Body systems are made of groups of cells"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Atoms combine into large molecules such as DNA"
+  ]
+ ],
+ "NGSS|HS-LS1-2": [
+  [
+   "NGSS|MS-LS1-3",
+   "same",
+   "Body as interacting subsystems, now a full hierarchy"
+  ],
+  [
+   "NGSS|MS-LS1-1",
+   "concept",
+   "Living things are made of cells"
+  ],
+  [
+   "NGSS|MS-LS1-2",
+   "concept",
+   "Cell parts contribute to the function of the cell"
+  ],
+  [
+   "AERO-SCI|4-LS1-1",
+   "concept",
+   "Structures function to support survival"
+  ]
+ ],
+ "NGSS|HS-LS1-3": [
+  [
+   "NGSS|MS-LS1-3",
+   "concept",
+   "Body subsystems interact to keep the organism alive"
+  ],
+  [
+   "NGSS|MS-LS1-8",
+   "concept",
+   "Receptors detect stimuli and send messages to the brain"
+  ],
+  [
+   "NGSS|HS-ESS2-2",
+   "concept",
+   "Feedbacks in Earth systems show a similar idea of control"
+  ]
+ ],
+ "NGSS|HS-LS1-4": [
+  [
+   "NGSS|MS-LS1-1",
+   "concept",
+   "Organisms are made of one or many cells"
+  ],
+  [
+   "NGSS|MS-LS3-2",
+   "concept",
+   "Asexual reproduction copies genetic information exactly"
+  ],
+  [
+   "NGSS|MS-LS1-2",
+   "concept",
+   "Cell parts and their functions"
+  ],
+  [
+   "NGSS|MS-LS1-5",
+   "concept",
+   "Genetic and environmental factors affect growth"
+  ]
+ ],
+ "NGSS|HS-LS1-5": [
+  [
+   "NGSS|MS-LS1-6",
+   "same",
+   "Photosynthesis cycles matter and energy, now at the chemical level"
+  ],
+  [
+   "AERO-SCI|5-PS3-1",
+   "concept",
+   "Energy in food comes from sunlight"
+  ],
+  [
+   "NGSS|HS-PS3-2",
+   "concept",
+   "Energy can be stored in the arrangement of particles"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Molecules such as sugar are made of atoms"
+  ]
+ ],
+ "NGSS|HS-LS1-6": [
+  [
+   "NGSS|MS-LS1-7",
+   "same",
+   "Food is rearranged into new molecules for growth"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Atoms combine into molecules in set ways"
+  ],
+  [
+   "NGSS|MS-PS1-5",
+   "prereq",
+   "Atoms are conserved in chemical reactions"
+  ],
+  [
+   "NGSS|MS-LS1-6",
+   "concept",
+   "Photosynthesis produces the sugar molecules that are rearranged"
+  ]
+ ],
+ "NGSS|HS-LS1-7": [
+  [
+   "NGSS|MS-LS1-7",
+   "same",
+   "Food molecules react to release energy in organisms"
+  ],
+  [
+   "NGSS|MS-PS1-2",
+   "prereq",
+   "Recognising that chemical reactions make new substances"
+  ],
+  [
+   "NGSS|MS-PS1-6",
+   "concept",
+   "Chemical processes can release or absorb thermal energy"
+  ],
+  [
+   "NGSS|HS-PS3-2",
+   "concept",
+   "Energy is stored in the arrangement of particles"
+  ]
+ ],
+ "NGSS|HS-LS2-1": [
+  [
+   "NGSS|MS-LS2-1",
+   "same",
+   "Resource availability limits the size of populations"
+  ],
+  [
+   "NGSS|MS-LS2-4",
+   "concept",
+   "Changes in an ecosystem affect its populations"
+  ],
+  [
+   "NGSS|MS-LS2-2",
+   "concept",
+   "Patterns of interaction such as competition and predation"
+  ]
+ ],
+ "NGSS|HS-LS2-2": [
+  [
+   "NGSS|MS-LS2-4",
+   "same",
+   "Changes in ecosystems affect populations"
+  ],
+  [
+   "NGSS|MS-LS2-1",
+   "concept",
+   "Available resources affect population size"
+  ],
+  [
+   "NGSS|MS-LS2-5",
+   "concept",
+   "Biodiversity and the services ecosystems provide"
+  ]
+ ],
+ "NGSS|HS-LS2-3": [
+  [
+   "NGSS|MS-LS2-3",
+   "same",
+   "Matter cycles and energy flows in ecosystems"
+  ],
+  [
+   "NGSS|MS-LS1-7",
+   "concept",
+   "Food molecules react to release energy"
+  ],
+  [
+   "NGSS|MS-LS1-6",
+   "concept",
+   "Photosynthesis brings matter and energy into ecosystems"
+  ]
+ ],
+ "NGSS|HS-LS2-4": [
+  [
+   "NGSS|MS-LS2-3",
+   "same",
+   "Cycling of matter and flow of energy, now quantified"
+  ],
+  [
+   "AERO-SCI|5-LS2-1",
+   "concept",
+   "Matter moves among plants, animals and decomposers"
+  ],
+  [
+   "NGSS|HS-PS3-1",
+   "concept",
+   "Accounting for energy flowing into and out of a system"
+  ]
+ ],
+ "NGSS|HS-LS2-5": [
+  [
+   "NGSS|HS-ESS2-6",
+   "same",
+   "Carbon cycles among the Earth systems"
+  ],
+  [
+   "NGSS|MS-LS1-6",
+   "concept",
+   "Photosynthesis takes in carbon dioxide"
+  ],
+  [
+   "NGSS|MS-LS1-7",
+   "concept",
+   "Organisms release energy from food, giving off carbon dioxide"
+  ],
+  [
+   "NGSS|MS-LS2-3",
+   "concept",
+   "Matter cycles between living and nonliving parts"
+  ]
+ ],
+ "NGSS|HS-LS2-6": [
+  [
+   "NGSS|MS-LS2-4",
+   "same",
+   "Changes to ecosystem parts affect populations"
+  ],
+  [
+   "NGSS|MS-LS2-2",
+   "concept",
+   "Patterns of interaction among organisms"
+  ],
+  [
+   "AERO-SCI|3-LS4-4",
+   "concept",
+   "Environmental change alters which organisms live there"
+  ]
+ ],
+ "NGSS|HS-LS2-7": [
+  [
+   "NGSS|MS-LS2-5",
+   "same",
+   "Evaluating solutions for maintaining biodiversity"
+  ],
+  [
+   "NGSS|HS-ESS3-4",
+   "concept",
+   "Refining solutions that reduce human impacts"
+  ],
+  [
+   "NGSS|MS-ESS3-3",
+   "concept",
+   "Monitoring and reducing human impact"
+  ],
+  [
+   "NGSS|HS-ETS1-3",
+   "procedure",
+   "Evaluating solutions with criteria and tradeoffs"
+  ]
+ ],
+ "NGSS|HS-LS2-8": [
+  [
+   "AERO-SCI|3-LS2-1",
+   "same",
+   "Groups help members survive, now evaluating the evidence"
+  ],
+  [
+   "NGSS|MS-LS1-4",
+   "concept",
+   "Behaviours affect the success of reproduction"
+  ]
+ ],
+ "NGSS|HS-LS3-1": [
+  [
+   "NGSS|MS-LS3-1",
+   "same",
+   "Genes on chromosomes affect proteins and traits"
+  ],
+  [
+   "NGSS|MS-LS3-2",
+   "same",
+   "Reproduction passes genetic information to offspring"
+  ],
+  [
+   "AERO-SCI|3-LS3-1",
+   "concept",
+   "Traits are inherited from parents"
+  ]
+ ],
+ "NGSS|HS-LS3-2": [
+  [
+   "NGSS|MS-LS3-2",
+   "same",
+   "Sexual reproduction creates genetic variation"
+  ],
+  [
+   "NGSS|MS-LS3-1",
+   "same",
+   "Mutations change genes and may affect traits"
+  ],
+  [
+   "NGSS|MS-LS1-5",
+   "concept",
+   "Environmental factors can affect organisms"
+  ]
+ ],
+ "NGSS|HS-LS3-3": [
+  [
+   "AERO-SCI|3-LS3-1",
+   "same",
+   "Variation of traits in a group, now with statistics"
+  ],
+  [
+   "NGSS|MS-LS3-2",
+   "concept",
+   "Sexual reproduction produces variation among offspring"
+  ],
+  [
+   "NGSS|MS-LS4-6",
+   "procedure",
+   "Mathematical representations of trait changes in populations"
+  ]
+ ],
+ "NGSS|HS-LS4-1": [
+  [
+   "NGSS|MS-LS4-1",
+   "same",
+   "Patterns in the fossil record of life"
+  ],
+  [
+   "NGSS|MS-LS4-2",
+   "same",
+   "Anatomical similarities show relationships between organisms"
+  ],
+  [
+   "NGSS|MS-LS4-3",
+   "same",
+   "Similar embryo development shows relationships between species"
+  ]
+ ],
+ "NGSS|HS-LS4-2": [
+  [
+   "NGSS|MS-LS4-4",
+   "same",
+   "Genetic variation affects survival and reproduction"
+  ],
+  [
+   "NGSS|MS-LS4-6",
+   "same",
+   "Natural selection changes traits in populations"
+  ],
+  [
+   "NGSS|MS-LS3-2",
+   "prereq",
+   "Sexual reproduction creates variation among offspring"
+  ],
+  [
+   "NGSS|MS-LS3-1",
+   "prereq",
+   "Mutations create new genetic variation"
+  ],
+  [
+   "NGSS|MS-LS2-1",
+   "concept",
+   "Limited resources create competition among organisms"
+  ]
+ ],
+ "NGSS|HS-LS4-3": [
+  [
+   "NGSS|MS-LS4-6",
+   "same",
+   "Mathematical representations of trait changes, now statistics"
+  ],
+  [
+   "NGSS|MS-LS4-4",
+   "same",
+   "Advantageous variations increase the chances of survival"
+  ],
+  [
+   "AERO-SCI|3-LS4-2",
+   "concept",
+   "Some variations give individuals an advantage"
+  ]
+ ],
+ "NGSS|HS-LS4-4": [
+  [
+   "NGSS|MS-LS4-6",
+   "same",
+   "Natural selection changes traits over time"
+  ],
+  [
+   "NGSS|MS-LS4-4",
+   "same",
+   "Variations that aid survival in a specific environment"
+  ],
+  [
+   "AERO-SCI|3-LS4-3",
+   "concept",
+   "Organisms survive differently in a given habitat"
+  ]
+ ],
+ "NGSS|HS-LS4-5": [
+  [
+   "NGSS|MS-LS4-1",
+   "concept",
+   "Fossils record the extinction and change of life"
+  ],
+  [
+   "NGSS|MS-LS2-4",
+   "concept",
+   "Environmental changes affect the size of populations"
+  ],
+  [
+   "AERO-SCI|3-LS4-4",
+   "same",
+   "Environmental change changes the organisms that live there"
+  ]
+ ],
+ "NGSS|HS-LS4-6": [
+  [
+   "NGSS|MS-LS2-5",
+   "same",
+   "Evaluating solutions for maintaining biodiversity and ecosystem services"
+  ],
+  [
+   "NGSS|HS-ESS3-3",
+   "procedure",
+   "Building a computational simulation of human impact"
+  ],
+  [
+   "NGSS|HS-ETS1-4",
+   "procedure",
+   "Using simulations to model proposed solutions"
+  ]
+ ],
+ "NGSS|HS-PS1-1": [
+  [
+   "NGSS|MS-PS1-1",
+   "same",
+   "Atoms and molecules, now atomic structure and the periodic table"
+  ],
+  [
+   "AERO-SCI|5-PS1-3",
+   "concept",
+   "Materials are identified by their properties"
+  ],
+  [
+   "NGSS|MS-PS1-2",
+   "concept",
+   "Substances have characteristic properties used to identify them"
+  ]
+ ],
+ "NGSS|HS-PS1-2": [
+  [
+   "NGSS|MS-PS1-2",
+   "same",
+   "Identifying chemical reactions, now predicting outcomes"
+  ],
+  [
+   "NGSS|MS-PS1-5",
+   "concept",
+   "Atoms rearrange and are conserved in reactions"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Atoms combine to form molecules"
+  ]
+ ],
+ "NGSS|HS-PS1-3": [
+  [
+   "NGSS|HS-PS2-4",
+   "prereq",
+   "Coulomb law describes forces between charged particles"
+  ],
+  [
+   "NGSS|HS-PS2-6",
+   "same",
+   "Molecular structure explains the properties of materials"
+  ],
+  [
+   "NGSS|MS-PS1-4",
+   "concept",
+   "Particle motion and states of matter"
+  ],
+  [
+   "NGSS|MS-PS2-3",
+   "concept",
+   "Electric forces depend on charge and distance"
+  ]
+ ],
+ "NGSS|HS-PS1-4": [
+  [
+   "NGSS|MS-PS1-6",
+   "same",
+   "Chemical processes release or absorb thermal energy"
+  ],
+  [
+   "NGSS|HS-PS3-2",
+   "prereq",
+   "Energy is stored in the arrangement of particles"
+  ],
+  [
+   "NGSS|MS-PS3-2",
+   "concept",
+   "Potential energy changes with arrangement"
+  ],
+  [
+   "NGSS|HS-LS1-7",
+   "concept",
+   "Respiration breaks and forms bonds with a net energy transfer"
+  ]
+ ],
+ "NGSS|HS-PS1-5": [
+  [
+   "NGSS|MS-PS1-4",
+   "concept",
+   "Temperature is related to particle motion"
+  ],
+  [
+   "NGSS|MS-PS3-4",
+   "concept",
+   "Temperature measures the average kinetic energy of particles"
+  ],
+  [
+   "NGSS|MS-PS1-2",
+   "prereq",
+   "Identifying when a chemical reaction has occurred"
+  ],
+  [
+   "NGSS|HS-PS3-2",
+   "concept",
+   "Energy of particle motion at the molecular scale"
+  ]
+ ],
+ "NGSS|HS-PS1-6": [
+  [
+   "NGSS|MS-PS1-6",
+   "procedure",
+   "Designing and modifying a device based on chemical processes"
+  ],
+  [
+   "NGSS|MS-PS1-2",
+   "prereq",
+   "Recognising the reactants and products of a reaction"
+  ],
+  [
+   "NGSS|HS-ETS1-3",
+   "procedure",
+   "Weighing criteria and tradeoffs when refining a design"
+  ]
+ ],
+ "NGSS|HS-PS1-7": [
+  [
+   "NGSS|MS-PS1-5",
+   "same",
+   "Atoms are conserved, now shown mathematically"
+  ],
+  [
+   "AERO-SCI|5-PS1-2",
+   "same",
+   "Total weight of matter is conserved in changes"
+  ],
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Molecules are made of atoms"
+  ]
+ ],
+ "NGSS|HS-PS1-8": [
+  [
+   "NGSS|MS-PS1-1",
+   "prereq",
+   "Atoms are the building blocks of matter"
+  ],
+  [
+   "NGSS|HS-ESS1-1",
+   "concept",
+   "Nuclear fusion powers the sun"
+  ],
+  [
+   "NGSS|HS-ESS1-3",
+   "concept",
+   "Stars produce new elements over their life cycle"
+  ],
+  [
+   "NGSS|HS-ESS1-5",
+   "concept",
+   "Radioactive decay helps date crustal rocks"
+  ]
+ ],
+ "NGSS|HS-PS3-4": [
+  [
+   "NGSS|MS-PS3-4",
+   "same",
+   "Energy transfer and temperature change, now in closed systems"
+  ],
+  [
+   "NGSS|MS-PS3-3",
+   "concept",
+   "Thermal energy transfer can be controlled"
+  ],
+  [
+   "NGSS|HS-PS3-1",
+   "concept",
+   "Energy changes in one part balance changes in others"
+  ],
+  [
+   "NGSS|HS-PS3-2",
+   "concept",
+   "Thermal energy as the motion of particles"
+  ],
+  [
+   "NGSS|MS-PS1-4",
+   "concept",
+   "Particle motion and temperature are linked"
+  ]
+ ]
+}

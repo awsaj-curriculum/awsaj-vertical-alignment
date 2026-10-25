@@ -30,7 +30,11 @@ Read `docs/HANDOFF.md` first (current status and next steps), then `docs/spec.md
   `ela_crosswalk.py` builds `data/standards/ela_crosswalk_2010_2020.json` from DPI's official 2010/2020 ELA comparison;
   `audit/plan_marks.py` builds `data/standards/plan_marks.json` (in plans / priority per grade) from the school's
   documents in `data/source/ma3loomat/` (6-12) and `data/source/hub/` (K-5); `audit/audit_secondary.py` writes the
-  secondary audit to `outputs/`. Rebuild order: ela_crosswalk, plan_marks, build_site_data.
+  secondary audit to `outputs/`. Rebuild order: ela_crosswalk, plan_marks, build_site_data, build_progressions,
+  build_prereqs. `data/standards/math_ccss_crosswalk.json` lists the Wisconsin 2021 Math rows whose Common Core code
+  differs (renumbered K.CC, 3.OA, HS G-C/GMD/MG; split parts); it feeds the `cw` field, plan-code reading and the
+  prerequisite map. `M.`-prefixed codes in documents are read as Wisconsin codes. Open question for the school: the K-5
+  sheet has "Flexibly and efficiently multiply and divide within 100" as M.4.OA.D.6, the Hub as M.3.OA.C.7.
   Math: `parse_wi_math.py`, `parse_wi_ee_math.py`, `build_math_master.py`,
   `build_math_json.py`, `build_math_xlsx.py`. Other subjects: `scripts/ela|science|social_studies/`.
   `build_site_data.py` regenerates `site/data/` from `data/standards/`. `load_supabase.py` loads standards and
@@ -75,6 +79,13 @@ linked standards), NGSS, AERO (AERO-SCI, AERO-SS) and WI (WI-SCI, WI-SS). Each t
 NGSS 6-12 for Science (the client hides NGSS in K-5 and WI-SCI in every grade; the data is kept), AERO-SS K-5 (WI-SS hidden in K-5; its suggested matches show in italics under each AERO code from the `wi` index field) / WI-SS 6-12 for Social Studies; other sets stay selectable). The default also ticks the subject's Essential Elements set when the grade has any. Teachers rate chosen sets one at a time (CC first, EE last). Every set
 has a badge with its own line style (CC solid green, EE dashed, NGSS solid grey, AERO dotted, WI double line); sets never
 use the rating colours.
+Prerequisite map: `scripts/build_prereqs.py` writes `site/data/prereqs.json` ({to: [[from, type, source, reason]]}).
+Math = Coherence Map arrows (Student Achievement Partners; `data/source/coherence_map/data.js`, git-ignored, only codes
+used); ELA = same anchor standard one grade earlier (official); ELA, Science and Social Studies also get AI-suggested
+prerequisites in `data/standards/prereqs_ai/*.json` (types same / concept / procedure / prereq, one-line reason), always
+shown as "Suggested, check". The site shows "N prerequisites" chips (hover lists them with ratings), a popup "Needs first
+/ Leads to" box, the Audit's Before and after table, and uses it for prerequisite-gap checks (official = Coherence Map or
+anchor; otherwise "Possible prerequisite gap").
 Codes: every standard everywhere (cards, lists, tables, popup, tips, CSV) shows the main code in bold with one small italic
 line underneath (`codeHTML()` / `codeParts()` in app.js; never print `e.c` on its own). Math and ELA: Common Core code
 first, Wisconsin code underneath (M.5.MD.A.1 -> 5.MD.A.1, M.A.APR.A.1 -> HSA-APR.A.1, SP -> S; ELA uses `cw`, the
@@ -107,7 +118,9 @@ checks, and never counts "not rated" as a gap. Rules every page follows (from th
   EE rows whose text is "Not applicable" are dropped at load. Shared Common Core codes get "(part n of m)"; Wisconsin
   2020 ELA rows with no Common Core code show "WI W.7.1".
 - `checksFor(e)` lists every check for one standard (popup "Why this standard is flagged", CSV Findings column).
-Coverage map: rows by strand (same-named Science strands share a row; each K-5 AERO Social Studies strand sits above
+Coverage map: "By strand" tiles or "Matched across grades" (chains of matched standards per progression, one square per
+grade; "see the links" opens each step with its link type, source, reason and shared wording), with K-12 / K-5 / 6-8 /
+9-12 buttons. Tiles: rows by strand (same-named Science strands share a row; each K-5 AERO Social Studies strand sits above
 the Wisconsin domain its matches fall in, `S.ssDomain`; EE rows last), thinnest = 3+ rated, weighted. Gaps: confirmed /
 possible / priority / progression problems / duplication (again later) / taught early / plans / only introduced /
 reinforcement / unknown; a grade filter narrows to what that grade works with. Audit: findings first, then the chosen

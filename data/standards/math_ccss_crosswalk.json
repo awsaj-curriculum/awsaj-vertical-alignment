@@ -1,0 +1,72 @@
+{
+ "note": "Wisconsin 2021 Math rows whose Common Core code is NOT the same as their Wisconsin code. Every other Wisconsin row keeps its own numbering (M.5.MD.A.1 = 5.MD.A.1). Found by matching each Wisconsin text to the Common Core texts in its domain (Coherence Map data) and checked by hand; the Wisconsin codes of K.CC agree with the school's Curriculum Hub. An empty list means new in Wisconsin, with no Common Core code. Open question for the school: the K-5 sheet places 'Flexibly and efficiently multiply and divide within 100' at M.4.OA.D.6, while the Curriculum Hub lists the same text as M.3.OA.C.7 (Common Core 3.OA.C.7); M.3.OA.C.6 and M.4.OA.D.6 are left unchanged until that is settled. wi_parts_to_ccss_parent: Wisconsin split a Common Core standard that has no lettered parts; each part shows the Common Core parent code (numbered as parts on the site). Plan citations of the parent already reach every part.",
+ "wi_to_ccss": {
+  "M.K.CC.B.5": [],
+  "M.K.CC.B.6": [
+   "K.CC.B.5"
+  ],
+  "M.K.CC.C.7": [
+   "K.CC.C.6"
+  ],
+  "M.K.CC.C.8": [
+   "K.CC.C.7"
+  ],
+  "M.3.OA.B.4": [
+   "3.OA.B.5"
+  ],
+  "M.3.OA.B.5": [
+   "3.OA.B.6"
+  ],
+  "M.3.OA.D.7": [
+   "3.OA.D.8"
+  ],
+  "M.3.OA.D.8": [
+   "3.OA.D.9"
+  ],
+  "M.G.C.A.1": [
+   "HSG-C.A.2",
+   "HSG-C.A.3"
+  ],
+  "M.G.C.B.2": [
+   "HSG-C.B.5"
+  ],
+  "M.G.GMD.A.2": [
+   "HSG-GMD.A.3"
+  ],
+  "M.G.GMD.B.3": [
+   "HSG-GMD.B.4"
+  ],
+  "M.G.GMD.C.4": [
+   "HSG-MG.A.1"
+  ],
+  "M.G.GMD.C.5": [
+   "HSG-MG.A.2"
+  ],
+  "M.G.GMD.C.6": [
+   "HSG-MG.A.3"
+  ]
+ },
+ "wi_parts_to_ccss_parent": {
+  "M.1.NBT.A.1.a": [
+   "1.NBT.A.1"
+  ],
+  "M.1.OA.C.5.a": [
+   "1.OA.C.5"
+  ],
+  "M.1.OA.C.5.b": [
+   "1.OA.C.5"
+  ],
+  "M.1.OA.C.6.a": [
+   "1.OA.C.6"
+  ],
+  "M.1.OA.C.6.b": [
+   "1.OA.C.6"
+  ],
+  "M.4.NF.A.1.a": [
+   "4.NF.A.1"
+  ],
+  "M.4.NF.A.1.b": [
+   "4.NF.A.1"
+  ]
+ }
+}

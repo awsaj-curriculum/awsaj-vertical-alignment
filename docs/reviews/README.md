@@ -121,6 +121,68 @@ that involve the standard, and the row a progression grows out of; Gaps lists sh
 shows the non-existent 2010 codes "R.2.7" and similar; ELA Writing, Language and Speaking and Listening rows say
 they use Wisconsin numbering.
 
-## Round 3
+## Round 3 (none passed yet)
+
+New reviewers E and F. Every count they recomputed matched. Scores rose; the standard popup reached 8 on usability
+and vertical progression.
+
+| Page | Usability | Visual | Information | Progression | Interpretation | Report |
+|---|---|---|---|---|---|---|
+| Coverage map | 7 | 7 | 7 | 6 | 6 | [E](round-3-E.md) |
+| Gaps & repetition | 7 | 7 | 6 | 7 | 7 | [E](round-3-E.md) |
+| Vertical Alignment Audit | 6 | 6 | 5 | 5 | 7 | [E](round-3-E.md) |
+| Standard popup | 8 | 7 | 7 | 8 | 7 | [E](round-3-E.md) |
+| Progressions | 7 | 6 | 5 | 7 | 6 | [F](round-3-F.md) |
+| Grade dashboard | 7 | 7 | 6 | 7 | 6 | [F](round-3-F.md) |
+| Popup progression and checks boxes | 7 | 7 | 5 | 7 | 6 | [F](round-3-F.md) |
+
+### What changed after round 3
+
+Critical issues (all addressed):
+
+1. **Verdicts on unsettled standards.** A standard now counts as not taught, for breaks and prerequisite gaps, only
+   when that is settled: every grade that rated it says not taught and no grade that might teach it (owners still to
+   rate, other grades of its band, grades whose plans cite it) is still to rate it.
+2. **A step-level message named grades that do not teach in depth.** It now names only the grades that do.
+3. **Suggested matches promoted to official.** Only ELA anchor links and the Math Coherence Map are official; every
+   other prerequisite gap is "possible".
+4. **The Audit's Before and after showed one grade's rating** for a neighbour placed in several grades. It now shows
+   every grade's rating and marks a neighbour only when it is settled that no grade teaches it.
+5. **Gaps narrowed to a band listed other grades' findings.** Findings about one grade now show only when that grade is
+   in view.
+
+New since round 3, at Tim's request:
+
+- **Prerequisite map.** Every standard can list the standards it needs first, several from one grade if needed, with
+  the kind of link (same skill earlier, a concept it relies on, a procedure it extends, a different skill needed
+  first) and its source. Sources:
+  - Math: the Coherence Map, from the Common Core progressions.
+  - ELA: the same anchor standard (official).
+  - ELA, Science and Social Studies: links suggested by an AI curriculum reviewer, each with a one-line reason and
+    labelled "Suggested, check".
+
+  The site shows "N prerequisites" chips (hover lists them with ratings), a "Needs first / Leads to" box in the popup,
+  and the Audit's Before and after table. The prerequisite checks use it, so checks now cross progression rows.
+- **Coverage map, "Matched across grades".** Each standard is followed into the standards that build on it, one row per
+  chain within each progression (a standard in two progressions, or with two successors, has two rows). There are
+  K-12 / K-5 / 6-8 / 9-12 buttons, and "see the links" shows each step with its link type, source, reason and shared
+  wording.
+- **Math codes.** Wisconsin 2021 renumbered a few Math standards, so their bold Common Core code was wrong. A checked
+  crosswalk now fixes the code shown, the plan and priority reading, and the prerequisite links (for example, Wisconsin
+  M.3.OA.B.4 is Common Core 3.OA.B.5). One school-data question is left open in the crosswalk notes.
+
+Other improvements:
+
+- "Repeated in depth" no longer includes standards only taught early.
+- Progression lines differ in pattern as well as colour.
+- A note appears when filters narrow the checks.
+- Progressions has a "What to do" line and source tags.
+- The dashboard hedges mixed headlines and lists priority standards placed in another grade.
+- Full standard text appears in progression rows.
+- Codes in messages name one standard each.
+- Planned-standard counts on the Audit exclude standards the grade does not rate.
+- Wording fixes, an easier-to-see priority star with labelled tiles, and the Gaps CSV follows the Grade filter.
+
+## Round 4
 
 Results are added below when the round finishes.

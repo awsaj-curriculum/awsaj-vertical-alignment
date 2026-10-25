@@ -412,7 +412,7 @@ table.cm th.sel .colh { background: var(--accent); color: #fff; } table.cm th.se
   background: var(--lv-none); box-shadow: inset 0 0 0 1px var(--line-2); cursor: pointer; transition: transform .12s, box-shadow .12s; }
 .cm-tile:hover { background: var(--lv-none); transform: translateY(-2px); box-shadow: inset 0 0 0 1px var(--line-2), 0 6px 14px rgba(2,70,56,.15); }
 .cm-tile.full, .cm-tile.full:hover { box-shadow: inset 0 0 0 2px var(--brand); }
-.cm-pr { position: absolute; left: 5px; bottom: 3px; font: 700 11px var(--font); color: var(--accent); text-shadow: 0 0 2px #fff, 0 0 2px #fff; }
+.cm-pr { position: absolute; left: 4px; bottom: 3px; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1.5px var(--accent); font: 700 11px/1 var(--font); color: var(--accent); }
 .cm-fill { position: absolute; inset: 0; display: flex; flex-direction: column-reverse; }
 .cm-fill i { display: block; width: 100%; }
 .cm-n { position: absolute; left: 6px; top: 5px; font: 700 12px var(--font); color: var(--ink); background: rgba(255,255,255,.88); border-radius: 5px; padding: 0 5px; }
@@ -745,8 +745,8 @@ details.gap summary .tag.auto { margin-left: 8px; font-size: 10px; }
 .sm-link { font-size: 12px; }
 
 /* Filters that do nothing on a page are hidden there; the image export is the Audit grid only. */
-.filters[data-view="heatmap"] .order-only, .filters[data-view="ladder"] .order-only { display: none; }
-.filters:not([data-view="plans"]) #x-png { display: none; }
+.filters[data-view="heatmap"] .order-only, .filters[data-view="ladder"] .order-only, .filters[data-view="gaps"] .order-only { display: none; }
+.filters:not([data-view="plans"]):not([data-mapmode="rows"]) #x-png { display: none; }
 @media (max-width: 760px) { .ins-grid { grid-template-columns: 1fr 1fr; } .ins b { font-size: 22px; } table.svs { min-width: 560px; } }
 @media (max-width: 760px) {
   .ring-box { flex: 1 1 100%; flex-wrap: wrap; } .rate-head > div:first-child { flex-basis: 100%; }
@@ -780,3 +780,51 @@ table.cm tfoot th.cm-row { font-size: 12px; }
   .strand-bars, .results .strand-bars { grid-template-columns: 1fr 44px; } .strand-bars .sb-name { grid-column: 1 / -1; } .strand-bars .sb { grid-column: 1; }
   table.svs td.muted { min-width: 200px; }
 }
+
+/* Coverage map: switch between tiles by strand and every standard as a row, and the grade-band buttons. */
+.map-bar { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; margin: 14px 0 4px; }
+.map-bar .seg-t + .help { margin-right: 12px; }
+.rows-view h3 { margin: 0 0 4px; }
+.rv-key { display: inline-flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; margin: 0 4px; }
+.cell-k { display: inline-block; width: 18px; height: 12px; border-radius: 3px; border: 1px solid var(--line); background: #fff; vertical-align: -1px; position: relative; }
+.cell-k.placed { box-shadow: 0 0 0 2px var(--placed); border-color: var(--placed); }
+.cell-k.l2 { background: var(--lv-2); border-color: var(--lv-2); }
+.cell-k.off::after { content: ""; position: absolute; right: 2px; top: 2px; width: 4px; height: 4px; border-radius: 50%; background: var(--brand); }
+@media screen { .rows-view .hm-wrap { max-height: 75vh; overflow: auto; } }
+/* The rows view stretches each grade square across the page, like the popup's strip. */
+.rows-view table.hm { width: 100%; }
+.rows-view table.hm td[data-gi] { min-width: 30px; }
+.rows-view table.hm .cell { width: 100%; height: 24px; }
+.rows-view table.hm td.rowh { width: 200px; }
+
+/* Matched across grades: chains, gaps between grades, same wording, and highlighted shared wording. */
+mark.kw { background: #FDE3B8; color: inherit; border-bottom: 2px solid var(--accent); padding: 0 1px; border-radius: 2px; }
+.ch-basis { font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--ink-2); margin-left: 6px; }
+.ch-to { display: block; font-size: 11px; color: var(--muted); white-space: normal; }
+.ch-skip { display: block; height: 2px; margin: 0 -2px; background: var(--line-2); }
+.ch-skip-k { display: inline-block; width: 18px; height: 2px; background: var(--line-2); vertical-align: middle; }
+.cell.same, .cell-k.same { outline: 2px dashed var(--ink-2); outline-offset: -5px; }
+.ch-list { padding-left: 22px; margin: 8px 0; display: grid; gap: 12px; }
+.ch-step .ch-g { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ch-step .ch-c { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; margin-top: 4px; }
+.ch-t { margin: 4px 0 2px; font-size: 14px; }
+.ch-why { margin: 0; font-size: 12.5px; }
+.pb-why { flex-basis: 100%; font-size: 11.5px; color: var(--ink-2); }
+
+@media (max-width: 760px) { table.cm th.cm-row { min-width: 110px; max-width: 130px; box-shadow: -8px 0 0 var(--surface); font-size: 12px; } }
+/* Prerequisites: the "N prerequisites" chip, link type and source tags. */
+.pq { font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 99px; border: 1px solid var(--brand); background: #fff; color: var(--brand); }
+.pq:hover { background: var(--brand-tint); }
+.pq.bad { border-color: var(--lv-0); color: var(--lv-0); }
+.tag.pt { background: var(--brand-tint); color: var(--brand-ink); }
+.tag.src { background: #fff; border: 1px solid var(--line-2); }
+.tag.src-ai { border-style: dashed; }
+.pb-list li.muted { display: block; }
+/* Progression lines differ in pattern as well as colour (colour-blind readers). */
+.pl-svg line, .pl-key line { stroke-width: 3; }
+.seg-ok { stroke-dasharray: none; }
+.seg-pre { stroke: var(--lv-0); stroke-width: 5 !important; stroke-dasharray: 14 3; }
+.seg-break { stroke-dasharray: 5 4; }
+.seg-un { stroke-dasharray: 1 4; stroke-linecap: round; }
+.seg-skip { stroke-dasharray: 0 7; stroke-linecap: round; stroke-width: 4 !important; }
+@media (max-width: 760px) { .pl-tools select { max-width: 100%; } .pl-tools label { min-width: 0; max-width: 100%; } }

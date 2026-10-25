@@ -1,0 +1,3494 @@
+{
+ "WI-CC-ELA|RF.K.2.d": [
+  [
+   "WI-CC-ELA|RF.K.2.c",
+   "prereq",
+   "Splitting words into onset and rime comes before isolating single sounds"
+  ]
+ ],
+ "WI-CC-ELA|RF.K.2.e": [
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "prereq",
+   "Isolating each sound in a word comes before adding or swapping one"
+  ]
+ ],
+ "WI-CC-ELA|RF.K.3.a": [
+  [
+   "WI-CC-ELA|RF.K.1.d",
+   "prereq",
+   "Recognising and naming letters supports linking each letter to its sound"
+  ]
+ ],
+ "WI-CC-ELA|RF.K.3.d": [
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Consonant letter sounds are needed to hear how similar words differ"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.b",
+   "prereq",
+   "Vowel letter sounds are needed to compare words like cap and cape"
+  ]
+ ],
+ "WI-CC-ELA|RF.K.4": [
+  [
+   "WI-CC-ELA|RF.K.3.c",
+   "prereq",
+   "Sight words let emergent readers read simple texts"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Letter sound knowledge lets emergent readers decode simple words"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.a",
+   "prereq",
+   "Following print left to right is needed to read any text"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.1": [
+  [
+   "WI-CC-ELA|RF.K.1.c",
+   "same",
+   "Knowing words are separated by spaces leads to seeing whole sentences"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.d",
+   "prereq",
+   "Telling uppercase from lowercase letters is needed to spot capitals"
+  ],
+  [
+   "WI-CC-ELA|L.K.6",
+   "concept",
+   "Capitalizing the first word in kindergarten introduces how sentences begin"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.a",
+   "concept",
+   "Tracking print left to right shows where sentences start and end"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.2.a": [
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "prereq",
+   "Isolating the middle vowel sound lets students compare vowel sounds"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.b",
+   "concept",
+   "Kindergarten long and short vowel sounds are now heard in spoken words"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.2.b": [
+  [
+   "WI-CC-ELA|RF.K.2.c",
+   "same",
+   "Blending onset and rime grows into blending every single sound"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "prereq",
+   "Hearing separate sounds in CVC words comes before blending them"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.b",
+   "procedure",
+   "Blending syllables is the larger unit practised before blending phonemes"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.2.c": [
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "same",
+   "Isolating sounds in CVC words extends to all single syllable words"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.c",
+   "concept",
+   "Splitting onset from rime shows words break into smaller sounds"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.2.d": [
+  [
+   "WI-CC-ELA|RF.K.2.c",
+   "same",
+   "Kindergarten onset and rime work underpins matching beginning sounds"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "prereq",
+   "Isolating the first sound lets students compare word beginnings"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.a",
+   "concept",
+   "Rhyming teaches students to notice shared sound parts across words"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.2.e": [
+  [
+   "WI-CC-ELA|RF.K.2.e",
+   "same",
+   "Kindergarten adding and substituting sounds now also includes deleting sounds"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "prereq",
+   "Isolating each sound must come before changing one"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.3.a": [
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "same",
+   "Kindergarten consonant sounds extend to two letter digraph sounds"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.d",
+   "prereq",
+   "Naming all letters is needed before learning letter pairs"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.b",
+   "concept",
+   "Seeing words as letter sequences helps show two letters can make one sound"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.3.b": [
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Consonant letter sounds are needed to sound out simple words"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.b",
+   "prereq",
+   "Short vowel sounds for each vowel letter are needed to decode CVC words"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "prereq",
+   "Hearing each sound in CVC words supports blending and spelling them"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.d",
+   "same",
+   "Comparing similarly spelled words by their sounds is early decoding practice"
+  ],
+  [
+   "WI-CC-ELA|L.K.6",
+   "procedure",
+   "Phonetic spelling of simple words in kindergarten leads to encoding"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.3.c": [
+  [
+   "WI-CC-ELA|RF.K.3.b",
+   "concept",
+   "Knowing vowels have long sounds prepares for long vowel spellings"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.d",
+   "procedure",
+   "Noticing letter differences in similar words prepares for silent e contrasts"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.3.d": [
+  [
+   "WI-CC-ELA|RF.K.2.b",
+   "prereq",
+   "Counting syllables in spoken words comes before counting them in print"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.b",
+   "concept",
+   "Knowing the vowel letters and their sounds is needed to find syllables"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.3.e": [
+  [
+   "WI-CC-ELA|RF.K.2.b",
+   "prereq",
+   "Segmenting spoken syllables supports breaking printed words into syllables"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Letter sound knowledge is needed to decode each syllable"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.b",
+   "prereq",
+   "Vowel sounds are needed to decode the vowel in each syllable"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.3.f": [
+  [
+   "WI-CC-ELA|L.K.2.b",
+   "concept",
+   "Using endings like ed as meaning clues prepares for reading inflected words"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.b",
+   "concept",
+   "Oral plurals in kindergarten connect to reading the s ending"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Letter sounds let students decode the base word before the ending"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.3.g": [
+  [
+   "WI-CC-ELA|RF.K.3.c",
+   "same",
+   "Reading high frequency words by sight extends to irregular words"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Letter sound knowledge helps students notice the regular parts of irregular words"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.4.a": [
+  [
+   "WI-CC-ELA|RF.K.4",
+   "same",
+   "Reading emergent texts with understanding grows into grade level reading"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.c",
+   "prereq",
+   "Sight words let students read connected text"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Letter sound knowledge supports decoding words in text"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.4.b": [
+  [
+   "WI-CC-ELA|RF.K.4",
+   "same",
+   "Kindergarten emergent reading builds toward accurate expressive oral reading"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.c",
+   "prereq",
+   "Automatic sight words support reading at an appropriate rate"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.a",
+   "prereq",
+   "Tracking print left to right supports smooth oral reading"
+  ]
+ ],
+ "WI-CC-ELA|RF.1.4.c": [
+  [
+   "WI-CC-ELA|RF.K.4",
+   "same",
+   "Reading for understanding lets students notice when meaning breaks down"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.d",
+   "concept",
+   "Noticing letter differences helps students catch and fix misread words"
+  ],
+  [
+   "WI-CC-ELA|L.K.3.a",
+   "concept",
+   "Asking about unknown words builds the habit of checking meaning"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.2": [
+  [
+   "WI-CC-ELA|RF.1.2.e",
+   "same",
+   "Grade 1 sound changing work now includes blends and long vowels"
+  ],
+  [
+   "WI-CC-ELA|RF.1.2.c",
+   "prereq",
+   "Isolating initial, medial and final sounds comes before changing them"
+  ],
+  [
+   "WI-CC-ELA|RF.1.2.b",
+   "prereq",
+   "Blending sounds including consonant blends supports manipulating them"
+  ],
+  [
+   "WI-CC-ELA|RF.1.2.a",
+   "prereq",
+   "Hearing long versus short vowels is needed to swap vowel sounds"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.3.a": [
+  [
+   "WI-CC-ELA|RF.1.3.c",
+   "same",
+   "Final e and vowel team conventions let readers spot long vowels"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.b",
+   "prereq",
+   "Decoding regular short vowel words is the base for vowel contrasts"
+  ],
+  [
+   "WI-CC-ELA|RF.1.2.a",
+   "concept",
+   "Hearing long and short vowels in speech supports reading them"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.3.b": [
+  [
+   "WI-CC-ELA|RF.1.3.c",
+   "same",
+   "Common vowel teams from grade 1 extend to additional vowel teams"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.a",
+   "concept",
+   "Digraphs show that two letters can stand for one sound"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.3.c": [
+  [
+   "WI-CC-ELA|RF.1.3.e",
+   "same",
+   "Breaking two syllable words into syllables extends to longer words"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.b",
+   "procedure",
+   "Decoding and encoding one syllable CVC words is repeated within each syllable"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.d",
+   "concept",
+   "Knowing every syllable has a vowel helps divide longer words"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.3.d": [
+  [
+   "WI-CC-ELA|RF.1.3.f",
+   "same",
+   "Reading inflectional endings grows into reading prefixes and suffixes"
+  ],
+  [
+   "WI-CC-ELA|L.1.2.b",
+   "concept",
+   "Identifying root words helps separate a base word from its affixes"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.e",
+   "procedure",
+   "Breaking words into syllables supports chunking off prefixes and suffixes"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.3.e": [
+  [
+   "WI-CC-ELA|RF.1.3.e",
+   "same",
+   "Decoding two syllable words now includes long vowel patterns"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.c",
+   "prereq",
+   "Final e and vowel team knowledge is needed for long vowel syllables"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.f",
+   "prereq",
+   "Reading ing and ed endings comes before rules for adding them"
+  ],
+  [
+   "WI-CC-ELA|L.1.6.d",
+   "procedure",
+   "Spelling common patterns in grade 1 leads to spelling rules for endings"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.3.f": [
+  [
+   "WI-CC-ELA|RF.1.3.g",
+   "same",
+   "Grade 1 irregular words grow into a larger grade 2 set"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.4.a": [
+  [
+   "WI-CC-ELA|RF.1.4.a",
+   "same",
+   "Reading grade 1 text with understanding builds to grade 2 text"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.e",
+   "prereq",
+   "Decoding two syllable words supports reading grade 2 text"
+  ],
+  [
+   "WI-CC-ELA|RF.1.4.c",
+   "procedure",
+   "Self correcting with context keeps reading focused on meaning"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.4.b": [
+  [
+   "WI-CC-ELA|RF.1.4.b",
+   "same",
+   "Accurate expressive oral reading continues with harder grade 2 text"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.g",
+   "prereq",
+   "Recognising irregular words quickly supports a good reading rate"
+  ],
+  [
+   "WI-CC-ELA|RF.1.1",
+   "concept",
+   "Knowing sentence features and end punctuation guides expression and phrasing"
+  ]
+ ],
+ "WI-CC-ELA|RF.2.4.c": [
+  [
+   "WI-CC-ELA|RF.1.4.c",
+   "same",
+   "Using context to self correct continues with grade 2 text"
+  ],
+  [
+   "WI-CC-ELA|RF.1.4.a",
+   "concept",
+   "Reading for understanding lets students notice when words do not fit"
+  ]
+ ],
+ "WI-CC-ELA|RF.3.3.a": [
+  [
+   "WI-CC-ELA|L.2.2.a",
+   "same",
+   "Grade 2 meaning of added prefixes and suffixes deepens in grade 3"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.d",
+   "prereq",
+   "Decoding words with prefixes and suffixes comes before knowing their meanings"
+  ],
+  [
+   "WI-CC-ELA|L.2.2.b",
+   "concept",
+   "Using a root word as a clue shows what affixes add"
+  ]
+ ],
+ "WI-CC-ELA|RF.3.3.b": [
+  [
+   "WI-CC-ELA|RF.2.3.d",
+   "same",
+   "Decoding common suffixes extends to Latin suffixes like able and tion"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.c",
+   "procedure",
+   "Breaking multisyllable words into syllables supports decoding suffixed words"
+  ]
+ ],
+ "WI-CC-ELA|RF.3.3.c": [
+  [
+   "WI-CC-ELA|RF.2.3.c",
+   "same",
+   "Decoding two and three syllable words extends to all learned patterns"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.e",
+   "same",
+   "Two syllable long vowel patterns are among the patterns now combined"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.b",
+   "prereq",
+   "Vowel team knowledge is needed for vowel team syllables"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.d",
+   "procedure",
+   "Decoding prefixes and suffixes helps chunk longer words"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.d",
+   "concept",
+   "Every syllable has a vowel sound, which guides syllable division"
+  ]
+ ],
+ "WI-CC-ELA|RF.3.3.d": [
+  [
+   "WI-CC-ELA|RF.2.3.f",
+   "same",
+   "Grade 2 irregular words grow into a larger grade 3 set"
+  ]
+ ],
+ "WI-CC-ELA|RF.3.3.e": [
+  [
+   "WI-CC-ELA|RF.2.3.e",
+   "same",
+   "Grade 2 rules for dropping e and doubling consonants are now applied"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.c",
+   "prereq",
+   "Knowing final e marks a long vowel explains when to drop it"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.a",
+   "concept",
+   "Telling long from short vowels decides whether to double the consonant"
+  ]
+ ],
+ "WI-CC-ELA|RF.3.4.a": [
+  [
+   "WI-CC-ELA|RF.2.4.a",
+   "same",
+   "Reading grade 2 text with understanding builds to grade 3 text"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.c",
+   "prereq",
+   "Decoding multisyllable words supports reading grade 3 text"
+  ],
+  [
+   "WI-CC-ELA|RF.2.4.c",
+   "procedure",
+   "Self correcting with context keeps reading focused on meaning"
+  ]
+ ],
+ "WI-CC-ELA|RF.3.4.b": [
+  [
+   "WI-CC-ELA|RF.2.4.b",
+   "same",
+   "Accurate expressive oral reading continues with harder grade 3 text"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.f",
+   "prereq",
+   "Quick recognition of irregular words supports a good reading rate"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.c",
+   "prereq",
+   "Decoding longer words smoothly supports accurate oral reading"
+  ]
+ ],
+ "WI-CC-ELA|RF.3.4.c": [
+  [
+   "WI-CC-ELA|RF.2.4.c",
+   "same",
+   "Using context to self correct continues with grade 3 text"
+  ],
+  [
+   "WI-CC-ELA|RF.2.4.a",
+   "concept",
+   "Reading for understanding lets students notice when words do not fit"
+  ]
+ ],
+ "WI-CC-ELA|RF.4.3.a": [
+  [
+   "WI-CC-ELA|RF.3.3.c",
+   "same",
+   "Decoding multisyllable words with all patterns now adds morphology"
+  ],
+  [
+   "WI-CC-ELA|RF.3.3.a",
+   "prereq",
+   "Knowing prefix and suffix meanings supports using morphology to read"
+  ],
+  [
+   "WI-CC-ELA|RF.3.3.b",
+   "prereq",
+   "Decoding Latin suffixes supports reading long unfamiliar words"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.b",
+   "concept",
+   "Full letter sound knowledge, including vowel teams, is combined here"
+  ]
+ ],
+ "WI-CC-ELA|RF.4.4.a": [
+  [
+   "WI-CC-ELA|RF.3.4.a",
+   "same",
+   "Reading grade 3 text with understanding builds to grade 4 text"
+  ],
+  [
+   "WI-CC-ELA|RF.3.3.c",
+   "prereq",
+   "Decoding multisyllable words supports reading grade 4 text"
+  ]
+ ],
+ "WI-CC-ELA|RF.4.4.b": [
+  [
+   "WI-CC-ELA|RF.3.4.b",
+   "same",
+   "Accurate expressive oral reading continues with harder grade 4 text"
+  ],
+  [
+   "WI-CC-ELA|RF.3.3.d",
+   "prereq",
+   "Automatic recognition of irregular words supports a good reading rate"
+  ]
+ ],
+ "WI-CC-ELA|RF.4.4.c": [
+  [
+   "WI-CC-ELA|RF.3.4.c",
+   "same",
+   "Using context to self correct continues with grade 4 text"
+  ],
+  [
+   "WI-CC-ELA|L.3.2.a",
+   "concept",
+   "Using sentence context for word meaning supports self correction"
+  ]
+ ],
+ "WI-CC-ELA|RF.5.3": [
+  [
+   "WI-CC-ELA|RF.4.3.a",
+   "same",
+   "Grade 4 combined decoding skills are applied to harder grade 5 words"
+  ],
+  [
+   "WI-CC-ELA|RF.3.3.a",
+   "concept",
+   "Knowing affix meanings supports reading unfamiliar multisyllable words"
+  ]
+ ],
+ "WI-CC-ELA|RF.5.4.a": [
+  [
+   "WI-CC-ELA|RF.4.4.a",
+   "same",
+   "Reading grade 4 text with understanding builds to grade 5 text"
+  ],
+  [
+   "WI-CC-ELA|RF.4.3.a",
+   "prereq",
+   "Reading unfamiliar multisyllable words supports reading grade 5 text"
+  ]
+ ],
+ "WI-CC-ELA|RF.5.4.b": [
+  [
+   "WI-CC-ELA|RF.4.4.b",
+   "same",
+   "Accurate expressive oral reading continues with harder grade 5 text"
+  ],
+  [
+   "WI-CC-ELA|RF.4.3.a",
+   "prereq",
+   "Reading unfamiliar multisyllable words accurately supports fluent oral reading"
+  ]
+ ],
+ "WI-CC-ELA|RF.5.4.c": [
+  [
+   "WI-CC-ELA|RF.4.4.c",
+   "same",
+   "Using context to self correct continues with grade 5 text"
+  ],
+  [
+   "WI-CC-ELA|L.4.2.a",
+   "concept",
+   "Using context as a clue to word meaning supports self correction"
+  ]
+ ],
+ "WI-CC-ELA|R.1.1": [
+  [
+   "WI-CC-ELA|R.K.1",
+   "same",
+   "Kindergarten questioning with support grows into independent questioning"
+  ],
+  [
+   "WI-CC-ELA|SL.K.2",
+   "concept",
+   "Asking about key details in read alouds builds questioning about text"
+  ]
+ ],
+ "WI-CC-ELA|R.1.2": [
+  [
+   "WI-CC-ELA|R.K.2",
+   "same",
+   "Retelling stories and sharing key details leads to naming a main topic"
+  ],
+  [
+   "WI-CC-ELA|R.K.3",
+   "prereq",
+   "Identifying events and information is needed to pick important details"
+  ]
+ ],
+ "WI-CC-ELA|R.1.3": [
+  [
+   "WI-CC-ELA|R.K.3",
+   "same",
+   "Identifying characters, settings and events grows into describing them"
+  ],
+  [
+   "WI-CC-ELA|SL.K.4",
+   "concept",
+   "Describing familiar people, places and events supports describing story elements"
+  ]
+ ],
+ "WI-CC-ELA|R.1.4": [
+  [
+   "WI-CC-ELA|R.K.4",
+   "same",
+   "Finding feeling and content words extends to sensory words and phrases"
+  ],
+  [
+   "WI-CC-ELA|L.K.3.d",
+   "concept",
+   "Connecting words to real life supports noticing sensory language"
+  ]
+ ],
+ "WI-CC-ELA|R.1.5": [
+  [
+   "WI-CC-ELA|R.K.5",
+   "same",
+   "Telling literary from informational texts leads to explaining their differences"
+  ]
+ ],
+ "WI-CC-ELA|R.1.6": [
+  [
+   "WI-CC-ELA|R.K.6",
+   "same",
+   "Knowing author and illustrator roles leads to how they support purpose"
+  ],
+  [
+   "WI-CC-ELA|R.K.7",
+   "concept",
+   "Relating illustrations to text supports seeing how pictures serve a purpose"
+  ]
+ ],
+ "WI-CC-ELA|R.1.7": [
+  [
+   "WI-CC-ELA|R.K.7",
+   "same",
+   "Relating illustrations to text grows into using them to discuss stories"
+  ],
+  [
+   "WI-CC-ELA|R.K.3",
+   "prereq",
+   "Knowing characters, settings and events gives students story elements to discuss"
+  ]
+ ],
+ "WI-CC-ELA|R.1.8": [
+  [
+   "WI-CC-ELA|R.K.8",
+   "same",
+   "Identifying information that supports ideas becomes independent and names the author"
+  ],
+  [
+   "WI-CC-ELA|R.K.6",
+   "concept",
+   "Knowing author and illustrator roles helps credit their supporting information"
+  ]
+ ],
+ "WI-CC-ELA|R.1.9": [
+  [
+   "WI-CC-ELA|R.K.9",
+   "same",
+   "Comparing two texts with support becomes independent comparison"
+  ],
+  [
+   "WI-CC-ELA|R.K.3",
+   "prereq",
+   "Identifying story elements gives points to compare across texts"
+  ]
+ ],
+ "WI-CC-ELA|R.2.1": [
+  [
+   "WI-CC-ELA|R.1.1",
+   "same",
+   "Grade 1 questioning about key details now shows understanding of text"
+  ],
+  [
+   "WI-CC-ELA|SL.1.2",
+   "concept",
+   "Asking about key details in read alouds supports text based questioning"
+  ]
+ ],
+ "WI-CC-ELA|R.2.2": [
+  [
+   "WI-CC-ELA|R.1.2",
+   "same",
+   "Naming a main topic and retelling details leads to summarizing"
+  ],
+  [
+   "WI-CC-ELA|R.1.1",
+   "prereq",
+   "Answering questions about key details helps pick details for a summary"
+  ]
+ ],
+ "WI-CC-ELA|R.2.3": [
+  [
+   "WI-CC-ELA|R.1.3",
+   "same",
+   "Describing characters and events grows into how characters respond to events"
+  ],
+  [
+   "WI-CC-ELA|R.1.2",
+   "concept",
+   "Retelling events in order supports connecting a series of events"
+  ]
+ ],
+ "WI-CC-ELA|R.2.4": [
+  [
+   "WI-CC-ELA|R.1.4",
+   "same",
+   "Identifying feeling and sensory words grows into explaining their effect"
+  ],
+  [
+   "WI-CC-ELA|L.1.3.a",
+   "concept",
+   "Spotting words that suggest feelings or appeal to senses supports explaining them"
+  ]
+ ],
+ "WI-CC-ELA|R.2.5": [
+  [
+   "WI-CC-ELA|R.1.2",
+   "prereq",
+   "Retelling a text in order shows how it begins and ends"
+  ],
+  [
+   "WI-CC-ELA|W.1.3.a",
+   "concept",
+   "Writing a beginning, middle and ending helps describe text structure"
+  ],
+  [
+   "WI-CC-ELA|R.1.5",
+   "concept",
+   "Knowing differences between genres prepares for describing text structure"
+  ]
+ ],
+ "WI-CC-ELA|R.2.6": [
+  [
+   "WI-CC-ELA|R.1.6",
+   "same",
+   "Grade 1 illustrations and details supporting purpose now add text features"
+  ]
+ ],
+ "WI-CC-ELA|R.2.7": [
+  [
+   "WI-CC-ELA|R.1.7",
+   "same",
+   "Using illustrations to discuss stories extends to text features"
+  ],
+  [
+   "WI-CC-ELA|R.1.3",
+   "prereq",
+   "Describing characters, settings and events gives story elements to apply"
+  ]
+ ],
+ "WI-CC-ELA|R.2.8": [
+  [
+   "WI-CC-ELA|R.1.8",
+   "same",
+   "Identifying supporting information grows into explaining reasons and evidence"
+  ],
+  [
+   "WI-CC-ELA|W.1.2.a",
+   "concept",
+   "Giving a reason for an opinion shows how points need support"
+  ]
+ ],
+ "WI-CC-ELA|R.2.9": [
+  [
+   "WI-CC-ELA|R.1.9",
+   "same",
+   "Comparing two texts now focuses on key points and perspectives"
+  ],
+  [
+   "WI-CC-ELA|R.1.2",
+   "prereq",
+   "Identifying the main topic is needed to compare key points"
+  ]
+ ],
+ "WI-CC-ELA|R.3.1": [
+  [
+   "WI-CC-ELA|R.2.1",
+   "same",
+   "Questioning about key details now locates evidence for inferences"
+  ],
+  [
+   "WI-CC-ELA|R.2.8",
+   "concept",
+   "Seeing how reasons and evidence support points prepares for citing details"
+  ]
+ ],
+ "WI-CC-ELA|R.3.2": [
+  [
+   "WI-CC-ELA|R.2.2",
+   "same",
+   "Summarizing to find a central idea now adds theme and support"
+  ],
+  [
+   "WI-CC-ELA|R.2.3",
+   "concept",
+   "Seeing how characters respond to events helps students infer a theme"
+  ]
+ ],
+ "WI-CC-ELA|R.3.3": [
+  [
+   "WI-CC-ELA|R.2.3",
+   "same",
+   "Characters responding to events grows into traits and motivations"
+  ],
+  [
+   "WI-CC-ELA|R.2.5",
+   "concept",
+   "Knowing how texts begin and end supports describing event sequences"
+  ]
+ ],
+ "WI-CC-ELA|R.3.4": [
+  [
+   "WI-CC-ELA|R.2.4",
+   "same",
+   "Explaining word effects grows into determining meanings including figurative language"
+  ],
+  [
+   "WI-CC-ELA|L.2.2.d",
+   "procedure",
+   "Using resources to clarify meanings supports determining word meanings"
+  ],
+  [
+   "WI-CC-ELA|L.2.3.a",
+   "concept",
+   "Noticing rhythm and repeated lines in grade 2 starts figurative language awareness"
+  ]
+ ],
+ "WI-CC-ELA|R.3.5": [
+  [
+   "WI-CC-ELA|R.2.5",
+   "same",
+   "Describing overall structure leads to naming chapters, scenes and stanzas"
+  ],
+  [
+   "WI-CC-ELA|R.2.7",
+   "concept",
+   "Applying information from text features prepares for using them to comprehend"
+  ],
+  [
+   "WI-CC-ELA|R.1.5",
+   "concept",
+   "Knowing different genres prepares for naming parts of stories, dramas and poems"
+  ]
+ ],
+ "WI-CC-ELA|R.3.6": [
+  [
+   "WI-CC-ELA|R.2.6",
+   "same",
+   "Point of view work in grade 2 now compares reader and author views"
+  ],
+  [
+   "WI-CC-ELA|R.2.9",
+   "concept",
+   "Comparing perspectives in two texts supports noticing differing points of view"
+  ],
+  [
+   "WI-CC-ELA|R.2.3",
+   "prereq",
+   "Understanding how characters respond lets students compare their views to their own"
+  ]
+ ],
+ "WI-CC-ELA|R.3.7": [
+  [
+   "WI-CC-ELA|R.2.7",
+   "same",
+   "Using illustrations and text features grows into explaining their contribution"
+  ],
+  [
+   "WI-CC-ELA|R.2.6",
+   "concept",
+   "Seeing how illustrations support purpose prepares for explaining their effect"
+  ]
+ ],
+ "WI-CC-ELA|R.3.8": [
+  [
+   "WI-CC-ELA|R.2.8",
+   "same",
+   "Explaining how points are supported now applies to claims"
+  ],
+  [
+   "WI-CC-ELA|W.2.2.a",
+   "concept",
+   "Supporting an opinion with reasons shows how claims need evidence"
+  ]
+ ],
+ "WI-CC-ELA|R.3.9": [
+  [
+   "WI-CC-ELA|R.2.9",
+   "same",
+   "Comparing texts and cultures grows into wider connections across texts"
+  ],
+  [
+   "WI-CC-ELA|R.1.5",
+   "concept",
+   "Identifying a variety of genres prepares for recognizing genres"
+  ]
+ ],
+ "WI-CC-ELA|R.4.1": [
+  [
+   "WI-CC-ELA|R.3.1",
+   "same",
+   "Locating details to support inferences grows into citing evidence"
+  ],
+  [
+   "WI-CC-ELA|R.3.8",
+   "concept",
+   "Explaining how evidence supports claims helps students use evidence themselves"
+  ]
+ ],
+ "WI-CC-ELA|R.4.2": [
+  [
+   "WI-CC-ELA|R.3.2",
+   "same",
+   "Summarizing portions for theme now covers whole texts in many genres"
+  ],
+  [
+   "WI-CC-ELA|R.3.9",
+   "concept",
+   "Recognizing genres supports summarizing across a variety of genres"
+  ]
+ ],
+ "WI-CC-ELA|R.4.3": [
+  [
+   "WI-CC-ELA|R.3.3",
+   "same",
+   "Describing character traits and event relationships extends to settings and why"
+  ],
+  [
+   "WI-CC-ELA|R.3.1",
+   "procedure",
+   "Locating specific details supports describing with evidence"
+  ]
+ ],
+ "WI-CC-ELA|R.4.4": [
+  [
+   "WI-CC-ELA|R.3.4",
+   "same",
+   "Determining meanings of words and figurative language continues with harder text"
+  ],
+  [
+   "WI-CC-ELA|L.3.3.a",
+   "concept",
+   "Telling literal from non literal language supports figurative meanings"
+  ],
+  [
+   "WI-CC-ELA|L.3.2.a",
+   "procedure",
+   "Using sentence context as a clue supports determining word meanings"
+  ]
+ ],
+ "WI-CC-ELA|R.4.5": [
+  [
+   "WI-CC-ELA|R.3.5",
+   "same",
+   "Naming parts like chapters, scenes and stanzas grows into analyzing structure"
+  ],
+  [
+   "WI-CC-ELA|R.3.3",
+   "concept",
+   "Describing events using time, sequence and cause supports naming text structures"
+  ],
+  [
+   "WI-CC-ELA|L.2.3.a",
+   "concept",
+   "Knowing how rhyme and repeated lines give rhythm supports verse and meter"
+  ]
+ ],
+ "WI-CC-ELA|R.4.6": [
+  [
+   "WI-CC-ELA|R.3.6",
+   "same",
+   "Noticing narrator and character points of view leads to first and third person"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "prereq",
+   "Understanding pronouns helps tell first person from third person narration"
+  ]
+ ],
+ "WI-CC-ELA|R.4.7": [
+  [
+   "WI-CC-ELA|R.3.7",
+   "same",
+   "Explaining how illustrations add to words extends to charts and timelines"
+  ],
+  [
+   "WI-CC-ELA|R.3.5",
+   "concept",
+   "Using text features to build comprehension prepares for explaining them"
+  ]
+ ],
+ "WI-CC-ELA|R.4.8": [
+  [
+   "WI-CC-ELA|R.3.8",
+   "same",
+   "Explaining how claims are supported continues with harder texts"
+  ],
+  [
+   "WI-CC-ELA|W.3.2.a",
+   "concept",
+   "Listing reasons for an opinion helps recognize reasons in other writing"
+  ]
+ ],
+ "WI-CC-ELA|R.4.9": [
+  [
+   "WI-CC-ELA|R.3.9",
+   "same",
+   "Grade 3 genre recognition and connections continue with wider texts"
+  ]
+ ],
+ "WI-CC-ELA|R.5.1": [
+  [
+   "WI-CC-ELA|R.4.1",
+   "same",
+   "Citing evidence and making inferences continues with harder grade 5 text"
+  ]
+ ],
+ "WI-CC-ELA|R.5.2": [
+  [
+   "WI-CC-ELA|R.4.2",
+   "same",
+   "Summarizing texts for theme continues with harder grade 5 text"
+  ]
+ ],
+ "WI-CC-ELA|R.5.3": [
+  [
+   "WI-CC-ELA|R.4.3",
+   "same",
+   "Describing one character or event grows into comparing two or more"
+  ],
+  [
+   "WI-CC-ELA|R.3.3",
+   "concept",
+   "Describing relationships among events and ideas underpins explaining interactions"
+  ]
+ ],
+ "WI-CC-ELA|R.5.4": [
+  [
+   "WI-CC-ELA|R.4.4",
+   "same",
+   "Determining word meanings now adds their effect on tone and mood"
+  ],
+  [
+   "WI-CC-ELA|L.4.3.a",
+   "prereq",
+   "Understanding similes and metaphors is needed to analyze figurative language"
+  ],
+  [
+   "WI-CC-ELA|R.3.7",
+   "concept",
+   "Seeing how illustrations create mood prepares for how words create mood"
+  ]
+ ],
+ "WI-CC-ELA|R.5.5": [
+  [
+   "WI-CC-ELA|R.4.5",
+   "same",
+   "Naming structural elements and text structures leads to comparing structures"
+  ],
+  [
+   "WI-CC-ELA|R.3.5",
+   "concept",
+   "Knowing chapters, scenes and stanzas as parts supports seeing how they fit"
+  ]
+ ],
+ "WI-CC-ELA|R.5.6": [
+  [
+   "WI-CC-ELA|R.4.6",
+   "same",
+   "Comparing first and third person narration leads to how point of view shapes events"
+  ],
+  [
+   "WI-CC-ELA|R.3.6",
+   "concept",
+   "Noticing differing perspectives prepares for analyzing multiple accounts"
+  ]
+ ],
+ "WI-CC-ELA|R.5.7": [
+  [
+   "WI-CC-ELA|R.4.7",
+   "same",
+   "Explaining text features grows into analyzing visual and multimedia elements"
+  ]
+ ],
+ "WI-CC-ELA|R.5.8": [
+  [
+   "WI-CC-ELA|R.4.8",
+   "same",
+   "Explaining how claims are supported grows into matching reasons to claims"
+  ],
+  [
+   "WI-CC-ELA|SL.4.3",
+   "concept",
+   "Identifying the reasons and evidence a speaker gives supports tracing them in texts"
+  ]
+ ],
+ "WI-CC-ELA|R.5.9": [
+  [
+   "WI-CC-ELA|R.4.9",
+   "same",
+   "Making connections across texts and cultures continues with judging quality"
+  ],
+  [
+   "WI-CC-ELA|R.4.8",
+   "concept",
+   "Evaluating how claims are supported helps judge the quality of a text"
+  ]
+ ],
+ "WI-CC-ELA|W.K.5": [
+  [
+   "WI-CC-ELA|W.K.4",
+   "procedure",
+   "Composing a piece comes before adding details to strengthen it"
+  ]
+ ],
+ "WI-CC-ELA|W.K.6": [
+  [
+   "WI-CC-ELA|RF.K.1.d",
+   "prereq",
+   "Recognising upper and lowercase letters comes before forming them in print"
+  ]
+ ],
+ "WI-CC-ELA|W.1.1": [
+  [
+   "WI-CC-ELA|W.K.1",
+   "same",
+   "Composing by drawing, dictating and writing grows into independent writing"
+  ],
+  [
+   "WI-CC-ELA|W.K.6",
+   "prereq",
+   "Printing most letters is needed to compose in writing"
+  ],
+  [
+   "WI-CC-ELA|L.K.6",
+   "prereq",
+   "Phonetic spelling lets students write their own words"
+  ]
+ ],
+ "WI-CC-ELA|W.1.2.a": [
+  [
+   "WI-CC-ELA|W.K.2.a",
+   "same",
+   "Stating an opinion about a topic grows into giving a reason"
+  ],
+  [
+   "WI-CC-ELA|W.K.3.a",
+   "concept",
+   "Attempting an introduction prepares for introducing the topic"
+  ]
+ ],
+ "WI-CC-ELA|W.1.2.b": [
+  [
+   "WI-CC-ELA|W.K.2.b",
+   "same",
+   "Naming a topic and giving information grows into facts with closure"
+  ],
+  [
+   "WI-CC-ELA|W.K.8",
+   "concept",
+   "Gathering information from sources supplies facts to write about"
+  ]
+ ],
+ "WI-CC-ELA|W.1.2.c": [
+  [
+   "WI-CC-ELA|W.K.2.c",
+   "same",
+   "Telling loosely linked events in order grows into sequenced narratives"
+  ],
+  [
+   "WI-CC-ELA|R.K.2",
+   "concept",
+   "Retelling stories shows how events are sequenced"
+  ],
+  [
+   "WI-CC-ELA|SL.K.4",
+   "concept",
+   "Describing familiar events aloud supports adding details in writing"
+  ]
+ ],
+ "WI-CC-ELA|W.1.3.a": [
+  [
+   "WI-CC-ELA|W.K.3.a",
+   "same",
+   "Attempting an introduction and structure grows into beginning, middle and end"
+  ],
+  [
+   "WI-CC-ELA|R.K.2",
+   "concept",
+   "Retelling stories shows that texts have a beginning, middle and end"
+  ]
+ ],
+ "WI-CC-ELA|W.1.3.b": [
+  [
+   "WI-CC-ELA|W.K.2.c",
+   "concept",
+   "Telling events in the order they happened prepares for temporal words"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.d",
+   "prereq",
+   "Producing complete sentences comes before linking them with transitions"
+  ]
+ ],
+ "WI-CC-ELA|W.1.3.c": [
+  [
+   "WI-CC-ELA|W.K.3.b",
+   "same",
+   "Using familiar words grows into experimenting with descriptive words"
+  ],
+  [
+   "WI-CC-ELA|L.K.3.d",
+   "concept",
+   "Connecting words to real life builds descriptive vocabulary"
+  ],
+  [
+   "WI-CC-ELA|L.K.3.e",
+   "concept",
+   "Acting out shades of meaning in verbs builds precise word choice"
+  ]
+ ],
+ "WI-CC-ELA|W.1.4": [
+  [
+   "WI-CC-ELA|W.K.4",
+   "same",
+   "Composing with adult support continues into writing for task and purpose"
+  ]
+ ],
+ "WI-CC-ELA|W.1.5": [
+  [
+   "WI-CC-ELA|W.K.5",
+   "same",
+   "Responding to peers and adding details now includes staying on topic"
+  ],
+  [
+   "WI-CC-ELA|W.K.4",
+   "procedure",
+   "Drafting a piece comes before strengthening it with details"
+  ]
+ ],
+ "WI-CC-ELA|W.1.6": [
+  [
+   "WI-CC-ELA|W.K.6",
+   "same",
+   "Exploring digital tools and forming letters continues with more independence"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.d",
+   "prereq",
+   "Knowing upper and lowercase letters is needed to print them"
+  ]
+ ],
+ "WI-CC-ELA|W.1.7": [
+  [
+   "WI-CC-ELA|W.K.7",
+   "same",
+   "Shared inquiry projects in kindergarten continue with how to writing"
+  ]
+ ],
+ "WI-CC-ELA|W.1.8": [
+  [
+   "WI-CC-ELA|W.K.8",
+   "same",
+   "Grade 1 continues recalling and gathering information to answer questions"
+  ],
+  [
+   "WI-CC-ELA|R.K.1",
+   "concept",
+   "Asking and answering questions about texts supports finding answers in sources"
+  ]
+ ],
+ "WI-CC-ELA|W.1.9": [
+  [
+   "WI-CC-ELA|W.K.9",
+   "same",
+   "Recalling facts from texts now extends to using them for reflection"
+  ],
+  [
+   "WI-CC-ELA|R.K.3",
+   "prereq",
+   "Identifying characters, settings and events gives facts to recall"
+  ]
+ ],
+ "WI-CC-ELA|W.2.1": [
+  [
+   "WI-CC-ELA|W.1.1",
+   "same",
+   "Grade 1 composing for many purposes continues in grade 2"
+  ]
+ ],
+ "WI-CC-ELA|W.2.2.a": [
+  [
+   "WI-CC-ELA|W.1.2.a",
+   "same",
+   "An opinion with one reason grows into several linked reasons and a conclusion"
+  ],
+  [
+   "WI-CC-ELA|W.1.3.b",
+   "prereq",
+   "Simple transitions come before linking reasons with connecting words"
+  ],
+  [
+   "WI-CC-ELA|L.1.4",
+   "concept",
+   "Using conjunctions like because signals reasons in an opinion"
+  ]
+ ],
+ "WI-CC-ELA|W.2.2.b": [
+  [
+   "WI-CC-ELA|W.1.2.b",
+   "same",
+   "Naming a topic with facts grows into developing points with definitions"
+  ],
+  [
+   "WI-CC-ELA|W.1.8",
+   "procedure",
+   "Gathering information from sources supplies the facts to develop points"
+  ]
+ ],
+ "WI-CC-ELA|W.2.2.c": [
+  [
+   "WI-CC-ELA|W.1.2.c",
+   "same",
+   "Sequenced narratives grow into one well elaborated event or sequence"
+  ],
+  [
+   "WI-CC-ELA|W.1.3.c",
+   "concept",
+   "Descriptive words for feelings and events support elaborated narratives"
+  ],
+  [
+   "WI-CC-ELA|W.1.3.b",
+   "prereq",
+   "Temporal words for event order are reused in grade 2 narratives"
+  ]
+ ],
+ "WI-CC-ELA|W.2.3.a": [
+  [
+   "WI-CC-ELA|W.1.3.a",
+   "same",
+   "Beginning, middle and simple ending now work together around a theme"
+  ],
+  [
+   "WI-CC-ELA|R.1.2",
+   "concept",
+   "Identifying a central idea helps writers keep parts focused on it"
+  ]
+ ],
+ "WI-CC-ELA|W.2.3.b": [
+  [
+   "WI-CC-ELA|W.1.3.b",
+   "same",
+   "Simple word transitions grow into transitions that build connections"
+  ]
+ ],
+ "WI-CC-ELA|W.2.3.c": [
+  [
+   "WI-CC-ELA|W.1.3.c",
+   "same",
+   "Experimenting with descriptive words grows into vivid word choice"
+  ],
+  [
+   "WI-CC-ELA|L.1.3.c",
+   "concept",
+   "Shades of meaning in verbs and adjectives support vivid word choice"
+  ],
+  [
+   "WI-CC-ELA|L.1.3.a",
+   "concept",
+   "Noticing words that suggest feelings or senses supplies vivid language"
+  ]
+ ],
+ "WI-CC-ELA|W.2.4": [
+  [
+   "WI-CC-ELA|W.1.4",
+   "same",
+   "Writing for task and purpose continues with grade 2 expectations"
+  ]
+ ],
+ "WI-CC-ELA|W.2.5": [
+  [
+   "WI-CC-ELA|W.1.5",
+   "same",
+   "Adding details to strengthen writing grows into revising and editing"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.d",
+   "prereq",
+   "Producing complete sentences is needed to edit for sentence errors"
+  ],
+  [
+   "WI-CC-ELA|L.1.6.b",
+   "prereq",
+   "Knowing end punctuation is needed to edit writing"
+  ]
+ ],
+ "WI-CC-ELA|W.2.6": [
+  [
+   "WI-CC-ELA|W.1.6",
+   "same",
+   "Using digital tools and printing continues with more independence"
+  ]
+ ],
+ "WI-CC-ELA|W.2.7": [
+  [
+   "WI-CC-ELA|W.1.7",
+   "same",
+   "Shared inquiry projects now include independent research reports"
+  ],
+  [
+   "WI-CC-ELA|W.1.2.b",
+   "concept",
+   "Writing informative text with facts prepares for producing a report"
+  ]
+ ],
+ "WI-CC-ELA|W.2.8": [
+  [
+   "WI-CC-ELA|W.1.8",
+   "same",
+   "Gathering information to answer a question becomes more independent"
+  ]
+ ],
+ "WI-CC-ELA|W.2.9": [
+  [
+   "WI-CC-ELA|W.1.9",
+   "same",
+   "Using facts from texts for reflection continues with peer support"
+  ],
+  [
+   "WI-CC-ELA|R.1.3",
+   "prereq",
+   "Describing characters, settings and events gives facts to use"
+  ]
+ ],
+ "WI-CC-ELA|W.3.1": [
+  [
+   "WI-CC-ELA|W.2.1",
+   "same",
+   "Grade 2 composing for many purposes continues in grade 3"
+  ]
+ ],
+ "WI-CC-ELA|W.3.2.a": [
+  [
+   "WI-CC-ELA|W.2.2.a",
+   "same",
+   "An opinion with linked reasons continues as supporting a point of view"
+  ],
+  [
+   "WI-CC-ELA|R.2.8",
+   "concept",
+   "Seeing how authors support points with reasons models opinion writing"
+  ]
+ ],
+ "WI-CC-ELA|W.3.2.b": [
+  [
+   "WI-CC-ELA|W.2.2.b",
+   "same",
+   "Developing points with facts and definitions now adds details"
+  ],
+  [
+   "WI-CC-ELA|W.2.8",
+   "procedure",
+   "Gathering information from sources supplies facts and details"
+  ]
+ ],
+ "WI-CC-ELA|W.3.2.c": [
+  [
+   "WI-CC-ELA|W.2.2.c",
+   "same",
+   "Elaborated narratives grow into stories with characters and dialogue"
+  ],
+  [
+   "WI-CC-ELA|R.2.3",
+   "concept",
+   "Understanding how characters respond to events helps writers show responses"
+  ],
+  [
+   "WI-CC-ELA|W.2.3.c",
+   "concept",
+   "Vivid descriptive words support describing actions, thoughts and feelings"
+  ]
+ ],
+ "WI-CC-ELA|W.3.3.a": [
+  [
+   "WI-CC-ELA|W.2.3.a",
+   "same",
+   "A cohesive beginning, middle and end now includes a purposeful introduction"
+  ],
+  [
+   "WI-CC-ELA|W.2.2.b",
+   "concept",
+   "Writing concluding statements in grade 2 prepares for conclusions that fit the mode"
+  ]
+ ],
+ "WI-CC-ELA|W.3.3.b": [
+  [
+   "WI-CC-ELA|W.2.3.b",
+   "same",
+   "Grade 2 transitions grow into words and phrases that signal order"
+  ],
+  [
+   "WI-CC-ELA|L.2.5.b",
+   "prereq",
+   "Building compound sentences supports linking ideas with transition words"
+  ]
+ ],
+ "WI-CC-ELA|W.3.3.c": [
+  [
+   "WI-CC-ELA|W.2.3.c",
+   "same",
+   "Vivid word choice now serves emphasis, addition, contrast and order"
+  ],
+  [
+   "WI-CC-ELA|W.2.2.a",
+   "concept",
+   "Using linking words for emphasis, addition, contrast and order began in opinions"
+  ]
+ ],
+ "WI-CC-ELA|W.3.4": [
+  [
+   "WI-CC-ELA|W.2.4",
+   "same",
+   "Writing for task and purpose continues with grade 3 expectations"
+  ]
+ ],
+ "WI-CC-ELA|W.3.5": [
+  [
+   "WI-CC-ELA|W.2.5",
+   "same",
+   "Revising and editing with support now includes planning"
+  ],
+  [
+   "WI-CC-ELA|L.2.5.b",
+   "prereq",
+   "Rearranging simple and compound sentences supports revising sentences"
+  ]
+ ],
+ "WI-CC-ELA|W.3.6": [
+  [
+   "WI-CC-ELA|W.2.6",
+   "same",
+   "Producing and publishing with digital tools continues in grade 3"
+  ]
+ ],
+ "WI-CC-ELA|W.3.7": [
+  [
+   "WI-CC-ELA|W.2.7",
+   "same",
+   "Shared and independent inquiry projects grow into short research projects"
+  ],
+  [
+   "WI-CC-ELA|W.2.8",
+   "procedure",
+   "Gathering information from sources is the core step of inquiry"
+  ]
+ ],
+ "WI-CC-ELA|W.3.8": [
+  [
+   "WI-CC-ELA|W.2.8",
+   "same",
+   "Gathering information from sources now adds notes and sorting"
+  ],
+  [
+   "WI-CC-ELA|L.1.3.b",
+   "concept",
+   "Sorting words into categories prepares for sorting evidence into categories"
+  ],
+  [
+   "WI-CC-ELA|R.2.2",
+   "concept",
+   "Picking out key details helps students take brief notes"
+  ]
+ ],
+ "WI-CC-ELA|W.3.9": [
+  [
+   "WI-CC-ELA|W.2.9",
+   "same",
+   "Using facts from texts for reflection now becomes independent"
+  ]
+ ],
+ "WI-CC-ELA|W.4.1": [
+  [
+   "WI-CC-ELA|W.3.1",
+   "same",
+   "Grade 3 composing for many purposes continues in grade 4"
+  ]
+ ],
+ "WI-CC-ELA|W.4.2.a": [
+  [
+   "WI-CC-ELA|W.3.2.a",
+   "same",
+   "Supporting an opinion with listed reasons grows into grouped ideas"
+  ],
+  [
+   "WI-CC-ELA|W.3.3.a",
+   "concept",
+   "Purposeful introductions and conclusions frame an organized opinion piece"
+  ]
+ ],
+ "WI-CC-ELA|W.4.2.b": [
+  [
+   "WI-CC-ELA|W.3.2.b",
+   "same",
+   "Developing points with facts and details now adds paragraphs and headings"
+  ],
+  [
+   "WI-CC-ELA|W.3.8",
+   "procedure",
+   "Sorting evidence into categories prepares for grouping information in paragraphs"
+  ],
+  [
+   "WI-CC-ELA|R.3.5",
+   "concept",
+   "Using text features to understand texts prepares for adding headings"
+  ]
+ ],
+ "WI-CC-ELA|W.4.2.c": [
+  [
+   "WI-CC-ELA|W.3.2.c",
+   "same",
+   "Stories with characters and dialogue now add pacing and natural sequence"
+  ],
+  [
+   "WI-CC-ELA|L.3.6.b",
+   "prereq",
+   "Quotation marks for speech are needed to write dialogue"
+  ],
+  [
+   "WI-CC-ELA|R.3.3",
+   "concept",
+   "Describing character traits and feelings helps writers develop characters"
+  ]
+ ],
+ "WI-CC-ELA|W.4.3.a": [
+  [
+   "WI-CC-ELA|W.3.3.a",
+   "same",
+   "Purposeful introductions and conclusions now connect to the body"
+  ]
+ ],
+ "WI-CC-ELA|W.4.3.b": [
+  [
+   "WI-CC-ELA|W.3.3.b",
+   "same",
+   "Transition words and phrases continue with more complex linking"
+  ],
+  [
+   "WI-CC-ELA|L.3.4.a",
+   "concept",
+   "Phrases signalling time and place supply transitional phrases"
+  ]
+ ],
+ "WI-CC-ELA|W.4.3.c": [
+  [
+   "WI-CC-ELA|W.3.3.c",
+   "same",
+   "Word choice for emphasis and contrast now connects themes and ideas"
+  ],
+  [
+   "WI-CC-ELA|L.3.1.c",
+   "concept",
+   "Choosing words for effect when writing supports deliberate word choice"
+  ]
+ ],
+ "WI-CC-ELA|W.4.4": [
+  [
+   "WI-CC-ELA|W.3.4",
+   "same",
+   "Writing for task and purpose now adds audience and more independence"
+  ],
+  [
+   "WI-CC-ELA|L.3.5.d",
+   "prereq",
+   "Simple and compound sentences are needed for clear coherent writing"
+  ]
+ ],
+ "WI-CC-ELA|W.4.5": [
+  [
+   "WI-CC-ELA|W.3.5",
+   "same",
+   "Planning, revising and editing with support continues more independently"
+  ]
+ ],
+ "WI-CC-ELA|W.4.6": [
+  [
+   "WI-CC-ELA|W.3.6",
+   "same",
+   "Producing writing with digital tools now adds keyboarding fluency"
+  ]
+ ],
+ "WI-CC-ELA|W.4.7": [
+  [
+   "WI-CC-ELA|W.3.7",
+   "same",
+   "Short inquiry projects now investigate several aspects of a topic"
+  ],
+  [
+   "WI-CC-ELA|W.3.8",
+   "procedure",
+   "Taking notes and sorting evidence supports investigating a topic"
+  ]
+ ],
+ "WI-CC-ELA|W.4.8": [
+  [
+   "WI-CC-ELA|W.3.8",
+   "same",
+   "Brief notes and sorting evidence grow into categorizing and listing sources"
+  ]
+ ],
+ "WI-CC-ELA|W.4.9": [
+  [
+   "WI-CC-ELA|W.3.9",
+   "same",
+   "Using facts from texts now supports analysis as well as reflection"
+  ],
+  [
+   "WI-CC-ELA|R.3.1",
+   "procedure",
+   "Locating specific details in text supports using facts in writing"
+  ]
+ ],
+ "WI-CC-ELA|W.5.1": [
+  [
+   "WI-CC-ELA|W.4.1",
+   "same",
+   "Grade 4 composing for many purposes continues in grade 5"
+  ]
+ ],
+ "WI-CC-ELA|W.5.2.a": [
+  [
+   "WI-CC-ELA|W.4.2.a",
+   "same",
+   "Grouping ideas to support an opinion grows into logical ordering"
+  ],
+  [
+   "WI-CC-ELA|R.4.8",
+   "concept",
+   "Seeing how claims are supported by evidence models logical support"
+  ]
+ ],
+ "WI-CC-ELA|W.5.2.b": [
+  [
+   "WI-CC-ELA|W.4.2.b",
+   "same",
+   "Paragraphs, headings and multimedia continue with logical grouping and linking"
+  ],
+  [
+   "WI-CC-ELA|W.4.3.b",
+   "prereq",
+   "Transitional phrases are needed to link ideas across categories"
+  ],
+  [
+   "WI-CC-ELA|L.4.4.a",
+   "concept",
+   "Using topic specific words and phrases supports genre specific language"
+  ]
+ ],
+ "WI-CC-ELA|W.5.2.c": [
+  [
+   "WI-CC-ELA|W.4.2.c",
+   "same",
+   "Grade 4 narrative techniques continue with more control in grade 5"
+  ],
+  [
+   "WI-CC-ELA|L.4.6.b",
+   "prereq",
+   "Punctuating quotations correctly is needed for written dialogue"
+  ]
+ ],
+ "WI-CC-ELA|W.5.3.a": [
+  [
+   "WI-CC-ELA|W.4.3.a",
+   "same",
+   "Purposeful introductions and linked conclusions now engage the reader"
+  ]
+ ],
+ "WI-CC-ELA|W.5.3.b": [
+  [
+   "WI-CC-ELA|W.4.3.b",
+   "same",
+   "Transitional phrases grow into a varied range that connect ideas logically"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.e",
+   "concept",
+   "Compound and complex sentences show how ideas connect within sentences"
+  ]
+ ],
+ "WI-CC-ELA|W.5.3.c": [
+  [
+   "WI-CC-ELA|W.4.3.c",
+   "same",
+   "Experimenting with words for emphasis and contrast grows into creative choice"
+  ],
+  [
+   "WI-CC-ELA|L.4.1.c",
+   "concept",
+   "Choosing precise words when writing supports selecting unique words"
+  ],
+  [
+   "WI-CC-ELA|L.4.3.c",
+   "concept",
+   "Relating words to synonyms and antonyms widens word choice"
+  ]
+ ],
+ "WI-CC-ELA|W.5.4": [
+  [
+   "WI-CC-ELA|W.4.4",
+   "same",
+   "Clear coherent writing for task, purpose and audience continues in grade 5"
+  ]
+ ],
+ "WI-CC-ELA|W.5.5": [
+  [
+   "WI-CC-ELA|W.4.5",
+   "same",
+   "Planning, revising and editing continue with deliberate choices for audience"
+  ]
+ ],
+ "WI-CC-ELA|W.5.6": [
+  [
+   "WI-CC-ELA|W.4.6",
+   "same",
+   "Typing one page grows into typing two pages in one sitting"
+  ]
+ ],
+ "WI-CC-ELA|W.5.7": [
+  [
+   "WI-CC-ELA|W.4.7",
+   "same",
+   "Short inquiry projects now become student driven with several sources"
+  ],
+  [
+   "WI-CC-ELA|W.4.8",
+   "procedure",
+   "Gathering and categorizing information from sources supports multi source inquiry"
+  ]
+ ],
+ "WI-CC-ELA|W.5.8": [
+  [
+   "WI-CC-ELA|W.4.8",
+   "same",
+   "Taking notes and listing sources now adds summarizing and paraphrasing"
+  ],
+  [
+   "WI-CC-ELA|R.4.2",
+   "prereq",
+   "Summarizing texts is needed to summarize information in notes"
+  ],
+  [
+   "WI-CC-ELA|SL.4.2",
+   "prereq",
+   "Paraphrasing information heard prepares for paraphrasing in notes"
+  ]
+ ],
+ "WI-CC-ELA|W.5.9": [
+  [
+   "WI-CC-ELA|W.4.9",
+   "same",
+   "Using facts from texts grows into drawing evidence for analysis"
+  ],
+  [
+   "WI-CC-ELA|R.4.1",
+   "prereq",
+   "Referring to details and evidence in text is needed to draw evidence"
+  ]
+ ],
+ "WI-CC-ELA|SL.1.1.a": [
+  [
+   "WI-CC-ELA|SL.K.1.a",
+   "same",
+   "Following discussion norms with support continues in grade 1"
+  ]
+ ],
+ "WI-CC-ELA|SL.1.1.b": [
+  [
+   "WI-CC-ELA|SL.K.1.b",
+   "same",
+   "Multiple exchanges grow into responding to what others say"
+  ],
+  [
+   "WI-CC-ELA|SL.K.1.a",
+   "prereq",
+   "Listening and taking turns are needed to build on the talk of others"
+  ]
+ ],
+ "WI-CC-ELA|SL.1.1.c": [
+  [
+   "WI-CC-ELA|SL.K.1.c",
+   "same",
+   "Asking about a topic grows into asking to clear up confusion"
+  ],
+  [
+   "WI-CC-ELA|SL.K.3",
+   "concept",
+   "Asking to clarify something not understood began in kindergarten"
+  ]
+ ],
+ "WI-CC-ELA|SL.1.1.d": [
+  [
+   "WI-CC-ELA|SL.K.1.d",
+   "same",
+   "Considering individual differences when communicating continues in grade 1"
+  ]
+ ],
+ "WI-CC-ELA|SL.1.2": [
+  [
+   "WI-CC-ELA|SL.K.2",
+   "same",
+   "Questions about key details read aloud become more independent"
+  ]
+ ],
+ "WI-CC-ELA|SL.1.3": [
+  [
+   "WI-CC-ELA|SL.K.3",
+   "same",
+   "Asking to get information or clarify now focuses on a speaker"
+  ]
+ ],
+ "WI-CC-ELA|SL.1.4": [
+  [
+   "WI-CC-ELA|SL.K.4",
+   "same",
+   "Describing familiar things with support grows into relevant detailed description"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.d",
+   "prereq",
+   "Speaking in complete sentences supports expressing ideas clearly"
+  ]
+ ],
+ "WI-CC-ELA|SL.1.5": [
+  [
+   "WI-CC-ELA|SL.K.5",
+   "same",
+   "Visual displays that support descriptions now clarify ideas and feelings"
+  ]
+ ],
+ "WI-CC-ELA|SL.2.1.a": [
+  [
+   "WI-CC-ELA|SL.1.1.a",
+   "same",
+   "Discussion norms now add gaining the floor respectfully"
+  ]
+ ],
+ "WI-CC-ELA|SL.2.1.b": [
+  [
+   "WI-CC-ELA|SL.1.1.b",
+   "same",
+   "Responding to others grows into linking comments to their remarks"
+  ]
+ ],
+ "WI-CC-ELA|SL.2.1.c": [
+  [
+   "WI-CC-ELA|SL.1.1.c",
+   "same",
+   "Asking to clear up confusion grows into asking for further explanation"
+  ]
+ ],
+ "WI-CC-ELA|SL.2.1.d": [
+  [
+   "WI-CC-ELA|SL.1.1.d",
+   "same",
+   "Considering individual differences when communicating continues in grade 2"
+  ]
+ ],
+ "WI-CC-ELA|SL.2.2": [
+  [
+   "WI-CC-ELA|SL.1.2",
+   "same",
+   "Answering questions about key details grows into recounting them"
+  ],
+  [
+   "WI-CC-ELA|R.1.2",
+   "concept",
+   "Retelling important details from text supports recounting what was heard"
+  ]
+ ],
+ "WI-CC-ELA|SL.2.3": [
+  [
+   "WI-CC-ELA|SL.1.3",
+   "same",
+   "Questions about what a speaker says now also expand on the topic"
+  ]
+ ],
+ "WI-CC-ELA|SL.2.4": [
+  [
+   "WI-CC-ELA|SL.1.4",
+   "same",
+   "Describing with relevant details grows into telling stories and experiences"
+  ],
+  [
+   "WI-CC-ELA|W.1.2.c",
+   "concept",
+   "Sequencing events in written narratives supports telling stories aloud"
+  ]
+ ],
+ "WI-CC-ELA|SL.2.5": [
+  [
+   "WI-CC-ELA|SL.1.5",
+   "same",
+   "Visual displays that clarify ideas now include digital media in presentations"
+  ],
+  [
+   "WI-CC-ELA|W.1.6",
+   "concept",
+   "Using digital tools for writing supports adding digital media"
+  ]
+ ],
+ "WI-CC-ELA|SL.3.1.a": [
+  [
+   "WI-CC-ELA|SL.2.1.a",
+   "concept",
+   "Participating and staying on topic grows into coming prepared on the topic"
+  ],
+  [
+   "WI-CC-ELA|SL.2.2",
+   "prereq",
+   "Recounting key ideas from texts lets students draw on them in discussion"
+  ]
+ ],
+ "WI-CC-ELA|SL.3.1.b": [
+  [
+   "WI-CC-ELA|SL.2.1.a",
+   "same",
+   "Grade 2 discussion norms continue with speaking one at a time"
+  ]
+ ],
+ "WI-CC-ELA|SL.3.1.c": [
+  [
+   "WI-CC-ELA|SL.2.1.c",
+   "same",
+   "Asking for clarification grows into checking understanding"
+  ],
+  [
+   "WI-CC-ELA|SL.2.1.b",
+   "same",
+   "Linking comments to the remarks of others continues in grade 3"
+  ]
+ ],
+ "WI-CC-ELA|SL.3.1.d": [
+  [
+   "WI-CC-ELA|SL.2.1.b",
+   "concept",
+   "Building on the remarks of others prepares for explaining ideas in light of discussion"
+  ],
+  [
+   "WI-CC-ELA|SL.2.4",
+   "prereq",
+   "Expressing ideas clearly is needed to explain personal thinking"
+  ]
+ ],
+ "WI-CC-ELA|SL.3.2": [
+  [
+   "WI-CC-ELA|SL.2.2",
+   "same",
+   "Recounting key ideas heard grows into finding main ideas and support"
+  ],
+  [
+   "WI-CC-ELA|R.2.2",
+   "concept",
+   "Identifying a central idea and key details in text transfers to listening"
+  ]
+ ],
+ "WI-CC-ELA|SL.3.3": [
+  [
+   "WI-CC-ELA|SL.2.3",
+   "same",
+   "Questions about a speaker now include elaboration and detail"
+  ]
+ ],
+ "WI-CC-ELA|SL.3.4": [
+  [
+   "WI-CC-ELA|SL.2.4",
+   "same",
+   "Telling stories with details grows into reports, poems and recounts"
+  ],
+  [
+   "WI-CC-ELA|RF.2.4.b",
+   "prereq",
+   "Reading aloud with accuracy and expression supports reading a poem aloud"
+  ]
+ ],
+ "WI-CC-ELA|SL.3.5": [
+  [
+   "WI-CC-ELA|SL.2.5",
+   "same",
+   "Digital media and visual displays in presentations now enhance facts"
+  ]
+ ],
+ "WI-CC-ELA|SL.4.1.a": [
+  [
+   "WI-CC-ELA|SL.3.1.a",
+   "same",
+   "Coming prepared to discussions continues with harder topics and texts"
+  ]
+ ],
+ "WI-CC-ELA|SL.4.1.b": [
+  [
+   "WI-CC-ELA|SL.3.1.b",
+   "same",
+   "Grade 3 discussion norms continue in grade 4"
+  ]
+ ],
+ "WI-CC-ELA|SL.4.1.c": [
+  [
+   "WI-CC-ELA|SL.3.1.c",
+   "same",
+   "Checking understanding and linking comments grows into follow up questions"
+  ],
+  [
+   "WI-CC-ELA|SL.3.3",
+   "concept",
+   "Asking a speaker for elaboration supports follow up questions"
+  ]
+ ],
+ "WI-CC-ELA|SL.4.1.d": [
+  [
+   "WI-CC-ELA|SL.3.1.d",
+   "same",
+   "Explaining ideas in light of discussion now starts by reviewing key ideas"
+  ],
+  [
+   "WI-CC-ELA|SL.3.2",
+   "concept",
+   "Finding main ideas in what is heard supports reviewing key ideas"
+  ]
+ ],
+ "WI-CC-ELA|SL.4.2": [
+  [
+   "WI-CC-ELA|SL.3.2",
+   "same",
+   "Identifying main ideas and details heard comes before paraphrasing them"
+  ]
+ ],
+ "WI-CC-ELA|SL.4.3": [
+  [
+   "WI-CC-ELA|SL.3.3",
+   "same",
+   "Questioning a speaker grows into identifying their reasons and evidence"
+  ],
+  [
+   "WI-CC-ELA|R.3.8",
+   "concept",
+   "Explaining how claims are supported in texts transfers to listening"
+  ]
+ ],
+ "WI-CC-ELA|SL.4.4": [
+  [
+   "WI-CC-ELA|SL.3.4",
+   "same",
+   "Reports and recounts now need organization and audience awareness"
+  ],
+  [
+   "WI-CC-ELA|W.3.3.a",
+   "concept",
+   "Purposeful introductions and conclusions help organize spoken reports"
+  ]
+ ],
+ "WI-CC-ELA|SL.4.5": [
+  [
+   "WI-CC-ELA|SL.3.5",
+   "same",
+   "Digital media in presentations now integrates audio to develop main ideas"
+  ]
+ ],
+ "WI-CC-ELA|SL.5.1.a": [
+  [
+   "WI-CC-ELA|SL.4.1.a",
+   "same",
+   "Coming prepared to discussions continues with harder topics and texts"
+  ]
+ ],
+ "WI-CC-ELA|SL.5.1.b": [
+  [
+   "WI-CC-ELA|SL.4.1.b",
+   "same",
+   "Grade 4 discussion norms continue in grade 5"
+  ]
+ ],
+ "WI-CC-ELA|SL.5.1.c": [
+  [
+   "WI-CC-ELA|SL.4.1.c",
+   "same",
+   "Follow up questions and linked comments grow into elaborating on others"
+  ]
+ ],
+ "WI-CC-ELA|SL.5.1.d": [
+  [
+   "WI-CC-ELA|SL.4.1.d",
+   "same",
+   "Reviewing key ideas now leads to drawing conclusions"
+  ],
+  [
+   "WI-CC-ELA|R.4.1",
+   "concept",
+   "Making logical inferences from text supports drawing conclusions from talk"
+  ]
+ ],
+ "WI-CC-ELA|SL.5.2": [
+  [
+   "WI-CC-ELA|SL.4.2",
+   "same",
+   "Paraphrasing what is heard grows into summarizing it"
+  ],
+  [
+   "WI-CC-ELA|R.4.2",
+   "concept",
+   "Summarizing written texts transfers to summarizing what is heard"
+  ]
+ ],
+ "WI-CC-ELA|SL.5.3": [
+  [
+   "WI-CC-ELA|SL.4.3",
+   "same",
+   "Identifying the reasons a speaker gives grows into linking each claim to support"
+  ],
+  [
+   "WI-CC-ELA|R.4.8",
+   "concept",
+   "Explaining how claims in texts are supported transfers to speakers"
+  ]
+ ],
+ "WI-CC-ELA|SL.5.4": [
+  [
+   "WI-CC-ELA|SL.4.4",
+   "same",
+   "Organized reports now include opinions with logically sequenced ideas"
+  ],
+  [
+   "WI-CC-ELA|W.4.2.a",
+   "concept",
+   "Organizing an opinion with grouped reasons supports presenting an opinion"
+  ]
+ ],
+ "WI-CC-ELA|SL.5.5": [
+  [
+   "WI-CC-ELA|SL.4.5",
+   "same",
+   "Integrating audio and visuals grows into using multimedia components"
+  ]
+ ],
+ "WI-CC-ELA|L.K.6": [
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Letter sound knowledge is needed to spell simple words phonetically"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "prereq",
+   "Hearing each sound in a word lets students write a letter for it"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.d",
+   "prereq",
+   "Knowing uppercase letters is needed to capitalize the first word"
+  ]
+ ],
+ "WI-CC-ELA|L.1.1": [
+  [
+   "WI-CC-ELA|L.K.1.a",
+   "same",
+   "Appreciating the linguistic diversity of classmates continues in grade 1"
+  ]
+ ],
+ "WI-CC-ELA|L.1.2.a": [
+  [
+   "WI-CC-ELA|L.K.2.b",
+   "same",
+   "Using endings like ed as meaning clues extends to inflected forms"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.b",
+   "concept",
+   "Oral plurals show how adding an ending changes meaning"
+  ]
+ ],
+ "WI-CC-ELA|L.1.2.b": [
+  [
+   "WI-CC-ELA|L.K.2.b",
+   "concept",
+   "Noticing prefixes and suffixes leads to finding the root word left behind"
+  ]
+ ],
+ "WI-CC-ELA|L.1.3.a": [
+  [
+   "WI-CC-ELA|R.K.4",
+   "same",
+   "Finding words that express feelings in text extends to sensory words"
+  ],
+  [
+   "WI-CC-ELA|L.K.3.d",
+   "concept",
+   "Connecting words to real life supports noticing sensory words"
+  ]
+ ],
+ "WI-CC-ELA|L.1.3.b": [
+  [
+   "WI-CC-ELA|L.K.3.b",
+   "same",
+   "Sorting objects into categories grows into sorting words and explaining why"
+  ]
+ ],
+ "WI-CC-ELA|L.1.3.c": [
+  [
+   "WI-CC-ELA|L.K.3.e",
+   "same",
+   "Acting out shades of meaning in verbs now includes adjectives"
+  ],
+  [
+   "WI-CC-ELA|L.K.3.c",
+   "concept",
+   "Understanding verbs and their opposites builds word relationship knowledge"
+  ]
+ ],
+ "WI-CC-ELA|L.1.4": [
+  [
+   "WI-CC-ELA|L.K.4",
+   "same",
+   "Building vocabulary when meeting unknown words continues in grade 1"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.d",
+   "prereq",
+   "Producing complete sentences comes before joining ideas with because"
+  ]
+ ],
+ "WI-CC-ELA|L.1.5.a": [
+  [
+   "WI-CC-ELA|L.K.5.a",
+   "same",
+   "Using frequent nouns grows into common, proper and possessive nouns"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.b",
+   "concept",
+   "Oral plural nouns build understanding of how nouns change form"
+  ]
+ ],
+ "WI-CC-ELA|L.1.5.b": [
+  [
+   "WI-CC-ELA|L.K.5.a",
+   "prereq",
+   "Knowing nouns and verbs is needed before making them agree"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.b",
+   "prereq",
+   "Knowing singular and plural nouns is needed for agreement"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.d",
+   "prereq",
+   "Producing complete sentences gives the frame for agreement"
+  ]
+ ],
+ "WI-CC-ELA|L.1.5.c": [
+  [
+   "WI-CC-ELA|L.K.5.a",
+   "same",
+   "Using frequent nouns, verbs and prepositions extends to more word types"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.d",
+   "concept",
+   "Expanding complete sentences creates the need for pronouns and conjunctions"
+  ]
+ ],
+ "WI-CC-ELA|L.1.5.d": [
+  [
+   "WI-CC-ELA|L.K.5.d",
+   "same",
+   "Oral complete sentences now expand in response to prompts"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.c",
+   "concept",
+   "Using question words helps students answer prompts in complete sentences"
+  ]
+ ],
+ "WI-CC-ELA|L.1.6.a": [
+  [
+   "WI-CC-ELA|L.K.6",
+   "same",
+   "Capitalizing the first word of a sentence extends to dates and names"
+  ],
+  [
+   "WI-CC-ELA|RF.K.1.d",
+   "prereq",
+   "Knowing uppercase letter forms is needed to capitalize"
+  ]
+ ],
+ "WI-CC-ELA|L.1.6.b": [
+  [
+   "WI-CC-ELA|L.K.6",
+   "same",
+   "Naming frequently used punctuation leads to using end punctuation"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.d",
+   "prereq",
+   "Knowing what a complete sentence is shows where it ends"
+  ]
+ ],
+ "WI-CC-ELA|L.1.6.c": [
+  [
+   "WI-CC-ELA|L.K.6",
+   "concept",
+   "Naming common punctuation marks prepares for using commas"
+  ]
+ ],
+ "WI-CC-ELA|L.1.6.d": [
+  [
+   "WI-CC-ELA|L.K.6",
+   "same",
+   "Phonetic spelling of simple words grows into spelling common patterns"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.a",
+   "prereq",
+   "Letter sound knowledge is needed to spell words phonetically"
+  ],
+  [
+   "WI-CC-ELA|RF.K.2.d",
+   "prereq",
+   "Isolating each sound in a word supports spelling it"
+  ],
+  [
+   "WI-CC-ELA|RF.K.3.b",
+   "prereq",
+   "Knowing vowel spellings supports spelling common patterns"
+  ]
+ ],
+ "WI-CC-ELA|L.2.1.a": [
+  [
+   "WI-CC-ELA|L.1.1",
+   "same",
+   "Appreciating the diversity of classmates now extends to home and community"
+  ]
+ ],
+ "WI-CC-ELA|L.2.1.b": [
+  [
+   "WI-CC-ELA|L.1.1",
+   "concept",
+   "Noticing how people speak differently prepares for formal and informal English"
+  ]
+ ],
+ "WI-CC-ELA|L.2.2.a": [
+  [
+   "WI-CC-ELA|L.1.2.a",
+   "same",
+   "Using inflected forms as meaning clues extends to prefixes and suffixes"
+  ],
+  [
+   "WI-CC-ELA|L.1.2.b",
+   "prereq",
+   "Identifying the root word is needed to see what an affix adds"
+  ],
+  [
+   "WI-CC-ELA|L.K.2.b",
+   "concept",
+   "Early use of prefixes like un as clues prepares for affix meanings"
+  ]
+ ],
+ "WI-CC-ELA|L.2.2.b": [
+  [
+   "WI-CC-ELA|L.1.2.b",
+   "same",
+   "Identifying root words grows into using them as meaning clues"
+  ]
+ ],
+ "WI-CC-ELA|L.2.2.c": [
+  [
+   "WI-CC-ELA|L.1.2.b",
+   "concept",
+   "Finding a root word inside a longer word supports splitting compound words"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.e",
+   "procedure",
+   "Breaking two syllable words into parts supports splitting compound words"
+  ]
+ ],
+ "WI-CC-ELA|L.2.2.d": [
+  [
+   "WI-CC-ELA|L.1.4",
+   "concept",
+   "Building vocabulary when meeting unknown words leads to using resources"
+  ],
+  [
+   "WI-CC-ELA|L.K.3.a",
+   "concept",
+   "Asking about unknown words starts the habit of seeking word meanings"
+  ]
+ ],
+ "WI-CC-ELA|L.2.3.a": [
+  [
+   "WI-CC-ELA|RF.K.2.a",
+   "prereq",
+   "Recognizing and producing rhymes is needed to notice rhyme in texts"
+  ],
+  [
+   "WI-CC-ELA|RF.1.2.d",
+   "prereq",
+   "Matching words with the same beginning sound underpins alliteration"
+  ],
+  [
+   "WI-CC-ELA|L.1.3.a",
+   "concept",
+   "Noticing words that appeal to the senses prepares for sound effects in text"
+  ]
+ ],
+ "WI-CC-ELA|L.2.3.b": [
+  [
+   "WI-CC-ELA|L.K.3.d",
+   "same",
+   "Connecting common words to real life continues with descriptive words"
+  ]
+ ],
+ "WI-CC-ELA|L.2.3.c": [
+  [
+   "WI-CC-ELA|L.1.3.c",
+   "same",
+   "Acting out shades of meaning grows into distinguishing similar words"
+  ]
+ ],
+ "WI-CC-ELA|L.2.4": [
+  [
+   "WI-CC-ELA|L.1.4",
+   "same",
+   "Building vocabulary from unknown words continues in grade 2"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "prereq",
+   "Using adjectives in grade 1 comes before describing with adverbs"
+  ]
+ ],
+ "WI-CC-ELA|L.2.5.a": [
+  [
+   "WI-CC-ELA|L.1.5.a",
+   "same",
+   "Grade 1 noun types extend to collective and plural nouns"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "same",
+   "Grade 1 adjectives and verb tenses extend to adverbs and irregular past"
+  ],
+  [
+   "WI-CC-ELA|L.K.5.b",
+   "concept",
+   "Oral plurals in kindergarten underpin regular plural nouns"
+  ]
+ ],
+ "WI-CC-ELA|L.2.5.b": [
+  [
+   "WI-CC-ELA|L.1.5.d",
+   "same",
+   "Expanding complete sentences grows into rearranging and compound sentences"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "prereq",
+   "Using conjunctions is needed to build compound sentences"
+  ],
+  [
+   "WI-CC-ELA|L.1.4",
+   "concept",
+   "Using because to show relationships prepares for joining clauses"
+  ]
+ ],
+ "WI-CC-ELA|L.2.6.a": [
+  [
+   "WI-CC-ELA|L.1.6.a",
+   "same",
+   "Capitalizing dates and names extends to holidays, products and places"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.a",
+   "concept",
+   "Knowing proper nouns explains which words need capitals"
+  ]
+ ],
+ "WI-CC-ELA|L.2.6.b": [
+  [
+   "WI-CC-ELA|L.1.6.c",
+   "same",
+   "Using commas in dates and sets extends to letter greetings and closings"
+  ]
+ ],
+ "WI-CC-ELA|L.2.6.c": [
+  [
+   "WI-CC-ELA|L.1.5.a",
+   "prereq",
+   "Understanding possessive nouns is needed before writing them with apostrophes"
+  ]
+ ],
+ "WI-CC-ELA|L.2.6.d": [
+  [
+   "WI-CC-ELA|L.1.6.d",
+   "same",
+   "Spelling common patterns grows into using patterns and references"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.c",
+   "prereq",
+   "Knowing final e and vowel teams supplies long vowel spelling patterns"
+  ],
+  [
+   "WI-CC-ELA|RF.1.3.a",
+   "prereq",
+   "Knowing consonant digraphs supports spelling them"
+  ],
+  [
+   "WI-CC-ELA|RF.1.2.c",
+   "prereq",
+   "Isolating sounds in spoken words supports spelling each sound"
+  ]
+ ],
+ "WI-CC-ELA|L.3.1.a": [
+  [
+   "WI-CC-ELA|L.2.1.a",
+   "same",
+   "Recognizing diversity at home and in the community grows into comparing uses"
+  ],
+  [
+   "WI-CC-ELA|L.2.1.b",
+   "concept",
+   "Knowing formal and informal English supports comparing language across contexts"
+  ]
+ ],
+ "WI-CC-ELA|L.3.1.b": [
+  [
+   "WI-CC-ELA|L.2.1.b",
+   "concept",
+   "Recognizing formal and informal English prepares for written versus spoken conventions"
+  ]
+ ],
+ "WI-CC-ELA|L.3.1.c": [
+  [
+   "WI-CC-ELA|R.2.4",
+   "concept",
+   "Explaining how words express feelings and content supports choosing words for effect"
+  ],
+  [
+   "WI-CC-ELA|W.2.3.c",
+   "concept",
+   "Vivid descriptive word choice leads to choosing words for effect"
+  ]
+ ],
+ "WI-CC-ELA|L.3.2.a": [
+  [
+   "WI-CC-ELA|RF.2.4.c",
+   "concept",
+   "Using context to self correct reading prepares for context clues to meaning"
+  ],
+  [
+   "WI-CC-ELA|L.K.2.a",
+   "concept",
+   "Knowing some words have multiple meanings shows why context matters"
+  ]
+ ],
+ "WI-CC-ELA|L.3.2.b": [
+  [
+   "WI-CC-ELA|L.2.2.a",
+   "same",
+   "Grade 2 meaning of added affixes continues with more prefixes and suffixes"
+  ],
+  [
+   "WI-CC-ELA|L.2.2.b",
+   "prereq",
+   "Using root words as clues is needed to combine with affix meanings"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.d",
+   "prereq",
+   "Decoding words with prefixes and suffixes comes before analyzing their meaning"
+  ]
+ ],
+ "WI-CC-ELA|L.3.2.c": [
+  [
+   "WI-CC-ELA|L.2.2.d",
+   "same",
+   "Using resources to clarify meanings continues in grade 3"
+  ]
+ ],
+ "WI-CC-ELA|L.3.3.a": [
+  [
+   "WI-CC-ELA|L.2.3.a",
+   "concept",
+   "Noticing how words supply rhythm and meaning prepares for figurative language"
+  ],
+  [
+   "WI-CC-ELA|L.K.2.a",
+   "concept",
+   "Knowing words have multiple meanings supports non literal meaning"
+  ],
+  [
+   "WI-CC-ELA|R.2.4",
+   "concept",
+   "Explaining how words express feelings prepares for figurative meanings"
+  ]
+ ],
+ "WI-CC-ELA|L.3.3.b": [
+  [
+   "WI-CC-ELA|L.2.3.c",
+   "same",
+   "Shades of meaning among similar verbs extend to degrees of certainty"
+  ]
+ ],
+ "WI-CC-ELA|L.3.3.c": [
+  [
+   "WI-CC-ELA|L.2.3.b",
+   "same",
+   "Connecting words to real life use continues in grade 3"
+  ]
+ ],
+ "WI-CC-ELA|L.3.4.a": [
+  [
+   "WI-CC-ELA|L.2.4",
+   "same",
+   "Grade 2 vocabulary building now adds time and place phrases"
+  ],
+  [
+   "WI-CC-ELA|W.2.2.c",
+   "concept",
+   "Using temporal words in narratives prepares for time phrases"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "prereq",
+   "Using prepositions is needed for phrases about place and time"
+  ]
+ ],
+ "WI-CC-ELA|L.3.5.a": [
+  [
+   "WI-CC-ELA|L.2.5.a",
+   "same",
+   "Regular plurals and irregular past tense verbs continue in grade 3"
+  ]
+ ],
+ "WI-CC-ELA|L.3.5.b": [
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "same",
+   "Using frequent verb tenses grows into simple past, present and future"
+  ],
+  [
+   "WI-CC-ELA|L.2.5.a",
+   "prereq",
+   "Irregular past tense verbs are needed for correct simple tenses"
+  ]
+ ],
+ "WI-CC-ELA|L.3.5.c": [
+  [
+   "WI-CC-ELA|L.1.5.b",
+   "same",
+   "Noun verb agreement in simple sentences grows into subject verb agreement"
+  ],
+  [
+   "WI-CC-ELA|L.2.5.a",
+   "prereq",
+   "Knowing singular, plural and collective nouns supports agreement"
+  ]
+ ],
+ "WI-CC-ELA|L.3.5.d": [
+  [
+   "WI-CC-ELA|L.2.5.b",
+   "same",
+   "Producing simple and compound sentences continues in grade 3"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "prereq",
+   "Using conjunctions joins simple sentences into compound sentences"
+  ]
+ ],
+ "WI-CC-ELA|L.3.5.e": [
+  [
+   "WI-CC-ELA|L.2.6.d",
+   "concept",
+   "Using spelling patterns helps tell apart words that sound alike"
+  ],
+  [
+   "WI-CC-ELA|L.2.6.c",
+   "prereq",
+   "Knowing contractions helps sort confused words like its and it is"
+  ],
+  [
+   "WI-CC-ELA|L.K.2.a",
+   "concept",
+   "Knowing some words share sounds but differ in meaning prepares for homophones"
+  ]
+ ],
+ "WI-CC-ELA|L.3.6.a": [
+  [
+   "WI-CC-ELA|L.2.6.a",
+   "same",
+   "Capitalizing holidays, products and places extends to titles"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.a",
+   "concept",
+   "Knowing proper nouns explains why titles are capitalized"
+  ]
+ ],
+ "WI-CC-ELA|L.3.6.b": [
+  [
+   "WI-CC-ELA|W.2.2.c",
+   "concept",
+   "Describing actions, thoughts and feelings in narratives leads to written speech"
+  ],
+  [
+   "WI-CC-ELA|L.1.6.b",
+   "prereq",
+   "End punctuation is needed inside quoted speech"
+  ]
+ ],
+ "WI-CC-ELA|L.3.6.c": [
+  [
+   "WI-CC-ELA|L.2.6.c",
+   "same",
+   "Apostrophes in frequent possessives extend to more possessive forms"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.a",
+   "prereq",
+   "Understanding possessive nouns underpins writing possessives"
+  ]
+ ],
+ "WI-CC-ELA|L.3.6.d": [
+  [
+   "WI-CC-ELA|L.2.6.d",
+   "same",
+   "Using spelling patterns to solve words grows into wider generalizations"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.b",
+   "prereq",
+   "Vowel team spellings are among the patterns now used in writing"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.e",
+   "prereq",
+   "Ending rules like dropping e are applied in spelling"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.d",
+   "concept",
+   "Knowing prefixes and suffixes supports spelling meaningful word parts"
+  ]
+ ],
+ "WI-CC-ELA|L.3.6.e": [
+  [
+   "WI-CC-ELA|L.1.6.d",
+   "same",
+   "Conventional spelling of common words grows into high frequency words"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.f",
+   "prereq",
+   "Reading irregular high frequency words supports spelling them correctly"
+  ]
+ ],
+ "WI-CC-ELA|L.3.6.f": [
+  [
+   "WI-CC-ELA|RF.2.3.e",
+   "same",
+   "Grade 2 rules for adding ing and ed now apply to all suffixes"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.d",
+   "prereq",
+   "Knowing common suffixes is needed before spelling them onto base words"
+  ]
+ ],
+ "WI-CC-ELA|L.3.6.g": [
+  [
+   "WI-CC-ELA|L.2.6.d",
+   "same",
+   "Using patterns and basic references grows into syllable patterns and references"
+  ],
+  [
+   "WI-CC-ELA|RF.2.3.c",
+   "prereq",
+   "Decoding multisyllable words supports spelling them syllable by syllable"
+  ]
+ ],
+ "WI-CC-ELA|L.4.1.a": [
+  [
+   "WI-CC-ELA|L.3.1.a",
+   "same",
+   "Comparing language in familiar contexts extends to unfamiliar ones"
+  ]
+ ],
+ "WI-CC-ELA|L.4.1.b": [
+  [
+   "WI-CC-ELA|L.3.1.b",
+   "concept",
+   "Knowing written and spoken conventions differ helps meet situation demands"
+  ],
+  [
+   "WI-CC-ELA|L.2.1.b",
+   "concept",
+   "Knowing formal and informal English supports matching language to situation"
+  ]
+ ],
+ "WI-CC-ELA|L.4.1.c": [
+  [
+   "WI-CC-ELA|L.3.1.c",
+   "same",
+   "Choosing words for effect grows into precise and concise word choice"
+  ],
+  [
+   "WI-CC-ELA|L.3.3.b",
+   "concept",
+   "Shades of meaning in certainty words supports precise word choice"
+  ]
+ ],
+ "WI-CC-ELA|L.4.1.d": [
+  [
+   "WI-CC-ELA|L.1.6.b",
+   "prereq",
+   "Knowing end punctuation is needed before choosing punctuation for effect"
+  ],
+  [
+   "WI-CC-ELA|RF.3.4.b",
+   "concept",
+   "Reading with expression shows how punctuation changes meaning"
+  ]
+ ],
+ "WI-CC-ELA|L.4.2.a": [
+  [
+   "WI-CC-ELA|L.3.2.a",
+   "same",
+   "Using sentence context grows into wider context clues"
+  ]
+ ],
+ "WI-CC-ELA|L.4.2.b": [
+  [
+   "WI-CC-ELA|L.3.2.c",
+   "same",
+   "Using resources for word meanings now adds pronunciation and digital sources"
+  ],
+  [
+   "WI-CC-ELA|L.3.6.g",
+   "concept",
+   "Using reference materials to spell words builds reference skills"
+  ]
+ ],
+ "WI-CC-ELA|L.4.3.a": [
+  [
+   "WI-CC-ELA|L.3.3.a",
+   "same",
+   "Telling literal from non literal language leads to similes and metaphors"
+  ],
+  [
+   "WI-CC-ELA|R.3.4",
+   "concept",
+   "Determining meanings of figurative language in text continues here"
+  ]
+ ],
+ "WI-CC-ELA|L.4.3.b": [
+  [
+   "WI-CC-ELA|L.3.3.a",
+   "prereq",
+   "Telling literal from non literal meaning is needed to explain idioms"
+  ],
+  [
+   "WI-CC-ELA|L.3.1.a",
+   "concept",
+   "Comparing how language is used in different contexts supports idiom meanings"
+  ]
+ ],
+ "WI-CC-ELA|L.4.3.c": [
+  [
+   "WI-CC-ELA|L.3.3.b",
+   "concept",
+   "Shades of meaning among similar words builds understanding of synonyms"
+  ],
+  [
+   "WI-CC-ELA|L.K.3.c",
+   "same",
+   "Kindergarten work with verbs and their opposites introduced antonyms"
+  ]
+ ],
+ "WI-CC-ELA|L.4.3.d": [
+  [
+   "WI-CC-ELA|L.3.3.c",
+   "same",
+   "Connecting words to real life use continues in grade 4"
+  ]
+ ],
+ "WI-CC-ELA|L.4.4.a": [
+  [
+   "WI-CC-ELA|L.3.4.a",
+   "same",
+   "Using time and place phrases grows into precise action and topic words"
+  ],
+  [
+   "WI-CC-ELA|L.2.3.c",
+   "concept",
+   "Distinguishing shades of meaning supports words for precise actions"
+  ],
+  [
+   "WI-CC-ELA|R.3.4",
+   "concept",
+   "Determining content specific word meanings supports topic vocabulary"
+  ]
+ ],
+ "WI-CC-ELA|L.4.5.a": [
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "prereq",
+   "Using frequent pronouns comes before relative pronouns"
+  ],
+  [
+   "WI-CC-ELA|L.2.5.a",
+   "prereq",
+   "Using adverbs is needed before relative adverbs"
+  ],
+  [
+   "WI-CC-ELA|L.3.5.d",
+   "prereq",
+   "Building simple and compound sentences comes before relative clauses"
+  ]
+ ],
+ "WI-CC-ELA|L.4.5.b": [
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "prereq",
+   "Using frequent prepositions is needed to form prepositional phrases"
+  ],
+  [
+   "WI-CC-ELA|L.3.4.a",
+   "concept",
+   "Phrases signalling time and place are often prepositional phrases"
+  ]
+ ],
+ "WI-CC-ELA|L.4.5.c": [
+  [
+   "WI-CC-ELA|L.2.5.a",
+   "prereq",
+   "Using adjectives comes before ordering several of them"
+  ],
+  [
+   "WI-CC-ELA|L.2.4",
+   "concept",
+   "Describing with adjectives and adverbs leads to stacking adjectives"
+  ]
+ ],
+ "WI-CC-ELA|L.4.5.d": [
+  [
+   "WI-CC-ELA|L.2.5.a",
+   "same",
+   "Grade 2 adjectives and adverbs continue with conjunctions in grade 4"
+  ],
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "same",
+   "Grade 1 adjectives and conjunctions are now used with more purpose"
+  ]
+ ],
+ "WI-CC-ELA|L.4.5.e": [
+  [
+   "WI-CC-ELA|L.3.5.d",
+   "same",
+   "Simple and compound sentences grow into complex sentences"
+  ],
+  [
+   "WI-CC-ELA|L.1.4",
+   "concept",
+   "Using because to show relationships prepares for complex sentences"
+  ]
+ ],
+ "WI-CC-ELA|L.4.5.f": [
+  [
+   "WI-CC-ELA|L.3.5.e",
+   "same",
+   "Grade 3 easily confused words continue in grade 4"
+  ]
+ ],
+ "WI-CC-ELA|L.4.6.a": [
+  [
+   "WI-CC-ELA|L.3.6.a",
+   "same",
+   "Capitalizing titles continues as general capitalization rules"
+  ],
+  [
+   "WI-CC-ELA|L.2.6.a",
+   "same",
+   "Capitalizing holidays, products and places is part of grade 4 capitalization"
+  ]
+ ],
+ "WI-CC-ELA|L.4.6.b": [
+  [
+   "WI-CC-ELA|L.3.6.b",
+   "same",
+   "Quotation marks for speech now include commas with quotations"
+  ]
+ ],
+ "WI-CC-ELA|L.4.6.c": [
+  [
+   "WI-CC-ELA|L.3.5.d",
+   "prereq",
+   "Building compound sentences is needed before punctuating them"
+  ],
+  [
+   "WI-CC-ELA|L.1.6.c",
+   "concept",
+   "Commas in dates and lists show that commas separate parts"
+  ]
+ ],
+ "WI-CC-ELA|L.4.6.d": [
+  [
+   "WI-CC-ELA|L.3.6.g",
+   "same",
+   "Using syllable patterns and references to spell continues in grade 4"
+  ],
+  [
+   "WI-CC-ELA|L.3.6.d",
+   "prereq",
+   "Spelling patterns and generalizations support spelling grade level words"
+  ],
+  [
+   "WI-CC-ELA|L.3.6.f",
+   "prereq",
+   "Spelling suffixed words correctly supports grade level spelling"
+  ]
+ ],
+ "WI-CC-ELA|L.5.1.a": [
+  [
+   "WI-CC-ELA|L.4.1.a",
+   "concept",
+   "Comparing language in many contexts prepares for seeing English as dialects"
+  ],
+  [
+   "WI-CC-ELA|L.2.1.a",
+   "concept",
+   "Appreciating linguistic diversity underpins valuing all dialects"
+  ]
+ ],
+ "WI-CC-ELA|L.5.1.b": [
+  [
+   "WI-CC-ELA|L.4.1.a",
+   "same",
+   "Comparing language in familiar and unfamiliar contexts continues in grade 5"
+  ]
+ ],
+ "WI-CC-ELA|L.5.1.c": [
+  [
+   "WI-CC-ELA|L.4.1.a",
+   "concept",
+   "Comparing language in unfamiliar contexts supports noticing dialects in stories"
+  ],
+  [
+   "WI-CC-ELA|L.4.1.b",
+   "concept",
+   "Knowing formal and personal language demands supports noticing registers"
+  ],
+  [
+   "WI-CC-ELA|R.4.5",
+   "prereq",
+   "Knowing elements of stories, dramas and poems supports comparing their language"
+  ]
+ ],
+ "WI-CC-ELA|L.5.1.d": [
+  [
+   "WI-CC-ELA|L.4.5.e",
+   "prereq",
+   "Building compound and complex sentences is needed to combine sentences"
+  ],
+  [
+   "WI-CC-ELA|L.2.5.b",
+   "procedure",
+   "Expanding and rearranging sentences in grade 2 grows into combining and reducing"
+  ],
+  [
+   "WI-CC-ELA|L.4.1.c",
+   "concept",
+   "Choosing precise and concise language supports reducing sentences"
+  ]
+ ],
+ "WI-CC-ELA|L.5.2.a": [
+  [
+   "WI-CC-ELA|L.3.2.b",
+   "same",
+   "Meaning of words with added affixes leads to Greek and Latin affixes"
+  ],
+  [
+   "WI-CC-ELA|L.2.2.b",
+   "concept",
+   "Using root words as meaning clues extends to Greek and Latin roots"
+  ],
+  [
+   "WI-CC-ELA|RF.4.3.a",
+   "prereq",
+   "Using morphology to read multisyllable words supports finding roots"
+  ],
+  [
+   "WI-CC-ELA|RF.3.3.b",
+   "prereq",
+   "Decoding Latin suffixes prepares for using them as meaning clues"
+  ]
+ ],
+ "WI-CC-ELA|L.5.3.a": [
+  [
+   "WI-CC-ELA|L.4.3.a",
+   "same",
+   "Figurative meanings of words in text extend to allusions"
+  ],
+  [
+   "WI-CC-ELA|L.4.3.b",
+   "concept",
+   "Explaining idioms shows phrases can carry meanings from culture"
+  ]
+ ],
+ "WI-CC-ELA|L.5.3.b": [
+  [
+   "WI-CC-ELA|L.4.3.a",
+   "same",
+   "Understanding similes and metaphors grows into interpreting them in context"
+  ],
+  [
+   "WI-CC-ELA|L.4.2.a",
+   "procedure",
+   "Using context clues supports interpreting figurative language"
+  ]
+ ],
+ "WI-CC-ELA|L.5.3.c": [
+  [
+   "WI-CC-ELA|L.4.3.c",
+   "same",
+   "Relating words to synonyms and antonyms now adds homographs"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.f",
+   "concept",
+   "Telling easily confused words apart supports work with homographs"
+  ]
+ ],
+ "WI-CC-ELA|L.5.3.d": [
+  [
+   "WI-CC-ELA|L.4.3.d",
+   "same",
+   "Connecting words to real life use continues in grade 5"
+  ]
+ ],
+ "WI-CC-ELA|L.5.4.a": [
+  [
+   "WI-CC-ELA|L.4.4.a",
+   "same",
+   "Precise word and phrase use extends to logical connecting phrases"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.d",
+   "prereq",
+   "Using conjunctions is needed before logical linking phrases"
+  ],
+  [
+   "WI-CC-ELA|W.4.3.c",
+   "concept",
+   "Choosing words for emphasis, addition and contrast in writing leads here"
+  ]
+ ],
+ "WI-CC-ELA|L.5.5.a": [
+  [
+   "WI-CC-ELA|L.4.5.d",
+   "same",
+   "Grade 4 use of conjunctions continues with more purpose"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.e",
+   "concept",
+   "Building compound and complex sentences relies on conjunctions"
+  ]
+ ],
+ "WI-CC-ELA|L.5.5.b": [
+  [
+   "WI-CC-ELA|L.3.5.b",
+   "same",
+   "Simple verb tenses grow into a wider range of tenses"
+  ],
+  [
+   "WI-CC-ELA|L.3.5.a",
+   "prereq",
+   "Regular and irregular verb forms are needed for correct tenses"
+  ]
+ ],
+ "WI-CC-ELA|L.5.5.c": [
+  [
+   "WI-CC-ELA|L.4.5.d",
+   "prereq",
+   "Using single conjunctions comes before paired correlative conjunctions"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.e",
+   "concept",
+   "Compound sentences show how conjunctions join equal ideas"
+  ]
+ ],
+ "WI-CC-ELA|L.5.5.d": [
+  [
+   "WI-CC-ELA|L.1.5.c",
+   "prereq",
+   "Using frequent pronouns is needed before singular they and their"
+  ],
+  [
+   "WI-CC-ELA|L.3.5.c",
+   "concept",
+   "Subject verb agreement explains why singular they still takes plural verbs"
+  ]
+ ],
+ "WI-CC-ELA|L.5.6.a": [
+  [
+   "WI-CC-ELA|L.4.6.c",
+   "same",
+   "Commas in compound sentences extend to introductory elements"
+  ],
+  [
+   "WI-CC-ELA|L.4.5.b",
+   "prereq",
+   "Introductory prepositional phrases are a common place for commas"
+  ],
+  [
+   "WI-CC-ELA|L.4.6.b",
+   "concept",
+   "Commas with quotations show commas setting off parts of sentences"
+  ]
+ ],
+ "WI-CC-ELA|L.5.6.b": [
+  [
+   "WI-CC-ELA|L.3.6.a",
+   "same",
+   "Capitalizing titles extends to marking titles with italics or quotation marks"
+  ],
+  [
+   "WI-CC-ELA|L.4.6.b",
+   "concept",
+   "Using quotation marks for quotations prepares for quotation marks with titles"
+  ]
+ ],
+ "WI-CC-ELA|L.5.6.c": [
+  [
+   "WI-CC-ELA|L.4.6.d",
+   "same",
+   "Spelling grade level words with references now includes editing"
+  ],
+  [
+   "WI-CC-ELA|W.4.5",
+   "procedure",
+   "Revising and editing writing gives the context for spelling corrections"
+  ]
+ ]
+}
