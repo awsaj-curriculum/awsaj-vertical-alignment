@@ -351,7 +351,7 @@
   function marks(e, g) {
     const out = [];
     if (isPr(e, g)) out.push(`<span class="mk mk-pr" title="${isEE(e.f) ? "An Essential Element linked to a priority or power standard (it takes the mark from that standard)" : g ? `A ${prName(g).toLowerCase()} standard for ${esc(gname(g))} in the school's curriculum documents` : "Priority (6-12) or power (K-5) standard in " + esc(gList(e.pr))}">★ ${g ? prName(g) : e.pr.every((x) => DIV.Elementary.includes(x)) ? "Power" : e.pr.every((x) => !DIV.Elementary.includes(x)) ? "Priority" : "Priority / power"}${isEE(e.f) ? " (linked)" : ""}${g ? "" : " " + esc(gList(e.pr))}</span>`);
-    if (isPn(e, g)) out.push(`<span class="mk mk-pn" title="${g ? `${esc(gname(g))}'s curriculum documents cite this standard (course maps, pacing and overviews read so far; weekly, unit and lesson plans come in Part 2)` : "Cited in the curriculum documents of " + esc(gList(e.pn))}. Read so far: course maps, pacing and overviews (K weekly plans); other weekly, unit and lesson plans come in Part 2.">✓ In curriculum docs${g ? "" : " " + esc(gList(e.pn))}</span>`);
+    if (isPn(e, g)) out.push(`<span class="mk mk-pn" title="${g ? `${esc(gname(g))}'s curriculum documents cite this standard (from course maps, scope and sequence, pacing guides, storyboards, grade overviews and maps, and Kindergarten weekly plans)` : "Cited in the curriculum documents of " + esc(gList(e.pn))}. Documents: course maps, scope and sequence, pacing guides, storyboards, grade overviews and maps, and Kindergarten weekly plans.">✓ In curriculum docs${g ? "" : " " + esc(gList(e.pn))}</span>`);
     if (g && e.pa && e.pa.includes(g)) out.push(`<span class="tag sg">Added from ${esc(gname(g))} plans</span>`);
     return out.join("");
   }
@@ -623,7 +623,6 @@
       <div class="box"><h3>✓ In curriculum docs and ★ Priority / Power</h3>
         <p><b>Grades 6-12:</b> ${sec.length} Ma3loomat course documents (${byDoc(sec)}), citing ${sum(sec, "codes")} standards in all, ${sum(sec, "priority")} of them as priority.</p>
         <p><b>K-5:</b> ${el.filter((x) => x.kind === "weekly plan").length} Kindergarten weekly plans, ${el.filter((x) => x.kind === "grade document").length} grade documents (overviews, maps, units, standards by week) and the K-5 ELA Power Standards PDF. ★ Power also comes from the Curriculum Hub grade standards lists (below).</p>
-        <p class="notice sm-note"><b>Not read yet:</b> ${esc(d.not_read)} A standard without "In curriculum docs" may still be in those plans.</p>
         <details class="sub"><summary>Every document (${d.documents.length})</summary>${tb(["Grade", "Subject", "Course", "Document", "Standards cited", "Priority / power"], d.documents.map((x) => `<tr><td>${esc(gl(x.grade))}</td><td>${esc(x.subject)}</td><td>${esc(x.course || "")}</td><td>${esc(x.doc)}</td><td>${x.codes}</td><td>${x.priority || ""}</td></tr>`))}</details>
         <details class="sub"><summary>Curriculum Hub grade standards lists (${d.hub.length})</summary>${tb(["Grade", "Subject", "Codes listed", "Found on the site", "Not found"], d.hub.map((x) => `<tr><td>${esc(gl(x.grade))}</td><td>${esc(x.subject)}</td><td>${x.listed}</td><td>${x.found}</td><td>${esc(x.not_found.join(", ") || "")}</td></tr>`))}</details></div>
       <div class="box"><h3>Prerequisite links</h3>${tb(["Source", "Links"], Object.entries(d.prereqs).map(([k, n]) => `<tr><td>${esc(PSRC[k] || k)}</td><td>${n}</td></tr>`))}
@@ -1264,7 +1263,7 @@
       extra.length + extraEE.length ? [both(extra.length, extraEE.length, "standard is", "standards are", "suggested for another grade but taught here (possible moves)"), extra.concat(extraEE), null, "extra"] : null,
       prUn.length + prUnEE.length ? [both(prUn.length, prUnEE.length, `${P} standard is`, `${P} standards are`, "not rated yet"), prUn.concat(prUnEE), null, "prun"] : null,
       prElse.length ? [`${pl(prElse.length, `${P} standard named for this grade is`, `${P} standards named for this grade are`)} placed in another grade (${esc(gname(g))} rates only band standards it claims on the Rate page)`, prElse, null, "prelse"] : null,
-      notPlan.length ? [`${pl(notPlan.length, "standard is", "standards are")} taught in depth but not cited in the documents read so far (the plans may not list ${notPlan.length === 1 ? "it" : "them"} yet; Part 2 will check)`, notPlan, null, "notplan"] : null,
+      notPlan.length ? [`${pl(notPlan.length, "standard is", "standards are")} taught in depth but not cited in the curriculum documents (they may not list every standard taught)`, notPlan, null, "notplan"] : null,
     ].filter(Boolean);
   }
   // The standards a grade rates in one subject, in the sets its team chose (or the one set picked in the filter).
@@ -1664,13 +1663,13 @@
   function evidenceFor(e) {
     if (!S.evidence) return `<p class="muted">Part 2 has not run yet. When it does, this shows which 2025-26 and 2026-27 plans include this standard, in which weeks, and whether the code was cited or inferred.</p>`;
     const rows = GRADES.map((g) => ({ g, x: ev(e.f, e.c, g) })).filter((r) => r.x);
-    if (!rows.length) return `<p class="muted">Not found in any plan read so far.</p>`;
+    if (!rows.length) return `<p class="muted">Not found in the plans.</p>`;
     return `<ul class="comments">${rows.map(({ g, x }) => `<li><b>${esc(gname(g))}</b>: ${x.weeks} week${x.weeks === 1 ? "" : "s"} (${LEVEL[x.level].toLowerCase()}, ${x.match})
       <div class="meta">${x.refs.map(([si, wk]) => { const s = S.evidence.sources[si]; return `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a> ${esc(s.year)}: ${esc(wk.join(", "))}`; }).join("<br>")}</div></li>`).join("")}</ul>`;
   }
   // What the curriculum documents say for one grade, next to the Part 1 ratings. Findings only count what can be known:
   // rated rows apart from unrated ones, priority standards the grade rates apart from those placed in other grades, and
-  // nothing about "not in the plans" when the documents read so far cite nothing for this grade and subject.
+  // nothing about "not in the plans" when the curriculum documents cite nothing for this grade and subject.
   function docsPanel(list, g) {
     const mine = list.filter((e) => forGrade(e, g) || isPn(e, g) || isPr(e, g)), lv = (e) => rating(e.f, e.c, g)?.level;
     const hasPlans = items().some((e) => isPn(e, g));
@@ -1694,17 +1693,17 @@
     const share = (a, b) => (b ? `${a}<small>/${b}</small>` : "n/a");
     return `<div class="panel insights"><h2>What the curriculum documents say ${hb("p_docs")}</h2>
       <p class="lede">${esc(gname(g))} · ${esc(S.f.subject)}: the school's documents cite <b>${pnAll.length}</b> standards for this grade (<span class="mk mk-pn">✓ In curriculum docs</span>)${pnOther.length ? `, ${pnOther.length} of them placed in other grades,` : ""} and name <b>${prMain.length}</b> as <span class="mk mk-pr">★ ${prName(g)}</span> standards${prOther.length ? ` (${prOther.length} of them ${prOther.length > 1 ? "are" : "is"} placed in other grades, so ${esc(gname(g))} does not rate ${prOther.length > 1 ? "them" : "it"})` : ""}.${prEE.length || pnEE ? ` Essential Elements take these marks from the standard they link to, so they are counted apart${prEE.length ? ` (${prEE.length} marked ${prName(g).toLowerCase()})` : ""}${pnEE ? ` or not counted (${pnEE} marked in plans)` : ""}.` : ""} Counts below use rated standards only; unrated ones are listed apart. <span class="muted">Updates as teams rate.</span></p>
-      ${hasPlans ? "" : `<div class="notice"><b>No plan data yet for ${esc(gname(g))} ${esc(S.f.subject)}.</b> The documents read so far cite no ${esc(S.f.subject)} standards for this grade, so the site cannot say what is or is not in the plans. ${hb("p_docs")}</div>`}
+      ${hasPlans ? "" : `<div class="notice"><b>No plan data yet for ${esc(gname(g))} ${esc(S.f.subject)}.</b> The curriculum documents cite no ${esc(S.f.subject)} standards for this grade, so the site cannot say what is or is not in the plans. ${hb("p_docs")}</div>`}
       <div class="ins-grid">
         <div class="ins ${prLow.length ? "ins-issue" : ""}"><b>${share(prDeep.length, prDeep.length + prLow.length)}</b><span>rated ${prName(g).toLowerCase()} standards taught in depth</span><small>${prLow.length} rated below in depth; ${prUn.length} not rated yet${prEE.length ? `. Linked Essential Elements: ${eeDeep.length} of ${eeRated.length} rated in depth` : ""}</small></div>
         <div class="ins"><b>${hasPlans ? share(pnTaught.length, pnRated.length) : "n/a"}</b><span>rated planned standards taught</span><small>${hasPlans ? `${pnRated.length} of ${pn.length} planned standards ${esc(gname(g))} rates are rated; ${pn.length - pnRated.length} unknown${pnOther.length ? `; ${pnOther.length} more are placed in other grades` : ""}` : "no plan data yet"}</small></div>
         <div class="ins ${planNot.length ? "ins-issue" : ""}"><b>${hasPlans ? planNot.length : "n/a"}</b><span>in the curriculum documents but marked not taught</span><small>${hasPlans ? "check the plan or the rating" : "needs plan data"}</small></div>
-        <div class="ins"><b>${hasPlans ? notInPlans.length : "n/a"}</b><span>taught but not cited in the curriculum documents</span><small>${hasPlans ? "the plans may not list it yet; Part 2 will check" : "needs plan data"}</small></div>
+        <div class="ins"><b>${hasPlans ? notInPlans.length : "n/a"}</b><span>taught but not cited in the curriculum documents</span><small>${hasPlans ? "the curriculum documents may not list every standard taught" : "needs plan data"}</small></div>
       </div>
       ${sec("prlow", `${prName(g)} standards rated below in depth`, `Named ${prName(g).toLowerCase()} standards for ${esc(gname(g))} that the team rates introduced or not taught${eeLow.length ? `, then the ${eeLow.length} linked Essential Elements rated below in depth` : ""}.`, prLow.concat(eeLow), prMine.length ? "None. Every rated one is taught in depth." : "The documents name none that this grade rates.", true)}
       ${sec("plannot", "In the curriculum documents, but marked not taught", "The documents cite these, but the team says they are not taught. Worth a quick check.", planNot, hasPlans ? "None." : "No plan data yet.", planNot.length > 0)}
       ${sec("prun", `${prName(g)} standards not rated yet`, `Unknown, not a gap: ${esc(gname(g))} has not rated these yet.`, prUn, "None.", false, false)}
-      ${hasPlans ? sec("notplan", "Taught, but not cited in the curriculum documents", "The team teaches these, but the curriculum documents read so far do not cite them. The documents may simply not list them yet; Part 2 will read the week-by-week plans. Essential Elements are left out because plans cite the main standard's code.", notInPlans, "None.") : ""}
+      ${hasPlans ? sec("notplan", "Taught, but not cited in the curriculum documents", "The team teaches these, but the curriculum documents listed under Data sources do not cite them. Essential Elements are left out because plans cite the main standard's code.", notInPlans, "None.") : ""}
       ${prOther.length ? sec("prother", `${prName(g)} for ${esc(gname(g))}, but placed in another grade`, `${esc(gname(g))}'s documents name these, but they are suggested for other grades, so ${esc(gname(g))} does not rate them. They may be standards the grade's plans revisit for review; the committee can decide whether the placement or the priority list should change.`, prOther, "None.", false, false) : ""}
       ${sec("prall", `All ${prName(g).toLowerCase()} standards ${esc(gname(g))} rates`, "Every standard the documents name as a priority or power standard for this grade, with the team's rating, then the linked Essential Elements.", prMine.concat(prEE), "The documents name none for this grade and subject.", false, false)}</div>`;
   }

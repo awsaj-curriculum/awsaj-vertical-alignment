@@ -33,7 +33,7 @@ Read `docs/HANDOFF.md` first (current status and next steps), then `docs/spec.md
   secondary audit to `outputs/`. Rebuild order: ela_crosswalk, plan_marks, build_site_data, build_progressions,
   build_prereqs, build_sources. `build_sources.py` writes `site/data/sources.json` for the site's "Data sources" panel
   (Tim wants data sources transparent): standard sets and their documents, every curriculum document read (course
-  names only, never file titles), Hub power lists with codes not found, prerequisite links by source, what is not read. `data/standards/math_ccss_crosswalk.json` lists the Wisconsin 2021 Math rows whose Common Core code
+  names only, never file titles), Hub power lists with codes not found, prerequisite links by source. Tim: state only what has been read, never list what has not. `data/standards/math_ccss_crosswalk.json` lists the Wisconsin 2021 Math rows whose Common Core code
   differs (renumbered K.CC, 3.OA, HS G-C/GMD/MG; split parts); it feeds the `cw` field, plan-code reading and the
   prerequisite map. `M.`-prefixed codes in documents are read as Wisconsin codes. Multiply and divide within 100 (checked
   against official Common Core and Wisconsin 2021): Common Core 3.OA.C.7 (Grade 3) = Wisconsin M.3.OA.C.6 ("multiplicative

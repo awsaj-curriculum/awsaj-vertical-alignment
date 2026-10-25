@@ -52,6 +52,6 @@ pre = J("site/data/prereqs.json")
 links = collections.Counter(x[2] for v in pre.values() for x in v)
 
 out = {"built": datetime.date.today().isoformat(), "standards": standards, "documents": docs, "hub": hubs,
-       "prereqs": dict(links), "not_read": "Weekly, unit and lesson plans for Grades 1-12 (Part 2 will read them)."}
+       "prereqs": dict(links)}
 json.dump(out, open(os.path.join(ROOT, "site/data/sources.json"), "w"), ensure_ascii=False, separators=(",", ":"))
 print(len(standards), "standard sources;", len(docs), "documents;", len(hubs), "Hub lists;", dict(links))
