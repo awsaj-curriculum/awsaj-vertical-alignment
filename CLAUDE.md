@@ -54,8 +54,8 @@ and the four symbol ribbons: orange #ED8B00, blue #0092BC, magenta #D00070, lime
 the school uses DIN Next and QF, which are licensed). Ratings: 0 Not taught (magenta #D00070), 1 Introduced / exposed
 (blue #0092BC), 2 Taught in depth (lime #78BE21), unrated white. Orange is only for highlights (selection, focus,
 celebrations): never make orange and lime two rating levels, colour-blind readers cannot tell them apart. Dark green
-outline = suggested grade; dot = taught in a grade other than the suggested one; dashed ring = in that grade's plans;
-orange corner = priority / power in that grade. Part 2 uses the same scale: 1-2 weeks in
+outline = suggested grade; dot = taught in a grade other than the suggested one; bar under a square = in that grade's plans;
+orange corner (or ★ on tiles) = priority / power in that grade. Not rated is white everywhere. Part 2 uses the same scale: 1-2 weeks in
 plans = Introduced, 3+ weeks = Taught in depth.
 
 Teachers use the "flow" view: all standards for a subject on one page by default (Small / Medium / Large, with Find,
@@ -89,20 +89,36 @@ Priority standard, 6-12, from Ma3loomat curriculum maps and scope & sequence; or
 Power Standards PDF and the Curriculum Hub grade Standards lists) and `pa` (grades added to the placement because their
 plans cite it: high school Math and middle school Science rate cited standards plus their current placement, as Tim
 decided). Marks: "★ Priority" / "★ Power" pill (orange, a highlight) and "✓ In plans" pill (dark green outline); on the
-K-12 grid an orange top-left corner and a dashed ring. Committee filters: Standards (all / priority / in plans / not in
+K-12 grid an orange top-left corner and a bar under the square. Committee filters: Standards (all / priority / in plans / not in
 plans) and Order (curriculum order / priority first / in plans first, within each strand). Teachers get Priority and In
 plans tabs in their library. Gaps, Dashboard and the Audit page have priority / in-plans sections.
 
 ## Analysis pages and progressions
 Every analysis page starts with findings computed live from the ratings (they fill in as teams rate), labels automatic
-checks, and never counts "not rated" as a gap. Coverage map: findings + tile dialog with the standards behind each tile.
-Gaps: confirmed gaps / priority below in depth / progression breaks / possible duplication (own grade + another) /
-only introduced / reinforcement (band standard in depth in 2+ of its grades) / unknown, each line with a K-12 strip.
-Grade dashboard: whole grade (every subject) + "What to review". Progressions: `scripts/build_progressions.py` writes
-`site/data/progressions.json` (lanes: ELA anchors, NGSS DCI components via WI-SCI codes, WI-SS standards with AERO K-5 via
-suggested matches = official; Math = Common Core topics by cluster = inferred; standard-to-standard links inferred by
-word overlap). Checks: break (middle step not taught), prerequisite gap (in depth after a not-taught step), repeated in
-depth. The popup shows the steps before and after. Run it after build_site_data.py.
+checks, and never counts "not rated" as a gap. Rules every page follows (from the independent reviews, `docs/reviews/`):
+- A gap is **confirmed** only when every owner grade has rated it (`owners()`: suggested grades plus any priority/power
+  grade that can rate it) and all say not taught; otherwise it is a **possible gap, waiting for** those grades.
+- Counts use rated standards and show the unknown share; priority standards placed in another grade are listed apart
+  (that grade does not rate them); "taught but not in the plans" is only shown when the grade's documents cite something
+  ("No plan data yet" otherwise), excludes Essential Elements, and is hedged until Part 2.
+- Essential Elements are counted apart from the main set (dashboard, overview cards) and get their own map rows.
+  EE rows whose text is "Not applicable" are dropped at load. Shared Common Core codes get "(part n of m)"; Wisconsin
+  2020 ELA rows with no Common Core code show "WI W.7.1".
+- `checksFor(e)` lists every check for one standard (popup "Why this standard is flagged", CSV Findings column).
+Coverage map: rows by strand (same-named Science strands share a row; each K-5 AERO Social Studies strand sits above
+the Wisconsin domain its matches fall in, `S.ssDomain`; EE rows last), thinnest = 3+ rated, weighted. Gaps: confirmed /
+possible / priority / progression problems / duplication (again later) / taught early / plans / only introduced /
+reinforcement / unknown; a grade filter narrows to what that grade works with. Audit: findings first, then the chosen
+grade's standards across K-12, Part 2 collapsed until it runs. Dashboard: whole grade + cross-subject review list,
+then the subject. Progressions: `scripts/build_progressions.py` writes `site/data/progressions.json` (lanes: ELA
+anchors, NGSS DCI components via WI-SCI codes, WI-SS standards with AERO K-5 via suggested matches = official; Math =
+Common Core topics by cluster = inferred, with `next` topics; links = up to 3 closest standards in the step before,
+`[a, b, similarity, same wording]`). The client hides links below `MIN_SIM` (0.12). Checks only use fully rated
+steps: break (whole middle step not taught and taught nowhere), moved (not taught there but taught in another grade),
+prereq (in depth while a linked standard is not taught anywhere; shown on both grades' dashboards), repeat, same
+wording. "Builds steadily" = 2+ grades, every standard rated and taught. Run it after build_site_data.py.
+The committee's page and filters are kept in the address (`#view=gaps&subject=Math&grade=3`), so Back works and links
+can be shared; the popup has its own Back for standards opened from a list.
 
 ## Testing
 Use Playwright (Chromium) against the local server, and check every view (Rate, Heatmap, Gaps, Dashboard,

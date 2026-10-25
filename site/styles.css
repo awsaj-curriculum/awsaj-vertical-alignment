@@ -176,11 +176,11 @@ table.hm tbody tr:hover td.rowh .code { color: var(--brand); }
 .cell.l1 { background: var(--lv-1); border-color: var(--lv-1); }
 .cell.l2 { background: var(--lv-2); border-color: var(--lv-2); }
 .cell.placed { box-shadow: 0 0 0 2px var(--placed); border-color: var(--placed); }
-.cell.placed:not(.l0):not(.l1):not(.l2) { background: var(--brand-tint); }
+.cell.placed:not(.l0):not(.l1):not(.l2) { background: var(--lv-none); }
 .cell.off::after { content: ""; position: absolute; right: 2px; top: 2px; width: 5px; height: 5px; border-radius: 50%; background: var(--brand); }
 .cell.l1.off::after, .cell.l0.off::after { background: #fff; } .cell.l2.off::after { background: var(--brand); }
 .cell:hover { outline: 2px solid var(--ink); outline-offset: 1px; transform: scale(1.25); z-index: 1; }
-.cell:hover { background: var(--lv-none); } .cell.placed:hover { background: var(--brand-tint); }
+.cell:hover { background: var(--lv-none); } .cell.placed:hover { background: var(--lv-none); }
 .cell.l0:hover { background: var(--lv-0); } .cell.l1:hover { background: var(--lv-1); } .cell.l2:hover { background: var(--lv-2); }
 td.dim { opacity: .35; }
 
@@ -409,23 +409,26 @@ table.cm th.sel .colh { background: var(--accent); color: #fff; } table.cm th.se
 .cm-row small { display: block; font-weight: 500; color: var(--muted); font-size: 11px; }
 .cm-td { padding: 0; }
 .cm-tile { position: relative; display: block; width: 100%; min-width: 46px; height: 52px; padding: 0; border: 0; border-radius: 8px; overflow: hidden;
-  background: var(--chip); cursor: pointer; transition: transform .12s, box-shadow .12s; }
-.cm-tile:hover { background: var(--chip); transform: translateY(-2px); box-shadow: 0 6px 14px rgba(2,70,56,.15); }
-.cm-tile.full { box-shadow: inset 0 0 0 2px var(--brand); }
+  background: var(--lv-none); box-shadow: inset 0 0 0 1px var(--line-2); cursor: pointer; transition: transform .12s, box-shadow .12s; }
+.cm-tile:hover { background: var(--lv-none); transform: translateY(-2px); box-shadow: inset 0 0 0 1px var(--line-2), 0 6px 14px rgba(2,70,56,.15); }
+.cm-tile.full, .cm-tile.full:hover { box-shadow: inset 0 0 0 2px var(--brand); }
+.cm-pr { position: absolute; left: 5px; bottom: 3px; font: 700 11px var(--font); color: var(--accent); text-shadow: 0 0 2px #fff, 0 0 2px #fff; }
 .cm-fill { position: absolute; inset: 0; display: flex; flex-direction: column-reverse; }
 .cm-fill i { display: block; width: 100%; }
 .cm-n { position: absolute; left: 6px; top: 5px; font: 700 12px var(--font); color: var(--ink); background: rgba(255,255,255,.88); border-radius: 5px; padding: 0 5px; }
-.cm-plus { position: absolute; right: 5px; top: 5px; font: 700 10px var(--font); color: #fff; background: var(--accent); border-radius: 5px; padding: 0 4px; }
+.cm-plus { position: absolute; right: 5px; top: 5px; font: 700 10px var(--font); color: var(--ink); background: var(--accent-tint); border: 1px solid var(--accent); border-radius: 5px; padding: 0 4px; }
 .cm-none { display: block; height: 52px; border-radius: 8px; background: repeating-linear-gradient(135deg, transparent 0 6px, var(--chip) 6px 7px); }
 .cm-extra { display: grid; place-items: center; font: 700 11px var(--font); color: var(--accent); }
 table.cm td.xcol .cm-none { background-color: var(--accent-tint); }
+table.cm th.cm-row { position: sticky; left: 0; background: var(--surface); z-index: 1; }
 /* blue ring = plans include the standard (audit grid) */
 /* In plans: a dashed ring outside the cell (a pattern, so it never looks like the solid suggested-grade outline).
    Priority / power: an orange corner. Neither uses a rating colour. */
-.cell.inplan { outline: 2px dashed var(--ink); outline-offset: 3px; }
+.cell.inplan::after { content: ""; position: absolute; left: 3px; right: 3px; bottom: -5px; height: 3px; border-radius: 2px; background: var(--ink); }
+.cell.off.inplan::after { content: ""; }
 .cell.prio::before { content: ""; position: absolute; top: -1px; left: -1px; border-style: solid; border-width: 9px 9px 0 0; border-color: var(--accent) transparent transparent transparent; border-top-left-radius: 4px; }
 .plan-ring-key, .prio-key { display: inline-block; width: 18px; height: 12px; border-radius: 3px; vertical-align: -1px; background: #fff; border: 1px solid var(--line); position: relative; }
-.plan-ring-key { outline: 2px dashed var(--ink); outline-offset: 2px; margin: 0 5px; }
+.plan-key { display: inline-block; width: 18px; height: 12px; border-radius: 3px; vertical-align: -1px; background: #fff; border: 1px solid var(--line); border-bottom: 3px solid var(--ink); margin: 0 3px; }
 .prio-key::after { content: ""; position: absolute; top: -1px; left: -1px; border-style: solid; border-width: 8px 8px 0 0; border-color: var(--accent) transparent transparent transparent; }
 
 /* ---------------- standard sets: badges and set styles (shape and line, never the rating colours) ---------------- */
@@ -631,7 +634,8 @@ ul.issues { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 6px
 ul.issues li { font-size: 14px; }
 .mk-flag { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 99px; padding: 1px 8px; border: 1px solid; white-space: nowrap; }
 .mk-flag.f-prereq, .mk-flag.f-break { color: var(--lv-0); border-color: var(--lv-0); background: var(--lv-0-tint); }
-.mk-flag.f-repeat { color: var(--ink-2); border-color: var(--line-2); background: var(--chip); }
+.mk-flag.f-repeat, .mk-flag.f-same, .mk-flag.f-moved { color: var(--ink-2); border-color: var(--line-2); background: var(--chip); }
+.mk-flag { color: var(--ink-2); border-color: var(--line-2); }
 
 /* ---------------- progressions ---------------- */
 .pl-tools { display: flex; flex-wrap: wrap; align-items: end; gap: 10px 16px; margin-bottom: 8px; }
@@ -642,7 +646,7 @@ ul.issues li { font-size: 14px; }
 .pl-head, .pl-row { display: grid; grid-template-columns: minmax(220px, 330px) 1fr; gap: 12px; align-items: center; }
 .pl-head { position: sticky; top: 0; background: var(--surface); z-index: 2; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; color: var(--ink-2); }
 .pl-head .pl-track span { text-align: center; }
-.pl-row { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.pl-row { padding: 8px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 70px; }
 .pl-row.open { background: var(--brand-tint); border-radius: 8px; }
 .pl-name { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding-left: 6px; }
 .pl-open { background: none; border: 0; padding: 0; text-align: left; font-weight: 700; color: var(--ink); font-size: 14px; }
@@ -666,7 +670,16 @@ ul.issues li { font-size: 14px; }
 .pc-star { font-style: normal; color: var(--accent); margin-left: 2px; font-size: 10px; }
 .pc-bar { display: flex; gap: 1px; height: 5px; border-radius: 3px; overflow: hidden; background: var(--line); }
 .pc-bar i { display: block; height: 100%; }
-.pc-bar .b2 { background: var(--lv-2); } .pc-bar .b1 { background: var(--lv-1); } .pc-bar .b0 { background: var(--lv-0); } .pc-bar .b3 { background: #E4E9EA; }
+.pc-bar .b2 { background: var(--lv-2); } .pc-bar .b1 { background: var(--lv-1); } .pc-bar .b0 { background: var(--lv-0); } .pc-bar .b3 { background: #fff; box-shadow: inset 0 0 0 1px var(--line-2); }
+.pl-cell.pc-not { background: var(--lv-0-tint); border-color: var(--lv-0); } .pl-cell.pc-mix { border-color: var(--lv-0); }
+.pl-cell.pc-ok { background: var(--lv-2-tint); border-color: var(--lv-2); } .pl-cell.pc-un { border-style: dashed; }
+.pl-cell.sel { box-shadow: 0 0 0 2px var(--accent); } .pl-head span.sel { background: var(--accent); color: #fff; border-radius: 6px; }
+.seg-skip { stroke: var(--line-2); stroke-dasharray: 1 5; stroke-linecap: round; }
+.st-thin { color: var(--lv-0); border-color: var(--lv-0); border-style: dashed; }
+.pd-own { display: block; margin-top: 3px; color: var(--ink-2); }
+.pd-pills, .pd-step .mks { display: flex; flex-wrap: wrap; gap: 4px; align-content: flex-start; }
+.pd-next { margin: 10px 0 0; font-weight: 600; }
+.pb-t { flex-basis: 100%; color: var(--muted); font-size: 12px; }
 .key-cell { display: inline-flex !important; width: 34px; margin: 0 4px 0 0 !important; vertical-align: middle; }
 .pd { width: 9px; height: 9px; border-radius: 50%; display: inline-block; background: #fff; border: 1.5px solid var(--line-2); }
 .pd.l0 { background: var(--lv-0); border-color: var(--lv-0); } .pd.l1 { background: var(--lv-1); border-color: var(--lv-1); } .pd.l2 { background: var(--lv-2); border-color: var(--lv-2); }
@@ -696,6 +709,23 @@ a.ins { text-decoration: none; color: inherit; } a.ins:hover { border-color: var
 .mstrip i { width: 7px; height: 12px; border-radius: 2px; background: #fff; border: 1px solid var(--line-2); }
 .mstrip i.l0 { background: var(--lv-0); border-color: var(--lv-0); } .mstrip i.l1 { background: var(--lv-1); border-color: var(--lv-1); } .mstrip i.l2 { background: var(--lv-2); border-color: var(--lv-2); }
 .mstrip i.pl { outline: 1.5px solid var(--placed); outline-offset: 0; }
+.mstrip b { font-size: 9px; font-weight: 700; color: var(--muted); align-self: center; padding: 0 2px; }
+.mstrip i.sel { box-shadow: 0 3px 0 -1px var(--accent); }
+.tag.wait { background: #fff; border: 1px dashed var(--line-2); color: var(--ink-2); }
+button.ins { font: inherit; text-align: left; color: inherit; cursor: pointer; align-items: stretch; }
+button.ins:hover { border-color: var(--brand); background: #fff; color: inherit; }
+.ins-warn { border-top-color: var(--ink-2); }
+.cm-key-full { display: inline-block; width: 18px; height: 18px; border-radius: 4px; box-shadow: inset 0 0 0 2px var(--brand); background: #fff; }
+.cm-pr-k { color: var(--accent); font-weight: 700; }
+.dlg-back, .back-bar { margin: 0 0 8px; } .back-bar { margin: 0 0 10px; }
+.grade-nav { display: flex; justify-content: space-between; margin: 0 0 8px; }
+.go-card.on { border-color: var(--brand); box-shadow: inset 0 0 0 1px var(--brand); }
+ul.go-rev { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 4px; font-size: 14px; }
+details.p2 > summary { cursor: pointer; list-style: revert; } details.p2 > summary h2 { display: inline; }
+.tbl-scroll { overflow-x: auto; }
+table.hm td.sel { background: var(--accent-tint); }
+.box.checks { margin-top: 14px; }
+.strand-bars .sb i.sb-un { box-shadow: inset 0 0 0 1px var(--line-2); }
 .gap-list.one { columns: 1; }
 details.gap summary .tag.auto { margin-left: 8px; font-size: 10px; }
 .gap-list li.fi { display: grid; grid-template-columns: auto 200px 1fr; gap: 4px 12px; align-items: start; padding: 6px 0; break-inside: avoid; }
@@ -707,9 +737,18 @@ details.gap summary .tag.auto { margin-left: 8px; font-size: 10px; }
 @media (max-width: 760px) { .gap-list li.fi { grid-template-columns: 1fr; } }
 .cm-key { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; font-size: 12px; color: var(--ink-2); margin-top: 12px; }
 .cm-key > span { display: inline-flex; align-items: center; gap: 6px; }
-.cm-key-tile { display: inline-flex; flex-direction: column-reverse; width: 18px; height: 22px; border-radius: 4px; overflow: hidden; background: var(--chip); border: 1px solid var(--line-2); }
+.cm-key-tile { display: inline-flex; flex-direction: column-reverse; width: 18px; height: 22px; border-radius: 4px; overflow: hidden; background: #fff; border: 1px solid var(--line-2); }
 .cm-key-tile i { display: block; width: 100%; }
 .cm-key-n { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 4px; background: var(--chip); font-size: 11px; }
 .cm-plus-k { font-size: 11px; font-weight: 700; color: var(--brand); border: 1px dashed var(--brand); border-radius: 4px; padding: 0 4px; }
 .cm-none-k { display: inline-block; width: 18px; height: 18px; border-radius: 4px; background: repeating-linear-gradient(135deg, transparent 0 4px, var(--chip) 4px 5px); border: 1px solid var(--line); }
 .sm-link { font-size: 12px; }
+
+/* Filters that do nothing on a page are hidden there; the image export is the Audit grid only. */
+.filters[data-view="heatmap"] .order-only, .filters[data-view="ladder"] .order-only { display: none; }
+.filters:not([data-view="plans"]) #x-png { display: none; }
+@media (max-width: 760px) { .ins-grid { grid-template-columns: 1fr 1fr; } .ins b { font-size: 22px; } table.svs { min-width: 560px; } }
+@media (max-width: 760px) {
+  .ring-box { flex: 1 1 100%; flex-wrap: wrap; } .rate-head > div:first-child { flex-basis: 100%; }
+  #view-activity .panel { overflow-x: auto; } table.log { min-width: 480px; }
+}

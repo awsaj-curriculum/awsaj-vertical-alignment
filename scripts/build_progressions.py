@@ -10,8 +10,11 @@ How lanes are formed (the "basis", shown on the site so users know how sure each
           standards join through their suggested Wisconsin matches. Official structure, with suggested matches.
   topic   Math: Common Core topics followed across domains (place value, fractions, ratios, functions...), grouped
           by cluster for this site after the Common Core progressions documents. Inferred grouping.
-Links inside a lane join a standard to the most similar standard in the step before it (word overlap); they are
-always labelled inferred. Output: site/data/progressions.json
+Links inside a lane join a standard to the most similar standards in the step before it (word overlap, up to three
+when several match about as well); they are labelled inferred, and the site hides links weaker than MIN_SIM in app.js.
+A link whose two standards have the same wording is marked, so the site can say the standard repeats rather than builds.
+Math topics that carry on in another topic (fractions into the number system) name it in "next".
+Output: site/data/progressions.json
 Usage: python3 scripts/build_progressions.py (after build_site_data.py)
 """
 import collections, json, math, os, re
@@ -22,8 +25,11 @@ IDX = {s: json.load(open(os.path.join(ROOT, f"site/data/index_{v}.json"))) for s
        [("Math", "math"), ("ELA", "ela"), ("Science", "science"), ("Social Studies", "social_studies")]}
 ROWS = json.load(open(os.path.join(ROOT, "data/standards/all_standards.json")))
 XW = collections.defaultdict(list)                           # (fw, code) -> crosswalk entries
+TEXT = {}                                                      # "fw|code" -> full text, to spot repeated wording
 for r in ROWS:
     XW[(r["framework"], r["code"])] = r["crosswalk"] or XW[(r["framework"], r["code"])]
+    TEXT.setdefault(r["framework"] + "|" + r["code"], r["text"] or "")
+same = lambda a, b: re.sub(r"[^a-z0-9]+", " ", TEXT.get(a, "").lower()).strip() == re.sub(r"[^a-z0-9]+", " ", TEXT.get(b, "").lower()).strip() != ""
 
 
 def home(e):
@@ -61,11 +67,13 @@ def lane(subject, lid, name, group, basis, members, sim, note=""):
     for e in sorted(members, key=lambda e: (G.index(home(e)[0]), e["c"])):
         by.setdefault(G.index(home(e)[0]), []).append(e)
     steps = [{"g": sorted({g for e in es for g in home(e)}, key=G.index), "k": [e["f"] + "|" + e["c"] for e in es]} for es in by.values()]
-    links = []
+    links = []                                                 # [earlier, later, similarity, 1 if same wording]
     for a, b in zip(steps, steps[1:]):
         for k in b["k"]:
-            best = max(a["k"], key=lambda x: sim(x, k))
-            links.append([best, k, round(sim(best, k), 2)])
+            ranked = sorted(a["k"], key=lambda x: -sim(x, k))
+            top = sim(ranked[0], k)
+            for x in [x for x in ranked if x == ranked[0] or sim(x, k) >= max(0.12, 0.75 * top)][:3]:
+                links.append([x, k, round(sim(x, k), 2), 1 if same(x, k) else 0])
     return {"id": lid, "subject": subject, "name": name, "group": group, "basis": basis, "note": note, "steps": steps, "links": links}
 
 
@@ -115,9 +123,14 @@ for e in math_rows:
     key = re.sub(r"^M\.", "", e["c"])
     best = max(((len(p), tid) for tid, _, ps in TOPICS for p in ps if re.match(re.escape(p) + r"(\.|$)", key)), default=None)
     (members[best[1]].append(e) if best else unassigned.append(e["c"]))
+# Where a topic carries on under another name in later grades (Common Core progressions documents).
+NEXT = {"count": ["place"], "place": ["decimals", "addsub"], "addsub": ["muldiv"], "muldiv": ["fractions", "expr"], "decimals": ["numsys"],
+        "fractions": ["ratio", "numsys"], "ratio": ["func"], "numsys": ["expr"], "expr": ["eq"], "eq": ["func"], "meas": ["area"],
+        "data": ["prob"], "shapes": ["angles"], "coord": ["angles"]}
 for tid, name, _ in TOPICS:
     lanes.append(lane("Math", f"Math-{tid}", name, "Common Core topics", "topic", members[tid], sim,
                       "Grouped by cluster for this site, following the Common Core progressions documents."))
+    lanes[-1]["next"] = [f"Math-{x}" for x in NEXT.get(tid, [])]
 
 # ---------- Science: NGSS disciplinary core idea components ----------
 sci = [e for e in IDX["Science"] if (e["f"] == "AERO-SCI") or (e["f"] == "NGSS" and any(g not in "K12345" or len(g) > 1 for g in home(e)))]
