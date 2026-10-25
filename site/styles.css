@@ -929,3 +929,11 @@ td > .ch-end { margin-left: 2px; }
 .colh-course { display: block; font-size: 9.5px; font-weight: 600; line-height: 1.1; color: var(--ink-2); max-width: 72px; margin: 1px auto 0; white-space: normal; }
 .go-course { display: block; font-size: 12px; font-weight: 600; color: var(--brand); }
 .iss-sub { margin: 10px 0 4px; font-size: 13px; color: var(--ink-2); }
+@media print {
+  /* Progressions: each box names its grade, since the grade header prints only once. */
+  .pl-track .pl-cell::before { content: attr(data-gl); display: block; font-size: 6pt; font-weight: 700; color: #444; text-align: center; transform: scale(1.4); }
+  /* Dashboard findings: leave out the informational lists. */
+  body.print-findings [data-sec="dash-notplan"], body.print-findings [data-sec="dash-extra"], body.print-findings .strand-bars,
+  body.print-findings .dash-strands, body.print-findings .go-strand { display: none !important; }
+}
+@media print { body.print-findings .info-only { display: none !important; } }

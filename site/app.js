@@ -621,7 +621,10 @@
     const byDoc = (a) => Object.entries(a.reduce((m, x) => ((m[x.doc.replace(/ S[12]$/, "")] = (m[x.doc.replace(/ S[12]$/, "")] || 0) + 1), m), {})).map(([k, n]) => `${n} ${esc(k)}`).join(", ");
     $("#d-body").innerHTML = `<p class="lede">Every rating, mark and finding on this site comes from one of the sources below. Lists built ${esc(d.built)}.</p>
       <div class="box"><h3>Ratings (Part 1)</h3><p>Each grade team rates how each standard is generally taught in its grade, on this site. Every change is kept, with the team and the time, on the Activity tab. Findings are computed live from these ratings; "not rated" is never counted as a gap.</p></div>
-      <div class="box"><h3>Standards</h3>${tb(["Set", "Read from", "Rows"], d.standards.map((x) => `<tr><td>${badge(x.framework)} ${esc(FW_NAME[x.framework] || x.framework)}</td><td>${esc(x.source)}</td><td>${x.rows}</td></tr>`))}
+      <div class="box"><h3>Standards</h3>${(() => { const onSite = {}; for (const sl of Object.keys(S.idx)) for (const e of S.idx[sl]) onSite[e.f] = (onSite[e.f] || 0) + 1; const seen = new Set();
+          return tb(["Set", "Read from", "Rows read (one per standard and grade)", "Standards on the site"], d.standards.map((x) => { const first = !seen.has(x.framework); seen.add(x.framework);
+            return `<tr><td>${badge(x.framework)} ${esc(FW_NAME[x.framework] || x.framework)}</td><td>${esc(x.source)}</td><td>${x.rows}</td><td>${first ? (onSite[x.framework] ? onSite[x.framework] : "not shown on the site") : ""}</td></tr>`; })); })()}
+        <p class="muted sm-note">Standards on the site: after the site's choices (Wisconsin Science is not shown; NGSS and Wisconsin Social Studies are not used in K-5; Essential Elements marked "Not applicable" are left out). Links between standards come from the prerequisite map below or, where it has none, from the closest wording in the same progression.</p>
         <p class="muted">Common Core codes for Wisconsin ELA come from DPI's official 2010 / 2020 comparison; for Wisconsin Math, from a checked crosswalk (most codes are the same). Wisconsin matches under NGSS and AERO codes come from the school's sheets.</p></div>
       <div class="box"><h3>✓ In curriculum docs and ★ Priority / Power</h3>
         <p><b>Grades 6-12:</b> ${sec.length} Ma3loomat course documents (${byDoc(sec)}), which together give ✓ to ${d.distinct["6-12"].standards} different standards (${d.distinct["6-12"].pairs} standard and grade pairs) and name ${d.distinct["6-12"].priority_pairs} standard and grade pairs as priority (main standards; Essential Elements take the marks from their linked standard).</p>
@@ -1163,7 +1166,7 @@
     const say = gs.map((g) => { const r = rating(e.f, e.c, g); return `${gl(g)} ${r ? LEVEL_SHORT[r.level].toLowerCase() : "not rated"}${e.pl.includes(g) ? " (suggested)" : ""}`; }).join(", ");
     return `<span class="mstrip" role="img" aria-label="${esc("Ratings by grade: " + say)}"><b>${gl(gs[0])}</b>${gs.map((g) => { const r = rating(e.f, e.c, g); return `<i class="${r ? "l" + r.level : ""} ${e.pl.includes(g) ? "pl" : ""} ${S.f.grade === g ? "sel" : ""}" title="${esc(gname(g))}: ${r ? LEVEL[r.level] : "not rated"}${e.pl.includes(g) ? " (suggested grade)" : ""}"></i>`; }).join("")}<b>${gl(gs[gs.length - 1]).replace("G", "")}</b></span>`;
   }
-  function li(e, extra, gs) { return `<li class="fi">${gs ? `<span class="fi-ev">${strip(e, gs)}</span>` : ""}<span class="fi-code">${badge(e.f)} ${codeHTML(e, searchQ())}</span><span class="fi-body"><span class="fi-tags">${extra || ""} ${marks(e, "")}</span><span class="muted">${hl(e.t.slice(0, 140), searchQ())}${e.t.length > 140 ? "…" : ""}</span></span></li>`; }
+  function li(e, extra, gs) { return `<li class="fi">${gs ? `<span class="fi-ev">${strip(e, gs)}</span>` : ""}<span class="fi-code">${badge(e.f)} ${codeHTML(e, searchQ())}</span><span class="fi-body"><span class="fi-tags">${extra || ""} ${marks(e, "")}</span><span class="muted">${hl(S.printAll ? e.t : e.t.slice(0, 140), searchQ())}${e.t.length > 140 && !S.printAll ? "…" : ""}</span></span></li>`; }
   // Which sections are open on the Gaps page, the Audit and the dashboard, kept across redraws (the page redraws when
   // ratings arrive or a popup closes). Unset means the section's default.
   S.open = {};
@@ -1302,7 +1305,7 @@
     }).join("");
     const review = gradeReview(g, S.f.subject, list);
     const flagLi = ({ x, f }) => `<li><span class="mk-flag f-${f.t}${f.t === "prereq" && !f.official ? " soft" : ""}">${flagName(f)}</span> <button type="button" class="linkish" data-act="goto-lane" data-id="${esc(x.l.id)}">${esc(x.l.name)}</button> <span class="muted">${msgHTML(f)}</span></li>`;
-    const revItem = ([title, arr, br, id], i) => `<details class="rev" data-sec="dash-${id}" ${isOpen("dash-" + id, i === 0 && !["prun", "notplan", "extra"].includes(id)) ? "open" : ""}><summary>${title} <span class="tag auto">Automatic check</span></summary>${arr ? `<ul class="gap-list rev-list">${arr.slice(0, S.printAll ? Infinity : 15).map((e) => { const r = rating(e.f, e.c, g); return `<li><span class="rv-code">${badge(e.f)} ${codeHTML(e)}</span> <span class="muted">${esc(e.t.slice(0, 100))}${e.t.length > 100 ? "…" : ""}</span> <span class="pill"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${r ? LEVEL_SHORT[r.level] : "Not rated"}</span>${!e.pl.includes(g) ? ` <span class="tag sg">suggested ${esc(e.pl.map(gl).join(", "))}</span>` : ""}</li>`; }).join("")}</ul>${arr.length > 15 && !S.printAll ? `<p class="muted">and ${arr.length - 15} more.</p>` : ""}` : ""}
+    const revItem = ([title, arr, br, id], i) => `<details class="rev" data-sec="dash-${id}" ${isOpen("dash-" + id, i === 0 && !["prun", "notplan", "extra"].includes(id)) ? "open" : ""}><summary>${title} <span class="tag auto">Automatic check</span></summary>${arr ? `<ul class="gap-list rev-list">${arr.slice(0, S.printAll ? Infinity : 15).map((e) => { const r = rating(e.f, e.c, g); return `<li><span class="rv-code">${badge(e.f)} ${codeHTML(e)}</span> <span class="muted">${esc(S.printAll ? e.t : e.t.slice(0, 100))}${e.t.length > 100 && !S.printAll ? "…" : ""}</span> <span class="pill"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${r ? LEVEL_SHORT[r.level] : "Not rated"}</span>${!e.pl.includes(g) ? ` <span class="tag sg">suggested ${esc(e.pl.map(gl).join(", "))}</span>` : ""}</li>`; }).join("")}</ul>${arr.length > 15 && !S.printAll ? `<p class="muted">and ${arr.length - 15} more.</p>` : ""}` : ""}
       ${br ? `<ul class="issues">${br.map(flagLi).join("")}</ul>` : ""}</details>`;
     const subs = S.meta.subjects.map((x) => x.name).filter((sb) => teamOf(g, sb));
     const gi = GRADES.indexOf(g), near = [GRADES[gi - 1], GRADES[gi + 1]];
@@ -1319,7 +1322,7 @@
         <div class="tile t-pn"><div class="n">${hasPlans ? `${deep(pn)}<small>/${rt(pn)}</small>` : "n/a"}</div><div class="l">${hasPlans ? `rated <span class="mk mk-pn">✓ In curriculum docs</span> standards taught in depth${pn.length - rt(pn) ? `; ${pn.length - rt(pn)} not rated` : ""}` : "No plan data yet for this grade and subject"} ${hb("t_plans")}</div></div>
         <div class="tile"><div class="n">${extra.length}</div><div class="l">taught here but suggested for another grade ${hb("t_extra")}</div></div>
       </div>
-      <h3>Coverage by strand ${hb("strandbars")}</h3><p class="muted sm-note">The number on the right is how many are taught in depth, out of the strand's standards.</p><div class="strand-bars" id="dash-bars">${bars || "<div class='muted'>No standards.</div>"}</div></div>`;
+      <h3 class="info-only">Coverage by strand ${hb("strandbars")}</h3><p class="muted sm-note info-only">The number on the right is how many are taught in depth, out of the strand's standards.</p><div class="strand-bars" id="dash-bars">${bars || "<div class='muted'>No standards.</div>"}</div></div>`;
   }
 
   /* ---------------- prerequisites (site/data/prereqs.json, scripts/build_prereqs.py) ---------------- */
@@ -1564,7 +1567,7 @@
       <div class="lib-tabs">${chip("", "All")}${chip("issue", "Breaks down")}${chip("check", "Not taught, suggested link")}${chip("repeat", "Repeated in depth")}${chip("reinforce", "Reinforced")}${chip("same", "Same wording")}${chip("thin", "Some not taught")}${chip("partial", "Partly rated")}${chip("unrated", "Not rated")}${chip("ok", "Taught at every step")}${chip("single", "One grade only")} ${hb("pl_status")}</div></div>
       <div class="pl-key"><span><span class="pl-cell has key-cell"><span class="pc-n">3<i class="pc-star">★</i></span><span class="pc-bar"><i class="b2" style="flex:1"></i><i class="b1" style="flex:1"></i><i class="b3" style="flex:1"></i></span></span>Each box: how many standards in that grade, with a bar of their ratings (lime in depth, blue introduced, magenta not taught, grey not rated). ★ includes a priority or power standard. A pink box has a standard rated not taught.</span>
         <span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-ok"/></svg>Rated and taught in both grades</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-pre"/></svg>Prerequisite not taught (official link)</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-maybe"/></svg>Prerequisite not taught (suggested link)</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-break"/></svg>A step rated not taught</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-un"/></svg>Not fully rated yet</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-skip"/></svg>No standard in the grades between</span> ${hb("pl_key")}</div>
-      <div class="pl-head"><div class="pl-name"><b>Progression</b></div><div class="pl-track" style="grid-template-columns:repeat(${gs.length},1fr)">${gs.map((x) => `<span data-gi="${x}" class="${g === x ? "sel" : ""}">${gl(x)}</span>`).join("")}</div></div>
+      <div class="pl-head"><div class="pl-name"><b>Progression</b></div><div class="pl-track" style="grid-template-columns:repeat(${gs.length},1fr)">${gs.map((x) => `<span data-gi="${x}" class="${g === x ? "sel" : ""}">${gl(x)}${courseOf(x, S.f.subject) ? `<span class="colh-course">${esc(courseOf(x, S.f.subject))}</span>` : ""}</span>`).join("")}</div></div>
       ${shown.map((x) => laneRow(x, gs, S.lane === x.l.id, q)).join("") || `<div class="empty">${q ? "No progression matches your search." : "No progressions in this view."}</div>`}</div>`;
     if (S.laneScroll) { const r = document.getElementById("lane-" + S.lane); if (r) r.scrollIntoView({ block: "start", behavior: "smooth" }); S.laneScroll = false; }
   }
@@ -1580,12 +1583,12 @@
     }
     const cells = gs.map((g) => {
       const sel = S.f.grade === g ? " sel" : "", es = x.steps.flatMap((st) => st.k).map((k) => S.byKey.get(k)).filter((e) => e.pl.includes(g));
-      if (!es.length) return `<div class="pl-cell${sel}"></div>`;
+      if (!es.length) return `<div class="pl-cell${sel}" data-gl="${gl(g)}"></div>`;
       // One box per grade: how many standards, a bar of their ratings, and a star if any is a priority or power standard.
       const c = countLevels(es, g), pr = es.filter((e) => isPr(e, g)).length, r = es.length - c[3];
       const tint = !r ? "pc-un" : c[0] === r ? "pc-not" : c[0] ? "pc-mix" : c[3] ? "pc-part" : "pc-ok";
       const tip = `${gname(g)}: ${es.length} standard${es.length === 1 ? "" : "s"}. ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? `, ${c[3]} not rated` : ""}${pr ? `. ${pr} ${prName(g).toLowerCase()}` : ""}. ${es.map(codeText).join(", ")}`;
-      return `<div class="pl-cell has ${tint}${sel}" data-tip-text="${esc(tip)}" tabindex="0" role="button" aria-label="${esc(tip)}. Open this progression." data-act="lane-open" data-id="${esc(l.id)}"><span class="pc-n">${es.length}${pr ? `<i class="pc-star">★</i>` : ""}</span><span class="pc-bar">${[2, 1, 0, 3].map((i) => (c[i] ? `<i class="b${i}" style="flex:${c[i]}"></i>` : "")).join("")}</span></div>`;
+      return `<div class="pl-cell has ${tint}${sel}" data-gl="${gl(g)}" data-tip-text="${esc(tip)}" tabindex="0" role="button" aria-label="${esc(tip)}. Open this progression." data-act="lane-open" data-id="${esc(l.id)}"><span class="pc-n">${es.length}${pr ? `<i class="pc-star">★</i>` : ""}</span><span class="pc-bar">${[2, 1, 0, 3].map((i) => (c[i] ? `<i class="b${i}" style="flex:${c[i]}"></i>` : "")).join("")}</span></div>`;
     }).join("");
     const types = new Set(x.flags.map((f) => f.t)), [label0, cls] = STATUS[x.status] || ["", ""];
     // Status with its count: findings in this row, or missing standards it holds for other rows.
@@ -2157,7 +2160,7 @@
     // A line at the top of the printout: what it shows and when (ratings change as teams rate).
     const pm = $("#print-meta") || document.querySelector("main").insertAdjacentElement("afterbegin", Object.assign(document.createElement("p"), { id: "print-meta" }));
     const on = [S.f.subject, S.f.division !== "all" ? divLabel(S.f.division) : "K-12", S.f.grade ? gname(S.f.grade) : "", S.f.framework ? SET(S.f.framework).abbr : "", S.f.strand, S.f.search ? `Find: ${S.f.search}` : ""].filter(Boolean);
-    pm.textContent = `Awsaj K-12 Vertical Alignment · ${$(".tabs [aria-selected='true'], .tabs .on")?.textContent?.trim() || ""} · ${on.join(" · ")} · Ratings as of ${new Date().toLocaleString()}`; if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw();
+    pm.textContent = `Awsaj K-12 Vertical Alignment · ${$(".tabs [aria-selected='true'], .tabs .on")?.textContent?.trim() || ""} · ${on.join(" · ")} · Ratings as of ${new Date().toLocaleString()}${document.body.classList.contains("print-findings") ? ". Findings only: the informational lists (taught in another grade or early, reinforcement, unknown, full K-12 grids, strand coverage) are left out; the PDF button prints everything." : ""}`; if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw();
     printOpen = [...document.querySelectorAll("details:not([open])")]; printOpen.forEach((d) => (d.open = true)); });
   addEventListener("afterprint", () => { if (!S.printAll) return; S.printAll = false; printOpen.forEach((d) => (d.open = false)); printOpen = []; rerender(); if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw(); });
 
@@ -2218,7 +2221,7 @@
     S.ssDomain = Object.fromEntries(Object.entries(tally).map(([s, t]) => [s, Object.keys(t).sort((a, b) => t[b] - t[a])[0]]));
     S.idx.social_studies = S.idx.social_studies.filter((e) => e.f !== "WI-SS" || (e.pl = e.pl.filter((g) => !DIV.Elementary.includes(g))).length);
     // Essential Elements written as "Not applicable" (no alternate expectation for that standard) have nothing to rate.
-    for (const s of S.meta.subjects) S.idx[s.slug] = S.idx[s.slug].filter((e) => !(e.f.startsWith("WI-EE-") && /^not applicable/i.test(e.t)));
+    for (const s of S.meta.subjects) S.idx[s.slug] = S.idx[s.slug].filter((e) => !(e.f.startsWith("WI-EE-") && /^(\S+\s+)?not applicable\b/i.test(e.t.trim())));
     S.subjOf = new Map();
     for (const s of S.meta.subjects) for (const e of S.idx[s.slug]) { S.byKey.set(e.f + "|" + e.c, e); S.subjOf.set(e.f + "|" + e.c, s.name); }
     for (const s of S.meta.subjects) {
