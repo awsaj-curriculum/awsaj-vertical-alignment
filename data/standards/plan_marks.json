@@ -5693,6 +5693,11 @@
 "3"
 ]
 },
+"WI-CC-MATH|M.3.OA.C.6": {
+"priority": [
+"3"
+]
+},
 "WI-CC-MATH|M.4.G.A.1": {
 "priority": [
 "4"
@@ -9966,6 +9971,11 @@
 "3"
 ]
 },
+"WI-EE-MATH|M.EE.3.OA.6": {
+"priority": [
+"3"
+]
+},
 "WI-EE-MATH|M.EE.4.G.1": {
 "priority": [
 "4"
@@ -13766,7 +13776,7 @@
 "subject": "Mathematics",
 "doc": "Curriculum Hub grade standards",
 "code": "M.3.OA.C.7",
-"matched": 0
+"matched": 1
 },
 {
 "grade": "3",

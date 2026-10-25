@@ -33,8 +33,10 @@ Read `docs/HANDOFF.md` first (current status and next steps), then `docs/spec.md
   secondary audit to `outputs/`. Rebuild order: ela_crosswalk, plan_marks, build_site_data, build_progressions,
   build_prereqs. `data/standards/math_ccss_crosswalk.json` lists the Wisconsin 2021 Math rows whose Common Core code
   differs (renumbered K.CC, 3.OA, HS G-C/GMD/MG; split parts); it feeds the `cw` field, plan-code reading and the
-  prerequisite map. `M.`-prefixed codes in documents are read as Wisconsin codes. Open question for the school: the K-5
-  sheet has "Flexibly and efficiently multiply and divide within 100" as M.4.OA.D.6, the Hub as M.3.OA.C.7.
+  prerequisite map. `M.`-prefixed codes in documents are read as Wisconsin codes. Multiply and divide within 100 (checked
+  against official Common Core and Wisconsin 2021): Common Core 3.OA.C.7 (Grade 3) = Wisconsin M.3.OA.C.6 ("multiplicative
+  thinking"); Wisconsin M.4.OA.D.6 ("Flexibly and efficiently ...", Grade 4) is new in 2021 with no Common Core code; the
+  Hub's Grade 3 power standard "M.3.OA.C.7" (no such Wisconsin code) is read as Common Core 3.OA.C.7, so M.3.OA.C.6.
   Math: `parse_wi_math.py`, `parse_wi_ee_math.py`, `build_math_master.py`,
   `build_math_json.py`, `build_math_xlsx.py`. Other subjects: `scripts/ela|science|social_studies/`.
   `build_site_data.py` regenerates `site/data/` from `data/standards/`. `load_supabase.py` loads standards and
@@ -81,7 +83,9 @@ has a badge with its own line style (CC solid green, EE dashed, NGSS solid grey,
 use the rating colours.
 Prerequisite map: `scripts/build_prereqs.py` writes `site/data/prereqs.json` ({to: [[from, type, source, reason]]}).
 Math = Coherence Map arrows (Student Achievement Partners; `data/source/coherence_map/data.js`, git-ignored, only codes
-used); ELA = same anchor standard one grade earlier (official); ELA, Science and Social Studies also get AI-suggested
+used); ELA = same anchor standard one grade earlier (official when the grade before has one standard for the anchor or
+the part reads the same; otherwise source `anchorp`, "part matched by wording", not official; parts are compared on
+their own words in the full text, `own_text()` in build_progressions.py); ELA, Science and Social Studies also get AI-suggested
 prerequisites in `data/standards/prereqs_ai/*.json` (types same / concept / procedure / prereq, one-line reason), always
 shown as "Suggested, check". The site shows "N prerequisites" chips (hover lists them with ratings), a popup "Needs first
 / Leads to" box, the Audit's Before and after table, and uses it for prerequisite-gap checks (official = Coherence Map or
@@ -114,14 +118,16 @@ checks, and never counts "not rated" as a gap. Rules every page follows (from th
 - Counts use rated standards and show the unknown share; priority standards placed in another grade are listed apart
   (that grade does not rate them); "taught but not in the plans" is only shown when the grade's documents cite something
   ("No plan data yet" otherwise), excludes Essential Elements, and is hedged until Part 2.
-- Essential Elements are counted apart from the main set (dashboard, overview cards) and get their own map rows.
+- Essential Elements are counted apart from the main set (dashboard, overview cards, coverage map findings, Gaps
+  cards and sections) and get their own map rows. Their inherited "in plans" marks are not counted anywhere.
   EE rows whose text is "Not applicable" are dropped at load. Shared Common Core codes get "(part n of m)"; Wisconsin
   2020 ELA rows with no Common Core code show "WI W.7.1".
 - `checksFor(e)` lists every check for one standard (popup "Why this standard is flagged", CSV Findings column).
 Coverage map: "By strand" tiles or "Matched across grades" (chains of matched standards per progression, one square per
-grade; "see the links" opens each step with its link type, source, reason and shared wording), with K-12 / K-5 / 6-8 /
+grade; the strongest link continues a row, other links start branch rows; band views keep the band's standards; "see the links" opens each step with its link type, source, reason and shared wording), with K-12 / K-5 / 6-8 /
 9-12 buttons. Tiles: rows by strand (same-named Science strands share a row; each K-5 AERO Social Studies strand sits above
-the Wisconsin domain its matches fall in, `S.ssDomain`; EE rows last), thinnest = 3+ rated, weighted. Gaps: confirmed /
+the Wisconsin domain its matches fall in, `S.ssDomain`; EE rows last), thinnest = tiles with 3+ rated where at least half are below in depth, ranked by
+that count then share (EE ranked apart). Gaps: confirmed /
 possible / priority / progression problems / duplication (again later) / taught early / plans / only introduced /
 reinforcement / unknown; a grade filter narrows to what that grade works with. Audit: findings first, then the chosen
 grade's standards before and after it (`beforeAfter()`, K-12 grid folded below), Part 2 collapsed until it runs. Dashboard: whole grade + cross-subject review list,
@@ -133,7 +139,7 @@ below `MIN_SIM` (0.12). Checks only use fully rated standards: break (whole midd
 moved (taught in another grade instead), prereq (in depth while every standard it links to is not taught anywhere;
 official on ELA anchor links, otherwise "Possible prerequisite gap" and only with similarity >= `PRE_SIM` 0.25; a
 gap a break explains is dropped; shown on both grades' dashboards), repeat (possible duplication) vs reinforce (in
-depth in 2+ of its own grades), same wording. Only breaks and official prereqs make a row "Breaks down"; "Taught at
+depth in 2+ of its own grades: placed grades plus the rest of its band, `ownGrades()`), same wording. Only breaks and official prereqs make a row "Breaks down"; "Taught at
 every step" = 2+ grades, every standard rated and at least introduced. Run it after build_site_data.py.
 The committee's page and filters are kept in the address (`#view=gaps&subject=Math&grade=3`), so Back works and links
 can be shared; the popup has its own Back for standards opened from a list.

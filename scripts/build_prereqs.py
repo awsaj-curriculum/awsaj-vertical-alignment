@@ -5,29 +5,32 @@ Sources (shown on the site with every link):
           the Common Core progressions documents. Download https://achievethecore.org/coherence-map/data.js to
           data/source/coherence_map/data.js (git-ignored). Only the standard codes of each arrow are used.
   anchor  ELA: the same Wisconsin anchor standard one grade earlier (official), from site/data/progressions.json.
+  anchorp ELA: the same anchor standard, with the part (L.6.1.a ... d) matched by its own wording (not official).
   ai      ELA, Science, Social Studies: prerequisites suggested by an AI curriculum reviewer, each with a type and a
           one-line reason, kept in data/standards/prereqs_ai/*.json. Shown on the site as "suggested, check".
 Types: same (the same skill at a lower level), concept (an idea it relies on), procedure (a process it extends),
 prereq (a different skill needed first), build (Coherence Map arrow: builds on, type not given).
-Output: site/data/prereqs.json  {"to": [["from", type, source, reason], ...]}   (keys are "framework|code")
+Output: site/data/prereqs.json  {"to": [["from", type, source, reason, reason by], ...]}   (keys are "framework|code")
 Usage: python3 scripts/build_prereqs.py (after build_site_data.py and build_progressions.py)
 """
-import glob, json, os, re
+import collections, glob, json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 out = {}
 
 
 def add(to, frm, typ, src, why=""):
+    """One entry per pair: [from, type, source, reason, who wrote the reason]. An official source wins; a reason the AI
+    reviewer wrote keeps saying so."""
     if to == frm:
         return
     lst = out.setdefault(to, [])
     for x in lst:
-        if x[0] == frm:                                   # one entry per pair; an official source wins
-            if src in ("cm", "anchor") and x[2] == "ai":
+        if x[0] == frm:
+            if src in ("cm", "anchor", "anchorp") and x[2] == "ai":
                 x[2] = src
             return
-    lst.append([frm, typ, src, why])
+    lst.append([frm, typ, src, why, "ai" if src == "ai" and why else ""])
 
 
 # ---------- Math: Coherence Map arrows ----------
@@ -92,18 +95,28 @@ for path in sorted(glob.glob(os.path.join(ROOT, "data/standards/prereqs_ai/*.jso
     print(f"{os.path.basename(path)}: {len(data)} standards")
 
 # ---------- ELA: the same anchor standard in the step before (official) ----------
+# When the step before has one standard the link is official. When it has several parts (L.6.1.a ... d), the part is
+# matched by its own wording: an identical part stays official ("anchor"); otherwise the closest part is kept as
+# "anchorp" (same anchor standard, part matched by wording) and a part with no close match (below 0.12) gets no link.
 prog = json.load(open(os.path.join(ROOT, "site/data/progressions.json")))
-n = 0
+n = collections.Counter()
 for l in prog["lanes"]:
     if l["basis"] != "anchor":
         continue
+    size = {k: len(st["k"]) for st in l["steps"] for k in st["k"]}
+    letter = lambda k: (re.search(r"\.([a-z])$", k) or [None, ""])[1]
     best = {}
-    for a, b, sm, *_ in l["links"]:
-        if b not in best or sm > best[b][1]:
-            best[b] = (a, sm)
-    for b, (a, sm) in best.items():
-        add(b, a, "same", "anchor"); n += 1
-print(f"ELA anchor links: {n}")
+    for a, b, sm, same in l["links"]:
+        rank = (same, sm, letter(a) == letter(b))
+        if b not in best or rank > best[b][1]:
+            best[b] = (a, rank)
+    for b, (a, (same, sm, _)) in best.items():
+        src = "anchor" if size[a] == 1 or same else "anchorp" if sm >= 0.12 else None
+        if src:
+            add(b, a, "same", src); n[src] += 1
+        else:
+            n["no close part"] += 1
+print(f"ELA anchor links: {dict(n)}")
 
 json.dump(out, open(os.path.join(ROOT, "site/data/prereqs.json"), "w"), ensure_ascii=False, separators=(",", ":"))
 print(f"{len(out)} standards with prerequisites, {sum(len(v) for v in out.values())} links,",

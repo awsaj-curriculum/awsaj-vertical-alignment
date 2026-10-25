@@ -183,6 +183,63 @@ Other improvements:
 - Planned-standard counts on the Audit exclude standards the grade does not rate.
 - Wording fixes, an easier-to-see priority star with labelled tiles, and the Gaps CSV follows the Grade filter.
 
-## Round 4
+## Round 4 (none passed yet)
+
+New reviewers G and H. Every headline count G recomputed matched; H found one count off by one (Grade 4 Science on
+the dashboard). Scores held at 5 to 7: accuracy was held down by verdicts and labels that could lead to a wrong
+conclusion, not by arithmetic.
+
+| Page | Usability | Visual | Information | Progression | Interpretation | Report |
+|---|---|---|---|---|---|---|
+| Coverage map | 7 | 7 | 6 | 6 | 6 | [G](round-4-G.md) |
+| Gaps & repetition | 7 | 7 | 5 | 7 | 7 | [G](round-4-G.md) |
+| Vertical Alignment Audit | 6 | 6 | 5 | 7 | 6 | [G](round-4-G.md) |
+| Standard popup | 7 | 7 | 5 | 7 | 6 | [G](round-4-G.md) |
+| Progressions | 6 | 6 | 5 | 6 | 5 | [H](round-4-H.md) |
+| Grade dashboard | 6 | 7 | 6 | 7 | 6 | [H](round-4-H.md) |
+| Popup progression box and "see the links" | 7 | 6 | 5 | 7 | 6 | [H](round-4-H.md) |
+
+### What changed after round 4
+
+Critical issues (all addressed):
+
+1. **A "Break" on steps that were not settled** (G C1, H 1). A break now needs every standard in the step to be settled
+   as not taught; otherwise it is not a break.
+2. **ELA sub-parts paired with the wrong sub-part** (G C2). The index keeps only the start of each standard, and every
+   part repeats its parent's stem, so all parts looked identical. Links now compare each part's own words in the full
+   text. When the anchor has one standard in the grade before, or the parts are worded the same, the link stays
+   official. Otherwise it is labelled "Same anchor standard, part matched by wording" and is not official. A part with
+   no close match gets no link.
+3. **Source labels wrong or missing** (H 2). Every link and gap names its source (Coherence Map, official anchor,
+   anchor part by wording, AI suggestion, wording). AI-written reasons say so.
+4. **Impact statements** (H 3). Dashboard causes count this grade's standards only, sorted by grade. A standard's
+   "Why flagged" lists the problems it causes in other rows. Gaps inside one grade are labelled "within a grade" and do
+   not make a row "Breaks down".
+
+Other improvements:
+
+- **Essential Elements are counted apart** on the Coverage map (cards, thinnest teaching, strongest) and the Gaps page
+  (cards show the main count, "plus n Essential Elements"; each section lists them after a divider). Plan marks that
+  Essential Elements only inherit are no longer counted as "in the plans" anywhere.
+- **Every neighbour rating names its grade** (popup, Audit Before and after). "Leads to" uses later-direction labels
+  ("Same skill, later"), and official links are listed first.
+- **Thinnest teaching** is ranked by a rule each line shows: tiles where at least half the rated standards are below in
+  depth, by how many, then by share. Badges show only the sets in that tile, and the list says what to do next.
+- **Matched across grades** no longer repeats the same start: the strongest link continues a row and each other link
+  starts a branch row. In a band view each row keeps only its standards in the band and says where it started.
+- **Audit Before and after**: "Show only the ones that need a look" (rated below in depth, or a settled not-taught
+  neighbour), a bar on those rows, "Before and after" links from the priority lists, and a stacked layout on phones.
+- **Progressions and Gaps** list problems with one root cause together ("One cause, 3 problems"), and the codes in
+  check messages open the standard.
+- **Reinforcement vs duplication** uses the standard's band (a high school standard taught in depth in Grades 10 and 11
+  is reinforcement).
+- **Back** returns to the page before after opening a shared link.
+- **Math 3.OA.C.7** (Tim's question): checked against the official Common Core and Wisconsin 2021 texts. Common Core
+  3.OA.C.7 (Grade 3) is Wisconsin M.3.OA.C.6; Wisconsin M.4.OA.D.6 is new in 2021. The Hub's Grade 3 power standard
+  now marks M.3.OA.C.6.
+- Wording-match noise cut (more stop words), new words underlined in "see the links", help texts updated, the set
+  filter names only the sets in view, the priority corner has an edge for colour-blind readers.
+
+## Round 5
 
 Results are added below when the round finishes.

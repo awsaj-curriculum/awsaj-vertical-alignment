@@ -29,7 +29,6 @@ TEXT = {}                                                      # "fw|code" -> fu
 for r in ROWS:
     XW[(r["framework"], r["code"])] = r["crosswalk"] or XW[(r["framework"], r["code"])]
     TEXT.setdefault(r["framework"] + "|" + r["code"], r["text"] or "")
-same = lambda a, b: re.sub(r"[^a-z0-9]+", " ", TEXT.get(a, "").lower()).strip() == re.sub(r"[^a-z0-9]+", " ", TEXT.get(b, "").lower()).strip() != ""
 
 
 def home(e):
@@ -43,14 +42,31 @@ STOP = set("a an and are as at be by for from in into is it its of on or that th
 def toks(t): return [w for w in re.findall(r"[a-z]+", t.lower()) if w not in STOP and len(w) > 2]
 
 
+def own_text(e):
+    """The full text of a standard (the index keeps only the start); a lettered part keeps only its own words, since
+    every part repeats its parent's stem (L.7.1.b would otherwise match L.6.1.a as well as L.6.1.b)."""
+    t = TEXT.get(e["f"] + "|" + e["c"]) or e["t"]
+    m = re.search(r"\.([a-z])$", e["c"])
+    if m:
+        part = re.search(rf"(?:^|\s){m[1]}[.)]\s+(.+)", t)
+        if part:
+            t = re.split(r"\s[a-z][.)]\s", part[1])[0]
+    return t
+
+
+BYKEY = {e["f"] + "|" + e["c"]: e for es in IDX.values() for e in es}
+_norm = lambda t: re.sub(r"[^a-z0-9]+", " ", t.lower()).strip()
+same = lambda a, b: a in BYKEY and b in BYKEY and _norm(own_text(BYKEY[a])) == _norm(own_text(BYKEY[b])) != ""
+
+
 class Sim:
     def __init__(self, items):
-        df = collections.Counter(w for e in items for w in set(toks(e["t"])))
+        df = collections.Counter(w for e in items for w in set(toks(own_text(e))))
         n = len(items) or 1
         self.idf = {w: math.log(n / c) + 1 for w, c in df.items()}
         self.vec = {}
         for e in items:
-            tf = collections.Counter(toks(e["t"]))
+            tf = collections.Counter(toks(own_text(e)))
             v = {w: c * self.idf[w] for w, c in tf.items()}
             norm = math.sqrt(sum(x * x for x in v.values())) or 1
             self.vec[e["f"] + "|" + e["c"]] = {w: x / norm for w, x in v.items()}
@@ -141,6 +157,7 @@ NAMES = {}
 for e in IDX["Science"]:
     for comp, nm in re.findall(r"\b((?:PS|LS|ESS|ETS)\d\.[A-D]) ([^,()]+)", e.get("cl") or ""):
         NAMES.setdefault(comp, nm.strip())
+NAMES["PS4.C"] = "Information Technologies and Instrumentation"   # the source cluster text is cut short
 comp_members = collections.defaultdict(list)
 for e in sci:
     comps = {m.group(1) for x in XW[(e["f"], e["c"])] for m in [re.match(r"WI-SCI:SCI\.((?:PS|LS|ESS|ETS)\d\.[A-D])\.", x)] if m}

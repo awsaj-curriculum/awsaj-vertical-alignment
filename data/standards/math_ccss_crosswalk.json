@@ -1,5 +1,5 @@
 {
- "note": "Wisconsin 2021 Math rows whose Common Core code is NOT the same as their Wisconsin code. Every other Wisconsin row keeps its own numbering (M.5.MD.A.1 = 5.MD.A.1). Found by matching each Wisconsin text to the Common Core texts in its domain (Coherence Map data) and checked by hand; the Wisconsin codes of K.CC agree with the school's Curriculum Hub. An empty list means new in Wisconsin, with no Common Core code. Open question for the school: the K-5 sheet places 'Flexibly and efficiently multiply and divide within 100' at M.4.OA.D.6, while the Curriculum Hub lists the same text as M.3.OA.C.7 (Common Core 3.OA.C.7); M.3.OA.C.6 and M.4.OA.D.6 are left unchanged until that is settled. wi_parts_to_ccss_parent: Wisconsin split a Common Core standard that has no lettered parts; each part shows the Common Core parent code (numbered as parts on the site). Plan citations of the parent already reach every part.",
+ "note": "Wisconsin 2021 Math rows whose Common Core code is NOT the same as their Wisconsin code. Every other Wisconsin row keeps its own numbering (M.5.MD.A.1 = 5.MD.A.1). Found by matching each Wisconsin text to the Common Core texts in its domain (Coherence Map data) and checked by hand; the Wisconsin codes of K.CC agree with the school's Curriculum Hub. An empty list means new in Wisconsin, with no Common Core code. Multiply and divide within 100 (checked against the official Common Core and Wisconsin 2021 texts): Common Core 3.OA.C.7 'Fluently multiply and divide within 100 ... By the end of Grade 3, know from memory all products of two one-digit numbers' is Grade 3, and Common Core Grade 4 OA has no cluster D. Wisconsin 2021 rewrote it as M.3.OA.C.6 'Use multiplicative thinking to multiply and divide within 100' (Grade 3; part b: flexibly and efficiently with multiples of 0, 1, 2, 5 and 10) and added M.4.OA.D.6 'Flexibly and efficiently multiply and divide within 100' in Grade 4, new in Wisconsin 2021. So M.3.OA.C.6 = Common Core 3.OA.C.7 and M.4.OA.D.6 has no Common Core code. The Curriculum Hub's Grade 3 power standard 'M.3.OA.C.7' (Common Core number, Wisconsin Grade 4 wording; Wisconsin has no M.3.OA.C.7) is read as Common Core 3.OA.C.7, Grade 3's M.3.OA.C.6. wi_parts_to_ccss_parent: Wisconsin split a Common Core standard that has no lettered parts; each part shows the Common Core parent code (numbered as parts on the site). Plan citations of the parent already reach every part.",
  "wi_to_ccss": {
   "M.K.CC.B.5": [],
   "M.K.CC.B.6": [
@@ -44,7 +44,11 @@
   ],
   "M.G.GMD.C.6": [
    "HSG-MG.A.3"
-  ]
+  ],
+  "M.3.OA.C.6": [
+   "3.OA.C.7"
+  ],
+  "M.4.OA.D.6": []
  },
  "wi_parts_to_ccss_parent": {
   "M.1.NBT.A.1.a": [
