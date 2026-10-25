@@ -353,6 +353,39 @@ Matched across grades shows only rows that reach two or more grades by default, 
 standards counted once in opened rows and the links dialog; Audit section counts split main and EE; power vs priority
 wording for K-5; progression card names the right official source per subject; clearer "settled" wording.
 
-## Round 8
+## Round 8 (Gaps, Audit and popup passed)
+
+New reviewers O and P. Every count both recomputed matched. **Gaps & repetition** (8, 8, 9, 8, 8), the **Vertical
+Alignment Audit** (all 8) and the **standard popup** (8, 8, 9, 9, 8) met the standard in review O. Still below 8: the
+coverage map (both views), Progressions, the popup's progression box, the dashboard's visual hierarchy, and printing.
+
+| Page | Usability | Visual | Information | Progression | Interpretation | Report |
+|---|---|---|---|---|---|---|
+| Coverage map: By strand | 8 | 8 | 7 | 7 | 7 | [O](round-8-O.md) |
+| Coverage map: Matched across grades | 6 | 7 | 8 | 6 | 6 | [O](round-8-O.md) |
+| Gaps & repetition | 8 | 8 | 9 | 8 | 8 | [O](round-8-O.md) |
+| Vertical Alignment Audit | 8 | 8 | 8 | 8 | 8 | [O](round-8-O.md) |
+| Standard popup | 8 | 8 | 9 | 9 | 8 | [O](round-8-O.md) |
+| Printing / PDF (O) | 7 | 7 | 7 | 7 | 7 | [O](round-8-O.md) |
+| Progressions | 7 | 7 | 7 | 8 | 6 | [P](round-8-P.md) |
+| Grade dashboard | 8 | 7 | 8 | 8 | 8 | [P](round-8-P.md) |
+| Popup progression and Why flagged | 8 | 7 | 7 | 8 | 7 | [P](round-8-P.md) |
+| "See the links" dialog | 8 | 8 | 7 | 8 | 8 | [P](round-8-P.md) |
+| Printing / PDF (P) | 6 | 6 | 8 | 6 | 7 | [P](round-8-P.md) |
+
+### What changed after round 8
+
+At Tim's request the site now **presents facts and does not judge seriousness**: Progressions statuses, flags, headings
+and help say what the ratings and links show ("Not taught on an official link", "Not taught on a suggested link", "Step
+not taught", "Last steps not taught", "Prerequisite not taught (official link)"). Status follows the link source wherever
+the missing standard sits, and a row that holds a missing official prerequisite gets the same status (P C1-C4).
+
+Also: the thinnest list puts tiles where every rated standard is not taught first (O C1); the printed coverage map
+repeats its grade headings on every page (O C2); the Audit's Before and after prints every neighbour (O C3); "PDF:
+findings" leaves out the Progressions row grid; matched rows show each grade's code under its square and the page
+scrolls instead of an inner box; card wording says "grade placements"; the popup footnote separates official anchor links
+from parts matched by wording; the issue heading counts problems and rows.
+
+## Round 9
 
 Results are added below when the round finishes.

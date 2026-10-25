@@ -903,3 +903,18 @@ table.ba tr.flash td { background: #fde7c4; transition: background .4s; }
 @media print {
   body.print-findings #view-ladder > .panel:not(.insights), body.print-findings .pd-step { display: none !important; }
 }
+@media print {
+  table.cm thead, table.hm thead { display: table-header-group !important; }
+  table.cm thead th, table.hm thead th { position: static !important; }
+  table.cm tr, table.hm tr { break-inside: avoid; }
+}
+@media print {
+  /* Chrome does not repeat the header's buttons on later pages, so print the grade as plain text. */
+  table.cm thead th[data-gi] .colh { display: none !important; }
+  table.cm thead th[data-gi]::before { content: "Grade " attr(data-gi); font-size: 7.5pt; font-weight: 700; }
+}
+/* Matched across grades: the code of each grade's standard under its square, and no inner scroll box (the page scrolls). */
+.rows-wrap { max-height: none; overflow-x: auto; overflow-y: visible; }
+table.hm-rows td { vertical-align: top; text-align: center; }
+.cell-code { display: block; font-size: 9.5px; line-height: 1.1; color: var(--ink-2); margin-top: 2px; max-width: 64px; overflow-wrap: anywhere; }
+@media (max-width: 760px) { .cell-code { font-size: 8.5px; max-width: 44px; } }
