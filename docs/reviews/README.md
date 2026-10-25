@@ -70,6 +70,57 @@ address keeps the page and filters, so the browser's Back works; a "Back to ..."
 CSV downloads include each standard's findings, and Progressions downloads its rows and checks; phone layouts no
 longer scroll sideways.
 
-## Round 2
+## Round 2 (none passed yet)
+
+New reviewers C and D. Every count they recomputed from the raw data matched the pages exactly; the remaining problems
+were in what some verdicts claimed.
+
+| Page | Usability | Visual | Information | Progression | Interpretation | Report |
+|---|---|---|---|---|---|---|
+| Coverage map | 7 | 7 | 7 | 6 | 6 | [C](round-2-C.md) |
+| Gaps & repetition | 6 | 7 | 4 | 6 | 6 | [C](round-2-C.md) |
+| Vertical Alignment Audit | 6 | 6 | 6 | 4 | 6 | [C](round-2-C.md) |
+| Standard popup | 8 | 7 | 6 | 8 | 7 | [C](round-2-C.md) |
+| Progressions | 7 | 6 | 5 | 7 | 6 | [D](round-2-D.md) |
+| Grade dashboard | 6 | 6 | 5 | 6 | 6 | [D](round-2-D.md) |
+| Popup progression and checks boxes | 7 | 6 | 5 | 6 | 6 | [D](round-2-D.md) |
+
+Round 1 critical issues, as judged by round 2: 2 resolved, 9 partly resolved (the rest of each is in the list below).
+
+### What changed after round 2
+
+Critical issues (all addressed):
+
+1. **With a grade chosen, Gaps showed no progression problems** (it dropped the grades before and after). It now
+   checks every standard in view and keeps the problems in that grade or caused by it.
+2. **"Confirmed gap" still overclaimed** when other grades were never asked. A gap is now confirmed only when every
+   grade that could teach the standard has rated it not taught: its suggested grade(s), priority grades, grades whose
+   plans cite it, and every grade of its band for standards whose grade is only a suggestion (for example high school
+   Math). Otherwise it is a possible gap, tagged "waiting for", "not asked (same band)" or "plans cite it".
+3. **Prerequisite gaps rested on weak, inferred links.** A prerequisite gap now needs every standard the later one
+   builds on to be fully rated and not taught anywhere, and a gap a Break already explains is not repeated. Links
+   inferred from wording must be close (0.25 or more) and are shown as **Possible prerequisite gap**, a question to
+   check; only official links (the same ELA anchor standard) and Breaks make a row "Breaks down".
+4. **"Same wording" named Common Core codes** whose text differs. It now names the Wisconsin codes it compared and
+   says the Common Core versions can differ.
+5. **Grades that rate a standard because their plans cite it were missing from progression rows.** They now appear
+   in the boxes, counts and checks (marked "plans" in the ratings).
+6. **Dashboard review counts mixed in Essential Elements** and counted one standard twice. Counts are now for the main
+   standards with linked Essential Elements in brackets; problems that reach a later grade are counted by standard.
+
+Other improvements: "Builds steadily" is now "Taught at every step" (it does not judge how well the expectation
+rises); band reinforcement is separate from possible duplication; the Audit shows each standard of the grade with
+what it builds on before and what builds on it after, with ratings (the K-12 grid is folded under it); priority
+counts on the Audit and dashboard match and count Essential Elements apart, marked "(linked)"; the coverage map
+labels its percentages, adds each grade's share taught in depth, includes small fully not-taught tiles and shows the
+share in depth on each finding, and its ★ now means a priority standard rated below in depth; the popup shows a
+dot for teaching outside the suggested grade, a visible in-plans bar, checks ordered and coloured by severity, Breaks
+that involve the standard, and the row a progression grows out of; Gaps lists show 25 lines with "Show all";
+"Back to ..." returns to the same place; prerequisite gaps show on the row's line; progression boxes open the row
+(mouse or keyboard); the open tab stays in view on phones; small grey text is darker; the ELA crosswalk no longer
+shows the non-existent 2010 codes "R.2.7" and similar; ELA Writing, Language and Speaking and Listening rows say
+they use Wisconsin numbering.
+
+## Round 3
 
 Results are added below when the round finishes.

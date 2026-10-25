@@ -55,7 +55,8 @@ the school uses DIN Next and QF, which are licensed). Ratings: 0 Not taught (mag
 (blue #0092BC), 2 Taught in depth (lime #78BE21), unrated white. Orange is only for highlights (selection, focus,
 celebrations): never make orange and lime two rating levels, colour-blind readers cannot tell them apart. Dark green
 outline = suggested grade; dot = taught in a grade other than the suggested one; bar under a square = in that grade's plans;
-orange corner (or ★ on tiles) = priority / power in that grade. Not rated is white everywhere. Part 2 uses the same scale: 1-2 weeks in
+orange corner = priority / power in that grade (★ on a coverage map tile = one of them rated below in depth). Not rated
+is white everywhere. EE rows marked "★ Priority (linked)" take the mark from their linked standard and are counted apart. Part 2 uses the same scale: 1-2 weeks in
 plans = Introduced, 3+ weeks = Taught in depth.
 
 Teachers use the "flow" view: all standards for a subject on one page by default (Small / Medium / Large, with Find,
@@ -96,8 +97,9 @@ plans tabs in their library. Gaps, Dashboard and the Audit page have priority / 
 ## Analysis pages and progressions
 Every analysis page starts with findings computed live from the ratings (they fill in as teams rate), labels automatic
 checks, and never counts "not rated" as a gap. Rules every page follows (from the independent reviews, `docs/reviews/`):
-- A gap is **confirmed** only when every owner grade has rated it (`owners()`: suggested grades plus any priority/power
-  grade that can rate it) and all say not taught; otherwise it is a **possible gap, waiting for** those grades.
+- A gap is **confirmed** only when every grade that could teach it has rated it not taught (`unknownFor()`: owners =
+  suggested grades + priority grades that can rate it, still to rate = "waiting"; other grades of the band for `sg`
+  standards = "not asked"; grades whose plans cite it = "plans cite it"); otherwise it is a **possible gap**.
 - Counts use rated standards and show the unknown share; priority standards placed in another grade are listed apart
   (that grade does not rate them); "taught but not in the plans" is only shown when the grade's documents cite something
   ("No plan data yet" otherwise), excludes Essential Elements, and is hedged until Part 2.
@@ -109,14 +111,17 @@ Coverage map: rows by strand (same-named Science strands share a row; each K-5 A
 the Wisconsin domain its matches fall in, `S.ssDomain`; EE rows last), thinnest = 3+ rated, weighted. Gaps: confirmed /
 possible / priority / progression problems / duplication (again later) / taught early / plans / only introduced /
 reinforcement / unknown; a grade filter narrows to what that grade works with. Audit: findings first, then the chosen
-grade's standards across K-12, Part 2 collapsed until it runs. Dashboard: whole grade + cross-subject review list,
+grade's standards before and after it (`beforeAfter()`, K-12 grid folded below), Part 2 collapsed until it runs. Dashboard: whole grade + cross-subject review list,
 then the subject. Progressions: `scripts/build_progressions.py` writes `site/data/progressions.json` (lanes: ELA
 anchors, NGSS DCI components via WI-SCI codes, WI-SS standards with AERO K-5 via suggested matches = official; Math =
 Common Core topics by cluster = inferred, with `next` topics; links = up to 3 closest standards in the step before,
-`[a, b, similarity, same wording]`). The client hides links below `MIN_SIM` (0.12). Checks only use fully rated
-steps: break (whole middle step not taught and taught nowhere), moved (not taught there but taught in another grade),
-prereq (in depth while a linked standard is not taught anywhere; shown on both grades' dashboards), repeat, same
-wording. "Builds steadily" = 2+ grades, every standard rated and taught. Run it after build_site_data.py.
+`[a, b, similarity, same Wisconsin wording]`). Steps include grades added from plans (`pa`). The client hides links
+below `MIN_SIM` (0.12). Checks only use fully rated standards: break (whole middle step not taught and taught nowhere),
+moved (taught in another grade instead), prereq (in depth while every standard it links to is not taught anywhere;
+official on ELA anchor links, otherwise "Possible prerequisite gap" and only with similarity >= `PRE_SIM` 0.25; a
+gap a break explains is dropped; shown on both grades' dashboards), repeat (possible duplication) vs reinforce (in
+depth in 2+ of its own grades), same wording. Only breaks and official prereqs make a row "Breaks down"; "Taught at
+every step" = 2+ grades, every standard rated and at least introduced. Run it after build_site_data.py.
 The committee's page and filters are kept in the address (`#view=gaps&subject=Math&grade=3`), so Back works and links
 can be shared; the popup has its own Back for standards opened from a list.
 

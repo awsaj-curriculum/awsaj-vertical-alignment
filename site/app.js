@@ -196,7 +196,7 @@
     if (S.f.strand && !strands.includes(S.f.strand)) S.f.strand = "";
     // With several sets in view, each strand says which sets it comes from (EE strands share names with the main ones).
     const from = (s) => { const f = [...new Set(inGrade.filter((e) => e.s === s).map((e) => SET(e.f).abbr))]; return !S.f.framework && fws.length > 1 ? ` (${f.join(", ")})` : ""; };
-    fillSelect(strandSel, sg ? [["", "All strands"], ...strands.map((s) => [s, s + from(s)])] : [["", ""]], S.f.strand);
+    fillSelect(strandSel, sg ? [["", "All strands"], ...strands.map((s) => [s, s + from(s)])] : [["", "Choose a grade first"]], S.f.strand);
     strandSel.disabled = !sg;
     strandSel.title = sg ? "" : "Choose a grade first";
     $("#f-division").value = S.f.division; $("#f-mark").value = S.f.mark; $("#f-order").value = S.f.order;
@@ -213,6 +213,7 @@
     $$(".tabs [data-view]").forEach((x) => x.setAttribute("aria-selected", x.dataset.view === v));
     $$(".view").forEach((x) => (x.hidden = x.id !== "view-" + v));
     document.body.dataset.mode = mode(); document.body.dataset.view = v;
+    const t = $(`.tabs [data-view="${v}"]`); if (t && t.scrollIntoView && innerWidth < 760) t.scrollIntoView({ block: "nearest", inline: "center" });   // phones: keep the open tab in sight
     renderWho();
   }
   function renderWho() {
@@ -345,7 +346,7 @@
   const gList = (arr) => arr.filter((x) => visibleGrades().includes(x)).map(gl).join(", ");
   function marks(e, g) {
     const out = [];
-    if (isPr(e, g)) out.push(`<span class="mk mk-pr" title="${g ? `A ${prName(g).toLowerCase()} standard for ${esc(gname(g))} in the school's curriculum documents` : "Priority (6-12) or power (K-5) standard in " + esc(gList(e.pr))}">★ ${prName(g)}${g ? "" : " " + esc(gList(e.pr))}</span>`);
+    if (isPr(e, g)) out.push(`<span class="mk mk-pr" title="${isEE(e.f) ? "An Essential Element linked to a priority or power standard (it takes the mark from that standard)" : g ? `A ${prName(g).toLowerCase()} standard for ${esc(gname(g))} in the school's curriculum documents` : "Priority (6-12) or power (K-5) standard in " + esc(gList(e.pr))}">★ ${prName(g)}${isEE(e.f) ? " (linked)" : ""}${g ? "" : " " + esc(gList(e.pr))}</span>`);
     if (isPn(e, g)) out.push(`<span class="mk mk-pn" title="${g ? `${esc(gname(g))}'s curriculum documents cite this standard` : "Cited in the plans of " + esc(gList(e.pn))}">✓ In plans${g ? "" : " " + esc(gList(e.pn))}</span>`);
     if (g && e.pa && e.pa.includes(g)) out.push(`<span class="tag sg">Added from ${esc(gname(g))} plans</span>`);
     return out.join("");
@@ -697,7 +698,7 @@
     let rev = "";
     if (withReview) {
       const rows = lists.map(([s, list]) => [s, gradeReview(g, s, list)]).filter(([, r]) => r.length);
-      rev = `<h3>To review across subjects ${hb("grade_review")}</h3>${rows.length ? `<ul class="go-rev">${rows.map(([s, r]) => `<li><button type="button" class="linkish" data-act="subject" data-s="${esc(s)}"><b>${esc(s)}</b></button>: ${r.slice(0, 4).map(([t]) => t.replace(/<span class="setb[^>]*>[^<]*<\/span>\s*/g, "")).join(" · ")}${r.length > 4 ? ` · and ${r.length - 4} more` : ""}</li>`).join("")}</ul>` : `<p class="muted">Nothing stands out yet in any subject.</p>`}`;
+      rev = `<h3>To review across subjects ${hb("grade_review")}</h3>${rows.length ? `<ul class="go-rev">${rows.map(([s, r]) => `<li><button type="button" class="linkish" data-act="subject" data-s="${esc(s)}"><b>${esc(s)}</b></button>: ${r.slice(0, 4).map(([t]) => t).join(" · ")}${r.length > 4 ? ` · and ${r.length - 4} more` : ""}</li>`).join("")}</ul>` : `<p class="muted">Nothing stands out yet in any subject.</p>`}`;
     }
     return `<div class="card grade-ov"><h2>${esc(gname(g))}: every subject ${hb("grade_ov")}</h2><div class="go-grid">${cards}</div>${rev}</div>`;
   }
@@ -785,12 +786,14 @@
       const extra = row.arr.filter((e) => !e.pl.includes(g) && (rating(e.f, e.c, g)?.level || 0) > 0).length;
       if (!mine.length) return `<td class="cm-td" data-gi="${g}">${extra ? `<span class="cm-none cm-extra" data-tip-text="${esc(gname(g))} also teaches ${extra} ${esc(row.label)} standard${extra > 1 ? "s" : ""} suggested for other grades.">+${extra}</span>` : `<span class="cm-none"></span>`}</td>`;
       const c = countLevels(mine, g), n = mine.length, pr = mine.filter((e) => isPr(e, g)).length, pn = mine.filter((e) => isPn(e, g)).length; total += n; done += n - c[3];
+      // ★ on a tile = a priority or power standard here is rated below in depth (a signal, not just "has priority").
+      const prLow = mine.filter((e) => isPr(e, g) && (rating(e.f, e.c, g)?.level ?? 2) < 2).length;
       cellsInfo.push({ g, row, n, c, pr });
       const h = (i) => (c[i] / n) * 100;
       return `<td class="cm-td" data-gi="${g}"><button type="button" class="cm-tile ${c[3] ? "" : "full"}" data-act="cm-open" data-g="${g}" data-row="${esc(row.key)}"
-        data-tip-text="${esc(gname(g))} · ${esc(row.label)}: ${n} standard${n > 1 ? "s" : ""}. ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? ", " + c[3] + " not rated yet" : ""}.${pr ? ` ${pr} ${prName(g).toLowerCase()}.` : ""}${pn ? ` ${pn} in ${gname(g)}'s plans.` : ""}${extra ? " Also teaches " + extra + " from other grades." : ""} Click to see these standards.">
+        data-tip-text="${esc(gname(g))} · ${esc(row.label)}: ${n} standard${n > 1 ? "s" : ""}. ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? ", " + c[3] + " not rated yet" : ""}.${pr ? ` ${pr} ${prName(g).toLowerCase()}${prLow ? `, ${prLow} of them rated below in depth` : ""}.` : ""}${pn ? ` ${pn} in ${gname(g)}'s plans.` : ""}${extra ? " Also teaches " + extra + " from other grades." : ""} Click to see these standards.">
         <span class="cm-fill"><i style="height:${h(2)}%;background:${COLORS[2]}"></i><i style="height:${h(1)}%;background:${COLORS[1]}"></i><i style="height:${h(0)}%;background:${COLORS[0]}"></i></span>
-        <span class="cm-n">${n}</span>${extra ? `<span class="cm-plus">+${extra}</span>` : ""}${pr ? `<span class="cm-pr" aria-hidden="true">★</span>` : ""}</button></td>`;
+        <span class="cm-n">${n}</span>${extra ? `<span class="cm-plus">+${extra}</span>` : ""}${prLow ? `<span class="cm-pr" aria-hidden="true">★</span>` : ""}</button></td>`;
     };
     const body = rows.map((row) => {
       const fws = rowSets(row.arr);
@@ -800,12 +803,15 @@
       const mine = list.filter((e) => e.pl.includes(g) && markOkG(e, g)), c = countLevels(mine, g), pct = mine.length ? Math.round(((mine.length - c[3]) / mine.length) * 100) : 0;
       return `<th data-gi="${g}" class="${S.f.grade === g ? "sel" : ""}"><button type="button" class="colh" data-act="grade" data-g="${g}" data-tip-text="${esc(gname(g))}: ${mine.length - c[3]} of ${mine.length} suggested standards rated. Click to choose this grade.">${gl(g)}<small>${mine.length ? pct + "%" : ""}</small></button></th>`;
     }).join("");
+    const foot = gs.map((g) => { const mine = list.filter((e) => e.pl.includes(g) && markOkG(e, g)), c = countLevels(mine, g), r = mine.length - c[3];
+      return `<td class="cm-foot" data-gi="${g}">${r ? `<b>${Math.round((c[2] / r) * 100)}%</b>` : "<span class='muted'>n/a</span>"}</td>`; }).join("");
     // Findings first: which grades still need rating, where teaching is thinnest, and where it is strongest.
     const byGrade = gs.map((g) => { const mine = list.filter((e) => e.pl.includes(g) && markOkG(e, g)), c = countLevels(mine, g); return { g, n: mine.length, r: mine.length - c[3] }; }).filter((x) => x.n);
     const least = byGrade.filter((x) => x.r < x.n).sort((a, b) => a.r / a.n - b.r / b.n).slice(0, 4);
     // Thinnest: tiles with at least 3 rated standards, ranked by how much is not taught in depth (not taught counts
     // fully, introduced counts half) weighted by its share, so a big weak tile is not hidden behind a tiny one.
-    const ratedCells = cellsInfo.filter((x) => x.n - x.c[3] >= 3).map((x) => { const r = x.n - x.c[3], pts = x.c[0] + 0.5 * x.c[1]; return { ...x, r, pts, score: pts * (pts / r) }; });
+    // Small tiles count too when every rated standard in them is not taught.
+    const ratedCells = cellsInfo.filter((x) => x.n - x.c[3] >= 3 || (x.n - x.c[3] >= 2 && x.c[0] === x.n - x.c[3])).map((x) => { const r = x.n - x.c[3], pts = x.c[0] + 0.5 * x.c[1]; return { ...x, r, pts, score: pts * (pts / r) }; });
     const thin = ratedCells.filter((x) => x.pts > 0).sort((a, b) => b.score - a.score || b.pts - a.pts).slice(0, 5);
     const strong = ratedCells.filter((x) => x.c[2]).sort((a, b) => b.c[2] / b.r - a.c[2] / a.r || b.c[2] - a.c[2]).slice(0, 3);
     const notAll = cellsInfo.reduce((m, x) => m + x.c[0], 0), introAll = cellsInfo.reduce((m, x) => m + x.c[1], 0);
@@ -819,10 +825,12 @@
         <div class="ins ${notAll ? "ins-issue" : ""}"><b>${notAll}</b><span>rated standards marked not taught</span><small>and ${introAll} only introduced, out of ${done} rated in their suggested grade</small></div>
         <div class="ins ${prRated && prDeep < prRated ? "ins-warn" : ""}"><b>${prDeep}<small>/${prRated}</small></b><span>rated priority or power standards taught in depth</span><small>${prAll.length - prRated} more not rated yet (${prAll.length} named in their own grade)</small></div>
       </div>
-      ${thin.length ? `<h3>Thinnest teaching <span class="tag auto">Automatic check</span> ${hb("hm_thin")}</h3><ul class="issues">${thin.map((x) => `<li>${cellBtn(x, `${x.c[0]} not taught, ${x.c[1]} introduced, ${x.c[2]} in depth (${x.r} rated${x.c[3] ? `, ${x.c[3]} not rated` : ""})`)}</li>`).join("")}</ul>` : `<p class="muted">${done ? "No tile with three or more rated standards has any taught less than in depth yet." : "Nothing is rated yet in this view, so the map shows the standards only."}</p>`}
-      ${strong.length ? `<p class="muted">Strongest: ${strong.map((x) => cellBtn(x, `${x.c[2]} of ${x.r} rated in depth`)).join("; ")}.</p>` : ""}
-      <div class="cm-key"><span><span class="cm-key-tile"><i style="height:40%;background:${COLORS[2]}"></i><i style="height:30%;background:${COLORS[1]}"></i><i style="height:10%;background:${COLORS[0]}"></i></span> Fill: lime in depth, blue introduced, magenta not taught, white not rated</span><span><b class="cm-key-n">5</b> standards suggested for that grade</span><span><span class="cm-key-full"></span> dark green border: every one rated</span><span><span class="cm-pr-k">★</span> includes a priority or power standard</span><span><span class="cm-plus-k">+2</span> also teaches 2 suggested for other grades</span><span><span class="cm-none-k"></span> no standards in that grade</span>${multi ? `<span>${badge(subj().frameworks.find(isEE) || "WI-EE-MATH")} rows with a dashed edge are Essential Elements</span>` : ""}</div></div>
-      <div class="cm-wrap"><table class="cm"><thead><tr><th class="cm-row">Strand ${hb("hm_cols")}</th>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+      ${thin.length ? `<h3>Thinnest teaching <span class="tag auto">Automatic check</span> ${hb("hm_thin")}</h3><ul class="issues">${thin.map((x) => `<li>${cellBtn(x, `<b>${Math.round((x.c[2] / x.r) * 100)}% in depth</b>: ${x.c[0]} not taught, ${x.c[1]} introduced, ${x.c[2]} in depth of ${x.r} rated${x.c[3] ? `; ${x.c[3]} not rated` : ""}`)}</li>`).join("")}</ul><p class="muted sm-note">Tiles with at least 3 rated standards, or 2 that are both not taught.</p>` : `<p class="muted">${done ? "No tile with three or more rated standards has any taught less than in depth yet." : "Nothing is rated yet in this view, so the map shows the standards only."}</p>`}
+      ${strong.length ? `<p class="muted">Strongest: ${strong.map((x) => cellBtn(x, `${Math.round((x.c[2] / x.r) * 100)}% in depth (${x.c[2]} of ${x.r} rated)`)).join("; ")}.</p>` : ""}
+      <div class="cm-key"><span><span class="cm-key-tile"><i style="height:40%;background:${COLORS[2]}"></i><i style="height:30%;background:${COLORS[1]}"></i><i style="height:10%;background:${COLORS[0]}"></i></span> Fill: lime in depth, blue introduced, magenta not taught, white not rated</span><span><b class="cm-key-n">5</b> standards suggested for that grade</span><span><span class="cm-key-full"></span> dark green border: every one rated</span><span><span class="cm-pr-k">★</span> a priority or power standard here is rated below in depth</span><span><span class="cm-plus-k">+2</span> also teaches 2 suggested for other grades</span><span><span class="cm-none-k"></span> no standards in that grade</span>${multi ? `<span>${badge(subj().frameworks.find(isEE) || "WI-EE-MATH")} Essential Elements rows come last, with a dashed bar beside the name</span>` : ""}</div></div>
+      <p class="scroll-hint muted">Scroll sideways to see every grade →</p>
+      <div class="cm-wrap"><table class="cm"><thead><tr><th class="cm-row">Strand <small>% under each grade: share rated</small> ${hb("hm_cols")}</th>${head}</tr></thead><tbody>${body}</tbody>
+        <tfoot><tr><th class="cm-row" scope="row">Taught in depth <small>share of rated standards</small></th>${foot}</tr></tfoot></table></div>`;
   }
 
   // The standards behind one coverage-map tile, with each grade's rating and where they sit in their progressions.
@@ -875,6 +883,23 @@
   // The grades whose rating a conclusion about the standard needs: its suggested grades, and any grade that names it a
   // priority or power standard and can rate it. A standard is only a confirmed gap once all of them have rated it.
   const owners = (e) => GRADES.filter((g) => e.pl.includes(g) || (isPr(e, g) && forGrade(e, g)));
+  // A standard whose grade is only a suggestion (e.sg) belongs to a band (HS = 9-12, MS = 6-8, 3-5 ...): the other grades
+  // of the band could teach it but were not asked. Grades whose own plans cite a standard could too.
+  function bandOf(e) {
+    if (!e.sg) return [];
+    const b = e.band === "HS" ? "9-12" : e.band === "MS" ? "6-8" : e.band || "", m = b.match(/^(K|\d+)-(\d+)$/);
+    return m ? GRADES.slice(GRADES.indexOf(m[1]), GRADES.indexOf(m[2]) + 1) : [];
+  }
+  // Grades that have not rated the standard but might teach it: owners still to rate ("waiting"), band grades and grades
+  // whose plans cite it ("not asked"). A gap is confirmed only when this is empty.
+  function unknownFor(e) {
+    const rated = (g) => !!rating(e.f, e.c, g), own = owners(e);
+    return { waiting: own.filter((g) => !rated(g)), band: bandOf(e).filter((g) => !own.includes(g) && !rated(g)), plans: GRADES.filter((g) => isPn(e, g) && !own.includes(g) && !rated(g)) };
+  }
+  const unknownTags = (u) => (u.waiting.length ? ` <span class="tag wait">waiting for ${u.waiting.map(gl).join(", ")}</span>` : "")
+    + (u.band.length ? ` <span class="tag wait">not asked: ${u.band.map(gl).join(", ")} (same band)</span>` : "")
+    + (u.plans.length ? ` <span class="tag wait">${u.plans.map(gl).join(", ")} plans cite it, not rated there</span>` : "");
+  const unknownAny = (u) => u.waiting.length + u.band.length + u.plans.length > 0;
   // Sort every standard in view into findings. "Confirmed" needs every owner grade's rating; anything still waiting
   // for ratings is "possible" or unknown, never a gap. All of these are automatic checks over the live ratings.
   function analyse(list) {
@@ -882,9 +907,9 @@
     for (const e of list) {
       const lv = levelsAcross(e);
       if (!lv.length) { out.unrated.push(e); continue; }
-      const missing = owners(e).filter((g) => !rating(e.f, e.c, g));
-      if (lv.every((x) => x.r.level === 0)) (missing.length ? out.maybe : out.gap).push({ e, missing });
-      else if (!lv.some((x) => x.r.level === 2)) out.weak.push({ e, missing });
+      const u = unknownFor(e);
+      if (lv.every((x) => x.r.level === 0)) (unknownAny(u) ? out.maybe : out.gap).push({ e, u });
+      else if (!lv.some((x) => x.r.level === 2)) out.weak.push({ e, u });
       // In depth in two or more grades: across its own band (reinforcement), again after its suggested grade
       // (possible duplication), or only before it (a placement question, not a duplicate).
       const deep = lv.filter((x) => x.r.level === 2), first = GRADES.indexOf(e.pl[0]);
@@ -901,24 +926,26 @@
   }
   // Every automatic check that applies to one standard, in plain words: the popup's "Why this standard is flagged" box
   // and the CSV's Findings column. Each item: [short label, sentence].
+  const SEV = ["high", "mid", "wait", "info"];   // most serious first: problems, things to check, waiting for ratings, notes
   function checksFor(e) {
-    const out = [], lv = levelsAcross(e), missing = owners(e).filter((g) => !rating(e.f, e.c, g)), list = (gs) => gs.map(gname).join(", ");
-    if (!lv.length) return [["Unknown", "No grade has rated it yet, so nothing can be concluded."]];
-    if (lv.every((x) => x.r.level === 0)) out.push(missing.length ? ["Possible gap", `Every grade that rated it says not taught, but ${list(missing)} ${missing.length > 1 ? "have" : "has"} not rated it yet.`] : ["Confirmed gap", "Every grade that should teach it has rated it, and none teaches it."]);
-    else if (!lv.some((x) => x.r.level === 2)) out.push(["Only introduced", "No grade that rated it teaches it in depth."]);
+    const out = [], lv = levelsAcross(e), u = unknownFor(e), list = (gs) => gs.map(gname).join(", ");
+    const open = [u.waiting.length ? `${list(u.waiting)} (should rate it) ${u.waiting.length > 1 ? "have" : "has"} not rated it yet` : "", u.band.length ? `${list(u.band)}, in the same band, ${u.band.length > 1 ? "were" : "was"} not asked` : "", u.plans.length ? `the plans of ${list(u.plans)} cite it (not rated there)` : ""].filter(Boolean).join("; ");
+    if (!lv.length) return [["Unknown", "No grade has rated it yet, so nothing can be concluded.", "wait"]];
+    if (lv.every((x) => x.r.level === 0)) out.push(open ? ["Possible gap", `Every grade that rated it (${list(lv.map((x) => x.g))}) says not taught. Not settled yet: ${open}.`, "wait"] : ["Confirmed gap", `Rated not taught by ${list(lv.map((x) => x.g))}: every grade it is suggested for, named priority by, or cited in the plans of.`, "high"]);
+    else if (!lv.some((x) => x.r.level === 2)) out.push(["Only introduced", `No grade that rated it teaches it in depth${open ? `; ${open}` : ""}.`, "mid"]);
     for (const g of GRADES.filter((x) => isPr(e, x))) {
       const r = rating(e.f, e.c, g);
-      if (!forGrade(e, g)) out.push([`${prName(g)} elsewhere`, `${gname(g)}'s documents name it a ${prName(g).toLowerCase()} standard, but it is placed in ${list(e.pl)}, so ${gname(g)} does not rate it.`]);
-      else if (r && r.level < 2) out.push([`${prName(g)} below in depth`, `A ${prName(g).toLowerCase()} standard for ${gname(g)}, rated ${LEVEL[r.level].toLowerCase()} there.`]);
-      else if (!r) out.push([`${prName(g)} not rated`, `A ${prName(g).toLowerCase()} standard for ${gname(g)}, not rated there yet.`]);
+      if (!forGrade(e, g)) out.push([`${prName(g)} elsewhere`, `${gname(g)}'s documents name it a ${prName(g).toLowerCase()} standard, but it is placed in ${list(e.pl)}, so ${gname(g)} does not rate it.`, "info"]);
+      else if (r && r.level < 2) out.push([`${prName(g)} below in depth`, `A ${prName(g).toLowerCase()} standard for ${gname(g)}${isEE(e.f) ? " (through the standard it links to)" : ""}, rated ${LEVEL[r.level].toLowerCase()} there.`, "high"]);
+      else if (!r) out.push([`${prName(g)} not rated`, `A ${prName(g).toLowerCase()} standard for ${gname(g)}, not rated there yet.`, "wait"]);
     }
-    for (const g of GRADES.filter((x) => isPn(e, x))) if (rating(e.f, e.c, g)?.level === 0) out.push(["In plans, not taught", `${gname(g)}'s documents cite it, but ${gname(g)} rates it not taught.`]);
+    for (const g of GRADES.filter((x) => isPn(e, x))) if (rating(e.f, e.c, g)?.level === 0) out.push(["In plans, not taught", `${gname(g)}'s documents cite it, but ${gname(g)} rates it not taught.`, "high"]);
     const deep = lv.filter((x) => x.r.level === 2).map((x) => x.g), other = deep.filter((g) => !e.pl.includes(g));
-    if (deep.length >= 2) out.push(!other.length ? ["Reinforcement", `Taught in depth in ${list(deep)}, all grades of its band.`]
-      : other.some((g) => GRADES.indexOf(g) > GRADES.indexOf(e.pl[0])) ? ["Possible duplication", `Taught in depth in ${list(deep)}; it is suggested for ${list(e.pl)}.`]
-      : ["Taught early", `Taught in depth in ${list(deep)}, before its suggested grade (${list(e.pl)}).`]);
-    for (const x of lv) if (e.pl.includes(x.g) && x.r.level === 0 && lv.some((y) => y.r.level > 0)) out.push(["Not taught in its grade", `${gname(x.g)} says not taught, while ${list(lv.filter((y) => y.r.level > 0).map((y) => y.g))} ${lv.filter((y) => y.r.level > 0).length > 1 ? "teach" : "teaches"} it.`]);
-    if (S.prog) for (const l of S.progLanes.get(e.f + "|" + e.c) || []) for (const f of laneInfo(l, GRADES).flags) if (f.t !== "repeat" && (f.k === e.f + "|" + e.c || f.ka === e.f + "|" + e.c)) out.push([FLAG[f.t] || f.t, `${l.name}: ${f.msg}`]);
+    if (deep.length >= 2) out.push(!other.length ? ["Reinforcement", `Taught in depth in ${list(deep)}, all grades of its band.`, "info"]
+      : other.some((g) => GRADES.indexOf(g) > GRADES.indexOf(e.pl[0])) ? ["Possible duplication", `Taught in depth in ${list(deep)}; it is suggested for ${list(e.pl)}.`, "mid"]
+      : ["Taught early", `Taught in depth in ${list(deep)}, before its suggested grade (${list(e.pl)}).`, "mid"]);
+    for (const x of lv) if (e.pl.includes(x.g) && x.r.level === 0 && lv.some((y) => y.r.level > 0)) out.push(["Not taught in its grade", `${gname(x.g)} says not taught, while ${list(lv.filter((y) => y.r.level > 0).map((y) => y.g))} ${lv.filter((y) => y.r.level > 0).length > 1 ? "teach" : "teaches"} it.`, "mid"]);
+    if (S.prog) for (const l of S.progLanes.get(e.f + "|" + e.c) || []) for (const f of laneInfo(l, GRADES).flags) { const k = e.f + "|" + e.c; if (!["repeat", "reinforce"].includes(f.t) && (f.k === k || f.ka === k || (f.ks || []).includes(k))) out.push([flagName(f), `${l.name}: ${f.msg}`, f.t === "break" || (f.t === "prereq" && f.official) ? "high" : "mid"]); }
     return out;
   }
   // A tiny K-12 strip: each grade's rating, with the suggested grade outlined and the chosen grade marked. The evidence
@@ -932,45 +959,50 @@
   // ratings arrive or a popup closes). Unset means the section's default.
   S.open = {};
   const isOpen = (id, dflt) => (id in S.open ? S.open[id] : !!dflt);
-  const waiting = (m) => (m && m.length ? ` <span class="tag wait">waiting for ${m.map(gl).join(", ")}</span>` : "");
+  // Long lists show their first 25 lines, with a button for the rest (S.more remembers which were opened).
+  S.more = {};
   function renderGaps() {
     const el = $("#view-gaps"), gs = visibleGrades(), g = S.f.grade;
     // With a grade chosen: only the standards that grade works with (suggested for it, rated by it, or in its documents).
     let list = ordered(filtered(), "");
     if (g) list = list.filter((e) => forGrade(e, g) || rating(e.f, e.c, g) || isPr(e, g) || isPn(e, g));
-    const a = analyse(list), n = list.length, keys = new Set(list.map((e) => e.f + "|" + e.c));
+    const a = analyse(list), n = list.length;
     const prGap = [], prUnrated = [], planNot = [];
     for (const e of list) {
-      for (const pg of (e.pr || []).filter((x) => gs.includes(x) && (!g || x === g) && forGrade(e, x))) { const r = rating(e.f, e.c, pg); if (!r) prUnrated.push({ e, g: pg }); else if (r.level < 2) prGap.push({ e, g: pg, r }); }
+      // Not rated: only in the grades a standard is placed in (the same count as the coverage map); rated: any grade that rates it.
+      for (const pg of (e.pr || []).filter((x) => gs.includes(x) && (!g || x === g) && forGrade(e, x))) { const r = rating(e.f, e.c, pg); if (!r) { if (e.pl.includes(pg)) prUnrated.push({ e, g: pg }); } else if (r.level < 2) prGap.push({ e, g: pg, r }); }
       for (const pg of (e.pn || []).filter((x) => gs.includes(x) && (!g || x === g))) if (rating(e.f, e.c, pg)?.level === 0) planNot.push({ e, g: pg });
     }
-    const breaks = progFlags(S.f.subject, gs, keys).filter(({ f }) => !g || f.g === g || f.cause === g);
+    // Progression problems need the steps before and after, so they use every standard in view (not only the grade's).
+    const keys = new Set(filtered().map((e) => e.f + "|" + e.c));
+    const breaks = progFlags(S.f.subject, gs, keys).filter(({ f }) => !g || f.g === g || f.cause === g || (f.gs || []).includes(g));
     const rated = n - a.unrated.length, pct = (x) => (n ? Math.round((x / n) * 100) : 0);
     // Summary cards: coloured only when they count a problem; each one opens its section below.
     const card = (id, num, label, sub, cls) => `<button type="button" class="ins ${num ? cls || "" : ""}" data-act="open-sec" data-id="gap-${id}"><b>${num}</b><span>${label}</span><small>${sub}</small></button>`;
-    const sec = (id, title, desc, todo, arr, fn, open) => `<details class="gap" id="gap-${id}" data-sec="gap-${id}" ${isOpen("gap-" + id, open) ? "open" : ""}><summary><span class="count">${arr.length}</span>${title} <span class="tag auto">Automatic check</span></summary>
-      <p class="muted">${desc}${todo ? ` <b>What to do:</b> ${todo}` : ""}</p><ul class="gap-list one">${arr.slice(0, 300).map(fn).join("") || "<li class='muted'>None found.</li>"}</ul>${arr.length > 300 ? `<p class="muted">Showing 300 of ${arr.length}. Narrow the view with the filters above.</p>` : ""}</details>`;
-    const flagLi = ({ x, f }) => `<li><span class="mk-flag f-${f.t}">${FLAG[f.t]}</span> <button type="button" class="linkish" data-act="goto-lane" data-id="${esc(x.l.id)}">${esc(x.l.name)}</button> <span class="muted">${esc(f.msg)}</span></li>`;
+    const sec = (id, title, desc, todo, arr, fn, open) => { const all = S.more["gap-" + id], cut = all ? 300 : 25;
+      return `<details class="gap" id="gap-${id}" data-sec="gap-${id}" ${isOpen("gap-" + id, open) ? "open" : ""}><summary><span class="count">${arr.length}</span>${title} <span class="tag auto">Automatic check</span></summary>
+      <p class="muted">${desc}${todo ? ` <b>What to do:</b> ${todo}` : ""}</p><ul class="gap-list one">${arr.slice(0, cut).map(fn).join("") || "<li class='muted'>None found.</li>"}</ul>${arr.length > cut ? (all ? `<p class="muted">Showing 300 of ${arr.length}. Narrow the view with the filters above.</p>` : `<p><button type="button" class="ghost sm" data-act="more" data-id="gap-${id}">Show all ${arr.length}</button></p>`) : ""}</details>`; };
+    const flagLi = ({ x, f }) => `<li><span class="mk-flag f-${f.t}">${FLAG[f.t]}</span> <button type="button" class="linkish" data-act="goto-lane" data-id="${esc(x.l.id)}">${esc(x.l.name)}</button> <span class="muted">${esc(f.msg)}</span> <span class="tag">${esc(f.ka ? linkBasis(x.l) : BASIS[x.l.basis])}</span></li>`;
     el.innerHTML = `<div class="panel insights"><h2>Gaps and repetition: ${esc(S.f.subject)}, ${esc(g ? gname(g) : divLabel(S.f.division))} ${hb("gaps")}</h2>
       <p class="lede">${g ? `Standards ${esc(gname(g))} works with: suggested for it, rated by it, or named in its documents. ` : ""}${n} standards in view; ${rated} (${pct(rated)}%) rated by at least one grade. A standard nobody has rated is <b>unknown</b>, and a gap is only <b>confirmed</b> once every grade that should teach it has rated it. <span class="muted">Updates as teams rate.</span></p>
       <div class="ins-grid">
-        ${card("gap", a.gap.length, "confirmed gaps", "every grade that should teach it has rated it, and none teaches it", "ins-issue")}
-        ${card("maybe", a.maybe.length, "possible gaps", "not taught so far, but a grade that should teach it has not rated it yet", "ins-data")}
+        ${card("gap", a.gap.length, "confirmed gaps", "rated not taught by every grade it is suggested for, named priority by, or planned in", "ins-issue")}
+        ${card("maybe", a.maybe.length, "possible gaps", "not taught where rated, but a grade that might teach it has not rated it", "ins-data")}
         ${card("prio", prGap.length, "priority or power below in depth", `rated in their grade, not taught in depth${prUnrated.length ? `; ${prUnrated.length} more not rated yet` : ""}`, "ins-issue")}
-        ${card("breaks", breaks.length, "progression problems", "a whole step not taught, or a standard taught in depth without the one it builds on", "ins-issue")}
+        ${card("breaks", breaks.length, "progression problems", `in ${new Set(breaks.map(({ x }) => x.l.id)).size} progressions: a whole step not taught, or a standard taught in depth without the one it builds on`, "ins-issue")}
         ${card("dup", a.dup.length, "possible duplication", "taught in depth again in a later grade", "ins-warn")}
         ${card("unrated", a.unrated.length, "unknown", "no grade has rated these yet", "ins-data")}
       </div></div>
     <div class="panel">
-      ${sec("gap", "Confirmed gaps: no grade teaches it", "Every grade that should teach the standard (its suggested grades, and any grade that names it a priority or power standard) has rated it, and every rating says not taught.", "decide which grade should teach it, or confirm it is intentionally left out.", a.gap, ({ e }) => li(e, `<span class="tag">suggested ${e.pl.map(gl).join(", ")}</span>`, gs), true)}
-      ${sec("maybe", "Possible gaps: waiting for ratings", "Every grade that rated the standard says not taught, but a grade that should teach it has not rated it yet. It becomes a confirmed gap, or not, when that grade rates.", "ask the waiting grade to rate it.", a.maybe, ({ e, missing }) => li(e, `<span class="tag">suggested ${e.pl.map(gl).join(", ")}</span>${waiting(missing)}`, gs))}
-      ${sec("prio", "★ Priority and power standards not taught in depth", "The school's documents name these as priority (6-12) or power (K-5) for a grade, and that grade rates them introduced or not taught.", "check whether the priority list or the teaching should change.", prGap, (x) => li(x.e, `<span class="tag">${gl(x.g)} · ${LEVEL_SHORT[x.r.level]}</span>`, gs), true)}
-      ${sec("prio-un", "★ Priority and power standards not rated yet", "Named priority or power standards that their grade has not rated yet. Unknown, not a gap.", "", prUnrated, (x) => li(x.e, `<span class="tag wait">${gl(x.g)} · not rated</span>`, gs))}
-      ${sec("breaks", "Progression problems", "From the Progressions page, for the standards in view: a middle step where every standard is rated not taught in every grade, or a standard taught in depth while the standard it builds on is not taught anywhere. Only fully rated steps are checked.", "open the progression to see every step.", breaks, flagLi)}
+      ${sec("gap", "Confirmed gaps: not taught in any grade that could teach it", "Rated not taught by its suggested grade(s), by any grade that names it a priority or power standard, by any grade whose plans cite it and, for a standard placed in a band (such as high school), by every grade of the band.", "decide which grade should teach it, or confirm it is intentionally left out.", a.gap, ({ e }) => li(e, `<span class="tag">suggested ${e.pl.map(gl).join(", ")}</span>`, gs), true)}
+      ${sec("maybe", "Possible gaps: not taught where rated, other grades not asked yet", "Every grade that rated the standard says not taught, but a grade that might teach it has not rated it: a suggested or priority grade still to rate (waiting), another grade of its band (not asked), or a grade whose plans cite it.", "ask those grades, or check their plans, before deciding.", a.maybe, ({ e, u }) => li(e, `<span class="tag">suggested ${e.pl.map(gl).join(", ")}</span>${unknownTags(u)}`, gs))}
+      ${sec("prio", "★ Priority and power standards not taught in depth", "The school's documents name these as priority (6-12) or power (K-5) for a grade, and that grade rates them introduced or not taught. Essential Elements take the mark from the standard they link to.", "check whether the priority list or the teaching should change.", prGap, (x) => li(x.e, `<span class="tag">${gl(x.g)} · ${LEVEL_SHORT[x.r.level]}</span>`, gs))}
+      ${sec("prio-un", "★ Priority and power standards not rated yet", "Named priority or power standards, placed in the grade that names them, that it has not rated yet. Unknown, not a gap.", "", prUnrated, (x) => li(x.e, `<span class="tag wait">${gl(x.g)} · not rated</span>`, gs))}
+      ${sec("breaks", "Progression problems", `From the Progressions page${g ? `, involving ${esc(gname(g))} (in it, or caused by its ratings)` : ""}: a middle step where every standard is rated not taught and no grade that rated them teaches them, or a standard taught in depth while a standard it builds on is not taught where rated. Only fully rated steps are checked. The tag says whether the link between the two standards is official or inferred from wording.`, "open the progression to see every step.", breaks, flagLi)}
       ${sec("dup", "Possible duplication: taught in depth again later", "Taught in depth in a grade after its suggested grade (often its own grade too).", "agree which grade owns it; the later grade can review or extend it.", a.dup, (x) => li(x.e, `<span class="tag">in depth: ${x.gs.map(gl).join(", ")} (suggested ${x.e.pl.map(gl).join(", ")})</span>`, gs))}
       ${sec("early", "Taught in depth before its suggested grade", "An earlier grade teaches it in depth (sometimes as well as its own grade). This is a placement question, not a duplicate.", "decide whether the standard belongs in the earlier grade.", a.early, (x) => li(x.e, `<span class="tag">in depth: ${x.gs.map(gl).join(", ")} (suggested ${x.e.pl.map(gl).join(", ")})</span>`, gs))}
       ${sec("plans", "In the plans, but marked not taught", "A grade's curriculum documents cite the standard, but the grade says it is not taught.", "check the plan or the rating.", planNot, (x) => li(x.e, `<span class="tag">${gl(x.g)}</span>`, gs))}
-      ${sec("weak", "Only introduced: no grade teaches it in depth", "Rated, but no grade that rated it reports teaching, practising and assessing it.", "decide where it should be taught in depth.", a.weak, ({ e, missing }) => li(e, `<span class="tag">suggested ${e.pl.map(gl).join(", ")}</span>${waiting(missing)}`, gs))}
+      ${sec("weak", "Only introduced: no grade teaches it in depth", "Rated, but no grade that rated it reports teaching, practising and assessing it.", "decide where it should be taught in depth.", a.weak, ({ e, u }) => li(e, `<span class="tag">suggested ${e.pl.map(gl).join(", ")}</span>${unknownTags(u)}`, gs))}
       ${sec("placed", "Not taught in the suggested grade, but taught elsewhere", "The suggested grade says not taught while another grade teaches it.", "consider moving the standard to the grade that teaches it.", a.placedNot, (x) => li(x.e, `<span class="tag">${gl(x.g)} says not taught</span>`, gs))}
       ${sec("moves", "Taught in a grade other than the suggested one", "A grade teaches a standard that is suggested for another grade. This can be healthy review or extension.", "use these when deciding where standards belong.", a.elsewhere, (x) => li(x.e, `<span class="tag sg">${gl(x.g)} · ${LEVEL_SHORT[x.l]} (suggested ${x.e.pl.map(gl).join(", ")})</span>`, gs))}
       ${sec("reinforce", "Reinforcement across a band", "A standard written for several grades (for example 9-10) taught in depth in more than one of them. Usually healthy.", "check the expectation rises from one grade to the next.", a.reinforce, (x) => li(x.e, `<span class="tag">in depth: ${x.gs.map(gl).join(", ")}</span>`, gs))}
@@ -983,25 +1015,34 @@
   // then priority standards, plans, the weakest strand, possible moves. Each item: [title, standards, flags, id].
   // Used by the dashboard (one subject in full) and its cross-subject list (counts only).
   function gradeReview(g, subject, list) {
-    const lv = (e) => rating(e.f, e.c, g)?.level, main = list.filter((e) => !isEE(e.f));
-    const hasPlans = S.idx[S.meta.subjects.find((x) => x.name === subject).slug].some((e) => isPn(e, g));
-    const pr = list.filter((e) => isPr(e, g)), prLow = pr.filter((e) => lv(e) != null && lv(e) < 2), prUn = pr.filter((e) => lv(e) == null);
-    const planNot = list.filter((e) => isPn(e, g) && lv(e) === 0);
-    const notPlan = hasPlans ? main.filter((e) => !isPn(e, g) && lv(e) === 2) : [];
-    const extra = S.idx[S.meta.subjects.find((x) => x.name === subject).slug].filter((e) => !e.pl.includes(g) && (lv(e) || 0) > 0 && (!S.f.framework || subject !== S.f.subject || e.f === S.f.framework));
-    const flags = progFlags(subject, GRADES), here = flags.filter(({ f }) => f.g === g || (f.gs || []).includes(g)), caused = flags.filter(({ f }) => f.cause === g && f.g !== g);
+    const lv = (e) => rating(e.f, e.c, g)?.level, sl = S.meta.subjects.find((x) => x.name === subject).slug;
+    const hasPlans = S.idx[sl].some((e) => isPn(e, g));
+    // Counts are for the main standards; Essential Elements linked to them are added in brackets, never mixed in.
+    const split = (arr) => [arr.filter((e) => !isEE(e.f)), arr.filter((e) => isEE(e.f))];
+    const pr = list.filter((e) => isPr(e, g)), [prLow, prLowEE] = split(pr.filter((e) => lv(e) != null && lv(e) < 2)), [prUn, prUnEE] = split(pr.filter((e) => lv(e) == null));
+    const [planNot, planNotEE] = split(list.filter((e) => isPn(e, g) && lv(e) === 0));
+    const notPlan = hasPlans ? list.filter((e) => !isEE(e.f) && !isPn(e, g) && lv(e) === 2) : [];
+    const [extra, extraEE] = split(S.idx[sl].filter((e) => !e.pl.includes(g) && (lv(e) || 0) > 0 && (!S.f.framework || subject !== S.f.subject || e.f === S.f.framework)));
+    const flags = progFlags(subject, GRADES);
+    // Problems that reach a later grade, counted by the standards rated here that cause them; then problems in this grade
+    // that are not the same thing seen from the other side.
+    const caused = flags.filter(({ f }) => f.cause === g && f.g !== g), causeKeys = new Set(caused.flatMap(({ f }) => f.ka ? [f.ka] : f.ks || []));
+    const causedF = new Set(caused.map(({ f }) => f)), here = flags.filter(({ f }) => (f.g === g || (f.gs || []).includes(g)) && !causedF.has(f));
     const strands = []; for (const e of list) { const key = e.f + "|" + (e.s || "Other"); let x = strands.find((y) => y.key === key); if (!x) strands.push(x = { key, f: e.f, s: e.s || "Other", arr: [] }); x.arr.push(e); }
     strands.forEach((x) => (x.c = countLevels(x.arr, g)));
     const worst = strands.filter((x) => x.arr.length - x.c[3] >= 3 && x.c[0] / (x.arr.length - x.c[3]) >= 0.4).sort((a, b) => b.c[0] / (b.arr.length - b.c[3]) - a.c[0] / (a.arr.length - a.c[3]))[0];
-    const pl = (n, one, many) => `<b>${n}</b> ${n === 1 ? one : many}`;
+    const pl = (n, one, many) => `<b>${n}</b> ${n === 1 ? one : many}`, ee = (n) => (n ? ` (plus ${n} linked Essential Element${n > 1 ? "s" : ""})` : "");
+    // "5 power standards are rated below in depth (plus 6 linked Essential Elements)", or only the Essential Elements.
+    const both = (m, x, one, many, rest) => (m ? `${pl(m, one, many)} ${rest}${ee(x)}` : `${pl(x, "linked Essential Element is", "linked Essential Elements are")} ${rest}`);
+    const P = prName(g).toLowerCase(), soft = caused.length && caused.every(({ f }) => f.t === "prereq" && !f.official);
     return [
-      caused.length ? [`${pl(caused.length, "standard rated not taught here leaves", "standards rated not taught here leave")} a prerequisite gap in a later grade`, null, caused, "caused"] : null,
+      caused.length ? [`${pl(causeKeys.size || caused.length, "standard rated not taught here leaves", "standards rated not taught here leave")} a ${soft ? "possible " : ""}prerequisite gap in ${gnames([...new Set(caused.map(({ f }) => f.g))])}`, null, caused, "caused"] : null,
       here.length ? [`${pl(here.length, "progression problem", "progression problems")} in ${esc(gname(g))}`, null, here, "here"] : null,
-      prLow.length ? [`${pl(prLow.length, `${prName(g).toLowerCase()} standard is`, `${prName(g).toLowerCase()} standards are`)} rated below in depth`, prLow, null, "prlow"] : null,
-      planNot.length ? [`${pl(planNot.length, "standard is", "standards are")} in the grade's plans but marked not taught`, planNot, null, "plannot"] : null,
-      worst ? [`${badge(worst.f)} <b>${esc(worst.s)}</b>: ${worst.c[0]} of ${worst.arr.length - worst.c[3]} rated standards not taught`, worst.arr.filter((e) => lv(e) === 0), null, "strand"] : null,
-      prUn.length ? [`${pl(prUn.length, `${prName(g).toLowerCase()} standard is`, `${prName(g).toLowerCase()} standards are`)} not rated yet`, prUn, null, "prun"] : null,
-      extra.length ? [`${pl(extra.length, "standard suggested for another grade is", "standards suggested for other grades are")} taught here (possible moves)`, extra, null, "extra"] : null,
+      prLow.length + prLowEE.length ? [both(prLow.length, prLowEE.length, `${P} standard is`, `${P} standards are`, "rated below in depth"), prLow.concat(prLowEE), null, "prlow"] : null,
+      planNot.length + planNotEE.length ? [both(planNot.length, planNotEE.length, "standard is", "standards are", "in the grade's plans but marked not taught"), planNot.concat(planNotEE), null, "plannot"] : null,
+      worst ? [`${badge(worst.f)} <b>${esc(worst.s)}</b>${isEE(worst.f) ? " (Essential Elements)" : ""}: ${worst.c[0]} of ${worst.arr.length - worst.c[3]} rated standards not taught`, worst.arr.filter((e) => lv(e) === 0), null, "strand"] : null,
+      extra.length + extraEE.length ? [both(extra.length, extraEE.length, "standard is", "standards are", "suggested for another grade but taught here (possible moves)"), extra.concat(extraEE), null, "extra"] : null,
+      prUn.length + prUnEE.length ? [both(prUn.length, prUnEE.length, `${P} standard is`, `${P} standards are`, "not rated yet"), prUn.concat(prUnEE), null, "prun"] : null,
       notPlan.length ? [`${pl(notPlan.length, "standard is", "standards are")} taught in depth but not cited in the documents read so far (the plans may not list ${notPlan.length === 1 ? "it" : "them"} yet; Part 2 will check)`, notPlan, null, "notplan"] : null,
     ].filter(Boolean);
   }
@@ -1030,13 +1071,13 @@
         <div class="num">${x.c[2]}/${x.arr.length}</div>`;
     }).join("");
     const review = gradeReview(g, S.f.subject, list);
-    const flagLi = ({ x, f }) => `<li><span class="mk-flag f-${f.t}">${FLAG[f.t]}</span> <button type="button" class="linkish" data-act="goto-lane" data-id="${esc(x.l.id)}">${esc(x.l.name)}</button> <span class="muted">${esc(f.msg)}</span></li>`;
-    const revItem = ([title, arr, br, id], i) => `<details class="rev" data-sec="dash-${id}" ${isOpen("dash-" + id, i === 0) ? "open" : ""}><summary>${title} <span class="tag auto">Automatic check</span></summary>${arr ? `<ul class="gap-list res-list">${arr.slice(0, 15).map((e) => { const r = rating(e.f, e.c, g); return `<li>${badge(e.f)} ${codeHTML(e)} <span class="muted">${esc(e.t.slice(0, 100))}${e.t.length > 100 ? "…" : ""}</span> <span class="pill"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${r ? LEVEL_SHORT[r.level] : "Not rated"}</span>${!e.pl.includes(g) ? ` <span class="tag sg">suggested ${esc(e.pl.map(gl).join(", "))}</span>` : ""}</li>`; }).join("")}</ul>${arr.length > 15 ? `<p class="muted">and ${arr.length - 15} more.</p>` : ""}` : ""}
+    const flagLi = ({ x, f }) => `<li><span class="mk-flag f-${f.t}${f.t === "prereq" && !f.official ? " soft" : ""}">${flagName(f)}</span> <button type="button" class="linkish" data-act="goto-lane" data-id="${esc(x.l.id)}">${esc(x.l.name)}</button> <span class="muted">${esc(f.msg)}</span></li>`;
+    const revItem = ([title, arr, br, id], i) => `<details class="rev" data-sec="dash-${id}" ${isOpen("dash-" + id, i === 0 && !["prun", "notplan", "extra"].includes(id)) ? "open" : ""}><summary>${title} <span class="tag auto">Automatic check</span></summary>${arr ? `<ul class="gap-list rev-list">${arr.slice(0, 15).map((e) => { const r = rating(e.f, e.c, g); return `<li><span class="rv-code">${badge(e.f)} ${codeHTML(e)}</span> <span class="muted">${esc(e.t.slice(0, 100))}${e.t.length > 100 ? "…" : ""}</span> <span class="pill"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${r ? LEVEL_SHORT[r.level] : "Not rated"}</span>${!e.pl.includes(g) ? ` <span class="tag sg">suggested ${esc(e.pl.map(gl).join(", "))}</span>` : ""}</li>`; }).join("")}</ul>${arr.length > 15 ? `<p class="muted">and ${arr.length - 15} more.</p>` : ""}` : ""}
       ${br ? `<ul class="issues">${br.map(flagLi).join("")}</ul>` : ""}</details>`;
     const subs = S.meta.subjects.map((x) => x.name).filter((sb) => teamOf(g, sb));
     const gi = GRADES.indexOf(g), near = [GRADES[gi - 1], GRADES[gi + 1]];
     el.innerHTML = backBar() + `<p class="grade-nav">${near[0] ? `<button type="button" class="linkish" data-act="grade" data-g="${near[0]}">← ${esc(gname(near[0]))}</button>` : ""}${near[1] ? `<button type="button" class="linkish" data-act="grade" data-g="${near[1]}">${esc(gname(near[1]))} →</button>` : ""}</p>` + gradeOverview(g, subs, true) + `<div class="panel insights"><h2>${esc(gname(g))} · ${esc(S.f.subject)} ${hb("dashboard")}</h2>
-      <p class="lede">${rated ? `${rated} of ${main.length} main standards rated (${Math.round((rated / main.length) * 100)}%): ${tot[2]} taught in depth, ${tot[1]} introduced, ${tot[0]} not taught.${ee.length ? ` Essential Elements: ${ee.length - eeC[3]} of ${ee.length} rated.` : ""}${ratedStrands.length > 1 ? ` Strongest strand: <b>${esc(ratedStrands[0].s)}</b>; most room to grow: <b>${esc(ratedStrands[ratedStrands.length - 1].s)}</b>.` : ""}` : `No ratings yet for ${esc(gname(g))} ${esc(S.f.subject)}. This page fills in as the team rates.`} <span class="muted">Sets: ${setsFor(S.f.subject, g).map(badge).join(" ")} (the team's choice${S.f.framework ? "; the Standard set filter is narrowing it" : ""}). Updates as teams rate.</span></p>
+      <p class="lede">${rated ? `${rated} of ${main.length} main standards rated (${Math.round((rated / main.length) * 100)}%): ${tot[2]} taught in depth, ${tot[1]} introduced, ${tot[0]} not taught.${ee.length ? ` Essential Elements: ${ee.length - eeC[3]} of ${ee.length} rated.` : ""}${ratedStrands.length > 1 ? ` Strongest strand: <b>${esc(ratedStrands[0].s)}</b>; most room to grow: <b>${ratedStrands.filter((x) => x.score === ratedStrands[ratedStrands.length - 1].score).map((x) => esc(x.s)).join("</b> and <b>")}</b>.` : ""}` : `No ratings yet for ${esc(gname(g))} ${esc(S.f.subject)}. This page fills in as the team rates.`} <span class="muted">Sets: ${setsFor(S.f.subject, g).map(badge).join(" ")} (the team's choice${S.f.framework ? "; the Standard set filter is narrowing it" : ""}). Updates as teams rate.</span></p>
       <h3>What to review ${hb("dash_review")}</h3>
       ${review.length ? review.map(revItem).join("") : `<p class="muted">${rated ? "Nothing stands out yet." : "Nothing to review until the team rates its standards."}</p>`}
       <div class="tiles">
@@ -1061,75 +1102,90 @@
   //   prereq   a standard taught in depth while a standard it builds on is rated not taught and taught nowhere
   //   repeat   a standard taught in depth in two or more grades (reinforcement across a band, or possible duplication)
   //   same     a standard with the same wording as the one it builds on (the standard itself does not rise)
-  const MIN_SIM = 0.12;
+  const MIN_SIM = 0.12, PRE_SIM = 0.25;   // links shown as "builds on"; links strong enough to support a prerequisite verdict
   const BASIS = { anchor: "Official anchor standard", dci: "Official core idea (NGSS), joined by matches", wiss: "Official Wisconsin standard, K-5 by suggested matches", topic: "Inferred topic" };
-  const FLAG = { break: "Break", moved: "Taught in another grade", prereq: "Prerequisite gap", repeat: "Repeated in depth", same: "Same wording" };
+  const FLAG = { break: "Break", moved: "Taught in another grade", prereq: "Prerequisite gap", repeat: "Repeated in depth", reinforce: "Reinforced across grades", same: "Same wording" };
+  const flagName = (f) => (f.t === "prereq" && !f.official ? "Possible prerequisite gap" : FLAG[f.t]);
+  const linkBasis = (l, one) => (l.basis === "anchor" ? (one ? "same anchor standard, official" : "same anchor standard (official); matching part inferred from wording") : "link inferred from wording");
   const home = (e) => { const h = e.pl.filter((g) => !(e.pa || []).includes(g)); return h.length ? h : e.pl; };
   const taughtIn = (e) => GRADES.filter((g) => (rating(e.f, e.c, g)?.level || 0) > 0);
-  const gnames = (gs) => gs.map(gname).join(" and ");
-  // One step: every standard in each of its own grades. full = every one rated.
+  const gnames = (gs) => (gs.length < 2 ? gs.map(gname).join("") : gs.slice(0, -1).map(gname).join(", ") + " and " + gname(gs[gs.length - 1]));
+  const verb = (n, one, many) => (n > 1 ? many : one);
+  // A standard is "fully not taught" when every grade it is placed in (its own grade and any grade whose plans cite it)
+  // rated it not taught and no other grade says it teaches it.
+  const fullyNot = (e) => e.pl.every((g) => rating(e.f, e.c, g)?.level === 0) && !taughtIn(e).length;
+  // One step: every standard in each grade it is placed in (including grades added because their plans cite it).
   function stepState(st) {
     let n = 0, rated = 0, deep = 0, intro = 0, not = 0;
     for (const k of st.k) {
       const e = S.byKey.get(k);
-      for (const g of home(e).filter((x) => st.g.includes(x))) { n++; const r = rating(e.f, e.c, g); if (!r) continue; rated++; if (r.level === 2) deep++; else if (r.level === 1) intro++; else not++; }
+      for (const g of e.pl) { n++; const r = rating(e.f, e.c, g); if (!r) continue; rated++; if (r.level === 2) deep++; else if (r.level === 1) intro++; else not++; }
     }
     return { n, rated, deep, intro, not, full: n > 0 && rated === n,
       state: !rated ? "unrated" : !deep && !intro ? "not" : not ? "mixed" : deep >= intro ? "deep" : "intro" };
   }
   // laneInfo(lane, grades in view, keys): keys (optional) keeps only those standards, so the set, strand and Standards
-  // filters narrow the steps. Remembered until the next redraw.
+  // filters narrow the steps. Remembered until the next redraw. Only fully rated standards and steps are judged.
   const laneMemo = new Map();
   function laneInfo(l, gs, keys) {
     const mk = keys ? null : l.id + "|" + gs.join(); if (mk && laneMemo.has(mk)) return laneMemo.get(mk);
-    const steps = l.steps.map((st) => ({ ...st, k: st.k.filter((k) => S.byKey.has(k) && (!keys || keys.has(k))) }))
+    const steps = l.steps.map((st) => { const k = st.k.filter((x) => S.byKey.has(x) && (!keys || keys.has(x)));
+        return { ...st, k, g: GRADES.filter((g) => k.some((x) => S.byKey.get(x).pl.includes(g))) }; })
       .filter((st) => st.k.length && st.g.some((g) => gs.includes(g))).map((st) => ({ ...st, s: stepState(st) }));
-    const flags = [], inLane = new Set(steps.flatMap((st) => st.k)), seen = new Set();
-    const vis = (st) => st.g.filter((g) => gs.includes(g)), taught = (st) => st.s.deep + st.s.intro > 0;
+    const flags = [], inLane = new Set(steps.flatMap((st) => st.k)), stepOf = new Map(steps.flatMap((st, i) => st.k.map((k) => [k, i])));
+    const vis = (st) => st.g.filter((g) => gs.includes(g)), taught = (st) => st.s.deep + st.s.intro > 0, broken = new Set();
     steps.forEach((st, i) => {
       if (!(i > 0 && i < steps.length - 1 && st.s.full && st.s.state === "not" && steps.slice(0, i).some(taught) && steps.slice(i + 1).some(taught))) return;
       const es = st.k.map((k) => S.byKey.get(k)), elsewhere = [...new Set(es.flatMap(taughtIn))].sort((a, b) => GRADES.indexOf(a) - GRADES.indexOf(b));
+      if (!elsewhere.length) broken.add(i);
       flags.push(!elsewhere.length
-        ? { t: "break", g: vis(st)[0], gs: vis(st), msg: `Breaks in ${gnames(vis(st))}: every standard in this step is rated not taught and no grade teaches them, although earlier and later grades teach the idea.` }
-        : { t: "moved", g: vis(st)[0], gs: vis(st), msg: `${gnames(vis(st))} rates this step not taught, but ${gnames(elsewhere)} teach${elsewhere.length > 1 ? "" : "es"} ${es.filter((e) => taughtIn(e).length).map(codeText).join(", ")}. The idea may simply sit in another grade.` });
+        ? { t: "break", g: vis(st)[0], gs: vis(st), ks: st.k, official: l.basis !== "topic", msg: `Breaks in ${gnames(vis(st))}: every standard in this step is rated not taught there and no grade teaches ${verb(es.length, "it", "them")}, although earlier and later grades teach the idea.` }
+        : { t: "moved", g: vis(st)[0], gs: vis(st), ks: st.k, msg: `${gnames(vis(st))} ${verb(vis(st).length, "rates", "rate")} this step not taught, but ${gnames(elsewhere)} ${verb(elsewhere.length, "teaches", "teach")} ${es.filter((e) => taughtIn(e).length).map(codeText).join(", ")}. The idea may simply sit in another grade.` });
     });
-    // Prerequisite gaps, standard by standard along the links (only links close enough to count).
-    for (const [a, b, sm] of l.links) {
-      if (sm < MIN_SIM || !inLane.has(a) || !inLane.has(b) || seen.has(a + b)) continue;
-      const ea = S.byKey.get(a), eb = S.byKey.get(b), bDeep = home(eb).filter((g) => gs.includes(g) && rating(eb.f, eb.c, g)?.level === 2), aH = home(ea).filter((g) => gs.includes(g));
-      if (bDeep.length && aH.length && aH.every((g) => rating(ea.f, ea.c, g)?.level === 0) && !taughtIn(ea).length) {
-        seen.add(a + b);
-        flags.push({ t: "prereq", g: bDeep[0], cause: aH[0], k: b, ka: a, msg: `${codeText(eb)} is taught in depth in ${gname(bDeep[0])}, but ${codeText(ea)}, which it builds on (${gnames(aH)}), is rated not taught and no grade teaches it.` });
-      }
+    // Prerequisite gaps, standard by standard: a standard taught in depth where every standard it builds on (by a close
+    // link) is fully rated and not taught anywhere. A gap already explained by a Break is not repeated.
+    const into = new Map(); for (const [a, b, sm] of l.links) if (sm >= MIN_SIM && inLane.has(a) && inLane.has(b)) (into.get(b) || into.set(b, []).get(b)).push([a, sm]);
+    for (const [b, from] of into) {
+      const eb = S.byKey.get(b), bDeep = eb.pl.filter((g) => gs.includes(g) && rating(eb.f, eb.c, g)?.level === 2), best = Math.max(...from.map((x) => x[1]));
+      const prevStep = steps[stepOf.get(from[0][0])], one = prevStep && prevStep.k.length === 1;
+      if (!bDeep.length || (l.basis !== "anchor" && best < PRE_SIM)) continue;
+      const as = from.map(([a]) => S.byKey.get(a));
+      if (!as.every(fullyNot) || as.some((ea) => broken.has(stepOf.get(ea.f + "|" + ea.c)))) continue;
+      const ea = as[0], aG = ea.pl.filter((g) => gs.includes(g)), official = l.basis === "anchor" && one;
+      flags.push({ t: "prereq", g: bDeep[0], cause: aG[0], k: b, ka: ea.f + "|" + ea.c, official, msg: `${codeText(eb)} is taught in depth in ${gname(bDeep[0])}, but ${as.map(codeText).join(" and ")}, which it builds on (${gnames(aG)}; ${linkBasis(l, one)}), ${verb(as.length, "is", "are")} rated not taught and no grade teaches ${verb(as.length, "it", "them")}.` });
     }
-    // Without a close link, the same check step to step: a whole earlier step rated not taught and taught nowhere.
+    // Without a close link, the same check step to step, in the official order of the progression.
     steps.forEach((st, i) => {
       const prev = steps[i - 1];
-      if (!prev || !st.s.deep || !prev.s.full || prev.s.state !== "not" || flags.some((f) => f.t === "prereq" && st.k.includes(f.k))) return;
-      if (prev.k.some((k) => taughtIn(S.byKey.get(k)).length)) return;
-      flags.push({ t: "prereq", g: vis(st)[0], cause: vis(prev)[0], msg: `${gnames(vis(st))} teaches this idea in depth, but every standard in the step before (${gnames(vis(prev))}) is rated not taught and no grade teaches them.` });
+      if (!prev || !st.s.deep || !prev.s.full || prev.s.state !== "not" || broken.has(i - 1) || flags.some((f) => f.t === "prereq" && st.k.includes(f.k))) return;
+      if (!prev.k.every((k) => fullyNot(S.byKey.get(k)))) return;
+      flags.push({ t: "prereq", g: vis(st)[0], cause: vis(prev)[0], ks: prev.k, official: l.basis !== "topic", msg: `${gnames(vis(st))} ${verb(vis(st).length, "teaches", "teach")} this idea in depth, but every standard in the step before (${gnames(vis(prev))}) is rated not taught and no grade teaches them.` });
     });
     for (const st of steps) for (const k of st.k) {
       const e = S.byKey.get(k), deepIn = GRADES.filter((g) => gs.includes(g) && rating(e.f, e.c, g)?.level === 2);
-      if (deepIn.length > 1) flags.push({ t: "repeat", g: deepIn[0], gs: deepIn, k, msg: deepIn.every((g) => e.pl.includes(g))
-        ? `${codeText(e)} is taught in depth in ${gnames(deepIn)}, the grades of its band: reinforcement across the band. Check the expectation rises.`
-        : `${codeText(e)} (suggested for ${gnames(e.pl)}) is taught in depth in ${gnames(deepIn)}: possible duplication. Agree which grade owns it.` });
+      if (deepIn.length < 2) continue;
+      const own = deepIn.every((g) => e.pl.includes(g)), added = deepIn.filter((g) => (e.pa || []).includes(g));
+      flags.push(own ? { t: "reinforce", g: deepIn[0], gs: deepIn, k, msg: `${codeText(e)} is taught in depth in ${gnames(deepIn)}${added.length ? ` (${gnames(added)} ${verb(added.length, "rates", "rate")} it because ${verb(added.length, "its", "their")} plans cite it)` : ", the grades of its band"}: reinforcement. Check the expectation rises.` }
+        : { t: "repeat", g: deepIn[0], gs: deepIn, k, msg: `${codeText(e)} (suggested for ${gnames(e.pl)}) is taught in depth in ${gnames(deepIn)}: possible duplication. Agree which grade owns it.` });
     }
+    // Same wording: compared in the Wisconsin 2020 text (what the site shows); Common Core versions can differ slightly.
     for (const [a, b, , same] of l.links) if (same && inLane.has(a) && inLane.has(b)) {
       const ea = S.byKey.get(a), eb = S.byKey.get(b);
-      flags.push({ t: "same", g: home(eb)[0], k: b, ka: a, msg: `${codeText(eb)} (${gl(home(eb)[0])}) has the same wording as ${codeText(ea)} (${gl(home(ea)[0])}), so the standard itself does not say how the expectation rises${eb.s === "Reading" ? " (in Reading it usually rises through more complex texts)" : ""}.` });
+      flags.push({ t: "same", g: home(eb)[0], k: b, ka: a, msg: `In the Wisconsin 2020 text, ${eb.c} (${gl(home(eb)[0])}) reads the same as ${ea.c} (${gl(home(ea)[0])}), so the Wisconsin standard does not say how the expectation rises${eb.s === "Reading" ? " (in Reading it rises through more complex texts)" : ""}. The Common Core versions (${codeText(eb)}, ${codeText(ea)}) can differ slightly: compare them before deciding.` });
     }
     const slots = steps.reduce((n, st) => n + st.s.n, 0), rated = steps.reduce((n, st) => n + st.s.rated, 0), not = steps.reduce((n, st) => n + st.s.not, 0);
-    const status = !steps.length ? "none" : flags.some((f) => f.t === "break" || f.t === "prereq") ? "issue" : steps.length < 2 ? "single" : !rated ? "unrated" : rated < slots ? "partial" : not ? "thin" : "ok";
+    const hard = flags.some((f) => f.t === "break" || (f.t === "prereq" && f.official)), soft = flags.some((f) => f.t === "prereq" && !f.official);
+    const status = !steps.length ? "none" : hard ? "issue" : soft ? "check" : steps.length < 2 ? "single" : !rated ? "unrated" : rated < slots ? "partial" : not ? "thin" : "ok";
     const span = steps.length ? [vis(steps[0])[0], vis(steps[steps.length - 1]).slice(-1)[0]] : [];
     const out = { steps, flags, status, slots, rated, unrated: steps.filter((st) => st.s.state === "unrated").length, span };
     if (mk) laneMemo.set(mk, out);
     return out;
   }
-  // Breaks and prerequisite gaps for one subject, for the Gaps page and the dashboard.
+  // Breaks and prerequisite gaps for one subject, for the Gaps page and the dashboard: official structure first.
+  const flagRank = (f) => (f.t === "break" ? 0 : f.official ? 1 : 2);
   const progFlags = (subject, gs, keys) => (S.prog ? S.prog.lanes.filter((l) => l.subject === subject).map((l) => ({ l, ...laneInfo(l, gs, keys) }))
-    .flatMap((x) => x.flags.filter((f) => f.t === "break" || f.t === "prereq").map((f) => ({ x, f }))) : []);
-  const STATUS = { issue: ["Breaks down", "st-issue"], single: ["One grade only", "st-unrated"], unrated: ["Not rated yet", "st-unrated"], partial: ["Partly rated", "st-partial"], thin: ["Some standards not taught", "st-thin"], ok: ["Builds steadily", "st-ok"] };
+    .flatMap((x) => x.flags.filter((f) => f.t === "break" || f.t === "prereq").map((f) => ({ x, f }))).sort((a, b) => flagRank(a.f) - flagRank(b.f)) : []);
+  const STATUS = { issue: ["Breaks down", "st-issue"], check: ["Possible prerequisite gap", "st-thin"], single: ["One grade only", "st-none"], unrated: ["Not rated yet", "st-none"], partial: ["Partly rated", "st-part"], thin: ["Some standards not taught", "st-thin"], ok: ["Taught at every step", "st-ok"] };
   const laneById = (id) => S.prog.lanes.find((l) => l.id === id);
   const laneMatch = (x, q) => !q || x.l.name.toLowerCase().includes(q) || x.steps.some((st) => st.k.some((k) => { const e = S.byKey.get(k); return e && matchQ(e, q); }));
   const backBar = () => (S.backTo ? `<p class="back-bar"><button type="button" class="linkish" data-act="back-view">← Back to ${esc(S.backTo.label)}</button></p>` : "");
@@ -1145,36 +1201,37 @@
     if (S.pgGroup && !groups.includes(S.pgGroup)) S.pgGroup = "";
     const inGroup = all.filter((x) => !S.pgGroup || x.l.group === S.pgGroup);
     const has = (x, t) => x.flags.some((f) => f.t === t);
-    const pick = { repeat: (x) => has(x, "repeat"), same: (x) => has(x, "same") };
+    const pick = { repeat: (x) => has(x, "repeat"), reinforce: (x) => has(x, "reinforce"), same: (x) => has(x, "same") };
     const shown = inGroup.filter((x) => (!S.pgStatus || (pick[S.pgStatus] ? pick[S.pgStatus](x) : x.status === S.pgStatus)) && laneMatch(x, q));
     const cnt = (k) => inGroup.filter((x) => (pick[k] ? pick[k](x) : x.status === k)).length;
-    const issues = inGroup.flatMap((x) => x.flags.filter((f) => f.t === "break" || f.t === "prereq").map((f) => ({ x, f }))).sort((a, b) => (a.f.t === "prereq" ? 0 : 1) - (b.f.t === "prereq" ? 0 : 1) || GRADES.indexOf(a.f.g) - GRADES.indexOf(b.f.g));
+    const issues = inGroup.flatMap((x) => x.flags.filter((f) => f.t === "break" || f.t === "prereq").map((f) => ({ x, f }))).sort((a, b) => flagRank(a.f) - flagRank(b.f) || GRADES.indexOf(a.f.g) - GRADES.indexOf(b.f.g));
     const moved = inGroup.flatMap((x) => x.flags.filter((f) => f.t === "moved").map((f) => ({ x, f })));
     const slots = inGroup.reduce((n, x) => n + x.slots, 0), rated = inGroup.reduce((n, x) => n + x.rated, 0);
     const strong = inGroup.filter((x) => x.status === "ok" && !has(x, "same")).sort((a, b) => b.steps.length - a.steps.length).slice(0, 3);
     const chip = (k, label) => `<button type="button" class="lib-t ${(S.pgStatus || "") === k ? "on" : ""}" data-act="pg-status" data-s="${k}">${label} <span>${k ? cnt(k) : inGroup.length}</span></button>`;
     const go = (x) => `<button type="button" class="linkish" data-act="lane-go" data-id="${esc(x.l.id)}">${esc(x.l.name)}</button>`;
-    const fl = ({ x, f }) => `<li><span class="mk-flag f-${f.t}">${FLAG[f.t]}</span> ${go(x)} <span class="muted">${esc(f.msg)}</span></li>`;
+    const fl = ({ x, f }) => `<li><span class="mk-flag f-${f.t}${f.t === "prereq" && !f.official ? " soft" : ""}">${flagName(f)}</span> ${go(x)} <span class="muted">${esc(f.msg)}</span></li>`;
     const card = (n, label, sub, cls, k) => `<button type="button" class="ins ${n ? cls : ""}" data-act="pg-status" data-s="${k}"><b>${n}</b><span>${label}</span><small>${sub}</small></button>`;
     el.innerHTML = backBar() + `<div class="panel insights"><h2>${esc(S.f.subject)} progressions, ${esc(divLabel(S.f.division))} ${hb("ladder")}</h2>
       <p class="lede">Each row follows one idea across the grades. Each box is one grade: how many standards, and a bar of how that grade rates them. The line shows how the idea builds from grade to grade.${g ? ` Showing the progressions with a step in ${esc(gname(g))} (its column is highlighted).` : ""} <span class="muted">Every verdict is an automatic check over the ratings so far.</span></p>
       <div class="ins-grid">
-        ${card(cnt("issue"), "progressions break down", "a whole step not taught anywhere, or a standard taught in depth without the one it builds on", "ins-issue", "issue")}
-        ${card(cnt("repeat"), "repeat a standard in depth", "the same standard taught in depth in two or more grades", "ins-warn", "repeat")}
-        ${card(cnt("same"), "repeat the same wording", "a grade's standard reads the same as the one before it", "ins-warn", "same")}
-        ${card(cnt("ok"), "build steadily", "two or more grades; every standard rated and taught in its grade", "ins-ok", "ok")}
+        ${card(cnt("issue"), "progressions break down", "a whole step not taught where rated, or in depth without an official prerequisite", "ins-issue", "issue")}
+        ${card(cnt("check"), "possible prerequisite gaps", "taught in depth while the standard it seems to build on (inferred from wording) is not taught: check", "ins-warn", "check")}
+        ${card(cnt("repeat"), "repeat a standard in depth", "taught in depth again in a grade it is not placed in (possible duplication)", "ins-warn", "repeat")}
+        ${card(cnt("same"), "repeat the same wording", "a grade's Wisconsin standard reads the same as the one before it", "ins-warn", "same")}
+        ${card(cnt("ok"), "taught at every step", "two or more grades; every standard rated and at least introduced", "ins-ok", "ok")}
         <div class="ins ins-data"><b>${slots ? Math.round((rated / slots) * 100) : 0}%</b><span>of standards rated</span><small>${slots - rated} of ${slots} still to rate: unknown, not a gap</small></div>
       </div>
-      ${issues.length ? `<h3>Where progression breaks down <span class="tag auto">Automatic check</span></h3><ul class="issues">${issues.slice(0, 8).map(fl).join("")}</ul>${issues.length > 8 ? `<p class="muted">${issues.length - 8} more: choose <b>Breaks down</b> below.</p>` : ""}`
+      ${issues.length ? `<h3>Where progression breaks down <span class="tag auto">Automatic check</span> ${hb("pl_breaks")}</h3><ul class="issues">${issues.slice(0, 8).map(fl).join("")}</ul>${issues.length > 8 ? `<p class="muted">${issues.length - 8} more: choose <b>Breaks down</b> or <b>Possible prerequisite gap</b> below.</p>` : ""}`
         : `<p class="muted">${rated ? "No breaks found in the fully rated steps so far." : "No ratings yet, so breaks cannot be checked. Rows show the standards only."}</p>`}
       ${moved.length ? `<details class="rev" data-sec="pg-moved" ${isOpen("pg-moved") ? "open" : ""}><summary><b>${moved.length}</b> step${moved.length > 1 ? "s" : ""} rated not taught in ${moved.length > 1 ? "their" : "its"} grade but taught in another grade <span class="tag auto">Automatic check</span></summary><ul class="issues">${moved.map(fl).join("")}</ul></details>` : ""}
-      ${strong.length ? `<p class="muted">Building steadily: ${strong.map(go).join(", ")}.</p>` : ""}
+      ${strong.length ? `<p class="muted">Taught at every step: ${strong.map(go).join(", ")}.</p>` : ""}
     </div>
     <div class="panel"><div class="pl-tools">
       <label><span>Group ${hb("pl_group")}</span><select id="pg-group"><option value="">All groups (${all.length})</option>${groups.map((gr) => `<option ${gr === S.pgGroup ? "selected" : ""} value="${esc(gr)}">${esc(gr)}</option>`).join("")}</select></label>
-      <div class="lib-tabs">${chip("", "All")}${chip("issue", "Breaks down")}${chip("repeat", "Repeated in depth")}${chip("same", "Same wording")}${chip("thin", "Some not taught")}${chip("partial", "Partly rated")}${chip("unrated", "Not rated")}${chip("ok", "Builds steadily")}${chip("single", "One grade only")} ${hb("pl_status")}</div></div>
+      <div class="lib-tabs">${chip("", "All")}${chip("issue", "Breaks down")}${chip("check", "Possible prerequisite gap")}${chip("repeat", "Repeated in depth")}${chip("reinforce", "Reinforced")}${chip("same", "Same wording")}${chip("thin", "Some not taught")}${chip("partial", "Partly rated")}${chip("unrated", "Not rated")}${chip("ok", "Taught at every step")}${chip("single", "One grade only")} ${hb("pl_status")}</div></div>
       <div class="pl-key"><span><span class="pl-cell has key-cell"><span class="pc-n">3<i class="pc-star">★</i></span><span class="pc-bar"><i class="b2" style="flex:1"></i><i class="b1" style="flex:1"></i><i class="b3" style="flex:1"></i></span></span>Each box: how many standards in that grade, with a bar of their ratings (lime in depth, blue introduced, magenta not taught, grey not rated). ★ includes a priority or power standard. A pink box has a standard rated not taught.</span>
-        <span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-ok"/></svg>Rated and taught in both grades</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-break"/></svg>A step rated not taught</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-un"/></svg>Not fully rated yet</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-skip"/></svg>No standard in the grades between</span> ${hb("pl_key")}</div>
+        <span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-ok"/></svg>Rated and taught in both grades</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-pre"/></svg>Prerequisite gap (official link)</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-break"/></svg>A step rated not taught, or a possible prerequisite gap</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-un"/></svg>Not fully rated yet</span><span><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" class="seg-skip"/></svg>No standard in the grades between</span> ${hb("pl_key")}</div>
       <div class="pl-head"><div class="pl-name"><b>Progression</b></div><div class="pl-track" style="grid-template-columns:repeat(${gs.length},1fr)">${gs.map((x) => `<span data-gi="${x}" class="${g === x ? "sel" : ""}">${gl(x)}</span>`).join("")}</div></div>
       ${shown.map((x) => laneRow(x, gs, S.lane === x.l.id, q)).join("") || `<div class="empty">${q ? "No progression matches your search." : "No progressions in this view."}</div>`}</div>`;
     if (S.laneScroll) { const r = document.getElementById("lane-" + S.lane); if (r) r.scrollIntoView({ block: "start", behavior: "smooth" }); S.laneScroll = false; }
@@ -1184,31 +1241,32 @@
     let svg = "";
     for (let i = 0; i + 1 < x.steps.length; i++) {
       const a = x.steps[i].s, b = x.steps[i + 1].s;
-      const cls = !a.full || !b.full ? "seg-un" : a.state === "not" || b.state === "not" ? "seg-break" : pos[i + 1] - pos[i] > 1 ? "seg-skip" : "seg-ok";
+      // A prerequisite gap into the later step shows on the line itself: solid magenta (official) or dashed (inferred).
+      const pre = x.flags.filter((f) => f.t === "prereq" && (x.steps[i + 1].k.includes(f.k) || (!f.k && x.steps[i + 1].g.includes(f.g))));
+      const cls = pre.some((f) => f.official) ? "seg-pre" : pre.length ? "seg-break" : !a.full || !b.full ? "seg-un" : a.state === "not" || b.state === "not" ? "seg-break" : pos[i + 1] - pos[i] > 1 ? "seg-skip" : "seg-ok";
       svg += `<line x1="${pos[i] * 100 + 50}" y1="20" x2="${pos[i + 1] * 100 + 50}" y2="20" class="${cls}" vector-effect="non-scaling-stroke"/>`;
     }
     const cells = gs.map((g) => {
-      const st = x.steps.find((s2) => s2.g.includes(g)), sel = S.f.grade === g ? " sel" : "";
-      const es = st ? st.k.map((k) => S.byKey.get(k)).filter((e) => home(e).includes(g)) : [];
+      const sel = S.f.grade === g ? " sel" : "", es = x.steps.flatMap((st) => st.k).map((k) => S.byKey.get(k)).filter((e) => e.pl.includes(g));
       if (!es.length) return `<div class="pl-cell${sel}"></div>`;
       // One box per grade: how many standards, a bar of their ratings, and a star if any is a priority or power standard.
       const c = countLevels(es, g), pr = es.filter((e) => isPr(e, g)).length, r = es.length - c[3];
       const tint = !r ? "pc-un" : c[0] === r ? "pc-not" : c[0] ? "pc-mix" : c[3] ? "pc-part" : "pc-ok";
       const tip = `${gname(g)}: ${es.length} standard${es.length === 1 ? "" : "s"}. ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? `, ${c[3]} not rated` : ""}${pr ? `. ${pr} ${prName(g).toLowerCase()}` : ""}. ${es.map(codeText).join(", ")}`;
-      return `<div class="pl-cell has ${tint}${sel}" data-tip-text="${esc(tip)}"><span class="pc-n">${es.length}${pr ? `<i class="pc-star">★</i>` : ""}</span><span class="pc-bar">${[2, 1, 0, 3].map((i) => (c[i] ? `<i class="b${i}" style="flex:${c[i]}"></i>` : "")).join("")}</span></div>`;
+      return `<div class="pl-cell has ${tint}${sel}" data-tip-text="${esc(tip)}" tabindex="0" role="button" aria-label="${esc(tip)}. Open this progression." data-act="lane-open" data-id="${esc(l.id)}"><span class="pc-n">${es.length}${pr ? `<i class="pc-star">★</i>` : ""}</span><span class="pc-bar">${[2, 1, 0, 3].map((i) => (c[i] ? `<i class="b${i}" style="flex:${c[i]}"></i>` : "")).join("")}</span></div>`;
     }).join("");
     const types = new Set(x.flags.map((f) => f.t)), [label, cls] = STATUS[x.status] || ["", ""];
     const next = (l.next || []).map(laneById).filter((y) => y && y.subject === l.subject);
     return `<div class="pl-row ${open ? "open" : ""}" id="lane-${esc(l.id)}"><div class="pl-name"><button type="button" class="pl-open" data-act="lane" data-id="${esc(l.id)}" aria-expanded="${open}">${hl(l.name, q)}</button>
         <small>${esc(l.group)} · <span class="basis b-${l.basis}">${BASIS[l.basis]}</span> · ${x.span[0] === x.span[1] ? esc(gl(x.span[0])) : `${esc(gl(x.span[0]))} to ${esc(gl(x.span[1]))}`}${next.length ? ` · continues in ${next.map((y) => `<button type="button" class="linkish" data-act="lane-go" data-id="${esc(y.id)}">${esc(y.name.split(" (")[0])}</button>`).join(", ")}` : ""}</small>
-        <span class="pl-flags" title="Automatic checks over the ratings so far"><span class="st ${cls}">${label}</span>${types.has("repeat") ? `<span class="st st-repeat">Repeated in depth</span>` : ""}${types.has("same") ? `<span class="st st-repeat">Same wording</span>` : ""}${types.has("moved") ? `<span class="st st-partial">Taught in another grade</span>` : ""}</span></div>
+        <span class="pl-flags" title="Automatic checks over the ratings so far"><span class="st ${cls}">${label}</span>${types.has("repeat") ? `<span class="st st-repeat">Repeated in depth</span>` : ""}${types.has("same") ? `<span class="st st-repeat">Same wording</span>` : ""}${types.has("moved") ? `<span class="st st-part">Taught in another grade</span>` : ""}</span></div>
       <div class="pl-track" style="grid-template-columns:repeat(${n},1fr)"><svg class="pl-svg" viewBox="0 0 ${n * 100} 40" preserveAspectRatio="none" aria-hidden="true">${svg}</svg>${cells}</div></div>
       ${open ? laneDetail(x, gs) : ""}`;
   }
   // Rating pills for every grade a standard belongs to, plus any other grade that teaches it.
   function gradePills(e, gs) {
-    const own = home(e).filter((g) => gs.includes(g)), also = taughtIn(e).filter((g) => !own.includes(g));
-    return own.map((g) => { const r = rating(e.f, e.c, g); return `<span class="pill"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${own.length > 1 ? gl(g) + ": " : ""}${r ? LEVEL_SHORT[r.level] : "Not rated"}</span>`; }).join("")
+    const own = e.pl.filter((g) => gs.includes(g)), also = taughtIn(e).filter((g) => !own.includes(g)), pa = e.pa || [];
+    return own.map((g) => { const r = rating(e.f, e.c, g); return `<span class="pill" title="${pa.includes(g) ? esc(gname(g)) + " rates it because its plans cite it" : ""}"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${own.length > 1 ? gl(g) + (pa.includes(g) ? " (plans)" : "") + ": " : ""}${r ? LEVEL_SHORT[r.level] : "Not rated"}</span>`; }).join("")
       + (also.length ? `<span class="tag sg">also taught in ${also.map(gl).join(", ")}</span>` : "");
   }
   function laneDetail(x, gs) {
@@ -1223,12 +1281,13 @@
         html += `<div class="pd-gap">No standard for this idea is placed in ${gs.slice(lastIdx + 1, gi).map(gname).join(", ")}. ${near ? "These standards are written for a grade band and their grade here is the site's suggestion, so this can change as teams rate." : `The standards themselves skip ${gi - lastIdx - 1 > 1 ? "these grades" : "this grade"}.`}</div>`;
       }
       lastIdx = Math.max(lastIdx, gs.indexOf([...st.g].reverse().find((g) => gs.includes(g))));
-      const fl = x.flags.filter((f) => ["break", "moved"].includes(f.t) ? (f.gs || [f.g]).some((g) => st.g.includes(g)) : f.t === "prereq" && !f.k && st.g.includes(f.g));
+      const fl = x.flags.filter((f) => ["break", "moved"].includes(f.t) ? (f.ks || []).some((k) => st.k.includes(k)) : f.t === "prereq" && !f.k && st.g.includes(f.g));
       const ss = st.s, parts = [[ss.deep, "in depth", 2], [ss.intro, "introduced", 1], [ss.not, "not taught", 0], [ss.n - ss.rated, "not rated", null]].filter((p2) => p2[0]);
-      html += `<div class="pd-step st-${ss.state}"><div class="pd-g"><b>${st.g.filter((g) => gs.includes(g)).map(gl).join(", ")}</b>${parts.map(([n2, lab, lv]) => `<span class="pill"><i class="lv ${lv == null ? "lv-none" : "lv-" + lv}"></i>${n2} ${lab}</span>`).join("")}</div>
+      html += `<div class="pd-step ps-${ss.state}"><div class="pd-g"><b>${st.g.filter((g) => gs.includes(g)).map(gl).join(", ")}</b>${parts.map(([n2, lab, lv]) => `<span class="pill"><i class="lv ${lv == null ? "lv-none" : "lv-" + lv}"></i>${n2} ${lab}</span>`).join("")}</div>
         <ul>${st.k.map((k) => S.byKey.get(k)).map((e) => { const k = e.f + "|" + e.c, p = (before.get(k) || []).map(([a, same]) => [S.byKey.get(a), same]).filter(([pe]) => pe);
           const own = x.flags.filter((f) => f.k === k && f.t !== "same");
-          return `<li>${codeHTML(e)}<span class="pd-t">${esc(e.t.slice(0, 160))}${e.t.length > 160 ? "…" : ""}${si > 0 ? `<small class="pd-link">${p.length ? `Builds on ${p.map(([pe, same]) => `${esc(codeText(pe))} (${esc(gl(home(pe)[0]))})${same ? ", same wording" : ""}`).join("; ")} · ${official && x.steps[si - 1].k.length === 1 ? "same anchor standard, official" : "closest match by wording, inferred"}` : "No close match in the step before (same progression)"}</small>` : ""}${own.map((f) => `<small class="pd-own"><span class="mk-flag f-${f.t}">${FLAG[f.t]}</span> ${esc(f.msg)}</small>`).join("")}</span><span class="mks">${marks(e, home(e)[0])}</span><span class="pd-pills">${gradePills(e, gs)}</span></li>`; }).join("")}</ul>
+          const flagChip = (f) => `<span class="mk-flag f-${f.t}${f.t === "prereq" && !f.official ? " soft" : ""}">${flagName(f)}</span>`;
+          return `<li>${codeHTML(e)}<span class="pd-t">${esc(e.t.slice(0, 160))}${e.t.length > 160 ? "…" : ""}${si > 0 ? `<small class="pd-link">${p.length ? `Builds on ${p.map(([pe, same]) => `${esc(codeText(pe))} (${esc(gl(home(pe)[0]))})${same ? ", same Wisconsin wording" : ""}`).join("; ")} · ${official && x.steps[si - 1].k.length === 1 ? "same anchor standard, official" : "closest match by wording, inferred"}` : "No close match in the step before (same progression)"}</small>` : ""}${own.map((f) => `<small class="pd-own">${flagChip(f)} ${esc(f.msg)}</small>`).join("")}</span><span class="mks">${marks(e, home(e)[0])}</span><span class="pd-pills">${gradePills(e, gs)}</span></li>`; }).join("")}</ul>
         ${fl.map((f) => `<p class="pd-flag f-${f.t}"><span class="tag auto">Automatic check</span> ${esc(f.msg)}</p>`).join("")}</div>`;
     });
     const reps = x.flags.filter((f) => f.t === "same");
@@ -1253,13 +1312,19 @@
       const lb = l.links.filter((x) => x[1] === k && strong(x)).map((x) => [S.byKey.get(x[0]), x[3]]).filter(([x]) => x);
       const la = l.links.filter((x) => x[0] === k && strong(x)).map((x) => [S.byKey.get(x[1]), x[3]]).filter(([x]) => x);
       const pStep = stepEs(info.steps[i - 1]), nStep = stepEs(info.steps[i + 1]), next = (l.next || []).map(laneById).filter(Boolean);
+      // At the start of a row, the row it grows out of (Ratios grows out of Fractions) and that row's last step.
+      const prevLane = !pStep.length && i === 0 ? S.prog.lanes.find((y) => (y.next || []).includes(l.id)) : null, pInfo = prevLane && laneInfo(prevLane, GRADES);
+      // ... its latest step before this grade (Expressions grows into Equations around Grade 6, not at Grade 12).
+      const g0 = GRADES.indexOf(info.steps[0] ? info.steps[0].g[0] : e.pl[0]), before = pInfo ? pInfo.steps.filter((st) => GRADES.indexOf(st.g[st.g.length - 1]) < g0) : [];
+      const fromPrev = before.length ? before[before.length - 1].k.map((x) => S.byKey.get(x)) : [];
+      const laneBtn = (y) => (mode() === "full" ? `<button type="button" class="linkish" data-act="goto-lane" data-id="${esc(y.id)}">${esc(y.name)}</button>` : esc(y.name));
       const col = (title, linked, step, none) => `<div><h4>${linked.length ? title[0] : step.length ? title[1] : title[0]}</h4><ul class="pb-list">${linked.length ? linked.slice(0, 4).map(([x, same]) => one(x, same)).join("") + more(linked, 4)
         : step.length ? `<li class="muted">No close match by wording; the ${title === BEFORE ? "earlier" : "later"} step of this progression is:</li>` + step.slice(0, 3).map((x) => one(x)).join("") + more(step, 3) : `<li class="muted">${none}</li>`}</ul></div>`;
       const BEFORE = ["Builds on", "Step before"], AFTER = ["Leads to", "Next step"];
-      const fl = info.flags.filter((f) => f.t !== "repeat" && (f.k === k || f.ka === k));
+      const fl = info.flags.filter((f) => !["repeat", "reinforce"].includes(f.t) && (f.k === k || f.ka === k || (f.ks || []).includes(k)));
       return `<div class="pb">${mode() === "full" ? `<button type="button" class="linkish" data-act="goto-lane" data-id="${esc(l.id)}" title="Open this progression"><b>${esc(l.name)}</b></button>` : `<b>${esc(l.name)}</b>`} <span class="basis b-${l.basis}">${BASIS[l.basis]}</span>
-        ${fl.map((f) => `<p class="pd-flag f-${f.t}"><span class="tag auto">Automatic check</span> <span class="mk-flag f-${f.t}">${FLAG[f.t]}</span> ${esc(f.msg)}</p>`).join("")}
-        <div class="pb-cols">${col(BEFORE, lb, pStep, "No earlier step in this progression on this site.")}${col(AFTER, la, nStep, next.length ? `No later step here; the idea continues in ${next.map((y) => esc(y.name)).join(" and ")}.` : "No later step in this progression on this site.")}</div></div>`;
+        ${fl.map((f) => `<p class="pd-flag f-${f.t}"><span class="tag auto">Automatic check</span> <span class="mk-flag f-${f.t}${f.t === "prereq" && !f.official ? " soft" : ""}">${flagName(f)}</span> ${esc(f.msg)}</p>`).join("")}
+        <div class="pb-cols">${fromPrev.length ? `<div><h4>Grows out of</h4><ul class="pb-list"><li class="muted">This progression grows out of ${laneBtn(prevLane)}; its step just before this grade is:</li>${fromPrev.slice(0, 3).map((x) => one(x)).join("")}${more(fromPrev, 3)}</ul></div>` : col(BEFORE, lb, pStep, "No earlier step in this progression on this site.")}${col(AFTER, la, nStep, next.length ? `No later step here; the idea continues in ${next.map(laneBtn).join(" and ")}.` : "No later step in this progression on this site.")}</div></div>`;
     }).join("") + `<p class="muted" style="margin:6px 0 0">${lanes[0].basis === "anchor" ? "Same anchor standard (official); the closest part is matched by wording." : "Links between single standards are inferred from shared wording."}</p>`;
   }
 
@@ -1294,8 +1359,12 @@
   function docsPanel(list, g) {
     const mine = list.filter((e) => forGrade(e, g) || isPn(e, g) || isPr(e, g)), lv = (e) => rating(e.f, e.c, g)?.level;
     const hasPlans = items().some((e) => isPn(e, g));
-    const pr = mine.filter((e) => isPr(e, g)), prMine = pr.filter((e) => forGrade(e, g)), prOther = pr.filter((e) => !forGrade(e, g));
+    // Priority counts are for the main standards; Essential Elements take the mark from the standard they link to, so
+    // they are counted apart (the same way as the Grade dashboard).
+    const pr = mine.filter((e) => isPr(e, g)), prEE = pr.filter((e) => isEE(e.f) && forGrade(e, g)), prMain = pr.filter((e) => !isEE(e.f));
+    const prMine = prMain.filter((e) => forGrade(e, g)), prOther = prMain.filter((e) => !forGrade(e, g));
     const prLow = prMine.filter((e) => lv(e) != null && lv(e) < 2), prUn = prMine.filter((e) => lv(e) == null), prDeep = prMine.filter((e) => lv(e) === 2);
+    const eeLow = prEE.filter((e) => lv(e) != null && lv(e) < 2), eeDeep = prEE.filter((e) => lv(e) === 2), eeRated = prEE.filter((e) => lv(e) != null);
     const pn = mine.filter((e) => isPn(e, g)), pnRated = pn.filter((e) => lv(e) != null), pnTaught = pnRated.filter((e) => lv(e) > 0);
     const planNot = pn.filter((e) => lv(e) === 0);
     // Essential Elements are not cited by code in the plans, so they are left out of "taught but not in the plans".
@@ -1305,20 +1374,38 @@
     const sec = (id, title, desc, arr, msg, open, auto = true) => `<details class="gap" data-sec="aud-${id}" ${isOpen("aud-" + id, open) ? "open" : ""}><summary><span class="count">${arr.length}</span>${title}${auto ? ' <span class="tag auto">Automatic check</span>' : ""}</summary><p class="muted">${desc}</p>${tbl(arr, msg)}</details>`;
     const share = (a, b) => (b ? `${a}<small>/${b}</small>` : "n/a");
     return `<div class="panel insights"><h2>What the curriculum documents say ${hb("p_docs")}</h2>
-      <p class="lede">${esc(gname(g))} · ${esc(S.f.subject)}: the school's documents cite <b>${pn.length}</b> standards for this grade (<span class="mk mk-pn">✓ In plans</span>) and name <b>${pr.length}</b> as <span class="mk mk-pr">★ ${prName(g)}</span> standards${prOther.length ? ` (${prOther.length} of them are placed in other grades, so ${esc(gname(g))} does not rate them)` : ""}. Counts below use rated standards only; unrated ones are listed apart. <span class="muted">Updates as teams rate.</span></p>
+      <p class="lede">${esc(gname(g))} · ${esc(S.f.subject)}: the school's documents cite <b>${pn.length}</b> standards for this grade (<span class="mk mk-pn">✓ In plans</span>) and name <b>${prMain.length}</b> as <span class="mk mk-pr">★ ${prName(g)}</span> standards${prOther.length ? ` (${prOther.length} of them are placed in other grades, so ${esc(gname(g))} does not rate them)` : ""}.${prEE.length ? ` ${prEE.length} Essential Elements linked to them carry the mark too; they are counted apart.` : ""} Counts below use rated standards only; unrated ones are listed apart. <span class="muted">Updates as teams rate.</span></p>
       ${hasPlans ? "" : `<div class="notice"><b>No plan data yet for ${esc(gname(g))} ${esc(S.f.subject)}.</b> The documents read so far cite no ${esc(S.f.subject)} standards for this grade, so the site cannot say what is or is not in the plans. ${hb("p_docs")}</div>`}
       <div class="ins-grid">
-        <div class="ins ${prLow.length ? "ins-issue" : ""}"><b>${share(prDeep.length, prDeep.length + prLow.length)}</b><span>rated ${prName(g).toLowerCase()} standards taught in depth</span><small>${prLow.length} rated below in depth; ${prUn.length} not rated yet</small></div>
-        <div class="ins ${planNot.length ? "ins-issue" : ""}"><b>${hasPlans ? share(pnTaught.length, pnRated.length) : "n/a"}</b><span>rated planned standards taught</span><small>${hasPlans ? `${pnRated.length} of ${pn.length} planned standards rated; ${pn.length - pnRated.length} unknown` : "no plan data yet"}</small></div>
-        <div class="ins ${planNot.length ? "ins-issue" : ""}"><b>${planNot.length}</b><span>in the plans but marked not taught</span><small>check the plan or the rating</small></div>
+        <div class="ins ${prLow.length ? "ins-issue" : ""}"><b>${share(prDeep.length, prDeep.length + prLow.length)}</b><span>rated ${prName(g).toLowerCase()} standards taught in depth</span><small>${prLow.length} rated below in depth; ${prUn.length} not rated yet${prEE.length ? `. Linked Essential Elements: ${eeDeep.length} of ${eeRated.length} rated in depth` : ""}</small></div>
+        <div class="ins"><b>${hasPlans ? share(pnTaught.length, pnRated.length) : "n/a"}</b><span>rated planned standards taught</span><small>${hasPlans ? `${pnRated.length} of ${pn.length} planned standards rated; ${pn.length - pnRated.length} unknown` : "no plan data yet"}</small></div>
+        <div class="ins ${planNot.length ? "ins-issue" : ""}"><b>${hasPlans ? planNot.length : "n/a"}</b><span>in the plans but marked not taught</span><small>${hasPlans ? "check the plan or the rating" : "needs plan data"}</small></div>
         <div class="ins"><b>${hasPlans ? notInPlans.length : "n/a"}</b><span>taught but not cited in the plans</span><small>${hasPlans ? "the plans may not list it yet; Part 2 will check" : "needs plan data"}</small></div>
       </div>
-      ${sec("prlow", `${prName(g)} standards rated below in depth`, `Named ${prName(g).toLowerCase()} standards for ${esc(gname(g))} that the team rates introduced or not taught.`, prLow, prMine.length ? "None. Every rated one is taught in depth." : "The documents name none that this grade rates.", true)}
+      ${sec("prlow", `${prName(g)} standards rated below in depth`, `Named ${prName(g).toLowerCase()} standards for ${esc(gname(g))} that the team rates introduced or not taught${eeLow.length ? `, then the ${eeLow.length} linked Essential Elements rated below in depth` : ""}.`, prLow.concat(eeLow), prMine.length ? "None. Every rated one is taught in depth." : "The documents name none that this grade rates.", true)}
       ${sec("plannot", "In the plans, but marked not taught", "The documents cite these, but the team says they are not taught. Worth a quick check.", planNot, hasPlans ? "None." : "No plan data yet.", planNot.length > 0)}
       ${sec("prun", `${prName(g)} standards not rated yet`, `Unknown, not a gap: ${esc(gname(g))} has not rated these yet.`, prUn, "None.", false, false)}
       ${hasPlans ? sec("notplan", "Taught, but not cited in the plans", "The team teaches these, but the curriculum documents read so far do not cite them. The documents may simply not list them yet; Part 2 will read the week-by-week plans. Essential Elements are left out because plans cite the main standard's code.", notInPlans, "None.") : ""}
-      ${prOther.length ? sec("prother", `${prName(g)} for ${esc(gname(g))}, but placed in another grade`, `${esc(gname(g))}'s documents name these, but they are suggested for other grades, so ${esc(gname(g))} does not rate them (it can claim band standards on the Rate page). Shown with the rating ${esc(gname(g))} gave, if any.`, prOther, "None.", false, false) : ""}
-      ${sec("prall", `All ${prName(g).toLowerCase()} standards ${esc(gname(g))} rates`, "Every standard the documents name as a priority or power standard for this grade, with the team's rating.", prMine, "The documents name none for this grade and subject.", false, false)}</div>`;
+      ${prOther.length ? sec("prother", `${prName(g)} for ${esc(gname(g))}, but placed in another grade`, `${esc(gname(g))}'s documents name these, but they are suggested for other grades, so ${esc(gname(g))} does not rate them. They may be review the grade's plans revisit; the committee can decide whether the placement or the priority list should change.`, prOther, "None.", false, false) : ""}
+      ${sec("prall", `All ${prName(g).toLowerCase()} standards ${esc(gname(g))} rates`, "Every standard the documents name as a priority or power standard for this grade, with the team's rating, then the linked Essential Elements.", prMine.concat(prEE), "The documents name none for this grade and subject.", false, false)}</div>`;
+  }
+  // Before and after one grade: each of its standards with what it builds on in an earlier grade and what builds on it
+  // in a later grade (close links in the progressions), each with its own rating. A not-taught neighbour is marked.
+  function beforeAfter(g, list) {
+    const rows = list.filter((e) => e.pl.includes(g) && !isEE(e.f));
+    const nb = (e, dir) => { const k = e.f + "|" + e.c, out = new Map();
+      for (const l of S.progLanes ? S.progLanes.get(k) || [] : []) for (const [a, b, sm] of l.links) if (sm >= MIN_SIM && (dir < 0 ? b === k : a === k)) { const x = S.byKey.get(dir < 0 ? a : b); if (x && !x.pl.includes(g)) out.set(x.f + "|" + x.c, [x, l]); }
+      return [...out.values()]; };
+    const cellOf = (pairs) => pairs.length ? pairs.slice(0, 3).map(([x, l]) => { const gx = x.pl[0], r = rating(x.f, x.c, gx);
+      return `<span class="ba-n ${r && r.level === 0 ? "ba-not" : ""}">${codeHTML(x)} <span class="pill"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${esc(gl(gx))}: ${r ? LEVEL_SHORT[r.level] : "Not rated"}</span> <small class="muted">${l.basis === "anchor" ? "official anchor" : "inferred"}</small></span>`; }).join("") + (pairs.length > 3 ? `<small class="muted">and ${pairs.length - 3} more</small>` : "")
+      : `<span class="muted">No close match</span>`;
+    let last = null, html = "";
+    for (const e of rows) {
+      if (e.f + e.s !== last) { html += `<tr class="strand-row"><td colspan="4">${badge(e.f)} ${esc(e.s || "")}</td></tr>`; last = e.f + e.s; }
+      const r = rating(e.f, e.c, g), pre = nb(e, -1), post = nb(e, 1);
+      html += `<tr><td>${codeHTML(e)}<div class="mks">${marks(e, g)}</div></td><td><span class="pill"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${r ? LEVEL_SHORT[r.level] : "Not rated"}</span></td><td>${cellOf(pre)}</td><td>${cellOf(post)}</td></tr>`;
+    }
+    return `<div class="tbl-scroll"><table class="svs ba"><thead><tr><th>${esc(gname(g))} standard</th><th>${esc(gl(g))} says</th><th>Builds on (earlier grade)</th><th>Leads to (later grade)</th></tr></thead><tbody>${html || `<tr class="placeholder"><td colspan="4">No standards in view.</td></tr>`}</tbody></table></div>`;
   }
   // The Audit's K-12 grid is about the chosen grade: the standards it works with, each followed across every grade.
   const auditGrid = (g) => filtered({ ignoreDivision: true }).filter((e) => forGrade(e, g) || isPn(e, g) || isPr(e, g) || rating(e.f, e.c, g));
@@ -1359,9 +1446,12 @@
     el.innerHTML = `<div class="panel"><h2>Vertical Alignment Audit: ${esc(gname(g))} · ${esc(S.f.subject)} ${hb("plans")}</h2>
       <p class="lede">What the school's curriculum documents say about ${esc(gname(g))}, side by side with what the team said in Part 1. ${ready ? `Plans last read ${esc(S.evidence.built)} · ${S.evidence.sources.length} plan files.` : `The <span class="mk mk-pn">✓ In plans</span> and <span class="mk mk-pr">★ Priority / power</span> marks come from the Ma3loomat course documents (Grades 6-12) and the Curriculum Hub (K-5). The week-by-week reading of plans (Part 2) has not run yet.`}</p></div>
     ${docsPanel(list, g)}
-    <div class="panel"><h2>${esc(gname(g))}'s standards across K-12 ${hb("p_heat")}</h2>
-      <p class="lede">One row per ${esc(S.f.subject)} standard ${esc(gname(g))} works with${S.f.strand ? " in " + esc(S.f.strand) : ""}, followed across every grade: first the standards suggested for ${esc(gname(g))}, then those from other grades that it rates or that its documents name. Colour is what each grade said in Part 1; the ${esc(gl(g))} column is highlighted. A bar under a square <span class="plan-key"></span> marks a grade whose documents cite the standard, and an orange corner <span class="prio-key"></span> a grade that names it a priority or power standard. Read along a row to see where the standard is also taught before or after.</p>
-      ${standardGrid(gridList, GRADES)}</div>
+    <div class="panel"><h2>Before and after ${esc(gname(g))} ${hb("p_ba")}</h2>
+      <p class="lede">Each ${esc(S.f.subject)} standard suggested for ${esc(gname(g))}${S.f.strand ? " in " + esc(S.f.strand) : ""}, with the standard it builds on in an earlier grade and the one that builds on it in a later grade, each with that grade's rating. A pink outline marks a neighbour rated not taught. Links come from the Progressions page: official for ELA anchor standards, otherwise the closest match by wording (inferred).</p>
+      ${beforeAfter(g, gridList)}
+      <details class="sub" data-sec="aud-grid" ${isOpen("aud-grid") ? "open" : ""}><summary><b>Every grade's rating of these standards (K-12 grid)</b> ${hb("p_heat")}</summary>
+      <p class="muted">One row per standard ${esc(gname(g))} works with: first those suggested for it, then those from other grades that it rates or that its documents name. Most standards are rated only by their own grade, so most squares in other grades stay white; a coloured square elsewhere means another grade also teaches it. The ${esc(gl(g))} column is highlighted. A bar under a square <span class="plan-key"></span> marks a grade whose documents cite the standard, and an orange corner <span class="prio-key"></span> a grade that names it a priority or power standard.</p>
+      ${standardGrid(gridList, GRADES)}</details></div>
     <details class="panel p2" data-sec="aud-part2" ${isOpen("aud-part2", ready) ? "open" : ""}><summary><h2>Part 2: week-by-week plans ${ready ? "" : '<span class="soon">not run yet</span>'}</h2></summary>
       <ol class="steps">
         <li><b>Read the plans ${hb("p_sources")}</b>2026-27 unit and weekly plans for every grade, with 2025-26 filling weeks not planned yet.</li>
@@ -1383,7 +1473,7 @@
       .filter(([x]) => o[x]).map(([x, l]) => `<dt>${l}</dt><dd>${esc(o[x])}</dd>`).join("")}</dl>`;
     const strip = GRADES.map((g) => {
       const r = rating(e.f, e.c, g), placed = e.pl.includes(g);
-      return `<div><button class="cell ${r ? "l" + r.level : ""} ${placed ? "placed" : ""} ${isPr(e, g) ? "prio" : ""} ${isPn(e, g) ? "inplan" : ""}" data-act="cycle" data-k="${esc(k)}" data-g="${g}"
+      return `<div><button class="cell ${r ? "l" + r.level : ""} ${placed ? "placed" : ""} ${r && r.level > 0 && !placed ? "off" : ""} ${isPr(e, g) ? "prio" : ""} ${isPn(e, g) ? "inplan" : ""}" data-act="cycle" data-k="${esc(k)}" data-g="${g}"
         aria-label="${esc(gname(g))}: ${r ? LEVEL[r.level] : "not rated"}${placed ? ", suggested grade" : ""}${canEdit(g) ? ". Click to change" : ""}" title="${esc(gname(g))}: ${r ? LEVEL[r.level] + " (" + esc(r.team) + ")" : "not rated"}"></button>${gl(g)}</div>`;
     }).join("");
     const comments = S.comments.filter((c) => c.framework === e.f && c.code === e.c);
@@ -1401,8 +1491,8 @@
       <p class="stdtext">${esc(d.text || e.t)}</p>
       <p class="muted">Suggested for ${e.pl.map(gname).join(", ")}${e.sg ? " (a suggestion: teachers confirm the grade in Part 1)" : ""}${d.course ? " · " + esc(d.course) : ""}${d.cluster ? " · " + esc(d.cluster) : ""}</p>
       <div class="box"><h3>How each grade teaches it ${hb("d_strip")}</h3><div class="strip">${strip}</div>
-        <p class="muted" style="margin:8px 0 0">${S.team ? (isCommittee() ? "The committee can change any grade's rating here; it asks first." : "Click your grade's square to change its rating.") : "Choose your team to rate."} Outline: suggested grade. Orange corner: priority or power there. Bar underneath: in that grade's plans.</p></div>
-      <div class="box checks"><h3>Why this standard is flagged ${hb("d_checks")}</h3>${checks.length ? `<ul class="issues">${checks.map(([t, m]) => `<li><span class="mk-flag">${esc(t)}</span> <span class="muted">${esc(m)}</span></li>`).join("")}</ul>` : `<p class="muted">Nothing flagged: no automatic check finds a problem with the ratings so far.</p>`}<p class="muted" style="margin:4px 0 0"><span class="tag auto">Automatic checks</span> over the live ratings.</p></div>
+        <p class="muted" style="margin:8px 0 0">${S.team ? (isCommittee() ? "The committee can change any grade's rating here; it asks first." : "Click your grade's square to change its rating.") : "Choose your team to rate."} Outline: suggested grade. Dot: taught outside the suggested grade. Orange corner: priority or power there. Bar underneath: in that grade's plans.</p></div>
+      <div class="box checks"><h3>Why this standard is flagged ${hb("d_checks")}</h3>${checks.length ? `<ul class="issues">${checks.sort((a, b) => SEV.indexOf(a[2]) - SEV.indexOf(b[2])).map(([t, m, sv]) => `<li><span class="mk-flag sev-${sv || "info"}">${esc(t)}</span> <span class="muted">${esc(m)}</span></li>`).join("")}</ul>` : `<p class="muted">Nothing flagged: no automatic check finds a problem with the ratings so far.</p>`}<p class="muted" style="margin:4px 0 0"><span class="tag auto">Automatic checks</span> over the live ratings.</p></div>
       <div class="box" style="margin-top:14px"><h3>In the school's curriculum documents ${hb("d_marks")}</h3>
         <p class="mks">${e.pr ? e.pr.map((g) => `<span class="mk mk-pr">★ ${prName(g)} ${gl(g)}</span>`).join(" ") : ""} ${e.pn ? e.pn.map((g) => `<span class="mk mk-pn">✓ In ${gl(g)} plans</span>`).join(" ") : ""}</p>
         <p class="muted" style="margin:6px 0 0">${!e.pr && !e.pn ? "No grade's curriculum documents name this standard yet." : `${e.pn ? "Cited in the plans of " + e.pn.map(gname).join(", ") + ". " : ""}${e.pr ? "Named a priority (6-12) or power (K-5) standard for " + e.pr.map(gname).join(", ") + "." : ""}`}${e.pa ? ` ${e.pa.map(gname).join(", ")} ${e.pa.length > 1 ? "were" : "was"} given this standard to rate because ${e.pa.length > 1 ? "their" : "its"} plans cite it.` : ""}</p>
@@ -1486,7 +1576,7 @@
   function gotoLane(id) {
     const l = S.prog && laneById(id); if (!l) return;
     if ($("#detail").open) $("#detail").close();
-    if (S.view !== "ladder") S.backTo = { view: S.view, f: { ...S.f }, label: S.view === "dashboard" ? `the ${gname(S.f.grade)} dashboard` : VIEW_LABEL[S.view] || "the last page" };
+    if (S.view !== "ladder") S.backTo = { view: S.view, f: { ...S.f }, y: scrollY, open: { ...S.open }, label: S.view === "dashboard" ? `the ${gname(S.f.grade)} dashboard` : VIEW_LABEL[S.view] || "the last page" };
     S.f.subject = l.subject; S.f.framework = ""; S.f.strand = ""; S.f.search = ""; S.f.mark = ""; S.f.division = "all"; $("#f-search").value = "";
     if (S.f.grade && !l.steps.some((st) => st.g.includes(S.f.grade))) S.f.grade = "";
     S.lane = id; S.laneScroll = true; S.pgStatus = ""; S.pgGroup = "";
@@ -1500,6 +1590,7 @@
     const p = new URLSearchParams(); p.set("view", S.view);
     for (const k of HASH_KEYS) if (S.f[k] && !(k === "division" && S.f[k] === "all")) p.set(k, S.f[k]);
     if (S.view === "ladder" && S.lane) p.set("lane", S.lane);
+    if (S.view === "ladder" && S.pgStatus) p.set("check", S.pgStatus);
     const h = "#" + p.toString();
     if (location.hash === h) return;
     if (S.hashReady) history.pushState(null, "", h); else history.replaceState(null, "", h);
@@ -1511,7 +1602,7 @@
     for (const k of HASH_KEYS) S.f[k] = p.get(k) || (k === "division" ? "all" : "");
     if (!S.meta.subjects.some((x) => x.name === S.f.subject)) S.f.subject = S.meta.subjects[0].name;
     if (!(S.f.division in DIV) && !(S.f.division in BAND)) S.f.division = "all";
-    S.lane = p.get("lane") || S.lane; S.backTo = null;
+    S.lane = p.get("lane") || null; S.pgStatus = p.get("check") || ""; S.backTo = null;
     S.applyingHash = true; showView(v); refreshFilterOptions(); rerender(); S.applyingHash = false;
     return true;
   }
@@ -1539,11 +1630,13 @@
     else if (act === "back-to-flow") { S.explore = false; showView("flow"); rerender(); }
     else if (act === "review") { S.f.subject = S.flow.subject || S.f.subject; S.f.framework = ""; S.f.strand = ""; S.f.search = ""; $("#f-search").value = ""; showView("rate"); refreshFilterOptions(); rerender(); }
     else if (act === "lane") { S.lane = S.lane === b.dataset.id ? null : b.dataset.id; rerender(); }
+    else if (act === "more") { S.more[b.dataset.id] = true; S.open[b.dataset.id] = true; rerender(); }
+    else if (act === "lane-open") { if (S.lane !== b.dataset.id) { S.lane = b.dataset.id; rerender(); } }
     else if (act === "lane-go") { S.lane = b.dataset.id; S.laneScroll = true; S.pgStatus = ""; rerender(); }
     else if (act === "goto-lane") gotoLane(b.dataset.id);
     else if (act === "back-view") {
       const bk = S.backTo; S.backTo = null; if (!bk) return;
-      S.f = { ...bk.f }; $("#f-search").value = S.f.search; showView(bk.view); refreshFilterOptions(); rerender(); scrollTo({ top: 0 });
+      S.f = { ...bk.f }; $("#f-search").value = S.f.search; showView(bk.view); refreshFilterOptions(); rerender(); scrollTo({ top: bk.y || 0 });
     }
     else if (act === "dlg-back") { const pv = S.dlg.hist.pop(); S.dlg.cur = null; if (pv) pv.redraw(); }
     else if (act === "open-sec") { const d = document.getElementById(b.dataset.id); if (d) { d.open = true; S.open[b.dataset.id] = true; d.scrollIntoView({ block: "start", behavior: "smooth" }); } }
@@ -1609,6 +1702,8 @@
       catch (err) { toast("Could not hide: " + err.message); }
     }
   });
+  // Boxes that act as buttons (progression boxes) open with Enter or Space too.
+  document.addEventListener("keydown", (ev) => { const t = ev.target; if ((ev.key === "Enter" || ev.key === " ") && t.matches && t.matches('[role="button"][data-act]')) { ev.preventDefault(); t.click(); } });
   document.addEventListener("input", (ev) => {
     if (ev.target.id !== "t-search") return;
     const pos = ev.target.selectionStart; S.flow.q = ev.target.value; rerender();
@@ -1617,7 +1712,8 @@
   $$("dialog [data-close], #d-close").forEach((b) => b.addEventListener("click", () => b.closest("dialog").close()));
   $("#detail").addEventListener("close", () => { S.dlg = { cur: null, hist: [] }; rerender(); });
   // Remember which sections are open (Gaps, Audit, dashboard) so a redraw keeps them as the user left them.
-  document.addEventListener("toggle", (ev) => { const d = ev.target; if (d && d.dataset && d.dataset.sec) S.open[d.dataset.sec] = d.open; }, true);
+  // Only the user's own clicks count (a redraw also fires "toggle" events, which would freeze the defaults).
+  document.addEventListener("click", (ev) => { const sm = ev.target.closest("details[data-sec] > summary"); if (sm && !ev.target.closest(".help")) { const d = sm.parentElement; S.open[d.dataset.sec] = !d.open; } }, true);
 
   // "?" explanations
   const pop = $("#pop");
