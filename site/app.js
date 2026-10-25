@@ -17,12 +17,16 @@
   // Standard sets: each has a short badge and its own badge style, so Common Core, EE, NGSS, AERO and Wisconsin never look
   // alike. Set styles use shape and line (solid, dashed, dotted, double), not the rating colours.
   const SET = (f) => (f.startsWith("WI-EE-") ? { abbr: "EE", name: "Essential Elements", style: "ee" }
-    : f.startsWith("WI-CC-") ? { abbr: "CC", name: "Common Core", style: "cc" }
+    : f.startsWith("WI-CC-") ? { abbr: "CC", name: f === "WI-CC-MATH" ? "Wisconsin Math (CC)" : "Wisconsin ELA (CC)", style: "cc" }
     : f === "NGSS" ? { abbr: "NGSS", name: "NGSS", style: "ngss" }
     : f.startsWith("AERO-") ? { abbr: "AERO", name: "AERO", style: "aero" }
     : { abbr: "WI", name: f === "WI-SS" ? "Wisconsin Social Studies" : "Wisconsin Science", style: "wi" });
   const SET_ORDER = (f) => (f.startsWith("WI-EE-") ? 9 : f.startsWith("WI-CC-") ? 0 : f === "NGSS" ? 1 : f.startsWith("AERO-") ? 2 : 3);
-  const badge = (f) => { const x = SET(f); return `<span class="setb set-${x.style}" title="${esc(FW_NAME[f] || x.name)}">${x.abbr}</span>`; };
+  // Hover text for a set. The Wisconsin Math and ELA sets are Common Core based, so they carry (CC) and say so on hover.
+  const CC_TIP = { "WI-CC-MATH": "Wisconsin Math (CC): the Wisconsin Standards for Mathematics (2021), built on the Common Core State Standards. The bold code is the Common Core code; the Wisconsin code is underneath.",
+    "WI-CC-ELA": "Wisconsin ELA (CC): the Wisconsin Standards for English Language Arts (2020), built on the Common Core State Standards (2010). The bold code is the Common Core code; the Wisconsin code is underneath." };
+  const setTip = (f) => CC_TIP[f] || FW_NAME[f] || SET(f).name;
+  const badge = (f) => { const x = SET(f); return `<span class="setb set-${x.style}" title="${esc(setTip(f))}">${x.abbr}</span>`; };
   // Awsaj brand: ratings use three of the four symbol ribbons (orange is kept for highlights so it never sits next to lime).
   const COLORS = { none: "#FFFFFF", 0: "#D00070", placed: "#024638", 1: "#0092BC", 2: "#78BE21", maroon: "#024638", accent: "#ED8B00", line: "#D9E1E2", ink: "#1E2324" };
 
@@ -657,7 +661,7 @@
     const pct = list.length ? (done / list.length) * 100 : 100, view = tview();
     const results = F.results === F.subject || (!left && F.reviewing !== F.subject);
     const setPills = `<div class="set-pills"><span class="muted">Standards:</span> ${fwsNow.map((f) => { const l = flowList(F.subject, g, f), n = l.filter((e) => !rating(e.f, e.c, g)).length;
-        return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(FW_NAME[f] || f)}">${badge(f)} ${esc(SET(f).name)} <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
+        return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(setTip(f))}">${badge(f)} ${esc(SET(f).name)} <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
       <button type="button" class="linkish" data-act="sets-change">Change ${hb("sets")}</button></div>`;
     const head = `<div class="flow-head">${pills}${setPills}
       <div class="flow-progress"><div class="fp-bar"><i style="width:${pct}%"></i></div>
