@@ -48,9 +48,9 @@
   <label class="grade-only"><span>Grade <button type="button" class="help" data-help="grade" aria-label="What is this?">?</button></span><select id="f-grade"></select></label>
   <label><span>Strand <button type="button" class="help" data-help="strand" aria-label="What is this?">?</button></span><select id="f-strand"><option value="">All strands</option></select></label>
   <label><span>Standards <button type="button" class="help" data-help="mark" aria-label="What is this?">?</button></span><select id="f-mark">
-    <option value="">All standards</option><option value="pr">★ Priority / power only</option><option value="pn">✓ In curriculum docs only</option><option value="npn">Not in curriculum docs</option></select></label>
+    <option value="">All standards</option><option value="pr">★ Priority / power only</option><option value="pn" class="pn-opt">✓ In curriculum docs only</option><option value="npn" class="pn-opt">Not in curriculum docs</option></select></label>
   <label class="order-only"><span>Order <button type="button" class="help" data-help="order" aria-label="What is this?">?</button></span><select id="f-order">
-    <option value="">Curriculum order</option><option value="pr">Priority / power first</option><option value="pn">In curriculum docs first</option></select></label>
+    <option value="">Curriculum order</option><option value="pr">Priority / power first</option><option value="pn" class="pn-opt">In curriculum docs first</option></select></label>
   <label class="grow"><span>Search <button type="button" class="help" data-help="search" aria-label="What is this?">?</button></span><input id="f-search" type="search" name="va-search" autocomplete="off" placeholder="Code or words, e.g. fractions"></label>
   <div class="exports">
     <button class="ghost" id="x-csv" title="Download the current view as a spreadsheet">CSV</button>
@@ -76,7 +76,7 @@
   <span class="key"><i class="lv lv-1"></i>Introduced / exposed</span>
   <span class="key"><i class="lv lv-2"></i>Taught in depth</span>
   <span class="key"><i class="lv lv-none placed"></i>Suggested grade for the standard</span>
-  <span class="key"><span class="mk mk-pr">★ Priority / power</span><span class="mk mk-pn">✓ In curriculum docs</span><button type="button" class="help" data-help="marks" aria-label="What is this?">?</button></span><button type="button" class="ghost sm src-btn" data-act="sources">Data sources</button><button type="button" class="help" data-help="sources" aria-label="What is this?">?</button>
+  <span class="key"><span class="mk mk-pr">★ Priority (6-12)</span><span class="mk mk-pr">★ Power (K-5)</span><span class="mk mk-pn pn-opt">✓ In curriculum docs</span><button type="button" class="help" data-help="marks" aria-label="What is this?">?</button></span><button type="button" class="ghost sm src-btn" data-act="sources">Data sources</button><button type="button" class="help" data-help="sources" aria-label="What is this?">?</button>
   <span class="legend-sets"><span class="setb set-cc">CC</span><span class="setb set-ee">EE</span><span class="setb set-ngss">NGSS</span><span class="setb set-aero">AERO</span><span class="setb set-wi">WI</span><button type="button" class="help" data-help="sets" aria-label="What is this?">?</button></span><button type="button" class="help" data-help="legend" aria-label="What is this?">?</button>
 </div>
 
