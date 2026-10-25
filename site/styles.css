@@ -895,8 +895,8 @@ table.ba tr.flash td { background: #fde7c4; transition: background .4s; }
 .pb-code { white-space: nowrap; }
 @media print {
   body.print-findings [data-sec="gap-moves"], body.print-findings [data-sec="gap-reinforce"], body.print-findings [data-sec="gap-unrated"],
-  body.print-findings [data-sec="gap-early"], body.print-findings [data-sec="gap-prio-un"], body.print-findings [data-sec="aud-grid"],
-  body.print-findings [data-sec="aud-prall"], body.print-findings [data-sec="aud-prun"], body.print-findings [data-sec="aud-part2"],
+  body.print-findings [data-sec="gap-early"], body.print-findings [data-sec="aud-grid"],
+  body.print-findings [data-sec="aud-prall"], body.print-findings [data-sec="aud-part2"],
   body.print-findings .mstrip-key, body.print-findings .pl-key { display: none !important; }
 }
 .rows-view td.rowh { min-width: 230px; } .rows-view .tag.src { white-space: nowrap; }
@@ -922,3 +922,6 @@ table.hm-rows td { vertical-align: top; text-align: center; }
 td > .ch-end { margin-left: 2px; }
 .ch-open, .ch-open-k { display: inline-grid; place-items: center; width: 20px; height: 18px; border: 1.5px dashed var(--muted); border-radius: 4px; font: 700 11px/1 var(--font); color: var(--muted); vertical-align: middle; }
 @media print { .src-btn { display: none !important; } } .src-btn { margin-left: 6px; }
+.ch-more, .ch-more-k { display: inline-grid; place-items: center; width: 20px; height: 18px; border: 1.5px solid var(--brand); border-radius: 4px; font: 700 12px/1 var(--font); color: var(--brand); vertical-align: middle; }
+
+@media print { .cell-code { font-size: 6.5pt; max-width: none; overflow-wrap: normal; white-space: nowrap; } }

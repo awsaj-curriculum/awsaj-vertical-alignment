@@ -47,11 +47,19 @@ for d in pm["sources"]["elementary"]:
                  "source": "Curriculum Hub" if kind != "power" else "K-5 ELA Power Standards PDF", "kind": kind})
 hubs = [{"grade": g, "subject": s, **v} for (g, s), v in sorted(hub.items())]
 
+# Distinct standard-grade pairs behind the marks (a standard cited by several documents counts once per grade).
+SEC = {"6", "7", "8", "9", "10", "11", "12"}
+distinct = {}
+for lvl, inl in (("6-12", lambda g: g in SEC), ("K-5", lambda g: g not in SEC)):
+    pn = {(k, g) for k, m in pm["marks"].items() if not k.startswith("WI-EE-") for g in m.get("plans", []) if inl(g)}
+    pr = {(k, g) for k, m in pm["marks"].items() if not k.startswith("WI-EE-") for g in m.get("priority", []) if inl(g)}
+    distinct[lvl] = {"pairs": len(pn), "standards": len({k for k, _ in pn}), "priority_pairs": len(pr)}
+
 # ---------- prerequisite links ----------
 pre = J("site/data/prereqs.json")
 links = collections.Counter(x[2] for v in pre.values() for x in v)
 
 out = {"built": datetime.date.today().isoformat(), "standards": standards, "documents": docs, "hub": hubs,
-       "prereqs": dict(links)}
+       "prereqs": dict(links), "distinct": distinct}
 json.dump(out, open(os.path.join(ROOT, "site/data/sources.json"), "w"), ensure_ascii=False, separators=(",", ":"))
 print(len(standards), "standard sources;", len(docs), "documents;", len(hubs), "Hub lists;", dict(links))
