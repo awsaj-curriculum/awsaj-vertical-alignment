@@ -918,3 +918,6 @@ table.ba tr.flash td { background: #fde7c4; transition: background .4s; }
 table.hm-rows td { vertical-align: top; text-align: center; }
 .cell-code { display: block; font-size: 9.5px; line-height: 1.1; color: var(--ink-2); margin-top: 2px; max-width: 64px; overflow-wrap: anywhere; }
 @media (max-width: 760px) { .cell-code { font-size: 8.5px; max-width: 44px; } }
+.ch-end, .ch-end-k { display: inline-block; width: 4px; height: 18px; background: var(--ink-2, #56595A); border-radius: 2px; vertical-align: middle; }
+td > .ch-end { margin-left: 2px; }
+.ch-open, .ch-open-k { display: inline-grid; place-items: center; width: 20px; height: 18px; border: 1.5px dashed var(--muted); border-radius: 4px; font: 700 11px/1 var(--font); color: var(--muted); vertical-align: middle; }

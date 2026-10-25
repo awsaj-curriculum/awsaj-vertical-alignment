@@ -386,6 +386,12 @@ findings" leaves out the Progressions row grid; matched rows show each grade's c
 scrolls instead of an inner box; card wording says "grade placements"; the popup footnote separates official anchor links
 from parts matched by wording; the issue heading counts problems and rows.
 
+Then, at Tim's direction: "Breaks down" is used again for findings on official links (the one evaluative label he
+accepted); nothing else judges ("Strongest" and "most room to grow" became "highest / lowest share in depth", "Thinnest
+teaching" became "Most standards below in depth"), and no link is called weak or strong. Matched across grades now marks
+the end of each row: a dark bar where the progression has no later standard (no link expected), a dashed "?" where it
+does but none is linked to this one (a link may be missing), and the same "?" before a first square.
+
 ## Round 9
 
 Results are added below when the round finishes.
