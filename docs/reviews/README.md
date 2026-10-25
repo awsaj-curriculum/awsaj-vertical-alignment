@@ -321,6 +321,38 @@ distinctive shared words; separators between popup list entries; "Not applicable
 messages put the Common Core code first; the dashboard prints every list in full and never names an Essential Elements
 strand as the weakest; headings stay with their lists in print; no double "Within ... From another progression" prefix.
 
-## Round 7
+## Round 7 (Gaps & repetition and "see the links" passed)
+
+New reviewers M and N. Every count both recomputed matched. **Gaps & repetition** (M: 8 on all five) and the **"see the
+links" dialog** (N: 8 on all five) met the standard. The Audit had all 8s and a 9, but it is reviewed with the other
+pages again until every page passes in the same round.
+
+| Page | Usability | Visual | Information | Progression | Interpretation | Report |
+|---|---|---|---|---|---|---|
+| Coverage map: By strand | 8 | 8 | 7 | 7 | 8 | [M](round-7-M.md) |
+| Coverage map: Matched across grades | 6 | 7 | 8 | 7 | 6 | [M](round-7-M.md) |
+| Gaps & repetition | 8 | 8 | 8 | 8 | 8 | [M](round-7-M.md) |
+| Vertical Alignment Audit | 8 | 8 | 8 | 9 | 8 | [M](round-7-M.md) |
+| Standard popup | 8 | 7 | 9 | 9 | 8 | [M](round-7-M.md) |
+| Printing / PDF (M) | 7 | 8 | 9 | 7 | 7 | [M](round-7-M.md) |
+| Progressions | 8 | 7 | 7 | 8 | 7 | [N](round-7-N.md) |
+| Grade dashboard | 8 | 7 | 9 | 8 | 8 | [N](round-7-N.md) |
+| Popup progression box and Why flagged | 8 | 7 | 8 | 8 | 8 | [N](round-7-N.md) |
+| "See the links" dialog | 8 | 8 | 8 | 8 | 8 | [N](round-7-N.md) |
+| Printing / PDF (N) | 8 | 7 | 9 | 7 | 8 | [N](round-7-N.md) |
+
+### What changed after round 7
+
+Critical issues (all addressed): a tile listed as both thinnest and strongest (the fallback list now says so and a
+tile never appears in both); "from X" read as a direct link ("chain starts at X"); official gaps whose cause sits in
+another row explained as AI links (card text fixed; rows that cause official gaps elsewhere say so in a stronger chip);
+a row that stops being taught got no verdict (new settled "Stops early" check).
+
+Other improvements: "PDF: findings" prints without the long informational lists (Math Gaps 54 pages down to 33);
+Matched across grades shows only rows that reach two or more grades by default, with a wider first column; split
+standards counted once in opened rows and the links dialog; Audit section counts split main and EE; power vs priority
+wording for K-5; progression card names the right official source per subject; clearer "settled" wording.
+
+## Round 8
 
 Results are added below when the round finishes.

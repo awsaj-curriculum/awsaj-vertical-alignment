@@ -893,3 +893,10 @@ table.ba tr.flash td { background: #fde7c4; transition: background .4s; }
   .rev-list li, .gap-list li { break-inside: avoid; }
 }
 .pb-code { white-space: nowrap; }
+@media print {
+  body.print-findings [data-sec="gap-moves"], body.print-findings [data-sec="gap-reinforce"], body.print-findings [data-sec="gap-unrated"],
+  body.print-findings [data-sec="gap-early"], body.print-findings [data-sec="gap-prio-un"], body.print-findings [data-sec="aud-grid"],
+  body.print-findings [data-sec="aud-prall"], body.print-findings [data-sec="aud-prun"], body.print-findings [data-sec="aud-part2"],
+  body.print-findings .mstrip-key, body.print-findings .pl-key { display: none !important; }
+}
+.rows-view td.rowh { min-width: 230px; } .rows-view .tag.src { white-space: nowrap; }
