@@ -982,7 +982,7 @@
     const sec = (id, title, desc, todo, arr, fn, open) => { const all = S.more["gap-" + id], cut = all ? 300 : 25;
       return `<details class="gap" id="gap-${id}" data-sec="gap-${id}" ${isOpen("gap-" + id, open) ? "open" : ""}><summary><span class="count">${arr.length}</span>${title} <span class="tag auto">Automatic check</span></summary>
       <p class="muted">${desc}${todo ? ` <b>What to do:</b> ${todo}` : ""}</p><ul class="gap-list one">${arr.slice(0, cut).map(fn).join("") || "<li class='muted'>None found.</li>"}</ul>${arr.length > cut ? (all ? `<p class="muted">Showing 300 of ${arr.length}. Narrow the view with the filters above.</p>` : `<p><button type="button" class="ghost sm" data-act="more" data-id="gap-${id}">Show all ${arr.length}</button></p>`) : ""}</details>`; };
-    const flagLi = ({ x, f }) => `<li><span class="mk-flag f-${f.t}">${FLAG[f.t]}</span> <button type="button" class="linkish" data-act="goto-lane" data-id="${esc(x.l.id)}">${esc(x.l.name)}</button> <span class="muted">${esc(f.msg)}</span> <span class="tag">${esc(f.ka ? linkBasis(x.l) : BASIS[x.l.basis])}</span></li>`;
+    const flagLi = ({ x, f }) => `<li><span class="mk-flag f-${f.t}${f.t === "prereq" && !f.official ? " soft" : ""}">${flagName(f)}</span> <button type="button" class="linkish" data-act="goto-lane" data-id="${esc(x.l.id)}">${esc(x.l.name)}</button> <span class="muted">${esc(f.msg)}</span>${f.ka ? "" : ` <span class="tag">${esc(BASIS[x.l.basis])}</span>`}</li>`;
     el.innerHTML = `<div class="panel insights"><h2>Gaps and repetition: ${esc(S.f.subject)}, ${esc(g ? gname(g) : divLabel(S.f.division))} ${hb("gaps")}</h2>
       <p class="lede">${g ? `Standards ${esc(gname(g))} works with: suggested for it, rated by it, or named in its documents. ` : ""}${n} standards in view; ${rated} (${pct(rated)}%) rated by at least one grade. A standard nobody has rated is <b>unknown</b>, and a gap is only <b>confirmed</b> once every grade that should teach it has rated it. <span class="muted">Updates as teams rate.</span></p>
       <div class="ins-grid">
@@ -1535,7 +1535,7 @@
       rows = [["Subject", "Progression", "Group", "Basis", "Status", "Grade(s)", "Codes", "In depth", "Introduced", "Not taught", "Not rated", "Automatic checks on this row"]];
       for (const l of S.prog.lanes.filter((x) => x.subject === S.f.subject)) {
         const x = laneInfo(l, gs, keys); if (!x.steps.length) continue;
-        const checks = x.flags.map((f) => `${FLAG[f.t]}: ${f.msg}`).join(" | ");
+        const checks = x.flags.map((f) => `${flagName(f)}: ${f.msg}`).join(" | ");
         for (const st of x.steps) rows.push([S.f.subject, l.name, l.group, BASIS[l.basis], (STATUS[x.status] || [""])[0], st.g.join(" "), st.k.map((k) => codeText(S.byKey.get(k))).join(", "), st.s.deep, st.s.intro, st.s.not, st.s.n - st.s.rated, checks]);
       }
     }
