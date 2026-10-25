@@ -925,3 +925,4 @@ td > .ch-end { margin-left: 2px; }
 .ch-more, .ch-more-k { display: inline-grid; place-items: center; width: 20px; height: 18px; border: 1.5px solid var(--brand); border-radius: 4px; font: 700 12px/1 var(--font); color: var(--brand); vertical-align: middle; }
 
 @media print { .cell-code { font-size: 6.5pt; max-width: none; overflow-wrap: normal; white-space: nowrap; } }
+.pl-why { margin: 6px 0 4px 6px; font-size: 13px; }
