@@ -106,9 +106,11 @@ for e in ela:
         groups.setdefault((m[1], int(m[3])), []).append(e)
 for (kind, num), es in sorted(groups.items(), key=lambda x: (list(STRAND).index(x[0][0]), x[0][1])):
     ref = next((e for e in es if home(e)[0] in ("6", "5", "4")), es[0])
-    short = re.split(r"(?<=[a-z])[.;:]\s", ref["t"])[0]
+    full = TEXT.get(ref["f"] + "|" + ref["c"]) or ref["t"]
+    short = re.split(r"(?<=[a-z])[.;]\s", full)[0]
+    short = short.split(": ")[0] + ("…" if ": " in short else "")   # a list follows a colon: say the name continues
     short = re.sub(r"\s+[a-z]$", "", short.strip())            # a part letter left at the end ("... (phonemes). a")
-    short = short if len(short) <= 90 else short[:90].rsplit(" ", 1)[0].rstrip(" ,") + "…"
+    short = short if len(short) <= 110 else short[:110].rsplit(" ", 1)[0].rstrip(" ,") + "…"
     # The name quotes one grade's standard (Grade 4-6 where there is one), so it says which grade.
     short += f" (Grade {home(ref)[0]} wording)" if home(ref)[0] != "K" else " (Kindergarten wording)"
     # Wisconsin renumbered Writing, Language and Speaking and Listening in 2020, so their anchor numbers are Wisconsin's.
