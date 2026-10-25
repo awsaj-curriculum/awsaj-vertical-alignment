@@ -885,3 +885,10 @@ table.ba tr.flash td { background: #fde7c4; transition: background .4s; }
 }
 @media print { .mstrip, .mstrip-key { transform: none; } .mstrip i, .mstrip span { min-width: 7px; min-height: 9px; } }
 .rev-first { margin: 4px 0 6px 20px; padding: 0; } .rev-first li { margin: 3px 0; }
+.pb-list li { padding: 4px 0; border-bottom: 1px solid #e3e6e9; } .pb-list li:last-child { border-bottom: 0; }
+.pd-cause { color: var(--ink-2); }
+@media print {
+  .pl-track .pl-cell { transform: scale(.68); }
+  details > summary, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  .rev-list li, .gap-list li { break-inside: avoid; }
+}

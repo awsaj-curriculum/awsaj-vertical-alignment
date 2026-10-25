@@ -280,6 +280,47 @@ lede and explains empty band views; the popup's row box says the step before is 
 Audit jump highlights its row; printouts start with the page, filters and "ratings as of" date and hide the team button;
 the phone Progressions page no longer scrolls sideways; more wording noise removed.
 
-## Round 6
+## Round 6 (none passed yet)
+
+New reviewers K and L. Every count both recomputed matched (L: Math 21/21, Science 17/17, Social Studies 4/4
+prerequisite gaps; ELA differences all explained by the stated rules). The Audit, popup, dashboard and "see the links"
+dialog reached 8 on most criteria.
+
+| Page | Usability | Visual | Information | Progression | Interpretation | Report |
+|---|---|---|---|---|---|---|
+| Coverage map: By strand | 8 | 8 | 7 | 7 | 8 | [K](round-6-K.md) |
+| Coverage map: Matched across grades | 6 | 7 | 7 | 6 | 6 | [K](round-6-K.md) |
+| Gaps & repetition | 8 | 8 | 7 | 8 | 8 | [K](round-6-K.md) |
+| Vertical Alignment Audit | 8 | 8 | 8 | 9 | 8 | [K](round-6-K.md) |
+| Standard popup | 8 | 7 | 9 | 9 | 8 | [K](round-6-K.md) |
+| Printing / PDF (K) | 7 | 8 | 9 | 7 | 7 | [K](round-6-K.md) |
+| Progressions | 7 | 7 | 7 | 8 | 7 | [L](round-6-L.md) |
+| Grade dashboard | 8 | 7 | 8 | 7 | 8 | [L](round-6-L.md) |
+| Popup progression boxes | 8 | 7 | 7 | 8 | 8 | [L](round-6-L.md) |
+| "See the links" dialog | 8 | 7 | 8 | 8 | 7 | [L](round-6-L.md) |
+| Printing / PDF (L) | 7 | 6 | 7 | 6 | 7 | [L](round-6-L.md) |
+
+### What changed after round 6
+
+Critical issues (all addressed):
+
+1. **Gaps card filed official within-grade gaps as "possible"** (K C1): the card now counts official between grades,
+   official inside one grade, and possible (AI or wording) separately.
+2. **Matched rows read as dead ends** (K C2): a row whose last standard leads on through an official link into another
+   progression says "continues in Place value: 5.NBT.A.1 (G5)", with links to both.
+3. **Rows hid the problems they cause** (L C1): a row whose standards are needed first elsewhere shows "Causes n gaps in
+   other rows"; opened, each such standard says which standards need it.
+4. **"Where progression breaks down" heading over possible gaps** (L C2): it reads "Prerequisite gaps to check (nothing
+   breaks down)" when nothing does.
+5. **Prerequisite counts in the popup** (L C3): split standards' parts count as one in the chip and the box, a part says
+   when its other parts are taught, and "Not taught where rated" shows only when the whole standard is.
+6. **Print hid the progression lines** (L C4): boxes print smaller so the lines between them show.
+
+Other improvements: the map's lowest-grade line uses the same measure as its bottom row; popup highlights only the most
+distinctive shared words; separators between popup list entries; "Not applicable" Essential Elements explained; codes in
+messages put the Common Core code first; the dashboard prints every list in full and never names an Essential Elements
+strand as the weakest; headings stay with their lists in print; no double "Within ... From another progression" prefix.
+
+## Round 7
 
 Results are added below when the round finishes.
