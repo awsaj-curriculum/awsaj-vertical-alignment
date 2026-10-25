@@ -55,6 +55,14 @@ standard; every change and undo stays in `rating_events`. (The old `admin_*` fun
 grade can claim a band standard suggested for another grade. `load_rows()` (bulk loader) exists but its EXECUTE is
 revoked; re-grant temporarily with a fresh token when reloading standards, then revoke again.
 Free projects pause after 7 days idle; `keepalive.yml` pings every 3 days.
+Saved copies (migration 006, Team progress dialog): `save_copy` (named copy of every rating; Tim may do this twice a
+year, so names, not years), `load_copy` (replaces every rating with a saved whole copy), `clear_part` (grade and/or
+subject = a team, grade, subject or course), `undo_copy` (reverses a Clear, Load or Undo, all of it or one grade/subject;
+separate from Load), `delete_copy`. Each needs the clear PIN, checked only in the database against the bcrypt hash in
+`app_settings` key `clear_pin_hash` (Tim knows the PIN; never write it in the repo or the site). Clear, Load and Undo keep
+what they replace as a copy (`rating_archives` / `rating_archive_rows`, kinds clear / load / undo) and log each change in
+`rating_events`. Undoing a single rating stays open to everyone with no PIN (Tim). The 215 test ratings were cleared on
+Oct 25, 2026 (copy "Cleared" kept).
 
 ## Rating scale and colours
 Awsaj brand (from awsaj.qa logo and stylesheet): dark green #024638 (frame, headings, buttons), greys #56595A / #75787B,
@@ -106,7 +114,7 @@ Studies 6-12 shows its set name.
 Priority standard, 6-12, from Ma3loomat curriculum maps and scope & sequence; or a Power standard, K-5, from the K-5 ELA
 Power Standards PDF and the Curriculum Hub grade Standards lists) and `pa` (grades added to the placement because their
 plans cite it: high school Math and middle school Science rate cited standards plus their current placement, as Tim
-decided). Marks: "★ Priority" / "★ Power" pill (orange, a highlight) and "✓ In curriculum docs" pill (renamed from "In plans": only course maps, pacing, overviews and K weekly plans are read until Part 2; dark green outline); on the
+decided). Marks: "★ Priority" (Grades 6-12 only) / "★ Power" (K-5 only; `prName()`, K-12 views name both with their grades) pill (orange, a highlight) and "✓ In curriculum docs" pill (hidden on the site since Oct 2026 by `SHOW_PLANS = false` in app.js at Tim's request, "plans keep out for now"; the data is kept and the switch brings back the pill, filter, sort and checks; renamed from "In plans": only course maps, pacing, overviews and K weekly plans are read until Part 2; dark green outline); on the
 K-12 grid an orange top-left corner and a bar under the square. Committee filters: Standards (all / priority / in plans / not in
 plans) and Order (curriculum order / priority first / in plans first, within each strand). Teachers get Priority and In
 plans tabs in their library. Gaps, Dashboard and the Audit page have priority / in-plans sections.
