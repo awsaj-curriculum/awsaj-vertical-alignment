@@ -19,7 +19,7 @@
 
 ## Waiting on Tim
 - **Turn on GitHub Pages**: repo Settings, Pages, Source = GitHub Actions, then re-run the failed "Publish site"
-  run. Site URL: https://timjmills.github.io/awsaj-vertical-alignment
+  run. Site URL: https://awsaj-curriculum.github.io/awsaj-vertical-alignment (repository moved to the awsaj-curriculum organization; the old timjmills address no longer serves the site)
 - Awsaj logo and colours: now taken from awsaj.qa (symbol in site/awsaj-symbol.svg, palette in CLAUDE.md). Confirm with the school if an official brand guide exists.
 
 ## Next steps
