@@ -8,9 +8,10 @@ SS.EE.Geog1) in any letter case. find_codes() returns every code it saw with the
 like a standard but maps to nothing is returned with an empty list so it can be reported, never guessed.
 
 ELA caution: the site's ELA set is Wisconsin 2020, which renumbered Writing, Language and Speaking & Listening
-(CCSS W.6.1 "Write arguments" is Wisconsin W.6.2.a; Wisconsin W.6.1 is a different standard). Only Reading has a
-crosswalk (RL/RI -> R). So find_codes(text, ela="ccss") leaves W/L/SL/RF codes unmapped (family "ela_2010"),
-while ela="wi" (the default) reads them as Wisconsin codes. ela_version(text) guesses which one a document uses.
+(CCSS W.6.1 "Write arguments" is Wisconsin W.6.2.a; Wisconsin W.6.1 is a different standard). find_codes(text,
+ela="ccss") reads W/L/SL/RF codes as Common Core 2010 codes and maps them through DPI's official 2010/2020 comparison
+(data/standards/ela_crosswalk_2010_2020.json, built by scripts/ela_crosswalk.py; family "ela_2010"). ela="wi" (the
+default) reads them as Wisconsin codes. ela_version(text) guesses which one a document uses.
 
 Usage: from standards_codes import Codes; C = Codes(); C.find_codes(text) -> [(raw, family, [(fw, code), ...]), ...]
 """
@@ -54,6 +55,8 @@ class Codes:
             if r["framework"] == "WI-CC-ELA":
                 for x in r.get("crosswalk") or []:
                     self.xw[x.split(":")[-1]].add(r["code"])
+        xw = os.path.join(root, "data/standards/ela_crosswalk_2010_2020.json")
+        self.to2020 = json.load(open(xw))["to2020"] if os.path.exists(xw) else {}   # CCSS 2010 W.6.1 -> WI W.6.2.a
         self.math = {}                                       # "6.NS.1", "6.NS.A.1", "A.REI.3", "A.REI.B.3" -> M.x
         for c in self.codes["WI-CC-MATH"]:
             m = re.match(r"M\.([K0-9]+|N|A|F|G|SP)\.([A-Z]+)\.([A-D])\.(\d+)(?:\.([a-z]))?$", c)
@@ -96,17 +99,39 @@ class Codes:
                 return found
         return []
 
+    def _ela2010(self, ee, kind, grade, num, sub):
+        """A Common Core 2010 Writing, Language, Speaking & Listening or Foundational code -> Wisconsin 2020 rows."""
+        kind = kind.upper(); grade = grade.upper()
+        if grade in ("9", "10"): grade = "9-10"
+        if grade in ("11", "12"): grade = "11-12"
+        base = f"{kind}.{grade}.{num}"
+        wi = self.to2020.get(f"{base}.{sub.lower()}" if sub else base) or self.to2020.get(base, [])
+        if not ee:
+            return [("WI-CC-ELA", w) for w in wi]
+        out = []
+        for w in wi:
+            out += self._lookup("WI-EE-ELA", "EE." + w)
+            if not out:
+                out += self._lookup("WI-EE-ELA", "EE." + re.sub(r"\.[a-z]$", "", w))
+        return sorted(set(out))
+
     def _math(self, ee, d, dom, clu, n, sub):
         d = d.upper(); dom = dom.upper(); sub = (sub or "").lower(); d = "SP" if d == "S" else d
+        # A parent code (5.NBT.A.3) stands for its lettered parts when Wisconsin splits it (M.5.NBT.A.3.a, .b).
+        parts = lambda table, k: sorted({v for key, v in table.items() if re.fullmatch(re.escape(k) + "[a-z]", key)})
         if ee:
             for k in (f"{d}.{dom}.{n}{sub}", f"{d}.{dom}.{n}"):
                 if k in self.math_ee:
                     return [("WI-EE-MATH", self.math_ee[k])]
+                if parts(self.math_ee, k):
+                    return [("WI-EE-MATH", c) for c in parts(self.math_ee, k)]
             return []
         keys = ([f"{d}.{dom}.{clu.upper()}.{n}{sub}"] if clu else []) + [f"{d}.{dom}.{n}{sub}", f"{d}.{dom}.{n}"]
         for k in keys:
             if k in self.math:
                 return [("WI-CC-MATH", self.math[k])]
+            if parts(self.math, k):
+                return [("WI-CC-MATH", c) for c in parts(self.math, k)]
         return []
 
     @staticmethod
@@ -135,7 +160,7 @@ class Codes:
                     res = self._lookup("WI-EE-SS" if g[0] else "WI-SS", m.group(0))
                 elif fam == "ela":
                     if ela == "ccss" and g[1].upper() in ("W", "L", "SL", "RF"):
-                        out.append((m.group(0), "ela_2010", [])); spans.append((m.start(), m.end())); continue
+                        out.append((m.group(0), "ela_2010", self._ela2010(g[0], *g[1:5]))); spans.append((m.start(), m.end())); continue
                     res = self._ela(g[0], *g[1:5])
                 elif fam in ("math", "math_hs"):
                     ee = bool(g[1]) or bool(re.match(r"(?i)EE\.", m.group(0)))

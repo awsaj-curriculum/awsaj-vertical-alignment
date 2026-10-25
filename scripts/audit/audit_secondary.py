@@ -46,7 +46,7 @@ for (g, subject, course), docs in courses.items():
         if v: versions[v] += 1
         for raw, fam, res in C.find_codes(text, ela=v or "wi"):
             styles[fam] += 1
-            if fam == "ela_2010":
+            if fam == "ela_2010" and not res:
                 ela_2010[raw.upper()] += 1
             elif not res:
                 raw_unmapped[raw] += 1
@@ -77,7 +77,7 @@ for r in report:
           f"- Site asks Grade {r['grade']} to rate {r['site_checklist']} standards; documents cite {r['site_checklist_cited']} of them",
           f"- Cited but placed in another grade on the site ({len(r['cited_other_grade'])}): {', '.join(r['cited_other_grade'][:40])}",
           f"- Cited codes not on the site ({len(r['not_on_site'])}): {', '.join(r['not_on_site'][:40])}",
-          f"- 2010 ELA Writing/Language/SL codes, no crosswalk yet ({len(r['ela_2010_unmapped'])}): {', '.join(r['ela_2010_unmapped'][:40])}",
+          f"- 2010 ELA Writing/Language/SL codes with no 2020 match ({len(r['ela_2010_unmapped'])}): {', '.join(r['ela_2010_unmapped'][:40])}",
           f"- On the site for this grade but not in any document ({len(r['site_not_cited'])}): {', '.join(x.split('|')[1] for x in r['site_not_cited'][:60])}", ""]
 open(os.path.join(ROOT, "outputs/secondary_audit.md"), "w").write("\n".join(L))
 print("\n".join(L))
