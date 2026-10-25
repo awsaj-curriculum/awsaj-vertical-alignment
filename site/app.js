@@ -606,6 +606,31 @@
       <p class="muted">Not sure? Choose the answer closest to what usually happens. You can change any answer later, and every answer is saved straight away.</p>`;
     if (!$("#detail").open) $("#detail").showModal();
   }
+  // Where every part of the site's data comes from (site/data/sources.json, scripts/build_sources.py).
+  async function sourcesDialog() {
+    if (!S.sources) S.sources = await fetch("data/sources.json").then((r) => r.json()).catch(() => null);
+    const d = S.sources; dlgShow("Data sources", sourcesDialog);
+    $("#d-eyebrow").textContent = "Transparency"; $("#d-title").textContent = "Where the data comes from";
+    if (!d) { $("#d-body").innerHTML = `<p class="muted">The list of sources could not be loaded.</p>`; if (!$("#detail").open) $("#detail").showModal(); return; }
+    const tb = (head, rows) => `<div class="tbl-scroll"><table class="svs"><thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
+    const sum = (a, k) => a.reduce((m, x) => m + (x[k] || 0), 0);
+    const sec = d.documents.filter((x) => x.level === "6-12"), el = d.documents.filter((x) => x.level === "K-5");
+    const byDoc = (a) => Object.entries(a.reduce((m, x) => ((m[x.doc.replace(/ S[12]$/, "")] = (m[x.doc.replace(/ S[12]$/, "")] || 0) + 1), m), {})).map(([k, n]) => `${n} ${esc(k)}`).join(", ");
+    $("#d-body").innerHTML = `<p class="lede">Every rating, mark and finding on this site comes from one of the sources below. Lists built ${esc(d.built)}.</p>
+      <div class="box"><h3>Ratings (Part 1)</h3><p>Each grade team rates how each standard is generally taught in its grade, on this site. Every change is kept, with the team and the time, on the Activity tab. Findings are computed live from these ratings; "not rated" is never counted as a gap.</p></div>
+      <div class="box"><h3>Standards</h3>${tb(["Set", "Read from", "Rows"], d.standards.map((x) => `<tr><td>${badge(x.framework)} ${esc(FW_NAME[x.framework] || x.framework)}</td><td>${esc(x.source)}</td><td>${x.rows}</td></tr>`))}
+        <p class="muted">Common Core codes for Wisconsin ELA come from DPI's official 2010 / 2020 comparison; for Wisconsin Math, from a checked crosswalk (most codes are the same). Wisconsin matches under NGSS and AERO codes come from the school's sheets.</p></div>
+      <div class="box"><h3>✓ In curriculum docs and ★ Priority / Power</h3>
+        <p><b>Grades 6-12:</b> ${sec.length} Ma3loomat course documents (${byDoc(sec)}), citing ${sum(sec, "codes")} standards in all, ${sum(sec, "priority")} of them as priority.</p>
+        <p><b>K-5:</b> ${el.filter((x) => x.kind === "weekly plan").length} Kindergarten weekly plans, ${el.filter((x) => x.kind === "grade document").length} grade documents (overviews, maps, units, standards by week) and the K-5 ELA Power Standards PDF. ★ Power also comes from the Curriculum Hub grade standards lists (below).</p>
+        <p class="notice sm-note"><b>Not read yet:</b> ${esc(d.not_read)} A standard without "In curriculum docs" may still be in those plans.</p>
+        <details class="sub"><summary>Every document (${d.documents.length})</summary>${tb(["Grade", "Subject", "Course", "Document", "Standards cited", "Priority / power"], d.documents.map((x) => `<tr><td>${esc(gl(x.grade))}</td><td>${esc(x.subject)}</td><td>${esc(x.course || "")}</td><td>${esc(x.doc)}</td><td>${x.codes}</td><td>${x.priority || ""}</td></tr>`))}</details>
+        <details class="sub"><summary>Curriculum Hub grade standards lists (${d.hub.length})</summary>${tb(["Grade", "Subject", "Codes listed", "Found on the site", "Not found"], d.hub.map((x) => `<tr><td>${esc(gl(x.grade))}</td><td>${esc(x.subject)}</td><td>${x.listed}</td><td>${x.found}</td><td>${esc(x.not_found.join(", ") || "")}</td></tr>`))}</details></div>
+      <div class="box"><h3>Prerequisite links</h3>${tb(["Source", "Links"], Object.entries(d.prereqs).map(([k, n]) => `<tr><td>${esc(PSRC[k] || k)}</td><td>${n}</td></tr>`))}
+        <p class="muted">Coherence Map: Student Achievement Partners, after the Common Core progressions (only the codes of each arrow are used). Same anchor standard: the Wisconsin anchor standard one grade earlier. Suggested, check: proposed by an AI curriculum reviewer, each with a one-line reason; not an official source.</p></div>
+      <div class="box"><h3>Progressions</h3><p>ELA rows follow the Wisconsin anchor standards; Science rows the NGSS core ideas (through Wisconsin codes); Social Studies rows the Wisconsin standards, with AERO K-5 joined by the school's suggested matches; Math rows are Common Core topics grouped by cluster (built for this site, not official).</p></div>`;
+    if (!$("#detail").open) $("#detail").showModal();
+  }
   function viewBar(view) {
     const size = tsize(), seg = (act, v, cur, label) => `<button type="button" data-act="${act}" data-v="${v}" aria-pressed="${v === cur}">${label}</button>`;
     return `<div class="view-bar"><div class="seg-t" role="group" aria-label="How to see the standards">${seg("tview", "all", view, "All at once")}${seg("tview", "one", view, "One at a time")}</div>
@@ -1968,6 +1993,7 @@
     else if (act === "tsize") { S.flow.size = b.dataset.v; store.set("va_tsize", b.dataset.v); rerender(); }
     else if (act === "tfilter") { S.flow.lib = b.dataset.t; rerender(); }
     else if (act === "levels") levelsDialog();
+    else if (act === "sources") sourcesDialog();
     else if (act === "finish" || act === "results") {
       const g = teamGrade(), list = flowList(S.flow.subject, g);
       if (act === "finish" && unfinished(list, g, `Every standard needs an answer before ${S.flow.subject} is finished.`)) return;
