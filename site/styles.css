@@ -926,3 +926,6 @@ td > .ch-end { margin-left: 2px; }
 
 @media print { .cell-code { font-size: 6.5pt; max-width: none; overflow-wrap: normal; white-space: nowrap; } }
 .pl-why { margin: 6px 0 4px 6px; font-size: 13px; }
+.colh-course { display: block; font-size: 9.5px; font-weight: 600; line-height: 1.1; color: var(--ink-2); max-width: 72px; margin: 1px auto 0; white-space: normal; }
+.go-course { display: block; font-size: 12px; font-weight: 600; color: var(--brand); }
+.iss-sub { margin: 10px 0 4px; font-size: 13px; color: var(--ink-2); }
