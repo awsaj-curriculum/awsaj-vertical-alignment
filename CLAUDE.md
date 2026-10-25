@@ -114,7 +114,9 @@ Every analysis page starts with findings computed live from the ratings (they fi
 checks, and never counts "not rated" as a gap. Rules every page follows (from the independent reviews, `docs/reviews/`):
 - A gap is **confirmed** only when every grade that could teach it has rated it not taught (`unknownFor()`: owners =
   suggested grades + priority grades that can rate it, still to rate = "waiting"; other grades of the band for `sg`
-  standards = "not asked"; grades whose plans cite it = "plans cite it"); otherwise it is a **possible gap**.
+  standards = "not asked"; grades whose plans cite it = "plans cite it"); when every grade asked to rate it (its placed
+  grades) says not taught and only never-asked grades are open (band, priority grades it is not placed in, plans) it is
+  **not taught where asked**; when a placed grade is still to rate it, a **possible gap**.
 - Counts use rated standards and show the unknown share; priority standards placed in another grade are listed apart
   (that grade does not rate them); "taught but not in the plans" is only shown when the grade's documents cite something
   ("No plan data yet" otherwise), excludes Essential Elements, and is hedged until Part 2.
@@ -141,7 +143,8 @@ below `MIN_SIM` (0.12). Checks only use fully rated standards: break (whole midd
 moved (taught in another grade instead), prereq (in depth while every standard it links to is not taught anywhere;
 official on ELA anchor links, otherwise "Possible prerequisite gap" and only with similarity >= `PRE_SIM` 0.25; a
 gap a break explains is dropped; shown on both grades' dashboards), repeat (possible duplication) vs reinforce (in
-depth in 2+ of its own grades: placed grades plus the rest of its band, `ownGrades()`), same wording. Only breaks and official prereqs make a row "Breaks down"; "Taught at
+depth in 2+ of its own grades: placed grades plus the rest of its band, `ownGrades()`), same wording. Only breaks and official prereqs whose missing standard is in the same row make a row "Breaks down" (a split
+standard's parts share a `grp` in prereqs.json and count as one prerequisite, missing only when every part is); "Taught at
 every step" = 2+ grades, every standard rated and at least introduced. Run it after build_site_data.py.
 The committee's page and filters are kept in the address (`#view=gaps&subject=Math&grade=3`), so Back works and links
 can be shared; the popup has its own Back for standards opened from a list.

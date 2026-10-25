@@ -863,3 +863,25 @@ mark.kw { background: #FDE3B8; color: inherit; border-bottom: 2px solid var(--ac
 .issues.sub { margin: 4px 0 2px 14px; padding-left: 10px; border-left: 2px solid #e3e6e9; }
 .mk-flag.f-cause { background: #fff; color: var(--brand, #024638); border: 1px solid currentColor; }
 .code-link { font-weight: 700; }
+#print-meta { display: none; }
+@media print {
+  #print-meta { display: block; font-size: 9pt; color: #444; margin: 0 0 3mm; border-bottom: 1px solid #ccc; padding-bottom: 2mm; }
+  .whoami button, #whoami button { display: none !important; }
+}
+@media (max-width: 760px) { .pl-head, .pl-row { grid-template-columns: minmax(0, 1fr); max-width: 100%; } .pl-name, .pl-open, .pl-flags { min-width: 0; overflow-wrap: anywhere; white-space: normal; } .pl-track { min-width: 0; overflow: hidden; } .pl-cell { min-width: 0; } }
+.ba-bar { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 4px 0 6px; }
+table.ba tr.ba-weak td:first-child { box-shadow: inset 4px 0 0 var(--lv-0); }
+table.ba tr.flash { outline: 3px solid var(--accent); outline-offset: -2px; }
+table.ba tr.flash td { background: #fde7c4; transition: background .4s; }
+.linkish.sm { font-size: 12px; }
+@media (max-width: 760px) {
+  table.svs.ba { min-width: 0; }
+  table.ba, table.ba tbody, table.ba tr, table.ba td { display: block; width: auto; }
+  table.ba thead { display: none; }
+  table.ba tr { border-bottom: 1px solid #e3e6e9; padding: 6px 0; }
+  table.ba td { border: 0; padding: 3px 8px; }
+  table.ba td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .dlg-head { position: static; }
+}
+@media print { .mstrip, .mstrip-key { transform: none; } .mstrip i, .mstrip span { min-width: 7px; min-height: 9px; } }
+.rev-first { margin: 4px 0 6px 20px; padding: 0; } .rev-first li { margin: 3px 0; }

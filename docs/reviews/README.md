@@ -240,6 +240,46 @@ Other improvements:
 - Wording-match noise cut (more stop words), new words underlined in "see the links", help texts updated, the set
   filter names only the sets in view, the priority corner has an edge for colour-blind readers.
 
-## Round 5
+## Round 5 (none passed yet, several pages at 8 or 9)
+
+New reviewers I and J. Every count I recomputed matched, for all four subjects. The Audit, the popup and printing reached
+8 or more on every criterion except one (print visual hierarchy 7); the Gaps page and the coverage map's By strand view
+reached 8 on most.
+
+| Page | Usability | Visual | Information | Progression | Interpretation | Report |
+|---|---|---|---|---|---|---|
+| Coverage map: By strand | 8 | 8 | 8 | 6 | 7 | [I](round-5-I.md) |
+| Coverage map: Matched across grades | 6 | 7 | 7 | 6 | 5 | [I](round-5-I.md) |
+| Gaps & repetition | 8 | 8 | 8 | 7 | 7 | [I](round-5-I.md) |
+| Vertical Alignment Audit | 8 | 8 | 9 | 8 | 8 | [I](round-5-I.md) |
+| Standard popup | 8 | 8 | 9 | 9 | 8 | [I](round-5-I.md) |
+| Printing / PDF | 8 | 7 | 9 | 8 | 8 | [I](round-5-I.md) |
+| Progressions | 7 | 7 | 6 | 8 | 7 | [J](round-5-J.md) |
+| Grade dashboard | 8 | 7 | 8 | 7 | 7 | [J](round-5-J.md) |
+| Popup progression box and Why flagged | 8 | 7 | 7 | 8 | 8 | [J](round-5-J.md) |
+| "See the links" dialog | 7 | 7 | 6 | 7 | 7 | [J](round-5-J.md) |
+
+### What changed after round 5
+
+Critical issues (all addressed):
+
+1. **Possible gaps that could never settle** (I C1). A new state, "not taught where asked": every grade asked to rate the
+   standard says not taught, and only grades never asked are open. It has its own card and section, and the Why
+   flagged box says to ask those grades. "Waiting" now means only grades the standard is placed in.
+2. **Red card for possible problems** (I C2). The progression problems card splits official from possible links.
+3. **Split standards** (J C1, C2). A Coherence Map arrow that reaches several parts of one standard counts as one
+   prerequisite, missing only when every part is; a parent code now reaches all its parts (5.NF.B.7 a, b and c).
+4. **Chains followed wording over the map** (J C3). Wording only links a standard the map does not link on from.
+5. **"Breaks down" from another row** (J C4). A gap whose missing standard sits in another progression is labelled
+   "From another progression", is not drawn on the row's line, and leaves the row at "to check"; messages count
+   prerequisites ("1 of the 6").
+
+Other improvements: progression cards say "progressions with ..."; break messages name the codes; the dashboard has a
+ranked "review first" list across subjects; the coverage map names the weakest grades and its matched view has its own
+lede and explains empty band views; the popup's row box says the step before is the same idea, not a prerequisite; the
+Audit jump highlights its row; printouts start with the page, filters and "ratings as of" date and hide the team button;
+the phone Progressions page no longer scrolls sideways; more wording noise removed.
+
+## Round 6
 
 Results are added below when the round finishes.

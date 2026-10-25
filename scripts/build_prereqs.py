@@ -10,7 +10,8 @@ Sources (shown on the site with every link):
           one-line reason, kept in data/standards/prereqs_ai/*.json. Shown on the site as "suggested, check".
 Types: same (the same skill at a lower level), concept (an idea it relies on), procedure (a process it extends),
 prereq (a different skill needed first), build (Coherence Map arrow: builds on, type not given).
-Output: site/data/prereqs.json  {"to": [["from", type, source, reason, reason by], ...]}   (keys are "framework|code")
+Output: site/data/prereqs.json  {"to": [["from", type, source, reason, reason by, group?], ...]} (group: the Common
+Core code when one arrow reaches several parts of a split standard)   (keys are "framework|code")
 Usage: python3 scripts/build_prereqs.py (after build_site_data.py and build_progressions.py)
 """
 import collections, glob, json, os, re
@@ -19,7 +20,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 out = {}
 
 
-def add(to, frm, typ, src, why=""):
+def add(to, frm, typ, src, why="", grp=""):
     """One entry per pair: [from, type, source, reason, who wrote the reason]. An official source wins; a reason the AI
     reviewer wrote keeps saying so."""
     if to == frm:
@@ -30,7 +31,7 @@ def add(to, frm, typ, src, why=""):
             if src in ("cm", "anchor", "anchorp") and x[2] == "ai":
                 x[2] = src
             return
-    lst.append([frm, typ, src, why, "ai" if src == "ai" and why else ""])
+    lst.append([frm, typ, src, why, "ai" if src == "ai" and why else ""] + ([grp] if grp else []))
 
 
 # ---------- Math: Coherence Map arrows ----------
@@ -64,12 +65,11 @@ if os.path.exists(cm_path):
         return re.sub(r"\.([a-z])$", r"\1", c)               # 1.NBT.B.2.a -> 1.NBT.B.2a, as on the site
 
     def to_site(c):
-        """A Coherence Map code -> the site rows it names: the row itself, its lettered parts, or its parent."""
-        if c in site:
-            return site[c]
+        """A Coherence Map code -> the site rows it names: the row itself and its lettered parts (Wisconsin keeps part a
+        in the parent row, M.5.NF.B.7 = stem + a), or its parent."""
         parts = [x for k, v in site.items() if re.fullmatch(re.escape(c) + "[a-z]", k) for x in v]
-        if parts:
-            return parts
+        if c in site or parts:
+            return site.get(c, []) + [x for x in parts if x not in site.get(c, [])]
         parent = re.sub(r"[a-z]$", "", c)
         return site[parent] if parent != c and parent in site else []
 
@@ -79,9 +79,11 @@ if os.path.exists(cm_path):
         fa, fb = to_site(a), to_site(b)
         if not fa: unmapped.add(a)
         if not fb: unmapped.add(b)
+        # A standard split into parts on the site is one prerequisite: the parts share a group (the Common Core code),
+        # and the site counts it missing only when every part is.
         for x in fa:
             for y in fb:
-                add(y, x, "build", "cm")
+                add(y, x, "build", "cm", grp=a if len(fa) > 1 else "")
     print(f"Math: {len(d['edges'])} Coherence Map arrows; codes not on the site: {sorted(unmapped)}")
 else:
     print("Math: data/source/coherence_map/data.js not found, Math has no prerequisite links")
