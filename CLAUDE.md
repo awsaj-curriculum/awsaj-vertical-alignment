@@ -104,7 +104,7 @@ Studies 6-12 shows its set name.
 Priority standard, 6-12, from Ma3loomat curriculum maps and scope & sequence; or a Power standard, K-5, from the K-5 ELA
 Power Standards PDF and the Curriculum Hub grade Standards lists) and `pa` (grades added to the placement because their
 plans cite it: high school Math and middle school Science rate cited standards plus their current placement, as Tim
-decided). Marks: "★ Priority" / "★ Power" pill (orange, a highlight) and "✓ In plans" pill (dark green outline); on the
+decided). Marks: "★ Priority" / "★ Power" pill (orange, a highlight) and "✓ In curriculum docs" pill (renamed from "In plans": only course maps, pacing, overviews and K weekly plans are read until Part 2; dark green outline); on the
 K-12 grid an orange top-left corner and a bar under the square. Committee filters: Standards (all / priority / in plans / not in
 plans) and Order (curriculum order / priority first / in plans first, within each strand). Teachers get Priority and In
 plans tabs in their library. Gaps, Dashboard and the Audit page have priority / in-plans sections.
