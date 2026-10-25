@@ -122,6 +122,8 @@ checks, and never counts "not rated" as a gap. Rules every page follows (from th
   cards and sections) and get their own map rows. Their inherited "in plans" marks are not counted anywhere.
   EE rows whose text is "Not applicable" are dropped at load. Shared Common Core codes get "(part n of m)"; Wisconsin
   2020 ELA rows with no Common Core code show "WI W.7.1".
+- Printing (PDF button or browser print) is A4 portrait (`@page` in styles.css) with every finding: `S.printAll` opens
+  every section and lifts every list cut-off while printing; with a popup open, only the popup prints.
 - `checksFor(e)` lists every check for one standard (popup "Why this standard is flagged", CSV Findings column).
 Coverage map: "By strand" tiles or "Matched across grades" (chains of matched standards per progression, one square per
 grade; the strongest link continues a row, other links start branch rows; band views keep the band's standards; "see the links" opens each step with its link type, source, reason and shared wording), with K-12 / K-5 / 6-8 /

@@ -307,12 +307,33 @@ table.svs th { font-size: 12px; color: var(--ink-2); }
   .filters .exports { margin-left: 0; }
   .legend-bar { position: static; }
 }
+/* Print and "Save as PDF": A4 portrait, every finding shown (app.js opens every section and lists in full). */
+@page { size: A4 portrait; margin: 12mm 10mm; }
 @media print {
-  .tabs, .filters, .legend-bar .key:last-child, .team-pick, .exports, .seg button:not([aria-pressed="true"]) { display: none !important; }
+  html, body { width: auto; background: #fff !important; font-size: 10.5pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .tabs, .filters, .legend-bar .key:last-child, .team-pick, .exports, .seg button:not([aria-pressed="true"]),
+  .scroll-hint, .grid-more, .map-bar, .pl-tools, button.help, button.ghost, .ba-bar button, [data-act="more"], [data-act="ba-go"], .sync, .confetti { display: none !important; }
   .legend-bar { position: static; }
-  body { background: #fff; }
-  .panel { break-inside: avoid; border-color: #ccc; }
-  .hm-wrap { max-height: none; overflow: visible; }
+  main { padding: 0 !important; max-width: none !important; }
+  .panel { box-shadow: none !important; border: 1px solid #ccc; break-inside: auto; margin: 0 0 6mm; padding: 4mm; }
+  h2, h3, summary { break-after: avoid; }
+  li, tr, .ins, .pb, .ch-step { break-inside: avoid; }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker, details > summary::marker { display: none; }
+  .hm-wrap, .cm-wrap, .tbl-scroll, .pl-wrap { max-height: none !important; overflow: visible !important; }
+  thead { display: table-header-group; }
+  .sticky, [style*="sticky"], .pl-head, table thead th { position: static !important; }
+  /* Wide grids shrink to the page width instead of being cut off. */
+  table.hm, table.cm, table.svs { width: 100% !important; min-width: 0 !important; table-layout: auto; font-size: 8pt; }
+  table.hm td, table.hm th, table.cm td, table.cm th { padding: 1px !important; }
+  .ins-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 3mm; }
+  a { color: inherit; text-decoration: none; }
+  .linkish, .code-link { text-decoration: none; color: inherit; }
+  /* With a popup open, print the popup only. */
+  body:has(#detail[open]) > :not(#detail) { display: none !important; }
+  #detail[open] { position: static; display: block; width: auto; max-width: none; max-height: none; height: auto; overflow: visible; border: 0; box-shadow: none; margin: 0; padding: 0; transform: none; }
+  #detail::backdrop { display: none; }
+  #d-close, #detail [data-act="dlg-back"] { display: none !important; }
 }
 
 /* ---------------- teacher flow (one standard at a time) ---------------- */

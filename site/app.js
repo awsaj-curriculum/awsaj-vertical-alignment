@@ -682,8 +682,8 @@
       <ul class="res-insights">${insights.map((x) => `<li>${x}</li>`).join("")}</ul>
       <h3>By strand</h3><div class="strand-bars">${strands.map((x) => { const w = (i) => (x.c[i] / x.arr.length) * 100;
         return `<span class="sb-name">${badge(x.f)} ${esc(x.s)}</span><div class="sb" role="img" aria-label="${esc(x.s)}: ${x.c[2]} in depth, ${x.c[1]} introduced, ${x.c[0]} not taught">${[[2, COLORS[2]], [1, COLORS[1]], [0, COLORS[0]], [3, "#F2F4F6"]].map(([i, col]) => (x.c[i] ? `<i style="width:${w(i)}%;background:${col}"></i>` : "")).join("")}</div><div class="num">${x.c[2]}/${x.arr.length}</div>`; }).join("")}</div>
-      ${prLow.length ? `<h3>${prName(g)} standards not taught in depth (${prLow.length})</h3><ul class="gap-list res-list">${prLow.slice(0, 12).map(item).join("")}</ul>` : ""}
-      ${planNot.length ? `<h3>In your plans, but marked not taught (${planNot.length})</h3><ul class="gap-list res-list">${planNot.slice(0, 12).map(item).join("")}</ul>` : ""}
+      ${prLow.length ? `<h3>${prName(g)} standards not taught in depth (${prLow.length})</h3><ul class="gap-list res-list">${prLow.slice(0, S.printAll ? Infinity : 12).map(item).join("")}</ul>` : ""}
+      ${planNot.length ? `<h3>In your plans, but marked not taught (${planNot.length})</h3><ul class="gap-list res-list">${planNot.slice(0, S.printAll ? Infinity : 12).map(item).join("")}</ul>` : ""}
       <div class="done-actions">${next ? `<button type="button" data-act="flow-subject" data-s="${esc(next)}">Next: ${esc(next)} →</button>` : ""}
         <button type="button" class="ghost" data-act="review-answers">Review or change my answers</button>
         ${allDone && !S.lock ? `<button type="button" class="ghost" data-act="explore">See your grade on the K-12 map</button>` : ""}</div></div>`;
@@ -953,7 +953,7 @@
   function chainView(list, gs) {
     if (!S.prog) return `<div class="panel empty">Progressions are loading…</div>`;
     const all = chainRows(list, gs);
-    const multi = all.filter((c) => c.vk.length > 1).length, shown = S.gridAll ? all : all.slice(0, GRID_ROWS), eeN = list.filter((e) => isEE(e.f)).length;
+    const multi = all.filter((c) => c.vk.length > 1).length, shown = S.gridAll || S.printAll ? all : all.slice(0, GRID_ROWS), eeN = list.filter((e) => isEE(e.f)).length;
     // Where each link in a chain comes from (the prerequisite map's source, or wording when the map has none).
     const srcOf = (c) => c.ks.slice(1).map((k, j) => { const p = preOf(S.byKey.get(k)).find((x) => x.k === c.ks[j]); return p ? p.src : "words"; });
     const tally = (cs) => { const t = {}; for (const c of cs) for (const x of srcOf(c)) t[x] = (t[x] || 0) + 1; return Object.entries(t).sort((a, b) => b[1] - a[1]).map(([x, n]) => `${n} ${PSHORT[x]}`).join(", "); };
@@ -1012,7 +1012,7 @@
   const GRID_ROWS = 120;
   function standardGrid(list, gs) {
     let rows = "", last = null;
-    const all = list.length, shown = S.gridAll ? list : list.slice(0, GRID_ROWS);
+    const all = list.length, shown = S.gridAll || S.printAll ? list : list.slice(0, GRID_ROWS);
     for (const e of shown) {
       const head = (subj().frameworks.length > 1 ? (FW_NAME[e.f] || e.f) + " · " : "") + (e.s || "");
       if (head !== last) { rows += `<tr class="strand-row"><td colspan="${gs.length + 1}">${badge(e.f)} ${esc(head)}</td></tr>`; last = head; }
@@ -1108,7 +1108,8 @@
   // Which sections are open on the Gaps page, the Audit and the dashboard, kept across redraws (the page redraws when
   // ratings arrive or a popup closes). Unset means the section's default.
   S.open = {};
-  const isOpen = (id, dflt) => (id in S.open ? S.open[id] : !!dflt);
+  // Printing (or saving as PDF) shows every section open and every list in full (S.printAll).
+  const isOpen = (id, dflt) => (S.printAll ? true : id in S.open ? S.open[id] : !!dflt);
   // Long lists show their first 25 lines, with a button for the rest (S.more remembers which were opened).
   S.more = {};
   function renderGaps() {
@@ -1138,7 +1139,7 @@
     // Summary cards: coloured only when they count a problem; each one opens its section below.
     const card = (id, arr, label, sub, cls) => { const num = arr.length - nEE(arr);
       return `<button type="button" class="ins ${num ? cls || "" : ""}" data-act="open-sec" data-id="gap-${id}"><b>${num}</b><span>${num === 1 ? label.replace(/gaps\b/, "gap").replace(/problems\b/, "problem") : label}</span><small>${sub}${eeNote(arr)}</small></button>`; };
-    const sec = (id, title, desc, todo, arr0, fn, open) => { const all = S.more["gap-" + id], cut = all ? 300 : 25, k = nEE(arr0);
+    const sec = (id, title, desc, todo, arr0, fn, open) => { const all = S.more["gap-" + id] || S.printAll, cut = S.printAll ? Infinity : all ? 300 : 25, k = nEE(arr0);
       const arr = k ? [...arr0.filter((x) => !eeOf(x)), ...arr0.filter(eeOf)] : arr0, first = arr.length - k;
       const lis = arr.slice(0, cut).map((x, i) => (k && i === first ? `<li class="ee-div muted">Essential Elements (${k}): they follow the standard they link to</li>` : "") + fn(x)).join("");
       return `<details class="gap" id="gap-${id}" data-sec="gap-${id}" ${isOpen("gap-" + id, open) ? "open" : ""}><summary><span class="count">${first}${k ? `<small> + ${k} EE</small>` : ""}</span>${title} <span class="tag auto">Automatic check</span></summary>
@@ -1291,7 +1292,7 @@
       return `<li>${codeHTML(x)} <span class="pd-pills">${gradePills(x, GRADES, true)}</span> <span class="tag pt">${esc(ptype(p, !before))}</span> <span class="tag src src-${p.src}">${esc(PSRC[p.src] || p.src)}</span>${before && fullyNot(x) ? ` <span class="mk-flag sev-high">Not taught where rated</span>` : ""}
         ${p.why ? `<small class="pb-why">${p.whySrc === "ai" && p.src !== "ai" ? "Reason suggested by AI: " : ""}${esc(p.why)}</small>` : ""}<span class="pb-t">${lit ? markWords(trunc(t, 180), sw) : esc(trunc(t, 180))}</span></li>`; };
     return `<div class="pb-cols"><div><h4>Needs first (${pre.length})</h4><ul class="pb-list">${byTrust(pre, false).map((p) => item(p, true)).join("") || "<li class='muted'>None recorded.</li>"}</ul></div>
-      <div><h4>Leads to (${post.length})</h4><ul class="pb-list">${byTrust(post, true).slice(0, 8).map((p) => item(p, false)).join("") || "<li class='muted'>None recorded.</li>"}${post.length > 8 ? `<li class="muted">and ${post.length - 8} more</li>` : ""}</ul></div></div>
+      <div><h4>Leads to (${post.length})</h4><ul class="pb-list">${byTrust(post, true).slice(0, S.printAll ? Infinity : 8).map((p) => item(p, false)).join("") || "<li class='muted'>None recorded.</li>"}${post.length > 8 ? `<li class="muted">and ${post.length - 8} more</li>` : ""}</ul></div></div>
       <p class="muted sm-note">Each link says what kind it is and where it comes from: Coherence Map (Math, after the Common Core progressions), the same anchor standard (ELA, official; when the anchor has several parts, the matching part is chosen by its wording), or suggested by an AI curriculum reviewer (check before relying on it). Official links are listed first. Each rating shows its grade. Highlighted words are wording the two standards share.</p>`;
   }
 
@@ -1442,7 +1443,7 @@
       .sort((a, b) => flagRank(a.f) - flagRank(b.f) || GRADES.indexOf(a.f.g) - GRADES.indexOf(b.f.g));
     // Grouped by root cause: one not-taught standard (or step) can explain several problems.
     const byCause = new Map(); for (const it of issues) { const ck = causeKey(it.f); (byCause.get(ck) || byCause.set(ck, []).get(ck)).push(it); }
-    const causeGroups = [...byCause.values()], allIssues = S.more["pg-issues"], shownGroups = allIssues ? causeGroups : causeGroups.slice(0, 8);
+    const causeGroups = [...byCause.values()], allIssues = S.more["pg-issues"] || S.printAll, shownGroups = allIssues ? causeGroups : causeGroups.slice(0, 8);
     const moved = inGroup.flatMap((x) => x.flags.filter((f) => f.t === "moved").map((f) => ({ x, f })));
     const slots = inGroup.reduce((n, x) => n + x.slots, 0), rated = inGroup.reduce((n, x) => n + x.rated, 0);
     const strong = inGroup.filter((x) => x.status === "ok" && !has(x, "same")).sort((a, b) => b.steps.length - a.steps.length).slice(0, 3);
@@ -1608,7 +1609,7 @@
     // Essential Elements are not cited by code in the plans, so they are left out of "taught but not in the plans".
     const notInPlans = hasPlans ? mine.filter((e) => e.pl.includes(g) && !isEE(e.f) && !isPn(e, g) && lv(e) > 0) : [];
     const row = (e) => { const r = rating(e.f, e.c, g); return `<tr><td>${badge(e.f)} ${codeHTML(e)}${e.pl.includes(g) && !isEE(e.f) ? `<br><button type="button" class="linkish sm" data-act="ba-go" data-id="${esc(baId(e))}">Before and after ↓</button>` : ""}</td><td>${marks(e, g) || "<span class='muted'>None</span>"}${!forGrade(e, g) ? ` <span class="tag">placed in ${esc(e.pl.map(gl).join(", "))}</span>` : ""}</td><td>${r ? `<span class="pill"><i class="lv lv-${r.level}"></i>${LEVEL_SHORT[r.level]}</span>` : `<span class="pill"><i class="lv lv-none"></i>Not rated</span>`}</td><td class="muted">${esc(e.t.slice(0, 110))}${e.t.length > 110 ? "…" : ""}</td></tr>`; };
-    const tbl = (arr, msg) => `<div class="tbl-scroll"><table class="svs"><thead><tr><th>Code</th><th>In the documents</th><th>Team says (Part 1)</th><th>Standard</th></tr></thead><tbody>${arr.slice(0, 200).map(row).join("") || `<tr class="placeholder"><td colspan="4">${msg}</td></tr>`}</tbody></table></div>`;
+    const tbl = (arr, msg) => `<div class="tbl-scroll"><table class="svs"><thead><tr><th>Code</th><th>In the documents</th><th>Team says (Part 1)</th><th>Standard</th></tr></thead><tbody>${arr.slice(0, S.printAll ? Infinity : 200).map(row).join("") || `<tr class="placeholder"><td colspan="4">${msg}</td></tr>`}</tbody></table></div>`;
     const sec = (id, title, desc, arr, msg, open, auto = true) => `<details class="gap" data-sec="aud-${id}" ${isOpen("aud-" + id, open) ? "open" : ""}><summary><span class="count">${arr.length}</span>${title}${auto ? ' <span class="tag auto">Automatic check</span>' : ""}</summary><p class="muted">${desc}</p>${tbl(arr, msg)}</details>`;
     const share = (a, b) => (b ? `${a}<small>/${b}</small>` : "n/a");
     return `<div class="panel insights"><h2>What the curriculum documents say ${hb("p_docs")}</h2>
@@ -1641,12 +1642,12 @@
       return [...out.values()];
     };
     // Every grade a neighbour is placed in, with its rating; pink only when it is settled that no grade teaches it.
-    const cellOf = (pairs) => pairs.length ? pairs.slice(0, 3).map(([x, src, type]) => `<span class="ba-n ${fullyNot(x) ? "ba-not" : ""}">${codeHTML(x)} <span class="pd-pills">${gradePills(x, GRADES, true)}</span> <small class="muted">${esc(type ? type.toLowerCase() + "; " : "")}${esc(src)}</small></span>`).join("") + (pairs.length > 3 ? `<small class="muted">and ${pairs.length - 3} more</small>` : "")
+    const cellOf = (pairs) => pairs.length ? pairs.slice(0, S.printAll ? Infinity : 3).map(([x, src, type]) => `<span class="ba-n ${fullyNot(x) ? "ba-not" : ""}">${codeHTML(x)} <span class="pd-pills">${gradePills(x, GRADES, true)}</span> <small class="muted">${esc(type ? type.toLowerCase() + "; " : "")}${esc(src)}</small></span>`).join("") + (pairs.length > 3 ? `<small class="muted">and ${pairs.length - 3} more</small>` : "")
       : `<span class="muted">None recorded</span>`;
     // A row needs a look when this grade rates it below in depth, or a neighbour is settled as not taught.
     const data = rows.map((e) => { const r = rating(e.f, e.c, g), pre = nb(e, -1), post = nb(e, 1);
       return { e, r, pre, post, weak: (r && r.level < 2) || pre.some(([x]) => fullyNot(x)) || post.some(([x]) => fullyNot(x)) }; });
-    const nWeak = data.filter((d) => d.weak).length, only = S.baWeak && nWeak > 0;
+    const nWeak = data.filter((d) => d.weak).length, only = S.baWeak && nWeak > 0 && !S.printAll;
     let last = null, html = "";
     for (const { e, r, pre, post, weak } of data) {
       if (only && !weak) continue;
@@ -2043,6 +2044,11 @@
   document.addEventListener("change", (ev) => { if (ev.target.id === "pg-group") { S.pgGroup = ev.target.value; rerender(); } });
   $("#team").addEventListener("change", (ev) => { setTeam(ev.target.value); store.set("va_team", ev.target.value); });
   $("#x-csv").addEventListener("click", exportCSV); $("#x-png").addEventListener("click", exportPNG); $("#x-pdf").addEventListener("click", () => window.print());
+  // Print or PDF (A4): redraw with every section open and every list in full, then put the page back.
+  let printOpen = [];
+  addEventListener("beforeprint", () => { if (S.printAll) return; S.printAll = true; rerender(); if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw();
+    printOpen = [...document.querySelectorAll("details:not([open])")]; printOpen.forEach((d) => (d.open = true)); });
+  addEventListener("afterprint", () => { if (!S.printAll) return; S.printAll = false; printOpen.forEach((d) => (d.open = false)); printOpen = []; rerender(); if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw(); });
 
   function setTeam(name) {
     S.team = S.teams.find((t) => t.name === name) || null;
