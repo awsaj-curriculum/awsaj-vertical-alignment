@@ -93,6 +93,8 @@ linked standards), NGSS, AERO (AERO-SCI, AERO-SS) and WI (WI-SCI, WI-SS). Each t
 NGSS 6-12 for Science (the client hides NGSS in K-5 and WI-SCI in every grade; the data is kept), AERO-SS K-5 (WI-SS hidden in K-5; its suggested matches show in italics under each AERO code from the `wi` index field) / WI-SS 6-12 for Social Studies; other sets stay selectable). The default also ticks the subject's Essential Elements set when the grade has any. Teachers rate chosen sets one at a time (CC first, EE last). Every set
 has a badge with its own line style and bright colour (CCSS solid dark green #024638, EE dashed violet #7C4DFF, NGSS solid teal #00A39A,
 AERO dotted gold #F2A900, WI double line navy #1F3A93; `--set-*` in styles.css); sets never use the rating colours.
+Why Wisconsin (Tim, stated in the CCSS and EE popups): Awsaj uses Wisconsin's version of the Common Core because it goes with
+the Essential Elements, which Wisconsin also uses, and Wisconsin has published the most detailed work on them.
 Wisconsin Science and Social Studies are labelled (WI), with a popup that CCSS has no science or social studies standards.
 Prerequisite map: `scripts/build_prereqs.py` writes `site/data/prereqs.json` ({to: [[from, type, source, reason]]}).
 Math = Coherence Map arrows (Student Achievement Partners; `data/source/coherence_map/data.js`, git-ignored, only codes
