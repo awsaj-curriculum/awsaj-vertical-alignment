@@ -1006,3 +1006,7 @@ table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { ba
 .tip .lv { width: 10px; height: 10px; border-radius: 2px; }
 .strip .cell.lnk { border-style: dashed; border-width: 1.5px; }
 .strip .cell-code { margin: 0 auto; }
+/* Every standard carries its set badge on the code line. */
+.cd-main { display: inline-flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
+.cd-main b { font-weight: 700; color: var(--ink); }
+.cd-main .setb { flex: none; height: 16px; min-width: 22px; font-size: 9px; padding: 0 4px; }
