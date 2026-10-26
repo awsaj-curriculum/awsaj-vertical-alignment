@@ -164,6 +164,10 @@ weak/strong link or strongest/weakest): "Breaks down" (a settled break, last ste
 one; a split standard's parts share a `grp` in prereqs.json and count as one) vs "Not taught on a suggested link"
 (AI or wording links only); "Taught at
 every step" = 2+ grades, every standard rated and at least introduced. Run it after build_site_data.py.
+All subjects (Tim, Oct 2026): the Subject box on Coverage map, Gaps, Dashboard, Progressions and Audit also offers "All subjects"
+(`ALL`, `ALL_VIEWS`): `renderAllSubjects()` draws each subject in turn under a dark green band (`withSubject()`), puts what
+belongs to every subject (Back, grade arrows, the grade summary, the map's band buttons) above the sections, and clicks inside a
+section act as that subject. Standard set and Strand need one subject; the CSV holds every subject; Rate needs one subject.
 The committee's page and filters are kept in the address (`#view=gaps&subject=Math&grade=3`), so Back works and links
 can be shared; the popup has its own Back for standards opened from a list.
 
