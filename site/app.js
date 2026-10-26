@@ -11,7 +11,7 @@
   const divLabel = (d) => (d === "all" ? "K-12" : BAND[d] ? "Grades " + d : d + " school");
   const LEVEL = ["Not taught", "Introduced / exposed", "Taught in depth"];
   const LEVEL_SHORT = ["Not taught", "Introduced", "In depth"];
-  const FW_NAME = { "WI-CC-MATH": "Wisconsin Math (CCSS)", "WI-CC-ELA": "Wisconsin ELA (CCSS)", "NGSS": "NGSS",
+  const FW_NAME = { "WI-CC-MATH": "Wisconsin Math (CCSS): the Wisconsin Standards for Mathematics (2021), published by the Wisconsin Department of Public Instruction and built on the Common Core State Standards. Wisconsin public schools use them for all students; the bold code is the Wisconsin code, with the Common Core State Standards (CCSS) code underneath.", "WI-CC-ELA": "Wisconsin ELA (CCSS): the Wisconsin Standards for English Language Arts (2020), published by the Wisconsin Department of Public Instruction and built on the Common Core State Standards (2010). Wisconsin public schools use them for all students; the bold code is the Wisconsin code, with the Common Core State Standards (CCSS) code underneath.", "NGSS": "NGSS",
     "WI-SCI": "Wisconsin Science (WI)", "AERO-SCI": "AERO Science", "WI-SS": "Wisconsin Social Studies (WI)", "AERO-SS": "AERO Social Studies",
     "WI-EE-MATH": "Essential Elements (Math)", "WI-EE-ELA": "Essential Elements (ELA)", "WI-EE-SCI": "Essential Elements (Science)", "WI-EE-SS": "Essential Elements (Social Studies)" };
   // Standard sets: each has a short badge and its own badge style, so Common Core, EE, NGSS, AERO and Wisconsin never look
@@ -22,15 +22,30 @@
     : f.startsWith("AERO-") ? { abbr: "AERO", name: "AERO", style: "aero" }
     : { abbr: "WI", name: f === "WI-SS" ? "Wisconsin Social Studies (WI)" : "Wisconsin Science (WI)", style: "wi" });
   const SET_ORDER = (f) => (f.startsWith("WI-EE-") ? 9 : f.startsWith("WI-CC-") ? 0 : f === "NGSS" ? 1 : f.startsWith("AERO-") ? 2 : 3);
+  // Where each kind of standard comes from and who it is for: used by every badge, set name and acronym popup.
+  const STD_INFO = {
+    CCSS: "Common Core State Standards: the K-12 standards for Math and English Language Arts published in 2010 by the National Governors Association and the Council of Chief State School Officers. More than 40 US states adopted them, many (like Wisconsin) with their own revisions, and many American international schools use them.",
+    EE: "Essential Elements: alternate standards written by the Dynamic Learning Maps consortium of US states, based at the University of Kansas, and used by about 20 states including Wisconsin. They are for students with the most significant cognitive disabilities (usually the students who take an alternate assessment instead of the regular state test). Each one is linked to a grade-level standard and keeps the same content at reduced depth, breadth and complexity.",
+    NGSS: "Next Generation Science Standards: K-12 science standards released in 2013, written by 26 US states with the nonprofit Achieve and based on the National Research Council's Framework for K-12 Science Education. About 20 US states (for example California, Illinois and Washington) and many American and international schools use them, and Wisconsin's own science standards come from the same framework; Awsaj uses them for Grades 6 to 12.",
+    AERO: "American Education Reaches Out: standards frameworks supported by the US State Department's Office of Overseas Schools, which adapt US standards (including the Common Core and NGSS) for American-curriculum international schools. Many international schools around the world use them; Awsaj uses AERO Science and Social Studies for K-5.",
+    WI: "Wisconsin's own standards, from the Wisconsin Department of Public Instruction, used by Wisconsin public schools for all students. The Common Core State Standards cover only Math and ELA, so they have no science or social studies standards.",
+    ELA: "English Language Arts: reading, writing, speaking and listening, and language.",
+    DLM: "Dynamic Learning Maps: the consortium of US states, based at the University of Kansas, that wrote the Essential Elements.",
+    DPI: "Wisconsin Department of Public Instruction: the Wisconsin state agency that publishes the Wisconsin standards and Essential Elements." };
   // Hover text for a set. The Wisconsin Math and ELA sets are Common Core based, so they carry (CCSS) and say so on hover.
-  const CC_TIP = { "WI-CC-MATH": "Wisconsin Math (CCSS): the Wisconsin Standards for Mathematics (2021), built on the Common Core State Standards. The bold code is the Common Core State Standards code; the Wisconsin code is underneath.",
-    "WI-CC-ELA": "Wisconsin ELA (CCSS): the Wisconsin Standards for English Language Arts (2020), built on the Common Core State Standards (2010). The bold code is the Common Core State Standards code; the Wisconsin code is underneath." };
+  const CC_TIP = { "WI-CC-MATH": "Wisconsin Math (CCSS): the Wisconsin Standards for Mathematics (2021), published by the Wisconsin Department of Public Instruction and built on the Common Core State Standards. Wisconsin public schools use them for all students; the bold code is the Wisconsin code, with the Common Core State Standards (CCSS) code underneath.",
+    "WI-CC-ELA": "Wisconsin ELA (CCSS): the Wisconsin Standards for English Language Arts (2020), published by the Wisconsin Department of Public Instruction and built on the Common Core State Standards (2010). Wisconsin public schools use them for all students; the bold code is the Wisconsin code, with the Common Core State Standards (CCSS) code underneath." };
   // A set name in HTML: (CCSS) gets a popup that spells out Common Core State Standards.
-  const fwHTML = (name) => esc(name).replace("(CCSS)", '(<abbr class="ccss" title="Common Core State Standards">CCSS</abbr>)')
-    .replace("(WI)", '(<abbr class="ccss" title="Wisconsin\'s own standards. The Common Core State Standards (CCSS) cover only Math and ELA, so they have no social studies or science standards.">WI</abbr>)');
-  CC_TIP["WI-SS"] = "Wisconsin Social Studies (WI): Wisconsin's own Social Studies standards (2018). The Common Core State Standards (CCSS) have no social studies standards, so these come from the Wisconsin standards.";
-  CC_TIP["WI-SCI"] = "Wisconsin Science (WI): Wisconsin's own Science standards (2017). The Common Core State Standards (CCSS) have no science standards.";
-  const setTip = (f) => CC_TIP[f] || FW_NAME[f] || SET(f).name;
+  const fwHTML = (name) => esc(name).replace("(CCSS)", `(<abbr class="ccss" data-tip-text="${esc(STD_INFO.CCSS)}">CCSS</abbr>)`)
+    .replace("(WI)", `(<abbr class="ccss" data-tip-text="${esc(STD_INFO.WI)}">WI</abbr>)`);
+  CC_TIP["WI-SS"] = "Wisconsin Social Studies (WI): Wisconsin's own Social Studies standards (2018), from the Wisconsin Department of Public Instruction, used by Wisconsin public schools for all students. The Common Core State Standards have no social studies standards, so these come from Wisconsin.";
+  CC_TIP["WI-SCI"] = "Wisconsin Science (WI): Wisconsin's own Science standards (2017), from the Wisconsin Department of Public Instruction, for all students. The Common Core State Standards have no science standards.";
+  const setTip = (f) => {
+    if (CC_TIP[f]) return CC_TIP[f];
+    const name = FW_NAME[f] || SET(f).name, info = STD_INFO[SET(f).abbr]; if (!info) return name;
+    const k = info.indexOf(": "), head = info.slice(0, k), rest = info.slice(k + 2);
+    return name.startsWith(head) ? `${name}: ${rest}` : `${name} (${head}): ${rest}`;   // "Essential Elements (Math): ..." / "NGSS (Next Generation ...): ..."
+  };
   const badge = (f) => { const x = SET(f); return `<span class="setb set-${x.style}" title="${esc(setTip(f))}">${x.abbr}</span>`; };
   // Awsaj brand: ratings use three of the four symbol ribbons (orange is kept for highlights so it never sits next to lime).
   const COLORS = { none: "#FFFFFF", 0: "#D00070", placed: "#024638", 1: "#0092BC", 2: "#78BE21", maroon: "#024638", accent: "#ED8B00", line: "#D9E1E2", ink: "#1E2324" };
@@ -107,7 +122,7 @@
       (!S.f.framework || e.f === S.f.framework) &&
       (!S.f.strand || e.s === S.f.strand) &&
       (ignoreDivision || S.f.division === "all" || e.pl.some((g) => grades.includes(g))) && markOk(e) &&
-      (!q || e.c.toLowerCase().includes(q) || codeText(e).toLowerCase().includes(q) || e.t.toLowerCase().includes(q) || e.s.toLowerCase().includes(q)));
+      (!q || e.c.toLowerCase().includes(q) || codeText(e).toLowerCase().includes(q) || altText(e).toLowerCase().includes(q) || e.t.toLowerCase().includes(q) || e.s.toLowerCase().includes(q)));
   }
   const levelsAcross = (e) => GRADES.map((g) => ({ g, r: rating(e.f, e.c, g) })).filter((x) => x.r);
   const canEdit = (g) => S.team && (S.team.name === "Vertical Alignment Committee" || S.team.grades.includes(g));
@@ -412,11 +427,13 @@
   }
   function codeParts(e) {
     const cc = ccss(e);
-    if (cc) return { main: cc, alt: "Wisconsin " + e.c };
+    // Tim (Oct 2026): the Wisconsin code comes first, because the site shows the Wisconsin wording; the Common Core
+    // State Standards code (or, for Essential Elements, the Dynamic Learning Maps code) goes underneath.
+    if (cc) return { main: [e.c], alt: (e.f.startsWith("WI-EE-") ? "DLM " : "CCSS ") + cc.join(" · ") };
     if (e.wi) return { main: [e.c], alt: "Wisconsin " + e.wi.join(" · ") };
     // New in Wisconsin 2020: "WI" in front, so W.7.1 (Wisconsin, new) never looks like Common Core W.7.1 (Wisconsin W.7.2.a).
-    if (e.f === "WI-CC-ELA") return { main: ["WI " + e.c], alt: "New in Wisconsin 2020 (no Common Core State Standards code)" };
-    if (e.f === "WI-CC-MATH") return { main: ["WI " + e.c.replace(/^M\./, "")], alt: "New in Wisconsin 2021 (no Common Core State Standards code)" };
+    if (e.f === "WI-CC-ELA") return { main: [e.c], alt: "New in Wisconsin 2020 (no CCSS code)" };
+    if (e.f === "WI-CC-MATH") return { main: [e.c], alt: "New in Wisconsin 2021 (no CCSS code)" };
     const lk = e.lk && e.lk[0], base = lk && S.byKey.get(lk.replace(":", "|"));
     return { main: [e.c], alt: lk ? "Essential Element for " + (base ? codeText(base) : lk.split(":")[1])
       : e.f === "NGSS" || e.f.startsWith("AERO-") ? "No Wisconsin match" : FW_NAME[e.f] || e.f };
@@ -646,7 +663,7 @@
     const pages = {
       1: `${flowTitle(subject, g, shown)}
       <ul class="set-sum">${shown.map((f) => { const n = S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)).length, x = SET(f);
-        return `<li class="set-opt set-${x.style}">${badge(f)} <span><b>${fwHTML(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}. ${DESC[x.style]}</small></span></li>`; }).join("")}</ul>
+        return `<li class="set-opt set-${x.style}">${badge(f)} <span><b>${fwHTML(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}.</small><small class="set-desc">${esc(((t) => t.charAt(0).toUpperCase() + t.slice(1))(setTip(f).slice(setTip(f).indexOf(": ") + 2)))}</small></span></li>`; }).join("")}</ul>
       ${nav(false, `<button type="button" data-act="how-page" data-p="2">Next</button>`)}`,
       2: `<h2>Standards across the school ${hb("sets")}</h2>
       <p class="muted">What every grade and subject at Awsaj rates. Your row is highlighted.</p>
@@ -657,10 +674,8 @@
         ${step(1, "Check the title", `<p>It shows your grade and subject (or your course). Every standard on the page belongs to it.</p>`)}
         ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${LEVEL_DEF.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}</div>`)}
         ${step(3, "Change or take off an answer", `<p>Click a different answer to change it. Click the chosen answer again to take it off.</p>`)}
-        ${step(4, "Rate only your own grade's standards", `<p>You may also teach standards from other grades, for example prerequisites. The other grades rate theirs.</p>`)}
-        ${step(5, "Choose how to see the standards", `<p><b>All at once</b> (Small, Medium or Large) or <b>One at a time</b>. Use <b>Find</b> to search. Rest the mouse on an answer button to see what it means.</p>`)}
-        ${step(6, "Stop and come back any time", `<p>Every answer saves straight away. Open the same link to carry on.</p>`)}
-        ${step(7, "Finish", `<p>Press <b>Finish</b> at the bottom. It lists anything not answered yet.</p>`)}
+        ${step(4, "Choose how to see the standards", `<p><b>All at once</b> (Small, Medium or Large) or <b>One at a time</b>. Use <b>Find</b> to search. Rest the mouse on an answer button to see what it means.</p>`)}
+        ${step(5, "Finish", `<p>Press <b>Finish</b> at the bottom. It lists anything not answered yet.</p>`)}
       </ol>
       ${nav(true, `<button type="button" data-act="sets-save" data-s="${esc(subject)}" data-f="${esc(shown.join(","))}">Begin rating</button>`)}` };
     return `<div class="how-modal" role="dialog" aria-modal="true" aria-label="Before you begin: page ${pg} of 3"><div class="card set-card how-to"><p class="how-eyebrow">Before you begin · page ${pg} of 3</p>${pages[pg]}</div></div>`;
@@ -2287,22 +2302,22 @@
   const tip = $("#tip"); let tipWait = 0;
   // Acronyms get an explanation popup everywhere (Tim, Oct 2026). Text is scanned after each change to the page;
   // codes (EE.RL.6.1, HS-ESS1-1), form controls and set badges (which have their own popup) are left alone.
-  const ACRO = { ELA: "English Language Arts", CCSS: "Common Core State Standards", EE: "Essential Elements: the alternate standards for students with significant cognitive disabilities",
-    NGSS: "Next Generation Science Standards", AERO: "American Education Reaches Out: standards for American-curriculum international schools", DPI: "Wisconsin Department of Public Instruction" };
-  const ACRO_RE = /\b(ELA|CCSS|EE|NGSS|AERO|DPI)\b(?![.\-]\w)/g;
+  const ACRO = { DLM: STD_INFO.DLM, ELA: STD_INFO.ELA, CCSS: STD_INFO.CCSS, EE: STD_INFO.EE, NGSS: STD_INFO.NGSS, AERO: STD_INFO.AERO, DPI: STD_INFO.DPI };
+  const ACRO_RE = /\b(ELA|CCSS|EE|NGSS|AERO|DPI|DLM)\b(?![.\-]\w)/g;
   const ACRO_SKIP = "script,style,abbr,select,option,textarea,input,.setb,.cd,.code,.wi-code,kbd,.tip,svg,code";
   function markAcronyms(root) {
     const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (ACRO_RE.lastIndex = 0, ACRO_RE.test(n.nodeValue) && !(n.parentElement && n.parentElement.closest(ACRO_SKIP)) ? 1 : 2) });
     const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
     for (const n of nodes) {
       const f = document.createDocumentFragment(); let last = 0; const t = n.nodeValue; ACRO_RE.lastIndex = 0; let m;
-      while ((m = ACRO_RE.exec(t))) { f.append(t.slice(last, m.index)); const a = document.createElement("abbr"); a.className = "acro"; a.dataset.tipText = `${m[1]}: ${ACRO[m[1]]}`; a.textContent = m[1]; f.append(a); last = m.index + m[1].length; }
+      while ((m = ACRO_RE.exec(t))) { f.append(t.slice(last, m.index)); const a = document.createElement("abbr"); a.className = "acro"; a.dataset.tipText = ACRO[m[1]]; a.textContent = m[1]; f.append(a); last = m.index + m[1].length; }
       f.append(t.slice(last)); n.replaceWith(f);
     }
   }
   let acroQueued = false;
   new MutationObserver(() => { if (acroQueued) return; acroQueued = true; requestAnimationFrame(() => { acroQueued = false; markAcronyms(document.body); }); }).observe(document.body, { childList: true, subtree: true, characterData: true });
   markAcronyms(document.body);
+  $$(".legend-sets .setb").forEach((b) => { b.dataset.tipText = STD_INFO[b.textContent] || ""; });
   document.addEventListener("click", () => { clearTimeout(tipWait); tip.hidden = true; }, true);
   document.addEventListener("mouseover", (ev) => {
     // Answer buttons: resting on one for a moment shows what that answer means (same words as "What do these mean?").
