@@ -84,7 +84,7 @@ Locked links: `?team=<name>` (optionally `&subject=`) for one team, `?grade=<K-1
 is rated as that subject's own team). The committee's Team progress dialog lists both, by grade or by team.
 
 ## Standard sets
-Each set is a framework: CC (WI-CC-MATH, WI-CC-ELA), EE (WI-EE-MATH, WI-EE-ELA, WI-EE-SCI, WI-EE-SS: Essential Elements
+Each set is a framework: CC (WI-CC-MATH "Wisconsin Math (CCSS)", WI-CC-ELA "Wisconsin ELA (CCSS)"; every visible (CCSS) has a "Common Core State Standards" popup via `fwHTML()`; Wisconsin Science and Social Studies are not Common Core and get no (CCSS)), EE (WI-EE-MATH, WI-EE-ELA, WI-EE-SCI, WI-EE-SS: Essential Elements
 as their own rows, built by `scripts/build_ee_rows.py` into `data/standards/essential_elements.json`, `crosswalk`/`lk` =
 linked standards), NGSS, AERO (AERO-SCI, AERO-SS) and WI (WI-SCI, WI-SS). Each team chooses its sets per subject
 (`team_sets`, written by `set_team_sets`, migration 004); until it chooses, it gets the default (CC for Math/ELA, AERO-SCI K-5 /

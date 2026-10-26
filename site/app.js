@@ -11,20 +11,22 @@
   const divLabel = (d) => (d === "all" ? "K-12" : BAND[d] ? "Grades " + d : d + " school");
   const LEVEL = ["Not taught", "Introduced / exposed", "Taught in depth"];
   const LEVEL_SHORT = ["Not taught", "Introduced", "In depth"];
-  const FW_NAME = { "WI-CC-MATH": "Wisconsin Math (CC)", "WI-CC-ELA": "Wisconsin ELA (CC)", "NGSS": "NGSS",
+  const FW_NAME = { "WI-CC-MATH": "Wisconsin Math (CCSS)", "WI-CC-ELA": "Wisconsin ELA (CCSS)", "NGSS": "NGSS",
     "WI-SCI": "Wisconsin Science", "AERO-SCI": "AERO Science", "WI-SS": "Wisconsin Social Studies", "AERO-SS": "AERO Social Studies",
     "WI-EE-MATH": "Essential Elements (Math)", "WI-EE-ELA": "Essential Elements (ELA)", "WI-EE-SCI": "Essential Elements (Science)", "WI-EE-SS": "Essential Elements (Social Studies)" };
   // Standard sets: each has a short badge and its own badge style, so Common Core, EE, NGSS, AERO and Wisconsin never look
   // alike. Set styles use shape and line (solid, dashed, dotted, double), not the rating colours.
   const SET = (f) => (f.startsWith("WI-EE-") ? { abbr: "EE", name: "Essential Elements", style: "ee" }
-    : f.startsWith("WI-CC-") ? { abbr: "CC", name: f === "WI-CC-MATH" ? "Wisconsin Math (CC)" : "Wisconsin ELA (CC)", style: "cc" }
+    : f.startsWith("WI-CC-") ? { abbr: "CC", name: f === "WI-CC-MATH" ? "Wisconsin Math (CCSS)" : "Wisconsin ELA (CCSS)", style: "cc" }
     : f === "NGSS" ? { abbr: "NGSS", name: "NGSS", style: "ngss" }
     : f.startsWith("AERO-") ? { abbr: "AERO", name: "AERO", style: "aero" }
     : { abbr: "WI", name: f === "WI-SS" ? "Wisconsin Social Studies" : "Wisconsin Science", style: "wi" });
   const SET_ORDER = (f) => (f.startsWith("WI-EE-") ? 9 : f.startsWith("WI-CC-") ? 0 : f === "NGSS" ? 1 : f.startsWith("AERO-") ? 2 : 3);
-  // Hover text for a set. The Wisconsin Math and ELA sets are Common Core based, so they carry (CC) and say so on hover.
-  const CC_TIP = { "WI-CC-MATH": "Wisconsin Math (CC): the Wisconsin Standards for Mathematics (2021), built on the Common Core State Standards. The bold code is the Common Core code; the Wisconsin code is underneath.",
-    "WI-CC-ELA": "Wisconsin ELA (CC): the Wisconsin Standards for English Language Arts (2020), built on the Common Core State Standards (2010). The bold code is the Common Core code; the Wisconsin code is underneath." };
+  // Hover text for a set. The Wisconsin Math and ELA sets are Common Core based, so they carry (CCSS) and say so on hover.
+  const CC_TIP = { "WI-CC-MATH": "Wisconsin Math (CCSS): the Wisconsin Standards for Mathematics (2021), built on the Common Core State Standards. The bold code is the Common Core code; the Wisconsin code is underneath.",
+    "WI-CC-ELA": "Wisconsin ELA (CCSS): the Wisconsin Standards for English Language Arts (2020), built on the Common Core State Standards (2010). The bold code is the Common Core code; the Wisconsin code is underneath." };
+  // A set name in HTML: (CCSS) gets a popup that spells out Common Core State Standards.
+  const fwHTML = (name) => esc(name).replace("(CCSS)", '(<abbr class="ccss" title="Common Core State Standards">CCSS</abbr>)');
   const setTip = (f) => CC_TIP[f] || FW_NAME[f] || SET(f).name;
   const badge = (f) => { const x = SET(f); return `<span class="setb set-${x.style}" title="${esc(setTip(f))}">${x.abbr}</span>`; };
   // Awsaj brand: ratings use three of the four symbol ribbons (orange is kept for highlights so it never sits next to lime).
@@ -621,7 +623,7 @@
     return `<div class="card set-card"><h2>${first ? "Which standards is your team working through?" : "Change your standard sets"} ${hb("sets")}</h2>
       <p class="lede">${esc(subject)} for ${esc(gname(g))}. Tick one or more. If you tick more than one, you rate them one set at a time, and every card shows which set it belongs to. This choice is shared by everyone on your team.</p>
       <div class="set-opts">${fws.map((f) => { const n = S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)).length; const x = SET(f);
-        return n ? `<label class="set-opt set-${x.style}"><input type="checkbox" value="${esc(f)}" ${cur.includes(f) ? "checked" : ""}> ${badge(f)} <span><b>${esc(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}. ${DESC[x.style]}</small></span></label>` : ""; }).join("")}</div>
+        return n ? `<label class="set-opt set-${x.style}"><input type="checkbox" value="${esc(f)}" ${cur.includes(f) ? "checked" : ""}> ${badge(f)} <span><b>${fwHTML(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}. ${DESC[x.style]}</small></span></label>` : ""; }).join("")}</div>
       <div class="done-actions" style="justify-content:flex-start"><button type="button" data-act="sets-save" data-s="${esc(subject)}">Save and start</button>
         ${first ? "" : `<button type="button" class="ghost" data-act="sets-cancel">Cancel</button>`}</div></div>`;
   }
@@ -664,7 +666,7 @@
     const pct = list.length ? (done / list.length) * 100 : 100, view = tview();
     const results = F.results === F.subject || (!left && F.reviewing !== F.subject);
     const setPills = `<div class="set-pills"><span class="muted">Standards:</span> ${fwsNow.map((f) => { const l = flowList(F.subject, g, f), n = l.filter((e) => !rating(e.f, e.c, g)).length;
-        return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(setTip(f))}">${badge(f)} ${esc(SET(f).name)} <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
+        return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(setTip(f))}">${badge(f)} <b class="setp-n">${fwHTML(SET(f).name)}</b> <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
       <button type="button" class="linkish" data-act="sets-change">Change ${hb("sets")}</button></div>`;
     const head = `<div class="flow-head">${pills}${setPills}
       <div class="flow-progress"><div class="fp-bar"><i style="width:${pct}%"></i></div>
@@ -680,7 +682,7 @@
       const links = (e.lk || []).map((x) => x.split(":")[1]);
       const ee = e.ee ? e.ee.split(";")[0].trim() : "";
       const fresh = S.flow.lastKey !== k; S.flow.lastKey = k;
-      body = `${viewBar(view)}${levelKey()}${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${esc(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
+      body = `${viewBar(view)}${levelKey()}${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${fwHTML(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
         <div class="card-top"><span class="eyebrow">${badge(e.f)} ${esc(sx.name)} · ${esc(e.s || F.subject)}</span><span class="muted">${pos} of ${inSet.length}</span></div>
         <h2 class="card-code">${codeHTML(e)} ${hb(ccss(e) ? "ccss" : e.wi ? "aero_wi" : "codes")}</h2>
         ${marks(e, g) ? `<div class="mks card-mks">${marks(e, g)} ${hb("marks")}</div>` : ""}
@@ -731,7 +733,7 @@
       <div class="box"><h3>Ratings (Part 1)</h3><p>Each grade team rates how each standard is generally taught in its grade, on this site. Every change is kept, with the team and the time, on the Activity tab. Findings are computed live from these ratings; "not rated" is never counted as a gap.</p></div>
       <div class="box"><h3>Standards</h3>${(() => { const onSite = {}; for (const sl of Object.keys(S.idx)) for (const e of S.idx[sl]) onSite[e.f] = (onSite[e.f] || 0) + 1; const seen = new Set();
           return tb(["Set", "Read from", "Rows read (one per standard and grade)", "Standards on the site"], d.standards.map((x) => { const first = !seen.has(x.framework); seen.add(x.framework);
-            return `<tr><td>${badge(x.framework)} ${esc(FW_NAME[x.framework] || x.framework)}</td><td>${esc(x.source)}</td><td>${x.rows}</td><td>${first ? (onSite[x.framework] ? onSite[x.framework] : "not shown on the site") : ""}</td></tr>`; })); })()}
+            return `<tr><td>${badge(x.framework)} ${fwHTML(FW_NAME[x.framework] || x.framework)}</td><td>${esc(x.source)}</td><td>${x.rows}</td><td>${first ? (onSite[x.framework] ? onSite[x.framework] : "not shown on the site") : ""}</td></tr>`; })); })()}
         <p class="muted sm-note">Standards on the site: after the site's choices (Wisconsin Science is not shown; NGSS and Wisconsin Social Studies are not used in K-5; Essential Elements marked "Not applicable" are left out). Links between standards come from the prerequisite map below or, where it has none, from the closest wording in the same progression.</p>
         <p class="muted">Common Core codes for Wisconsin ELA come from DPI's official 2010 / 2020 comparison; for Wisconsin Math, from a checked crosswalk (most codes are the same). Wisconsin matches under NGSS and AERO codes come from the school's sheets.</p></div>
       <div class="box"><h3>${SHOW_PLANS ? "✓ In curriculum docs and " : ""}★ Priority (6-12) and Power (K-5)</h3>
@@ -1156,7 +1158,7 @@
       return `<li class="fi"><span class="fi-ev">${strip(e, gs)}</span><span class="fi-code">${badge(e.f)} ${codeHTML(e)}</span><span class="fi-body"><span class="fi-tags"><span class="pill"><i class="lv ${r ? "lv-" + r.level : "lv-none"}"></i>${esc(gl(g))}: ${r ? LEVEL[r.level] : "Not rated"}</span> ${marks(e, g)}${lanes[0] ? ` <button type="button" class="linkish sm-link" data-act="goto-lane" data-id="${esc(lanes[0].id)}">Progression: ${esc(lanes[0].name.slice(0, 40))}${lanes[0].name.length > 40 ? "…" : ""}</button>` : ""}</span><span class="muted">${esc(e.t.slice(0, 160))}${e.t.length > 160 ? "…" : ""}</span></span></li>`; };
     const c = countLevels(mine, g), sets = rowSets(mine.length ? mine : list);
     dlgShow(`${gname(g)} · ${row.label}`, () => tileDialog(g, rowKey));
-    $("#d-eyebrow").innerHTML = `${sets.map(badge).join(" ")} ${esc(S.f.subject)} · ${esc(sets.map((f) => FW_NAME[f] || f).join(" + "))}`; $("#d-title").textContent = `${gname(g)} · ${row.label}`;
+    $("#d-eyebrow").innerHTML = `${sets.map(badge).join(" ")} ${esc(S.f.subject)} · ${fwHTML(sets.map((f) => FW_NAME[f] || f).join(" + "))}`; $("#d-title").textContent = `${gname(g)} · ${row.label}`;
     $("#d-body").innerHTML = `${dlgBack()}<p class="lede">${mine.length} standard${mine.length === 1 ? "" : "s"} suggested for ${esc(gname(g))} here: ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? `, ${c[3]} not rated` : ""}. The strip before each one shows every grade's rating (suggested grade outlined).</p>
       <ul class="gap-list one">${mine.map(row1).join("") || "<li class='muted'>None.</li>"}</ul>
       ${extra.length ? `<h3>Also taught in ${esc(gname(g))} (suggested for other grades)</h3><ul class="gap-list one">${extra.map(row1).join("")}</ul>` : ""}`;
@@ -1945,7 +1947,7 @@
     const hist = S.events.filter((ev) => ev.framework === e.f && ev.code === e.c).slice(0, 12);
     const label = codeText(e);
     dlgShow(label, () => openDetail(k));
-    $("#d-eyebrow").innerHTML = `${badge(e.f)} ${esc(FW_NAME[e.f] || e.f)} · ${esc(e.s || "")}`;
+    $("#d-eyebrow").innerHTML = `${badge(e.f)} ${fwHTML(FW_NAME[e.f] || e.f)} · ${esc(e.s || "")}`;
     const eeFw = "WI-EE-" + ({ Math: "MATH", ELA: "ELA", Science: "SCI", "Social Studies": "SS" })[sub.name];
     const eeItem = e.ee ? S.idx[sub.slug].find((x) => x.f === eeFw && x.c === e.ee.split(";")[0].trim()) : null;
     const linkBtn = (x) => { const [f, c] = x.split(":"), it = S.byKey.get(f + "|" + c); return `<span class="lk-b">${badge(f)} ${it ? codeHTML(it) : `<button class="code" data-act="open" data-k="${esc(f + "|" + c)}">${esc(c)}</button>`}</span>`; };
