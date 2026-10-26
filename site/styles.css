@@ -455,11 +455,11 @@ table.cm th.cm-row { position: sticky; left: 0; background: var(--surface); z-in
 /* ---------------- standard sets: badges and set styles (shape and line, never the rating colours) ---------------- */
 .setb { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 18px; padding: 0 5px; border-radius: 4px;
   font: 700 10px/1 var(--font); letter-spacing: .04em; vertical-align: 1px; white-space: nowrap; }
-.setb.set-cc { background: var(--brand); color: #fff; border: 1.5px solid var(--brand); }
-.setb.set-ee { background: #fff; color: var(--brand); border: 1.5px dashed var(--brand); border-radius: 9px; }
-.setb.set-ngss { background: var(--ink-2); color: #fff; border: 1.5px solid var(--ink-2); border-radius: 2px; }
-.setb.set-aero { background: #fff; color: var(--ink-2); border: 1.5px dotted var(--ink-2); }
-.setb.set-wi { background: var(--chip); color: var(--ink); border: 3px double var(--muted); height: 20px; }
+.setb.set-cc { background: var(--set-cc); color: #fff; border: 1.5px solid var(--set-cc); }
+.setb.set-ee { background: #EFE8FF; color: #5A2FD6; border: 2px dashed var(--set-ee); border-radius: 9px; }
+.setb.set-ngss { background: var(--set-ngss); color: #fff; border: 1.5px solid var(--set-ngss); border-radius: 2px; }
+.setb.set-aero { background: #FFF6D6; color: #6B4E00; border: 2px dotted var(--set-aero); }
+.setb.set-wi { background: var(--set-wi); color: #fff; border: 3px double #fff; outline: 1.5px solid var(--set-wi); height: 20px; }
 /* set chooser */
 .set-card h2 { font-size: 24px; }
 .set-opts { display: grid; gap: 10px; margin: 16px 0 20px; }
@@ -479,11 +479,11 @@ table.cm th.cm-row { position: sticky; left: 0; background: var(--surface); z-in
 .setp.done span { color: var(--lv-2-text); font-weight: 700; }
 .set-switch { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; padding: 10px 14px; border-radius: 10px; background: var(--accent-tint); color: var(--ink); font-size: 14px; animation: cardIn .3s ease-out; }
 /* cards and rows take the set's line style, so a CC card and an EE card never look the same */
-.std-card.set-ee { border: 2px dashed var(--brand); background: linear-gradient(#F6FAF8, #fff 120px); }
-.std-card.set-aero { border: 2px dotted var(--ink-2); }
-.std-card.set-ngss { border-top: 6px solid var(--ink-2); }
-.std-card.set-wi { border: 4px double var(--line-2); }
-.std-card.set-cc { border-top: 6px solid var(--brand); }
+.std-card.set-ee { border: 2px dashed var(--set-ee); background: linear-gradient(#F6FAF8, #fff 120px); }
+.std-card.set-aero { border: 2px dotted var(--set-aero); }
+.std-card.set-ngss { border-top: 6px solid var(--set-ngss); }
+.std-card.set-wi { border: 4px double var(--set-wi); }
+.std-card.set-cc { border-top: 6px solid var(--set-cc); }
 .std-card .eyebrow .setb { margin-right: 4px; }
 .std.set-ee { background: repeating-linear-gradient(135deg, transparent 0 10px, #F4F8F6 10px 11px); }
 .chip .setb { height: 15px; min-width: 20px; font-size: 9px; margin-right: 2px; }
@@ -493,7 +493,7 @@ table.cm th.cm-row { position: sticky; left: 0; background: var(--surface); z-in
 .ring-box { flex: 0 0 auto; }
 .ring-key { min-width: 220px; }
 .rate-head > div:first-child { flex: 1 1 380px; }
-table.cm tr.set-ee th.cm-row { border-left: 3px dashed var(--brand); padding-left: 8px; }
+table.cm tr.set-ee th.cm-row { border-left: 3px dashed var(--set-ee); padding-left: 8px; }
 
 /* ---------------- library (Still to do / Done) and team links ---------------- */
 .library { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
@@ -976,7 +976,7 @@ table.school-sets th, table.school-sets td { border: 1px solid var(--line); padd
 table.school-sets thead th { background: var(--brand); color: #fff; }
 table.school-sets th[scope=row] small { display: block; color: var(--muted); font-weight: 500; }
 table.school-sets td div { margin: 2px 0; }
-table.school-sets tr.here { background: var(--brand-tint); outline: 2px solid var(--brand); }
+table.school-sets tr.here { outline: 3px solid var(--brand); outline-offset: -2px; }
 ol.how-steps { list-style: none; padding: 0; margin: 8px 0 18px; display: grid; gap: 10px; }
 ol.how-steps li { display: flex; gap: 12px; align-items: flex-start; }
 ol.how-steps .hs-n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 700; }
@@ -991,3 +991,13 @@ ol.how-steps p { margin: 2px 0 0; }
 .how-dots { margin-right: auto; display: flex; gap: 6px; }
 .how-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-2); }
 .how-dots i.on { background: var(--brand); }
+/* Standard sets: each its own bright colour, never a rating colour (magenta, blue, lime). */
+:root { --set-cc: #024638; --set-ee: #7C4DFF; --set-ngss: #00A39A; --set-aero: #F2A900; --set-wi: #1F3A93; }
+.set-opt.set-ee { border-color: var(--set-ee); } .set-opt.set-aero { border: 2px dotted var(--set-aero); } .set-opt.set-ngss { border-color: var(--set-ngss); } .set-opt.set-wi { border: 4px double var(--set-wi); }
+/* School bands (team page and the How to table): K-5, 6-8 and 9-12 each get their own light background. */
+.band-k5 { background: #FFF7E6; } .band-ms { background: #E8F7F5; } .band-hs { background: #EDF0FA; }
+.band { border-radius: 12px; padding: 4px 14px 12px; margin: 10px 0; }
+.band .pick-h small { font-weight: 500; color: var(--muted); margin-left: 6px; font-size: 13px; }
+table.school-sets tr.band-k5 td, table.school-sets tr.band-k5 th[scope=row] { background: #FFF7E6; }
+table.school-sets tr.band-ms td, table.school-sets tr.band-ms th[scope=row] { background: #E8F7F5; }
+table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { background: #EDF0FA; }
