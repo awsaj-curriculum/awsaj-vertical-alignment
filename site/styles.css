@@ -958,3 +958,6 @@ button.danger { border-style: dashed; }
 .pin-dlg .pin-in input { width: 9rem; font-size: 1.1rem; letter-spacing: .2em; }
 .pin-dlg .pin-btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
 @media print { .copies, button.danger { display: none !important; } }
+
+/* Small view: the whole standard on hover, black with larger text. */
+.tip.tip-lg { background: #000; max-width: 480px; font-size: 17px; line-height: 1.45; padding: 12px 14px; }
