@@ -113,6 +113,15 @@
 
   /* ---------------- helpers over standards ---------------- */
   const subj = () => S.meta.subjects.find((s) => s.name === S.f.subject);
+  // "All subjects" (Tim, Oct 2026): the analysis pages show each subject in turn, one section per subject.
+  const ALL = "All subjects", ALL_VIEWS = ["heatmap", "gaps", "dashboard", "ladder", "plans"];
+  const filterSubjects = () => (S.team && S.team.name !== "Vertical Alignment Committee" ? S.team.subjects : S.meta.subjects.map((s) => s.name));
+  // Runs fn as if one subject were chosen. A rerender asked for meanwhile waits until the whole page is drawn again.
+  // When fn chose a subject, or moved to a page that shows one subject (Rate), that subject stays.
+  function withSubject(name, fn) {
+    const keep = [S.f.subject, S.f.framework, S.f.strand]; S.subjFor = name; S.f.subject = name; S.f.framework = ""; S.f.strand = "";
+    try { return fn(); } finally { if (S.f.subject === name && !S.keepSubj && ALL_VIEWS.includes(S.view)) [S.f.subject, S.f.framework, S.f.strand] = keep; S.subjFor = null; S.keepSubj = false; }
+  }
   const items = () => S.idx[subj().slug];
   const visibleGrades = () => (S.f.division === "all" ? GRADES : DIV[S.f.division] || BAND[S.f.division] || GRADES);
   function filtered({ ignoreDivision = false, ignoreSearch = false } = {}) {
@@ -207,15 +216,25 @@
     if (value !== undefined && opts.some(([v]) => v === value)) sel.value = value;
   }
   function refreshFilterOptions() {
-    const subs = S.team && S.team.name !== "Vertical Alignment Committee" ? S.team.subjects : S.meta.subjects.map((s) => s.name);
-    if (!subs.includes(S.f.subject)) S.f.subject = subs[0];
-    fillSelect($("#f-subject"), subs.map((s) => [s, s]), S.f.subject);
-    const fws = subj().frameworks;
+    const subs = filterSubjects(), allOk = subs.length > 1 && ALL_VIEWS.includes(S.view);
+    if (!subs.includes(S.f.subject) && !(allOk && S.f.subject === ALL)) S.f.subject = subs[0];
+    fillSelect($("#f-subject"), [...(allOk ? [[ALL, ALL]] : []), ...subs.map((s) => [s, s])], S.f.subject);
+    const all = S.f.subject === ALL;
+    $("#f-framework").disabled = all; $("#f-framework").title = all ? "Each subject uses its own sets. Choose one subject to pick a set." : "";
+    if (all) {
+      S.f.framework = ""; S.f.strand = "";
+      fillSelect($("#f-framework"), [["", "Each subject's own sets"]], "");
+      const gs = visibleGrades(); if (!gs.includes(S.f.grade)) S.f.grade = "";
+      fillSelect($("#f-grade"), [["", "Choose a grade"], ...gs.map((g) => [g, gname(g)])], S.f.grade);
+      fillSelect($("#f-strand"), [["", "Choose one subject first"]], ""); $("#f-strand").disabled = true; $("#f-strand").title = "Choose one subject first";
+    }
+    const fws = all ? [] : subj().frameworks;
     if (S.f.framework && !fws.includes(S.f.framework)) S.f.framework = "";
     const sorted = fws.slice().sort((a, b) => SET_ORDER(a) - SET_ORDER(b));
     // "All sets" names only the sets that have standards in the grades in view (no WI in K-5 Social Studies).
-    const gs = visibleGrades(), here = sorted.filter((f) => items().some((e) => e.f === f && e.pl.some((g) => gs.includes(g))));
-    fillSelect($("#f-framework"), [["", "All sets (" + (here.length ? here : sorted).map((f) => SET(f).abbr).join(", ") + ")"], ...sorted.map((f) => [f, SET(f).abbr + ": " + (FW_NAME[f] || f)])], S.f.framework);
+    const gs = visibleGrades(), here = all ? [] : sorted.filter((f) => items().some((e) => e.f === f && e.pl.some((g) => gs.includes(g))));
+    if (!all) fillSelect($("#f-framework"), [["", "All sets (" + (here.length ? here : sorted).map((f) => SET(f).abbr).join(", ") + ")"], ...sorted.map((f) => [f, SET(f).abbr + ": " + (FW_NAME[f] || f)])], S.f.framework);
+    if (!all) {
     if (!gs.includes(S.f.grade)) S.f.grade = "";
     fillSelect($("#f-grade"), [["", "Choose a grade"], ...gs.map((g) => [g, gradeCourse(g, S.f.subject)])], S.f.grade);
     const sg = strandGrade(), strandSel = $("#f-strand");
@@ -227,6 +246,7 @@
     fillSelect(strandSel, sg ? [["", "All strands"], ...strands.map((s) => [s, s + from(s)])] : [["", "Choose a grade first"]], S.f.strand);
     strandSel.disabled = !sg;
     strandSel.title = sg ? "" : "Choose a grade first";
+    }
     if (!SHOW_PLANS) document.querySelectorAll(".pn-opt").forEach((o) => o.remove());
     $('#f-mark option[value="pr"]').textContent = `★ ${prName(markGrade())} only`; $('#f-order option[value="pr"]').textContent = `${prName(markGrade())} first`;
     $("#f-division").value = S.f.division; $("#f-mark").value = S.f.mark; $("#f-order").value = S.f.order;
@@ -244,7 +264,7 @@
     $$(".view").forEach((x) => (x.hidden = x.id !== "view-" + v));
     document.body.dataset.mode = mode(); document.body.dataset.view = v;
     const t = $(`.tabs [data-view="${v}"]`); if (t && t.scrollIntoView && innerWidth < 760) t.scrollIntoView({ block: "nearest", inline: "center" });   // phones: keep the open tab in sight
-    renderWho();
+    renderWho(); setTimeout(tabFade, 350);
   }
   function renderWho() {
     const m = mode();
@@ -389,10 +409,29 @@
     }
   }
   function rerender() {
+    if (S.subjFor) { S.needRerender = true; return; }
     const v = S.view; laneMemo.clear(); causeMemo.clear();
+    if (S.f.subject === ALL && !ALL_VIEWS.includes(v)) S.f.subject = filterSubjects()[0];
+    if (S.f.subject === ALL) renderAllSubjects(v); else renderView(v);
+    writeHash();
+  }
+  function renderView(v) {
     if (v === "flow") renderFlow(); else if (v === "rate") renderRate(); else if (v === "heatmap") renderHeatmap(); else if (v === "gaps") renderGaps();
     else if (v === "dashboard") renderDashboard(); else if (v === "ladder") renderLadder(); else if (v === "plans") renderPlans(); else renderActivity();
-    writeHash();
+  }
+  // All subjects: each subject's page in turn, under its own heading. Pages that need a grade ask for it once.
+  function renderAllSubjects(v) {
+    const el = $("#view-" + v);
+    if ((v === "dashboard" || v === "plans") && !S.f.grade) return pickGrade(el, v === "dashboard" ? "its dashboard for every subject" : "its audit for every subject");
+    const subs = filterSubjects();
+    const html = subs.map((s) => { withSubject(s, () => renderView(v)); return `<section class="subj-sec" data-subj="${esc(s)}"><h2 class="subj-h">${esc(s)}</h2>${el.innerHTML}</section>`; }).join("");
+    el.innerHTML = `<p class="subj-all"><span class="muted">${ALL}. Jump to:</span> ${subs.map((s) => `<button type="button" class="ghost sm" data-act="subj-jump" data-s="${esc(s)}">${esc(s)}</button>`).join(" ")} ${hb("subject")}</p>` + html;
+    // What belongs to every subject (the grade's summary, Back, the grade and band buttons) goes above the sections.
+    const first = el.querySelector(".subj-sec"), top = el.querySelector(".subj-all");
+    if (first) for (const c of [".back-bar", ".grade-nav", ".map-bar", ".grade-ov"]) { const x = first.querySelector(":scope > " + c); if (x) top.before(x); }
+    el.querySelectorAll(":scope > .grade-ov .go-card.on").forEach((x) => x.classList.remove("on"));
+    el.querySelectorAll(".subj-sec").forEach((x, i, a) => x.querySelector(".subj-h").insertAdjacentHTML("beforeend", `<small>${i + 1} of ${a.length}</small><button type="button" class="linkish" data-act="subj-top">Top ↑</button>`));
+    S.needRerender = false;
   }
 
   function segFor(e, g) {
@@ -2089,8 +2128,8 @@
   /* ---------------- exports ---------------- */
   function download(name, blob) { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }
   function csvCell(v) { v = String(v ?? ""); return /[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; }
-  function exportCSV() {
-    if ((S.view === "rate" && !teamGrade()) || ((S.view === "dashboard" || S.view === "plans") && !S.f.grade)) { toast("Choose a grade first."); return; }
+  // The CSV rows for the page as it is now (one subject).
+  function csvRows() {
     const gs = S.view === "rate" || S.view === "dashboard" ? [S.view === "rate" ? teamGrade() : S.f.grade] : S.view === "plans" ? GRADES : visibleGrades();
     let list = S.view === "activity" ? null : filtered({ ignoreDivision: S.view === "rate" || S.view === "dashboard" });
     const g0 = S.f.grade; if (list && S.view === "gaps" && g0) list = list.filter((e) => forGrade(e, g0) || rating(e.f, e.c, g0) || isPr(e, g0) || isPn(e, g0));   // the same rows as the page
@@ -2108,10 +2147,23 @@
     }
     else rows = [["Subject", "Framework", "Code", "Other code", "Site code", "Strand", "Suggested grade(s)", ...(SHOW_PLANS ? ["In curriculum docs (grades)"] : []), "Priority (6-12) / power (K-5) (grades)", "Standard", ...gs.map(gname), "Findings (automatic checks)"],
       ...ordered(S.view === "plans" ? auditGrid(S.f.grade) : list, S.view === "rate" ? teamGrade() : S.view === "dashboard" ? S.f.grade : "").map((e) => [S.f.subject, e.f, codeText(e), altText(e), e.c, e.s, e.pl.join(" "), ...(SHOW_PLANS ? [(e.pn || []).join(" ")] : []), (e.pr || []).join(" "), e.t, ...gs.map((g) => { const r = rating(e.f, e.c, g); return r ? LEVEL[r.level] : ""; }), checksFor(e).map(([t]) => t).join("; ")])];
+    return rows;
+  }
+  function exportCSV() {
+    if (S.f.subject === ALL && ALL_VIEWS.includes(S.view)) {
+      if ((S.view === "dashboard" || S.view === "plans") && !S.f.grade) { toast("Choose a grade first."); return; }
+      const parts = filterSubjects().map((s) => withSubject(s, () => csvRows()));
+      const rows = [parts[0][0], ...parts.flatMap((r) => r.slice(1))];
+      download(`awsaj-${S.view}-AllSubjects.csv`, new Blob(["\ufeff" + rows.map((r) => r.map(csvCell).join(",")).join("\n")], { type: "text/csv" }));
+      return;
+    }
+    if ((S.view === "rate" && !teamGrade()) || ((S.view === "dashboard" || S.view === "plans") && !S.f.grade)) { toast("Choose a grade first."); return; }
+    const rows = csvRows();
     download(`awsaj-${S.view}-${S.f.subject.replace(/\s/g, "")}.csv`, new Blob(["﻿" + rows.map((r) => r.map(csvCell).join(",")).join("\n")], { type: "text/csv" }));
   }
   // The image is a grid: the coverage map's "Matched across grades" rows, or the Audit's K-12 grid for the chosen grade.
   function exportPNG() {
+    if (S.f.subject === ALL) { toast("The image shows one subject. Choose a subject in the Subject box first."); return; }
     const rowsMap = S.view === "heatmap" && mapMode() === "rows";
     if (!rowsMap && (S.view !== "plans" || !S.f.grade)) { toast("The image is a standard-by-grade grid: use the coverage map's Matched across grades view, or the Audit with a grade chosen."); return; }
     if (rowsMap && !S.prog) { toast("Progressions are still loading."); return; }
@@ -2149,7 +2201,9 @@
   function gotoLane(id) {
     const l = S.prog && laneById(id); if (!l) return;
     if ($("#detail").open) $("#detail").close();
-    if (S.view !== "ladder") S.backTo = { view: S.view, f: { ...S.f }, y: scrollY, open: { ...S.open }, label: S.view === "dashboard" ? `the ${gname(S.f.grade)} dashboard` : VIEW_LABEL[S.view] || "the last page" };
+    // From an All subjects page, the progression opens in its own subject; Back returns to All subjects.
+    if (S.view !== "ladder" && S.subjFor) S.keepSubj = true;
+    if (S.view !== "ladder") S.backTo = { view: S.view, f: { ...S.f, ...(S.subjFor ? { subject: ALL, framework: "", strand: "" } : {}) }, y: scrollY, open: { ...S.open }, label: S.view === "dashboard" ? `the ${gname(S.f.grade)} dashboard` : VIEW_LABEL[S.view] || "the last page" };
     S.f.subject = l.subject; S.f.framework = ""; S.f.strand = ""; S.f.search = ""; S.f.mark = ""; S.f.division = "all"; $("#f-search").value = "";
     if (S.f.grade && !l.steps.some((st) => st.g.includes(S.f.grade))) S.f.grade = "";
     S.lane = id; S.laneScroll = true; S.pgStatus = ""; S.pgGroup = "";
@@ -2175,7 +2229,7 @@
     const p = new URLSearchParams(location.hash.slice(1)), v = p.get("view");
     if (mode() !== "full" || !v || !$(`.tabs [data-view="${v}"]`)) return false;
     for (const k of HASH_KEYS) S.f[k] = p.get(k) || (k === "division" ? "all" : "");
-    if (!S.meta.subjects.some((x) => x.name === S.f.subject)) S.f.subject = S.meta.subjects[0].name;
+    if (!S.meta.subjects.some((x) => x.name === S.f.subject) && S.f.subject !== ALL) S.f.subject = S.meta.subjects[0].name;
     if (!(S.f.division in DIV) && !(S.f.division in BAND)) S.f.division = "all";
     S.lane = p.get("lane") || null; S.pgStatus = p.get("check") || ""; S.backTo = null;
     if (v === "heatmap") S.mapMode = p.get("mode") === "rows" ? "rows" : "tiles";
@@ -2185,8 +2239,17 @@
   window.addEventListener("popstate", () => { if ($("#detail").open) $("#detail").close(); applyHash(); });
 
   /* ---------------- events ---------------- */
-  document.addEventListener("click", async (ev) => {
+  // With All subjects, a click inside one subject's section acts as if that subject were chosen.
+  document.addEventListener("click", (ev) => {
     const b = ev.target.closest("[data-act]"); if (!b) return;
+    if (b.dataset.act === "subj-top") { scrollTo({ top: 0, behavior: "smooth" }); return; }
+    if (b.dataset.act === "subj-jump") { ev.preventDefault(); const t = $(`.subj-sec[data-subj="${CSS.escape(b.dataset.s)}"]`, $("#view-" + S.view)); if (t) t.scrollIntoView({ behavior: "smooth" }); return; }
+    const sec = S.f.subject === ALL && b.closest("[data-subj]");
+    if (!sec) return onAct(ev, b);
+    withSubject(sec.dataset.subj, () => onAct(ev, b));
+    if (S.needRerender) { S.needRerender = false; refreshFilterOptions(); rerender(); }
+  });
+  async function onAct(ev, b) {
     const act = b.dataset.act;
     if (act === "rate") { const e = findItem(b.dataset.k); const l = +b.dataset.l; const cur = rating(e.f, e.c, b.dataset.g); if (cur && cur.level === l) { clearRating(e, b.dataset.g); return; } setRating(e, b.dataset.g, l); }   // clicking the chosen answer again takes it off
     else if (act === "open") openDetail(b.dataset.k);
@@ -2272,7 +2335,7 @@
     else if (act === "cm-open") tileDialog(b.dataset.g, b.dataset.row);
     else if (act === "grade") { S.f.grade = b.dataset.g; refreshFilterOptions(); rerender(); }
     else if (act === "strand") { S.f.strand = b.dataset.s; $(`.tabs [data-view="rate"]`).click(); }
-    else if (act === "subject") { S.f.subject = b.dataset.s; S.f.framework = b.dataset.fw || ""; S.f.strand = ""; refreshFilterOptions(); rerender(); }
+    else if (act === "subject") { S.keepSubj = true; S.f.subject = b.dataset.s; S.f.framework = b.dataset.fw || ""; S.f.strand = ""; refreshFilterOptions(); rerender(); }
     else if (act === "cycle") {
       const e = findItem(b.dataset.k), g = b.dataset.g, cur = rating(e.f, e.c, g);
       if (!canEdit(g)) { toast(S.team ? `Your team rates ${S.team.grades.map(gname).join(", ")}.` : "Choose your team first."); return; }
@@ -2295,7 +2358,7 @@
       try { await rpc("hide_comment", { p_comment_id: +b.dataset.id }); await loadComments(); rerender(); toast("Comment hidden"); }
       catch (err) { toast("Could not hide: " + err.message); }
     }
-  });
+  }
   // Boxes that act as buttons (progression boxes) open with Enter or Space too.
   document.addEventListener("keydown", (ev) => { const t = ev.target; if ((ev.key === "Enter" || ev.key === " ") && t.matches && t.matches('[role="button"][data-act]')) { ev.preventDefault(); t.click(); } });
   document.addEventListener("input", (ev) => {
@@ -2396,6 +2459,9 @@
   });
   document.addEventListener("mousemove", (ev) => { if (!tip.hidden) { tip.style.left = Math.max(8, Math.min(ev.clientX + 14, innerWidth - tip.offsetWidth - 12)) + "px"; tip.style.top = (ev.clientY + 18 + tip.offsetHeight > innerHeight ? Math.max(8, ev.clientY - tip.offsetHeight - 12) : ev.clientY + 14) + "px"; } });
 
+  // Phones: fade the tab row at the end(s) where more tabs are hidden, so it is clear it scrolls sideways.
+  function tabFade() { const t = $(".tabs"); if (!t) return; t.classList.toggle("more-right", t.scrollLeft + t.clientWidth < t.scrollWidth - 4); t.classList.toggle("more-left", t.scrollLeft > 4); }
+  $(".tabs").addEventListener("scroll", tabFade, { passive: true }); addEventListener("resize", tabFade); setTimeout(tabFade, 0);
   $$(".tabs [data-view]").forEach((b) => b.addEventListener("click", () => {
     S.backTo = null; showView(b.dataset.view);
     store.set("va_view", S.view); refreshFilterOptions(); rerender();
@@ -2403,7 +2469,7 @@
   }));
   const bindF = (id, key) => $(id).addEventListener(id === "#f-search" ? "input" : "change", (ev) => {
     S.f[key] = ev.target.value; S.gridAll = false; if (key === "mark" || key === "order") store.set("va_" + key, ev.target.value);
-    if (key === "subject") S.f.framework = defaultFramework(S.f.subject, teamGrade());
+    if (key === "subject") S.f.framework = S.f.subject === ALL ? "" : defaultFramework(S.f.subject, teamGrade());
     // A set the new grade does not use (NGSS or Wisconsin Social Studies in K-5) would leave the page empty.
     if (key === "grade" && S.f.framework && S.f.grade && !items().some((e) => e.f === S.f.framework && e.pl.includes(S.f.grade))) S.f.framework = defaultFramework(S.f.subject, S.f.grade);
     refreshFilterOptions(); rerender();
