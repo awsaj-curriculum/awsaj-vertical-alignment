@@ -636,13 +636,20 @@
     const school = `<table class="school-sets"><thead><tr><th>Grades</th>${S.meta.subjects.map((x) => `<th>${esc(SUBJ_FULL[x.name] || x.name)}</th>`).join("")}</tr></thead><tbody>
       ${BANDS.map(([k, label, gs]) => `<tr class="${gs.includes(g) ? "here" : ""}"><th scope="row"><b>${k}</b><small>${label}${gs.includes(g) ? " · your grade" : ""}</small></th>${S.meta.subjects.map((x) => `<td>${bandSets(x.name, gs).map((f) => `<div>${badge(f)} ${fwHTML(FW_NAME[f] || SET(f).name)}</div>`).join("")}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
     const step = (n, title, body) => `<li><span class="hs-n">${n}</span><div><b>${title}</b>${body}</div></li>`;
-    return `<div class="card set-card how-to">${flowTitle(subject, g, shown)}
+    // Three pages in a popup, each moved on with Next: 1 what you are rating, 2 the whole school, 3 how to rate.
+    const pg = S.flow.howPage || 1, dots = [1, 2, 3].map((n) => `<i class="${n === pg ? "on" : ""}"></i>`).join("");
+    const nav = (back, next) => `<div class="how-nav"><span class="how-dots" aria-label="Page ${pg} of 3">${dots}</span>
+      ${back ? `<button type="button" class="ghost" data-act="how-page" data-p="${pg - 1}">Back</button>` : ""}${next}</div>`;
+    const pages = {
+      1: `${flowTitle(subject, g, shown)}
       <ul class="set-sum">${shown.map((f) => { const n = S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)).length, x = SET(f);
         return `<li class="set-opt set-${x.style}">${badge(f)} <span><b>${fwHTML(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}. ${DESC[x.style]}</small></span></li>`; }).join("")}</ul>
-      <h2>Standards across the school ${hb("sets")}</h2>
+      ${nav(false, `<button type="button" data-act="how-page" data-p="2">Next</button>`)}`,
+      2: `<h2>Standards across the school ${hb("sets")}</h2>
       <p class="muted">What every grade and subject at Awsaj rates. Your row is highlighted.</p>
       <div class="tbl-scroll">${school}</div>
-      <h2>How to rate, step by step</h2>
+      ${nav(true, `<button type="button" data-act="how-page" data-p="3">Next</button>`)}`,
+      3: `<h2>How to rate, step by step</h2>
       <ol class="how-steps">
         ${step(1, "Check the title", `<p>It shows your grade and subject (or your course). Every standard on the page belongs to it.</p>`)}
         ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${LEVEL_DEF.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}</div>`)}
@@ -652,7 +659,8 @@
         ${step(6, "Stop and come back any time", `<p>Every answer saves straight away. Open the same link to carry on.</p>`)}
         ${step(7, "Finish", `<p>Press <b>Finish</b> at the bottom. It lists anything not answered yet.</p>`)}
       </ol>
-      <div class="done-actions" style="justify-content:flex-start"><button type="button" data-act="sets-save" data-s="${esc(subject)}" data-f="${esc(shown.join(","))}">Begin rating</button></div></div>`;
+      ${nav(true, `<button type="button" data-act="sets-save" data-s="${esc(subject)}" data-f="${esc(shown.join(","))}">Begin rating</button>`)}` };
+    return `<div class="how-modal" role="dialog" aria-modal="true" aria-label="Before you begin: page ${pg} of 3"><div class="card set-card how-to"><p class="how-eyebrow">Before you begin · page ${pg} of 3</p>${pages[pg]}</div></div>`;
   }
   const howKey = (subject, g) => `${S.team ? S.team.name : ""}|${subject}|${g}`;
   const howSeen = () => { try { return JSON.parse(sessionStorage.getItem("va_howto") || "[]"); } catch (e) { return []; } };
@@ -2180,7 +2188,8 @@
       }
     }
     else if (act === "flow-set") { S.flow.set = S.flow.set === b.dataset.f ? null : b.dataset.f; S.flow.back = null; rerender(); }
-    else if (act === "howto") { S.flow.choose = S.flow.subject; rerender(); scrollTo({ top: 0 }); }
+    else if (act === "howto") { S.flow.choose = S.flow.subject; S.flow.howPage = 1; rerender(); }
+    else if (act === "how-page") { S.flow.howPage = +b.dataset.p; rerender(); const m = $(".how-modal"); if (m) m.scrollTop = 0; }
     else if (act === "sets-change") { S.flow.choose = S.flow.subject; rerender(); }
     else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
     else if (act === "sets-save") {
@@ -2192,9 +2201,9 @@
         try { await rpc("set_team_sets", { p_team: S.team.name, p_subject: subject, p_frameworks: fws }); (S.teamSets[S.team.name] ||= {})[subject] = fws; }
         catch (err) { toast("Could not save: " + err.message); return; }
       }
-      S.flow.choose = null; S.flow.set = null; S.flow.lastSet = null; rerender(); scrollTo({ top: 0 });
+      S.flow.choose = null; S.flow.howPage = 1; S.flow.set = null; S.flow.lastSet = null; rerender(); scrollTo({ top: 0 });
     }
-    else if (act === "flow-subject") { S.flow.subject = b.dataset.s; S.flow.set = null; S.flow.choose = null; S.flow.back = null; S.flow.results = null; S.flow.reviewing = null; S.flow.lib = ""; S.flow.q = ""; S.flow.skipped.clear(); showView("flow"); rerender(); scrollTo({ top: 0 }); }
+    else if (act === "flow-subject") { S.flow.howPage = 1; S.flow.subject = b.dataset.s; S.flow.set = null; S.flow.choose = null; S.flow.back = null; S.flow.results = null; S.flow.reviewing = null; S.flow.lib = ""; S.flow.q = ""; S.flow.skipped.clear(); showView("flow"); rerender(); scrollTo({ top: 0 }); }
     else if (act === "flow-rate") flowRate(b.dataset.k, +b.dataset.l);
     else if (act === "flow-skip") flowSkip();
     else if (act === "flow-back") flowBack();
