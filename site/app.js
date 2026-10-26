@@ -171,7 +171,7 @@
     if (!S.team || !canEdit(g)) { toast(S.team ? `Your team rates ${S.team.grades.map(gname).join(", ")}.` : "Choose your team first."); return; }
     const k = rkey(e.f, e.c, g), now = S.ratings.get(k); if (!now) return;
     S.ratings.delete(k); rerender();
-    try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${e.c} removed. It is back in Still to do.`); }
+    try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${codeText(e)} answer taken off. It is back in Still to do.`); }
     catch (err) { S.ratings.set(k, now); rerender(); toast("Could not remove: " + err.message); }
   }
   // Bring an answered standard back on screen with its answer showing, so it can be switched.
@@ -2087,7 +2087,7 @@
   document.addEventListener("click", async (ev) => {
     const b = ev.target.closest("[data-act]"); if (!b) return;
     const act = b.dataset.act;
-    if (act === "rate") { const e = findItem(b.dataset.k); const l = +b.dataset.l; const cur = rating(e.f, e.c, b.dataset.g); if (cur && cur.level === l) return; setRating(e, b.dataset.g, l); }
+    if (act === "rate") { const e = findItem(b.dataset.k); const l = +b.dataset.l; const cur = rating(e.f, e.c, b.dataset.g); if (cur && cur.level === l) { clearRating(e, b.dataset.g); return; } setRating(e, b.dataset.g, l); }   // clicking the chosen answer again takes it off
     else if (act === "open") openDetail(b.dataset.k);
     else if (act === "grid-all") { S.gridAll = true; rerender(); }
     else if (act === "team") { setTeam(b.dataset.t); store.set("va_team", b.dataset.t); $("#team").value = b.dataset.t; }
