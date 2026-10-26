@@ -31,7 +31,9 @@ Read `docs/HANDOFF.md` first (current status and next steps), then `docs/spec.md
   `audit/plan_marks.py` builds `data/standards/plan_marks.json` (in plans / priority per grade) from the school's
   documents in `data/source/ma3loomat/` (6-12) and `data/source/hub/` (K-5); `audit/audit_secondary.py` writes the
   secondary audit to `outputs/`. Rebuild order: ela_crosswalk, plan_marks, build_site_data, build_progressions,
-  build_prereqs, build_sources. `build_sources.py` writes `site/data/sources.json` for the site's "Data sources" panel
+  build_prereqs, build_sources, then `scripts/check_progressions.py` (must report 0 problems: every progression step, link and
+  prerequisite uses only the sets the school uses, AERO K-5 / NGSS 6-12 Science, AERO K-5 / Wisconsin 6-12 Social Studies,
+  Wisconsin (CCSS) Math and ELA; every in-use standard is in a progression; rechecked Oct 26, 2026, ESS2.E Biogeology fixed). `build_sources.py` writes `site/data/sources.json` for the site's "Data sources" panel
   (Tim wants data sources transparent): standard sets and their documents, every curriculum document read (course
   names only, never file titles), Hub power lists with codes not found, prerequisite links by source. Tim: state only what has been read, never list what has not. `data/standards/math_ccss_crosswalk.json` lists the Wisconsin 2021 Math rows whose Common Core code
   differs (renumbered K.CC, 3.OA, HS G-C/GMD/MG; split parts); it feeds the `cw` field, plan-code reading and the

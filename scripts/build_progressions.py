@@ -160,12 +160,12 @@ sci = [e for e in IDX["Science"] if (e["f"] == "AERO-SCI") or (e["f"] == "NGSS" 
 sim = Sim(sci)
 NAMES = {}
 for e in IDX["Science"]:
-    for comp, nm in re.findall(r"\b((?:PS|LS|ESS|ETS)\d\.[A-D]) ([^,()]+)", e.get("cl") or ""):
+    for comp, nm in re.findall(r"\b((?:PS|LS|ESS|ETS)\d\.[A-G]) ([^,()]+)", e.get("cl") or ""):
         NAMES.setdefault(comp, nm.strip())
 NAMES["PS4.C"] = "Information Technologies and Instrumentation"   # the source cluster text is cut short
 comp_members = collections.defaultdict(list)
 for e in sci:
-    comps = {m.group(1) for x in XW[(e["f"], e["c"])] for m in [re.match(r"WI-SCI:SCI\.((?:PS|LS|ESS|ETS)\d\.[A-D])\.", x)] if m}
+    comps = {m.group(1) for x in XW[(e["f"], e["c"])] for m in [re.match(r"WI-SCI:SCI\.((?:PS|LS|ESS|ETS)\d\.[A-G])\.", x)] if m}
     if not comps:
         m = re.search(r"(PS|LS|ESS|ETS)(\d)", e["c"]); comps = {f"{m[1]}{m[2]}"} if m else set()
     for c in comps:
