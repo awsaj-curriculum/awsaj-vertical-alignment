@@ -1002,3 +1002,7 @@ table.school-sets tr.band-k5 td, table.school-sets tr.band-k5 th[scope=row] { ba
 table.school-sets tr.band-ms td, table.school-sets tr.band-ms th[scope=row] { background: #E8F7F5; }
 table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { background: #EDF0FA; }
 .set-opt small.set-desc { color: var(--ink-2); font-size: 13.5px; margin-top: 4px; line-height: 1.45; }
+.tip .rdot { white-space: nowrap; } .tip .rdot .lv { border: 1px solid #fff; margin-right: 3px; vertical-align: -1px; } .tip .setb { vertical-align: 1px; }
+.tip .lv { width: 10px; height: 10px; border-radius: 2px; }
+.strip .cell.lnk { border-style: dashed; border-width: 1.5px; }
+.strip .cell-code { margin: 0 auto; }
