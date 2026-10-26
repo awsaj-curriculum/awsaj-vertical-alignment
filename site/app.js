@@ -125,6 +125,7 @@
   }
   function syncNote(msg) { $("#sync").textContent = msg; }
 
+  const tabTeam = (t) => { try { sessionStorage.setItem("va_team", t); } catch (e) { /* storage blocked */ } };
   async function setRating(e, g, level) {
     if (!S.team) { toast("Choose your team first (top right)."); $("#team").focus(); return; }
     if (!canEdit(g)) { toast(`Your team rates ${S.team.grades.map(gname).join(", ")}.`); return; }
@@ -171,7 +172,7 @@
     if (!S.team || !canEdit(g)) { toast(S.team ? `Your team rates ${S.team.grades.map(gname).join(", ")}.` : "Choose your team first."); return; }
     const k = rkey(e.f, e.c, g), now = S.ratings.get(k); if (!now) return;
     S.ratings.delete(k); rerender();
-    try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${e.c} removed. It is back in Still to do.`); }
+    try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${codeText(e)} answer taken off. It is back in Still to do.`); }
     catch (err) { S.ratings.set(k, now); rerender(); toast("Could not remove: " + err.message); }
   }
   // Bring an answered standard back on screen with its answer showing, so it can be switched.
@@ -2087,10 +2088,10 @@
   document.addEventListener("click", async (ev) => {
     const b = ev.target.closest("[data-act]"); if (!b) return;
     const act = b.dataset.act;
-    if (act === "rate") { const e = findItem(b.dataset.k); const l = +b.dataset.l; const cur = rating(e.f, e.c, b.dataset.g); if (cur && cur.level === l) return; setRating(e, b.dataset.g, l); }
+    if (act === "rate") { const e = findItem(b.dataset.k); const l = +b.dataset.l; const cur = rating(e.f, e.c, b.dataset.g); if (cur && cur.level === l) { clearRating(e, b.dataset.g); return; } setRating(e, b.dataset.g, l); }   // clicking the chosen answer again takes it off
     else if (act === "open") openDetail(b.dataset.k);
     else if (act === "grid-all") { S.gridAll = true; rerender(); }
-    else if (act === "team") { setTeam(b.dataset.t); store.set("va_team", b.dataset.t); $("#team").value = b.dataset.t; }
+    else if (act === "team") { setTeam(b.dataset.t); tabTeam(b.dataset.t); $("#team").value = b.dataset.t; }
     else if (act === "links") teamLinks();
     else if (act === "prog-filter") { S.progFilter = b.dataset.f; teamLinks(); }
     else if (act === "prog-by") { S.progBy = b.dataset.b; teamLinks(); }
@@ -2100,7 +2101,7 @@
     else if (act === "clear") { const e = findItem(b.dataset.k); if (e) clearRating(e, b.dataset.g || teamGrade()); }
     else if (act === "lib") { S.flow.lib = S.flow.lib === b.dataset.t ? "" : b.dataset.t; rerender(); }
     else if (act === "lib-open") { const e = findItem(b.dataset.k); if (e) { S.flow.back = rkey(e.f, e.c, teamGrade()); S.flow.set = null; rerender(); scrollTo({ top: 0, behavior: "smooth" }); } }
-    else if (act === "switch-team") { S.explore = false; setTeam(""); store.set("va_team", ""); $("#team").value = ""; }
+    else if (act === "switch-team") { S.explore = false; setTeam(""); tabTeam(""); $("#team").value = ""; }
     else if (act === "explore" && S.lock) { /* locked links stay on the team's own standards */ }
     else if (act === "explore") { S.explore = true; showView("heatmap"); refreshFilterOptions(); rerender(); }
     else if (act === "back-to-flow") { S.explore = false; showView("flow"); rerender(); }
@@ -2261,7 +2262,7 @@
   bindF("#f-subject", "subject"); bindF("#f-framework", "framework"); bindF("#f-division", "division"); bindF("#f-grade", "grade"); bindF("#f-strand", "strand"); bindF("#f-search", "search");
   bindF("#f-mark", "mark"); bindF("#f-order", "order");
   document.addEventListener("change", (ev) => { if (ev.target.id === "pg-group") { S.pgGroup = ev.target.value; rerender(); } });
-  $("#team").addEventListener("change", (ev) => { setTeam(ev.target.value); store.set("va_team", ev.target.value); });
+  $("#team").addEventListener("change", (ev) => { setTeam(ev.target.value); tabTeam(ev.target.value); });
   $("#x-csv").addEventListener("click", exportCSV); $("#x-png").addEventListener("click", exportPNG); $("#x-pdf").addEventListener("click", () => window.print());
   // Findings only: the same print without the long informational lists (moves, reinforcement, unknown, full grids).
   $("#x-pdf-f").addEventListener("click", () => { document.body.classList.add("print-findings"); S.printFindings = true; window.print(); });
@@ -2369,7 +2370,10 @@
     const lg = (qp.get("grade") || "").toUpperCase(), lgTeam = !lt && GRADES.includes(lg) && S.meta.subjects.map((s) => teamOf(lg, s.name)).find(Boolean);
     if (lt) { const ls = qp.get("subject"); S.lock = { team: lt.name, subject: lt.subjects.includes(ls) ? ls : null }; document.body.dataset.lock = "1"; setTeam(lt.name); }
     else if (lgTeam) { S.lock = { grade: lg }; document.body.dataset.lock = "1"; setTeam(lgTeam.name); }
-    else { const saved = store.get("va_team"); if (saved && S.teams.some((t) => t.name === saved)) { $("#team").value = saved; setTeam(saved); } }
+    // Many people share devices, so every new visit starts on the team page (Tim, Oct 2026). The team is kept only for
+    // this browser tab (a reload stays on it); a new tab or a new visit asks again.
+    else { let saved = ""; try { saved = sessionStorage.getItem("va_team") || ""; } catch (e) { /* storage blocked: ask again */ }
+      if (saved && S.teams.some((t) => t.name === saved)) { $("#team").value = saved; setTeam(saved); } }
     const v = store.get("va_view"); S.applyingHash = false;
     if (applyHash()) { /* the address named the page and filters */ }
     else if (mode() === "full" && v && v !== "flow" && $(`.tabs [data-view="${v}"]`)) $(`.tabs [data-view="${v}"]`).click();
