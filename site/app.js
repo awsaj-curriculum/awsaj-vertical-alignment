@@ -668,7 +668,11 @@
     const setPills = `<div class="set-pills"><span class="muted">Standards:</span> ${fwsNow.map((f) => { const l = flowList(F.subject, g, f), n = l.filter((e) => !rating(e.f, e.c, g)).length;
         return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(setTip(f))}">${badge(f)} <b class="setp-n">${fwHTML(SET(f).name)}</b> <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
       <button type="button" class="linkish" data-act="sets-change">Change ${hb("sets")}</button></div>`;
-    const head = `<div class="flow-head">${pills}${setPills}
+    // A large title so a teacher never loses track of which grade, subject or course they are rating, and which sets it uses.
+    const course = courseOf(g, F.subject), names = fwsNow.map((f) => FW_NAME[f] || SET(f).name);
+    const title = `<div class="flow-title"><h1>${course && course !== F.subject ? `${esc(course)} <small>${esc(gname(g))} · ${esc(F.subject)}</small>` : `${esc(gname(g))} · ${esc(F.subject)}`}</h1>
+      <p>${course && course !== F.subject ? "This course" : `${esc(gname(g))} ${esc(F.subject)}`} uses ${names.map((n) => `the <b>${fwHTML(n)}</b> standards`).join(names.length > 2 ? ", " : " and ")}. ${hb("flow_title")}</p></div>`;
+    const head = `<div class="flow-head">${title}${pills}${setPills}
       <div class="flow-progress"><div class="fp-bar"><i style="width:${pct}%"></i></div>
       <span><b>${done}</b> of ${list.length} rated · <b>${left}</b> left ${hb("flow")}</span></div>
       <p class="saved-note muted">Every answer saves the moment you click it. You can stop and come back any time with the same link.</p></div>`;
@@ -2236,8 +2240,15 @@
     hmCol = col; if (col) $$(`table.hm [data-gi="${col}"], table.cm [data-gi="${col}"]`).forEach((x) => x.classList.add("xcol"));
   });
   // tooltip for heatmap cells and bars
-  const tip = $("#tip");
+  const tip = $("#tip"); let tipWait = 0;
+  document.addEventListener("click", () => { clearTimeout(tipWait); tip.hidden = true; }, true);
   document.addEventListener("mouseover", (ev) => {
+    // Answer buttons: resting on one for a moment shows what that answer means (same words as "What do these mean?").
+    clearTimeout(tipWait);
+    const ans = ev.target.closest('[data-act="rate"][data-l],[data-act="flow-rate"][data-l]');
+    if (ans) { tip.hidden = true; tipWait = setTimeout(() => { const [n, d] = LEVEL_DEF[+ans.dataset.l]; tip.classList.add("tip-lg"); tip.innerHTML = `<b>${esc(n)}</b><br>${esc(d)}`;
+      const r = ans.getBoundingClientRect(); tip.hidden = false; tip.style.left = Math.max(8, Math.min(r.left, innerWidth - tip.offsetWidth - 12)) + "px";
+      tip.style.top = (r.bottom + 8 + tip.offsetHeight > innerHeight ? r.top - tip.offsetHeight - 8 : r.bottom + 8) + "px"; }, 700); return; }
     // Small view: a standard cut off at the end of its line shows the whole standard in a large black popup.
     const c = ev.target.closest("[data-pq],[data-tip],[data-tip-text],.tr-text[data-full]");
     if (!c || (c.dataset.full && c.scrollWidth <= c.clientWidth + 1)) { tip.hidden = true; return; }
