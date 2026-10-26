@@ -102,8 +102,9 @@ shown as "Suggested, check". The site shows "N prerequisites" chips (hover lists
 / Leads to" box, the Audit's Before and after table, and uses it for prerequisite-gap checks (official = Coherence Map or
 anchor; otherwise "Possible prerequisite gap").
 Codes: every standard everywhere (cards, lists, tables, popup, tips, CSV) shows the main code in bold with one small italic
-line underneath (`codeHTML()` / `codeParts()` in app.js; never print `e.c` on its own). Math and ELA: Common Core code
-first, Wisconsin code underneath (M.5.MD.A.1 -> 5.MD.A.1, M.A.APR.A.1 -> HSA-APR.A.1, SP -> S; ELA uses `cw`, the
+line underneath (`codeHTML()` / `codeParts()` in app.js; never print `e.c` on its own). Math and ELA (Tim, Oct 2026): Wisconsin code FIRST in bold (the site shows Wisconsin wording), then "CCSS <code>" underneath
+(EE rows: "DLM <code>"; rows new in Wisconsin: "New in Wisconsin 2020/2021 (no CCSS code)"). CCSS mapping still comes from
+the crosswalk (M.5.MD.A.1 -> 5.MD.A.1, M.A.APR.A.1 -> HSA-APR.A.1, SP -> S; ELA uses `cw`, the
 Common Core 2010 code(s) from DPI's comparison: R.6.1 -> RL.6.1 · RI.6.1, W.6.2.a -> W.6.1, L.6.5.a -> L.6.1; Wisconsin
 renumbered W/L/SL in 2020, they are NOT the same codes). Rows new in Wisconsin 2020 show their Wisconsin code with "new
 in 2020". EE rows follow their linked standard (M.EE.6.NS.5 -> EE.6.NS.5, EE.W.6.2.a -> EE.W.6.1). NGSS, AERO Science and

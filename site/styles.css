@@ -1001,3 +1001,4 @@ ol.how-steps p { margin: 2px 0 0; }
 table.school-sets tr.band-k5 td, table.school-sets tr.band-k5 th[scope=row] { background: #FFF7E6; }
 table.school-sets tr.band-ms td, table.school-sets tr.band-ms th[scope=row] { background: #E8F7F5; }
 table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { background: #EDF0FA; }
+.set-opt small.set-desc { color: var(--ink-2); font-size: 13.5px; margin-top: 4px; line-height: 1.45; }
