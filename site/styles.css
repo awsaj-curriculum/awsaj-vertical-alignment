@@ -1010,3 +1010,4 @@ table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { ba
 .cd-main { display: inline-flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
 .cd-main b { font-weight: 700; color: var(--ink); }
 .cd-main .setb { flex: none; height: 16px; min-width: 22px; font-size: 9px; padding: 0 4px; }
+.set-name { cursor: help; }
