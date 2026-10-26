@@ -12,7 +12,7 @@
   const LEVEL = ["Not taught", "Introduced / exposed", "Taught in depth"];
   const LEVEL_SHORT = ["Not taught", "Introduced", "In depth"];
   const FW_NAME = { "WI-CC-MATH": "Wisconsin Math (CCSS)", "WI-CC-ELA": "Wisconsin ELA (CCSS)", "NGSS": "NGSS",
-    "WI-SCI": "Wisconsin Science", "AERO-SCI": "AERO Science", "WI-SS": "Wisconsin Social Studies", "AERO-SS": "AERO Social Studies",
+    "WI-SCI": "Wisconsin Science (WI)", "AERO-SCI": "AERO Science", "WI-SS": "Wisconsin Social Studies (WI)", "AERO-SS": "AERO Social Studies",
     "WI-EE-MATH": "Essential Elements (Math)", "WI-EE-ELA": "Essential Elements (ELA)", "WI-EE-SCI": "Essential Elements (Science)", "WI-EE-SS": "Essential Elements (Social Studies)" };
   // Standard sets: each has a short badge and its own badge style, so Common Core, EE, NGSS, AERO and Wisconsin never look
   // alike. Set styles use shape and line (solid, dashed, dotted, double), not the rating colours.
@@ -20,13 +20,16 @@
     : f.startsWith("WI-CC-") ? { abbr: "CCSS", name: f === "WI-CC-MATH" ? "Wisconsin Math (CCSS)" : "Wisconsin ELA (CCSS)", style: "cc" }
     : f === "NGSS" ? { abbr: "NGSS", name: "NGSS", style: "ngss" }
     : f.startsWith("AERO-") ? { abbr: "AERO", name: "AERO", style: "aero" }
-    : { abbr: "WI", name: f === "WI-SS" ? "Wisconsin Social Studies" : "Wisconsin Science", style: "wi" });
+    : { abbr: "WI", name: f === "WI-SS" ? "Wisconsin Social Studies (WI)" : "Wisconsin Science (WI)", style: "wi" });
   const SET_ORDER = (f) => (f.startsWith("WI-EE-") ? 9 : f.startsWith("WI-CC-") ? 0 : f === "NGSS" ? 1 : f.startsWith("AERO-") ? 2 : 3);
   // Hover text for a set. The Wisconsin Math and ELA sets are Common Core based, so they carry (CCSS) and say so on hover.
   const CC_TIP = { "WI-CC-MATH": "Wisconsin Math (CCSS): the Wisconsin Standards for Mathematics (2021), built on the Common Core State Standards. The bold code is the Common Core State Standards code; the Wisconsin code is underneath.",
     "WI-CC-ELA": "Wisconsin ELA (CCSS): the Wisconsin Standards for English Language Arts (2020), built on the Common Core State Standards (2010). The bold code is the Common Core State Standards code; the Wisconsin code is underneath." };
   // A set name in HTML: (CCSS) gets a popup that spells out Common Core State Standards.
-  const fwHTML = (name) => esc(name).replace("(CCSS)", '(<abbr class="ccss" title="Common Core State Standards">CCSS</abbr>)');
+  const fwHTML = (name) => esc(name).replace("(CCSS)", '(<abbr class="ccss" title="Common Core State Standards">CCSS</abbr>)')
+    .replace("(WI)", '(<abbr class="ccss" title="Wisconsin\'s own standards. The Common Core State Standards (CCSS) cover only Math and ELA, so they have no social studies or science standards.">WI</abbr>)');
+  CC_TIP["WI-SS"] = "Wisconsin Social Studies (WI): Wisconsin's own Social Studies standards (2018). The Common Core State Standards (CCSS) have no social studies standards, so these come from the Wisconsin standards.";
+  CC_TIP["WI-SCI"] = "Wisconsin Science (WI): Wisconsin's own Science standards (2017). The Common Core State Standards (CCSS) have no science standards.";
   const setTip = (f) => CC_TIP[f] || FW_NAME[f] || SET(f).name;
   const badge = (f) => { const x = SET(f); return `<span class="setb set-${x.style}" title="${esc(setTip(f))}">${x.abbr}</span>`; };
   // Awsaj brand: ratings use three of the four symbol ribbons (orange is kept for highlights so it never sits next to lime).
@@ -634,7 +637,7 @@
     const BANDS = [["K-5", "Kindergarten to Grade 5", DIV.Elementary], ["6-8", "Grades 6 to 8", DIV.Middle], ["9-12", "High school, Grades 9 to 12", GRADES.filter((x) => !DIV.Elementary.includes(x) && !DIV.Middle.includes(x))]];
     const bandSets = (subj, gs) => { const out = []; for (const x of gs) for (const f of setsFor(subj, x)) if (!out.includes(f)) out.push(f); return out.sort((a, b) => SET_ORDER(a) - SET_ORDER(b)); };
     const school = `<table class="school-sets"><thead><tr><th>Grades</th>${S.meta.subjects.map((x) => `<th>${esc(SUBJ_FULL[x.name] || x.name)}</th>`).join("")}</tr></thead><tbody>
-      ${BANDS.map(([k, label, gs]) => `<tr class="${gs.includes(g) ? "here" : ""}"><th scope="row"><b>${k}</b><small>${label}${gs.includes(g) ? " · your grade" : ""}</small></th>${S.meta.subjects.map((x) => `<td>${bandSets(x.name, gs).map((f) => `<div>${badge(f)} ${fwHTML(FW_NAME[f] || SET(f).name)}</div>`).join("")}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+      ${BANDS.map(([k, label, gs], bi) => `<tr class="band-${["k5", "ms", "hs"][bi]} ${gs.includes(g) ? "here" : ""}"><th scope="row"><b>${k}</b><small>${label}${gs.includes(g) ? " · your grade" : ""}</small></th>${S.meta.subjects.map((x) => `<td>${bandSets(x.name, gs).map((f) => `<div>${badge(f)} ${fwHTML(FW_NAME[f] || SET(f).name)}</div>`).join("")}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
     const step = (n, title, body) => `<li><span class="hs-n">${n}</span><div><b>${title}</b>${body}</div></li>`;
     // Three pages in a popup, each moved on with Next: 1 what you are rating, 2 the whole school, 3 how to rate.
     const pg = S.flow.howPage || 1, dots = [1, 2, 3].map((n) => `<i class="${n === pg ? "on" : ""}"></i>`).join("");
@@ -681,8 +684,8 @@
     const groups = { "Elementary": [], "Middle school": [], "High school": [] };
     S.teams.forEach((t) => { if (t.name !== "Vertical Alignment Committee") (DIV.Elementary.includes(t.grades[0]) ? groups.Elementary : DIV.Middle.includes(t.grades[0]) ? groups["Middle school"] : groups["High school"]).push(t); });
     el.innerHTML = `<div class="flow-wrap"><div class="hero"><h2>Which team are you?</h2>
-      <p class="lede">You will see your grade's standards, all on one page or one at a time. For each one, say how it is generally taught in your grade. Every answer saves as you go, and this device remembers your team.</p></div>
-      ${Object.entries(groups).map(([g, ts]) => `<h3 class="pick-h">${g}</h3><div class="pick">${ts.map((t) => `<button type="button" class="pick-b" data-act="team" data-t="${esc(t.name)}">${esc(t.name)}</button>`).join("")}</div>`).join("")}
+      <p class="lede">You will see your grade's standards, all on one page or one at a time. For each one, say how it is generally taught in your grade. Every answer saves as you go.</p></div>
+      ${Object.entries(groups).map(([g, ts], i) => `<div class="band band-${["k5", "ms", "hs"][i]}"><h3 class="pick-h">${g} <small>${["Kindergarten to Grade 5", "Grades 6 to 8", "Grades 9 to 12"][i]}</small></h3><div class="pick">${ts.map((t) => `<button type="button" class="pick-b" data-act="team" data-t="${esc(t.name)}">${esc(t.name)}</button>`).join("")}</div></div>`).join("")}
       <p class="muted committee-link"><button type="button" class="linkish" data-act="team" data-t="Vertical Alignment Committee">I am on the Vertical Alignment Committee</button></p></div>`;
   }
   function renderFlow() {
