@@ -1021,3 +1021,5 @@ table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { ba
   table.ba thead th { position: sticky; top: 0; z-index: 2; background: var(--surface); box-shadow: 0 1px 0 var(--line); }
 }
 .ch-none { display: block; width: 100%; height: 24px; }
+.brand { color: inherit; text-decoration: none; cursor: pointer; border-radius: 10px; } .brand:hover h1 { text-decoration: underline; } .brand:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+header.top { position: relative; z-index: 950; } /* stays clickable above the Before you begin popup */
