@@ -963,3 +963,7 @@ button.danger { border-style: dashed; }
 .tip.tip-lg { background: #000; max-width: 480px; font-size: 17px; line-height: 1.45; padding: 12px 14px; }
 abbr.ccss { text-decoration: underline dotted; cursor: help; }
 .setp b.setp-n { font-weight: inherit; }
+.flow-title { margin: 0 0 12px; }
+.flow-title h1 { margin: 0; font-size: 32px; line-height: 1.15; color: var(--brand); }
+.flow-title h1 small { display: block; font-size: 16px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+.flow-title p { margin: 4px 0 0; color: var(--ink-2); }
