@@ -196,7 +196,7 @@ for k in sorted(key_members):
 lanes = [l for l in lanes if l["steps"]]
 out = {"built": __import__("datetime").date.today().isoformat(),
        "basis": {"anchor": "Official: the same Wisconsin anchor standard in each grade.",
-                 "dci": "Official: the same NGSS disciplinary core idea, through the Wisconsin Science codes each standard is matched to.",
+                 "dci": "Official: the same NGSS disciplinary core idea, through the Wisconsin Science codes each standard is matched to. Grades 6-12 use NGSS; K-5 AERO Science standards join through their suggested Wisconsin matches.",
                  "wiss": "Official Wisconsin Social Studies standard; K-5 AERO standards join through suggested matches.",
                  "topic": "Inferred: Common Core State Standards topics followed across domains, grouped by cluster for this site."},
        "lanes": lanes}
