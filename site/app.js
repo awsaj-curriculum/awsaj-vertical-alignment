@@ -17,14 +17,14 @@
   // Standard sets: each has a short badge and its own badge style, so Common Core, EE, NGSS, AERO and Wisconsin never look
   // alike. Set styles use shape and line (solid, dashed, dotted, double), not the rating colours.
   const SET = (f) => (f.startsWith("WI-EE-") ? { abbr: "EE", name: "Essential Elements", style: "ee" }
-    : f.startsWith("WI-CC-") ? { abbr: "CC", name: f === "WI-CC-MATH" ? "Wisconsin Math (CCSS)" : "Wisconsin ELA (CCSS)", style: "cc" }
+    : f.startsWith("WI-CC-") ? { abbr: "CCSS", name: f === "WI-CC-MATH" ? "Wisconsin Math (CCSS)" : "Wisconsin ELA (CCSS)", style: "cc" }
     : f === "NGSS" ? { abbr: "NGSS", name: "NGSS", style: "ngss" }
     : f.startsWith("AERO-") ? { abbr: "AERO", name: "AERO", style: "aero" }
     : { abbr: "WI", name: f === "WI-SS" ? "Wisconsin Social Studies" : "Wisconsin Science", style: "wi" });
   const SET_ORDER = (f) => (f.startsWith("WI-EE-") ? 9 : f.startsWith("WI-CC-") ? 0 : f === "NGSS" ? 1 : f.startsWith("AERO-") ? 2 : 3);
   // Hover text for a set. The Wisconsin Math and ELA sets are Common Core based, so they carry (CCSS) and say so on hover.
-  const CC_TIP = { "WI-CC-MATH": "Wisconsin Math (CCSS): the Wisconsin Standards for Mathematics (2021), built on the Common Core State Standards. The bold code is the Common Core code; the Wisconsin code is underneath.",
-    "WI-CC-ELA": "Wisconsin ELA (CCSS): the Wisconsin Standards for English Language Arts (2020), built on the Common Core State Standards (2010). The bold code is the Common Core code; the Wisconsin code is underneath." };
+  const CC_TIP = { "WI-CC-MATH": "Wisconsin Math (CCSS): the Wisconsin Standards for Mathematics (2021), built on the Common Core State Standards. The bold code is the Common Core State Standards code; the Wisconsin code is underneath.",
+    "WI-CC-ELA": "Wisconsin ELA (CCSS): the Wisconsin Standards for English Language Arts (2020), built on the Common Core State Standards (2010). The bold code is the Common Core State Standards code; the Wisconsin code is underneath." };
   // A set name in HTML: (CCSS) gets a popup that spells out Common Core State Standards.
   const fwHTML = (name) => esc(name).replace("(CCSS)", '(<abbr class="ccss" title="Common Core State Standards">CCSS</abbr>)');
   const setTip = (f) => CC_TIP[f] || FW_NAME[f] || SET(f).name;
@@ -412,8 +412,8 @@
     if (cc) return { main: cc, alt: "Wisconsin " + e.c };
     if (e.wi) return { main: [e.c], alt: "Wisconsin " + e.wi.join(" · ") };
     // New in Wisconsin 2020: "WI" in front, so W.7.1 (Wisconsin, new) never looks like Common Core W.7.1 (Wisconsin W.7.2.a).
-    if (e.f === "WI-CC-ELA") return { main: ["WI " + e.c], alt: "New in Wisconsin 2020 (no Common Core code)" };
-    if (e.f === "WI-CC-MATH") return { main: ["WI " + e.c.replace(/^M\./, "")], alt: "New in Wisconsin 2021 (no Common Core code)" };
+    if (e.f === "WI-CC-ELA") return { main: ["WI " + e.c], alt: "New in Wisconsin 2020 (no Common Core State Standards code)" };
+    if (e.f === "WI-CC-MATH") return { main: ["WI " + e.c.replace(/^M\./, "")], alt: "New in Wisconsin 2021 (no Common Core State Standards code)" };
     const lk = e.lk && e.lk[0], base = lk && S.byKey.get(lk.replace(":", "|"));
     return { main: [e.c], alt: lk ? "Essential Element for " + (base ? codeText(base) : lk.split(":")[1])
       : e.f === "NGSS" || e.f.startsWith("AERO-") ? "No Wisconsin match" : FW_NAME[e.f] || e.f };
@@ -615,17 +615,26 @@
     return fws.filter((f) => !onlySet || f === onlySet).flatMap((f) => S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)));
   }
   // Set chooser: which standard sets the team works through for this subject (saved for everyone on the team).
+  // A large title so a teacher never loses track of which grade, subject or course they are rating, and which sets it uses.
+  const SUBJ_FULL = { ELA: "English Language Arts" };
+  function flowTitle(subject, g, fws) {
+    const course = courseOf(g, subject), full = SUBJ_FULL[subject] || subject, names = fws.map((f) => FW_NAME[f] || SET(f).name);
+    const isCourse = course && course !== subject;
+    return `<div class="flow-title"><h1>${isCourse ? `${esc(course)} <small>${esc(gname(g))} · ${esc(full)}</small>` : `${esc(gname(g))} · ${esc(full)}`}</h1>
+      <p>${isCourse ? "This course" : `${esc(gname(g))} ${esc(full)}`} uses ${names.map((n) => `the <b>${fwHTML(n)}</b> standards`).join(names.length > 2 ? ", " : " and ")}. ${hb("flow_title")}</p></div>`;
+  }
   function setChooser(subject, g, first) {
     const sl = S.meta.subjects.find((s) => s.name === subject).slug, fws = S.meta.subjects.find((s) => s.name === subject).frameworks.slice().sort((a, b) => SET_ORDER(a) - SET_ORDER(b));
     const cur = setsFor(subject, g, S.team);
-    const DESC = { cc: "The grade-level Common Core standards.", ee: "The alternate standards for students with significant cognitive disabilities, one for each linked standard.",
+    const DESC = { cc: "The grade-level Common Core State Standards.", ee: "The alternate standards for students with significant cognitive disabilities, one for each linked standard.",
       ngss: "Next Generation Science Standards performance expectations.", aero: "The AERO framework the school uses now.", wi: "Wisconsin's own standards." };
-    return `<div class="card set-card"><h2>${first ? "Which standards is your team working through?" : "Change your standard sets"} ${hb("sets")}</h2>
-      <p class="lede">${esc(subject)} for ${esc(gname(g))}. Tick one or more. If you tick more than one, you rate them one set at a time, and every card shows which set it belongs to. This choice is shared by everyone on your team.</p>
-      <div class="set-opts">${fws.map((f) => { const n = S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)).length; const x = SET(f);
-        return n ? `<label class="set-opt set-${x.style}"><input type="checkbox" value="${esc(f)}" ${cur.includes(f) ? "checked" : ""}> ${badge(f)} <span><b>${fwHTML(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}. ${DESC[x.style]}</small></span></label>` : ""; }).join("")}</div>
-      <div class="done-actions" style="justify-content:flex-start"><button type="button" data-act="sets-save" data-s="${esc(subject)}">Save and start</button>
-        ${first ? "" : `<button type="button" class="ghost" data-act="sets-cancel">Cancel</button>`}</div></div>`;
+    // Teams do not choose or untick sets (Tim, Oct 2026): this page only says what will be rated, then starts.
+    const shown = fws.filter((f) => cur.includes(f) && S.idx[sl].some((e) => e.f === f && e.pl.includes(g)));
+    return `<div class="card set-card">${flowTitle(subject, g, shown)}
+      <p class="lede">You will rate these standards for ${esc(gname(g))}. Every standard shows which set it belongs to. ${hb("sets")}</p>
+      <ul class="set-sum">${shown.map((f) => { const n = S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)).length, x = SET(f);
+        return `<li class="set-opt set-${x.style}">${badge(f)} <span><b>${fwHTML(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}. ${DESC[x.style]}</small></span></li>`; }).join("")}</ul>
+      <div class="done-actions" style="justify-content:flex-start"><button type="button" data-act="sets-save" data-s="${esc(subject)}" data-f="${esc(shown.join(","))}">Start rating</button></div></div>`;
   }
   // Index rows trim long standards; the card shows the full text from the detail file once it has loaded.
   function fullText(e) {
@@ -667,11 +676,8 @@
     const results = F.results === F.subject || (!left && F.reviewing !== F.subject);
     const setPills = `<div class="set-pills"><span class="muted">Standards:</span> ${fwsNow.map((f) => { const l = flowList(F.subject, g, f), n = l.filter((e) => !rating(e.f, e.c, g)).length;
         return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(setTip(f))}">${badge(f)} <b class="setp-n">${fwHTML(SET(f).name)}</b> <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
-      <button type="button" class="linkish" data-act="sets-change">Change ${hb("sets")}</button></div>`;
-    // A large title so a teacher never loses track of which grade, subject or course they are rating, and which sets it uses.
-    const course = courseOf(g, F.subject), names = fwsNow.map((f) => FW_NAME[f] || SET(f).name);
-    const title = `<div class="flow-title"><h1>${course && course !== F.subject ? `${esc(course)} <small>${esc(gname(g))} · ${esc(F.subject)}</small>` : `${esc(gname(g))} · ${esc(F.subject)}`}</h1>
-      <p>${course && course !== F.subject ? "This course" : `${esc(gname(g))} ${esc(F.subject)}`} uses ${names.map((n) => `the <b>${fwHTML(n)}</b> standards`).join(names.length > 2 ? ", " : " and ")}. ${hb("flow_title")}</p></div>`;
+      ${hb("sets")}</div>`;
+    const title = flowTitle(F.subject, g, fwsNow);
     const head = `<div class="flow-head">${title}${pills}${setPills}
       <div class="flow-progress"><div class="fp-bar"><i style="width:${pct}%"></i></div>
       <span><b>${done}</b> of ${list.length} rated · <b>${left}</b> left ${hb("flow")}</span></div>
@@ -739,7 +745,7 @@
           return tb(["Set", "Read from", "Rows read (one per standard and grade)", "Standards on the site"], d.standards.map((x) => { const first = !seen.has(x.framework); seen.add(x.framework);
             return `<tr><td>${badge(x.framework)} ${fwHTML(FW_NAME[x.framework] || x.framework)}</td><td>${esc(x.source)}</td><td>${x.rows}</td><td>${first ? (onSite[x.framework] ? onSite[x.framework] : "not shown on the site") : ""}</td></tr>`; })); })()}
         <p class="muted sm-note">Standards on the site: after the site's choices (Wisconsin Science is not shown; NGSS and Wisconsin Social Studies are not used in K-5; Essential Elements marked "Not applicable" are left out). Links between standards come from the prerequisite map below or, where it has none, from the closest wording in the same progression.</p>
-        <p class="muted">Common Core codes for Wisconsin ELA come from DPI's official 2010 / 2020 comparison; for Wisconsin Math, from a checked crosswalk (most codes are the same). Wisconsin matches under NGSS and AERO codes come from the school's sheets.</p></div>
+        <p class="muted">Common Core State Standards codes for Wisconsin ELA come from DPI's official 2010 / 2020 comparison; for Wisconsin Math, from a checked crosswalk (most codes are the same). Wisconsin matches under NGSS and AERO codes come from the school's sheets.</p></div>
       <div class="box"><h3>${SHOW_PLANS ? "✓ In curriculum docs and " : ""}★ Priority (6-12) and Power (K-5)</h3>
         <p><b>Grades 6-12:</b> ${sec.length} Ma3loomat course documents (${byDoc(sec)}), which together ${SHOW_PLANS ? `give ✓ to ${d.distinct["6-12"].standards} different standards (${d.distinct["6-12"].pairs} standard and grade pairs) and ` : ""}name ${d.distinct["6-12"].priority_pairs} standard and grade pairs as priority (main standards; Essential Elements take the marks from their linked standard).</p>
         ${SHOW_PLANS ? "" : "<p><b>K-5:</b> ★ Power standards come from the K-5 ELA Power Standards PDF and the Curriculum Hub grade standards lists (below), " + d.distinct["K-5"].priority_pairs + " standard and grade pairs.</p>"}
@@ -747,8 +753,8 @@
         <details class="sub"><summary>Every document (${(SHOW_PLANS ? d.documents : d.documents.filter((x) => x.priority)).length})</summary>${tb(["Grade", "Subject", "Course", "Document", ...(SHOW_PLANS ? ["Code mentions"] : []), "Priority / power mentions"], (SHOW_PLANS ? d.documents : d.documents.filter((x) => x.priority)).map((x) => `<tr><td>${esc(gl(x.grade))}</td><td>${esc(x.subject)}</td><td>${esc(x.course || "")}</td><td>${esc(x.doc)}</td>${SHOW_PLANS ? `<td>${x.codes}</td>` : ""}<td>${x.priority || ""}</td></tr>`))}</details>
         <details class="sub"><summary>Curriculum Hub grade standards lists (${d.hub.length})</summary>${tb(["Grade", "Subject", "Codes listed", "Found on the site", "Not found"], d.hub.map((x) => `<tr><td>${esc(gl(x.grade))}</td><td>${esc(x.subject)}</td><td>${x.listed}</td><td>${x.found}</td><td>${esc(x.not_found.join(", ") || "")}</td></tr>`))}</details></div>
       <div class="box"><h3>Prerequisite links</h3>${tb(["Source", "Links"], Object.entries(d.prereqs).map(([k, n]) => `<tr><td>${esc(PSRC[k] || k)}</td><td>${n}</td></tr>`))}
-        <p class="muted">Coherence Map: Student Achievement Partners, after the Common Core progressions (only the codes of each arrow are used). Same anchor standard: the Wisconsin anchor standard one grade earlier. Suggested, check: proposed by an AI curriculum reviewer, each with a one-line reason; not an official source.</p></div>
-      <div class="box"><h3>Progressions</h3><p>ELA rows follow the Wisconsin anchor standards; Science rows the NGSS core ideas (through Wisconsin codes); Social Studies rows the Wisconsin standards, with AERO K-5 joined by the school's suggested matches; Math rows are Common Core topics grouped by cluster (built for this site, not official).</p></div>`;
+        <p class="muted">Coherence Map: Student Achievement Partners, after the Common Core State Standards progressions (only the codes of each arrow are used). Same anchor standard: the Wisconsin anchor standard one grade earlier. Suggested, check: proposed by an AI curriculum reviewer, each with a one-line reason; not an official source.</p></div>
+      <div class="box"><h3>Progressions</h3><p>ELA rows follow the Wisconsin anchor standards; Science rows the NGSS core ideas (through Wisconsin codes); Social Studies rows the Wisconsin standards, with AERO K-5 joined by the school's suggested matches; Math rows are Common Core State Standards topics grouped by cluster (built for this site, not official).</p></div>`;
     if (!$("#detail").open) $("#detail").showModal();
   }
   function viewBar(view) {
@@ -1480,7 +1486,7 @@
         ${p.why ? `<small class="pb-why">${p.whySrc === "ai" && p.src !== "ai" ? "Reason suggested by AI: " : ""}${esc(p.why)}</small>` : ""}<span class="pb-t">${lit ? markWords(trunc(t, 180), sw) : esc(trunc(t, 180))}</span></li>`; };
     return `<div class="pb-cols"><div><h4>Needs first (${preGroups(e).length}${preGroups(e).length < pre.length ? `; ${pre.length} lines, split standards' parts counted as one` : ""})</h4><ul class="pb-list">${byTrust(pre, false).map((p) => item(p, true)).join("") || "<li class='muted'>None recorded.</li>"}</ul></div>
       <div><h4>Leads to (${post.length})</h4><ul class="pb-list">${byTrust(post, true).slice(0, S.printAll ? Infinity : 8).map((p) => item(p, false)).join("") || "<li class='muted'>None recorded.</li>"}${post.length > 8 ? `<li class="muted">and ${post.length - 8} more</li>` : ""}</ul></div></div>
-      <p class="muted sm-note">Each link says what kind it is and where it comes from: Coherence Map (Math, after the Common Core progressions), the same anchor standard (ELA, official when the grade before has one standard for it or the parts read the same; "part matched by wording" when the part was chosen by its wording, which is not official), or suggested by an AI curriculum reviewer (check before relying on it). Official links are listed first. Each rating shows its grade. Highlighted words are wording the two standards share.</p>`;
+      <p class="muted sm-note">Each link says what kind it is and where it comes from: Coherence Map (Math, after the Common Core State Standards progressions), the same anchor standard (ELA, official when the grade before has one standard for it or the parts read the same; "part matched by wording" when the part was chosen by its wording, which is not official), or suggested by an AI curriculum reviewer (check before relying on it). Official links are listed first. Each rating shows its grade. Highlighted words are wording the two standards share.</p>`;
   }
 
   /* ---------------- Progressions: each idea followed across the grades ---------------- */
@@ -1602,7 +1608,7 @@
     // Same wording: compared in the Wisconsin 2020 text (what the site shows); Common Core versions can differ slightly.
     for (const [a, b, , same] of l.links) if (same && inLane.has(a) && inLane.has(b)) {
       const ea = S.byKey.get(a), eb = S.byKey.get(b);
-      flags.push({ t: "same", g: home(eb)[0], k: b, ka: a, msg: `In the Wisconsin 2020 text, ${eb.c} (${gl(home(eb)[0])}) reads the same as ${ea.c} (${gl(home(ea)[0])}), so the Wisconsin standard does not say how the expectation rises${eb.s === "Reading" ? " (in Reading it rises through more complex texts)" : ""}. The Common Core versions the plans use (${codeText(eb)}, ${codeText(ea)}) can differ slightly.` });
+      flags.push({ t: "same", g: home(eb)[0], k: b, ka: a, msg: `In the Wisconsin 2020 text, ${eb.c} (${gl(home(eb)[0])}) reads the same as ${ea.c} (${gl(home(ea)[0])}), so the Wisconsin standard does not say how the expectation rises${eb.s === "Reading" ? " (in Reading it rises through more complex texts)" : ""}. The Common Core State Standards versions the plans use (${codeText(eb)}, ${codeText(ea)}) can differ slightly.` });
     }
     const slots = steps.reduce((n, st) => n + st.s.n, 0), rated = steps.reduce((n, st) => n + st.s.rated, 0), not = steps.reduce((n, st) => n + st.s.not, 0);
     // Status by link source, not by judgement: a settled finding on an official link sets "issue" wherever the missing
@@ -1631,7 +1637,7 @@
     const el = $("#view-ladder"), gs = visibleGrades(), q = mode() === "full" ? S.f.search.trim().toLowerCase() : "", g = S.f.grade, fw = S.f.framework;
     if (!S.prog) { el.innerHTML = `<div class="panel empty">Progressions are loading…</div>`; return; }
     if (!S.detail[subj().slug]) loadDetail(subj().slug).then(() => { if (S.view === "ladder") rerender(); }).catch(() => {});   // full texts for opened rows
-    if (fw && isEE(fw)) { el.innerHTML = backBar() + `<div class="panel empty"><b>Progressions follow the main standard sets</b> (Common Core, NGSS, AERO and Wisconsin Social Studies). Essential Elements are alternate versions of those standards, so each one follows the progression of the standard it links to: open an Essential Element and use its linked standard. Choose another standard set above to see progressions.</div>`; return; }
+    if (fw && isEE(fw)) { el.innerHTML = backBar() + `<div class="panel empty"><b>Progressions follow the main standard sets</b> (Common Core State Standards, NGSS, AERO and Wisconsin Social Studies). Essential Elements are alternate versions of those standards, so each one follows the progression of the standard it links to: open an Essential Element and use its linked standard. Choose another standard set above to see progressions.</div>`; return; }
     // The filters narrow the steps: standard set, strand and Standards (priority / in plans) keep only matching standards.
     const keys = new Set(filtered({ ignoreSearch: true }).map((e) => e.f + "|" + e.c));
     const all = S.prog.lanes.filter((l) => l.subject === S.f.subject).map((l) => withCauses({ l, ...laneInfo(l, gs, keys) }))
@@ -2156,7 +2162,7 @@
     else if (act === "sets-change") { S.flow.choose = S.flow.subject; rerender(); }
     else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
     else if (act === "sets-save") {
-      const fws = $$(".set-opt input:checked").map((x) => x.value), subject = b.dataset.s;
+      const fws = (b.dataset.f || "").split(",").filter(Boolean), subject = b.dataset.s;
       if (!fws.length) { toast("Tick at least one set of standards."); return; }
       try { await rpc("set_team_sets", { p_team: S.team.name, p_subject: subject, p_frameworks: fws });
         (S.teamSets[S.team.name] ||= {})[subject] = fws; S.flow.choose = null; S.flow.set = null; S.flow.lastSet = null; rerender(); toast("Saved for your whole team"); }

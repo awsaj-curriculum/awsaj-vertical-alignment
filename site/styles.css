@@ -967,3 +967,5 @@ abbr.ccss { text-decoration: underline dotted; cursor: help; }
 .flow-title h1 { margin: 0; font-size: 32px; line-height: 1.15; color: var(--brand); }
 .flow-title h1 small { display: block; font-size: 16px; font-weight: 600; color: var(--muted); margin-top: 2px; }
 .flow-title p { margin: 4px 0 0; color: var(--ink-2); }
+.set-sum { list-style: none; padding: 0; margin: 10px 0 14px; display: grid; gap: 8px; }
+.set-sum .set-opt { cursor: default; }

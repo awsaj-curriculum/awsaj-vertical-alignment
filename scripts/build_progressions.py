@@ -8,7 +8,7 @@ How lanes are formed (the "basis", shown on the site so users know how sure each
           Science codes each NGSS / AERO standard is matched to. Official structure.
   wiss    Social Studies: the same Wisconsin Social Studies standard (SS.Hist2.a) at each level; K-5 AERO
           standards join through their suggested Wisconsin matches. Official structure, with suggested matches.
-  topic   Math: Common Core topics followed across domains (place value, fractions, ratios, functions...), grouped
+  topic   Math: Common Core State Standards topics followed across domains (place value, fractions, ratios, functions...), grouped
           by cluster for this site after the Common Core progressions documents. Inferred grouping.
 Links inside a lane join a standard to the most similar standards in the step before it (word overlap, up to three
 when several match about as well); they are labelled inferred, and the site hides links weaker than MIN_SIM in app.js.
@@ -117,7 +117,7 @@ for (kind, num), es in sorted(groups.items(), key=lambda x: (list(STRAND).index(
     label = f"{STRAND[kind]} {num}" + (" (Wisconsin numbering)" if kind in ("W", "L", "SL") else "")
     lanes.append(lane("ELA", f"ELA-{kind}{num}", f"{label}: {short}", f"{STRAND[kind]} · {ref['cl'] or ''}".rstrip(" ·"), "anchor", es, sim))
 
-# ---------- Math: Common Core topics ----------
+# ---------- Math: Common Core State Standards topics ----------
 TOPICS = [
     ("count", "Counting and cardinality", ["K.CC", "1.NBT.A"]),
     ("place", "Place value", ["K.NBT.A", "1.NBT.B", "2.NBT.A", "3.NBT.A.1", "4.NBT.A", "5.NBT.A"]),
@@ -151,7 +151,7 @@ NEXT = {"count": ["place"], "place": ["decimals", "addsub"], "addsub": ["muldiv"
         "fractions": ["ratio", "numsys"], "ratio": ["func"], "numsys": ["expr"], "expr": ["eq"], "eq": ["func"], "meas": ["area"],
         "data": ["prob"], "shapes": ["angles"], "coord": ["angles"]}
 for tid, name, _ in TOPICS:
-    lanes.append(lane("Math", f"Math-{tid}", name, "Common Core topics", "topic", members[tid], sim,
+    lanes.append(lane("Math", f"Math-{tid}", name, "Common Core State Standards topics", "topic", members[tid], sim,
                       "Grouped by cluster for this site, following the Common Core progressions documents."))
     lanes[-1]["next"] = [f"Math-{x}" for x in NEXT.get(tid, [])]
 
@@ -198,7 +198,7 @@ out = {"built": __import__("datetime").date.today().isoformat(),
        "basis": {"anchor": "Official: the same Wisconsin anchor standard in each grade.",
                  "dci": "Official: the same NGSS disciplinary core idea, through the Wisconsin Science codes each standard is matched to.",
                  "wiss": "Official Wisconsin Social Studies standard; K-5 AERO standards join through suggested matches.",
-                 "topic": "Inferred: Common Core topics followed across domains, grouped by cluster for this site."},
+                 "topic": "Inferred: Common Core State Standards topics followed across domains, grouped by cluster for this site."},
        "lanes": lanes}
 json.dump(out, open(os.path.join(ROOT, "site/data/progressions.json"), "w"), ensure_ascii=False, separators=(",", ":"))
 cnt = collections.Counter(l["subject"] for l in lanes)
