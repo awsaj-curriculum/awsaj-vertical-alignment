@@ -2198,8 +2198,6 @@
   $("#detail").addEventListener("close", () => { S.dlg = { cur: null, hist: [] }; rerender(); });
   // Remember which sections are open (Gaps, Audit, dashboard) so a redraw keeps them as the user left them.
   // Only the user's own clicks count (a redraw also fires "toggle" events, which would freeze the defaults).
-  // Small view: a standard cut off at the end of its line shows the whole standard in a popup on hover.
-  document.addEventListener("mouseover", (ev) => { const t = ev.target.closest && ev.target.closest(".tr-text[data-full]"); if (!t) return; t.title = t.scrollWidth > t.clientWidth + 1 ? t.dataset.full : ""; });
   document.addEventListener("click", (ev) => { const sm = ev.target.closest("details[data-sec] > summary"); if (sm && !ev.target.closest(".help")) { const d = sm.parentElement; S.open[d.dataset.sec] = !d.open; } }, true);
 
   // "?" explanations
@@ -2238,14 +2236,18 @@
   // tooltip for heatmap cells and bars
   const tip = $("#tip");
   document.addEventListener("mouseover", (ev) => {
-    const c = ev.target.closest("[data-pq],[data-tip],[data-tip-text]"); if (!c) { tip.hidden = true; return; }
-    if (c.dataset.pq) { const e = S.byKey.get(c.dataset.pq); if (e) tip.innerHTML = preTip(e); }
+    // Small view: a standard cut off at the end of its line shows the whole standard in a large black popup.
+    const c = ev.target.closest("[data-pq],[data-tip],[data-tip-text],.tr-text[data-full]");
+    if (!c || (c.dataset.full && c.scrollWidth <= c.clientWidth + 1)) { tip.hidden = true; return; }
+    tip.classList.toggle("tip-lg", !!c.dataset.full);
+    if (c.dataset.full) tip.textContent = c.dataset.full;
+    else if (c.dataset.pq) { const e = S.byKey.get(c.dataset.pq); if (e) tip.innerHTML = preTip(e); }
     else if (c.dataset.tipText) tip.innerHTML = esc(c.dataset.tipText);
     else { const e = findItem(c.dataset.k), g = c.dataset.g, r = rating(e.f, e.c, g);
       tip.innerHTML = `<b>${esc(codeText(e))}</b> <i>${esc(altText(e))}</i> · ${esc(gname(g))}<br>${r ? LEVEL[r.level] + " · " + esc(r.team) : "Not rated"}${e.pl.includes(g) ? "<br>Suggested grade" : ""}${isPr(e, g) ? `<br>★ ${prName(g)} standard` : ""}${isPn(e, g) ? "<br>✓ In this grade's plans" : ""}${preOf(e).length ? `<br>Needs first: ${preOf(e).length} standard${preOf(e).length > 1 ? "s" : ""}${preOf(e).some((p) => fullyNot(p.e)) ? `, ${preOf(e).filter((p) => fullyNot(p.e)).length} not taught` : ""}` : ""}<br><span style="opacity:.8">${esc(e.t.slice(0, 120))}…</span>`; }
     tip.hidden = false;
   });
-  document.addEventListener("mousemove", (ev) => { if (!tip.hidden) { tip.style.left = Math.min(ev.clientX + 14, innerWidth - 360) + "px"; tip.style.top = ev.clientY + 14 + "px"; } });
+  document.addEventListener("mousemove", (ev) => { if (!tip.hidden) { tip.style.left = Math.max(8, Math.min(ev.clientX + 14, innerWidth - tip.offsetWidth - 12)) + "px"; tip.style.top = (ev.clientY + 18 + tip.offsetHeight > innerHeight ? Math.max(8, ev.clientY - tip.offsetHeight - 12) : ev.clientY + 14) + "px"; } });
 
   $$(".tabs [data-view]").forEach((b) => b.addEventListener("click", () => {
     S.backTo = null; showView(b.dataset.view);
