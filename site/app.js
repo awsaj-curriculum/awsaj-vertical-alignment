@@ -585,6 +585,19 @@
   // A short grade label with the course for the subject in view (G9 Algebra 1), for lists.
   const glc = (g) => { const c = courseOf(g, S.f.subject); return c && c !== S.f.subject ? `${gl(g)} ${c}` : gl(g); };
   const gradeCourse = (g, subject) => { const c = courseOf(g, subject); return c ? `${gname(g)} · ${c}` : gname(g); };
+  // Popups say what a box is, why it looks the way it does and what is expected there (Tim, Oct 2026).
+  const whoRates = (g, subject) => { const t = teamOf(g, subject); return t ? `the ${t.name}${t.subjects.length > 1 ? " " + subject : ""} team` : `${gname(g)}`; };
+  const codeList = (arr) => arr.slice(0, 6).map(codeText).join(", ") + (arr.length > 6 ? ` and ${arr.length - 6} more` : "");
+  const LEVEL_LOOK = ["magenta: Not taught", "blue: Introduced / exposed", "lime: Taught in depth"];
+  function cellWhy(e, g) {   // plain-text lines for one standard in one grade
+    const r = rating(e.f, e.c, g), placed = e.pl.includes(g), sub = S.subjOf.get(e.f + "|" + e.c), out = [];
+    out.push(r ? `Colour ${LEVEL_LOOK[r.level]} (rated by ${r.team}).` : placed ? "White: not rated yet." : "White: not rated (this grade is not asked to rate it).");
+    if (placed) out.push("Dark green outline: this is a grade the standard is suggested for.");
+    if (r && r.level > 0 && !placed) out.push(`Dot: taught here although it is suggested for ${e.pl.map(gname).join(", ")}.`);
+    if (isPr(e, g)) out.push(`Orange corner: a ${prName(g).toLowerCase()} standard for ${gname(g)}.`);
+    out.push(placed ? (r ? "Nothing more expected: rated." : `Expected: ${whoRates(g, sub)} rates how it is generally taught.`) : `Nothing expected here: it is suggested for ${e.pl.map(gname).join(", ")}${r ? "" : ", which rates it"}.`);
+    return out;
+  }
   const teamOf = (g, subject) => S.teams.find((t) => t.name !== "Vertical Alignment Committee" && t.grades.includes(g) && t.subjects.includes(subject));
   function setsFor(subject, g, team) {
     const t = team || teamOf(g, subject), saved = t && S.teamSets[t.name] && S.teamSets[t.name][subject];
@@ -880,7 +893,7 @@
       ${left ? `<div class="notice">${left} standard${left > 1 ? "s are" : " is"} still to answer. <button type="button" class="sm" data-act="finish">Show me which</button></div>` : ""}
       <ul class="res-insights">${insights.map((x) => `<li>${x}</li>`).join("")}</ul>
       <h3>By strand</h3><div class="strand-bars">${strands.map((x) => { const w = (i) => (x.c[i] / x.arr.length) * 100;
-        return `<span class="sb-name">${badge(x.f)} ${esc(x.s)}</span><div class="sb" role="img" aria-label="${esc(x.s)}: ${x.c[2]} in depth, ${x.c[1]} introduced, ${x.c[0]} not taught">${[[2, COLORS[2]], [1, COLORS[1]], [0, COLORS[0]], [3, "#F2F4F6"]].map(([i, col]) => (x.c[i] ? `<i style="width:${w(i)}%;background:${col}"></i>` : "")).join("")}</div><div class="num">${x.c[2]}/${x.arr.length}</div>`; }).join("")}</div>
+        return `<span class="sb-name">${badge(x.f)} ${esc(x.s)}</span><div class="sb" role="img" aria-label="${esc(x.s)}: ${x.c[2]} in depth, ${x.c[1]} introduced, ${x.c[0]} not taught" data-tip-text="${esc(x.s)}: ${x.c[2]} in depth (lime), ${x.c[1]} introduced (blue), ${x.c[0]} not taught (magenta)${x.c[3] ? `, ${x.c[3]} not answered yet (grey). Expected: answer the ${x.c[3]} ${esc(x.s)} standard${x.c[3] > 1 ? "s" : ""} still in Still to do` : ", all answered"}.">${[[2, COLORS[2]], [1, COLORS[1]], [0, COLORS[0]], [3, "#F2F4F6"]].map(([i, col]) => (x.c[i] ? `<i style="width:${w(i)}%;background:${col}"></i>` : "")).join("")}</div><div class="num">${x.c[2]}/${x.arr.length}</div>`; }).join("")}</div>
       ${prLow.length ? `<h3>${prName(g)} standards not taught in depth (${prLow.length})</h3><ul class="gap-list res-list">${prLow.slice(0, S.printAll ? Infinity : 12).map(item).join("")}</ul>` : ""}
       ${planNot.length ? `<h3>In your curriculum documents, but marked not taught (${planNot.length})</h3><ul class="gap-list res-list">${planNot.slice(0, S.printAll ? Infinity : 12).map(item).join("")}</ul>` : ""}
       <div class="done-actions">${next ? `<button type="button" data-act="flow-subject" data-s="${esc(next)}">Next: ${esc(next)} →</button>` : ""}
@@ -1001,20 +1014,20 @@
     const tile = (row, g) => {
       const mine = row.arr.filter((e) => e.pl.includes(g) && markOkG(e, g));
       const extra = row.arr.filter((e) => !e.pl.includes(g) && (rating(e.f, e.c, g)?.level || 0) > 0).length;
-      if (!mine.length) return `<td class="cm-td" data-gi="${g}">${extra ? `<span class="cm-none cm-extra" data-tip-text="${esc(gname(g))} also teaches ${extra} ${esc(row.label)} standard${extra > 1 ? "s" : ""} suggested for other grades.">+${extra}</span>` : `<span class="cm-none"></span>`}</td>`;
+      if (!mine.length) return `<td class="cm-td" data-gi="${g}">${extra ? `<span class="cm-none cm-extra" data-tip-text="${esc(gname(g))} · ${esc(row.label)}: no standards suggested for this grade, but ${esc(gname(g))} also teaches ${extra} ${esc(row.label)} standard${extra > 1 ? "s" : ""} suggested for other grades (the +${extra}). Nothing expected here.">+${extra}</span>` : `<span class="cm-none" data-tip-text="${esc(gname(g))} · ${esc(row.label)}: striped because no ${esc(row.label)} standards are suggested for this grade in the sets shown. Nothing expected here."></span>`}</td>`;
       const c = countLevels(mine, g), n = mine.length, pr = mine.filter((e) => isPr(e, g)).length, pn = mine.filter((e) => isPn(e, g)).length; total += n; done += n - c[3];
       // ★ on a tile = a priority or power standard here is rated below in depth (a signal, not just "has priority").
       const prLow = mine.filter((e) => isPr(e, g) && (rating(e.f, e.c, g)?.level ?? 2) < 2).length;
       cellsInfo.push({ g, row, n, c, pr });
       const h = (i) => (c[i] / n) * 100;
       return `<td class="cm-td" data-gi="${g}"><button type="button" class="cm-tile ${c[3] ? "" : "full"}" data-act="cm-open" data-g="${g}" data-row="${esc(row.key)}" aria-label="${esc(gname(g))} ${esc(row.label)}: ${n} standards, ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught, ${c[3]} not rated${prLow ? `, ${prLow} priority below in depth` : ""}"
-        data-tip-text="${esc(gname(g))} · ${esc(row.label)}: ${n} standard${n > 1 ? "s" : ""}. ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? ", " + c[3] + " not rated yet" : ""}.${pr ? ` ${pr} ${prName(g).toLowerCase()}${prLow ? `, ${prLow} of them rated below in depth` : ""}.` : ""}${pn ? ` ${pn} in ${gname(g)}'s plans.` : ""}${extra ? " Also teaches " + extra + " from other grades." : ""} Click to see these standards.">
+        data-tip-text="${esc(gname(g))} · ${esc(row.label)}: ${n} standard${n > 1 ? "s" : ""}. ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? ", " + c[3] + " not rated yet" : ""}.${pr ? ` ${pr} ${prName(g).toLowerCase()}${prLow ? `, ${prLow} of them rated below in depth` : ""}.` : ""}${pn ? ` ${pn} in ${gname(g)}'s plans.` : ""}${extra ? " Also teaches " + extra + " from other grades." : ""} Why it looks like this: the fill rises from the bottom, lime in depth, blue introduced, magenta not taught, white not rated yet${c[3] ? "" : "; dark green border because every one is rated"}${prLow ? "; the star marks a priority or power standard rated below in depth" : ""}. ${c[3] ? `Expected: ${whoRates(g, S.f.subject)} rates the ${c[3]} ${esc(row.label)} standard${c[3] > 1 ? "s" : ""} still white (${esc(codeList(mine.filter((e) => !rating(e.f, e.c, g))))}).` : "Nothing more expected: all rated."} Click to list the ${n} ${esc(row.label)} standard${n > 1 ? "s" : ""} suggested for ${esc(gname(g))}.">
         <span class="cm-fill"><i style="height:${h(2)}%;background:${COLORS[2]}"></i><i style="height:${h(1)}%;background:${COLORS[1]}"></i><i style="height:${h(0)}%;background:${COLORS[0]}"></i></span>
         <span class="cm-n">${n}</span>${extra ? `<span class="cm-plus">+${extra}</span>` : ""}${prLow ? `<span class="cm-pr" aria-hidden="true">★</span>` : ""}</button></td>`;
     };
     const body = rows.map((row) => {
       const fws = rowSets(row.arr);
-      return `<tr class="${row.ee ? "set-ee" : ""}"><th class="cm-row" scope="row"><span>${multi ? fws.map(badge).join(" ") + " " : ""}${esc(row.label)}</span>${multi || row.note ? `<small>${esc(row.note || fws.map((f) => FW_NAME[f] || f).join(" + "))}</small>` : ""}</th>${gs.map((g) => tile(row, g)).join("")}</tr>`;
+      return `<tr class="${row.ee ? "set-ee" : ""}"><th class="cm-row" scope="row" data-tip-text="${esc(row.label)}${row.ee ? " (Essential Elements)" : ""}: one square per grade to the right. Each square shows how that grade rated its ${esc(row.label)} standards; striped squares are grades with none."><span>${multi ? fws.map(badge).join(" ") + " " : ""}${esc(row.label)}</span>${multi || row.note ? `<small>${esc(row.note || fws.map((f) => FW_NAME[f] || f).join(" + "))}</small>` : ""}</th>${gs.map((g) => tile(row, g)).join("")}</tr>`;
     }).join("");
     const head = gs.map((g) => {
       const mine = list.filter((e) => e.pl.includes(g) && markOkG(e, g)), c = countLevels(mine, g), pct = mine.length ? Math.round(((mine.length - c[3]) / mine.length) * 100) : 0;
@@ -1141,7 +1154,7 @@
         <div class="ch-c">${codeHTML(e)} <span class="mks">${marks(e, e.pl[0])}</span></div>
         <p class="ch-t">${prev ? markNew(t, fullText2(prev), [...wp, ...wn]) : markWords(t, wn)}</p>
         ${prev ? (() => { const p = preOf(e).find((x) => x.k === ks[i - 1]);
-          return `<p class="muted ch-why">${p ? `<span class="tag pt">${esc(PTYPE[p.type] || p.type)}</span> <span class="tag src">${esc(PSRC[p.src] || p.src)}</span> ${p.why ? `${p.whySrc === "ai" && p.src !== "ai" ? "Suggested reason: " : ""}${esc(p.why)}` : ""}` : "Closest wording in the step before (inferred)."} ${same ? "Same Wisconsin wording as the grade before: the standard itself does not show how the expectation rises." : wp.length ? `Shared words: ${wp.map((w) => `<mark class="kw">${esc(wordFor(w, t))}</mark>`).join(" ")}` : ""}</p>`; })() : ""}
+          return `<p class="muted ch-why">${p ? `<span class="tag pt">${esc(PTYPE[p.type] || p.type)}</span> <span class="tag src src-${p.src}">${esc(PSRC[p.src] || p.src)}</span> ${p.why ? `${p.whySrc === "ai" && p.src !== "ai" ? "Suggested reason: " : ""}${esc(p.why)}` : ""}` : "Closest wording in the step before (inferred)."} ${same ? "Same Wisconsin wording as the grade before: the standard itself does not show how the expectation rises." : wp.length ? `Shared words: ${wp.map((w) => `<mark class="kw">${esc(wordFor(w, t))}</mark>`).join(" ")}` : ""}</p>`; })() : ""}
         ${preOf(e).length > 1 ? `<p class="muted ch-why">What it needs first: ${preChip(e)}</p>` : ""}</li>`;
     });
     const others = (S.progLanes.get(ks[0]) || []).filter((y) => y !== l);
@@ -1186,7 +1199,7 @@
       const startMark = prevIn.length ? `<span class="ch-more" title="Linked from ${esc(prevIn.map((p) => codeText(p.e) + " (" + gl(p.e.pl[0]) + ")").join(", "))}, shown in another row${prevIn.some((p) => !inLaneSet.has(p.k)) ? " or progression" : " of this progression"}">←</span>` : earlier ? `<span class="ch-open" title="This progression has standards in ${esc(gname(earlier))}, but none is linked to this one">?</span>` : "";
       const cells = gs.map((g, i) => {
         const e = at(g);
-        if (!e) return `<td data-gi="${g}" class="${S.f.grade === g ? "sel" : ""}">${i > lo && i < hi ? `<span class="ch-skip" title="No standard for this idea in ${esc(gname(g))}"></span>` : i === endAt ? endMark : i === startAt ? startMark : ""}</td>`;
+        if (!e) return `<td data-gi="${g}" class="${S.f.grade === g ? "sel" : ""}">${i > lo && i < hi ? `<span class="ch-skip" title="No standard for this idea in ${esc(gname(g))}: the progression skips this grade. Nothing expected here."></span>` : i === endAt && endMark ? endMark : i === startAt && startMark ? startMark : `<span class="ch-none" data-tip-text="${esc(gname(g))}: this row has no standard in this grade. Nothing expected here."></span>`}</td>`;
         const r = rating(e.f, e.c, g), inPlan = isPn(e, g), pr = isPr(e, g), j = ms.indexOf(e), same = j > 0 && c.same[j - 1], rep = prevKs.includes(e.f + "|" + e.c) || (j === 0 && !!c.from);
         return `<td data-gi="${g}" class="${S.f.grade === g ? "sel" : ""}"><button class="cell ${r ? "l" + r.level : ""} ${inPlan ? "inplan" : ""} ${pr ? "prio" : ""} ${same ? "same" : ""} ${rep ? "rep" : ""}" data-act="open" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}" data-tip="1"
           aria-label="${esc(codeText(e))}, ${esc(gname(g))}: ${r ? LEVEL[r.level] : "not rated"}${inPlan ? ", in plans" : ""}${pr ? ", " + prName(g).toLowerCase() + " standard" : ""}${same ? ", same Wisconsin wording as the grade before" : ""}"></button><span class="cell-code">${esc(codeText(e).replace(/ \(part \d+ of \d+\)$/, ""))}</span></td>`;
@@ -1754,11 +1767,12 @@
     }
     const cells = gs.map((g) => {
       const sel = S.f.grade === g ? " sel" : "", es = x.steps.flatMap((st) => st.k).map((k) => S.byKey.get(k)).filter((e) => e.pl.includes(g));
-      if (!es.length) return `<div class="pl-cell${sel}" data-gl="${gl(g)}"></div>`;
+      if (!es.length) return `<div class="pl-cell${sel}" data-gl="${gl(g)}" data-tip-text="${esc(gname(g))}: no standard for this idea in this grade. Nothing expected here."></div>`;
       // One box per grade: how many standards, a bar of their ratings, and a star if any is a priority or power standard.
       const c = countLevels(es, g), pr = es.filter((e) => isPr(e, g)).length, r = es.length - c[3];
       const tint = !r ? "pc-un" : c[0] === r ? "pc-not" : c[0] ? "pc-mix" : c[3] ? "pc-part" : "pc-ok";
-      const tip = `${gname(g)}: ${es.length} standard${es.length === 1 ? "" : "s"}. ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? `, ${c[3]} not rated` : ""}${pr ? `. ${pr} ${prName(g).toLowerCase()}` : ""}. ${es.map(codeText).join(", ")}`;
+      const look = { "pc-un": "White box: none rated yet", "pc-not": "Magenta box: every rated one is not taught", "pc-mix": "Pale magenta box: some rated not taught", "pc-part": "Some rated; the rest are still white", "pc-ok": "Green box: every one rated and taught" }[tint];
+      const tip = `${gname(g)}: ${es.length} standard${es.length === 1 ? "" : "s"}. ${c[2]} in depth, ${c[1]} introduced, ${c[0]} not taught${c[3] ? `, ${c[3]} not rated` : ""}${pr ? `. ${pr} ${prName(g).toLowerCase()}` : ""}. ${es.map(codeText).join(", ")}. ${look}; the bar shows the ratings (lime, blue, magenta, white).${pr ? " The star marks a priority or power standard." : ""} ${c[3] ? `Expected: ${whoRates(g, S.f.subject)} rates the ${c[3]} standard${c[3] > 1 ? "s" : ""} not rated yet (${codeList(es.filter((e) => !rating(e.f, e.c, g)))}).` : "Nothing more expected: all rated."}`;
       return `<div class="pl-cell has ${tint}${sel}" data-gl="${gl(g)}" data-tip-text="${esc(tip)}" tabindex="0" role="button" aria-label="${esc(tip)}. Open this progression." data-act="lane-open" data-id="${esc(l.id)}"><span class="pc-n">${es.length}${pr ? `<i class="pc-star">★</i>` : ""}</span><span class="pc-bar">${[2, 1, 0, 3].map((i) => (c[i] ? `<i class="b${i}" style="flex:${c[i]}"></i>` : "")).join("")}</span></div>`;
     }).join("");
     const types = new Set(x.flags.map((f) => f.t)), [label0, cls] = STATUS[x.status] || ["", ""];
@@ -2025,7 +2039,7 @@
         return `<div><button class="cell lnk ${rx ? "l" + rx.level : ""} ${isPr(x, g) ? "prio" : ""}" data-act="open" data-k="${esc(x.f + "|" + x.c)}" data-tip-text="${esc(tipText)}" aria-label="${esc(tipText)}"></button>${gl(g)}<span class="cell-code">${esc(codeText(x))}${more ? " +" + more : ""}</span></div>`;
       }
       return `<div><button class="cell ${r ? "l" + r.level : ""} ${placed ? "placed" : ""} ${r && r.level > 0 && !placed ? "off" : ""} ${isPr(e, g) ? "prio" : ""} ${isPn(e, g) ? "inplan" : ""}" data-act="cycle" data-k="${esc(k)}" data-g="${g}"
-        aria-label="${esc(gname(g))}: ${r ? LEVEL[r.level] : "not rated"}${placed ? ", suggested grade" : ""}${canEdit(g) ? ". Click to change" : ""}" title="${esc(gname(g))}: this standard, ${esc(codeText(e))}. ${r ? LEVEL[r.level] + " (" + esc(r.team) + ")" : "not rated"}"></button>${gl(g)}${placed || r ? `<span class="cell-code"><b>${esc(codeText(e))}</b></span>` : ""}</div>`;
+        aria-label="${esc(gname(g))}: ${r ? LEVEL[r.level] : "not rated"}${placed ? ", suggested grade" : ""}${canEdit(g) ? ". Click to change" : ""}" title="${esc(placed || r ? `${gname(g)}: this standard, ${codeText(e)}. ${cellWhy(e, g).join(" ")}` : `${gname(g)}: blank because no standard in ${gname(g)} is connected to ${codeText(e)} (needs first or leads to), and ${gname(g)} is not asked to rate ${codeText(e)} itself. Nothing expected here.`)}"></button>${gl(g)}${placed || r ? `<span class="cell-code"><b>${esc(codeText(e))}</b></span>` : ""}</div>`;
     }).join("");
     const comments = S.comments.filter((c) => c.framework === e.f && c.code === e.c);
     const hist = S.events.filter((ev) => ev.framework === e.f && ev.code === e.c).slice(0, 12);
@@ -2327,6 +2341,12 @@
   });
   // tooltip for heatmap cells and bars
   const tip = $("#tip"); let tipWait = 0;
+  const AUTO_TIP = "Automatic check: the site works this out by itself from the teams' ratings and the links between standards. No person wrote it, and it updates as teams rate. It points to something to look at; check it before acting on it.";
+  const SRC_TIP = { cm: "Coherence Map: an official map, from Student Achievement Partners, of how the Common Core State Standards for Math build on each other.",
+    anchor: "Official: the same Wisconsin anchor standard one grade earlier.",
+    anchorp: "The same Wisconsin anchor standard one grade earlier; this part was matched by its wording, so check it.",
+    ai: "Suggested, check: suggested from the content of the two standards. It is not an official link, so check it before relying on it.",
+    words: "Found only because the two standards share wording. Check it before relying on it." };
   // Acronyms get an explanation popup everywhere (Tim, Oct 2026). Text is scanned after each change to the page;
   // codes (EE.RL.6.1, HS-ESS1-1), form controls and set badges (which have their own popup) are left alone.
   const ACRO = { DLM: STD_INFO.DLM, ELA: STD_INFO.ELA, CCSS: STD_INFO.CCSS, EE: STD_INFO.EE, NGSS: STD_INFO.NGSS, AERO: STD_INFO.AERO, DPI: STD_INFO.DPI };
@@ -2353,6 +2373,9 @@
     if (ans) { tip.hidden = true; tipWait = setTimeout(() => { const [n, d] = LEVEL_DEF[+ans.dataset.l]; tip.classList.add("tip-lg"); tip.innerHTML = `<b>${esc(n)}</b><br>${esc(d)}`;
       const r = ans.getBoundingClientRect(); tip.hidden = false; tip.style.left = Math.max(8, Math.min(r.left, innerWidth - tip.offsetWidth - 12)) + "px";
       tip.style.top = (r.bottom + 8 + tip.offsetHeight > innerHeight ? r.top - tip.offsetHeight - 8 : r.bottom + 8) + "px"; }, 700); return; }
+    // Labels that need explaining wherever they appear: "Automatic check" and where a link comes from.
+    const lab = ev.target.closest && ev.target.closest(".tag.auto, .tag.src");
+    if (lab && !lab.dataset.tipText) lab.dataset.tipText = lab.classList.contains("auto") ? AUTO_TIP : (SRC_TIP[[...lab.classList].find((c) => c.startsWith("src-"))?.slice(4)] || "Where this link comes from.");
     // Every popup on the site uses this black box: a plain title="" is moved to data-tip-text so the browser's own
     // grey tooltip never shows. Inside an open dialog the box moves into it, so it shows above the dialog.
     const tl = ev.target.closest && ev.target.closest("[title]"); if (tl && tl.title && !tl.closest("svg")) { tl.dataset.tipText = tl.title; tl.removeAttribute("title"); }
@@ -2365,7 +2388,7 @@
     else if (c.dataset.pq) { const e = S.byKey.get(c.dataset.pq); if (e) tip.innerHTML = preTip(e); }
     else if (c.dataset.tipText) tip.innerHTML = esc(c.dataset.tipText);
     else { const e = findItem(c.dataset.k), g = c.dataset.g, r = rating(e.f, e.c, g);
-      tip.innerHTML = `<b>${esc(codeText(e))}</b> <i>${esc(altText(e))}</i> · ${esc(gname(g))}<br>${r ? LEVEL[r.level] + " · " + esc(r.team) : "Not rated"}${e.pl.includes(g) ? "<br>Suggested grade" : ""}${isPr(e, g) ? `<br>★ ${prName(g)} standard` : ""}${isPn(e, g) ? "<br>✓ In this grade's plans" : ""}${preOf(e).length ? `<br>Needs first: ${preOf(e).length} standard${preOf(e).length > 1 ? "s" : ""}${preOf(e).some((p) => fullyNot(p.e)) ? `, ${preOf(e).filter((p) => fullyNot(p.e)).length} not taught` : ""}` : ""}<br><span style="opacity:.8">${esc(e.t.slice(0, 120))}…</span>`; }
+      tip.innerHTML = `<b>${esc(codeText(e))}</b> <i>${esc(altText(e))}</i> · ${esc(gname(g))} · ${esc(FW_NAME[e.f] || e.f)}<br>${cellWhy(e, g).map(esc).join("<br>")}${isPn(e, g) ? "<br>✓ In this grade's plans" : ""}${preOf(e).length ? `<br>Needs first: ${preOf(e).length} standard${preOf(e).length > 1 ? "s" : ""}${preOf(e).some((p) => fullyNot(p.e)) ? `, ${preOf(e).filter((p) => fullyNot(p.e)).length} not taught` : ""}` : ""}<br><span style="opacity:.8">${esc(e.t.slice(0, 120))}…</span>`; }
     tip.hidden = false;
   });
   document.addEventListener("mousemove", (ev) => { if (!tip.hidden) { tip.style.left = Math.max(8, Math.min(ev.clientX + 14, innerWidth - tip.offsetWidth - 12)) + "px"; tip.style.top = (ev.clientY + 18 + tip.offsetHeight > innerHeight ? Math.max(8, ev.clientY - tip.offsetHeight - 12) : ev.clientY + 14) + "px"; } });

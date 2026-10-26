@@ -1011,3 +1011,13 @@ table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { ba
 .cd-main b { font-weight: 700; color: var(--ink); }
 .cd-main .setb { flex: none; height: 16px; min-width: 22px; font-size: 9px; padding: 0 4px; }
 .set-name { cursor: help; }
+/* Long charts scroll inside their own box with the grade headers (and strand names) pinned, so the grade is always
+   in view. Printing lifts the box (see the print rules above). */
+@media screen {
+  .cm-wrap { max-height: 78vh; overflow: auto; }
+  table.cm thead th { position: sticky; top: 0; z-index: 3; background: var(--surface); box-shadow: 0 1px 0 var(--line); }
+  table.cm thead th.cm-row { left: 0; z-index: 4; }
+  .tbl-scroll:has(> table.ba) { max-height: 78vh; overflow: auto; }
+  table.ba thead th { position: sticky; top: 0; z-index: 2; background: var(--surface); box-shadow: 0 1px 0 var(--line); }
+}
+.ch-none { display: block; width: 100%; height: 24px; }
