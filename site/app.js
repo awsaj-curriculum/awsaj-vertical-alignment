@@ -628,14 +628,35 @@
     const cur = setsFor(subject, g, S.team);
     const DESC = { cc: "The grade-level Common Core State Standards.", ee: "The alternate standards for students with significant cognitive disabilities, one for each linked standard.",
       ngss: "Next Generation Science Standards performance expectations.", aero: "The AERO framework the school uses now.", wi: "Wisconsin's own standards." };
-    // Teams do not choose or untick sets (Tim, Oct 2026): this page only says what will be rated, then starts.
+    // Teams do not choose or untick sets (Tim, Oct 2026). This is the How to page every teacher sees before rating a
+    // subject (once per browser tab): what this grade rates, what the whole school uses, then the steps, then Begin.
     const shown = fws.filter((f) => cur.includes(f) && S.idx[sl].some((e) => e.f === f && e.pl.includes(g)));
-    return `<div class="card set-card">${flowTitle(subject, g, shown)}
-      <p class="lede">You will rate these standards for ${esc(gname(g))}. Every standard shows which set it belongs to. ${hb("sets")}</p>
+    const BANDS = [["K-5", "Kindergarten to Grade 5", DIV.Elementary], ["6-8", "Grades 6 to 8", DIV.Middle], ["9-12", "High school, Grades 9 to 12", GRADES.filter((x) => !DIV.Elementary.includes(x) && !DIV.Middle.includes(x))]];
+    const bandSets = (subj, gs) => { const out = []; for (const x of gs) for (const f of setsFor(subj, x)) if (!out.includes(f)) out.push(f); return out.sort((a, b) => SET_ORDER(a) - SET_ORDER(b)); };
+    const school = `<table class="school-sets"><thead><tr><th>Grades</th>${S.meta.subjects.map((x) => `<th>${esc(SUBJ_FULL[x.name] || x.name)}</th>`).join("")}</tr></thead><tbody>
+      ${BANDS.map(([k, label, gs]) => `<tr class="${gs.includes(g) ? "here" : ""}"><th scope="row"><b>${k}</b><small>${label}${gs.includes(g) ? " · your grade" : ""}</small></th>${S.meta.subjects.map((x) => `<td>${bandSets(x.name, gs).map((f) => `<div>${badge(f)} ${fwHTML(FW_NAME[f] || SET(f).name)}</div>`).join("")}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+    const step = (n, title, body) => `<li><span class="hs-n">${n}</span><div><b>${title}</b>${body}</div></li>`;
+    return `<div class="card set-card how-to">${flowTitle(subject, g, shown)}
       <ul class="set-sum">${shown.map((f) => { const n = S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)).length, x = SET(f);
         return `<li class="set-opt set-${x.style}">${badge(f)} <span><b>${fwHTML(FW_NAME[f] || x.name)}</b><small>${n} standards for ${esc(gname(g))}. ${DESC[x.style]}</small></span></li>`; }).join("")}</ul>
-      <div class="done-actions" style="justify-content:flex-start"><button type="button" data-act="sets-save" data-s="${esc(subject)}" data-f="${esc(shown.join(","))}">Start rating</button></div></div>`;
+      <h2>Standards across the school ${hb("sets")}</h2>
+      <p class="muted">What every grade and subject at Awsaj rates. Your row is highlighted.</p>
+      <div class="tbl-scroll">${school}</div>
+      <h2>How to rate, step by step</h2>
+      <ol class="how-steps">
+        ${step(1, "Check the title", `<p>It shows your grade and subject (or your course). Every standard on the page belongs to it.</p>`)}
+        ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${LEVEL_DEF.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}</div>`)}
+        ${step(3, "Change or take off an answer", `<p>Click a different answer to change it. Click the chosen answer again to take it off.</p>`)}
+        ${step(4, "Rate only your own grade's standards", `<p>You may also teach standards from other grades, for example prerequisites. The other grades rate theirs.</p>`)}
+        ${step(5, "Choose how to see the standards", `<p><b>All at once</b> (Small, Medium or Large) or <b>One at a time</b>. Use <b>Find</b> to search. Rest the mouse on an answer button to see what it means.</p>`)}
+        ${step(6, "Stop and come back any time", `<p>Every answer saves straight away. Open the same link to carry on.</p>`)}
+        ${step(7, "Finish", `<p>Press <b>Finish</b> at the bottom. It lists anything not answered yet.</p>`)}
+      </ol>
+      <div class="done-actions" style="justify-content:flex-start"><button type="button" data-act="sets-save" data-s="${esc(subject)}" data-f="${esc(shown.join(","))}">Begin rating</button></div></div>`;
   }
+  const howKey = (subject, g) => `${S.team ? S.team.name : ""}|${subject}|${g}`;
+  const howSeen = () => { try { return JSON.parse(sessionStorage.getItem("va_howto") || "[]"); } catch (e) { return []; } };
+  const howMark = (k) => { try { const a = howSeen(); if (!a.includes(k)) sessionStorage.setItem("va_howto", JSON.stringify(a.concat(k))); } catch (e) { /* storage blocked */ } };
   // Index rows trim long standards; the card shows the full text from the detail file once it has loaded.
   function fullText(e) {
     const sub = S.meta.subjects.find((s) => S.idx[s.slug].includes(e)), det = sub && S.detail[sub.slug];
@@ -666,7 +687,7 @@
       const l = flowList(s, g), n = l.filter((e) => !rating(e.f, e.c, g)).length;
       return `<button type="button" role="tab" aria-selected="${s === F.subject}" class="subj ${n ? "" : "done"}" data-act="flow-subject" data-s="${esc(s)}">${esc(s)} <span>${n ? n + " left" : "✓"}</span></button>`;
     }).join("")}</div>` : "";
-    if (F.choose === F.subject || (S.setsLoaded && !chosen(F.subject, S.team))) {
+    if (F.choose === F.subject || (S.setsLoaded && !chosen(F.subject, S.team)) || !howSeen().includes(howKey(F.subject, g))) {
       el.innerHTML = `<div class="flow-wrap">${pills}${setChooser(F.subject, g, !chosen(F.subject, S.team))}</div>`;
       return;
     }
@@ -676,7 +697,7 @@
     const results = F.results === F.subject || (!left && F.reviewing !== F.subject);
     const setPills = `<div class="set-pills"><span class="muted">Standards:</span> ${fwsNow.map((f) => { const l = flowList(F.subject, g, f), n = l.filter((e) => !rating(e.f, e.c, g)).length;
         return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(setTip(f))}">${badge(f)} <b class="setp-n">${fwHTML(SET(f).name)}</b> <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
-      ${hb("sets")}</div>`;
+      ${hb("sets")} <button type="button" class="linkish" data-act="howto">How to</button></div>`;
     const title = flowTitle(F.subject, g, fwsNow);
     const head = `<div class="flow-head">${title}${pills}${setPills}
       <div class="flow-progress"><div class="fp-bar"><i style="width:${pct}%"></i></div>
@@ -2159,14 +2180,19 @@
       }
     }
     else if (act === "flow-set") { S.flow.set = S.flow.set === b.dataset.f ? null : b.dataset.f; S.flow.back = null; rerender(); }
+    else if (act === "howto") { S.flow.choose = S.flow.subject; rerender(); scrollTo({ top: 0 }); }
     else if (act === "sets-change") { S.flow.choose = S.flow.subject; rerender(); }
     else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
     else if (act === "sets-save") {
       const fws = (b.dataset.f || "").split(",").filter(Boolean), subject = b.dataset.s;
-      if (!fws.length) { toast("Tick at least one set of standards."); return; }
-      try { await rpc("set_team_sets", { p_team: S.team.name, p_subject: subject, p_frameworks: fws });
-        (S.teamSets[S.team.name] ||= {})[subject] = fws; S.flow.choose = null; S.flow.set = null; S.flow.lastSet = null; rerender(); toast("Saved for your whole team"); }
-      catch (err) { toast("Could not save: " + err.message); }
+      howMark(howKey(subject, teamGrade()));
+      const saved = S.teamSets[S.team.name] && S.teamSets[S.team.name][subject];
+      // Save the team's sets only the first time (or if they changed); later visits just begin.
+      if (fws.length && (!saved || saved.join() !== fws.join())) {
+        try { await rpc("set_team_sets", { p_team: S.team.name, p_subject: subject, p_frameworks: fws }); (S.teamSets[S.team.name] ||= {})[subject] = fws; }
+        catch (err) { toast("Could not save: " + err.message); return; }
+      }
+      S.flow.choose = null; S.flow.set = null; S.flow.lastSet = null; rerender(); scrollTo({ top: 0 });
     }
     else if (act === "flow-subject") { S.flow.subject = b.dataset.s; S.flow.set = null; S.flow.choose = null; S.flow.back = null; S.flow.results = null; S.flow.reviewing = null; S.flow.lib = ""; S.flow.q = ""; S.flow.skipped.clear(); showView("flow"); rerender(); scrollTo({ top: 0 }); }
     else if (act === "flow-rate") flowRate(b.dataset.k, +b.dataset.l);
@@ -2247,6 +2273,24 @@
   });
   // tooltip for heatmap cells and bars
   const tip = $("#tip"); let tipWait = 0;
+  // Acronyms get an explanation popup everywhere (Tim, Oct 2026). Text is scanned after each change to the page;
+  // codes (EE.RL.6.1, HS-ESS1-1), form controls and set badges (which have their own popup) are left alone.
+  const ACRO = { ELA: "English Language Arts", CCSS: "Common Core State Standards", EE: "Essential Elements: the alternate standards for students with significant cognitive disabilities",
+    NGSS: "Next Generation Science Standards", AERO: "American Education Reaches Out: standards for American-curriculum international schools", DPI: "Wisconsin Department of Public Instruction" };
+  const ACRO_RE = /\b(ELA|CCSS|EE|NGSS|AERO|DPI)\b(?![.\-]\w)/g;
+  const ACRO_SKIP = "script,style,abbr,select,option,textarea,input,.setb,.cd,.code,.wi-code,kbd,.tip,svg,code";
+  function markAcronyms(root) {
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (ACRO_RE.lastIndex = 0, ACRO_RE.test(n.nodeValue) && !(n.parentElement && n.parentElement.closest(ACRO_SKIP)) ? 1 : 2) });
+    const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+    for (const n of nodes) {
+      const f = document.createDocumentFragment(); let last = 0; const t = n.nodeValue; ACRO_RE.lastIndex = 0; let m;
+      while ((m = ACRO_RE.exec(t))) { f.append(t.slice(last, m.index)); const a = document.createElement("abbr"); a.className = "acro"; a.dataset.tipText = `${m[1]}: ${ACRO[m[1]]}`; a.textContent = m[1]; f.append(a); last = m.index + m[1].length; }
+      f.append(t.slice(last)); n.replaceWith(f);
+    }
+  }
+  let acroQueued = false;
+  new MutationObserver(() => { if (acroQueued) return; acroQueued = true; requestAnimationFrame(() => { acroQueued = false; markAcronyms(document.body); }); }).observe(document.body, { childList: true, subtree: true, characterData: true });
+  markAcronyms(document.body);
   document.addEventListener("click", () => { clearTimeout(tipWait); tip.hidden = true; }, true);
   document.addEventListener("mouseover", (ev) => {
     // Answer buttons: resting on one for a moment shows what that answer means (same words as "What do these mean?").
@@ -2255,6 +2299,10 @@
     if (ans) { tip.hidden = true; tipWait = setTimeout(() => { const [n, d] = LEVEL_DEF[+ans.dataset.l]; tip.classList.add("tip-lg"); tip.innerHTML = `<b>${esc(n)}</b><br>${esc(d)}`;
       const r = ans.getBoundingClientRect(); tip.hidden = false; tip.style.left = Math.max(8, Math.min(r.left, innerWidth - tip.offsetWidth - 12)) + "px";
       tip.style.top = (r.bottom + 8 + tip.offsetHeight > innerHeight ? r.top - tip.offsetHeight - 8 : r.bottom + 8) + "px"; }, 700); return; }
+    // Every popup on the site uses this black box: a plain title="" is moved to data-tip-text so the browser's own
+    // grey tooltip never shows. Inside an open dialog the box moves into it, so it shows above the dialog.
+    const tl = ev.target.closest && ev.target.closest("[title]"); if (tl && tl.title && !tl.closest("svg")) { tl.dataset.tipText = tl.title; tl.removeAttribute("title"); }
+    const dlg = document.querySelector("dialog[open]"); if ((dlg || document.body) !== tip.parentElement) (dlg || document.body).append(tip);
     // Small view: a standard cut off at the end of its line shows the whole standard in a large black popup.
     const c = ev.target.closest("[data-pq],[data-tip],[data-tip-text],.tr-text[data-full]");
     if (!c || (c.dataset.full && c.scrollWidth <= c.clientWidth + 1)) { tip.hidden = true; return; }
