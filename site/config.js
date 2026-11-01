@@ -3,5 +3,5 @@
 window.VA_CONFIG = {
   supabaseUrl: "https://mmcblwddwgwhtlhrqmfi.supabase.co",
   supabaseKey: "sb_publishable_rfubWiFJpgX5ZcSBXrb1AA_bSG0MB-y",
-  refreshSeconds: 20
+  refreshSeconds: 30
 };
