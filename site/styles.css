@@ -1074,3 +1074,6 @@ table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { ba
 .open-full { font-weight: 600; color: var(--brand); text-decoration: none; border: 1px solid var(--line-2); border-radius: 10px; padding: 6px 12px; background: #fff; white-space: nowrap; }
 .open-full:hover { border-color: var(--brand); }
 @media print { .open-full { display: none !important; } }
+button.open-full, button.open-full:hover { background: #fff; color: var(--brand); font-size: 14px; }
+.saved-note .open-full { margin-left: 6px; padding: 4px 10px; }
+.pq-note { background: #fff7ea; border: 2px solid var(--accent); border-radius: 10px; padding: 8px 12px; margin: 8px 0; }

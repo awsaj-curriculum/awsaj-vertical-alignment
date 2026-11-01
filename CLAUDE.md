@@ -95,7 +95,14 @@ Google Site embed (https://sites.google.com/edi.qfschools.qa/ma3loomat/k-12-vert
 page embed" (nested frames, sandbox allows scripts, popups, same-origin, downloads, storage access); the frame fills the window
 below Google's 120 px banner and menu, which stay on screen. Tested there Nov 2026 (walk-through, popups, storage, PDF link): all
 work. When framed (`FRAMED`), an "Open full page" link (header and Before you begin popup) opens the same link in a new tab for
-presenting. Load is the same as the direct site (GitHub Pages + Supabase); Google serves its own page.
+presenting. Load is the same as the direct site (GitHub Pages + Supabase); Google serves its own page. Open full page (header, rating screen,
+walk-through bar, Before you begin popup) waits for saves in flight (`S.inflight`), then opens `resumeUrl()`: team, subject,
+view, size, Before you begin pages seen, answers still waiting to save, and in the walk-through the practice answers and step;
+the new tab picks these up after the first load and tidies the address.
+Continuous saving (Tim, Nov 2026): a save that fails for a network reason (no status, 5xx, 408, 429) keeps the answer on screen
+and in a queue on the laptop (`S.pq`, localStorage `va_pending`), retried every 5 s, on reconnect and after reload, in order; a
+newer answer to a queued standard replaces it; reloads re-apply waiting answers (`pqApply()`); closing the tab with answers
+waiting asks first; the rating screen shows how many are waiting. Only a refusal by the database is undone.
 When a subject is complete the teacher sees a results page for it; confetti only when every subject on the link is done.
 The committee and "Explore" get the full tabs.
 Locked links: `?team=<name>` (optionally `&subject=`) for one team, `?grade=<K-12>` for every subject in a grade (each subject
