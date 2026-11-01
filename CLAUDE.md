@@ -85,7 +85,7 @@ briefly, not a main focus, not assessed on its own; Taught in depth = taught dir
 `ANSWER_NOTE` / `ANSWER_SHORT` sit beside them everywhere: the whole grade level, the level of teaching exposure the majority of
 the grade's students get (not student learning or performance), for information only, not an evaluation, no right answer.
 Walk-Through Example (team page, top): `SAMPLE_TEAM` (8 real Grade 3 Math standards) in practice mode (`S.practice`,
-`RM()`: answers never saved, no `set_team_sets`), with an 18-step tour (`TOUR`, `tourShow()`): the three Before you begin
+`RM()`: answers never saved, no `set_team_sets`), with a welcome card and an 18-step tour (`TOUR`, `tourShow()`): the three Before you begin
 pages, then the rating page, each feature zoomed in (CSS zoom on the popup card or #view-flow) with a ring and a black card.
 Leader Directions: dialog (`directionsDialog()`, prints on its own) and `site/directions.pdf` (two sides of A4, built from the
 leader's working guide). Load (about 300 laptops at once, stress-tested Nov 2026): first screen loads only ratings and team

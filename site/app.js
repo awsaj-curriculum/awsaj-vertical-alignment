@@ -848,6 +848,7 @@
     sample: ["WI-CC-MATH|M.3.OA.A.1", "WI-CC-MATH|M.3.OA.C.6", "WI-CC-MATH|M.3.NF.A.1", "WI-CC-MATH|M.3.MD.A.1", "WI-CC-MATH|M.3.MD.B.3", "WI-CC-MATH|M.3.G.A.1", "WI-EE-MATH|M.EE.3.NF.1", "WI-EE-MATH|M.EE.3.OA.1"] };
   const EX_ROW = "#r-WI_CC_MATH_M_3_NF_A_1_3";   // rowId() of the worked example, M.3.NF.A.1 in Grade 3
   const TOUR = [
+    { page: 1, sel: null, t: "Welcome to the Walk-Through Example", d: "This walk-through will help you understand what you will do and how to do it. It uses a sample team (Grade 3 Math) to show you, step by step, the standards you will see, the standards for the whole school, and how to answer for each standard. Nothing you click here is saved. When it is finished, you will open your own team and rate your grade's standards. Press Next to begin." },
     { page: 1, sel: ".how-to .flow-title", t: "What you are rating", d: "The large title shows the grade and subject (or course). Every standard on the page belongs to it, so you always know where you are." },
     { page: 1, sel: ".how-to .set-sum", t: "Your standard sets", d: "The sets your grade rates, with how many standards each has and where they come from. Each set has its own badge; rest the mouse on a badge to read about it." },
     { page: 2, sel: ".how-to .school-sets", t: "Standards across the whole school", d: "What every grade and subject at Awsaj rates, K-5, 6-8 and 9-12. Together the answers make one K-12 picture." },
@@ -889,7 +890,7 @@
     if (!S.tour) return;
     const st = TOUR[S.tour.i]; tourPage(st);
     zoomBoxes().forEach((x) => (x.style.zoom = ""));
-    const t = $(st.sel), box = typeof st.page === "number" ? $(".how-modal .how-to") : $("#view-flow");
+    const t = st.sel ? $(st.sel) : null, box = typeof st.page === "number" ? $(".how-modal .how-to") : $("#view-flow");
     if (t && box) {
       // Zoom in so the feature's contents fill much of the screen (at most 2x), then scroll them just above the middle,
       // clear of the explanation card. Wide bars are measured by what is in them, not their full width.
@@ -899,7 +900,7 @@
       if (sc) { sc.scrollLeft += dx; sc.scrollTop += dy; } else scrollBy(dx, dy);
     }
     let o = $("#tour"); if (!o) { o = document.createElement("div"); o.id = "tour"; document.body.append(o); }
-    o.hidden = false;
+    o.hidden = false; o.classList.toggle("intro", !st.sel);   // the welcome step: a card in the middle, no feature
     o.innerHTML = `<div class="tour-ring"></div><div class="tour-card" role="dialog" aria-label="Walk-through step ${S.tour.i + 1} of ${TOUR.length}">
       <p class="tour-n">Walk-Through Example · step ${S.tour.i + 1} of ${TOUR.length}</p><h3>${esc(st.t)}</h3><p>${esc(st.d)}</p>
       <div class="tour-nav"><button type="button" class="ghost sm" data-act="tour-end">End tour</button><span></span>${S.tour.i ? `<button type="button" class="ghost" data-act="tour-back">Back</button>` : ""}<button type="button" data-act="tour-next">${S.tour.i === TOUR.length - 1 ? "Done" : "Next"}</button></div></div>`;
@@ -908,8 +909,8 @@
   // The ring follows the feature (after scrolling, rating or resizing); the card sits away from it.
   function tourPlace() {
     const o = $("#tour"); if (!S.tour || !o || o.hidden) return;
-    const t = $(TOUR[S.tour.i].sel), ring = $(".tour-ring", o), card = $(".tour-card", o);
-    if (!t) { ring.hidden = true; card.style.top = ""; card.style.bottom = "16px"; return; }
+    const sel = TOUR[S.tour.i].sel, t = sel ? $(sel) : null, ring = $(".tour-ring", o), card = $(".tour-card", o);
+    if (!t) { ring.hidden = true; card.style.top = sel ? "" : "50%"; card.style.bottom = sel ? "16px" : ""; return; }
     const r = tourRect(t), pad = 8; ring.hidden = false;
     Object.assign(ring.style, { left: r.left - pad + "px", top: r.top - pad + "px", width: r.width + pad * 2 + "px", height: r.height + pad * 2 + "px" });
     const low = r.top + r.height / 2 > innerHeight / 2;
