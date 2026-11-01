@@ -80,6 +80,17 @@ plans = Introduced, 3+ weeks = Taught in depth.
 Teachers use the "flow" view: all standards for a subject on one page by default (Small / Medium / Large, with Find,
 filter chips and a Finish button that lists anything unanswered), or One at a time (button toggle, remembered per device).
 The question is "How is this generally taught in Grade X?"; "What do these mean?" opens the three answer definitions.
+Answers (Tim, Nov 2026, `LEVEL_DEF`, kept simple): Not taught = our grade does not teach it; Introduced / exposed = covered
+briefly, not a main focus, not assessed on its own; Taught in depth = taught directly, practised over several lessons, assessed.
+`ANSWER_NOTE` / `ANSWER_SHORT` sit beside them everywhere: the whole grade level, the level of teaching exposure the majority of
+the grade's students get (not student learning or performance), for information only, not an evaluation, no right answer.
+Walk-Through Example (team page, top): `SAMPLE_TEAM` (8 real Grade 3 Math standards) in practice mode (`S.practice`,
+`RM()`: answers never saved, no `set_team_sets`), with an 18-step tour (`TOUR`, `tourShow()`): the three Before you begin
+pages, then the rating page, each feature zoomed in (CSS zoom on the popup card or #view-flow) with a ring and a black card.
+Leader Directions: dialog (`directionsDialog()`, prints on its own) and `site/directions.pdf` (two sides of A4, built from the
+leader's working guide). Load (about 300 laptops at once, stress-tested Nov 2026): first screen loads only ratings and team
+sets; history and comments follow after a random 1-7 s; the update check runs every 30 s from a random start, full reload every
+20th check. The Before you begin popup sits above the header (the header covered its top on laptops).
 When a subject is complete the teacher sees a results page for it; confetti only when every subject on the link is done.
 The committee and "Explore" get the full tabs.
 Locked links: `?team=<name>` (optionally `&subject=`) for one team, `?grade=<K-12>` for every subject in a grade (each subject

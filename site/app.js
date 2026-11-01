@@ -90,7 +90,9 @@
     return r.status === 204 ? null : r.json();
   }
   const rkey = (f, c, g) => `${f}|${c}|${g}`;
-  function rating(f, c, g) { return S.ratings.get(rkey(f, c, g)); }
+  // The Walk-Through Example keeps its answers in its own map: practice only, never saved or mixed with real ratings.
+  const RM = () => (S.practice ? S.practice.ratings : S.ratings);
+  function rating(f, c, g) { return RM().get(rkey(f, c, g)); }
 
   async function loadRatings(full) {
     const q = !full && S.lastSync ? `ratings?select=*&updated_at=gt.${encodeURIComponent(S.lastSync)}` : Q.ratings;
@@ -161,6 +163,7 @@
     // Teams rate only their own grade's standards (Tim, Oct 2026); only the committee can rate a standard placed elsewhere.
     if (!isCommittee() && !e.pl.includes(g)) { toast(`Please rate only ${gname(g)}'s own standards. This one is for ${e.pl.map(gname).join(", ")}.`); return; }
     const k = rkey(e.f, e.c, g), before = S.ratings.get(k);
+    if (S.practice) { RM().set(k, { framework: e.f, code: e.c, grade: g, level, team: S.team.name }); S.flash = k; rerender(); S.flash = null; tourPlace(); toast(`Practice: ${codeText(e)} is ${LEVEL[level]}. Nothing is saved.`); return; }
     const leftBefore = toRateLeft(g), strandBefore = strandLeft(e, g), allBefore = mode() === "teacher" ? teacherLeft(g) : 0;
     S.ratings.set(k, { framework: e.f, code: e.c, grade: g, level, team: S.team.name, updated_at: new Date().toISOString() });
     S.flash = k; rerender(); S.flash = null;
@@ -199,6 +202,7 @@
   // Remove any answer (not only the latest): the standard goes back to "Still to do".
   async function clearRating(e, g) {
     if (!S.team || !canEdit(g)) { toast(S.team ? `Your team rates ${S.team.grades.map(gname).join(", ")}.` : "Choose your team first."); return; }
+    if (S.practice) { RM().delete(rkey(e.f, e.c, g)); rerender(); tourPlace(); toast(`Practice: ${codeText(e)} answer taken off.`); return; }
     const k = rkey(e.f, e.c, g), now = S.ratings.get(k); if (!now) return;
     S.ratings.delete(k); rerender();
     try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${codeText(e)} answer taken off. It is back in Still to do.`); }
@@ -270,9 +274,9 @@
     const m = mode();
     if (S.lock && S.team) { $("#whoami").innerHTML = `<span class="who-team">${esc(S.lock.grade ? gname(S.lock.grade) : S.team.name)}${S.lock.subject ? " · " + esc(S.lock.subject) : ""}</span> ${hb("locked")}`; return; }
     $("#whoami").innerHTML = m === "welcome" ? "" : `<span class="who-team">${esc(S.team.name)}</span>
-      ${m === "teacher" ? `<button type="button" class="ghost sm" data-act="explore">Explore the K-12 map</button>` : !isCommittee() ? `<button type="button" class="sm" data-act="back-to-flow">Back to rating</button>` : ""}
+      ${S.practice ? `<button type="button" class="sm" data-act="walk-exit">Exit the walk-through</button>` : m === "teacher" ? `<button type="button" class="ghost sm" data-act="explore">Explore the K-12 map</button>` : !isCommittee() ? `<button type="button" class="sm" data-act="back-to-flow">Back to rating</button>` : ""}
       ${isCommittee() ? `<button type="button" class="ghost sm" data-act="links">Team progress</button>` : ""}
-      <button type="button" class="linkish" data-act="switch-team">Change team</button>`;
+      ${S.practice ? "" : `<button type="button" class="linkish" data-act="switch-team">Change team</button>`}`;
   }
   // Team progress (committee): every team and subject, how much is rated in the team's chosen sets, when it last rated,
   // and its locked link with a ready-made reminder. Unfinished first, so the committee knows who to remind.
@@ -684,7 +688,7 @@
   // Chosen sets are worked through one after another (all Common Core, then all Essential Elements, and so on).
   function flowList(subject, g, onlySet) {
     const sl = S.meta.subjects.find((s) => s.name === subject).slug, fws = setsFor(subject, g, subjTeam(subject, g));
-    return fws.filter((f) => !onlySet || f === onlySet).flatMap((f) => S.idx[sl].filter((e) => e.f === f && e.pl.includes(g)));
+    return fws.filter((f) => !onlySet || f === onlySet).flatMap((f) => S.idx[sl].filter((e) => e.f === f && e.pl.includes(g) && (!S.team.sample || S.team.sample.includes(e.f + "|" + e.c))));
   }
   // Set chooser: which standard sets the team works through for this subject (saved for everyone on the team).
   // A large title so a teacher never loses track of which grade, subject or course they are rating, and which sets it uses.
@@ -710,7 +714,7 @@
     const step = (n, title, body) => `<li><span class="hs-n">${n}</span><div><b>${title}</b>${body}</div></li>`;
     // Three pages in a popup, each moved on with Next: 1 what you are rating, 2 the whole school, 3 how to rate.
     const pg = S.flow.howPage || 1, dots = [1, 2, 3].map((n) => `<i class="${n === pg ? "on" : ""}"></i>`).join("");
-    const nav = (back, next) => `<div class="how-nav"><span class="how-dots" aria-label="Page ${pg} of 3">${dots}</span>
+    const nav = (back, next) => `<div class="how-nav"><button type="button" class="linkish how-home" data-act="home">${S.practice ? "Exit the walk-through" : "Team page"}</button><span class="how-dots" aria-label="Page ${pg} of 3">${dots}</span>
       ${back ? `<button type="button" class="ghost" data-act="how-page" data-p="${pg - 1}">Back</button>` : ""}${next}</div>`;
     const pages = {
       1: `${flowTitle(subject, g, shown)}
@@ -724,13 +728,13 @@
       3: `<h2>How to rate, step by step</h2>
       <ol class="how-steps">
         ${step(1, "Check the title", `<p>It shows your grade and subject (or your course). Every standard on the page belongs to it.</p>`)}
-        ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${LEVEL_DEF.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}</div>`)}
+        ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${LEVEL_DEF.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}<p class="ans-note-b">${ANSWER_NOTE}</p></div>`)}
         ${step(3, "Change or take off an answer", `<p>Click a different answer to change it. Click the chosen answer again to take it off.</p>`)}
         ${step(4, "Choose how to see the standards", `<p><b>All at once</b> (Small, Medium or Large) or <b>One at a time</b>. Use <b>Find</b> to search. Rest the mouse on an answer button to see what it means.</p>`)}
         ${step(5, "Finish", `<p>Press <b>Finish</b> at the bottom. It lists anything not answered yet.</p>`)}
       </ol>
       ${nav(true, `<button type="button" data-act="sets-save" data-s="${esc(subject)}" data-f="${esc(shown.join(","))}">Begin rating</button>`)}` };
-    return `<div class="how-modal" role="dialog" aria-modal="true" aria-label="Before you begin: page ${pg} of 3"><div class="card set-card how-to"><p class="how-eyebrow">Before you begin · page ${pg} of 3</p>${pages[pg]}</div></div>`;
+    return `<div class="how-modal" role="dialog" aria-modal="true" aria-label="Before you begin: page ${pg} of 3"><div class="card set-card how-to"><p class="how-eyebrow">${S.practice ? "Walk-Through Example · " : ""}Before you begin · page ${pg} of 3</p>${pages[pg]}</div></div>`;
   }
   const howKey = (subject, g) => `${S.team ? S.team.name : ""}|${subject}|${g}`;
   const howSeen = () => { try { return JSON.parse(sessionStorage.getItem("va_howto") || "[]"); } catch (e) { return []; } };
@@ -750,7 +754,9 @@
   function welcome(el) {
     const groups = { "Elementary": [], "Middle school": [], "High school": [] };
     S.teams.forEach((t) => { if (t.name !== "Vertical Alignment Committee") (DIV.Elementary.includes(t.grades[0]) ? groups.Elementary : DIV.Middle.includes(t.grades[0]) ? groups["Middle school"] : groups["High school"]).push(t); });
-    el.innerHTML = `<div class="flow-wrap"><div class="hero"><h2>Which team are you?</h2>
+    el.innerHTML = `<div class="flow-wrap"><div class="walk-cta"><div><b>Start here</b><span>Leaders: walk everyone through the example first. It is practice only, nothing is saved.</span></div>
+      <span class="walk-btns"><button type="button" class="walk-b" data-act="walk">▶ Walk-Through Example</button><button type="button" class="ghost" data-act="directions">Leader Directions</button><a class="ghost-a" href="directions.pdf" target="_blank" rel="noopener">Leader Directions (PDF)</a> ${hb("walk")}</span></div>
+      <div class="hero"><h2>Which team are you?</h2>
       <p class="lede">You will see your grade's standards, all on one page or one at a time. For each one, say how it is generally taught in your grade. Every answer saves as you go.</p></div>
       ${Object.entries(groups).map(([g, ts], i) => `<div class="band band-${["k5", "ms", "hs"][i]}"><h3 class="pick-h">${g} <small>${["Kindergarten to Grade 5", "Grades 6 to 8", "Grades 9 to 12"][i]}</small></h3><div class="pick">${ts.map((t) => `<button type="button" class="pick-b" data-act="team" data-t="${esc(t.name)}">${esc(t.name)}</button>`).join("")}</div></div>`).join("")}
       <p class="muted committee-link"><button type="button" class="linkish" data-act="team" data-t="Vertical Alignment Committee">I am on the Vertical Alignment Committee</button></p></div>`;
@@ -777,7 +783,9 @@
         return `<button type="button" class="setp ${F.set === f ? "on" : ""} ${n ? "" : "done"}" data-act="flow-set" data-f="${esc(f)}" title="${esc(setTip(f))}">${badge(f)} <b class="setp-n">${fwHTML(SET(f).name)}</b> <span>${n ? n + " left" : "✓"}</span></button>`; }).join("")}
       ${hb("sets")} <button type="button" class="linkish" data-act="howto">How to</button></div>`;
     const title = flowTitle(F.subject, g, fwsNow);
-    const head = `<div class="flow-head">${title}${pills}${setPills}
+    const practiceBar = S.practice ? `<div class="practice-bar"><b>Walk-Through Example</b><span>Practice only: nothing you click is saved. Grade 3 Math, ${list.length} sample standards.</span>
+      <button type="button" class="sm" data-act="tour">${S.tour ? "Tour is on" : "Step-by-step tour"}</button><button type="button" class="ghost sm" data-act="walk-exit">Exit to the team page</button> ${hb("walk")}</div>` : "";
+    const head = `${practiceBar}<div class="flow-head">${title}${pills}${setPills}
       <div class="flow-progress"><div class="fp-bar"><i style="width:${pct}%"></i></div>
       <span><b>${done}</b> of ${list.length} rated · <b>${left}</b> left ${hb("flow")}</span></div>
       <p class="saved-note muted">Every answer saves the moment you click it. You can stop and come back any time with the same link.</p></div>`;
@@ -814,18 +822,129 @@
   // Saved on this device. Sizes: s = one line per standard, m = full text, l = large cards with the answer meanings.
   const tview = () => S.flow.view || store.get("va_tview") || "all";
   const tsize = () => S.flow.size || store.get("va_tsize") || "m";
-  const LEVEL_HINT = ["We do not teach this in our grade", "Met or covered briefly, not a main focus or assessed", "Taught directly, practised and assessed"];
+  // Answer definitions (Tim, Nov 2026): kept simple. Each one is about the whole grade on average and the teaching
+  // students get, never about how well students learn; ANSWER_NOTE says so beside them everywhere.
+  const LEVEL_HINT = ["Our grade does not teach it", "Covered briefly, not a main focus", "Taught directly, practised and assessed"];
   const LEVEL_DEF = [
-    ["Not taught", "We do not teach this standard in our grade. Students may meet it in another grade, but not in our classes."],
-    ["Introduced / exposed", "Students meet it or it is covered briefly. We may mention it, model it or use it inside another lesson, but it is not a main focus, and we do not expect mastery or assess it on its own."],
-    ["Taught in depth", "We teach it directly, students practise it over several lessons, and we assess it. We expect most students to reach the standard."],
+    ["Not taught", "Our grade does not teach this standard."],
+    ["Introduced / exposed", "Our grade covers it briefly. It is not a main focus and is not assessed on its own."],
+    ["Taught in depth", "Our grade teaches it directly, students practise it over several lessons, and it is assessed."],
   ];
-  const levelKey = () => `<div class="lvl-key"><span class="muted">Answers:</span>${LEVEL_DEF.map(([n], l) => `<span class="lk"><i class="lv lv-${l}"></i>${n}</span>`).join("")}<button type="button" class="linkish" data-act="levels">What do these mean?</button></div>`;
+  const ANSWER_NOTE = "Answer for your whole grade level, not only your own class: the level of teaching exposure the majority of your grade's students get. It is about the teaching, not how well students learn or perform. This is for information only: it does not evaluate your teaching, and there is no right answer.";
+  const ANSWER_SHORT = "The teaching exposure most students in your grade get · not student results · for information only, there is no right answer";
+  const levelKey = () => `<div class="lvl-key"><span class="muted">Answers:</span>${LEVEL_DEF.map(([n], l) => `<span class="lk"><i class="lv lv-${l}"></i>${n}</span>`).join("")}<button type="button" class="linkish" data-act="levels">What do these mean?</button><span class="ans-note">${ANSWER_SHORT}</span></div>`;
   function levelsDialog() {
     $("#d-eyebrow").textContent = "How to answer"; $("#d-title").textContent = "What the three answers mean";
-    $("#d-body").innerHTML = `<p class="lede">For each standard, choose how it is <b>generally</b> taught in your grade: what usually happens in your classes, not just this term.</p>
-      <div class="lvl-defs">${LEVEL_DEF.map(([n, d], l) => `<div class="lvl-def l${l}"><h3><i class="lv lv-${l}"></i>${n}</h3><p>${d}</p><p class="muted">${["Example: it is not in any of our units, or another grade teaches it.", "Example: students use it in a project or warm-up, but we never teach a lesson on it or test it.", "Example: we have lessons on it, students practise it, and it is in our assessments."][l]}</p></div>`).join("")}</div>
-      <p class="muted">Not sure? Choose the answer closest to what usually happens. You can change any answer later, and every answer is saved straight away.</p>`;
+    $("#d-body").innerHTML = `<p class="lede">For each standard, choose how it is <b>generally</b> taught in your grade.</p><p class="ans-note-b">${ANSWER_NOTE}</p>
+      <div class="lvl-defs">${LEVEL_DEF.map(([n, d], l) => `<div class="lvl-def l${l}"><h3><i class="lv lv-${l}"></i>${n}</h3><p>${d}</p><p class="muted">${["Example: it is not in our grade's units, or another grade teaches it.", "Example: students meet it in a project or warm-up, but there is no lesson on it and no test.", "Example: there are lessons on it, students practise it, and it is in our assessments."][l]}</p></div>`).join("")}</div>
+      <p class="muted">Not sure? Choose the answer closest to what usually happens across the grade. You can change any answer later.</p>`;
+    if (!$("#detail").open) $("#detail").showModal();
+  }
+  /* ---------------- Walk-Through Example (Tim, Nov 2026) ----------------
+     Every teacher is walked through this before rating their own team. A sample team (real Grade 3 Math standards)
+     opens in practice mode: answers stay in S.practice and are never saved. The tour shows the three Before you begin
+     pages, then the rating page, one feature at a time, zoomed in (CSS zoom on the popup or the page) with a ring. */
+  const SAMPLE_TEAM = { name: "Walk-Through Example", subjects: ["Math"], grades: ["3"], practice: true,
+    sample: ["WI-CC-MATH|M.3.OA.A.1", "WI-CC-MATH|M.3.OA.C.6", "WI-CC-MATH|M.3.NF.A.1", "WI-CC-MATH|M.3.MD.A.1", "WI-CC-MATH|M.3.MD.B.3", "WI-CC-MATH|M.3.G.A.1", "WI-EE-MATH|M.EE.3.NF.1", "WI-EE-MATH|M.EE.3.OA.1"] };
+  const EX_ROW = "#r-WI_CC_MATH_M_3_NF_A_1_3";   // rowId() of the worked example, M.3.NF.A.1 in Grade 3
+  const TOUR = [
+    { page: 1, sel: ".how-to .flow-title", t: "What you are rating", d: "The large title shows the grade and subject (or course). Every standard on the page belongs to it, so you always know where you are." },
+    { page: 1, sel: ".how-to .set-sum", t: "Your standard sets", d: "The sets your grade rates, with how many standards each has and where they come from. Each set has its own badge; rest the mouse on a badge to read about it." },
+    { page: 2, sel: ".how-to .school-sets", t: "Standards across the whole school", d: "What every grade and subject at Awsaj rates, K-5, 6-8 and 9-12. Together the answers make one K-12 picture." },
+    { page: 2, sel: ".how-to .school-sets tr.here", t: "Your row", d: "Your own band is highlighted, so you can see where your grade sits." },
+    { page: 3, sel: ".how-steps li:nth-child(2)", t: "The three answers", d: "Not taught, Introduced / exposed, Taught in depth. Answer for the level of teaching exposure the majority of your grade's students get, not how well they learn. It is for information only, and there is no right answer." },
+    { page: 3, sel: ".how-steps", t: "How to rate, step by step", d: "Check the title, choose an answer for each standard, change or take off an answer, choose how to see the standards, then press Finish." },
+    { page: 3, sel: '.how-nav [data-act="sets-save"]', t: "Begin rating", d: "When everyone is ready, press Begin rating (or Next here)." },
+    { page: "rate", sel: ".practice-bar", t: "Practice only", d: "This is the Walk-Through Example: nothing you click is saved. Your own team's page looks the same." },
+    { page: "rate", sel: ".flow-title h1", t: "The title", d: "Grade 3 Mathematics, and the standard sets it uses. Check it before you start." },
+    { page: "rate", sel: ".set-pills", t: "Your standard sets", d: "Each set with how many standards are left. Click one to see only that set. How to opens the Before you begin pages again." },
+    { page: "rate", sel: ".flow-progress > span", t: "Progress", d: "How many are rated and how many are left. Every answer saves the moment you click it, so you can stop and come back with the same link." },
+    { page: "rate", sel: ".view-bar .seg-t", t: "How to see the standards", d: "All at once (Small, Medium or Large text) or One at a time. Find searches by code or words." },
+    { page: "rate", sel: ".lvl-key", t: "The answers", d: "The three answers and what they mean. Rest the mouse on an answer button for a moment to read its meaning." },
+    { page: "rate", sel: EX_ROW + " .tr-code", t: "A standard's code", d: "The Wisconsin code in bold with the Common Core (CCSS) code underneath, and the set's badge. ★ Power marks a standard the school's documents name as a focus for this grade." },
+    { page: "rate", sel: EX_ROW + " .tr-text", t: "Read the whole standard", d: "Ask: does our grade teach this on purpose? Only briefly, or directly with practice and assessment?" },
+    { page: "rate", sel: EX_ROW + " .tr-ans", t: "Try it: choose an answer", d: "Click the answer that fits the teaching most students in your grade get. Click it again to take it off, or click another to change it. (Practice: not saved.)" },
+    { page: "rate", sel: ".lib-tabs", t: "Filters", d: "All, Still to do, Done and ★ Power (or Priority). Use Still to do to find what is left." },
+    { page: "rate", sel: ".flow-more", t: "Finish", d: "Press Finish at the bottom. It lists anything not answered yet. When every subject is done you see your results." },
+  ];
+  const howUnmark = (k) => { try { sessionStorage.setItem("va_howto", JSON.stringify(howSeen().filter((x) => x !== k))); } catch (e) { /* storage blocked */ } };
+  function startWalk() {
+    S.practice = { ratings: new Map() }; S.explore = false;
+    S.team = SAMPLE_TEAM; delete S.teamSets[SAMPLE_TEAM.name]; howUnmark(howKey("Math", "3"));
+    S.flow = { subject: "Math", skipped: new Set(), back: null, history: [], howPage: 1, view: "all", size: "m" };
+    showView("flow"); rerender(); scrollTo({ top: 0 });
+    S.tour = { i: 0 }; tourShow();
+  }
+  // Put the page in the state a step needs: a Before you begin page, or the rating page.
+  function tourPage(st) {
+    const onHow = !!$(".how-modal");
+    if (typeof st.page === "number") {
+      if (!onHow || S.flow.howPage !== st.page) { delete S.teamSets[SAMPLE_TEAM.name]; howUnmark(howKey("Math", "3")); S.flow.howPage = st.page; rerender(); }
+    } else if (onHow) {
+      (S.teamSets[SAMPLE_TEAM.name] ||= {}).Math = setsFor("Math", "3", SAMPLE_TEAM); howMark(howKey("Math", "3")); S.flow.choose = null; S.flow.view = "all"; rerender();
+    }
+  }
+  const zoomBoxes = () => [$(".how-modal .how-to"), $("#view-flow")].filter(Boolean);
+  function tourShow() {
+    if (!S.tour) return;
+    const st = TOUR[S.tour.i]; tourPage(st);
+    zoomBoxes().forEach((x) => (x.style.zoom = ""));
+    const t = $(st.sel), box = typeof st.page === "number" ? $(".how-modal .how-to") : $("#view-flow");
+    if (t && box) {
+      // Zoom in so the feature's contents fill much of the screen (at most 2x), then scroll them just above the middle,
+      // clear of the explanation card. Wide bars are measured by what is in them, not their full width.
+      const r = tourRect(t), z = Math.max(1, Math.min(2, (innerWidth * 0.86) / Math.max(r.width, 1), (innerHeight * 0.45) / Math.max(r.height, 1)));
+      box.style.zoom = z.toFixed(2); box.classList.add("touring");   // the popup card stops scrolling inside itself
+      const c = tourRect(t), dx = c.left + c.width / 2 - innerWidth / 2, dy = c.top + c.height / 2 - innerHeight * 0.36, sc = typeof st.page === "number" ? $(".how-modal") : null;
+      if (sc) { sc.scrollLeft += dx; sc.scrollTop += dy; } else scrollBy(dx, dy);
+    }
+    let o = $("#tour"); if (!o) { o = document.createElement("div"); o.id = "tour"; document.body.append(o); }
+    o.hidden = false;
+    o.innerHTML = `<div class="tour-ring"></div><div class="tour-card" role="dialog" aria-label="Walk-through step ${S.tour.i + 1} of ${TOUR.length}">
+      <p class="tour-n">Walk-Through Example · step ${S.tour.i + 1} of ${TOUR.length}</p><h3>${esc(st.t)}</h3><p>${esc(st.d)}</p>
+      <div class="tour-nav"><button type="button" class="ghost sm" data-act="tour-end">End tour</button><span></span>${S.tour.i ? `<button type="button" class="ghost" data-act="tour-back">Back</button>` : ""}<button type="button" data-act="tour-next">${S.tour.i === TOUR.length - 1 ? "Done" : "Next"}</button></div></div>`;
+    tourPlace();
+  }
+  // The ring follows the feature (after scrolling, rating or resizing); the card sits away from it.
+  function tourPlace() {
+    const o = $("#tour"); if (!S.tour || !o || o.hidden) return;
+    const t = $(TOUR[S.tour.i].sel), ring = $(".tour-ring", o), card = $(".tour-card", o);
+    if (!t) { ring.hidden = true; card.style.top = ""; card.style.bottom = "16px"; return; }
+    const r = tourRect(t), pad = 8; ring.hidden = false;
+    Object.assign(ring.style, { left: r.left - pad + "px", top: r.top - pad + "px", width: r.width + pad * 2 + "px", height: r.height + pad * 2 + "px" });
+    const low = r.top + r.height / 2 > innerHeight / 2;
+    card.style.top = low ? "16px" : ""; card.style.bottom = low ? "" : "16px";
+  }
+  // The box around what is actually inside an element (a wide bar with three buttons is as wide as the buttons).
+  function tourRect(t) { const rg = document.createRange(); rg.selectNodeContents(t); const a = rg.getBoundingClientRect(), b = t.getBoundingClientRect(); return a.width && a.height ? a : b; }
+  function tourEnd() { S.tour = null; zoomBoxes().forEach((x) => { x.style.zoom = ""; x.classList.remove("touring"); }); const o = $("#tour"); if (o) o.hidden = true; if (S.practice) rerender(); }
+  addEventListener("scroll", () => tourPlace(), true); addEventListener("resize", () => tourPlace());
+  document.addEventListener("keydown", (ev) => {
+    if (!S.tour || ev.target.closest("input, textarea, select")) return;
+    if (ev.key === "ArrowRight") { ev.preventDefault(); $('#tour [data-act="tour-next"]').click(); }
+    else if (ev.key === "ArrowLeft") { ev.preventDefault(); const b = $('#tour [data-act="tour-back"]'); if (b) b.click(); }
+    else if (ev.key === "Escape") tourEnd();
+  }, true);
+
+  // The directions paper (also directions.pdf), using the site's three answers. Prints on its own (popup printing).
+  function directionsDialog() {
+    $("#d-eyebrow").textContent = "K-12 Vertical Alignment"; $("#d-title").textContent = "Leader Directions";
+    const q = (a) => `<ol>${a.map((x) => `<li>${x}</li>`).join("")}</ol>`;
+    $("#d-body").innerHTML = `<p class="dir-act"><button type="button" class="sm" onclick="window.print()">Print</button> <a class="ghost-a" href="directions.pdf" target="_blank" rel="noopener">Download the PDF</a> ${hb("directions")}</p>
+      <div class="dir">
+      <div class="box"><h3>Why are we meeting?</h3><p>To build an honest K-12 picture of what students actually learn, where essential skills may be missed or unnecessarily repeated, and how learning should progress toward success on the mainstream pathway. It is also our evidence for CIS accreditation (Domain C, The Curriculum). <b>We examine the curriculum, not individual teachers. This is for information only: it does not evaluate your teaching, and there is no right answer.</b></p>
+      <p><b>Guiding question:</b> if a student begins at Awsaj in Kindergarten, what must they learn at each grade to be ready for Grade 12 and the mainstream pathway?</p></div>
+      <h3>Team roles</h3><p><b>Facilitator / timekeeper:</b> leads the discussion and the Walk-Through Example. <b>Recorder:</b> captures observations, questions and who should respond. <b>Grade / subject reps:</b> share real teaching practice. <b>Administration:</b> supports attendance, collaboration and oversight. Bring a laptop, a notebook and a pen.</p>
+      <h3>Before you start: the Walk-Through Example</h3><p>The leader opens the team page, presses <b>▶ Walk-Through Example</b> and walks everyone through it: the three Before you begin pages (your standards, the standards for the whole school, how to rate), then each part of the rating page. It is practice only; nothing is saved. Then each team opens its own link.</p>
+      <h3>Step 1: Rate how each standard is taught</h3><p>Use last school year as evidence; do not rate from a pacing guide alone. Rate only your own grade's standards.</p>
+      <div class="lvl-defs">${LEVEL_DEF.map(([n, d], l) => `<div class="lvl-def l${l}"><h3><i class="lv lv-${l}"></i>${n}</h3><p>${d}</p></div>`).join("")}</div>
+      <p class="ans-note-b">${ANSWER_NOTE}</p>
+      <h3>Step 2: Reflect on your own before discussing</h3>${q(["What knowledge or essential skills are students missing when they arrive in your grade?", "What essential prerequisite skills do students need when they enter your grade?", "What essential skills should students show before moving to the next grade?"])}
+      <h3>Step 3: Discuss: what are we noticing?</h3><p>Use the ratings and your reflections. The recorder captures specific grades, standards and examples, not assumptions.</p>${q(["Which skills are taught in depth, only introduced, or not taught across grades?", "What prerequisites do students seem to lack when they enter the next grade?", "Where is learning repeated without greater complexity or independence?", "How should Common Core standards and Essential Elements progress across K-12?"])}
+      <h3>Steps 4-6: Look across the K-12 learning journey</h3><ul><li><b>Must-know learning:</b> the essential skills students must carry into the next grade. If one is missing, what becomes difficult later?</li><li><b>Gaps:</b> compare what the grade before teaches with what the next grade expects. Where might prerequisite learning be missing?</li><li><b>Unnecessary repetition:</b> purposeful review, or the same tasks at the same difficulty? Is learning becoming deeper and more independent?</li><li><b>Progression:</b> trace skills across grades: accuracy, reasoning, application and independence. What should this learning look like next year?</li></ul>
+      <p class="muted">Site views: Coverage map (rated learning by grade and strand), Gaps &amp; repetition (possible missing or repeated skills), Progressions (how learning builds), Grade dashboard (one grade, every subject).</p>
+      <h3>Record and next steps</h3><p>Record up to three high-priority findings (skill or pattern, grade and standard, evidence or next check) and any burning questions, with who should answer them (admin, lead or committee). The PDF has tables to write in. <b>Next meeting:</b> agree on grade and subject expectations, define assessment evidence, share effective resources.</p>
+      </div>`;
     if (!$("#detail").open) $("#detail").showModal();
   }
   // Where every part of the site's data comes from (site/data/sources.json, scripts/build_sources.py).
@@ -2314,19 +2433,29 @@
     }
     else if (act === "flow-set") { S.flow.set = S.flow.set === b.dataset.f ? null : b.dataset.f; S.flow.back = null; rerender(); }
     else if (act === "howto") { S.flow.choose = S.flow.subject; S.flow.howPage = 1; rerender(); }
-    else if (act === "how-page") { S.flow.howPage = +b.dataset.p; rerender(); const m = $(".how-modal"); if (m) m.scrollTop = 0; }
+    else if (act === "how-page") { S.flow.howPage = +b.dataset.p; rerender(); const m = $(".how-modal"); if (m) m.scrollTop = 0;
+      if (S.tour) { S.tour.i = TOUR.findIndex((x) => x.page === S.flow.howPage); tourShow(); } }
     else if (act === "sets-change") { S.flow.choose = S.flow.subject; rerender(); }
     else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
+    else if (act === "walk") startWalk();
+    else if (act === "walk-exit") { setTeam(""); tabTeam(""); scrollTo({ top: 0 }); }
+    else if (act === "tour") { if (!S.tour) { S.tour = { i: TOUR.findIndex((x) => x.page === "rate") }; tourShow(); } }
+    else if (act === "tour-next") { if (S.tour.i < TOUR.length - 1) { S.tour.i++; tourShow(); } else tourEnd(); }
+    else if (act === "tour-back") { if (S.tour.i > 0) { S.tour.i--; tourShow(); } }
+    else if (act === "tour-end") tourEnd();
+    else if (act === "directions") directionsDialog();
     else if (act === "sets-save") {
       const fws = (b.dataset.f || "").split(",").filter(Boolean), subject = b.dataset.s;
       howMark(howKey(subject, teamGrade()));
       const saved = S.teamSets[S.team.name] && S.teamSets[S.team.name][subject];
       // Save the team's sets only the first time (or if they changed); later visits just begin.
-      if (fws.length && (!saved || saved.join() !== fws.join())) {
+      if (S.practice) (S.teamSets[S.team.name] ||= {})[subject] = fws;
+      else if (fws.length && (!saved || saved.join() !== fws.join())) {
         try { await rpc("set_team_sets", { p_team: S.team.name, p_subject: subject, p_frameworks: fws }); (S.teamSets[S.team.name] ||= {})[subject] = fws; }
         catch (err) { (S.teamSets[S.team.name] ||= {})[subject] = fws; /* the school's defaults anyway: carry on; saved next time */ }
       }
       S.flow.choose = null; S.flow.howPage = 1; S.flow.set = null; S.flow.lastSet = null; rerender(); scrollTo({ top: 0 });
+      if (S.tour) { const i = TOUR.findIndex((x) => x.page === "rate"); if (S.tour.i < i) { S.tour.i = i; tourShow(); } }
     }
     else if (act === "flow-subject") { S.flow.howPage = 1; S.flow.subject = b.dataset.s; S.flow.set = null; S.flow.choose = null; S.flow.back = null; S.flow.results = null; S.flow.reviewing = null; S.flow.lib = ""; S.flow.q = ""; S.flow.skipped.clear(); showView("flow"); rerender(); scrollTo({ top: 0 }); }
     else if (act === "flow-rate") flowRate(b.dataset.k, +b.dataset.l);
@@ -2436,7 +2565,7 @@
     // Answer buttons: resting on one for a moment shows what that answer means (same words as "What do these mean?").
     clearTimeout(tipWait);
     const ans = ev.target.closest('[data-act="rate"][data-l],[data-act="flow-rate"][data-l]');
-    if (ans) { tip.hidden = true; tipWait = setTimeout(() => { const [n, d] = LEVEL_DEF[+ans.dataset.l]; tip.classList.add("tip-lg"); tip.innerHTML = `<b>${esc(n)}</b><br>${esc(d)}`;
+    if (ans) { tip.hidden = true; tipWait = setTimeout(() => { const [n, d] = LEVEL_DEF[+ans.dataset.l]; tip.classList.add("tip-lg"); tip.innerHTML = `<b>${esc(n)}</b><br>${esc(d)}<br><small>${esc(ANSWER_SHORT)}</small>`;
       const r = ans.getBoundingClientRect(); tip.hidden = false; tip.style.left = Math.max(8, Math.min(r.left, innerWidth - tip.offsetWidth - 12)) + "px";
       tip.style.top = (r.bottom + 8 + tip.offsetHeight > innerHeight ? r.top - tip.offsetHeight - 8 : r.bottom + 8) + "px"; }, 700); return; }
     // Labels that need explaining wherever they appear: "Automatic check" and where a link comes from.
@@ -2493,6 +2622,7 @@
   addEventListener("afterprint", () => { if (!S.printAll) return; S.printAll = false; printOpen.forEach((d) => (d.open = false)); printOpen = []; rerender(); if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw(); });
 
   function setTeam(name) {
+    if (S.practice) { S.practice = null; delete S.teamSets[SAMPLE_TEAM.name]; tourEnd(); }
     S.team = S.teams.find((t) => t.name === name) || null;
     if (S.team && S.lock && S.lock.subject && S.team.subjects.includes(S.lock.subject)) S.team = { ...S.team, subjects: [S.lock.subject] };
     S.flow = { subject: null, skipped: new Set(), back: null, history: [] };
@@ -2532,7 +2662,7 @@
     $("#f-search").value = ""; S.applyingHash = true;     // keep the address as given until the page it names is open
     S.f.mark = (SHOW_PLANS ? ["", "pr", "pn", "npn"] : ["", "pr"]).includes(store.get("va_mark")) ? store.get("va_mark") : ""; S.f.order = (SHOW_PLANS ? ["", "pr", "pn"] : ["", "pr"]).includes(store.get("va_order")) ? store.get("va_order") : "";
     S.device = store.get("va_device") || Math.random().toString(36).slice(2, 12); store.set("va_device", S.device);
-    Object.values(Q).forEach(prefetch);
+    prefetch(Q.ratings); prefetch(Q.sets);   // what the first screen needs; history and comments follow (below)
     S.meta = await (await fetch("data/meta.json")).json();
     S.teams = S.meta.teams;
     await Promise.all(S.meta.subjects.map(async (s) => (S.idx[s.slug] = await (await fetch(`data/index_${s.slug}.json`)).json())));
@@ -2595,15 +2725,21 @@
     else { showView(mode() === "full" ? "rate" : "flow"); refreshFilterOptions(); rerender(); }
     // Remove needs clear_rating (migration 005). Probe it with a team that does not exist: nothing is written either way.
     rpc("clear_rating", { p_framework: "", p_code: "", p_grade: "", p_team: "", p_device: "" }).then(() => {}, (err) => { S.canClear = /unknown team/i.test(err.message); if (S.canClear) rerender(); });
-    try { await Promise.all([loadRatings(true), loadEvents(), loadComments(), loadTeamSets()]); syncNote("Up to date"); rerender(); }
+    // About 300 people may open the site at once (Tim, Nov 2026): the first screen needs only the ratings and team sets.
+    // The change history and comments follow after a short random wait, so the requests do not all arrive together.
+    try { await Promise.all([loadRatings(true), loadTeamSets()]); syncNote("Up to date"); rerender(); }
     catch (err) { syncNote("Offline: ratings could not load"); }
     // Once everything is showing, fetch the current subject's full text in the background so the first popup opens at once.
     const idle = window.requestIdleCallback || ((f) => setTimeout(f, 1500));
     idle(() => { const sub = subj(); if (sub) loadDetail(sub.slug).catch(() => {}); });
+    setTimeout(() => Promise.all([loadEvents(), loadComments()]).then(rerender).catch(() => {}), 1000 + Math.random() * 6000);
     let n = 0;
+    // Each laptop checks for new ratings every refreshSeconds, starting at a random moment so 300 checks are spread out;
+    // a full reload (to catch answers taken off) runs every 20th check.
+    await new Promise((r) => setTimeout(r, Math.random() * CFG.refreshSeconds * 1000));
     setInterval(async () => {
       if (document.hidden) return;
-      try { n++; const got = await loadRatings(n % 15 === 0); if (got) { rerender(); } syncNote("Up to date " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })); }
+      try { n++; const got = await loadRatings(n % 20 === 0); if (got) { rerender(); } syncNote("Up to date " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })); }
       catch (e) { syncNote("Reconnecting…"); }
     }, CFG.refreshSeconds * 1000);
   }
