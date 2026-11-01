@@ -91,6 +91,11 @@ Leader Directions: dialog (`directionsDialog()`, prints on its own) and `site/di
 leader's working guide). Load (about 300 laptops at once, stress-tested Nov 2026): first screen loads only ratings and team
 sets; history and comments follow after a random 1-7 s; the update check runs every 30 s from a random start, full reload every
 20th check. The Before you begin popup sits above the header (the header covered its top on laptops).
+Google Site embed (https://sites.google.com/edi.qfschools.qa/ma3loomat/k-12-vertical-alignment, public): a Google Sites "whole
+page embed" (nested frames, sandbox allows scripts, popups, same-origin, downloads, storage access); the frame fills the window
+below Google's 120 px banner and menu, which stay on screen. Tested there Nov 2026 (walk-through, popups, storage, PDF link): all
+work. When framed (`FRAMED`), an "Open full page" link (header and Before you begin popup) opens the same link in a new tab for
+presenting. Load is the same as the direct site (GitHub Pages + Supabase); Google serves its own page.
 When a subject is complete the teacher sees a results page for it; confetti only when every subject on the link is done.
 The committee and "Explore" get the full tabs.
 Locked links: `?team=<name>` (optionally `&subject=`) for one team, `?grade=<K-12>` for every subject in a grade (each subject
