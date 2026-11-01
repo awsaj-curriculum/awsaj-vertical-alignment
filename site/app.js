@@ -85,13 +85,39 @@
   function getAllOnce(path) { const p = early.get(path); early.delete(path); return p || getAll(path); }
   const Q = { ratings: "ratings?select=*", events: "rating_events?select=*&order=created_at.desc&limit=300", comments: "comments?select=*&order=created_at.desc", sets: "team_sets?select=*" };
   async function rpc(fn, body) {
+    S.inflight = (S.inflight || 0) + 1;
+    try { return await rpc1(fn, body); } finally { S.inflight--; }
+  }
+  async function rpc1(fn, body) {
     const r = await fetch(`${CFG.supabaseUrl}/rest/v1/rpc/${fn}`, { method: "POST", headers: { ...H, "Content-Type": "application/json" }, body: JSON.stringify(body) });
-    if (!r.ok) { let m = await r.text(); try { m = JSON.parse(m).message || m; } catch (e) { /* keep text */ } throw new Error(m); }
+    if (!r.ok) { let m = await r.text(); try { m = JSON.parse(m).message || m; } catch (e) { /* keep text */ } const err = new Error(m); err.status = r.status; throw err; }
     return r.status === 204 ? null : r.json();
   }
   const rkey = (f, c, g) => `${f}|${c}|${g}`;
   const FRAMED = (() => { try { return self !== top; } catch (e) { return true; } })();   // inside the Google Site
-  const openFull = () => (FRAMED ? `<a class="open-full" href="${esc(location.href.split("#")[0])}" target="_blank" rel="noopener">Open full page ↗</a>` : "");
+  const openFull = () => (FRAMED ? `<button type="button" class="open-full" data-act="open-full" title="Open this page on its own in a new tab, right where you are">Open full page ↗</button>` : "");
+  // Open full page carries the teacher's place in the link (Tim, Nov 2026): inside the Google Site the browser keeps this
+  // frame's storage apart from a new tab, so the team, subject, view, the Before you begin pages already seen and, in the
+  // walk-through, the practice answers and tour step travel in the address. Real answers are already in the database.
+  function resumeUrl() {
+    const u = new URL(location.origin + location.pathname), qp = new URLSearchParams(location.search), set = (k, v) => v != null && v !== "" && u.searchParams.set(k, v);
+    for (const k of ["team", "grade", "subject"]) set(k, qp.get(k));   // a team or grade link stays the same link
+    set("resume", "1");
+    if (S.team && !S.lock && !S.practice) set("t", S.team.name);
+    if (S.explore) set("x", "1");
+    set("s", S.flow.subject); set("v", S.flow.view || store.get("va_tview")); set("z", S.flow.size || store.get("va_tsize"));
+    if (S.flow.howPage > 1) set("hp", S.flow.howPage);
+    set("how", howSeen().join("~"));
+    if (S.pq.size) set("pq", [...S.pq.values()].map((x) => [x.f, x.c, x.g, x.level == null ? "x" : x.level, x.team, x.at].join("|")).join("~"));   // answers still waiting to save
+    if (S.practice) { set("walk", "1"); set("pr", [...S.practice.ratings.values()].map((r) => `${r.framework}|${r.code}|${r.level}`).join("~")); if (S.tour) set("step", S.tour.i); }
+    return u.toString() + (mode() === "full" ? location.hash : "");
+  }
+  // Wait (up to 4 s) for any answer still being saved, then open the full page in the tab opened by the click.
+  function openFullPage() {
+    const w = window.open("about:blank", "_blank");
+    (async () => { const t0 = Date.now(); while (S.inflight > 0 && Date.now() - t0 < 4000) await new Promise((r) => setTimeout(r, 100));
+      const url = resumeUrl(); if (w) { try { w.opener = null; } catch (e) { /* fine */ } w.location.href = url; } else location.href = url; })();
+  }
   // The Walk-Through Example keeps its answers in its own map: practice only, never saved or mixed with real ratings.
   const RM = () => (S.practice ? S.practice.ratings : S.ratings);
   function rating(f, c, g) { return RM().get(rkey(f, c, g)); }
@@ -104,6 +130,7 @@
       S.ratings.set(rkey(r.framework, r.code, r.grade), r);
       if (!S.lastSync || r.updated_at > S.lastSync) S.lastSync = r.updated_at;
     }
+    pqApply();
     return rows.length;
   }
   async function loadEvents() { S.events = await getAllOnce(Q.events); }
@@ -157,6 +184,40 @@
     clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), action ? 10000 : 2600);
   }
   function syncNote(msg) { $("#sync").textContent = msg; }
+  // Continuous saving (Tim, Nov 2026). Every answer is sent the moment it is clicked. If the connection drops (busy school
+  // wifi), the answer stays on screen and in a queue kept on this laptop (localStorage "va_pending"), and is sent again
+  // every few seconds and when the connection comes back, until it is saved. A reload keeps the queue; closing the tab
+  // while answers are waiting asks first. Only a refusal from the database itself (not a network problem) is undone.
+  const PQ_KEY = "va_pending";
+  S.pq = new Map((() => { try { return JSON.parse(localStorage.getItem(PQ_KEY) || "[]"); } catch (e) { return []; } })().map((x) => [rkey(x.f, x.c, x.g), x]));
+  const pqPersist = () => { try { if (S.pq.size) localStorage.setItem(PQ_KEY, JSON.stringify([...S.pq.values()])); else localStorage.removeItem(PQ_KEY); } catch (e) { /* storage unavailable */ } };
+  const retryable = (err) => !err.status || err.status >= 500 || err.status === 408 || err.status === 429;
+  const pqSend = (x) => (x.level == null ? rpc("clear_rating", { p_framework: x.f, p_code: x.c, p_grade: x.g, p_team: x.team, p_device: S.device })
+    : rpc("set_rating", { p_framework: x.f, p_code: x.c, p_grade: x.g, p_level: x.level, p_team: x.team, p_device: S.device }));
+  function pqAdd(x) { S.pq.set(rkey(x.f, x.c, x.g), x); pqPersist(); saveNote(); S.pqShown = S.pq.size; rerender(); }
+  // Put waiting answers back on screen after ratings are (re)loaded from the database.
+  function pqApply() { for (const [k, x] of S.pq) { if (x.level == null) S.ratings.delete(k); else S.ratings.set(k, { framework: x.f, code: x.c, grade: x.g, level: x.level, team: x.team, updated_at: x.at }); } }
+  function saveNote() { if (S.pq.size) syncNote(`${S.pq.size} answer${S.pq.size > 1 ? "s" : ""} waiting to save, retrying…`); }
+  async function flushQueue() {
+    if (S.flushing || !S.pq.size) return; S.flushing = true;
+    try {
+      for (const [k, x] of [...S.pq]) {
+        try { await pqSend(x); if (S.pq.get(k) === x) S.pq.delete(k); }
+        catch (err) {
+          if (retryable(err)) break;   // still offline: try again later, in order
+          if (S.pq.get(k) === x) S.pq.delete(k);
+          toast(`Could not save ${x.c}: ${err.message}`);
+        }
+      }
+    } finally {
+      const had = S.pqShown; S.flushing = false; pqPersist(); S.pqShown = S.pq.size;
+      if (had !== S.pq.size && S.view === "flow") rerender();   // the waiting count on the rating page
+      if (S.pq.size) saveNote(); else syncNote("All answers saved " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+    }
+  }
+  setInterval(() => { if (S.pq.size && !document.hidden) flushQueue(); }, 5000);
+  addEventListener("online", () => flushQueue());
+  addEventListener("beforeunload", (ev) => { if (S.pq.size || S.inflight > 0) { flushQueue(); ev.preventDefault(); ev.returnValue = ""; } });
 
   const tabTeam = (t) => { try { sessionStorage.setItem("va_team", t); } catch (e) { /* storage blocked */ } };
   async function setRating(e, g, level) {
@@ -175,11 +236,15 @@
     const allDone = allBefore > 0 && teacherLeft(g) === 0;
     const party = allDone ? `Every standard for ${gname(g)} is rated. Thank you!` : "";
     const note = finished ? `Every ${finished} standard for ${gname(g)} is rated. Your results are ready.` : strandBefore > 0 && strandLeft(e, g) === 0 ? `${e.s}: every standard rated` : "";
+    const item = { f: e.f, c: e.c, g, level, team: S.team.name, at: new Date().toISOString() };
+    if (S.pq.has(k)) { pqAdd(item); flushQueue(); if (party) celebrate(party, undo); else toast(note || `${codeText(e)}, ${gname(g)}: ${LEVEL[level]}`, undo); return; }
     try {
+      syncNote("Saving…");
       await rpc("set_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_level: level, p_team: S.team.name, p_device: S.device });
-      syncNote("Saved " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      if (S.pq.size) saveNote(); else syncNote("All answers saved " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
       if (party) celebrate(party, undo); else toast(note || `${codeText(e)}, ${gname(g)}: ${LEVEL[level]}`, undo);
     } catch (err) {
+      if (retryable(err)) { pqAdd(item); toast("The connection dropped. Your answer is kept on this laptop and will save automatically. Keep going."); return; }
       if (before) S.ratings.set(k, before); else S.ratings.delete(k);
       rerender(); toast("Could not save: " + err.message);
     }
@@ -207,8 +272,11 @@
     if (S.practice) { RM().delete(rkey(e.f, e.c, g)); rerender(); tourPlace(); toast(`Practice: ${codeText(e)} answer taken off.`); return; }
     const k = rkey(e.f, e.c, g), now = S.ratings.get(k); if (!now) return;
     S.ratings.delete(k); rerender();
+    const item = { f: e.f, c: e.c, g, level: null, team: S.team.name, at: new Date().toISOString() };
+    if (S.pq.has(k)) { pqAdd(item); flushQueue(); toast(`${codeText(e)} answer taken off.`); return; }
     try { await rpc("clear_rating", { p_framework: e.f, p_code: e.c, p_grade: g, p_team: S.team.name, p_device: S.device }); toast(`${codeText(e)} answer taken off. It is back in Still to do.`); }
-    catch (err) { S.ratings.set(k, now); rerender(); toast("Could not remove: " + err.message); }
+    catch (err) { if (retryable(err)) { pqAdd(item); toast("The connection dropped. This change is kept on this laptop and will save automatically."); return; }
+      S.ratings.set(k, now); rerender(); toast("Could not remove: " + err.message); }
   }
   // Bring an answered standard back on screen with its answer showing, so it can be switched.
   function reviseAnswer(e, g) {
@@ -786,11 +854,12 @@
       ${hb("sets")} <button type="button" class="linkish" data-act="howto">How to</button></div>`;
     const title = flowTitle(F.subject, g, fwsNow);
     const practiceBar = S.practice ? `<div class="practice-bar"><b>Walk-Through Example</b><span>Practice only: nothing you click is saved. Grade 3 Math, ${list.length} sample standards.</span>
-      <button type="button" class="sm" data-act="tour">${S.tour ? "Tour is on" : "Step-by-step tour"}</button><button type="button" class="ghost sm" data-act="walk-exit">Exit to the team page</button> ${hb("walk")}</div>` : "";
+      <button type="button" class="sm" data-act="tour">${S.tour ? "Tour is on" : "Step-by-step tour"}</button><button type="button" class="ghost sm" data-act="walk-exit">Exit to the team page</button>${openFull()} ${hb("walk")}</div>` : "";
     const head = `${practiceBar}<div class="flow-head">${title}${pills}${setPills}
       <div class="flow-progress"><div class="fp-bar"><i style="width:${pct}%"></i></div>
       <span><b>${done}</b> of ${list.length} rated · <b>${left}</b> left ${hb("flow")}</span></div>
-      <p class="saved-note muted">Every answer saves the moment you click it. You can stop and come back any time with the same link.</p></div>`;
+      ${S.pq.size && !S.practice ? `<p class="pq-note" role="status"><b>${S.pq.size} answer${S.pq.size > 1 ? "s are" : " is"} waiting to save.</b> ${S.pq.size > 1 ? "They are" : "It is"} kept on this laptop and will save automatically when the connection is back. Please keep this page open. ${hb("sync")}</p>` : ""}
+      <p class="saved-note muted">Every answer saves the moment you click it. You can stop and come back any time with the same link. ${openFull()}${FRAMED ? hb("open_full") : ""}</p></div>`;
     let body;
     if (results) body = resultsPage(F.subject, g, list, subs);
     else if (view === "all") body = viewBar(view) + levelKey() + allView(list, g);
@@ -2440,6 +2509,7 @@
       if (S.tour) { S.tour.i = TOUR.findIndex((x) => x.page === S.flow.howPage); tourShow(); } }
     else if (act === "sets-change") { S.flow.choose = S.flow.subject; rerender(); }
     else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
+    else if (act === "open-full") openFullPage();
     else if (act === "walk") startWalk();
     else if (act === "walk-exit") { setTeam(""); tabTeam(""); scrollTo({ top: 0 }); }
     else if (act === "tour") { if (!S.tour) { S.tour = { i: TOUR.findIndex((x) => x.page === "rate") }; tourShow(); } }
@@ -2595,7 +2665,7 @@
   // Inside the Google Site (an embed), Google's banner and menu take the top of the window. This button opens the site
   // on its own in a new tab (Tim, Nov 2026: for presenting); it keeps the same team or grade link.
   (() => { const framed = FRAMED;
-    const w = $("#open-full"), b = w && $("a", w); if (b && framed) { w.hidden = false; b.addEventListener("click", () => { b.href = location.href.split("#")[0]; }); } })();
+    const w = $("#open-full"); if (w && framed) w.hidden = false; })();
   function tabFade() { const t = $(".tabs"); if (!t) return; t.classList.toggle("more-right", t.scrollLeft + t.clientWidth < t.scrollWidth - 4); t.classList.toggle("more-left", t.scrollLeft > 4); }
   $(".tabs").addEventListener("scroll", tabFade, { passive: true }); addEventListener("resize", tabFade); setTimeout(tabFade, 0);
   $$(".tabs [data-view]").forEach((b) => b.addEventListener("click", () => {
@@ -2724,8 +2794,12 @@
     else if (lgTeam) { S.lock = { grade: lg }; document.body.dataset.lock = "1"; setTeam(lgTeam.name); }
     // Many people share devices, so every new visit starts on the team page (Tim, Oct 2026). The team is kept only for
     // this browser tab (a reload stays on it); a new tab or a new visit asks again.
-    else { let saved = ""; try { saved = sessionStorage.getItem("va_team") || ""; } catch (e) { /* storage blocked: ask again */ }
+    else { let saved = qp.get("resume") ? qp.get("t") || "" : ""; if (!saved) try { saved = sessionStorage.getItem("va_team") || ""; } catch (e) { /* storage blocked: ask again */ }
+      if (saved) tabTeam(saved);
       if (saved && S.teams.some((t) => t.name === saved)) { $("#team").value = saved; setTeam(saved); } }
+    const rs = qp.get("resume") ? qp : null;
+    if (rs) { if (rs.get("how")) try { sessionStorage.setItem("va_howto", JSON.stringify(rs.get("how").split("~"))); } catch (e) { /* storage blocked */ }
+      if (rs.get("x") && S.team) S.explore = true; }
     const v = store.get("va_view"); S.applyingHash = false;
     if (applyHash()) { /* the address named the page and filters */ }
     else if (mode() === "full" && v && v !== "flow" && $(`.tabs [data-view="${v}"]`)) $(`.tabs [data-view="${v}"]`).click();
@@ -2734,8 +2808,29 @@
     rpc("clear_rating", { p_framework: "", p_code: "", p_grade: "", p_team: "", p_device: "" }).then(() => {}, (err) => { S.canClear = /unknown team/i.test(err.message); if (S.canClear) rerender(); });
     // About 300 people may open the site at once (Tim, Nov 2026): the first screen needs only the ratings and team sets.
     // The change history and comments follow after a short random wait, so the requests do not all arrive together.
-    try { await Promise.all([loadRatings(true), loadTeamSets()]); syncNote("Up to date"); rerender(); }
+    try { await Promise.all([loadRatings(true), loadTeamSets()]); syncNote("Up to date"); rerender(); if (S.pq.size) { saveNote(); flushQueue(); } }
     catch (err) { syncNote("Offline: ratings could not load"); }
+    // Opened with Open full page: carry on where the teacher was (after the ratings and sets have loaded), then tidy
+    // the address (a team or grade link stays).
+    if (rs) {
+      for (const x of (rs.get("pq") || "").split("~").filter(Boolean)) { const [f, c, g, l, team, at] = x.split("|"); S.pq.set(rkey(f, c, g), { f, c, g, level: l === "x" ? null : +l, team, at }); }
+      if (rs.get("pq")) { pqPersist(); pqApply(); saveNote(); flushQueue(); }
+      if (rs.get("walk")) {
+        startWalk();
+        for (const x of (rs.get("pr") || "").split("~").filter(Boolean)) { const [f, c, l] = x.split("|"); S.practice.ratings.set(rkey(f, c, "3"), { framework: f, code: c, grade: "3", level: +l, team: SAMPLE_TEAM.name }); }
+        if (rs.get("step") != null) S.tour.i = Math.min(TOUR.length - 1, +rs.get("step")); else S.tour = null;
+      }
+      if (rs.get("s") && S.team && flowSubjects().includes(rs.get("s"))) S.flow.subject = rs.get("s");
+      // A subject whose Before you begin pages were already done goes straight to its standards (sets as before).
+      if (S.team && !S.practice && S.flow.subject && howSeen().includes(howKey(S.flow.subject, teamGrade())) && !chosen(S.flow.subject, S.team))
+        (S.teamSets[S.team.name] ||= {})[S.flow.subject] = setsFor(S.flow.subject, teamGrade(), S.team);
+      if (["all", "one"].includes(rs.get("v"))) S.flow.view = rs.get("v");
+      if (["s", "m", "l"].includes(rs.get("z"))) S.flow.size = rs.get("z");
+      if (+rs.get("hp") > 1) S.flow.howPage = +rs.get("hp");
+      rerender(); if (S.tour) tourShow(); else if (S.practice) tourEnd();
+      const keep = new URLSearchParams(); for (const k of ["team", "grade", "subject"]) if (qp.get(k)) keep.set(k, qp.get(k));
+      history.replaceState(null, "", location.pathname + (keep.toString() ? "?" + keep : "") + location.hash);
+    }
     // Once everything is showing, fetch the current subject's full text in the background so the first popup opens at once.
     const idle = window.requestIdleCallback || ((f) => setTimeout(f, 1500));
     idle(() => { const sub = subj(); if (sub) loadDetail(sub.slug).catch(() => {}); });
@@ -2746,7 +2841,7 @@
     await new Promise((r) => setTimeout(r, Math.random() * CFG.refreshSeconds * 1000));
     setInterval(async () => {
       if (document.hidden) return;
-      try { n++; const got = await loadRatings(n % 20 === 0); if (got) { rerender(); } syncNote("Up to date " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })); }
+      try { n++; const got = await loadRatings(n % 20 === 0); if (got) { rerender(); } if (!S.pq.size) syncNote("Up to date " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })); }
       catch (e) { syncNote("Reconnecting…"); }
     }, CFG.refreshSeconds * 1000);
   }
