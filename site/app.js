@@ -90,6 +90,8 @@
     return r.status === 204 ? null : r.json();
   }
   const rkey = (f, c, g) => `${f}|${c}|${g}`;
+  const FRAMED = (() => { try { return self !== top; } catch (e) { return true; } })();   // inside the Google Site
+  const openFull = () => (FRAMED ? `<a class="open-full" href="${esc(location.href.split("#")[0])}" target="_blank" rel="noopener">Open full page ↗</a>` : "");
   // The Walk-Through Example keeps its answers in its own map: practice only, never saved or mixed with real ratings.
   const RM = () => (S.practice ? S.practice.ratings : S.ratings);
   function rating(f, c, g) { return RM().get(rkey(f, c, g)); }
@@ -714,7 +716,7 @@
     const step = (n, title, body) => `<li><span class="hs-n">${n}</span><div><b>${title}</b>${body}</div></li>`;
     // Three pages in a popup, each moved on with Next: 1 what you are rating, 2 the whole school, 3 how to rate.
     const pg = S.flow.howPage || 1, dots = [1, 2, 3].map((n) => `<i class="${n === pg ? "on" : ""}"></i>`).join("");
-    const nav = (back, next) => `<div class="how-nav"><button type="button" class="linkish how-home" data-act="home">${S.practice ? "Exit the walk-through" : "Team page"}</button><span class="how-dots" aria-label="Page ${pg} of 3">${dots}</span>
+    const nav = (back, next) => `<div class="how-nav"><button type="button" class="linkish how-home" data-act="home">${S.practice ? "Exit the walk-through" : "Team page"}</button>${openFull()}<span class="how-dots" aria-label="Page ${pg} of 3">${dots}</span>
       ${back ? `<button type="button" class="ghost" data-act="how-page" data-p="${pg - 1}">Back</button>` : ""}${next}</div>`;
     const pages = {
       1: `${flowTitle(subject, g, shown)}
@@ -2590,6 +2592,10 @@
   document.addEventListener("mousemove", (ev) => { if (!tip.hidden) { tip.style.left = Math.max(8, Math.min(ev.clientX + 14, innerWidth - tip.offsetWidth - 12)) + "px"; tip.style.top = (ev.clientY + 18 + tip.offsetHeight > innerHeight ? Math.max(8, ev.clientY - tip.offsetHeight - 12) : ev.clientY + 14) + "px"; } });
 
   // Phones: fade the tab row at the end(s) where more tabs are hidden, so it is clear it scrolls sideways.
+  // Inside the Google Site (an embed), Google's banner and menu take the top of the window. This button opens the site
+  // on its own in a new tab (Tim, Nov 2026: for presenting); it keeps the same team or grade link.
+  (() => { const framed = FRAMED;
+    const w = $("#open-full"), b = w && $("a", w); if (b && framed) { w.hidden = false; b.addEventListener("click", () => { b.href = location.href.split("#")[0]; }); } })();
   function tabFade() { const t = $(".tabs"); if (!t) return; t.classList.toggle("more-right", t.scrollLeft + t.clientWidth < t.scrollWidth - 4); t.classList.toggle("more-left", t.scrollLeft > 4); }
   $(".tabs").addEventListener("scroll", tabFade, { passive: true }); addEventListener("resize", tabFade); setTimeout(tabFade, 0);
   $$(".tabs [data-view]").forEach((b) => b.addEventListener("click", () => {
