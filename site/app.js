@@ -798,7 +798,7 @@
       3: `<h2>How to rate, step by step</h2>
       <ol class="how-steps">
         ${step(1, "Check the title", `<p>It shows your grade and subject (or your course). Every standard on the page belongs to it.</p>`)}
-        ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${DF(g).def.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}<p class="ans-note-b">${DF(g).note}</p></div>`)}
+        ${step(2, "Read each standard and choose the level of teaching exposure in your grade", `<div class="how-defs">${DF(g).def.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}<p class="ans-note-b">${DF(g).note}</p></div>`)}
         ${step(3, "Change or take off an answer", `<p>Click a different answer to change it. Click the chosen answer again to take it off.</p>`)}
         ${step(4, "Choose how to see the standards", `<p><b>All at once</b> (Small, Medium or Large) or <b>One at a time</b>. Use <b>Find</b> to search. Rest the mouse on an answer button to see what it means.</p>`)}
         ${step(5, "Finish", `<p>Press <b>Finish</b> at the bottom. It lists anything not answered yet.</p>`)}
@@ -902,8 +902,8 @@
       ["Introduced / exposed", "Anything in between. For example, if only 3 out of 5 classes teach and assess it, choose Introduced, not Taught in depth."],
       ["Taught in depth", "ALL classes in our grade level consistently teach, reteach, review and assess this standard."]],
     ex: ["Example: none of the classes in the grade teach it this year.", "Example: some classes teach and assess it and others do not, or every class only touches on it.", "Example: every class in the grade has lessons on it, reteaches and reviews it, and assesses it."],
-    note: "All or nothing: choose Taught in depth only when ALL classes in your grade level teach, reteach, review and assess the standard; if only some do, choose Introduced. Classes are not all the same, and the answers should show that. The goal is an accurate picture across all our classrooms, not just one class. It is about the teaching, not how well students learn. For information only: it does not evaluate your teaching, and there is no right answer.",
-    short: "All or nothing: In depth only when ALL classes in the grade teach it · some classes = Introduced · not student results · no right answer",
+    note: "These answers are about the level of teaching exposure in your grade, not the level of student learning or performance. All or nothing: choose Taught in depth only when ALL classes in your grade level teach, reteach, review and assess the standard; if only some do, choose Introduced. Classes are not all the same, and the answers should show that. The goal is an accurate picture across all our classrooms, not just one class. For information only: it does not evaluate your teaching, and there is no right answer.",
+    short: "Level of teaching exposure, not student learning or performance · All or nothing: In depth only when ALL classes teach it · no right answer",
   };
   const DF = () => DEFS;
   const LEVEL_DEF = DEFS.def;
@@ -923,25 +923,25 @@
     sample: ["WI-CC-MATH|M.3.OA.A.1", "WI-CC-MATH|M.3.OA.C.6", "WI-CC-MATH|M.3.NF.A.1", "WI-CC-MATH|M.3.MD.A.1", "WI-CC-MATH|M.3.MD.B.3", "WI-CC-MATH|M.3.G.A.1", "WI-EE-MATH|M.EE.3.NF.1", "WI-EE-MATH|M.EE.3.OA.1"] };
   const EX_ROW = "#r-WI_CC_MATH_M_3_NF_A_1_3";   // rowId() of the worked example, M.3.NF.A.1 in Grade 3
   const TOUR = [
-    { page: 1, sel: null, t: "Welcome to the Walk-Through Example", d: "This walk-through will help you understand what you will do and how to do it. It uses a sample team (Grade 3 Math) to show you, step by step, the standards you will see, the standards for the whole school, and how to answer for each standard. Nothing you click here is saved. When it is finished, you will open your own team and rate your grade's standards. Press Next to begin." },
-    { page: 1, sel: ".how-to .flow-title", t: "What you are rating", d: "The large title shows the grade and subject (or course). Every standard on the page belongs to it, so you always know where you are." },
-    { page: 1, sel: ".how-to .set-sum", t: "Your standard sets", d: "The sets your grade rates, with how many standards each has and where they come from. Each set has its own badge; rest the mouse on a badge to read about it." },
-    { page: 2, sel: ".how-to .school-sets", t: "Standards across the whole school", d: "What every grade and subject at Awsaj rates, K-5, 6-8 and 9-12. Together the answers make one K-12 picture." },
-    { page: 2, sel: ".how-to .school-sets tr.here", t: "Your row", d: "Your own band is highlighted, so you can see where your grade sits." },
-    { page: 3, sel: ".how-steps li:nth-child(2)", t: "The three answers", d: "All or nothing, K-12: Taught in depth only when ALL classes in your grade teach, reteach, review and assess it. If only some do (say 3 of 5), choose Introduced. Not taught when no class does. It is about the teaching, not student results, and there is no right answer." },
-    { page: 3, sel: ".how-steps", t: "How to rate, step by step", d: "Check the title, choose an answer for each standard, change or take off an answer, choose how to see the standards, then press Finish." },
-    { page: 3, sel: '.how-nav [data-act="sets-save"]', t: "Begin rating", d: "When everyone is ready, press Begin rating (or Next here)." },
-    { page: "rate", sel: ".practice-bar", t: "Practice only", d: "This is the Walk-Through Example: nothing you click is saved. Your own team's page looks the same." },
-    { page: "rate", sel: ".flow-title h1", t: "The title", d: "Grade 3 Mathematics, and the standard sets it uses. Check it before you start." },
-    { page: "rate", sel: ".set-pills", t: "Your standard sets", d: "Each set with how many standards are left. Click one to see only that set. How to opens the Before you begin pages again." },
-    { page: "rate", sel: ".flow-progress > span", t: "Progress", d: "How many are rated and how many are left. Every answer saves the moment you click it, so you can stop and come back with the same link." },
-    { page: "rate", sel: ".view-bar .seg-t", t: "How to see the standards", d: "All at once (Small, Medium or Large text) or One at a time. Find searches by code or words." },
-    { page: "rate", sel: ".lvl-key", t: "The answers", d: "The three answers, with the rule for your grade underneath. Rest the mouse on an answer button for a moment to read its meaning." },
-    { page: "rate", sel: EX_ROW + " .tr-code", t: "A standard's code", d: "The Wisconsin code in bold with the Common Core (CCSS) code underneath, and the set's badge. ★ Power marks a standard the school's documents name as a focus for this grade." },
-    { page: "rate", sel: EX_ROW + " .tr-text", t: "Read the whole standard", d: "Ask: which classes in our grade teach this? All of them, with reteaching, review and assessment? Only some, or only briefly? None?" },
-    { page: "rate", sel: EX_ROW + " .tr-ans", t: "Try it: choose an answer", d: "Click the answer that fits every class in your grade (In depth only if ALL classes teach it). Click it again to take it off, or click another to change it. (Practice: not saved.)" },
-    { page: "rate", sel: ".lib-tabs", t: "Filters", d: "All, Still to do, Done and ★ Power (or Priority). Use Still to do to find what is left." },
-    { page: "rate", sel: ".flow-more", t: "Finish", d: "Press Finish at the bottom. It lists anything not answered yet. When every subject is done you see your results." },
+    { page: 1, sel: null, t: "Welcome to the Walk-Through Example", d: "A short practice run with a sample team (Grade 3 Math). You will rate the level of teaching exposure in your grade, not student learning. Nothing is saved here." },
+    { page: 1, sel: ".how-to .flow-title", t: "What you are rating", d: "The title shows the grade and subject (or course) you are rating." },
+    { page: 1, sel: ".how-to .set-sum", t: "Your standard sets", d: "The sets your grade rates. Rest the mouse on a badge to learn about it." },
+    { page: 2, sel: ".how-to .school-sets", t: "Standards across the whole school", d: "What every grade and subject at Awsaj rates: K-5, 6-8 and 9-12." },
+    { page: 2, sel: ".how-to .school-sets tr.here", t: "Your row", d: "Your grade's row is highlighted." },
+    { page: 3, sel: ".how-steps li:nth-child(2)", t: "The three answers", d: "Rate the level of teaching exposure, not student learning or performance. All or nothing: In depth = ALL classes teach, reteach, review, assess it. Introduced = only some, or briefly. Not taught = no class." },
+    { page: 3, sel: ".how-steps", t: "How to rate, step by step", d: "Check the title, answer each standard, change if needed, then press Finish." },
+    { page: 3, sel: '.how-nav [data-act="sets-save"]', t: "Begin rating", d: "Press Begin rating to start." },
+    { page: "rate", sel: ".practice-bar", t: "Practice only", d: "This is the practice team: nothing you click is saved." },
+    { page: "rate", sel: ".flow-title h1", t: "The title", d: "Check the grade and subject before you start." },
+    { page: "rate", sel: ".set-pills", t: "Your standard sets", d: "Each set, with how many are left. Click one to see only that set." },
+    { page: "rate", sel: ".flow-progress > span", t: "Progress", d: "How many are rated and how many are left. Answers save as you click." },
+    { page: "rate", sel: ".view-bar .seg-t", t: "How to see the standards", d: "All at once (Small, Medium, Large) or One at a time. Find searches." },
+    { page: "rate", sel: ".lvl-key", t: "The answers", d: "The three answers and the rule. Rest the mouse on a button to see its meaning." },
+    { page: "rate", sel: EX_ROW + " .tr-code", t: "A standard's code", d: "The Wisconsin code in bold, the Common Core (CCSS) code below. ★ Power = a focus standard." },
+    { page: "rate", sel: EX_ROW + " .tr-text", t: "Read the whole standard", d: "Ask: do ALL our classes teach it, only some, or none?" },
+    { page: "rate", sel: EX_ROW + " .tr-ans", t: "Try it: choose an answer", d: "Click an answer. Click it again to take it off. (Practice: not saved.)" },
+    { page: "rate", sel: ".lib-tabs", t: "Filters", d: "All, Still to do, Done, ★ Power. Still to do shows what is left." },
+    { page: "rate", sel: ".flow-more", t: "Finish", d: "Press Finish. It lists anything not answered yet." },
   ];
   const howUnmark = (k) => { try { sessionStorage.setItem("va_howto", JSON.stringify(howSeen().filter((x) => x !== k))); } catch (e) { /* storage blocked */ } };
   function startWalk() {
@@ -961,17 +961,27 @@
     }
   }
   const zoomBoxes = () => [$(".how-modal .how-to"), $("#view-flow")].filter(Boolean);
+  // The explanations sit in their own panel (Tim, Nov 2026: never cover the page): a strip on the right on laptops, along
+  // the bottom on phones. The page and the Before you begin popup shrink to the rest of the window (body.touring).
+  const tourSide = () => innerWidth >= 760;
+  const tourPanel = () => (tourSide() ? { w: Math.min(360, Math.round(innerWidth * 0.3)), h: 0 } : { w: 0, h: 210 });
   function tourShow() {
     if (!S.tour) return;
+    const P = tourPanel(); document.body.classList.add("touring");
+    document.documentElement.style.setProperty("--tour-w", P.w + "px"); document.documentElement.style.setProperty("--tour-h", P.h + "px");
     const st = TOUR[S.tour.i]; tourPage(st);
     zoomBoxes().forEach((x) => (x.style.zoom = ""));
     const t = st.sel ? $(st.sel) : null, box = typeof st.page === "number" ? $(".how-modal .how-to") : $("#view-flow");
     if (t && box) {
       // Zoom in so the feature's contents fill much of the screen (at most 2x), then scroll them just above the middle,
       // clear of the explanation card. Wide bars are measured by what is in them, not their full width.
-      const r = tourRect(t), z = Math.max(1, Math.min(2, (innerWidth * 0.86) / Math.max(r.width, 1), (innerHeight * 0.45) / Math.max(r.height, 1)));
-      box.style.zoom = z.toFixed(2); box.classList.add("touring");   // the popup card stops scrolling inside itself
-      const c = tourRect(t), dx = c.left + c.width / 2 - innerWidth / 2, dy = c.top + c.height / 2 - innerHeight * 0.36, sc = typeof st.page === "number" ? $(".how-modal") : null;
+      const W = innerWidth - P.w, H = innerHeight - P.h;   // the part of the window the page has
+      const r = tourRect(t), z = tourSide() ? Math.max(1, Math.min(2, (W * 0.86) / Math.max(r.width, 1), (H * 0.8) / Math.max(r.height, 1))) : 1;
+      box.classList.add("touring");   // the popup card stops scrolling inside itself
+      // Zooming re-wraps text, so check the result and step back until the feature fits beside the panel.
+      let zz = z; box.style.zoom = zz.toFixed(2);
+      for (let k = 0; k < 12 && zz > 1; k++) { const q = tourRect(t); if (q.width <= W - 24 && q.height <= H - 24 && q.right <= W - 8) break; zz = Math.max(1, zz - 0.1); box.style.zoom = zz.toFixed(2); }
+      const c = tourRect(t), dx = c.left + c.width / 2 - W / 2, dy = c.height > H * 0.9 ? c.top - 12 : c.top + c.height / 2 - H / 2, sc = typeof st.page === "number" ? $(".how-modal") : null;
       if (sc) { sc.scrollLeft += dx; sc.scrollTop += dy; } else scrollBy(dx, dy);
     }
     let o = $("#tour"); if (!o) { o = document.createElement("div"); o.id = "tour"; document.body.append(o); }
@@ -985,22 +995,17 @@
   function tourPlace() {
     const o = $("#tour"); if (!S.tour || !o || o.hidden) return;
     const sel = TOUR[S.tour.i].sel, t = sel ? $(sel) : null, ring = $(".tour-ring", o), card = $(".tour-card", o);
-    const put = (x, y) => Object.assign(card.style, { left: x + "px", top: y + "px" });
-    const cw = card.offsetWidth, ch = card.offsetHeight, m = 14, corners = [[innerWidth - cw - m, innerHeight - ch - m], [m, innerHeight - ch - m], [innerWidth - cw - m, m], [m, m]];
-    if (!t) { ring.hidden = true; put(...corners[0]); return; }   // the welcome card: bottom right, the page stays visible
+    if (!t) { ring.hidden = true; return; }
     const r = tourRect(t), pad = 8; ring.hidden = false;
     Object.assign(ring.style, { left: r.left - pad + "px", top: r.top - pad + "px", width: r.width + pad * 2 + "px", height: r.height + pad * 2 + "px" });
-    // The small card goes to the corner that covers the least of the highlighted feature (Tim, Nov 2026: keep the view clear).
-    const cover = ([x, y]) => Math.max(0, Math.min(x + cw, r.right + pad) - Math.max(x, r.left - pad)) * Math.max(0, Math.min(y + ch, r.bottom + pad) - Math.max(y, r.top - pad));
-    put(...corners.reduce((a, b) => (cover(b) < cover(a) ? b : a)));
   }
   // The box around what is actually inside an element (a wide bar with three buttons is as wide as the buttons).
   function tourRect(t) { const rg = document.createRange(); rg.selectNodeContents(t); const a = rg.getBoundingClientRect(), b = t.getBoundingClientRect();
     if (!a.width || !a.height) return b;
     const top = Math.min(a.top, b.top), bottom = Math.max(a.bottom, b.bottom);   // full height of the box, width of what is in it
     return { left: a.left, right: a.right, width: a.width, top, bottom, height: bottom - top }; }
-  function tourEnd() { S.tour = null; zoomBoxes().forEach((x) => { x.style.zoom = ""; x.classList.remove("touring"); }); const o = $("#tour"); if (o) o.hidden = true; if (S.practice) rerender(); }
-  addEventListener("scroll", () => tourPlace(), true); addEventListener("resize", () => tourPlace());
+  function tourEnd() { S.tour = null; document.body.classList.remove("touring"); zoomBoxes().forEach((x) => { x.style.zoom = ""; x.classList.remove("touring"); }); const o = $("#tour"); if (o) o.hidden = true; if (S.practice) rerender(); }
+  addEventListener("scroll", () => tourPlace(), true); addEventListener("resize", () => { if (S.tour) tourShow(); });
   document.addEventListener("keydown", (ev) => {
     if (!S.tour || ev.target.closest("input, textarea, select")) return;
     if (ev.key === "ArrowRight") { ev.preventDefault(); $('#tour [data-act="tour-next"]').click(); }
