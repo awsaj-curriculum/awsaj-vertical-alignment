@@ -961,17 +961,27 @@
     }
   }
   const zoomBoxes = () => [$(".how-modal .how-to"), $("#view-flow")].filter(Boolean);
+  // The explanations sit in their own panel (Tim, Nov 2026: never cover the page): a strip on the right on laptops, along
+  // the bottom on phones. The page and the Before you begin popup shrink to the rest of the window (body.touring).
+  const tourSide = () => innerWidth >= 760;
+  const tourPanel = () => (tourSide() ? { w: Math.min(360, Math.round(innerWidth * 0.3)), h: 0 } : { w: 0, h: 210 });
   function tourShow() {
     if (!S.tour) return;
+    const P = tourPanel(); document.body.classList.add("touring");
+    document.documentElement.style.setProperty("--tour-w", P.w + "px"); document.documentElement.style.setProperty("--tour-h", P.h + "px");
     const st = TOUR[S.tour.i]; tourPage(st);
     zoomBoxes().forEach((x) => (x.style.zoom = ""));
     const t = st.sel ? $(st.sel) : null, box = typeof st.page === "number" ? $(".how-modal .how-to") : $("#view-flow");
     if (t && box) {
       // Zoom in so the feature's contents fill much of the screen (at most 2x), then scroll them just above the middle,
       // clear of the explanation card. Wide bars are measured by what is in them, not their full width.
-      const r = tourRect(t), z = Math.max(1, Math.min(2, (innerWidth * 0.86) / Math.max(r.width, 1), (innerHeight * 0.45) / Math.max(r.height, 1)));
-      box.style.zoom = z.toFixed(2); box.classList.add("touring");   // the popup card stops scrolling inside itself
-      const c = tourRect(t), dx = c.left + c.width / 2 - innerWidth / 2, dy = c.top + c.height / 2 - innerHeight * 0.36, sc = typeof st.page === "number" ? $(".how-modal") : null;
+      const W = innerWidth - P.w, H = innerHeight - P.h;   // the part of the window the page has
+      const r = tourRect(t), z = tourSide() ? Math.max(1, Math.min(2, (W * 0.86) / Math.max(r.width, 1), (H * 0.8) / Math.max(r.height, 1))) : 1;
+      box.classList.add("touring");   // the popup card stops scrolling inside itself
+      // Zooming re-wraps text, so check the result and step back until the feature fits beside the panel.
+      let zz = z; box.style.zoom = zz.toFixed(2);
+      for (let k = 0; k < 12 && zz > 1; k++) { const q = tourRect(t); if (q.width <= W - 24 && q.height <= H - 24 && q.right <= W - 8) break; zz = Math.max(1, zz - 0.1); box.style.zoom = zz.toFixed(2); }
+      const c = tourRect(t), dx = c.left + c.width / 2 - W / 2, dy = c.height > H * 0.9 ? c.top - 12 : c.top + c.height / 2 - H / 2, sc = typeof st.page === "number" ? $(".how-modal") : null;
       if (sc) { sc.scrollLeft += dx; sc.scrollTop += dy; } else scrollBy(dx, dy);
     }
     let o = $("#tour"); if (!o) { o = document.createElement("div"); o.id = "tour"; document.body.append(o); }
@@ -985,22 +995,17 @@
   function tourPlace() {
     const o = $("#tour"); if (!S.tour || !o || o.hidden) return;
     const sel = TOUR[S.tour.i].sel, t = sel ? $(sel) : null, ring = $(".tour-ring", o), card = $(".tour-card", o);
-    const put = (x, y) => Object.assign(card.style, { left: x + "px", top: y + "px" });
-    const cw = card.offsetWidth, ch = card.offsetHeight, m = 14, corners = [[innerWidth - cw - m, innerHeight - ch - m], [m, innerHeight - ch - m], [innerWidth - cw - m, m], [m, m]];
-    if (!t) { ring.hidden = true; put(...corners[0]); return; }   // the welcome card: bottom right, the page stays visible
+    if (!t) { ring.hidden = true; return; }
     const r = tourRect(t), pad = 8; ring.hidden = false;
     Object.assign(ring.style, { left: r.left - pad + "px", top: r.top - pad + "px", width: r.width + pad * 2 + "px", height: r.height + pad * 2 + "px" });
-    // The small card goes to the corner that covers the least of the highlighted feature (Tim, Nov 2026: keep the view clear).
-    const cover = ([x, y]) => Math.max(0, Math.min(x + cw, r.right + pad) - Math.max(x, r.left - pad)) * Math.max(0, Math.min(y + ch, r.bottom + pad) - Math.max(y, r.top - pad));
-    put(...corners.reduce((a, b) => (cover(b) < cover(a) ? b : a)));
   }
   // The box around what is actually inside an element (a wide bar with three buttons is as wide as the buttons).
   function tourRect(t) { const rg = document.createRange(); rg.selectNodeContents(t); const a = rg.getBoundingClientRect(), b = t.getBoundingClientRect();
     if (!a.width || !a.height) return b;
     const top = Math.min(a.top, b.top), bottom = Math.max(a.bottom, b.bottom);   // full height of the box, width of what is in it
     return { left: a.left, right: a.right, width: a.width, top, bottom, height: bottom - top }; }
-  function tourEnd() { S.tour = null; zoomBoxes().forEach((x) => { x.style.zoom = ""; x.classList.remove("touring"); }); const o = $("#tour"); if (o) o.hidden = true; if (S.practice) rerender(); }
-  addEventListener("scroll", () => tourPlace(), true); addEventListener("resize", () => tourPlace());
+  function tourEnd() { S.tour = null; document.body.classList.remove("touring"); zoomBoxes().forEach((x) => { x.style.zoom = ""; x.classList.remove("touring"); }); const o = $("#tour"); if (o) o.hidden = true; if (S.practice) rerender(); }
+  addEventListener("scroll", () => tourPlace(), true); addEventListener("resize", () => { if (S.tour) tourShow(); });
   document.addEventListener("keydown", (ev) => {
     if (!S.tour || ev.target.closest("input, textarea, select")) return;
     if (ev.key === "ArrowRight") { ev.preventDefault(); $('#tour [data-act="tour-next"]').click(); }

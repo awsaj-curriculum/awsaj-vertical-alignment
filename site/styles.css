@@ -1079,3 +1079,12 @@ button.open-full, button.open-full:hover { background: #fff; color: var(--brand)
 .pq-note { background: #fff7ea; border: 2px solid var(--accent); border-radius: 10px; padding: 8px 12px; margin: 8px 0; }
 .how-band { margin: 10px 0 2px !important; color: var(--brand); } .how-sec { margin-top: 10px; padding-top: 6px; border-top: 1px solid var(--line); }
 .dir h4 { margin: 12px 0 4px; color: var(--ink); }
+/* The walk-through's explanations in their own panel, never over the page (Tim, Nov 2026). */
+body.touring { padding-right: var(--tour-w); padding-bottom: var(--tour-h); }
+body.touring .how-modal { right: var(--tour-w); bottom: var(--tour-h); }
+body.touring #tour .tour-ring { box-shadow: none; }
+body.touring #tour .tour-card { left: auto !important; top: 0 !important; right: 0; bottom: 0; width: var(--tour-w) !important; border-radius: 0; transform: none !important;
+  display: flex; flex-direction: column; justify-content: center; padding: 22px 20px !important; background: #000 !important; overflow-y: auto; }
+body.touring #tour .tour-card h3 { font-size: 21px; } body.touring #tour .tour-card p { font-size: 15.5px; }
+@media (max-width: 759px) { body.touring #tour .tour-card { top: auto !important; left: 0 !important; width: auto !important; height: var(--tour-h); justify-content: flex-start; padding: 12px 14px !important; }
+  body.touring #tour .tour-card h3 { font-size: 17px; } body.touring #tour .tour-card p { font-size: 14px; } }
