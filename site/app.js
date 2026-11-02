@@ -923,25 +923,14 @@
     sample: ["WI-CC-MATH|M.3.OA.A.1", "WI-CC-MATH|M.3.OA.C.6", "WI-CC-MATH|M.3.NF.A.1", "WI-CC-MATH|M.3.MD.A.1", "WI-CC-MATH|M.3.MD.B.3", "WI-CC-MATH|M.3.G.A.1", "WI-EE-MATH|M.EE.3.NF.1", "WI-EE-MATH|M.EE.3.OA.1"] };
   const EX_ROW = "#r-WI_CC_MATH_M_3_NF_A_1_3";   // rowId() of the worked example, M.3.NF.A.1 in Grade 3
   const TOUR = [
-    { page: 1, sel: null, t: "Welcome to the Walk-Through Example", d: "A short practice run with a sample team (Grade 3 Math). You will rate the level of teaching exposure in your grade, not student learning. Nothing is saved here." },
-    { page: 1, sel: ".how-to .flow-title", t: "What you are rating", d: "The title shows the grade and subject (or course) you are rating." },
-    { page: 1, sel: ".how-to .set-sum", t: "Your standard sets", d: "The sets your grade rates. Rest the mouse on a badge to learn about it." },
-    { page: 2, sel: ".how-to .school-sets", t: "Standards across the whole school", d: "What every grade and subject at Awsaj rates: K-5, 6-8 and 9-12." },
-    { page: 2, sel: ".how-to .school-sets tr.here", t: "Your row", d: "Your grade's row is highlighted." },
-    { page: 3, sel: ".how-steps li:nth-child(2)", t: "The three answers", d: "Rate the level of teaching exposure, not student learning or performance. All or nothing: In depth = ALL classes teach, reteach, review, assess it. Introduced = only some, or briefly. Not taught = no class." },
-    { page: 3, sel: ".how-steps", t: "How to rate, step by step", d: "Check the title, answer each standard, change if needed, then press Finish." },
-    { page: 3, sel: '.how-nav [data-act="sets-save"]', t: "Begin rating", d: "Press Begin rating to start." },
-    { page: "rate", sel: ".practice-bar", t: "Practice only", d: "This is the practice team: nothing you click is saved." },
-    { page: "rate", sel: ".flow-title h1", t: "The title", d: "Check the grade and subject before you start." },
-    { page: "rate", sel: ".set-pills", t: "Your standard sets", d: "Each set, with how many are left. Click one to see only that set." },
-    { page: "rate", sel: ".flow-progress > span", t: "Progress", d: "How many are rated and how many are left. Answers save as you click." },
-    { page: "rate", sel: ".view-bar .seg-t", t: "How to see the standards", d: "All at once (Small, Medium, Large) or One at a time. Find searches." },
-    { page: "rate", sel: ".lvl-key", t: "The answers", d: "The three answers and the rule. Rest the mouse on a button to see its meaning." },
-    { page: "rate", sel: EX_ROW + " .tr-code", t: "A standard's code", d: "The Wisconsin code in bold, the Common Core (CCSS) code below. ★ Power = a focus standard." },
-    { page: "rate", sel: EX_ROW + " .tr-text", t: "Read the whole standard", d: "Ask: do ALL our classes teach it, only some, or none?" },
-    { page: "rate", sel: EX_ROW + " .tr-ans", t: "Try it: choose an answer", d: "Click an answer. Click it again to take it off. (Practice: not saved.)" },
-    { page: "rate", sel: ".lib-tabs", t: "Filters", d: "All, Still to do, Done, ★ Power. Still to do shows what is left." },
-    { page: "rate", sel: ".flow-more", t: "Finish", d: "Press Finish. It lists anything not answered yet." },
+    { page: 1, sel: null, t: "Welcome", d: "A short practice run with a sample team (Grade 3 Math). Nothing is saved. You rate the level of teaching exposure in your grade, not student learning." },
+    { page: 1, sel: ".how-to .set-sum", t: "Your standards", d: "The standard sets your grade rates." },
+    { page: 2, sel: ".how-to .school-sets", t: "The whole school", d: "What every grade at Awsaj rates, K-12." },
+    { page: "rate", sel: ".flow-title h1", t: "Step 1: Check the title", d: "Make sure it is your grade and subject." },
+    { page: "rate", sel: EX_ROW, t: "Step 2: Choose an answer", d: "All or nothing. In depth = ALL classes teach and assess it. Introduced = only some. Not taught = none." },
+    { page: "rate", sel: EX_ROW + " .tr-ans", t: "Step 3: Change or take off", d: "Click another answer to change it. Click it again to take it off." },
+    { page: "rate", sel: ".view-bar .seg-t", t: "Step 4: How to see them", d: "All at once or One at a time." },
+    { page: "rate", sel: ".flow-more", t: "Step 5: Finish", d: "Press Finish. It lists anything not answered." },
   ];
   const howUnmark = (k) => { try { sessionStorage.setItem("va_howto", JSON.stringify(howSeen().filter((x) => x !== k))); } catch (e) { /* storage blocked */ } };
   function startWalk() {
@@ -976,7 +965,7 @@
       // Zoom in so the feature's contents fill much of the screen (at most 2x), then scroll them just above the middle,
       // clear of the explanation card. Wide bars are measured by what is in them, not their full width.
       const W = innerWidth - P.w, H = innerHeight - P.h;   // the part of the window the page has
-      const r = tourRect(t), z = tourSide() ? Math.max(1, Math.min(2, (W * 0.86) / Math.max(r.width, 1), (H * 0.8) / Math.max(r.height, 1))) : 1;
+      const r = tourRect(t), z = tourSide() ? Math.max(1, Math.min(typeof st.page === "number" ? 2 : 1.5, (W * 0.86) / Math.max(r.width, 1), (H * 0.8) / Math.max(r.height, 1))) : 1;
       box.classList.add("touring");   // the popup card stops scrolling inside itself
       // Zooming re-wraps text, so check the result and step back until the feature fits beside the panel.
       let zz = z; box.style.zoom = zz.toFixed(2);
@@ -2521,7 +2510,7 @@
     else if (act === "flow-set") { S.flow.set = S.flow.set === b.dataset.f ? null : b.dataset.f; S.flow.back = null; rerender(); }
     else if (act === "howto") { S.flow.choose = S.flow.subject; S.flow.howPage = 1; rerender(); }
     else if (act === "how-page") { S.flow.howPage = +b.dataset.p; rerender(); const m = $(".how-modal"); if (m) m.scrollTop = 0;
-      if (S.tour) { S.tour.i = TOUR.findIndex((x) => x.page === S.flow.howPage); tourShow(); } }
+      if (S.tour) { const i = TOUR.findIndex((x) => x.page === S.flow.howPage); S.tour.i = i >= 0 ? i : TOUR.findIndex((x) => x.page === "rate"); tourShow(); } }
     else if (act === "sets-change") { S.flow.choose = S.flow.subject; rerender(); }
     else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
     else if (act === "open-full") openFullPage();

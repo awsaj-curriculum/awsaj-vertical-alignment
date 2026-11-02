@@ -1085,6 +1085,7 @@ body.touring .how-modal { right: var(--tour-w); bottom: var(--tour-h); }
 body.touring #tour .tour-ring { box-shadow: none; }
 body.touring #tour .tour-card { left: auto !important; top: 0 !important; right: 0; bottom: 0; width: var(--tour-w) !important; border-radius: 0; transform: none !important;
   display: flex; flex-direction: column; justify-content: center; padding: 22px 20px !important; background: #000 !important; overflow-y: auto; }
-body.touring #tour .tour-card h3 { font-size: 21px; } body.touring #tour .tour-card p { font-size: 15.5px; }
+body.touring #tour .tour-card h3 { font-size: 30px; line-height: 1.15; margin-bottom: 10px; } body.touring #tour .tour-card p { font-size: 22px; line-height: 1.4; } body.touring #tour .tour-n { font-size: 13px !important; }
 @media (max-width: 759px) { body.touring #tour .tour-card { top: auto !important; left: 0 !important; width: auto !important; height: var(--tour-h); justify-content: flex-start; padding: 12px 14px !important; }
-  body.touring #tour .tour-card h3 { font-size: 17px; } body.touring #tour .tour-card p { font-size: 14px; } }
+  body.touring #tour .tour-card h3 { font-size: 20px; } body.touring #tour .tour-card p { font-size: 16px; } }
+body.touring #tour .tour-nav button { font-size: 17px; padding: 10px 18px; }
