@@ -798,7 +798,7 @@
       3: `<h2>How to rate, step by step</h2>
       <ol class="how-steps">
         ${step(1, "Check the title", `<p>It shows your grade and subject (or your course). Every standard on the page belongs to it.</p>`)}
-        ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${LEVEL_DEF.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}<p class="ans-note-b">${ANSWER_NOTE}</p></div>`)}
+        ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${DF(g).def.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}<p class="ans-note-b">${DF(g).note}</p></div>`)}
         ${step(3, "Change or take off an answer", `<p>Click a different answer to change it. Click the chosen answer again to take it off.</p>`)}
         ${step(4, "Choose how to see the standards", `<p><b>All at once</b> (Small, Medium or Large) or <b>One at a time</b>. Use <b>Find</b> to search. Rest the mouse on an answer button to see what it means.</p>`)}
         ${step(5, "Finish", `<p>Press <b>Finish</b> at the bottom. It lists anything not answered yet.</p>`)}
@@ -862,7 +862,7 @@
       <p class="saved-note muted">Every answer saves the moment you click it. You can stop and come back any time with the same link. ${openFull()}${FRAMED ? hb("open_full") : ""}</p></div>`;
     let body;
     if (results) body = resultsPage(F.subject, g, list, subs);
-    else if (view === "all") body = viewBar(view) + levelKey() + allView(list, g);
+    else if (view === "all") body = viewBar(view) + levelKey(g) + allView(list, g);
     else {
       const e = flowCurrent(F.set ? flowList(F.subject, g, F.set) : list, g) || flowCurrent(list, g);
       const k = rkey(e.f, e.c, g), r = rating(e.f, e.c, g), inSet = list.filter((x) => x.f === e.f), pos = inSet.indexOf(e) + 1, sx = SET(e.f);
@@ -870,7 +870,7 @@
       const links = (e.lk || []).map((x) => x.split(":")[1]);
       const ee = e.ee ? e.ee.split(";")[0].trim() : "";
       const fresh = S.flow.lastKey !== k; S.flow.lastKey = k;
-      body = `${viewBar(view)}${levelKey()}${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${fwHTML(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
+      body = `${viewBar(view)}${levelKey(g)}${newSet && fresh ? `<div class="set-switch">${badge(e.f)} Now: <b>${fwHTML(FW_NAME[e.f] || sx.name)}</b> (${inSet.length} standards)</div>` : ""}<article class="card std-card set-${sx.style} ${fresh ? "enter" : ""}" data-k="${esc(k)}">
         <div class="card-top"><span class="eyebrow">${badge(e.f)} ${esc(sx.name)} · ${esc(e.s || F.subject)}</span><span class="muted">${pos} of ${inSet.length}</span></div>
         <h2 class="card-code">${codeHTML(e)} ${hb(ccss(e) ? "ccss" : e.wi ? "aero_wi" : "codes")}</h2>
         ${marks(e, g) ? `<div class="mks card-mks">${marks(e, g)} ${hb("marks")}</div>` : ""}
@@ -878,7 +878,7 @@
         <p class="card-meta">${links.length ? `Linked to ${links.slice(0, 3).map(esc).join(", ")}${links.length > 3 ? " and " + (links.length - 3) + " more" : ""} · ` : ee ? `Essential Element ${esc(ee)} · ` : ""}<button type="button" class="linkish" data-act="open" data-k="${esc(e.f + "|" + e.c)}">Full standard and "I can" levels</button>${e.sg ? ` · <span class="tag sg">Suggested placement</span>` : ""}</p>
         <p class="card-q">${r ? `Your answer: <b>${LEVEL[r.level]}</b>. Choose another answer to switch it${S.canClear ? `, or <button type="button" class="linkish" data-act="clear" data-k="${esc(e.f + "|" + e.c)}">remove it</button>` : ""}.` : `How is this generally taught in ${esc(gname(g))}?`} <button type="button" class="linkish" data-act="levels">What do the answers mean?</button></p>
         <div class="choices">${[0, 1, 2].map((l) => `<button type="button" class="choice c${l} ${r && r.level === l ? "on" : ""}" data-act="flow-rate" data-k="${esc(e.f + "|" + e.c)}" data-l="${l}">
-          <kbd>${l + 1}</kbd><b>${["Not taught", "Introduced / exposed", "Taught in depth"][l]}</b><small>${LEVEL_HINT[l]}</small></button>`).join("")}</div>
+          <kbd>${l + 1}</kbd><b>${["Not taught", "Introduced / exposed", "Taught in depth"][l]}</b><small>${DF(g).hint[l]}</small></button>`).join("")}</div>
         <div class="card-foot">
           <button type="button" class="linkish" data-act="flow-back" ${F.history.length ? "" : "disabled"}>← Previous</button>
           <span class="muted keys">Keys: 1, 2, 3 to answer · S to skip ${hb("flow_keys")}</span>
@@ -893,21 +893,25 @@
   // Saved on this device. Sizes: s = one line per standard, m = full text, l = large cards with the answer meanings.
   const tview = () => S.flow.view || store.get("va_tview") || "all";
   const tsize = () => S.flow.size || store.get("va_tsize") || "m";
-  // Answer definitions (Tim, Nov 2026): kept simple. Each one is about the whole grade on average and the teaching
-  // students get, never about how well students learn; ANSWER_NOTE says so beside them everywhere.
-  const LEVEL_HINT = ["Our grade does not teach it", "Covered briefly, not a main focus", "Taught directly, practised and assessed"];
-  const LEVEL_DEF = [
-    ["Not taught", "Our grade does not teach this standard."],
-    ["Introduced / exposed", "Our grade covers it briefly. It is not a main focus and is not assessed on its own."],
-    ["Taught in depth", "Our grade teaches it directly, students practise it over several lessons, and it is assessed."],
-  ];
-  const ANSWER_NOTE = "Answer for your whole grade level, not only your own class: the level of teaching exposure the majority of your grade's students get. It is about the teaching, not how well students learn or perform. This is for information only: it does not evaluate your teaching, and there is no right answer.";
-  const ANSWER_SHORT = "The teaching exposure most students in your grade get · not student results · for information only, there is no right answer";
-  const levelKey = () => `<div class="lvl-key"><span class="muted">Answers:</span>${LEVEL_DEF.map(([n], l) => `<span class="lk"><i class="lv lv-${l}"></i>${n}</span>`).join("")}<button type="button" class="linkish" data-act="levels">What do these mean?</button><span class="ans-note">${ANSWER_SHORT}</span></div>`;
+  // One K-12 definition (Tim, Nov 2026): ALL or NOTHING. Taught in depth only when ALL classes in the grade level teach,
+  // reteach, review and assess the standard; anything in between is Introduced; Not taught = no class teaches it.
+  // The goal: an accurate picture across all the grade's classrooms, not one class.
+  const DEFS = {
+    hint: ["No class teaches it", "Some classes, or only briefly", "ALL classes teach, review and assess it"],
+    def: [["Not taught", "The standard is not being taught in any of the classes in our grade level."],
+      ["Introduced / exposed", "Anything in between. For example, if only 3 out of 5 classes teach and assess it, choose Introduced, not Taught in depth."],
+      ["Taught in depth", "ALL classes in our grade level consistently teach, reteach, review and assess this standard."]],
+    ex: ["Example: none of the classes in the grade teach it this year.", "Example: some classes teach and assess it and others do not, or every class only touches on it.", "Example: every class in the grade has lessons on it, reteaches and reviews it, and assesses it."],
+    note: "All or nothing: choose Taught in depth only when ALL classes in your grade level teach, reteach, review and assess the standard; if only some do, choose Introduced. Classes are not all the same, and the answers should show that. The goal is an accurate picture across all our classrooms, not just one class. It is about the teaching, not how well students learn. For information only: it does not evaluate your teaching, and there is no right answer.",
+    short: "All or nothing: In depth only when ALL classes in the grade teach it · some classes = Introduced · not student results · no right answer",
+  };
+  const DF = () => DEFS;
+  const LEVEL_DEF = DEFS.def;
+  const levelKey = (g) => `<div class="lvl-key"><span class="muted">Answers:</span>${DF(g).def.map(([n], l) => `<span class="lk"><i class="lv lv-${l}"></i>${n}</span>`).join("")}<button type="button" class="linkish" data-act="levels">What do these mean?</button><span class="ans-note">${DF(g).short}</span></div>`;
   function levelsDialog() {
     $("#d-eyebrow").textContent = "How to answer"; $("#d-title").textContent = "What the three answers mean";
-    $("#d-body").innerHTML = `<p class="lede">For each standard, choose how it is <b>generally</b> taught in your grade.</p><p class="ans-note-b">${ANSWER_NOTE}</p>
-      <div class="lvl-defs">${LEVEL_DEF.map(([n, d], l) => `<div class="lvl-def l${l}"><h3><i class="lv lv-${l}"></i>${n}</h3><p>${d}</p><p class="muted">${["Example: it is not in our grade's units, or another grade teaches it.", "Example: students meet it in a project or warm-up, but there is no lesson on it and no test.", "Example: there are lessons on it, students practise it, and it is in our assessments."][l]}</p></div>`).join("")}</div>
+    $("#d-body").innerHTML = `<p class="lede">For each standard, choose how it is <b>generally</b> taught in your grade.</p><p class="ans-note-b">${DF().note}</p>
+      <div class="lvl-defs">${DF().def.map(([n, d], l) => `<div class="lvl-def l${l}"><h3><i class="lv lv-${l}"></i>${n}</h3><p>${d}</p><p class="muted">${DF().ex[l]}</p></div>`).join("")}</div>
       <p class="muted">Not sure? Choose the answer closest to what usually happens across the grade. You can change any answer later.</p>`;
     if (!$("#detail").open) $("#detail").showModal();
   }
@@ -924,7 +928,7 @@
     { page: 1, sel: ".how-to .set-sum", t: "Your standard sets", d: "The sets your grade rates, with how many standards each has and where they come from. Each set has its own badge; rest the mouse on a badge to read about it." },
     { page: 2, sel: ".how-to .school-sets", t: "Standards across the whole school", d: "What every grade and subject at Awsaj rates, K-5, 6-8 and 9-12. Together the answers make one K-12 picture." },
     { page: 2, sel: ".how-to .school-sets tr.here", t: "Your row", d: "Your own band is highlighted, so you can see where your grade sits." },
-    { page: 3, sel: ".how-steps li:nth-child(2)", t: "The three answers", d: "Not taught, Introduced / exposed, Taught in depth. Answer for the level of teaching exposure the majority of your grade's students get, not how well they learn. It is for information only, and there is no right answer." },
+    { page: 3, sel: ".how-steps li:nth-child(2)", t: "The three answers", d: "All or nothing, K-12: Taught in depth only when ALL classes in your grade teach, reteach, review and assess it. If only some do (say 3 of 5), choose Introduced. Not taught when no class does. It is about the teaching, not student results, and there is no right answer." },
     { page: 3, sel: ".how-steps", t: "How to rate, step by step", d: "Check the title, choose an answer for each standard, change or take off an answer, choose how to see the standards, then press Finish." },
     { page: 3, sel: '.how-nav [data-act="sets-save"]', t: "Begin rating", d: "When everyone is ready, press Begin rating (or Next here)." },
     { page: "rate", sel: ".practice-bar", t: "Practice only", d: "This is the Walk-Through Example: nothing you click is saved. Your own team's page looks the same." },
@@ -932,10 +936,10 @@
     { page: "rate", sel: ".set-pills", t: "Your standard sets", d: "Each set with how many standards are left. Click one to see only that set. How to opens the Before you begin pages again." },
     { page: "rate", sel: ".flow-progress > span", t: "Progress", d: "How many are rated and how many are left. Every answer saves the moment you click it, so you can stop and come back with the same link." },
     { page: "rate", sel: ".view-bar .seg-t", t: "How to see the standards", d: "All at once (Small, Medium or Large text) or One at a time. Find searches by code or words." },
-    { page: "rate", sel: ".lvl-key", t: "The answers", d: "The three answers and what they mean. Rest the mouse on an answer button for a moment to read its meaning." },
+    { page: "rate", sel: ".lvl-key", t: "The answers", d: "The three answers, with the rule for your grade underneath. Rest the mouse on an answer button for a moment to read its meaning." },
     { page: "rate", sel: EX_ROW + " .tr-code", t: "A standard's code", d: "The Wisconsin code in bold with the Common Core (CCSS) code underneath, and the set's badge. ★ Power marks a standard the school's documents name as a focus for this grade." },
-    { page: "rate", sel: EX_ROW + " .tr-text", t: "Read the whole standard", d: "Ask: does our grade teach this on purpose? Only briefly, or directly with practice and assessment?" },
-    { page: "rate", sel: EX_ROW + " .tr-ans", t: "Try it: choose an answer", d: "Click the answer that fits the teaching most students in your grade get. Click it again to take it off, or click another to change it. (Practice: not saved.)" },
+    { page: "rate", sel: EX_ROW + " .tr-text", t: "Read the whole standard", d: "Ask: which classes in our grade teach this? All of them, with reteaching, review and assessment? Only some, or only briefly? None?" },
+    { page: "rate", sel: EX_ROW + " .tr-ans", t: "Try it: choose an answer", d: "Click the answer that fits every class in your grade (In depth only if ALL classes teach it). Click it again to take it off, or click another to change it. (Practice: not saved.)" },
     { page: "rate", sel: ".lib-tabs", t: "Filters", d: "All, Still to do, Done and ★ Power (or Priority). Use Still to do to find what is left." },
     { page: "rate", sel: ".flow-more", t: "Finish", d: "Press Finish at the bottom. It lists anything not answered yet. When every subject is done you see your results." },
   ];
@@ -981,14 +985,20 @@
   function tourPlace() {
     const o = $("#tour"); if (!S.tour || !o || o.hidden) return;
     const sel = TOUR[S.tour.i].sel, t = sel ? $(sel) : null, ring = $(".tour-ring", o), card = $(".tour-card", o);
-    if (!t) { ring.hidden = true; card.style.top = sel ? "" : "50%"; card.style.bottom = sel ? "16px" : ""; return; }
+    const put = (x, y) => Object.assign(card.style, { left: x + "px", top: y + "px" });
+    const cw = card.offsetWidth, ch = card.offsetHeight, m = 14, corners = [[innerWidth - cw - m, innerHeight - ch - m], [m, innerHeight - ch - m], [innerWidth - cw - m, m], [m, m]];
+    if (!t) { ring.hidden = true; put(...corners[0]); return; }   // the welcome card: bottom right, the page stays visible
     const r = tourRect(t), pad = 8; ring.hidden = false;
     Object.assign(ring.style, { left: r.left - pad + "px", top: r.top - pad + "px", width: r.width + pad * 2 + "px", height: r.height + pad * 2 + "px" });
-    const low = r.top + r.height / 2 > innerHeight / 2;
-    card.style.top = low ? "16px" : ""; card.style.bottom = low ? "" : "16px";
+    // The small card goes to the corner that covers the least of the highlighted feature (Tim, Nov 2026: keep the view clear).
+    const cover = ([x, y]) => Math.max(0, Math.min(x + cw, r.right + pad) - Math.max(x, r.left - pad)) * Math.max(0, Math.min(y + ch, r.bottom + pad) - Math.max(y, r.top - pad));
+    put(...corners.reduce((a, b) => (cover(b) < cover(a) ? b : a)));
   }
   // The box around what is actually inside an element (a wide bar with three buttons is as wide as the buttons).
-  function tourRect(t) { const rg = document.createRange(); rg.selectNodeContents(t); const a = rg.getBoundingClientRect(), b = t.getBoundingClientRect(); return a.width && a.height ? a : b; }
+  function tourRect(t) { const rg = document.createRange(); rg.selectNodeContents(t); const a = rg.getBoundingClientRect(), b = t.getBoundingClientRect();
+    if (!a.width || !a.height) return b;
+    const top = Math.min(a.top, b.top), bottom = Math.max(a.bottom, b.bottom);   // full height of the box, width of what is in it
+    return { left: a.left, right: a.right, width: a.width, top, bottom, height: bottom - top }; }
   function tourEnd() { S.tour = null; zoomBoxes().forEach((x) => { x.style.zoom = ""; x.classList.remove("touring"); }); const o = $("#tour"); if (o) o.hidden = true; if (S.practice) rerender(); }
   addEventListener("scroll", () => tourPlace(), true); addEventListener("resize", () => tourPlace());
   document.addEventListener("keydown", (ev) => {
@@ -1009,8 +1019,8 @@
       <h3>Team roles</h3><p><b>Facilitator / timekeeper:</b> leads the discussion and the Walk-Through Example. <b>Recorder:</b> captures observations, questions and who should respond. <b>Grade / subject reps:</b> share real teaching practice. <b>Administration:</b> supports attendance, collaboration and oversight. Bring a laptop, a notebook and a pen.</p>
       <h3>Before you start: the Walk-Through Example</h3><p>The leader opens the team page, presses <b>▶ Walk-Through Example</b> and walks everyone through it: the three Before you begin pages (your standards, the standards for the whole school, how to rate), then each part of the rating page. It is practice only; nothing is saved. Then each team opens its own link.</p>
       <h3>Step 1: Rate how each standard is taught</h3><p>Use last school year as evidence; do not rate from a pacing guide alone. Rate only your own grade's standards.</p>
-      <div class="lvl-defs">${LEVEL_DEF.map(([n, d], l) => `<div class="lvl-def l${l}"><h3><i class="lv lv-${l}"></i>${n}</h3><p>${d}</p></div>`).join("")}</div>
-      <p class="ans-note-b">${ANSWER_NOTE}</p>
+      <div class="lvl-defs">${DEFS.def.map(([n, d], l) => `<div class="lvl-def l${l}"><h3><i class="lv lv-${l}"></i>${n}</h3><p>${d}</p></div>`).join("")}</div>
+      <p class="ans-note-b">${DEFS.note}</p>
       <h3>Step 2: Reflect on your own before discussing</h3>${q(["What knowledge or essential skills are students missing when they arrive in your grade?", "What essential prerequisite skills do students need when they enter your grade?", "What essential skills should students show before moving to the next grade?"])}
       <h3>Step 3: Discuss: what are we noticing?</h3><p>Use the ratings and your reflections. The recorder captures specific grades, standards and examples, not assumptions.</p>${q(["Which skills are taught in depth, only introduced, or not taught across grades?", "What prerequisites do students seem to lack when they enter the next grade?", "Where is learning repeated without greater complexity or independence?", "How should Common Core standards and Essential Elements progress across K-12?"])}
       <h3>Steps 4-6: Look across the K-12 learning journey</h3><ul><li><b>Must-know learning:</b> the essential skills students must carry into the next grade. If one is missing, what becomes difficult later?</li><li><b>Gaps:</b> compare what the grade before teaches with what the next grade expects. Where might prerequisite learning be missing?</li><li><b>Unnecessary repetition:</b> purposeful review, or the same tasks at the same difficulty? Is learning becoming deeper and more independent?</li><li><b>Progression:</b> trace skills across grades: accuracy, reasoning, application and independence. What should this learning look like next year?</li></ul>
@@ -1083,7 +1093,7 @@
   function trow(e, g, size, q) {
     const r = rating(e.f, e.c, g), k = rkey(e.f, e.c, g), mk = marks(e, g);
     const text = size === "s" ? e.t : fullText(e);
-    const btn = (l) => `<button type="button" class="tb c${l} ${r && r.level === l ? "on" : ""}" data-act="rate" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}" data-l="${l}" aria-pressed="${!!(r && r.level === l)}">${size === "l" ? `<b>${LEVEL[l]}</b><small>${LEVEL_HINT[l]}</small>` : LEVEL_SHORT[l]}</button>`;
+    const btn = (l) => `<button type="button" class="tb c${l} ${r && r.level === l ? "on" : ""}" data-act="rate" data-k="${esc(e.f + "|" + e.c)}" data-g="${g}" data-l="${l}" aria-pressed="${!!(r && r.level === l)}">${size === "l" ? `<b>${LEVEL[l]}</b><small>${DF(g).hint[l]}</small>` : LEVEL_SHORT[l]}</button>`;
     return `<div class="trow ${r ? "rated l" + r.level : ""} ${S.flash === k ? "flash" : ""}" id="${rowId(k)}">
       <div class="tr-code"><span class="cd"><span class="cd-main">${badge(e.f)} <button class="code" data-act="open" data-k="${esc(e.f + "|" + e.c)}" title="Open the full standard">${hl(codeText(e), q)}</button></span><span class="wi-code">${hl(altText(e), q)}</span></span>${mk ? `<div class="mks">${mk}</div>` : ""}</div>
       <div class="tr-text"${size === "s" ? ` data-full="${esc(fullText(e))}"` : ""}>${hl(text, q)}</div>
@@ -2638,7 +2648,7 @@
     // Answer buttons: resting on one for a moment shows what that answer means (same words as "What do these mean?").
     clearTimeout(tipWait);
     const ans = ev.target.closest('[data-act="rate"][data-l],[data-act="flow-rate"][data-l]');
-    if (ans) { tip.hidden = true; tipWait = setTimeout(() => { const [n, d] = LEVEL_DEF[+ans.dataset.l]; tip.classList.add("tip-lg"); tip.innerHTML = `<b>${esc(n)}</b><br>${esc(d)}<br><small>${esc(ANSWER_SHORT)}</small>`;
+    if (ans) { tip.hidden = true; tipWait = setTimeout(() => { const gg = ans.dataset.g || teamGrade(), [n, d] = DF(gg).def[+ans.dataset.l]; tip.classList.add("tip-lg"); tip.innerHTML = `<b>${esc(n)}</b><br>${esc(d)}<br><small>${esc(DF(gg).short)}</small>`;
       const r = ans.getBoundingClientRect(); tip.hidden = false; tip.style.left = Math.max(8, Math.min(r.left, innerWidth - tip.offsetWidth - 12)) + "px";
       tip.style.top = (r.bottom + 8 + tip.offsetHeight > innerHeight ? r.top - tip.offsetHeight - 8 : r.bottom + 8) + "px"; }, 700); return; }
     // Labels that need explaining wherever they appear: "Automatic check" and where a link comes from.
