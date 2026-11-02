@@ -798,7 +798,7 @@
       3: `<h2>How to rate, step by step</h2>
       <ol class="how-steps">
         ${step(1, "Check the title", `<p>It shows your grade and subject (or your course). Every standard on the page belongs to it.</p>`)}
-        ${step(2, "Read each standard and choose how it is generally taught in your grade", `<div class="how-defs">${DF(g).def.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}<p class="ans-note-b">${DF(g).note}</p></div>`)}
+        ${step(2, "Read each standard and choose the level of teaching exposure in your grade", `<div class="how-defs">${DF(g).def.map(([n, d], l) => `<p><span class="tb c${l} on how-btn">${["Not taught", "Introduced", "In depth"][l]}</span> <b>${esc(n)}:</b> ${esc(d)}</p>`).join("")}<p class="ans-note-b">${DF(g).note}</p></div>`)}
         ${step(3, "Change or take off an answer", `<p>Click a different answer to change it. Click the chosen answer again to take it off.</p>`)}
         ${step(4, "Choose how to see the standards", `<p><b>All at once</b> (Small, Medium or Large) or <b>One at a time</b>. Use <b>Find</b> to search. Rest the mouse on an answer button to see what it means.</p>`)}
         ${step(5, "Finish", `<p>Press <b>Finish</b> at the bottom. It lists anything not answered yet.</p>`)}
@@ -902,8 +902,8 @@
       ["Introduced / exposed", "Anything in between. For example, if only 3 out of 5 classes teach and assess it, choose Introduced, not Taught in depth."],
       ["Taught in depth", "ALL classes in our grade level consistently teach, reteach, review and assess this standard."]],
     ex: ["Example: none of the classes in the grade teach it this year.", "Example: some classes teach and assess it and others do not, or every class only touches on it.", "Example: every class in the grade has lessons on it, reteaches and reviews it, and assesses it."],
-    note: "All or nothing: choose Taught in depth only when ALL classes in your grade level teach, reteach, review and assess the standard; if only some do, choose Introduced. Classes are not all the same, and the answers should show that. The goal is an accurate picture across all our classrooms, not just one class. It is about the teaching, not how well students learn. For information only: it does not evaluate your teaching, and there is no right answer.",
-    short: "All or nothing: In depth only when ALL classes in the grade teach it · some classes = Introduced · not student results · no right answer",
+    note: "These answers are about the level of teaching exposure in your grade, not the level of student learning or performance. All or nothing: choose Taught in depth only when ALL classes in your grade level teach, reteach, review and assess the standard; if only some do, choose Introduced. Classes are not all the same, and the answers should show that. The goal is an accurate picture across all our classrooms, not just one class. For information only: it does not evaluate your teaching, and there is no right answer.",
+    short: "Level of teaching exposure, not student learning or performance · All or nothing: In depth only when ALL classes teach it · no right answer",
   };
   const DF = () => DEFS;
   const LEVEL_DEF = DEFS.def;
@@ -923,12 +923,12 @@
     sample: ["WI-CC-MATH|M.3.OA.A.1", "WI-CC-MATH|M.3.OA.C.6", "WI-CC-MATH|M.3.NF.A.1", "WI-CC-MATH|M.3.MD.A.1", "WI-CC-MATH|M.3.MD.B.3", "WI-CC-MATH|M.3.G.A.1", "WI-EE-MATH|M.EE.3.NF.1", "WI-EE-MATH|M.EE.3.OA.1"] };
   const EX_ROW = "#r-WI_CC_MATH_M_3_NF_A_1_3";   // rowId() of the worked example, M.3.NF.A.1 in Grade 3
   const TOUR = [
-    { page: 1, sel: null, t: "Welcome to the Walk-Through Example", d: "A short practice run with a sample team (Grade 3 Math). It shows what you will rate and how. Nothing is saved. Afterwards, you rate your own team." },
+    { page: 1, sel: null, t: "Welcome to the Walk-Through Example", d: "A short practice run with a sample team (Grade 3 Math). You will rate the level of teaching exposure in your grade, not student learning. Nothing is saved here." },
     { page: 1, sel: ".how-to .flow-title", t: "What you are rating", d: "The title shows the grade and subject (or course) you are rating." },
     { page: 1, sel: ".how-to .set-sum", t: "Your standard sets", d: "The sets your grade rates. Rest the mouse on a badge to learn about it." },
     { page: 2, sel: ".how-to .school-sets", t: "Standards across the whole school", d: "What every grade and subject at Awsaj rates: K-5, 6-8 and 9-12." },
     { page: 2, sel: ".how-to .school-sets tr.here", t: "Your row", d: "Your grade's row is highlighted." },
-    { page: 3, sel: ".how-steps li:nth-child(2)", t: "The three answers", d: "All or nothing. Taught in depth: ALL classes teach, reteach, review and assess it. Introduced: only some classes, or briefly. Not taught: no class. There is no right answer." },
+    { page: 3, sel: ".how-steps li:nth-child(2)", t: "The three answers", d: "Rate the level of teaching exposure, not student learning or performance. All or nothing: In depth = ALL classes teach, reteach, review, assess it. Introduced = only some, or briefly. Not taught = no class." },
     { page: 3, sel: ".how-steps", t: "How to rate, step by step", d: "Check the title, answer each standard, change if needed, then press Finish." },
     { page: 3, sel: '.how-nav [data-act="sets-save"]', t: "Begin rating", d: "Press Begin rating to start." },
     { page: "rate", sel: ".practice-bar", t: "Practice only", d: "This is the practice team: nothing you click is saved." },
