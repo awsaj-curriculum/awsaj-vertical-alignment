@@ -80,12 +80,12 @@ plans = Introduced, 3+ weeks = Taught in depth.
 Teachers use the "flow" view: all standards for a subject on one page by default (Small / Medium / Large, with Find,
 filter chips and a Finish button that lists anything unanswered), or One at a time (button toggle, remembered per device).
 The question is "How is this generally taught in Grade X?"; "What do these mean?" opens the three answer definitions.
-Answers (Tim, Nov 2026, `LEVEL_DEF`, kept simple): Not taught = our grade does not teach it; Introduced / exposed = covered
-briefly, not a main focus, not assessed on its own; Taught in depth = taught directly, practised over several lessons, assessed.
-`ANSWER_NOTE` / `ANSWER_SHORT` sit beside them everywhere: the whole grade level, the level of teaching exposure the majority of
-the grade's students get (not student learning or performance), for information only, not an evaluation, no right answer.
+Answers (Tim, Nov 2026, one K-12 definition, `DEFS`): ALL or NOTHING. Taught in depth = ALL classes in the grade level
+consistently teach, reteach, review and assess the standard; Introduced / exposed = anything in between (3 of 5 classes =
+Introduced); Not taught = no class teaches it. `DEFS.note` / `DEFS.short` sit beside them everywhere: an accurate picture across
+all the grade's classrooms, not one class; about the teaching, not student learning; for information only, no right answer.
 Walk-Through Example (team page, top): `SAMPLE_TEAM` (8 real Grade 3 Math standards) in practice mode (`S.practice`,
-`RM()`: answers never saved, no `set_team_sets`), with a welcome card and an 18-step tour (`TOUR`, `tourShow()`): the three Before you begin
+`RM()`: answers never saved, no `set_team_sets`), with a welcome card and an 18-step tour (small black card in the corner that covers least of the feature, `tourPlace()`) (`TOUR`, `tourShow()`): the three Before you begin
 pages, then the rating page, each feature zoomed in (CSS zoom on the popup card or #view-flow) with a ring and a black card.
 Leader Directions: dialog (`directionsDialog()`, prints on its own) and `site/directions.pdf` (two sides of A4, built from the
 leader's working guide). Load (about 300 laptops at once, stress-tested Nov 2026): first screen loads only ratings and team

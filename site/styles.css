@@ -1053,9 +1053,10 @@ table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { ba
 /* The tour: a ring around the zoomed-in feature and a card with the explanation. */
 #tour { position: fixed; inset: 0; z-index: 1200; pointer-events: none; }
 .tour-ring { position: fixed; border: 4px solid var(--accent); border-radius: 12px; box-shadow: 0 0 0 200vmax rgba(0,0,0,.45); transition: all .25s ease; }
-.tour-card { position: fixed; left: 50%; transform: translateX(-50%); width: min(560px, calc(100vw - 24px)); background: #000; color: #fff; border-radius: 14px; padding: 16px 18px; pointer-events: auto; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
-.tour-card h3 { margin: 2px 0 6px; font-size: 21px; color: #fff; }
-.tour-card p { margin: 0 0 10px; font-size: 16px; line-height: 1.4; }
+.tour-card { position: fixed; width: min(360px, calc(100vw - 28px)); background: #000; color: #fff; border-radius: 14px; padding: 16px 18px; pointer-events: auto; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.tour-card h3 { margin: 2px 0 4px; font-size: 18px; color: #fff; }
+.tour-card p { margin: 0 0 8px; font-size: 14.5px; line-height: 1.38; }
+.tour-card { padding: 12px 14px !important; background: rgba(0,0,0,.9) !important; }
 .tour-n { font-size: 12.5px !important; opacity: .75; margin: 0 !important; text-transform: uppercase; letter-spacing: .05em; }
 .tour-nav { display: flex; gap: 8px; align-items: center; } .tour-nav span { flex: 1; }
 .tour-card .ghost { color: #fff; border-color: rgba(255,255,255,.5); background: transparent; }
@@ -1067,9 +1068,8 @@ table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { ba
 .how-modal > .card { margin-block: auto; }
 .how-modal .how-to.touring { max-height: none; overflow: visible; }
 .walk-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-#tour.intro { background: rgba(0,0,0,.55); pointer-events: auto; }
-#tour.intro .tour-card { transform: translate(-50%, -50%); width: min(640px, calc(100vw - 24px)); padding: 22px 24px; }
-#tour.intro .tour-card h3 { font-size: 26px; } #tour.intro .tour-card p { font-size: 17.5px; }
+#tour.intro .tour-card { width: min(400px, calc(100vw - 28px)); }
+#tour.intro .tour-card h3 { font-size: 20px; } #tour.intro .tour-card p { font-size: 15px; }
 .open-full-w { align-self: center; display: inline-flex; align-items: center; gap: 4px; } .open-full-w[hidden] { display: none; }
 .open-full { font-weight: 600; color: var(--brand); text-decoration: none; border: 1px solid var(--line-2); border-radius: 10px; padding: 6px 12px; background: #fff; white-space: nowrap; }
 .open-full:hover { border-color: var(--brand); }
@@ -1077,3 +1077,5 @@ table.school-sets tr.band-hs td, table.school-sets tr.band-hs th[scope=row] { ba
 button.open-full, button.open-full:hover { background: #fff; color: var(--brand); font-size: 14px; }
 .saved-note .open-full { margin-left: 6px; padding: 4px 10px; }
 .pq-note { background: #fff7ea; border: 2px solid var(--accent); border-radius: 10px; padding: 8px 12px; margin: 8px 0; }
+.how-band { margin: 10px 0 2px !important; color: var(--brand); } .how-sec { margin-top: 10px; padding-top: 6px; border-top: 1px solid var(--line); }
+.dir h4 { margin: 12px 0 4px; color: var(--ink); }
