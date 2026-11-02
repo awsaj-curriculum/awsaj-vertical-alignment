@@ -977,7 +977,7 @@
     o.hidden = false; o.classList.toggle("intro", !st.sel);   // the welcome step: a card in the middle, no feature
     o.innerHTML = `<div class="tour-ring"></div><div class="tour-card" role="dialog" aria-label="Walk-through step ${S.tour.i + 1} of ${TOUR.length}">
       <p class="tour-n">Walk-Through Example · step ${S.tour.i + 1} of ${TOUR.length}</p><h3>${esc(st.t)}</h3><p>${esc(st.d)}</p>
-      <div class="tour-nav"><button type="button" class="ghost sm" data-act="tour-end">End tour</button><span></span>${S.tour.i ? `<button type="button" class="ghost" data-act="tour-back">Back</button>` : ""}<button type="button" data-act="tour-next">${S.tour.i === TOUR.length - 1 ? "Done: choose my team" : "Next"}</button></div></div>`;
+      <div class="tour-nav"><span></span>${S.tour.i ? `<button type="button" class="ghost" data-act="tour-back">Back</button>` : ""}<button type="button" data-act="tour-next">${S.tour.i === TOUR.length - 1 ? "Done: back to teams" : "Next"}</button></div></div>`;
     tourPlace();
   }
   // The ring follows the feature (after scrolling, rating or resizing); the card sits away from it.
@@ -993,6 +993,8 @@
     if (!a.width || !a.height) return b;
     const top = Math.min(a.top, b.top), bottom = Math.max(a.bottom, b.bottom);   // full height of the box, width of what is in it
     return { left: a.left, right: a.right, width: a.width, top, bottom, height: bottom - top }; }
+  // Done or End tour: leave the walk-through and go back to the team page it was started from.
+  function walkFinish() { tourEnd(); setTeam(""); tabTeam(""); scrollTo({ top: 0 }); toast("Walk-through finished. Now choose your own team."); }
   function tourEnd() { S.tour = null; document.body.classList.remove("touring"); zoomBoxes().forEach((x) => { x.style.zoom = ""; x.classList.remove("touring"); }); const o = $("#tour"); if (o) o.hidden = true; if (S.practice) rerender(); }
   addEventListener("scroll", () => tourPlace(), true); addEventListener("resize", () => { if (S.tour) tourShow(); });
   document.addEventListener("keydown", (ev) => {
@@ -2518,9 +2520,9 @@
     else if (act === "walk-exit") { setTeam(""); tabTeam(""); scrollTo({ top: 0 }); }
     else if (act === "tour") { if (!S.tour) { S.tour = { i: TOUR.findIndex((x) => x.page === "rate") }; tourShow(); } }
     // Done on the last step ends the walk-through and returns to the team page (Tim, Nov 2026).
-    else if (act === "tour-next") { if (S.tour.i < TOUR.length - 1) { S.tour.i++; tourShow(); } else { tourEnd(); setTeam(""); tabTeam(""); scrollTo({ top: 0 }); toast("Walk-through finished. Now choose your own team."); } }
+    else if (act === "tour-next") { if (S.tour.i < TOUR.length - 1) { S.tour.i++; tourShow(); } else walkFinish(); }
     else if (act === "tour-back") { if (S.tour.i > 0) { S.tour.i--; tourShow(); } }
-    else if (act === "tour-end") tourEnd();
+    else if (act === "tour-end") walkFinish();   // End tour also returns to the team page (Tim, Nov 2026)
     else if (act === "directions") directionsDialog();
     else if (act === "sets-save") {
       const fws = (b.dataset.f || "").split(",").filter(Boolean), subject = b.dataset.s;
