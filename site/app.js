@@ -926,7 +926,7 @@
   const EX_ROW = "#r-WI_CC_MATH_M_3_NF_A_1_3";   // rowId() of the worked example, M.3.NF.A.1 in Grade 3
   const TOUR = [
     { page: 1, sel: null, t: "Welcome", d: "A short practice run with a sample team (Grade 3 Math). Nothing is saved. You rate the level of teaching exposure in your grade, not student learning." },
-    { page: "team", sel: '.pick-b[data-t="Grade 3"]', t: "Pick your team", d: "On the team page, click your grade or course. For this example: Grade 3." },
+    { page: "team", sel: '.pick-b[data-t="Grade 3"]', t: "Pick your grade and subject", d: "Grades 6-12: click your grade and subject (or course). K-5: click your grade, then the subject at the top of the next page. For this example: Grade 3, Math." },
     { page: 1, sel: ".how-to .set-sum", t: "Your standards", d: "The standard sets your grade rates." },
     { page: 2, sel: ".how-to .school-sets", t: "The whole school", d: "What every grade at Awsaj rates, K-12." },
     { page: "rate", sel: ".flow-title h1", t: "Step 1: Check the title", d: "Make sure it is your grade and subject." },
