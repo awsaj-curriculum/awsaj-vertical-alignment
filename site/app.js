@@ -999,9 +999,14 @@
   addEventListener("scroll", () => tourPlace(), true); addEventListener("resize", () => { if (S.tour) tourShow(); });
   document.addEventListener("keydown", (ev) => {
     if (!S.tour || ev.target.closest("input, textarea, select")) return;
-    if (ev.key === "ArrowRight") { ev.preventDefault(); $('#tour [data-act="tour-next"]').click(); }
-    else if (ev.key === "ArrowLeft") { ev.preventDefault(); const b = $('#tour [data-act="tour-back"]'); if (b) b.click(); }
-    else if (ev.key === "Escape") tourEnd();
+    // Presentation clickers (Tim, Nov 2026): most send Page Down / Page Up, some the arrow keys, Space, Enter or N / P.
+    // Keys that start or blank a slide show (F5, Escape, B, full stop) do nothing here, so a stray press cannot reload the
+    // page or end the walk-through. Holding a key down does not race through the steps.
+    const next = ["PageDown", "ArrowRight", "ArrowDown", " ", "Spacebar", "Enter", "n", "N"], back = ["PageUp", "ArrowLeft", "ArrowUp", "Backspace", "p", "P"], quiet = ["F5", "Escape", "b", "B", ".", "Home", "End"];
+    if (next.includes(ev.key) || back.includes(ev.key) || quiet.includes(ev.key)) { ev.preventDefault(); ev.stopPropagation(); }
+    if (ev.repeat || Date.now() - (S.tourKeyAt || 0) < 250) return;
+    if (next.includes(ev.key)) { S.tourKeyAt = Date.now(); $('#tour [data-act="tour-next"]').click(); }
+    else if (back.includes(ev.key)) { S.tourKeyAt = Date.now(); const b = $('#tour [data-act="tour-back"]'); if (b) b.click(); }
   }, true);
 
   // The directions paper (also directions.pdf), using the site's three answers. Prints on its own (popup printing).
