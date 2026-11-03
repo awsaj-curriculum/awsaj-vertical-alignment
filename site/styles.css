@@ -1089,3 +1089,4 @@ body.touring #tour .tour-card h3 { font-size: 30px; line-height: 1.15; margin-bo
 @media (max-width: 759px) { body.touring #tour .tour-card { top: auto !important; left: 0 !important; width: auto !important; height: var(--tour-h); justify-content: flex-start; padding: 12px 14px !important; }
   body.touring #tour .tour-card h3 { font-size: 20px; } body.touring #tour .tour-card p { font-size: 16px; } }
 body.touring #tour .tour-nav button { font-size: 17px; padding: 10px 18px; }
+.pick-b.picked { background: var(--brand); color: #fff; border-color: var(--brand); }

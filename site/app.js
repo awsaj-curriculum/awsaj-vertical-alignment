@@ -833,6 +833,8 @@
   }
   function renderFlow() {
     const el = $("#view-flow");
+    // Walk-through step "Pick your team": the team page, with Grade 3 (the example) picked out, through any redraw.
+    if (S.tour && TOUR[S.tour.i] && TOUR[S.tour.i].page === "team") { welcome(el); const b = $('.pick-b[data-t="Grade 3"]', el); if (b) b.classList.add("picked"); return; }
     if (!S.team) return welcome(el);
     const g = teamGrade(), F = S.flow, subs = flowSubjects();
     if (!F.subject || !subs.includes(F.subject)) F.subject = subs.find((s) => flowList(s, g).some((e) => !rating(e.f, e.c, g))) || subs[0];
@@ -924,6 +926,7 @@
   const EX_ROW = "#r-WI_CC_MATH_M_3_NF_A_1_3";   // rowId() of the worked example, M.3.NF.A.1 in Grade 3
   const TOUR = [
     { page: 1, sel: null, t: "Welcome", d: "A short practice run with a sample team (Grade 3 Math). Nothing is saved. You rate the level of teaching exposure in your grade, not student learning." },
+    { page: "team", sel: '.pick-b[data-t="Grade 3"]', t: "Pick your team", d: "On the team page, click your grade or course. For this example: Grade 3." },
     { page: 1, sel: ".how-to .set-sum", t: "Your standards", d: "The standard sets your grade rates." },
     { page: 2, sel: ".how-to .school-sets", t: "The whole school", d: "What every grade at Awsaj rates, K-12." },
     { page: "rate", sel: ".flow-title h1", t: "Step 1: Check the title", d: "Make sure it is your grade and subject." },
@@ -942,6 +945,8 @@
   }
   // Put the page in the state a step needs: a Before you begin page, or the rating page.
   function tourPage(st) {
+    // The team page, as everyone sees it first, with Grade 3 (the example) picked out.
+    if (st.page === "team") { rerender(); return; }
     const onHow = !!$(".how-modal");
     if (typeof st.page === "number") {
       if (!onHow || S.flow.howPage !== st.page) { delete S.teamSets[SAMPLE_TEAM.name]; howUnmark(howKey("Math", "3")); S.flow.howPage = st.page; rerender(); }
@@ -990,7 +995,7 @@
   }
   // The box around what is actually inside an element (a wide bar with three buttons is as wide as the buttons).
   function tourRect(t) { const rg = document.createRange(); rg.selectNodeContents(t); const a = rg.getBoundingClientRect(), b = t.getBoundingClientRect();
-    if (!a.width || !a.height) return b;
+    if (!a.width || !a.height || t.tagName === "BUTTON") return b;   // a button: the whole button
     const top = Math.min(a.top, b.top), bottom = Math.max(a.bottom, b.bottom);   // full height of the box, width of what is in it
     return { left: a.left, right: a.right, width: a.width, top, bottom, height: bottom - top }; }
   // Done or End tour: leave the walk-through and go back to the team page it was started from.
@@ -2456,6 +2461,8 @@
     if (act === "rate") { const e = findItem(b.dataset.k); const l = +b.dataset.l; const cur = rating(e.f, e.c, b.dataset.g); if (cur && cur.level === l) { clearRating(e, b.dataset.g); return; } setRating(e, b.dataset.g, l); }   // clicking the chosen answer again takes it off
     else if (act === "open") openDetail(b.dataset.k);
     else if (act === "grid-all") { S.gridAll = true; rerender(); }
+    // In the walk-through's team page step, clicking Grade 3 (or any team) simply moves the walk-through on.
+    else if (act === "team" && S.tour && TOUR[S.tour.i].page === "team") { S.tour.i++; tourShow(); }
     else if (act === "team") { setTeam(b.dataset.t); tabTeam(b.dataset.t); $("#team").value = b.dataset.t; }
     else if (act === "links") teamLinks();
     else if (act === "prog-filter") { S.progFilter = b.dataset.f; teamLinks(); }
