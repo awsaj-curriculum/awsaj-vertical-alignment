@@ -393,7 +393,7 @@
       <div class="lib-tabs prog-by">${[["grade", "By grade"], ["team", "By team"]].map(([k, l]) => `<button type="button" class="lib-t ${by === k ? "on" : ""}" data-act="prog-by" data-b="${k}">${l}</button>`).join("")}</div>
       <div class="prog-sum"><span class="ps ps0"><b>${counts[0]}</b> not started</span><span class="ps ps1"><b>${counts[1]}</b> in progress</span><span class="ps ps2"><b>${counts[2]}</b> done</span></div>
       <div class="prog-bar-row"><div class="lib-tabs">${[["todo", "Need a reminder"], ["done", "Done"], ["all", "All"]].map(([k, l]) => `<button type="button" class="lib-t ${f === k ? "on" : ""}" data-act="prog-filter" data-f="${k}">${l}</button>`).join("")}</div>
-        ${counts[0] + counts[1] ? `<button type="button" class="sm" data-act="copy-all-reminders">Copy reminders for all ${counts[0] + counts[1]} unfinished</button>` : ""}</div>
+        ${counts[0] + counts[1] ? `<button type="button" class="sm" data-act="copy-all-reminders">Copy reminders and links for all ${counts[0] + counts[1]} unfinished</button>` : ""}</div>
       <table class="prog"><thead><tr><th>${by === "grade" ? "Grade" : "Team"}</th><th>${by === "grade" ? "Subjects" : "Sets"}</th><th>Progress</th><th>Status</th><th>Last rated</th><th></th></tr></thead><tbody>
       ${shown.map(row).join("") || `<tr><td colspan="6" class="muted">${f === "done" ? (by === "grade" ? "No grade has finished yet." : "No team has finished yet.") : "Everyone is done."}</td></tr>`}
       </tbody></table>
@@ -2468,8 +2468,11 @@
     else if (act === "prog-filter") { S.progFilter = b.dataset.f; teamLinks(); }
     else if (act === "prog-by") { S.progBy = b.dataset.b; teamLinks(); }
     else if (["clear-part", "copy-save", "copy-new", "copy-load", "copy-undo", "copy-delete"].includes(act)) copyAct(act, b);
-    else if (act === "copy-all-reminders") { const t = S.progBy === "team" ? teamProgressRows().filter((x) => x.status < 2).map(reminderText).join("\n\n") : gradeProgressRows().filter((x) => x.status < 2).map(gradeReminder).join("\n\n"); try { await navigator.clipboard.writeText(t); toast("Reminders copied"); } catch (err) { toast("Could not copy"); } }
-    else if (act === "copy") { try { await navigator.clipboard.writeText(b.dataset.u); toast(b.dataset.u.startsWith("http") ? "Link copied" : "Reminder copied"); } catch (err) { toast("Select the link and copy it"); } }
+    // Every unfinished team's reminder (each ends with its link), then all the links on their own, one per line.
+    else if (act === "copy-all-reminders") { const team = S.progBy === "team", rows = (team ? teamProgressRows() : gradeProgressRows()).filter((x) => x.status < 2);
+      const t = rows.length ? rows.map(team ? reminderText : gradeReminder).join("\n\n") + "\n\nLinks:\n" + rows.map((x) => `${team ? `${x.t.name}, ${x.subject}` : gname(x.g)}: ${x.u}`).join("\n") : "";
+      copyText(t, t ? "Reminders and links copied" : "Nothing to remind: every team is done"); }
+    else if (act === "copy") copyText(b.dataset.u, b.dataset.u.startsWith("http") ? "Link copied" : "Reminder copied");
     else if (act === "clear") { const e = findItem(b.dataset.k); if (e) clearRating(e, b.dataset.g || teamGrade()); }
     else if (act === "lib") { S.flow.lib = S.flow.lib === b.dataset.t ? "" : b.dataset.t; rerender(); }
     else if (act === "lib-open") { const e = findItem(b.dataset.k); if (e) { S.flow.back = rkey(e.f, e.c, teamGrade()); S.flow.set = null; rerender(); scrollTo({ top: 0, behavior: "smooth" }); } }
@@ -2685,6 +2688,24 @@
   // on its own in a new tab (Tim, Nov 2026: for presenting); it keeps the same team or grade link.
   (() => { const framed = FRAMED;
     const w = $("#open-full"); if (w && framed) w.hidden = false; })();
+  // Copy text (Tim, Nov 2026: inside the Google Site the browser blocks the clipboard API, so links and reminders did not
+  // copy). Try the clipboard API, then the older copy command on a hidden text box (works inside an embed after a click),
+  // and as a last resort show the text selected in a box so it can be copied with Ctrl+C.
+  async function copyText(t, ok) {
+    if (!t) { toast(ok); return; }
+    try { await navigator.clipboard.writeText(t); toast(ok); return; } catch (e) { /* blocked in the embed: try the older way */ }
+    const ta = document.createElement("textarea"); ta.value = t; ta.setAttribute("readonly", "");
+    Object.assign(ta.style, { position: "fixed", top: "0", left: "0", width: "1px", height: "1px", opacity: "0" });
+    const host = $("dialog[open]") || document.body; host.append(ta); ta.focus(); ta.select();
+    let done = false; try { done = document.execCommand("copy"); } catch (e) { done = false; }
+    ta.remove();
+    if (done) { toast(ok); return; }
+    const d = document.createElement("div"); d.className = "copy-fallback";
+    d.innerHTML = `<p><b>Press Ctrl+C (Cmd+C on a Mac) to copy</b>, then Esc to close.</p><textarea readonly></textarea><button type="button" class="sm">Close</button>`;
+    host.append(d); const box = $("textarea", d); box.value = t; box.focus(); box.select();
+    const close = () => d.remove(); $("button", d).addEventListener("click", close);
+    box.addEventListener("keydown", (ev) => { if (ev.key === "Escape") { ev.stopPropagation(); ev.preventDefault(); close(); } });
+  }
   function tabFade() { const t = $(".tabs"); if (!t) return; t.classList.toggle("more-right", t.scrollLeft + t.clientWidth < t.scrollWidth - 4); t.classList.toggle("more-left", t.scrollLeft > 4); }
   $(".tabs").addEventListener("scroll", tabFade, { passive: true }); addEventListener("resize", tabFade); setTimeout(tabFade, 0);
   $$(".tabs [data-view]").forEach((b) => b.addEventListener("click", () => {
