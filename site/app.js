@@ -393,7 +393,7 @@
       <div class="lib-tabs prog-by">${[["grade", "By grade"], ["team", "By team"]].map(([k, l]) => `<button type="button" class="lib-t ${by === k ? "on" : ""}" data-act="prog-by" data-b="${k}">${l}</button>`).join("")}</div>
       <div class="prog-sum"><span class="ps ps0"><b>${counts[0]}</b> not started</span><span class="ps ps1"><b>${counts[1]}</b> in progress</span><span class="ps ps2"><b>${counts[2]}</b> done</span></div>
       <div class="prog-bar-row"><div class="lib-tabs">${[["todo", "Need a reminder"], ["done", "Done"], ["all", "All"]].map(([k, l]) => `<button type="button" class="lib-t ${f === k ? "on" : ""}" data-act="prog-filter" data-f="${k}">${l}</button>`).join("")}</div>
-        ${counts[0] + counts[1] ? `<button type="button" class="sm" data-act="copy-all-reminders">Copy reminders for all ${counts[0] + counts[1]} unfinished</button>` : ""}</div>
+        ${counts[0] + counts[1] ? `<button type="button" class="sm" data-act="copy-all-reminders">Copy reminders and links for all ${counts[0] + counts[1]} unfinished</button>` : ""}</div>
       <table class="prog"><thead><tr><th>${by === "grade" ? "Grade" : "Team"}</th><th>${by === "grade" ? "Subjects" : "Sets"}</th><th>Progress</th><th>Status</th><th>Last rated</th><th></th></tr></thead><tbody>
       ${shown.map(row).join("") || `<tr><td colspan="6" class="muted">${f === "done" ? (by === "grade" ? "No grade has finished yet." : "No team has finished yet.") : "Everyone is done."}</td></tr>`}
       </tbody></table>
@@ -2468,8 +2468,10 @@
     else if (act === "prog-filter") { S.progFilter = b.dataset.f; teamLinks(); }
     else if (act === "prog-by") { S.progBy = b.dataset.b; teamLinks(); }
     else if (["clear-part", "copy-save", "copy-new", "copy-load", "copy-undo", "copy-delete"].includes(act)) copyAct(act, b);
-    else if (act === "copy-all-reminders") { const t = S.progBy === "team" ? teamProgressRows().filter((x) => x.status < 2).map(reminderText).join("\n\n") : gradeProgressRows().filter((x) => x.status < 2).map(gradeReminder).join("\n\n");
-      copyText(t, t ? "Reminders copied" : "Nothing to remind: every team is done"); }
+    // Every unfinished team's reminder (each ends with its link), then all the links on their own, one per line.
+    else if (act === "copy-all-reminders") { const team = S.progBy === "team", rows = (team ? teamProgressRows() : gradeProgressRows()).filter((x) => x.status < 2);
+      const t = rows.length ? rows.map(team ? reminderText : gradeReminder).join("\n\n") + "\n\nLinks:\n" + rows.map((x) => `${team ? `${x.t.name}, ${x.subject}` : gname(x.g)}: ${x.u}`).join("\n") : "";
+      copyText(t, t ? "Reminders and links copied" : "Nothing to remind: every team is done"); }
     else if (act === "copy") copyText(b.dataset.u, b.dataset.u.startsWith("http") ? "Link copied" : "Reminder copied");
     else if (act === "clear") { const e = findItem(b.dataset.k); if (e) clearRating(e, b.dataset.g || teamGrade()); }
     else if (act === "lib") { S.flow.lib = S.flow.lib === b.dataset.t ? "" : b.dataset.t; rerender(); }
