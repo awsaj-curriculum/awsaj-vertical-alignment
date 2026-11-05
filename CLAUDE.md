@@ -201,6 +201,17 @@ weak/strong link or strongest/weakest): "Breaks down" (a settled break, last ste
 one; a split standard's parts share a `grp` in prereqs.json and count as one) vs "Not taught on a suggested link"
 (AI or wording links only); "Taught at
 every step" = 2+ grades, every standard rated and at least introduced. Run it after build_site_data.py.
+Report (Tim, Nov 2026; Report tab, `renderReport()` and the `rp*` functions in app.js): one printable report from the live
+ratings, A4, about 30 pages (Tim: under 30; 40-50 would be acceptable if ever needed). Part 1 K-12 overview (subject rings,
+key findings, the three schools side by side, every grade x subject cell, where progressions break by grade, progression status,
+priority / power), then Parts 2-4 for K-5, 6-8 and 9-12 (findings, grade x subject, progressions, then each subject: strands by
+grade with the two thinnest marked, confirmed gaps, not taught where asked, progressions that break down, priority / power below
+in depth, introduced never in depth, possible duplication, each standard with its K-12 strip), Part 5 how to read it. Findings
+are sentences computed from the same checks as the other pages (`analyse`, `laneInfo`, `progFlags`): rated share, highest and
+lowest subject, whole-grade patterns (most subjects 10+ points below their own share), subject-specific dips (20+), change of
+school (5 to 6, 8 to 9, 15+ points), progression findings and where they gather, prerequisite gaps that cross schools, gaps,
+introduced never in depth, priority vs all, duplication, Essential Elements apart. Lists are cut to their first items ("and N
+more (page) on the site"). Each part starts a new page; subjects flow. Every section has a "?" (`report`, `rp_*`).
 All subjects (Tim, Oct 2026): the Subject box on Coverage map, Gaps, Dashboard, Progressions and Audit also offers "All subjects"
 (`ALL`, `ALL_VIEWS`): `renderAllSubjects()` draws each subject in turn under a dark green band (`withSubject()`), puts what
 belongs to every subject (Back, grade arrows, the grade summary, the map's band buttons) above the sections, and clicks inside a

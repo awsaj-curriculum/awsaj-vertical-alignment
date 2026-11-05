@@ -482,6 +482,196 @@
       await copyCall("delete_copy", { p_pin: a.pin, p_archive_id: x.id }, () => "Copy deleted.");
     }
   }
+  /* ---------------- Report (Tim, Nov 2026) ---------------- */
+  // One report from the live ratings, for the committee: an overview of K-12, then K-5, 6-8 and 9-12. Every number and
+  // sentence is computed here from the ratings the site has now, with the same checks as the other pages (analyse,
+  // laneInfo, progFlags); nothing is typed in by hand. It prints on A4 (about 30 pages): each part starts a new page and
+  // every list is cut to its first items, with the full list on the page it comes from.
+  const RB = [["K-5", "Elementary", DIV.Elementary], ["6-8", "Middle school", DIV.Middle], ["9-12", "High school", DIV.High]];
+  const pc = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+  const sumC = (cs) => cs.reduce((t, c) => t.map((x, i) => x + c[i]), [0, 0, 0, 0]);
+  const ratedN = (c) => c[0] + c[1] + c[2];
+  const bandOfG = (g) => RB.find((b) => b[2].includes(g));
+  const pctTxt = (c) => (ratedN(c) ? `${pc(c[2], ratedN(c))}%` : "–");
+  const andJ = (xs) => (xs.length < 2 ? xs.join("") : xs.slice(0, -1).join(", ") + " and " + xs[xs.length - 1]);
+  // One grade, one subject: the standards that grade rates (its team's sets), main standards and Essential Elements apart.
+  function rpCell(s, g) {
+    const sl = S.meta.subjects.find((x) => x.name === s).slug, fws = setsFor(s, g);
+    const list = S.idx[sl].filter((e) => e.pl.includes(g) && fws.includes(e.f)), main = list.filter((e) => !isEE(e.f)), ee = list.filter((e) => isEE(e.f));
+    const pr = main.filter((e) => isPr(e, g));
+    return { s, g, main, ee, c: countLevels(main, g), ce: countLevels(ee, g), pr, cp: countLevels(pr, g) };
+  }
+  function rpData() {
+    const subs = S.meta.subjects.map((x) => x.name), cell = {};
+    for (const s of subs) { cell[s] = {}; for (const g of GRADES) cell[s][g] = rpCell(s, g); }
+    const agg = (s, gs, k = "c") => sumC(gs.map((g) => cell[s][g][k]));
+    const lanes = {}, flags = {};
+    for (const s of subs) {
+      lanes[s] = S.prog ? S.prog.lanes.filter((l) => l.subject === s) : [];
+      flags[s] = progFlags(s, GRADES);
+    }
+    return { subs, cell, agg, lanes, flags };
+  }
+  // Coloured cell for a grade x subject map: the level bar, % of rated in depth, % rated.
+  function rpMapCell(x, low) {
+    const n = x.main.length, r = ratedN(x.c);
+    if (!n) return `<td class="rp-na">–</td>`;
+    return `<td class="${low ? "rp-low" : ""}">${miniBar(x.c, `${x.s}, ${gname(x.g)}`)}<span class="rp-n"><b>${pctTxt(x.c)}</b> in depth</span><span class="rp-s">${pc(r, n)}% rated · ${n}</span></td>`;
+  }
+  function rpMatrix(D, gs, note) {
+    // Cells well below their subject's K-12 share in depth (10 points or more, 5+ rated) get an orange outline.
+    const avg = Object.fromEntries(D.subs.map((s) => { const c = D.agg(s, GRADES); return [s, ratedN(c) ? c[2] / ratedN(c) : 0]; }));
+    const low = (x) => ratedN(x.c) >= 5 && x.c[2] / ratedN(x.c) <= avg[x.s] - 0.1;
+    return `<table class="rp-mx"><thead><tr><th>Grade</th>${D.subs.map((s) => `<th>${esc(s)}</th>`).join("")}</tr></thead><tbody>
+      ${gs.map((g) => `<tr><th>${esc(gname(g))}</th>${D.subs.map((s) => rpMapCell(D.cell[s][g], low(D.cell[s][g]))).join("")}</tr>`).join("")}</tbody></table>
+      <p class="rp-cap">Each cell: the grade's own standards in that subject (main sets; Essential Elements are counted apart). Bar: ${LEVEL_SHORT.map((l, i) => `<i class="lv lv-${i}"></i> ${l.toLowerCase()}`).reverse().join(", ")}, white not rated. % in depth is of the rated standards. ${note || "Orange outline: 10 points or more below the subject's K-12 share in depth."}</p>`;
+  }
+  // Progression findings by grade: where breaks, stops and missing prerequisites show (official links in bold).
+  function rpTransitions(D, gs) {
+    const rows = D.subs.map((s) => { const at = Object.fromEntries(gs.map((g) => [g, [0, 0]]));
+      for (const { f } of D.flags[s]) { const g = f.g; if (at[g]) at[g][f.official ? 0 : 1]++; } return [s, at]; });
+    const max = Math.max(1, ...rows.flatMap(([, at]) => Object.values(at).map((v) => v[0] + v[1])));
+    return `<table class="rp-tr"><thead><tr><th></th>${gs.map((g) => `<th class="${RB.some((b) => b[2][0] === g && g !== "K") ? "rp-edge" : ""}">${esc(gl(g))}</th>`).join("")}</tr></thead><tbody>
+      ${rows.map(([s, at]) => `<tr><th>${esc(s)}</th>${gs.map((g) => { const [o, u] = at[g], n = o + u;
+        return `<td class="${RB.some((b) => b[2][0] === g && g !== "K") ? "rp-edge" : ""}" style="background:rgba(2,70,56,${n ? (0.1 + 0.6 * n / max).toFixed(2) : 0});${n / max > 0.55 ? "color:#fff" : ""}">${n ? `<b>${o || ""}</b>${o && u ? "+" : ""}${u || ""}` : ""}</td>`; }).join("")}</tr>`).join("")}</tbody></table>
+      <p class="rp-cap">Number of progression findings (a step not taught, a progression that stops, or a standard taught in depth while the standard it needs first is not taught anywhere) at each grade. Bold = on an official link (Coherence Map, Wisconsin anchor standards, NGSS or Wisconsin structure); the number after + = on a suggested link (check). Darker = more. A thick line marks the start of a new school (Grade 6, Grade 9).</p>`;
+  }
+  const rpStatusBar = (counts, total) => `<span class="rp-sb">${[["issue", "#D00070"], ["check", "#56595A"], ["ok", "#78BE21"], ["thin", "#0092BC"], ["partial", "#C8CED0"], ["unrated", "#EEF1F2"], ["single", "#EEF1F2"]].map(([k, col]) => (counts[k] ? `<i style="flex:${counts[k]};background:${col}" title="${esc(STATUS[k][0])}: ${counts[k]}"></i>` : "")).join("")}</span>`;
+  function rpLaneStats(D, s, gs) {
+    const xs = D.lanes[s].map((l) => ({ l, ...laneInfo(l, gs) })).filter((x) => x.steps.length >= 2), counts = {};
+    for (const x of xs) counts[x.status] = (counts[x.status] || 0) + 1;
+    return { xs, counts, n: xs.length };
+  }
+  const rpItem = (e, gs, extra) => `<li><span class="rp-ev">${strip(e, gs)}</span><span class="rp-code">${codeHTML(e)}${extra ? ` <span class="tag">${extra}</span>` : ""}</span><span class="rp-t muted">${esc(trunc(e.t, 150))}</span></li>`;
+  const rpList = (arr, gs, n, more, fn) => (arr.length ? `<ul class="rp-list">${arr.slice(0, n).map((x) => (fn ? fn(x) : rpItem(x.e || x, gs))).join("")}</ul>${arr.length > n ? `<p class="rp-more">and ${arr.length - n} more (${more}).</p>` : ""}` : "");
+  // Plain-language findings for a set of grades: the pattern first, then the evidence, each with its numbers.
+  function rpFindings(D, gs, label) {
+    const out = [], subs = D.subs;
+    const st = subs.map((s) => ({ s, c: D.agg(s, gs), ce: D.agg(s, gs, "ce"), cp: D.agg(s, gs, "cp"), n: gs.reduce((t, g) => t + D.cell[s][g].main.length, 0) }));
+    const all = sumC(st.map((x) => x.c)), nAll = st.reduce((t, x) => t + x.n, 0);
+    out.push(`<b>${pc(ratedN(all), nAll)}%</b> of the ${nAll} grade-level standards in ${label} are rated. Of those, <b>${pc(all[2], ratedN(all))}%</b> are taught in depth, ${pc(all[1], ratedN(all))}% introduced and ${pc(all[0], ratedN(all))}% not taught.${pc(ratedN(all), nAll) < 90 ? " Not rated standards are left out of every count, so these shares can still change." : ""}`);
+    const rs = st.filter((x) => ratedN(x.c) >= 10).sort((a, b) => b.c[2] / ratedN(b.c) - a.c[2] / ratedN(a.c));
+    if (rs.length > 1) out.push(`By subject, <b>${esc(rs[0].s)}</b> has the highest share taught in depth (${pctTxt(rs[0].c)}) and <b>${esc(rs[rs.length - 1].s)}</b> the lowest (${pctTxt(rs[rs.length - 1].c)})${rs[rs.length - 1].c[0] / ratedN(rs[rs.length - 1].c) >= 0.15 ? `, where ${pc(rs[rs.length - 1].c[0], ratedN(rs[rs.length - 1].c))}% of rated standards are not taught` : ""}.`);
+    // Whole-grade patterns: grades where most subjects sit below their own share for these grades.
+    const sh = (c) => (ratedN(c) >= 5 ? c[2] / ratedN(c) : null);
+    const avg = Object.fromEntries(st.map((x) => [x.s, sh(x.c)]));
+    const whole = gs.map((g) => ({ g, below: subs.filter((s) => avg[s] != null && sh(D.cell[s][g].c) != null && sh(D.cell[s][g].c) <= avg[s] - 0.1), above: subs.filter((s) => avg[s] != null && sh(D.cell[s][g].c) != null && sh(D.cell[s][g].c) >= avg[s] + 0.1), n: subs.filter((s) => sh(D.cell[s][g].c) != null).length }));
+    const wb = whole.filter((x) => x.n >= 3 && x.below.length >= Math.max(2, x.n - 1)), wa = whole.filter((x) => x.n >= 3 && x.above.length >= Math.max(2, x.n - 1));
+    if (wb.length) out.push(`<b>Whole-grade pattern:</b> ${wb.map((x) => `${esc(gname(x.g))} is 10 points or more below in ${andJ(x.below.map(esc))}`).join("; ")}. When most subjects in a grade sit low together, the cause is more likely shared (time, staffing, how the grade understood the scale) than a single subject's curriculum.`);
+    if (wa.length) out.push(`${wa.map((x) => `${esc(gname(x.g))} is 10 points or more above in ${andJ(x.above.map(esc))}`).join("; ")}: worth checking that "taught in depth" was read the same way (ALL classes teach, review and assess it).`);
+    const single = gs.flatMap((g) => subs.filter((s) => !wb.some((x) => x.g === g) && sh(D.cell[s][g].c) != null && avg[s] != null && sh(D.cell[s][g].c) <= avg[s] - 0.2).map((s) => [s, g]));
+    if (single.length) out.push(`Subject-specific dips (20 points or more below the subject's share for these grades): ${single.slice(0, 6).map(([s, g]) => `${esc(s)} ${esc(gname(g))} (${pctTxt(D.cell[s][g].c)})`).join(", ")}${single.length > 6 ? ` and ${single.length - 6} more` : ""}.`);
+    // Hand-overs between schools: the last grade of one school against the first of the next, per subject.
+    for (const [a, b] of [["5", "6"], ["8", "9"]]) if (gs.includes(a) && gs.includes(b)) {
+      const d = subs.map((s) => [s, sh(D.cell[s][a].c), sh(D.cell[s][b].c)]).filter(([, x, y]) => x != null && y != null && Math.abs(x - y) >= 0.15);
+      if (d.length) out.push(`<b>From ${esc(gname(a))} to ${esc(gname(b))}</b> (a change of school): the share in depth ${d.map(([s, x, y]) => `${y < x ? "falls" : "rises"} in ${esc(s)} (${Math.round(x * 100)}% to ${Math.round(y * 100)}%)`).join(", ")}.`);
+    }
+    // Progressions and the links between grades.
+    const fl = subs.map((s) => [s, D.flags[s].filter(({ f }) => gs.includes(f.g))]);
+    const off = fl.map(([s, a]) => [s, a.filter(({ f }) => f.official).length, a.length]).filter(([, , n]) => n);
+    if (off.length) out.push(`Progression findings at these grades: ${off.map(([s, o, n]) => `${esc(s)} ${n} (${o} on official links)`).join(", ")}. ${(() => { const at = {}; for (const [, a] of fl) for (const { f } of a) at[f.g] = (at[f.g] || 0) + 1; const top = Object.entries(at).sort((x, y) => y[1] - x[1]).slice(0, 2); return top.length ? `They gather in ${top.map(([g, n]) => `${esc(gname(g))} (${n})`).join(" and ")}.` : ""; })()}`);
+    const cross = fl.flatMap(([s, a]) => a.filter(({ f }) => f.t === "prereq" && f.cause && bandOfG(f.cause) !== bandOfG(f.g)).map((x) => [s, x]));
+    if (cross.length) out.push(`<b>${cross.length}</b> standard${cross.length > 1 ? "s are" : " is"} taught in depth here while a standard ${cross.length > 1 ? "they need" : "it needs"} first, placed in an earlier school, is not taught anywhere (${[...new Set(cross.map(([s]) => s))].map(esc).join(", ")}). These links cross the hand-over between schools, so they need both schools in the conversation.`);
+    // Gaps, priorities, repetition.
+    const an = subs.map((s) => [s, analyse(S.idx[S.meta.subjects.find((x) => x.name === s).slug].filter((e) => !isEE(e.f) && e.pl.some((g) => gs.includes(g))))]);
+    const gapN = an.reduce((t, [, a]) => t + a.gap.length, 0), askedN = an.reduce((t, [, a]) => t + a.asked.length, 0), maybeN = an.reduce((t, [, a]) => t + a.maybe.length, 0);
+    if (gapN + askedN + maybeN) out.push(`Standards no grade teaches: <b>${gapN}</b> confirmed gap${gapN === 1 ? "" : "s"} (every grade that could teach it says not taught)${askedN ? `, ${askedN} not taught where asked (only grades never asked are open)` : ""}${maybeN ? `, and ${maybeN} possible gap${maybeN === 1 ? "" : "s"} still waiting for ratings` : ""}${gapN ? `: ${an.filter(([, a]) => a.gap.length).map(([s, a]) => `${esc(s)} ${a.gap.length}`).join(", ")}` : ""}.`);
+    const weakN = an.reduce((t, [, a]) => t + a.weak.length, 0);
+    if (weakN) out.push(`<b>${weakN}</b> standard${weakN === 1 ? " is" : "s are"} introduced but never taught in depth in any grade (${an.filter(([, a]) => a.weak.length).map(([s, a]) => `${esc(s)} ${a.weak.length}`).join(", ")}): students meet ${weakN === 1 ? "it" : "them"}, but no grade owns ${weakN === 1 ? "it" : "them"}.`);
+    const prs = st.filter((x) => ratedN(x.cp));
+    if (prs.length) { const cp = sumC(prs.map((x) => x.cp)); out.push(`Priority and power standards: ${pc(cp[2], ratedN(cp))}% of the rated ones are taught in depth${cp[0] + cp[1] ? `; ${cp[0] + cp[1]} are rated below in depth (${prs.filter((x) => x.cp[0] + x.cp[1]).map((x) => `${esc(x.s)} ${x.cp[0] + x.cp[1]}`).join(", ")})` : ""}. ${pc(cp[2], ratedN(cp)) < pc(all[2], ratedN(all)) ? "That is lower than for all standards, so the school's own priorities are not yet the most securely taught." : "That is at or above the share for all standards."}`); }
+    const dupN = an.reduce((t, [, a]) => t + a.dup.length, 0), reN = an.reduce((t, [, a]) => t + a.reinforce.length, 0);
+    if (dupN + reN) out.push(`Taught in depth in more than one grade: ${dupN} possible duplication${dupN === 1 ? "" : "s"} (again after its suggested grade) and ${reN} reinforcement${reN === 1 ? "" : "s"} (across its own band).`);
+    const ee = sumC(st.map((x) => x.ce)), eeN = gs.reduce((t, g) => t + subs.reduce((u, s) => u + D.cell[s][g].ee.length, 0), 0);
+    if (eeN) out.push(`Essential Elements (counted apart): ${pc(ratedN(ee), eeN)}% of ${eeN} rated, ${pctTxt(ee)} of those in depth.`);
+    return out;
+  }
+  function rpBandTable(D) {
+    return `<table class="rp-bt"><thead><tr><th></th>${D.subs.map((s) => `<th colspan="2">${esc(s)}</th>`).join("")}<th colspan="2">All subjects</th></tr>
+      <tr><th></th>${[...D.subs, ""].map(() => "<th>In depth</th><th>Rated</th>").join("")}</tr></thead><tbody>
+      ${RB.map(([k, n, gs]) => { const cs = D.subs.map((s) => [D.agg(s, gs), gs.reduce((t, g) => t + D.cell[s][g].main.length, 0)]), all = sumC(cs.map((x) => x[0])), nAll = cs.reduce((t, x) => t + x[1], 0);
+        return `<tr><th>${esc(n)} (${k})</th>${cs.map(([c, nn]) => `<td>${miniBar(c)}<b>${pctTxt(c)}</b></td><td>${pc(ratedN(c), nn)}%</td>`).join("")}<td>${miniBar(all)}<b>${pctTxt(all)}</b></td><td>${pc(ratedN(all), nAll)}%</td></tr>`; }).join("")}
+      </tbody></table>`;
+  }
+  function rpPriority(D) {
+    const rows = RB.map(([k, n, gs]) => [k, D.subs.map((s) => [D.agg(s, gs, "cp"), gs.reduce((t, g) => t + D.cell[s][g].pr.length, 0)])]);
+    return `<table class="rp-bt"><thead><tr><th></th>${D.subs.map((s) => `<th>${esc(s)}</th>`).join("")}</tr></thead><tbody>
+      ${rows.map(([k, cs]) => `<tr><th>${k === "K-5" ? "★ Power (K-5)" : `★ Priority (${k})`}</th>${cs.map(([c, n]) => (n ? `<td>${miniBar(c)}<b>${pctTxt(c)}</b> in depth<br><span class="rp-s">${ratedN(c)} of ${n} rated</span></td>` : `<td class="rp-na">None named</td>`)).join("")}</tr>`).join("")}</tbody></table>
+      <p class="rp-cap">Standards the school's own documents name as power (K-5: K-5 ELA Power Standards, Curriculum Hub lists) or priority (6-12: Ma3loomat curriculum maps), rated by the grade that names them.</p>`;
+  }
+  function rpProgTable(D, gs) {
+    return `<table class="rp-bt"><thead><tr><th>Subject</th><th>Progressions</th><th>How they are taught across the grades</th><th>Breaks down</th><th>Not taught on a suggested link</th><th>Taught at every step</th></tr></thead><tbody>
+      ${D.subs.map((s) => { const x = rpLaneStats(D, s, gs); return `<tr><th>${esc(s)}</th><td>${x.n}</td><td>${rpStatusBar(x.counts, x.n)}</td><td>${x.counts.issue || 0}</td><td>${x.counts.check || 0}</td><td>${x.counts.ok || 0}</td></tr>`; }).join("")}</tbody></table>
+      <p class="rp-cap">A progression follows one idea through the grades (ELA anchor standards, NGSS ideas, Wisconsin Social Studies standards, Math topics). Bar: <i class="rp-dot" style="background:#D00070"></i> breaks down, <i class="rp-dot" style="background:#56595A"></i> not taught on a suggested link, <i class="rp-dot" style="background:#78BE21"></i> taught at every step, <i class="rp-dot" style="background:#0092BC"></i> some standards not taught, <i class="rp-dot" style="background:#C8CED0"></i> partly rated, light grey not rated yet. Only progressions with two or more steps in these grades.</p>`;
+  }
+  // One subject inside one school: strands by grade, then the findings with the evidence strip for each standard.
+  function rpSubject(D, s, gs, label) {
+    const sl = S.meta.subjects.find((x) => x.name === s).slug, c = D.agg(s, gs), n = gs.reduce((t, g) => t + D.cell[s][g].main.length, 0);
+    if (!n) return "";
+    const list = S.idx[sl].filter((e) => !isEE(e.f) && e.pl.some((g) => gs.includes(g))), a = analyse(list);
+    const strands = new Map(); for (const g of gs) for (const e of D.cell[s][g].main) { const k = e.s || "Other"; if (!strands.has(k)) strands.set(k, {}); (strands.get(k)[g] ||= []).push(e); }
+    const srows = [...strands.entries()].map(([k, by]) => ({ k, by, c: sumC(gs.map((g) => countLevels(by[g] || [], g))) }));
+    const thin = srows.filter((x) => ratedN(x.c) >= 3 && x.c[0] + x.c[1] >= ratedN(x.c) / 2).sort((p, q) => (q.c[0] + q.c[1]) / ratedN(q.c) - (p.c[0] + p.c[1]) / ratedN(p.c)).slice(0, 2).map((x) => x.k);
+    const fl = D.flags[s].filter(({ f }) => gs.includes(f.g)), lanes = rpLaneStats(D, s, gs), broken = lanes.xs.filter((x) => x.status === "issue");
+    const pr = gs.flatMap((g) => D.cell[s][g].pr.filter((e) => (rating(e.f, e.c, g)?.level ?? 2) < 2).map((e) => ({ e, g })));
+    const cp = D.agg(s, gs, "cp"), ce = D.agg(s, gs, "ce"), eeN = gs.reduce((t, g) => t + D.cell[s][g].ee.length, 0);
+    const more = (page) => `${page} on the site`;
+    return `<section class="rp-subj"><div class="rp-subj-head"><h3>${esc(s)}: ${esc(label)} ${hb("rp_subject")}</h3>
+      <p class="rp-line">${miniBar(c)} <b>${pctTxt(c)}</b> of rated standards taught in depth · ${pc(ratedN(c), n)}% of ${n} rated${ratedN(cp) ? ` · ★ ${pctTxt(cp)} of rated ${gs[0] === "K" ? "power" : "priority"} standards in depth` : ""}${eeN ? ` · Essential Elements ${pc(ratedN(ce), eeN)}% rated, ${pctTxt(ce)} in depth` : ""}</p>
+      <table class="rp-st"><thead><tr><th>Strand</th>${gs.map((g) => `<th>${esc(gl(g))}</th>`).join("")}<th>${esc(label)}</th></tr></thead><tbody>
+      ${srows.map((x) => `<tr class="${thin.includes(x.k) ? "rp-thin" : ""}"><th>${esc(x.k)}${thin.includes(x.k) ? ` <span class="tag">thinnest</span>` : ""}</th>${gs.map((g) => { const arr = x.by[g] || []; if (!arr.length) return `<td class="rp-na"></td>`; const cc = countLevels(arr, g); return `<td title="${esc(gname(g))}: ${cc[2]} in depth, ${cc[1]} introduced, ${cc[0]} not taught, ${cc[3]} not rated">${miniBar(cc)}<span class="rp-s">${arr.length}</span></td>`; }).join("")}<td>${miniBar(x.c)}<b>${pctTxt(x.c)}</b></td></tr>`).join("")}</tbody></table></div>
+      <div class="rp-cols">
+      ${a.gap.length ? `<div><h4>Confirmed gaps (${a.gap.length})</h4>${rpList(a.gap, GRADES, 5, more("Gaps"))}</div>` : ""}
+      ${a.asked.length ? `<div><h4>Not taught where asked (${a.asked.length})</h4>${rpList(a.asked, GRADES, 4, more("Gaps"))}</div>` : ""}
+      ${broken.length ? `<div><h4>Progressions that break down (${broken.length} of ${lanes.n})</h4><ul class="rp-list">${broken.slice(0, 4).map((x) => { const f = x.flags.find((y) => y.official && ["break", "stop", "prereq"].includes(y.t)) || x.flags[0]; return `<li><b>${esc(x.l.name)}</b>${f ? `: <span class="muted">${esc(trunc(f.msg.replace(/<[^>]+>/g, ""), 170))}</span>` : ""}</li>`; }).join("")}</ul>${broken.length > 4 ? `<p class="rp-more">and ${broken.length - 4} more (${more("Progressions")}).</p>` : ""}</div>` : ""}
+      ${pr.length ? `<div><h4>${gs[0] === "K" ? "Power" : "Priority"} standards below in depth (${pr.length})</h4>${rpList(pr, gs, 5, more("Grade dashboard"), (x) => rpItem(x.e, GRADES, `${gl(x.g)}: ${LEVEL_SHORT[rating(x.e.f, x.e.c, x.g)?.level ?? 0].toLowerCase()}`))}</div>` : ""}
+      ${a.weak.length ? `<div><h4>Introduced, never in depth (${a.weak.length})</h4>${rpList(a.weak, GRADES, 4, more("Gaps"))}</div>` : ""}
+      ${a.dup.length ? `<div><h4>Possible duplication (${a.dup.length})</h4>${rpList(a.dup, GRADES, 3, more("Gaps"))}</div>` : ""}
+      ${a.maybe.length ? `<div><h4>Still open</h4><p class="muted">${a.maybe.length} possible gap${a.maybe.length === 1 ? "" : "s"} wait for a grade that has not rated yet; ${a.unrated.length} standard${a.unrated.length === 1 ? " has" : "s have"} no rating at all.</p></div>` : ""}
+      ${!a.gap.length && !a.asked.length && !broken.length && !pr.length && !a.weak.length && !a.dup.length ? `<p class="muted">No automatic check flags anything here yet${fl.length ? ` beyond ${fl.length} finding${fl.length === 1 ? "" : "s"} on suggested links` : ""}.</p>` : ""}
+      </div></section>`;
+  }
+  function renderReport() {
+    const el = $("#view-report");
+    if (!S.lastSync && !S.ratings.size) { el.innerHTML = `<div class="panel empty">Loading the ratings…</div>`; return; }
+    const D = rpData(), when = new Date().toLocaleString([], { dateStyle: "long", timeStyle: "short" });
+    const last = [...S.ratings.values()].reduce((m, r) => (r.updated_at > m ? r.updated_at : m), "");
+    const subjCards = D.subs.map((s) => { const c = D.agg(s, GRADES), n = GRADES.reduce((t, g) => t + D.cell[s][g].main.length, 0);
+      return `<div class="rp-card">${donut(c, 70)}<div><b>${esc(s)}</b><span>${pctTxt(c)} of rated in depth</span><span>${ratedN(c)} of ${n} rated</span><span class="rp-s">${c[2]} in depth · ${c[1]} introduced · ${c[0]} not taught</span></div></div>`; }).join("");
+    const bullets = (arr) => `<ul class="rp-find">${arr.map((t) => `<li>${t}</li>`).join("")}</ul>`;
+    const toc = [["Part 1", "K-12 overview"], ...RB.map(([k, n], i) => [`Part ${i + 2}`, `${n} (${k})`]), ["Part 5", "How to read this report"]];
+    el.innerHTML = `<div class="rp">
+      <div class="rp-tools"><button type="button" data-act="rp-print">Print or save as PDF</button> ${hb("report")} <span class="muted">A4, about 30 pages. The numbers come from the ratings on the site now and change as teams rate.</span></div>
+      <section class="rp-cover"><p class="eyebrow">Awsaj Academy · K-12 Vertical Alignment Committee</p><h1>K-12 Vertical Alignment Report</h1>
+        <p class="rp-sub">How each standard is taught across Kindergarten to Grade 12, from the grade teams' ratings (Part 1)</p>
+        <p>Ratings as of ${esc(when)}${last ? ` (latest rating ${esc(new Date(last).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }))})` : ""} · ${S.ratings.size} ratings</p>
+        <ol class="rp-toc">${toc.map(([p, t]) => `<li><b>${p}</b> ${esc(t)}</li>`).join("")}</ol>
+        <p class="rp-def"><b>The scale</b> (one K-12 definition, all or nothing): ${LEVEL_DEF.map(([nm, d], i) => `<i class="lv lv-${i}"></i> <b>${nm}</b>: ${esc(d)}`).reverse().join(" ")} ${esc(DEFS.note)}</p></section>
+      <section class="rp-part"><h2>Part 1 · K-12 overview ${hb("rp_overview")}</h2>
+        <div class="rp-cards">${subjCards}</div>
+        <h3>Key findings ${hb("rp_findings")}</h3>${bullets(rpFindings(D, GRADES, "K-12"))}
+        <h3>The three schools side by side ${hb("rp_bands")}</h3>${rpBandTable(D)}
+        <h3>Every grade and subject ${hb("rp_matrix")}</h3>${rpMatrix(D, GRADES)}
+        <h3>Where progressions break ${hb("rp_trans")}</h3>${rpTransitions(D, GRADES)}
+        <h3>Progressions across K-12 ${hb("rp_prog")}</h3>${rpProgTable(D, GRADES)}
+        <h3>Priority and power standards ${hb("rp_prio")}</h3>${rpPriority(D)}</section>
+      ${RB.map(([k, n, gs], i) => `<section class="rp-part"><h2>Part ${i + 2} · ${esc(n)} (${k}) ${hb("rp_band")}</h2>
+        <h3>Key findings</h3>${bullets(rpFindings(D, gs, k))}
+        <h3>Every grade and subject</h3>${rpMatrix(D, gs)}
+        <h3>Progressions in these grades</h3>${rpProgTable(D, gs)}
+        ${D.subs.map((s) => rpSubject(D, s, gs, k)).join("")}</section>`).join("")}
+      <section class="rp-part rp-method"><h2>Part 5 · How to read this report ${hb("report")}</h2>
+        <ul class="rp-find">
+          <li><b>What is counted.</b> Each grade's own standards in each subject, in the sets its team rates (Wisconsin Math and ELA (CCSS); AERO Science and Social Studies in K-5; NGSS and Wisconsin Social Studies in 6-12). Essential Elements are counted apart. A standard no one has rated is never counted as a gap.</li>
+          <li><b>Shares.</b> "% in depth" is of the rated standards. "% rated" is of all the grade's standards.</li>
+          <li><b>Confirmed gap.</b> Every grade that could teach it (its suggested grades and any grade that names it a priority or power standard) rates it not taught. <b>Not taught where asked</b>: every grade asked says not taught, but grades never asked (the rest of a band) are open. <b>Possible gap</b>: a grade asked to rate it has not rated yet.</li>
+          <li><b>Progressions.</b> "Breaks down" is used only for a settled finding on an official link: a whole step not taught and taught nowhere, a progression that stops, or a standard taught in depth while the standard it needs first is not taught anywhere. Findings on suggested links (AI-suggested or similar wording) are listed as "check", never as a break.</li>
+          <li><b>Possible duplication</b>: taught in depth again after its suggested grade. <b>Reinforcement</b>: taught in depth in more than one grade of its own band.</li>
+          <li><b>Patterns.</b> A "whole-grade pattern" is a grade where most subjects sit 10 points or more below their own share in depth for the same grades. A "change of school" compares Grade 5 with Grade 6 and Grade 8 with Grade 9.</li>
+          <li><b>Lists</b> show the first items; every list is complete on the site page named after it (Gaps, Progressions, Grade dashboard). The coloured strip before each standard shows its rating in every grade, K to 12, with its suggested grade outlined.</li>
+          <li><b>Not yet included.</b> Part 2 (what the weekly plans show) has not run. The ratings describe teaching exposure across all the grade's classes, not student learning.</li>
+        </ul></section></div>`;
+  }
   function rerender() {
     if (S.subjFor) { S.needRerender = true; return; }
     const v = S.view; laneMemo.clear(); causeMemo.clear();
@@ -491,7 +681,7 @@
   }
   function renderView(v) {
     if (v === "flow") renderFlow(); else if (v === "rate") renderRate(); else if (v === "heatmap") renderHeatmap(); else if (v === "gaps") renderGaps();
-    else if (v === "dashboard") renderDashboard(); else if (v === "ladder") renderLadder(); else if (v === "plans") renderPlans(); else renderActivity();
+    else if (v === "dashboard") renderDashboard(); else if (v === "ladder") renderLadder(); else if (v === "plans") renderPlans(); else if (v === "report") renderReport(); else renderActivity();
   }
   // All subjects: each subject's page in turn, under its own heading. Pages that need a grade ask for it once.
   function renderAllSubjects(v) {
@@ -2531,6 +2721,7 @@
     else if (act === "sets-change") { S.flow.choose = S.flow.subject; rerender(); }
     else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
     else if (act === "open-full") openFullPage();
+    else if (act === "rp-print") window.print();
     else if (act === "walk") startWalk();
     else if (act === "walk-exit") { setTeam(""); tabTeam(""); scrollTo({ top: 0 }); }
     else if (act === "tour") { if (!S.tour) { S.tour = { i: TOUR.findIndex((x) => x.page === "rate") }; tourShow(); } }
@@ -2734,7 +2925,8 @@
     // A line at the top of the printout: what it shows and when (ratings change as teams rate).
     const pm = $("#print-meta") || document.querySelector("main").insertAdjacentElement("afterbegin", Object.assign(document.createElement("p"), { id: "print-meta" }));
     const on = [S.f.subject, S.f.division !== "all" ? divLabel(S.f.division) : "K-12", S.f.grade ? gname(S.f.grade) : "", S.f.framework ? SET(S.f.framework).abbr : "", S.f.strand, S.f.search ? `Find: ${S.f.search}` : ""].filter(Boolean);
-    pm.textContent = `Awsaj K-12 Vertical Alignment · ${$(".tabs [aria-selected='true'], .tabs .on")?.textContent?.trim() || ""} · ${on.join(" · ")} · Ratings as of ${new Date().toLocaleString()}${document.body.classList.contains("print-findings") ? ". Findings only: the informational lists (taught in another grade or early, reinforcement, unknown, full K-12 grids, strand coverage) are left out; the PDF button prints everything." : ""}`; if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw();
+    if (S.view === "report") pm.textContent = "";
+    else pm.textContent = `Awsaj K-12 Vertical Alignment · ${$(".tabs [aria-selected='true'], .tabs .on")?.textContent?.trim() || ""} · ${on.join(" · ")} · Ratings as of ${new Date().toLocaleString()}${document.body.classList.contains("print-findings") ? ". Findings only: the informational lists (taught in another grade or early, reinforcement, unknown, full K-12 grids, strand coverage) are left out; the PDF button prints everything." : ""}`; if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw();
     printOpen = [...document.querySelectorAll("details:not([open])")]; printOpen.forEach((d) => (d.open = true)); });
   addEventListener("afterprint", () => { if (!S.printAll) return; S.printAll = false; printOpen.forEach((d) => (d.open = false)); printOpen = []; rerender(); if ($("#detail").open && S.dlg.cur) S.dlg.cur.redraw(); });
 
