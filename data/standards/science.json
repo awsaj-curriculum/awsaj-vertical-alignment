@@ -2394,8 +2394,8 @@
   "strand": "Physical Science",
   "cluster": "PS1 Matter and Its Interactions (PS1.A Structure and Properties of Matter, PS1.B Chemical Reactions)",
   "text": "Measure and graph quantities to provide evidence that regardless of the type of change that occurs when heating, cooling, or mixing substances, the total weight of matter is conserved.",
-  "ee_code": "EE.5-PS1-2",
-  "ee_text": "Target Level: Measure and compare weights of substances before and after heating, cooling, or mixing substances to show that weight of matter is conserved. Precursor Level: Compare the weight of an object before and after it changes from a liquid to a solid and from a solid to a liquid. Initial Level: Recognize the change in state from liquid to solid or from solid to liquid of the same material.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-PS1-2",
    "WI-SCI:SCI.PS1.A.5",
@@ -2405,8 +2405,7 @@
    "cc_advanced": "I can design an investigation, accurately measure and graph quantities, and use the evidence to explain and defend the principle that the total weight of matter is conserved in various transformations, relating it to everyday situations. For example, I can explain that when sugar dissolves in tea, the total weight of the sweetened tea is the sum of the tea and the sugar, even though the sugar is no longer visible.",
    "cc_at_target": "I can measure and graph quantities to provide evidence that regardless of the type of change that occurs when heating, cooling, or mixing substances, the total weight of matter is conserved. For example, I can weigh an ice cube, let it melt, weigh the water, and create a graph showing the weight remained constant.",
    "cc_approaching": "I can measure the weight of substances before and after a change, but I may not consistently find the weight is conserved or I struggle to represent this with a graph. For example, I might weigh an ice cube and then the water after it melts, but my graph might not clearly show the weights were the same.",
-   "cc_emerging": "I can observe changes in matter, like ice melting, but I don't connect this to measuring weight or the idea that weight stays the same. For example, I can watch an ice cube turn into water but not think about weighing it before and after.",
-   "ee_at_target": "I can weigh substances before and after heating, cooling, or mixing and show that the weight stays the same."
+   "cc_emerging": "I can observe changes in matter, like ice melting, but I don't connect this to measuring weight or the idea that weight stays the same. For example, I can watch an ice cube turn into water but not think about weighing it before and after."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -2427,8 +2426,8 @@
   "strand": "Physical Science",
   "cluster": "PS1 Matter and Its Interactions (PS1.A Structure and Properties of Matter)",
   "text": "Make observations and measurements to identify materials based on their properties.",
-  "ee_code": "EE.5-PS1-3",
-  "ee_text": "Target Level: Make observations and measurements to identify materials based on their properties (e.g., weight, shape, texture, buoyancy, color, or magnetism). Precursor Level: Classify materials by physical properties. (e.g., weight, shape, texture, buoyancy, color, or magnetism). Initial Level: Match materials with similar physical properties.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-PS1-3",
    "WI-SCI:SCI.PS1.A.5"
@@ -2437,8 +2436,7 @@
    "cc_advanced": "I can systematically test and compare multiple properties of various materials to identify them and then justify why certain materials are chosen for specific real-world applications based on those properties. For example, I can test copper, plastic, and wood for conductivity and explain why copper is used for wires and plastic for wire insulation.",
    "cc_at_target": "I can make observations and measurements to identify materials based on their properties. For example, I can test unknown materials for properties like color, hardness, reflectivity, electrical conductivity, thermal conductivity, response to magnetic forces, and solubility to identify them.",
    "cc_approaching": "I can observe and make simple measurements of some properties (like hardness or if it dissolves in water) but may not use enough different properties to reliably tell materials apart. For example, I might test if two white powders dissolve in water but not test other properties to distinguish them.",
-   "cc_emerging": "I can describe one or two obvious properties of a material, like its color, but I don't use these to identify it. For example, I can say a substance is white but not use other properties to figure out if it's salt or sugar.",
-   "ee_at_target": "I can observe and measure materials (weight, shape, texture, floating, color, magnetism) to identify them."
+   "cc_emerging": "I can describe one or two obvious properties of a material, like its color, but I don't use these to identify it. For example, I can say a substance is white but not use other properties to figure out if it's salt or sugar."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -2491,8 +2489,8 @@
   "strand": "Physical Science",
   "cluster": "PS2 Motion and Stability: Forces and Interactions (PS2.B Types of Interactions)",
   "text": "Support an argument that the gravitational force exerted by Earth on objects is directed down.",
-  "ee_code": "EE.5-PS2-1",
-  "ee_text": "Target Level: Demonstrate that the gravitational force exerted by Earth on objects is directed down. Precursor Level: Predict the direction an object will go when dropped. Initial Level: Recognize the direction an object will go when dropped.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-PS2-1",
    "WI-SCI:SCI.PS2.B.5"
@@ -2501,8 +2499,7 @@
    "cc_advanced": "I can construct a robust argument, using diverse evidence from everyday phenomena, to demonstrate that Earth's gravitational force is consistently directed \"down\" (towards Earth's center) and apply this understanding to explain why objects behave as they do in various real-world contexts. For example, I can explain that a plumb bob always points \"down\" towards the Earth's center, helping builders make straight walls, because of gravity's consistent downward pull, regardless of where on a building they are.",
    "cc_at_target": "I can support an argument that the gravitational force exerted by Earth on objects is directed down. For example, I can explain that no matter how I drop a ball or throw it up, it always comes back towards the ground, showing evidence that gravity pulls things \"down.\"",
    "cc_approaching": "I can state that gravity pulls objects down, but I find it hard to use examples or observations to clearly support an argument about the direction of this force. For example, I know a dropped apple falls, but I struggle to explain how this specific observation proves the force is always \"down.\"",
-   "cc_emerging": "I can observe that objects fall to the ground, but I cannot explain why or in what specific direction a force is acting. For example, I see a ball drop but don't connect it to a specific force called gravity or its consistent direction.",
-   "ee_at_target": "I can show that Earth's gravity pulls objects down."
+   "cc_emerging": "I can observe that objects fall to the ground, but I cannot explain why or in what specific direction a force is acting. For example, I see a ball drop but don't connect it to a specific force called gravity or its consistent direction."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -2523,8 +2520,8 @@
   "strand": "Physical Science",
   "cluster": "PS3 Energy (PS3.D Energy in Chemical Processes and Everyday Life)",
   "text": "Use models to describe that energy in animals’ food (used for body repair, growth, motion, and to maintain body warmth) was once energy from the sun.",
-  "ee_code": "EE.5-PS3-1",
-  "ee_text": "Target Level: Create a model to describe that energy in animals' food was once energy from the Sun. Precursor Level: Use models to describe that plants capture energy from sunlight. Initial Level: Identify simple models that show that plants need sunlight to grow.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-PS3-1",
    "WI-SCI:SCI.PS3.D.5"
@@ -2533,8 +2530,7 @@
    "cc_advanced": "I can create and explain detailed models (like food webs) to trace the flow of energy from the sun through multiple organisms in an ecosystem, explaining how all animal life ultimately depends on solar energy for survival and bodily functions. For example, I can design a food web for a local pond and explain how the sun's energy supports everything from algae to fish to herons, and how this energy allows them to live and grow.",
    "cc_at_target": "I can use models to describe that energy in animals’ food (used for body repair, growth, motion, and to maintain body warmth) was once energy from the sun. For example, I can draw a food chain (sun -> grass -> cow -> human) and explain how the sun's energy flows through it, enabling the human to move and grow.",
    "cc_approaching": "I can describe that animals get energy from eating plants or other animals, but I struggle to clearly model or explain how this energy ultimately traces back to the sun. For example, I can draw a picture of a rabbit eating a carrot for energy, but I'm unsure how to show the sun's role in the carrot's energy.",
-   "cc_emerging": "I can say that animals eat food to get energy, but I cannot explain where the food's energy originally comes from or use a model to show this. For example, I know a cat eats fish to run, but I don't know how the sun is involved.",
-   "ee_at_target": "I can make a model that shows the energy in animals' food first came from the sun."
+   "cc_emerging": "I can say that animals eat food to get energy, but I cannot explain where the food's energy originally comes from or use a model to show this. For example, I know a cat eats fish to run, but I don't know how the sun is involved."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -2555,8 +2551,8 @@
   "strand": "Life Science",
   "cluster": "LS1 From Molecules to Organisms: Structures and Processes (LS1.C Organization for Matter and Energy Flow in)",
   "text": "Support an argument that plants get the materials they need for growth chiefly from air and water.",
-  "ee_code": "EE.5-LS1-1",
-  "ee_text": "Target Level: Provide evidence that plants need air and water to grow. Precursor Level: Provide evidence that plants grow. Initial Level: Distinguish things that grow from things that don’t grow.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-LS1-1",
    "WI-SCI:SCI.LS1.C.5"
@@ -2565,8 +2561,7 @@
    "cc_advanced": "I can construct a detailed argument, citing experimental evidence (like Van Helmont's experiment or data about photosynthesis), to convincingly demonstrate that plants primarily build their mass from carbon dioxide in the air and water, and can relate this to the process of photosynthesis and its importance for producing food for ecosystems. For example, I can explain that a large tree gets most of its mass from the air and water, not by \"eating\" the soil, and this is how it makes its own food.",
    "cc_at_target": "I can support an argument that plants get the materials they need for growth chiefly from air and water. For example, I can explain that while plants use soil for small amounts of nutrients, most of their actual substance for growing bigger comes from carbon dioxide in the air and water absorbed by their roots, using evidence from experiments that show soil mass doesn't decrease much as plants grow.",
    "cc_approaching": "I can say that plants need air, water, and soil to grow, but I struggle to clearly argue or provide evidence that air and water are the chief materials for their growth (their mass). For example, I know plants need water from the soil and air to \"breathe,\" but I think the soil provides most of what makes them get bigger.",
-   "cc_emerging": "I can state that plants need soil to grow, but I cannot explain that their main materials for building their bodies come from air and water. For example, I think plants \"eat\" soil like animals eat food.",
-   "ee_at_target": "I can show evidence that plants need air and water to grow."
+   "cc_emerging": "I can state that plants need soil to grow, but I cannot explain that their main materials for building their bodies come from air and water. For example, I think plants \"eat\" soil like animals eat food."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -2587,8 +2582,8 @@
   "strand": "Life Science",
   "cluster": "LS2 Ecosystems: Interactions, Energy, and Dynamics (LS2.A Interdependent Relationships in Ecosystems, LS2.B Cycles of Matter and Energy Transfer in Ecosystems)",
   "text": "Develop a model to describe the movement of matter among plants, animals, decomposers, and the environment.",
-  "ee_code": "EE.5-LS2-1",
-  "ee_text": "Target Level: Create a model that shows the movement of matter (e.g., plant growth, eating, composting) through living things. Precursor Level: Identify a model that shows the movement of matter from plants to animals (e.g. food chain/food web). Initial Level: Identify common human foods.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-LS2-1",
    "WI-SCI:SCI.LS2.A.5",
@@ -2598,8 +2593,7 @@
    "cc_advanced": "I can design and explain a comprehensive model illustrating how specific types of matter (like carbon or nitrogen at a basic level) cycle through an ecosystem, detailing the crucial roles of plants (producers), animals (consumers), and especially decomposers in returning essential materials to the environment for reuse, and can predict impacts of disruptions to this cycle. For example, I can explain how if decomposers were removed from a forest, dead leaves and animals would pile up, and nutrients wouldn't return to the soil, affecting new plant growth and the entire food web.",
    "cc_at_target": "I can develop a model to describe the movement of matter among plants, animals, decomposers, and the environment. For example, I can draw a diagram showing a plant taking nutrients from the soil and air, an animal eating the plant, the animal dying, and decomposers (like fungi or bacteria) breaking it down to return nutrients to the soil and gases to the air.",
    "cc_approaching": "I can create a simple model showing animals eating plants, but I struggle to include decomposers or clearly show how matter cycles back into the environment (like soil or air). For example, I can draw a rabbit eating a carrot, but my model doesn't show how the carrot's matter eventually returns to the soil to help new carrots grow.",
-   "cc_emerging": "I can describe that animals eat plants, but I cannot create a model to show how matter moves between plants, animals, decomposers, and the environment in a cycle. For example, I know a deer eats grass, but I don't know what happens to the deer's body or the grass's matter when they die.",
-   "ee_at_target": "I can make a model that shows how matter moves through living things, such as plant growth, eating, and composting."
+   "cc_emerging": "I can describe that animals eat plants, but I cannot create a model to show how matter moves between plants, animals, decomposers, and the environment in a cycle. For example, I know a deer eats grass, but I don't know what happens to the deer's body or the grass's matter when they die."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -2652,8 +2646,8 @@
   "strand": "Earth and Space Science",
   "cluster": "ESS1 Earth's Place in the Universe (ESS1.B Earth and the Solar System)",
   "text": "Represent data in graphical displays to reveal patterns of daily changes in length and direction of shadows, day and night, and the seasonal appearance of some stars in the night sky.",
-  "ee_code": "EE.5-ESS1-2",
-  "ee_text": "Target Level: Represent and interpret data on a picture, line, or bar graph to show seasonal patterns in the length of daylight hours. Precursor Level: Recognize patterns about length of daylight hours over time (e.g., week to week, month to month). Initial Level: Order events in daily routine including sunrise and sunset.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-ESS1-2",
    "WI-SCI:SCI.ESS1.B.5"
@@ -2662,8 +2656,7 @@
    "cc_advanced": "Integrates multiple sets of data into graphical formats and provides a clear, detailed explanation of how these patterns reflect Earth’s rotation and orbit. Example: A student presents two graphs, one of shadow lengths over a day and one of daylight hours across months, and explains how both are connected to Earth’s movement relative to the sun.",
    "cc_at_target": "Accurately represents observational data in a graph or chart and uses it to explain patterns in shadow length, daylight duration, or star visibility across seasons. Example: A student produces a line graph showing how a shadow gets shorter at midday and explains that the sun is highest at that time.",
    "cc_approaching": "Collects basic data about shadows or sky observations and attempts to organize it into a simple graph or table. Example: A student creates a bar graph showing the length of a shadow at morning, noon, and afternoon but offers only a limited explanation of the pattern.",
-   "cc_emerging": "Recognizes that shadows and the appearance of the sky change over time but requires support to organize or interpret data. Example: A student draws a picture of a shadow at different times but cannot label the times or explain the change.",
-   "ee_at_target": "I can show and read daylight hours on a picture, line, or bar graph to find seasonal patterns."
+   "cc_emerging": "Recognizes that shadows and the appearance of the sky change over time but requires support to organize or interpret data. Example: A student draws a picture of a shadow at different times but cannot label the times or explain the change."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -2684,8 +2677,8 @@
   "strand": "Earth and Space Science",
   "cluster": "ESS2 Earth's Systems (ESS2.A Earth Materials and Systems)",
   "text": "Develop a model using an example to describe ways the geosphere, biosphere, hydrosphere, and/or atmosphere interact.",
-  "ee_code": "EE.5-ESS2-1",
-  "ee_text": "Target Level: Develop a model showing how water (hydrosphere) affects the living things (biosphere) found in a region. Precursor Level: Recognize how water (hydrosphere) affects people in a region (e.g., floods, droughts, mudslide, tourism, and recreation). Initial Level: Anticipates routine (e.g., clothes to wear, activities to do) to follow when it is raining.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-ESS2-1",
    "WI-SCI:SCI.ESS2.A.5"
@@ -2694,8 +2687,7 @@
    "cc_advanced": "Designs a complex model integrating all four Earth systems and clearly explains their dynamic interactions over time or due to human/environmental impact. Example: A student creates a diagram showing how deforestation (biosphere) affects soil erosion (geosphere), reduces cloud formation (atmosphere), and changes runoff patterns (hydrosphere), and explains the long-term consequences.",
    "cc_at_target": "Creates a clear model showing how at least three of Earth’s systems interact in a specific natural event or process. Example: A student illustrates a forest ecosystem where rain (hydrosphere) erodes soil (geosphere) and affects plant life (biosphere), with a brief description of each interaction.",
    "cc_approaching": "Develops a simple model (drawing or diorama) showing two Earth systems and describes a basic interaction. Example: A student draws a river (hydrosphere) watering trees (biosphere) and explains that “plants need water to grow.”",
-   "cc_emerging": "Names Earth's systems (e.g., water, land, air, life) with support but struggles to describe or show how they interact. Example: A student labels “water” and “plants” on a picture but doesn’t explain the connection between them.",
-   "ee_at_target": "I can make a model that shows how water affects the living things in a place."
+   "cc_emerging": "Names Earth's systems (e.g., water, land, air, life) with support but struggles to describe or show how they interact. Example: A student labels “water” and “plants” on a picture but doesn’t explain the connection between them."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -2748,8 +2740,8 @@
   "strand": "Earth and Space Science",
   "cluster": "ESS3 Earth and Human Activity (ESS3.C Human Impacts on Earth Systems)",
   "text": "Obtain and combine information about ways individual communities use science ideas to protect the Earth’s resources and environment.",
-  "ee_code": "EE.5-ESS3-1",
-  "ee_text": "Target Level: Use information to describe how people can help protect the Earth's resources and how that affects the environment. Precursor Level: Compare two methods people can use to help protect the Earth's resources. Initial Level: Identify one way to protect a resource of Earth (e.g., put paper in the recycling bin).",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "AERO-SCI:5-ESS3-1",
    "WI-SCI:SCI.ESS3.C.5"
@@ -2758,8 +2750,7 @@
    "cc_advanced": "Integrates information from diverse sources and explains in depth how science-based strategies are used by different communities to protect various environmental systems. Example: A student compares how two cities use renewable energy, one with solar panels and one with wind turbines, and explains how these reduce carbon emissions and preserve air quality.",
    "cc_at_target": "Combines specific information from multiple sources to explain how communities apply science to solve environmental problems. Example: A student researches and describes how a coastal city uses technology to monitor water quality and adjust sewage treatment to protect marine life.",
    "cc_approaching": "Describes a simple action a community takes to protect resources and makes a general connection to science. Example: A student explains that a local town uses recycling bins to reduce waste, linking it to the idea of reusing materials.",
-   "cc_emerging": "Identifies a basic environmental issue but needs support to explain how science is used to address it. Example: A student mentions “littering is bad” but does not describe how communities use science to reduce it.",
-   "ee_at_target": "I can use information to tell how people protect Earth's resources and how this helps the environment."
+   "cc_emerging": "Identifies a basic environmental issue but needs support to explain how science is used to address it. Example: A student mentions “littering is bad” but does not describe how communities use science to reduce it."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10139,8 +10130,8 @@
   "strand": "Physical Science",
   "cluster": "PS1 Matter and Its Interactions",
   "text": "Measure and graph quantities to provide evidence that regardless of the type of change that occurs when heating, cooling, or mixing substances, the total weight of matter is conserved.",
-  "ee_code": "EE.5-PS1-2",
-  "ee_text": "Target Level: Measure and compare weights of substances before and after heating, cooling, or mixing substances to show that weight of matter is conserved. Precursor Level: Compare the weight of an object before and after it changes from a liquid to a solid and from a solid to a liquid. Initial Level: Recognize the change in state from liquid to solid or from solid to liquid of the same material.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-PS1-2",
    "WI-SCI:SCI.PS1.A.5",
@@ -10150,8 +10141,7 @@
    "cc_advanced": "I can design an investigation, accurately measure and graph quantities, and use the evidence to explain and defend the principle that the total weight of matter is conserved in various transformations, relating it to everyday situations. For example, I can explain that when sugar dissolves in tea, the total weight of the sweetened tea is the sum of the tea and the sugar, even though the sugar is no longer visible.",
    "cc_at_target": "I can measure and graph quantities to provide evidence that regardless of the type of change that occurs when heating, cooling, or mixing substances, the total weight of matter is conserved. For example, I can weigh an ice cube, let it melt, weigh the water, and create a graph showing the weight remained constant.",
    "cc_approaching": "I can measure the weight of substances before and after a change, but I may not consistently find the weight is conserved or I struggle to represent this with a graph. For example, I might weigh an ice cube and then the water after it melts, but my graph might not clearly show the weights were the same.",
-   "cc_emerging": "I can observe changes in matter, like ice melting, but I don't connect this to measuring weight or the idea that weight stays the same. For example, I can watch an ice cube turn into water but not think about weighing it before and after.",
-   "ee_at_target": "I can weigh substances before and after heating, cooling, or mixing and show that the weight stays the same."
+   "cc_emerging": "I can observe changes in matter, like ice melting, but I don't connect this to measuring weight or the idea that weight stays the same. For example, I can watch an ice cube turn into water but not think about weighing it before and after."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10172,8 +10162,8 @@
   "strand": "Physical Science",
   "cluster": "PS1 Matter and Its Interactions",
   "text": "Make observations and measurements to identify materials based on their properties.",
-  "ee_code": "EE.5-PS1-3",
-  "ee_text": "Target Level: Make observations and measurements to identify materials based on their properties (e.g., weight, shape, texture, buoyancy, color, or magnetism). Precursor Level: Classify materials by physical properties. (e.g., weight, shape, texture, buoyancy, color, or magnetism). Initial Level: Match materials with similar physical properties.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-PS1-3",
    "WI-SCI:SCI.PS1.A.5"
@@ -10182,8 +10172,7 @@
    "cc_advanced": "I can systematically test and compare multiple properties of various materials to identify them and then justify why certain materials are chosen for specific real-world applications based on those properties. For example, I can test copper, plastic, and wood for conductivity and explain why copper is used for wires and plastic for wire insulation.",
    "cc_at_target": "I can make observations and measurements to identify materials based on their properties. For example, I can test unknown materials for properties like color, hardness, reflectivity, electrical conductivity, thermal conductivity, response to magnetic forces, and solubility to identify them.",
    "cc_approaching": "I can observe and make simple measurements of some properties (like hardness or if it dissolves in water) but may not use enough different properties to reliably tell materials apart. For example, I might test if two white powders dissolve in water but not test other properties to distinguish them.",
-   "cc_emerging": "I can describe one or two obvious properties of a material, like its color, but I don't use these to identify it. For example, I can say a substance is white but not use other properties to figure out if it's salt or sugar.",
-   "ee_at_target": "I can observe and measure materials (weight, shape, texture, floating, color, magnetism) to identify them."
+   "cc_emerging": "I can describe one or two obvious properties of a material, like its color, but I don't use these to identify it. For example, I can say a substance is white but not use other properties to figure out if it's salt or sugar."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10236,8 +10225,8 @@
   "strand": "Physical Science",
   "cluster": "PS2 Motion and Stability: Forces and Interactions",
   "text": "Support an argument that the gravitational force exerted by Earth on objects is directed down.",
-  "ee_code": "EE.5-PS2-1",
-  "ee_text": "Target Level: Demonstrate that the gravitational force exerted by Earth on objects is directed down. Precursor Level: Predict the direction an object will go when dropped. Initial Level: Recognize the direction an object will go when dropped.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-PS2-1",
    "WI-SCI:SCI.PS2.B.5"
@@ -10246,8 +10235,7 @@
    "cc_advanced": "I can construct a robust argument, using diverse evidence from everyday phenomena, to demonstrate that Earth's gravitational force is consistently directed \"down\" (towards Earth's center) and apply this understanding to explain why objects behave as they do in various real-world contexts. For example, I can explain that a plumb bob always points \"down\" towards the Earth's center, helping builders make straight walls, because of gravity's consistent downward pull, regardless of where on a building they are.",
    "cc_at_target": "I can support an argument that the gravitational force exerted by Earth on objects is directed down. For example, I can explain that no matter how I drop a ball or throw it up, it always comes back towards the ground, showing evidence that gravity pulls things \"down.\"",
    "cc_approaching": "I can state that gravity pulls objects down, but I find it hard to use examples or observations to clearly support an argument about the direction of this force. For example, I know a dropped apple falls, but I struggle to explain how this specific observation proves the force is always \"down.\"",
-   "cc_emerging": "I can observe that objects fall to the ground, but I cannot explain why or in what specific direction a force is acting. For example, I see a ball drop but don't connect it to a specific force called gravity or its consistent direction.",
-   "ee_at_target": "I can show that Earth's gravity pulls objects down."
+   "cc_emerging": "I can observe that objects fall to the ground, but I cannot explain why or in what specific direction a force is acting. For example, I see a ball drop but don't connect it to a specific force called gravity or its consistent direction."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10268,8 +10256,8 @@
   "strand": "Physical Science",
   "cluster": "PS3 Energy",
   "text": "Use models to describe that energy in animals’ food (used for body repair, growth, motion, and to maintain body warmth) was once energy from the sun.",
-  "ee_code": "EE.5-PS3-1",
-  "ee_text": "Target Level: Create a model to describe that energy in animals' food was once energy from the Sun. Precursor Level: Use models to describe that plants capture energy from sunlight. Initial Level: Identify simple models that show that plants need sunlight to grow.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-PS3-1",
    "WI-SCI:SCI.PS3.D.5"
@@ -10278,8 +10266,7 @@
    "cc_advanced": "I can create and explain detailed models (like food webs) to trace the flow of energy from the sun through multiple organisms in an ecosystem, explaining how all animal life ultimately depends on solar energy for survival and bodily functions. For example, I can design a food web for a local pond and explain how the sun's energy supports everything from algae to fish to herons, and how this energy allows them to live and grow.",
    "cc_at_target": "I can use models to describe that energy in animals’ food (used for body repair, growth, motion, and to maintain body warmth) was once energy from the sun. For example, I can draw a food chain (sun -> grass -> cow -> human) and explain how the sun's energy flows through it, enabling the human to move and grow.",
    "cc_approaching": "I can describe that animals get energy from eating plants or other animals, but I struggle to clearly model or explain how this energy ultimately traces back to the sun. For example, I can draw a picture of a rabbit eating a carrot for energy, but I'm unsure how to show the sun's role in the carrot's energy.",
-   "cc_emerging": "I can say that animals eat food to get energy, but I cannot explain where the food's energy originally comes from or use a model to show this. For example, I know a cat eats fish to run, but I don't know how the sun is involved.",
-   "ee_at_target": "I can make a model that shows the energy in animals' food first came from the sun."
+   "cc_emerging": "I can say that animals eat food to get energy, but I cannot explain where the food's energy originally comes from or use a model to show this. For example, I know a cat eats fish to run, but I don't know how the sun is involved."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10300,8 +10287,8 @@
   "strand": "Life Science",
   "cluster": "LS1 From Molecules to Organisms: Structures and Processes",
   "text": "Support an argument that plants get the materials they need for growth chiefly from air and water.",
-  "ee_code": "EE.5-LS1-1",
-  "ee_text": "Target Level: Provide evidence that plants need air and water to grow. Precursor Level: Provide evidence that plants grow. Initial Level: Distinguish things that grow from things that don’t grow.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-LS1-1",
    "WI-SCI:SCI.LS1.C.5"
@@ -10310,8 +10297,7 @@
    "cc_advanced": "I can construct a detailed argument, citing experimental evidence (like Van Helmont's experiment or data about photosynthesis), to convincingly demonstrate that plants primarily build their mass from carbon dioxide in the air and water, and can relate this to the process of photosynthesis and its importance for producing food for ecosystems. For example, I can explain that a large tree gets most of its mass from the air and water, not by \"eating\" the soil, and this is how it makes its own food.",
    "cc_at_target": "I can support an argument that plants get the materials they need for growth chiefly from air and water. For example, I can explain that while plants use soil for small amounts of nutrients, most of their actual substance for growing bigger comes from carbon dioxide in the air and water absorbed by their roots, using evidence from experiments that show soil mass doesn't decrease much as plants grow.",
    "cc_approaching": "I can say that plants need air, water, and soil to grow, but I struggle to clearly argue or provide evidence that air and water are the chief materials for their growth (their mass). For example, I know plants need water from the soil and air to \"breathe,\" but I think the soil provides most of what makes them get bigger.",
-   "cc_emerging": "I can state that plants need soil to grow, but I cannot explain that their main materials for building their bodies come from air and water. For example, I think plants \"eat\" soil like animals eat food.",
-   "ee_at_target": "I can show evidence that plants need air and water to grow."
+   "cc_emerging": "I can state that plants need soil to grow, but I cannot explain that their main materials for building their bodies come from air and water. For example, I think plants \"eat\" soil like animals eat food."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10332,8 +10318,8 @@
   "strand": "Life Science",
   "cluster": "LS2 Ecosystems: Interactions, Energy, and Dynamics",
   "text": "Develop a model to describe the movement of matter among plants, animals, decomposers, and the environment.",
-  "ee_code": "EE.5-LS2-1",
-  "ee_text": "Target Level: Create a model that shows the movement of matter (e.g., plant growth, eating, composting) through living things. Precursor Level: Identify a model that shows the movement of matter from plants to animals (e.g. food chain/food web). Initial Level: Identify common human foods.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-LS2-1",
    "WI-SCI:SCI.LS2.A.5",
@@ -10343,8 +10329,7 @@
    "cc_advanced": "I can design and explain a comprehensive model illustrating how specific types of matter (like carbon or nitrogen at a basic level) cycle through an ecosystem, detailing the crucial roles of plants (producers), animals (consumers), and especially decomposers in returning essential materials to the environment for reuse, and can predict impacts of disruptions to this cycle. For example, I can explain how if decomposers were removed from a forest, dead leaves and animals would pile up, and nutrients wouldn't return to the soil, affecting new plant growth and the entire food web.",
    "cc_at_target": "I can develop a model to describe the movement of matter among plants, animals, decomposers, and the environment. For example, I can draw a diagram showing a plant taking nutrients from the soil and air, an animal eating the plant, the animal dying, and decomposers (like fungi or bacteria) breaking it down to return nutrients to the soil and gases to the air.",
    "cc_approaching": "I can create a simple model showing animals eating plants, but I struggle to include decomposers or clearly show how matter cycles back into the environment (like soil or air). For example, I can draw a rabbit eating a carrot, but my model doesn't show how the carrot's matter eventually returns to the soil to help new carrots grow.",
-   "cc_emerging": "I can describe that animals eat plants, but I cannot create a model to show how matter moves between plants, animals, decomposers, and the environment in a cycle. For example, I know a deer eats grass, but I don't know what happens to the deer's body or the grass's matter when they die.",
-   "ee_at_target": "I can make a model that shows how matter moves through living things, such as plant growth, eating, and composting."
+   "cc_emerging": "I can describe that animals eat plants, but I cannot create a model to show how matter moves between plants, animals, decomposers, and the environment in a cycle. For example, I know a deer eats grass, but I don't know what happens to the deer's body or the grass's matter when they die."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10397,8 +10382,8 @@
   "strand": "Earth and Space Science",
   "cluster": "ESS1 Earth's Place in the Universe",
   "text": "Represent data in graphical displays to reveal patterns of daily changes in length and direction of shadows, day and night, and the seasonal appearance of some stars in the night sky",
-  "ee_code": "EE.5-ESS1-2",
-  "ee_text": "Target Level: Represent and interpret data on a picture, line, or bar graph to show seasonal patterns in the length of daylight hours. Precursor Level: Recognize patterns about length of daylight hours over time (e.g., week to week, month to month). Initial Level: Order events in daily routine including sunrise and sunset.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-ESS1-2",
    "WI-SCI:SCI.ESS1.B.5"
@@ -10407,8 +10392,7 @@
    "cc_advanced": "Integrates multiple sets of data into graphical formats and provides a clear, detailed explanation of how these patterns reflect Earth’s rotation and orbit. Example: A student presents two graphs, one of shadow lengths over a day and one of daylight hours across months, and explains how both are connected to Earth’s movement relative to the sun.",
    "cc_at_target": "Accurately represents observational data in a graph or chart and uses it to explain patterns in shadow length, daylight duration, or star visibility across seasons. Example: A student produces a line graph showing how a shadow gets shorter at midday and explains that the sun is highest at that time.",
    "cc_approaching": "Collects basic data about shadows or sky observations and attempts to organize it into a simple graph or table. Example: A student creates a bar graph showing the length of a shadow at morning, noon, and afternoon but offers only a limited explanation of the pattern.",
-   "cc_emerging": "Recognizes that shadows and the appearance of the sky change over time but requires support to organize or interpret data. Example: A student draws a picture of a shadow at different times but cannot label the times or explain the change.",
-   "ee_at_target": "I can show and read daylight hours on a picture, line, or bar graph to find seasonal patterns."
+   "cc_emerging": "Recognizes that shadows and the appearance of the sky change over time but requires support to organize or interpret data. Example: A student draws a picture of a shadow at different times but cannot label the times or explain the change."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10429,8 +10413,8 @@
   "strand": "Earth and Space Science",
   "cluster": "ESS2 Earth's Systems",
   "text": "Develop a model using an example to describe ways the geosphere, biosphere, hydrosphere, and/or atmosphere interact",
-  "ee_code": "EE.5-ESS2-1",
-  "ee_text": "Target Level: Develop a model showing how water (hydrosphere) affects the living things (biosphere) found in a region. Precursor Level: Recognize how water (hydrosphere) affects people in a region (e.g., floods, droughts, mudslide, tourism, and recreation). Initial Level: Anticipates routine (e.g., clothes to wear, activities to do) to follow when it is raining.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-ESS2-1",
    "WI-SCI:SCI.ESS2.A.5"
@@ -10439,8 +10423,7 @@
    "cc_advanced": "Designs a complex model integrating all four Earth systems and clearly explains their dynamic interactions over time or due to human/environmental impact. Example: A student creates a diagram showing how deforestation (biosphere) affects soil erosion (geosphere), reduces cloud formation (atmosphere), and changes runoff patterns (hydrosphere), and explains the long-term consequences.",
    "cc_at_target": "Creates a clear model showing how at least three of Earth’s systems interact in a specific natural event or process. Example: A student illustrates a forest ecosystem where rain (hydrosphere) erodes soil (geosphere) and affects plant life (biosphere), with a brief description of each interaction.",
    "cc_approaching": "Develops a simple model (drawing or diorama) showing two Earth systems and describes a basic interaction. Example: A student draws a river (hydrosphere) watering trees (biosphere) and explains that “plants need water to grow.”",
-   "cc_emerging": "Names Earth's systems (e.g., water, land, air, life) with support but struggles to describe or show how they interact. Example: A student labels “water” and “plants” on a picture but doesn’t explain the connection between them.",
-   "ee_at_target": "I can make a model that shows how water affects the living things in a place."
+   "cc_emerging": "Names Earth's systems (e.g., water, land, air, life) with support but struggles to describe or show how they interact. Example: A student labels “water” and “plants” on a picture but doesn’t explain the connection between them."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",
@@ -10493,8 +10476,8 @@
   "strand": "Earth and Space Science",
   "cluster": "ESS3 Earth and Human Activity",
   "text": "Obtain and combine information about ways individual communities use science ideas to protect the Earth’s resources and environment.",
-  "ee_code": "EE.5-ESS3-1",
-  "ee_text": "Target Level: Use information to describe how people can help protect the Earth's resources and how that affects the environment. Precursor Level: Compare two methods people can use to help protect the Earth's resources. Initial Level: Identify one way to protect a resource of Earth (e.g., put paper in the recycling bin).",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [
    "NGSS:5-ESS3-1",
    "WI-SCI:SCI.ESS3.C.5"
@@ -10503,8 +10486,7 @@
    "cc_advanced": "Integrates information from diverse sources and explains in depth how science-based strategies are used by different communities to protect various environmental systems. Example: A student compares how two cities use renewable energy, one with solar panels and one with wind turbines, and explains how these reduce carbon emissions and preserve air quality.",
    "cc_at_target": "Combines specific information from multiple sources to explain how communities apply science to solve environmental problems. Example: A student researches and describes how a coastal city uses technology to monitor water quality and adjust sewage treatment to protect marine life.",
    "cc_approaching": "Describes a simple action a community takes to protect resources and makes a general connection to science. Example: A student explains that a local town uses recycling bins to reduce waste, linking it to the idea of reusing materials.",
-   "cc_emerging": "Identifies a basic environmental issue but needs support to explain how science is used to address it. Example: A student mentions “littering is bad” but does not describe how communities use science to reduce it.",
-   "ee_at_target": "I can use information to tell how people protect Earth's resources and how this helps the environment."
+   "cc_emerging": "Identifies a basic environmental issue but needs support to explain how science is used to address it. Example: A student mentions “littering is bad” but does not describe how communities use science to reduce it."
   },
   "descriptor_source": "school",
   "descriptor_flag": "",

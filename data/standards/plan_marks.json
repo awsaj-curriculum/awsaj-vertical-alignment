@@ -1,5 +1,5 @@
 {
-"built": "2026-10-25",
+"built": "2026-11-05",
 "about": "In plans and priority (6-12) / power (K-5) standards per grade, from the school's curriculum documents. Built by scripts/audit/plan_marks.py.",
 "marks": {
 "AERO-SCI|1-ESS1-1": {
@@ -7178,11 +7178,6 @@
 "1"
 ]
 },
-"WI-EE-ELA|EE.L.1.2.b": {
-"priority": [
-"1"
-]
-},
 "WI-EE-ELA|EE.L.1.3.a": {
 "priority": [
 "1"
@@ -7251,12 +7246,6 @@
 "12"
 ]
 },
-"WI-EE-ELA|EE.L.11-12.1.d": {
-"priority": [
-"11",
-"12"
-]
-},
 "WI-EE-ELA|EE.L.11-12.2.a": {
 "plans": [
 "11",
@@ -7309,16 +7298,6 @@
 "12"
 ]
 },
-"WI-EE-ELA|EE.L.11-12.5.b": {
-"plans": [
-"11",
-"12"
-],
-"priority": [
-"11",
-"12"
-]
-},
 "WI-EE-ELA|EE.L.11-12.5.c": {
 "plans": [
 "11",
@@ -7350,16 +7329,6 @@
 ]
 },
 "WI-EE-ELA|EE.L.2.2.a": {
-"priority": [
-"2"
-]
-},
-"WI-EE-ELA|EE.L.2.2.b": {
-"priority": [
-"2"
-]
-},
-"WI-EE-ELA|EE.L.2.2.c": {
 "priority": [
 "2"
 ]
@@ -7404,16 +7373,6 @@
 "2"
 ]
 },
-"WI-EE-ELA|EE.L.2.6.b": {
-"priority": [
-"2"
-]
-},
-"WI-EE-ELA|EE.L.2.6.c": {
-"priority": [
-"2"
-]
-},
 "WI-EE-ELA|EE.L.2.6.d-e": {
 "priority": [
 "2"
@@ -7425,11 +7384,6 @@
 ]
 },
 "WI-EE-ELA|EE.L.3.2.b": {
-"priority": [
-"3"
-]
-},
-"WI-EE-ELA|EE.L.3.2.c": {
 "priority": [
 "3"
 ]
@@ -7464,11 +7418,6 @@
 "3"
 ]
 },
-"WI-EE-ELA|EE.L.3.5.d": {
-"priority": [
-"3"
-]
-},
 "WI-EE-ELA|EE.L.3.5.e": {
 "priority": [
 "3"
@@ -7480,16 +7429,6 @@
 ]
 },
 "WI-EE-ELA|EE.L.3.6.b": {
-"priority": [
-"3"
-]
-},
-"WI-EE-ELA|EE.L.3.6.c": {
-"priority": [
-"3"
-]
-},
-"WI-EE-ELA|EE.L.3.6.d": {
 "priority": [
 "3"
 ]
@@ -7572,11 +7511,6 @@
 "4"
 ]
 },
-"WI-EE-ELA|EE.L.4.5.c": {
-"priority": [
-"4"
-]
-},
 "WI-EE-ELA|EE.L.4.5.d": {
 "priority": [
 "4"
@@ -7593,22 +7527,6 @@
 ]
 },
 "WI-EE-ELA|EE.L.4.6.a": {
-"plans": [
-"4"
-],
-"priority": [
-"4"
-]
-},
-"WI-EE-ELA|EE.L.4.6.b": {
-"plans": [
-"4"
-],
-"priority": [
-"4"
-]
-},
-"WI-EE-ELA|EE.L.4.6.c": {
 "plans": [
 "4"
 ],
@@ -7657,11 +7575,6 @@
 "5"
 ]
 },
-"WI-EE-ELA|EE.L.5.3.b": {
-"priority": [
-"5"
-]
-},
 "WI-EE-ELA|EE.L.5.3.c": {
 "priority": [
 "5"
@@ -7693,31 +7606,7 @@
 "5"
 ]
 },
-"WI-EE-ELA|EE.L.5.5.c": {
-"plans": [
-"5"
-],
-"priority": [
-"5"
-]
-},
-"WI-EE-ELA|EE.L.5.5.d": {
-"plans": [
-"5"
-],
-"priority": [
-"5"
-]
-},
 "WI-EE-ELA|EE.L.5.6.a": {
-"plans": [
-"5"
-],
-"priority": [
-"5"
-]
-},
-"WI-EE-ELA|EE.L.5.6.b": {
 "plans": [
 "5"
 ],
@@ -7863,14 +7752,6 @@
 "7"
 ]
 },
-"WI-EE-ELA|EE.L.7.5.c": {
-"plans": [
-"7"
-],
-"priority": [
-"7"
-]
-},
 "WI-EE-ELA|EE.L.7.6.a": {
 "plans": [
 "7"
@@ -7924,23 +7805,7 @@
 "8"
 ]
 },
-"WI-EE-ELA|EE.L.8.5.c": {
-"plans": [
-"8"
-],
-"priority": [
-"8"
-]
-},
 "WI-EE-ELA|EE.L.8.6.a": {
-"plans": [
-"8"
-],
-"priority": [
-"8"
-]
-},
-"WI-EE-ELA|EE.L.8.6.b": {
 "plans": [
 "8"
 ],
@@ -7967,11 +7832,6 @@
 ]
 },
 "WI-EE-ELA|EE.L.9-10.1.c": {
-"priority": [
-"9"
-]
-},
-"WI-EE-ELA|EE.L.9-10.1.d": {
 "priority": [
 "9"
 ]
@@ -8007,11 +7867,6 @@
 ]
 },
 "WI-EE-ELA|EE.L.K.2.a": {
-"priority": [
-"K"
-]
-},
-"WI-EE-ELA|EE.L.K.2.b": {
 "priority": [
 "K"
 ]
@@ -8567,11 +8422,6 @@
 "1"
 ]
 },
-"WI-EE-ELA|EE.RF.1.2.d": {
-"priority": [
-"1"
-]
-},
 "WI-EE-ELA|EE.RF.1.3.a": {
 "plans": [
 "1"
@@ -8588,40 +8438,10 @@
 "1"
 ]
 },
-"WI-EE-ELA|EE.RF.1.3.c": {
-"priority": [
-"1"
-]
-},
-"WI-EE-ELA|EE.RF.1.3.d": {
-"priority": [
-"1"
-]
-},
-"WI-EE-ELA|EE.RF.1.3.e": {
-"priority": [
-"1"
-]
-},
-"WI-EE-ELA|EE.RF.1.3.f": {
-"priority": [
-"1"
-]
-},
-"WI-EE-ELA|EE.RF.1.3.g": {
-"priority": [
-"1"
-]
-},
 "WI-EE-ELA|EE.RF.1.4.a": {
 "plans": [
 "1"
 ],
-"priority": [
-"1"
-]
-},
-"WI-EE-ELA|EE.RF.1.4.b": {
 "priority": [
 "1"
 ]
@@ -8636,11 +8456,6 @@
 "2"
 ]
 },
-"WI-EE-ELA|EE.RF.2.3.c": {
-"priority": [
-"2"
-]
-},
 "WI-EE-ELA|EE.RF.2.3.f": {
 "priority": [
 "2"
@@ -8651,22 +8466,12 @@
 "2"
 ]
 },
-"WI-EE-ELA|EE.RF.2.4.b": {
-"priority": [
-"2"
-]
-},
 "WI-EE-ELA|EE.RF.3.3.a": {
 "priority": [
 "3"
 ]
 },
 "WI-EE-ELA|EE.RF.3.3.b": {
-"priority": [
-"3"
-]
-},
-"WI-EE-ELA|EE.RF.3.3.c": {
 "priority": [
 "3"
 ]
@@ -8725,27 +8530,7 @@
 "5"
 ]
 },
-"WI-EE-ELA|EE.RF.5.4.c": {
-"plans": [
-"5"
-]
-},
 "WI-EE-ELA|EE.RF.K.1.a": {
-"priority": [
-"K"
-]
-},
-"WI-EE-ELA|EE.RF.K.1.b": {
-"priority": [
-"K"
-]
-},
-"WI-EE-ELA|EE.RF.K.1.c": {
-"priority": [
-"K"
-]
-},
-"WI-EE-ELA|EE.RF.K.1.d": {
 "priority": [
 "K"
 ]
@@ -8775,17 +8560,7 @@
 "K"
 ]
 },
-"WI-EE-ELA|EE.RF.K.3.b": {
-"priority": [
-"K"
-]
-},
 "WI-EE-ELA|EE.RF.K.3.c": {
-"priority": [
-"K"
-]
-},
-"WI-EE-ELA|EE.RF.K.3.d": {
 "priority": [
 "K"
 ]
@@ -9496,19 +9271,6 @@
 "5"
 ]
 },
-"WI-EE-ELA|EE.W.5.3.b": {
-"plans": [
-"5"
-],
-"priority": [
-"5"
-]
-},
-"WI-EE-ELA|EE.W.5.3.c": {
-"priority": [
-"5"
-]
-},
 "WI-EE-ELA|EE.W.5.4": {
 "plans": [
 "5"
@@ -9675,16 +9437,6 @@
 "10"
 ]
 },
-"WI-EE-ELA|EE.W.9-10.3.b": {
-"priority": [
-"10"
-]
-},
-"WI-EE-ELA|EE.W.9-10.3.c": {
-"priority": [
-"10"
-]
-},
 "WI-EE-ELA|EE.W.9-10.4": {
 "priority": [
 "9"
@@ -9746,11 +9498,6 @@
 "K"
 ]
 },
-"WI-EE-MATH|M.EE..1.OA.C.6.a": {
-"priority": [
-"1"
-]
-},
 "WI-EE-MATH|M.EE.1.G.1": {
 "priority": [
 "1"
@@ -9806,27 +9553,12 @@
 "1"
 ]
 },
-"WI-EE-MATH|M.EE.1.NBT.5": {
-"priority": [
-"1"
-]
-},
 "WI-EE-MATH|M.EE.1.OA.1": {
 "priority": [
 "1"
 ]
 },
 "WI-EE-MATH|M.EE.2.G.1": {
-"priority": [
-"2"
-]
-},
-"WI-EE-MATH|M.EE.2.G.2": {
-"priority": [
-"2"
-]
-},
-"WI-EE-MATH|M.EE.2.G.3": {
 "priority": [
 "2"
 ]
@@ -9871,16 +9603,6 @@
 "2"
 ]
 },
-"WI-EE-MATH|M.EE.2.OA.1": {
-"priority": [
-"2"
-]
-},
-"WI-EE-MATH|M.EE.2.OA.2": {
-"priority": [
-"2"
-]
-},
 "WI-EE-MATH|M.EE.2.OA.3": {
 "priority": [
 "2"
@@ -9916,11 +9638,6 @@
 "3"
 ]
 },
-"WI-EE-MATH|M.EE.3.MD.5.b": {
-"priority": [
-"3"
-]
-},
 "WI-EE-MATH|M.EE.3.NBT.1": {
 "priority": [
 "3"
@@ -9936,22 +9653,7 @@
 "3"
 ]
 },
-"WI-EE-MATH|M.EE.3.NF.2.b": {
-"priority": [
-"3"
-]
-},
 "WI-EE-MATH|M.EE.3.NF.3.a": {
-"priority": [
-"3"
-]
-},
-"WI-EE-MATH|M.EE.3.NF.3.b": {
-"priority": [
-"3"
-]
-},
-"WI-EE-MATH|M.EE.3.NF.3.c": {
 "priority": [
 "3"
 ]
@@ -9962,11 +9664,6 @@
 ]
 },
 "WI-EE-MATH|M.EE.3.OA.1": {
-"priority": [
-"3"
-]
-},
-"WI-EE-MATH|M.EE.3.OA.3": {
 "priority": [
 "3"
 ]
@@ -10035,14 +9732,6 @@
 "4"
 ]
 },
-"WI-EE-MATH|M.EE.4.NBT.1": {
-"plans": [
-"4"
-],
-"priority": [
-"4"
-]
-},
 "WI-EE-MATH|M.EE.4.NBT.2": {
 "priority": [
 "4"
@@ -10064,25 +9753,7 @@
 "4"
 ]
 },
-"WI-EE-MATH|M.EE.4.NBT.5": {
-"priority": [
-"4"
-]
-},
-"WI-EE-MATH|M.EE.4.NBT.6": {
-"plans": [
-"4"
-]
-},
 "WI-EE-MATH|M.EE.4.NF.1.a": {
-"plans": [
-"4"
-],
-"priority": [
-"4"
-]
-},
-"WI-EE-MATH|M.EE.4.NF.1.b": {
 "plans": [
 "4"
 ],
@@ -10094,21 +9765,6 @@
 "plans": [
 "4"
 ],
-"priority": [
-"4"
-]
-},
-"WI-EE-MATH|M.EE.4.NF.3.b": {
-"priority": [
-"4"
-]
-},
-"WI-EE-MATH|M.EE.4.NF.3.c": {
-"priority": [
-"4"
-]
-},
-"WI-EE-MATH|M.EE.4.NF.3.d": {
 "priority": [
 "4"
 ]
@@ -10135,6 +9791,11 @@
 ]
 },
 "WI-EE-MATH|M.EE.4.OA.4": {
+"plans": [
+"4"
+]
+},
+"WI-EE-MATH|M.EE.4.OA.5": {
 "plans": [
 "4"
 ]
@@ -10199,13 +9860,13 @@
 "5"
 ]
 },
-"WI-EE-MATH|M.EE.5.MD.3.b": {
+"WI-EE-MATH|M.EE.5.MD.4": {
 "plans": [
 "5"
 ]
 },
-"WI-EE-MATH|M.EE.5.MD.4": {
-"plans": [
+"WI-EE-MATH|M.EE.5.MD.5.a": {
+"priority": [
 "5"
 ]
 },
@@ -10258,47 +9919,6 @@
 },
 "WI-EE-MATH|M.EE.5.NF.1": {
 "plans": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE.5.NF.2": {
-"plans": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE.5.NF.3": {
-"plans": [
-"5"
-],
-"priority": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE.5.NF.4.a": {
-"plans": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE.5.NF.4.b": {
-"plans": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE.5.NF.6": {
-"priority": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE.5.OA.1": {
-"plans": [
-"5"
-],
-"priority": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE.5.OA.2": {
-"priority": [
 "5"
 ]
 },
@@ -10774,11 +10394,6 @@
 "11"
 ]
 },
-"WI-EE-MATH|M.EE.G.CO.6": {
-"priority": [
-"10"
-]
-},
 "WI-EE-MATH|M.EE.G.CO.8": {
 "plans": [
 "10"
@@ -10828,16 +10443,6 @@
 "K"
 ]
 },
-"WI-EE-MATH|M.EE.K.NBT.A.1": {
-"priority": [
-"K"
-]
-},
-"WI-EE-MATH|M.EE.K.OA.5": {
-"priority": [
-"K"
-]
-},
 "WI-EE-MATH|M.EE.N.CN.2": {
 "priority": [
 "12"
@@ -10857,51 +10462,6 @@
 ],
 "priority": [
 "9"
-]
-},
-"WI-EE-MATH|M.EE5.MD.5.a": {
-"priority": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE5.MD.5.b": {
-"priority": [
-"5"
-]
-},
-"WI-EE-MATH|M.EE5.MD.5.c": {
-"priority": [
-"5"
-]
-},
-"WI-EE-SCI|EE.5-ESS1-2": {
-"priority": [
-"5"
-]
-},
-"WI-EE-SCI|EE.5-ESS3-1": {
-"priority": [
-"5"
-]
-},
-"WI-EE-SCI|EE.5-LS1-1": {
-"priority": [
-"5"
-]
-},
-"WI-EE-SCI|EE.5-LS2-1": {
-"priority": [
-"5"
-]
-},
-"WI-EE-SCI|EE.5-PS2-1": {
-"priority": [
-"5"
-]
-},
-"WI-EE-SCI|EE.5-PS3-1": {
-"priority": [
-"5"
 ]
 },
 "WI-EE-SCI|EE.HS-ESS2-1": {
@@ -12378,8 +11938,8 @@
 "subject": "ELA",
 "course": "Grade 7 English",
 "doc": "Curriculum Map",
-"codes": 381,
-"priority_codes": 126
+"codes": 380,
+"priority_codes": 125
 },
 {
 "grade": "7",
@@ -12546,8 +12106,8 @@
 "subject": "ELA",
 "course": "Grade 8 English",
 "doc": "Curriculum Map",
-"codes": 367,
-"priority_codes": 48
+"codes": 365,
+"priority_codes": 46
 },
 {
 "grade": "8",
@@ -12906,8 +12466,8 @@
 "subject": "ELA",
 "course": "English 11",
 "doc": "Curriculum Map",
-"codes": 125,
-"priority_codes": 92
+"codes": 124,
+"priority_codes": 91
 },
 {
 "grade": "11",
@@ -13042,8 +12602,8 @@
 "subject": "ELA",
 "course": "English 12",
 "doc": "Curriculum Map",
-"codes": 114,
-"priority_codes": 77
+"codes": 113,
+"priority_codes": 76
 },
 {
 "grade": "12",
@@ -14383,7 +13943,7 @@
 {
 "grade": "4",
 "doc": "G4_overview",
-"codes": 299
+"codes": 289
 },
 {
 "grade": "1",
@@ -14423,12 +13983,12 @@
 {
 "grade": "5",
 "doc": "G5_reading_map",
-"codes": 75
+"codes": 68
 },
 {
 "grade": "5",
 "doc": "G5_standards_by_week",
-"codes": 624
+"codes": 558
 },
 {
 "grade": "K",

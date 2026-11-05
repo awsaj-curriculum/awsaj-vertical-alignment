@@ -41,7 +41,8 @@ AERO_TEXT_FIX = {
     "4.2.e": "Describe the expectations of how to act in one’s own culture and compare this with behavioral expectations of other cultures.",
     "5.5.h": "Examine the difference between “acceptance” and “tolerance”.",
     "8.2.a": "Distinguish between \"tool\" and \"technique.\"",
-    "3.5.d": "Describe ways physical and human-made features have changed over time.",
+    "3.5.d": "Describe ways that the earth’s physical and human-made features have changed over time.",
+    "4.2.a": "Identify regional folk heroes, stories, or songs that have contributed to the development of a region’s cultural history.",
     "7.5.a": "Describe characteristics, locations, uses, and management of renewable and non-renewable resources.",
 }
 LP_FIX = {"Econ1.b: I ncentives": "Econ1.b: Incentives", "Inq5.a: Civic e ngagement": "Inq5.a: Civic engagement",
@@ -142,10 +143,10 @@ def main():
     for s in school:
         key = (s["code"], s["grade"])
         if key not in aero_rows:
-            base = dict(aero_rows[next(k for k in aero_rows if k[0] == s["code"])])
-            base.update({"grade": s["grade"], "descriptors": None, "descriptor_source": "draft",
-                         "_placement": "School report-card sheet only"})
-            aero_rows[key] = base
+            # Grades come from AERO only (Tim, Nov 2026). The report-card sheet also lists ten indicators in a grade
+            # AERO does not place them in; those placements are not added (they were removed from the site).
+            print("school sheet placement not in AERO, skipped:", s["grade"], s["code"])
+            continue
         r = aero_rows[key]
         r["source"] = f"{AERO_SRC}; placement and descriptors: {SCHOOL_SRC}" if s["descriptors"] else f"{AERO_SRC}; placement: {SCHOOL_SRC}"
         r["grade_is_suggested"] = False  # grade confirmed by the school's own report-card sheet
@@ -204,6 +205,10 @@ def main():
     for r in ordered_aero + ordered_wi:
         meta[(r["framework"], r["code"], r["grade"])] = {k: r[k] for k in r if k.startswith("_")}
         out.append({k: r[k] for k in KEYS})
+    # Nov 2026 cleanup (scripts/cleanup_rules.py): removed rows, placeholder Essential Element links, text and code fixes.
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+    import cleanup_rules  # noqa: E402
+    out = cleanup_rules.apply_main(out)
     os.makedirs(f"{ROOT}/data/standards", exist_ok=True)
     json.dump(out, open(f"{ROOT}/data/standards/social_studies.json", "w"), indent=1, ensure_ascii=False)
     json.dump({"|".join(k): v for k, v in meta.items()}, open(f"{SRC}/build_meta.json", "w"), indent=1, ensure_ascii=False)

@@ -11,7 +11,10 @@ ELA cw = the Common Core 2010 code(s) of each Wisconsin 2020 row, from DPI's off
 the few Wisconsin 2021 rows that were renumbered, or [] when new in Wisconsin (data/standards/math_ccss_crosswalk.json).
 Usage: python3 scripts/build_site_data.py
 """
-import json, collections, os
+import json, collections, os, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cleanup_rules  # noqa: E402
 rows = json.load(open("data/standards/all_standards.json"))
 XW = json.load(open("data/standards/ela_crosswalk_2010_2020.json"))["to2010"]
 # Math rows Wisconsin 2021 renumbered or added: their Common Core code(s), or [] when new in Wisconsin.
@@ -22,6 +25,7 @@ MARKS = json.load(open("data/standards/plan_marks.json"))["marks"] if os.path.ex
 FROM_PLANS = {"WI-CC-MATH": ["9", "10", "11", "12"], "WI-EE-MATH": ["9", "10", "11", "12"], "NGSS": ["6", "7", "8"], "WI-EE-SCI": ["6", "7", "8"]}
 # Essential Elements as their own standard sets (built by scripts/build_ee_rows.py)
 rows += json.load(open("data/standards/essential_elements.json"))
+rows = cleanup_rules.apply(rows)   # Nov 2026 cleanup rules (scripts/cleanup_rules.py), in case a source brings them back
 GORDER = ["K"] + [str(g) for g in range(1, 13)]
 slug = {"Math": "math", "ELA": "ela", "Science": "science", "Social Studies": "social_studies"}
 by_sub = collections.defaultdict(list)

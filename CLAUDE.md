@@ -24,13 +24,13 @@ Read `docs/HANDOFF.md` first (current status and next steps), then `docs/spec.md
 ## Layout
 - `site/` static site, no build step: `index.html`, `styles.css`, `app.js`, `help.js`, `config.js`, `data/*.json`.
   Run locally: `cd site && python3 -m http.server 8765`.
-- `data/standards/` one JSON per subject plus `all_standards.json` (2,557 rows, schema in
+- `data/standards/` one JSON per subject plus `all_standards.json` (2,547 rows since the Nov 2026 cleanup, schema in
   `docs/standards_team_brief.md`). `data/teams.json` team list.
 - `scripts/` parsers and builders. `standards_codes.py` reads standard codes in any style from plan text;
   `ela_crosswalk.py` builds `data/standards/ela_crosswalk_2010_2020.json` from DPI's official 2010/2020 ELA comparison;
   `audit/plan_marks.py` builds `data/standards/plan_marks.json` (in plans / priority per grade) from the school's
   documents in `data/source/ma3loomat/` (6-12) and `data/source/hub/` (K-5); `audit/audit_secondary.py` writes the
-  secondary audit to `outputs/`. Rebuild order: ela_crosswalk, plan_marks, build_site_data, build_progressions,
+  secondary audit to `outputs/`. Rebuild order: (subject builds, build_all_standards, build_ee_rows), ela_crosswalk, plan_marks, build_site_data, build_progressions,
   build_prereqs, build_sources, then `scripts/check_progressions.py` (must report 0 problems: every progression step, link and
   prerequisite uses only the sets the school uses, AERO K-5 / NGSS 6-12 Science, AERO K-5 / Wisconsin 6-12 Social Studies,
   Wisconsin (CCSS) Math and ELA; every in-use standard is in a progression; rechecked Oct 26, 2026, ESS2.E Biogeology fixed). `build_sources.py` writes `site/data/sources.json` for the site's "Data sources" panel
@@ -65,6 +65,20 @@ separate from Load), `delete_copy`. Each needs the clear PIN, checked only in th
 what they replace as a copy (`rating_archives` / `rating_archive_rows`, kinds clear / load / undo) and log each change in
 `rating_events`. Undoing a single rating stays open to everyone with no PIN (Tim). The 215 test ratings were cleared on
 Oct 25, 2026 (copy "Cleared" kept).
+Cleanup (Tim, Nov 2026; `supabase/cleanup/2026-11_remove_and_fix.sql`, migration 007, `scripts/cleanup_rules.py`): removed
+with their ratings, history and comments (285 standards, 156 ratings): Wisconsin Essential Elements for Social Studies in K-5
+and for Science in Grade 5 (6-12 kept; teams' sets updated), ten AERO Social Studies placements that came only from the
+school report-card sheet (AERO K-5 is now exactly AERO's 97: K 10, 1 14, 2 19, 3 19, 4 15, 5 20), and Essential Element
+placeholders ("(Begins in grade 3)", "Not applicable", "N/A"). Every Essential Element link that held no real standard was
+cleared (link, text, "at target" level). Fixed: two AERO texts, six Grade 2 ELA texts that began "I can", 14 ELA texts (and
+10 linked texts) that lost their first letter in the school-sheet parser, M.2.NBT.A.1 full text (Curriculum Hub G2 list), and
+five EE codes (EE..W.3.7 -> EE.W.3.7, EE.4.OA.5 -> M.EE.4.OA.5, M.EE5.MD.5.a -> M.EE.5.MD.5.a, M.EE.1.NBT.1a/b ->
+M.EE.1.NBT.1.a/b; ratings moved). The 161 ratings deleted or moved are kept as the copy "Before cleanup Nov 2026" (kind clear,
+`only_rows`: undoing it only touches those standards). `removed_standards` lists every removed set + code + grade;
+`rating_key_ok()` keeps them off for good: `set_rating` refuses them (and any code not placed in that grade's division), and
+Load / Undo (`put_back`) skip them. `cleanup_rules.py` is applied by every subject build, `build_all_standards.py` (subject
+files -> all_standards.json), `build_ee_rows.py` (no K-5 Social Studies or Science EEs), `build_site_data.py` and
+`load_supabase.py` (loads all_standards + essential_elements). A full backup was taken first (Excel, kept outside the repo).
 
 ## Rating scale and colours
 Awsaj brand (from awsaj.qa logo and stylesheet): dark green #024638 (frame, headings, buttons), greys #56595A / #75787B,

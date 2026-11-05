@@ -4,6 +4,7 @@ Inputs (all produced by the other scripts in scripts/ela/):
   data/ela/school_k5.json, data/ela/merged_6_12.json, data/ela/descriptors/*.json
 Run from /home/claude/awsaj-va:  python3 -I scripts/ela/build_ela_master.py
 """
+import sys
 import json, re, glob, os
 
 K5 = json.load(open("data/ela/school_k5.json"))
@@ -296,6 +297,10 @@ for r in out:
     if f:
         r["descriptor_flag_note"] = f["why"]
 
+# Nov 2026 cleanup (scripts/cleanup_rules.py): removed rows, placeholder Essential Element links, text and code fixes.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import cleanup_rules  # noqa: E402
+out = cleanup_rules.apply_main(out)
 json.dump(FIXLOG, open("data/ela/fixlog_round1.json", "w"), indent=1, ensure_ascii=False)
 os.makedirs("data/standards", exist_ok=True)
 json.dump(out, open("data/standards/ela.json", "w"), indent=1, ensure_ascii=False)

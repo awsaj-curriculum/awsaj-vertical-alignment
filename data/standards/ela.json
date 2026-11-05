@@ -46,15 +46,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Print Concepts",
   "text": "Recognize that spoken words are represented in written language by specific sequences of letters.",
-  "ee_code": "EE.RF.K.1.b",
-  "ee_text": "N/A",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can match spoken words to written words and explain how each word is made up of a sequence of letters.\nI can recognize and use letter patterns in written words to understand how spoken words are written.",
    "cc_at_target": "I can recognize that the words I say are made up of letters when I see them in writing.\nI can point out that each spoken word matches a specific sequence of letters in written words.",
    "cc_approaching": "I can recognize that some spoken words are written with letters, but I need help to see how each word has its own sequence of letters.\nI can match some spoken words to written words with support.",
-   "cc_emerging": "I can with support recognize spoken words, but I need help to understand how words are written with letters.\nI can with support match spoken words to written language.",
-   "ee_at_target": "N/A"
+   "cc_emerging": "I can with support recognize spoken words, but I need help to understand how words are written with letters.\nI can with support match spoken words to written language."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -79,15 +78,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Print Concepts",
   "text": "Understand that words are separated by spaces in print.",
-  "ee_code": "EE.RF.K.1.c",
-  "ee_text": "N/A",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can explain that words are separated by spaces in print and can point out where each word starts and ends in a sentence.\nI can show how spaces between words help readers understand sentences more easily.",
    "cc_at_target": "I can recognize that words are separated by spaces in print and show where one word ends and the next begins.\nI can use spaces when writing my own words to separate them clearly.",
    "cc_approaching": "I can recognize some spaces between words, but I need help to understand where each word starts and ends in a sentence.\nI need reminders to use spaces between words when writing.",
-   "cc_emerging": "I can with support find some words in print, but I need help to understand how spaces separate words in a sentence.\nI can with support recognize and use spaces between words when reading or writing.",
-   "ee_at_target": "N/A"
+   "cc_emerging": "I can with support find some words in print, but I need help to understand how spaces separate words in a sentence.\nI can with support recognize and use spaces between words when reading or writing."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -112,15 +110,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Print Concepts",
   "text": "Recognize and name all upper- and lowercase letters of the alphabet.",
-  "ee_code": "EE.RF.K.1.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can identify and name all uppercase and lowercase letters in different fonts and sizes.\n I can use my knowledge of letters to spell simple words.\n I can identify and name letters in my environment, such as on signs or in books.\n I can use my knowledge of letters to decode and write simple messages.",
    "cc_at_target": "I can identify all uppercase and lowercase letters.\n I can name all uppercase and lowercase letters.\n I can match uppercase and lowercase letters.\n I can recite the alphabet in order.",
    "cc_approaching": "I can identify most uppercase and lowercase letters.\n I can name most uppercase and lowercase letters.\n I can match uppercase and lowercase letters.",
    "cc_emerging": "I can identify some uppercase and lowercase letters.\n I can name some uppercase and lowercase letters.",
-   "ee_at_target": "Not applicable",
    "ee_approaching": "I can with guidance and support, recognize one letter at a time in print.\nI can Point to letters on the bulletin board and other locations in the classroom when asked, “Where do you see letters?”\nI can with guidance and support, say the name of a letter from any word posted in the room (e.g., When an adult points out and names letters, words, and pictures on bulletin boards in the classroom and throughout the school, the student says any letter name when the adults points at letters).",
    "ee_emerging": "I can with guidance and support, explore letters in a variety of forms (e.g., keyboards, letter stamps, and magnetic letters).\nI can with guidance and support from an adult who labels the letters and says words that start with the letter-sound, explore magnet letters on a cookie sheet.\nI can with guidance and support from an adult who labels the letters and says words that start with the letter-sound, use a switch to select letters from an onscreen keyboard and listen as they are typed in a talking word processor.\nI can with guidance and support, use alphabet software that is accessed by selecting letters on a keyboard."
   },
@@ -364,15 +361,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics and Word Recognition",
   "text": "Associate the long and short sounds with the common spellings (graphemes) for the five major vowels.",
-  "ee_code": "EE.RF.K.3.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use my knowledge of vowel sounds and spellings to decode unfamiliar words.\nI can spell simple words with correct vowel sounds.\nI can apply my understanding of vowel sounds and spellings to improve my reading fluency and comprehension.\nI can identify and use different vowel sounds to change the meaning of words (e.g., bat vs. bet).",
    "cc_at_target": "I can consistently identify the long and short sounds of the five major vowels when spoken.\nI can accurately match spoken vowel sounds to their corresponding letters.\nI can identify and use the common spellings (graphemes) for the five major vowels in writing and reading",
    "cc_approaching": "I can identify the long and short sounds of the five major vowels when spoken.\nI can match spoken vowel sounds to their corresponding letters with some accuracy.\nI can identify some common spellings (graphemes) for the five major vowels",
-   "cc_emerging": "I can identify the five major vowels (a, e, i, o, u) when spoken.\nI can sometimes match spoken vowel sounds to their corresponding letters",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can identify the five major vowels (a, e, i, o, u) when spoken.\nI can sometimes match spoken vowel sounds to their corresponding letters"
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -432,15 +428,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics and Word Recognition",
   "text": "Distinguish between similarly spelled words by identifying the sounds of the letters that differ.",
-  "ee_code": "EE.RF.K.3.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can identify the individual sounds in any word and use this knowledge to decode unfamiliar words. I can also explain how the sounds of letters change depending on their position in a word. For example, I know that the \"c\" in \"cat\" makes a different sound than the \"c\" in \"city.\"",
    "cc_at_target": "I can identify the individual sounds in most words and distinguish between similarly spelled words by identifying the sounds of the letters that differ. For example, I can tell the difference between \"cat\" and \"hat\" by identifying the different sounds of the first letter.",
    "cc_approaching": "I can identify the first sound in most words and sometimes identify the last sound. I can sometimes tell when two words start with the same sound.",
-   "cc_emerging": "I can sometimes identify the first sound in a word",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can sometimes identify the first sound in a word"
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -1030,15 +1025,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Word Choice (including domain specific): Use words familiar to the student.",
-  "ee_code": "EE.W.K.3.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use a wide variety of familiar and domain-specific words that clearly describe what I am writing about.\nI can choose words carefully to make my writing interesting and clear, even using new words I have learned recently.",
    "cc_at_target": "I can use familiar words to talk about what I am writing, including some domain-specific words that are related to my topic.\nI can use words that help my reader understand what I am writing about.",
    "cc_approaching": "I can use some familiar words in my writing, but I need help to use domain-specific words related to the topic.\nI can choose words to describe what I am writing about, but I may need support to make my word choices clearer.",
-   "cc_emerging": "I can use a few familiar words in my writing with support, but I need help to include more words or describe my topic clearly.\nI can with support use domain-specific words or choose words that match what I am trying to say.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can use a few familiar words in my writing with support, but I need help to include more words or describe my topic clearly.\nI can with support use domain-specific words or choose words that match what I am trying to say."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -1063,15 +1057,14 @@
   "strand": "Writing",
   "cluster": "Production & Distribution of Writing",
   "text": "With guidance and support from adults, use a combination of drawing, dictating, and writing to compose text in which the development and organization are culturally-sustaining and rhetorically authentic to task and purpose. (Grade-specific expectations for writing types are defined in standards 1-3 above.)",
-  "ee_code": "EE.W.K.4",
-  "ee_text": "(Begins in grade 3)",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can draw, tell and write a short piece for a clear purpose and explain who it is for.",
    "cc_at_target": "I can, with help from an adult, draw, tell and write to make a piece that fits my task and purpose.",
    "cc_approaching": "I can draw a picture and tell an adult about it to share an idea with support.",
-   "cc_emerging": "I can make marks or choose a picture to share an idea with help.",
-   "ee_at_target": "(Begins in grade 3)"
+   "cc_emerging": "I can make marks or choose a picture to share an idea with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -1638,15 +1631,14 @@
   "strand": "Language",
   "cluster": "Vocabulary Acquisition & Use",
   "text": "Use some word prefixes and suffixes as clues to the meaning of unknown words (e.g., un-, -ed).",
-  "ee_code": "EE.L.K.2.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use un- and -ed to work out new words and tell what they mean.",
    "cc_at_target": "I can use some prefixes and suffixes, like un- and -ed, as clues to what a word means.",
    "cc_approaching": "I can notice un- or -ed at the start or end of a word with help.",
-   "cc_emerging": "I can listen to a word and its un- partner (happy, unhappy) and point to the matching picture with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can listen to a word and its un- partner (happy, unhappy) and point to the matching picture with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2054,15 +2046,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Demonstrate contextually appropriate use of the conventions of standardized English capitalization, punctuation, and spelling when writing. Discern when and where it is appropriate to use standardized English. Appropriately use and explain the intended purpose in conventions with: a. capitalization of the first word in a sentence; b. name frequently used punctuation; and c. phonetically spell simple words drawing on knowledge of letter- sound relationships. Related to Reading Foundational standards (RF.K.3). d. writes letters for most consonant and short vowel sounds (phonemes). Related to Reading Foundational standards (RF.K.3).",
-  "ee_code": "EE.L.K.6",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can write a sentence with a capital letter, an end mark and sound-spelled words, and name the punctuation I used.",
    "cc_at_target": "I can capitalize the first word of a sentence, name common punctuation, spell simple words by their sounds and write letters for most sounds.",
    "cc_approaching": "I can write the first letter of a sentence as a capital and write letters for some sounds with support.",
-   "cc_emerging": "I can copy letters and point to a period or question mark with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can copy letters and point to a period or question mark with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2239,15 +2230,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonological Awareness",
   "text": "With guidance and support, identify single syllable spoken words with the same onset (beginning sound) as a familiar word.",
-  "ee_code": "EE.RF.1.2.d",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can quickly identify multiple single-syllable words with the same beginning sound as a familiar word.\nI can independently generate a list of words that share the same onset sound as a given word.",
    "cc_at_target": "I can identify single-syllable words that start with the same sound as a familiar word without needing help.\nI can listen to two words and decide if they begin with the same sound.",
    "cc_approaching": "I can match a familiar word with another word that starts with the same sound, with some support.\nI can find words that begin with the same sound as a word I know, with guidance.",
-   "cc_emerging": "I can recognize when two words start with the same sound if someone helps me.\nI can find one word that begins with the same sound as a familiar word when I receive support.",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can recognize when two words start with the same sound if someone helps me.\nI can find one word that begins with the same sound as a familiar word when I receive support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2272,15 +2262,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonological Awareness",
   "text": "Demonstrate understanding of spoken words, syllables, and sounds (phonemes). e. Add, delete, or substitute individual sounds (phonemes) in simple one-syllable words to make new words.",
-  "ee_code": "EE.RF.1.2.e",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can change sounds in harder words, like blends, to make new words and explain what changed.",
    "cc_at_target": "I can add, delete or change one sound in a simple one-syllable word to make a new word (cat to bat).",
    "cc_approaching": "I can change the first sound of a simple word to make a new word with support.",
-   "cc_emerging": "I can say the first sound of a word and hear when it changes with help.",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can say the first sound of a word and hear when it changes with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2389,15 +2378,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Know final -e and common vowel team conventions for representing long vowel sounds (Examples include but are not limited to: ai, ay, oa, ea, ee, ie, ue, ow).",
-  "ee_code": "EE.RF.1.3.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can easily identify words that use the final -e or vowel teams to represent long vowel sounds and explain how they work.\nI can create and use a variety of words with vowel teams or a final -e independently.",
    "cc_at_target": "I can recognize words with a final -e or common vowel teams and know they make long vowel sounds.\nI can read and spell words with vowel teams like \"ai,\" \"ea,\" or \"ee.\"",
    "cc_approaching": "I can find words with a final -e or vowel teams like \"ai\" or \"ee\" and know they make a long vowel sound with some help.\nI can sound out words with vowel teams when guided.",
-   "cc_emerging": "I can recognize a word with a long vowel sound when someone points out the final -e or vowel team.\nI can hear the difference between a short and long vowel sound in a word when helped.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize a word with a long vowel sound when someone points out the final -e or vowel team.\nI can hear the difference between a short and long vowel sound in a word when helped."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2422,15 +2410,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Use knowledge that every syllable must have a vowel sound to determine the number of syllables in a printed word.",
-  "ee_code": "EE.RF.1.3.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can quickly break words into syllables and identify how many syllables based on vowel sounds.\nI can explain why every syllable must have a vowel sound and use this to help me decode new words.",
    "cc_at_target": "I can count the number of syllables in a word by finding the vowel sounds.\nI can use what I know about vowels to help me break words into syllables.",
    "cc_approaching": "I can find the vowel sounds in a word to help me figure out how many syllables there are, with some help.\nI can try to break a word into syllables by looking for vowel sounds.",
-   "cc_emerging": "I can recognize that every syllable has a vowel sound if I get help.\nI can count syllables with support by listening for vowel sounds in words.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize that every syllable has a vowel sound if I get help.\nI can count syllables with support by listening for vowel sounds in words."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2455,15 +2442,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Decode two-syllable words following basic (known) patterns by breaking the words into syllables.",
-  "ee_code": "EE.RF.1.3.e",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can quickly decode two-syllable words by breaking them into syllables and recognizing patterns like V/CV or VC/V.\nI can use my knowledge of syllable patterns to read longer words smoothly and independently.",
    "cc_at_target": "I can break two-syllable words into syllables and read them using patterns I know.\nI can read two-syllable words by looking for familiar syllable patterns.",
    "cc_approaching": "I can read two-syllable words by breaking them into syllables when someone helps me.\nI can find the syllables in words I know and try to sound them out.",
-   "cc_emerging": "I can recognize two-syllable words and listen for syllables when I receive help.\nI can sound out short words and try to break them into parts with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize two-syllable words and listen for syllables when I receive help.\nI can sound out short words and try to break them into parts with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2488,15 +2474,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Read words with inflectional endings (i.e., -s, -ed, -ing).",
-  "ee_code": "EE.RF.1.3.f",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can read and understand words with various inflectional endings, such as \"plays,\" \"played,\" and \"playing,\" without help.\nI can easily change base words into new words by adding -s, -ed, or -ing and explain how it changes the meaning.",
    "cc_at_target": "I can read words with inflectional endings like -s, -ed, and -ing.\nI can understand that adding -s, -ed, or -ing to a word changes its tense or meaning.",
    "cc_approaching": "I can read words with -s, -ed, or -ing endings if I have some help.\nI can recognize words with endings like -s, -ed, or -ing and try to read them.",
-   "cc_emerging": "I can recognize that some words end with -s, -ed, or -ing if someone shows me.\nI can try to say a word with an ending like -ing or -ed with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize that some words end with -s, -ed, or -ing if someone shows me.\nI can try to say a word with an ending like -ing or -ed with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2521,15 +2506,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Recognize and read grade- appropriate irregularly spelled words.",
-  "ee_code": "EE.RF.1.3.g",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can recognize and read irregularly spelled words quickly and accurately.\nI can read and spell common irregular words, even if they don’t follow spelling rules.",
    "cc_at_target": "I can read and recognize common irregular words like \"said,\" \"come,\" or \"does.\"\nI can remember how to read words that don’t follow typical spelling rules.",
    "cc_approaching": "I can read irregular words that I’ve learned, with some help.\nI can try to read words that are spelled in a different way than they sound when guided.",
-   "cc_emerging": "I can listen to someone read irregular words and repeat them.\nI can recognize a few irregular words if someone helps me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can listen to someone read irregular words and repeat them.\nI can recognize a few irregular words if someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2596,15 +2580,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Fluency",
   "text": "Read grade-level text orally with accuracy, appropriate rate, and expression on successive readings.",
-  "ee_code": "EE.RF.1.4.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can read aloud smoothly with the right speed and expression, making it sound like talking.\nI can reread texts and improve my accuracy, speed, and expression with little or no help.",
    "cc_at_target": "I can read grade-level texts aloud with the right speed and expression.\nI can improve my reading fluency when I read a text multiple times.",
    "cc_approaching": "I can read grade-level texts aloud with some expression and appropriate speed when guided.\nI can improve my reading when I practice reading a text more than once.",
-   "cc_emerging": "I can read simple texts aloud and improve my speed with help.\nI can try to read more smoothly when I practice reading with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can read simple texts aloud and improve my speed with help.\nI can try to read more smoothly when I practice reading with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -2629,15 +2612,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Fluency",
   "text": "Use context to confirm or self- correct word recognition and understanding, rereading as necessary.",
-  "ee_code": "EE.RF.1.4.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use clues from the text to figure out words I don’t know and correct myself if I make a mistake.\nI can reread sentences to help me understand words and meaning independently.",
    "cc_at_target": "I can use context clues to figure out words or fix mistakes when I am reading.\nI can reread a sentence or part of a text to make sure I understand the words.",
    "cc_approaching": "I can find clues in the text to help me understand words when I read with help.\nI can try to fix my mistakes when I read, with guidance.",
-   "cc_emerging": "I can use help to understand or fix a word I don’t know while reading.\nI can try to understand a word by listening or looking for clues when someone helps me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can use help to understand or fix a word I don’t know while reading.\nI can try to understand a word by listening or looking for clues when someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -3172,15 +3154,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Transitions: Use simple word transitions and temporal words or pictures that link ideas.",
-  "ee_code": "EE.W.1.3.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use time words like \"first,\" \"then,\" and \"finally\" to link the events in my writing and make it easy to follow.",
    "cc_at_target": "I can use simple transition words to show the order of events in my writing.",
    "cc_approaching": "I can use words like \"and then\" to connect ideas in my writing with some help.",
-   "cc_emerging": "I can use words like \"first\" and \"then\" to talk about what happens in my story with help.\nI can use pictures to show what happens in my story with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can use words like \"first\" and \"then\" to talk about what happens in my story with help.\nI can use pictures to show what happens in my story with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -3205,15 +3186,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Word Choice (including domain specific): Experiment with descriptive words to describe feelings, events, and images.",
-  "ee_code": "EE.W.1.3.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can choose descriptive words to make my writing more interesting and help readers understand my feelings, events, and images.",
    "cc_at_target": "I can use descriptive words to describe how things look, feel, or happen in my writing.",
    "cc_approaching": "I can use simple words to describe things and try new words with help.",
-   "cc_emerging": "I can use simple words to describe how I feel or what I see with help.\nI can try out new words to describe things in my story when someone supports me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can use simple words to describe how I feel or what I see with help.\nI can try out new words to describe things in my story when someone supports me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -3238,15 +3218,14 @@
   "strand": "Writing",
   "cluster": "Production & Distribution of Writing",
   "text": "With guidance and support from adults, produce writing in which the development and organization are culturally-sustaining and rhetorically authentic to task and purpose. (Grade- specific expectations for writing types are defined in standards 1-3 above.)",
-  "ee_code": "EE.W.1.4(Beginsingrade3)",
-  "ee_text": "(Begins in grade 3).",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can independently write about topics that show respect for my culture and others, while organizing my writing clearly for the task.\nI can develop my writing in a way that is authentic to my voice and the purpose of the assignment, with little to no support.",
    "cc_at_target": "I can write about my culture or experiences and organize my writing to match the task and purpose, with some guidance.\nI can use appropriate details and organize my writing to stay focused on the topic or purpose of my work.",
    "cc_approaching": "I can write about something important to me, and with help, make sure it fits the task and purpose.\nI can organize my writing with guidance so that it makes sense for the assignment.",
-   "cc_emerging": "I can write about my ideas or culture with help, and organize my writing with support from an adult.\nI can get help to make my writing match the task or purpose, while sharing something about my experiences.",
-   "ee_at_target": "(Begins in grade 3)."
+   "cc_emerging": "I can write about my ideas or culture with help, and organize my writing with support from an adult.\nI can get help to make my writing match the task or purpose, while sharing something about my experiences."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -3810,15 +3789,14 @@
   "strand": "Language",
   "cluster": "Vocabulary Acquisition and Use",
   "text": "Identify common root words.",
-  "ee_code": "EE.L.1.2.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can identify root words and use them to figure out the meanings of new or bigger words that have the same roots.",
    "cc_at_target": "I can recognize and name common root words in words I read.",
    "cc_approaching": "I can find the root word in simple words with help.",
-   "cc_emerging": "I can recognize a simple root word when someone shows me.\nI can understand that some words have a basic part that gives the main meaning with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize a simple root word when someone shows me.\nI can understand that some words have a basic part that gives the main meaning with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -4200,15 +4178,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose in conventions with commas in dates and simple sets",
-  "ee_code": "EE.L.1.6.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use commas correctly when writing dates and lists of items, and explain why they are needed.",
    "cc_at_target": "I can use commas when writing dates and simple lists.",
    "cc_approaching": "I can use commas in dates and lists with help.",
-   "cc_emerging": "I can use a comma when writing the date with help.\nI can list things with commas when someone shows me how.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can use a comma when writing the date with help.\nI can list things with commas when someone shows me how."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -4373,15 +4350,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Decode and encode regularly spelled one, two, and some three syllable CVC pattern words (e.g., 1 syllable: mat, 2 syllable: picnic, 3 syllable: fantastic, etc.).",
-  "ee_code": "EE.RF.2.3.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can read and write words with up to three syllables, like \"fantastic\" and \"picnic,\" using CVC patterns independently.\nI can break long words into syllables to help me spell and read them accurately.",
    "cc_at_target": "I can read and spell one- and two-syllable words like \"mat\" and \"picnic\" using the CVC pattern.\nI can break words into syllables to read and write them correctly.",
    "cc_approaching": "I can read and spell one-syllable CVC words like \"cat\" and \"dog\" with help.\nI can break two-syllable words into parts to read and spell them with guidance.",
-   "cc_emerging": "I can recognize and read short CVC words like \"cat\" with help.\nI can try to spell simple CVC words when someone shows me the pattern.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize and read short CVC words like \"cat\" with help.\nI can try to spell simple CVC words when someone shows me the pattern."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -4406,15 +4382,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Decode words with common prefixes and suffixes.",
-  "ee_code": "EE.RF.2.3.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can read and spell words with prefixes like \"un-\" and \"pre-\" and suffixes like \"-ful\" or \"-ness\" independently.\nI can explain how adding a prefix or suffix changes the meaning of a word.",
    "cc_at_target": "I can read words with common prefixes and suffixes like \"unhappy\" or \"helpful.\"\nI can understand how adding prefixes and suffixes changes the meaning of a word.",
    "cc_approaching": "I can read words with prefixes like \"un-\" or suffixes like \"-ed\" with some help.\nI can try to use words with prefixes or suffixes in my reading and writing with support.",
-   "cc_emerging": "I can recognize that some words have beginnings or endings like \"un-\" or \"-ing\" with help.\nI can match a word with a prefix or suffix to its meaning when someone helps me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize that some words have beginnings or endings like \"un-\" or \"-ing\" with help.\nI can match a word with a prefix or suffix to its meaning when someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -4439,15 +4414,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Decode regularly spelled two- syllable words with long vowels. Encode some of these words. • Know when to drop the final e when adding an -ing, -ed endings. (Silent-e vowel pattern base word). • Know when to double the final consonant when adding a suffix. - ing, -ed.",
-  "ee_code": "EE.RF.2.3.e",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can read and spell two-syllable words with long vowels, like \"complete\" and \"inside,\" independently.\nI can use rules like dropping the final \"e\" or doubling the consonant when adding endings like \"-ing\" or \"-ed.\"",
    "cc_at_target": "I can read and spell two-syllable words with long vowels, like \"eagle\" and \"broken.\"\nI know when to drop the final \"e\" or double the consonant when adding \"-ing\" or \"-ed.\"",
    "cc_approaching": "I can read two-syllable words with long vowels with help and try to spell them.\nI can try to add \"-ing\" or \"-ed\" to words with help, but I may need support to follow the rules.",
-   "cc_emerging": "I can recognize two-syllable words with long vowels when someone shows me.\nI can try to spell long vowel words when someone helps me with the rules.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize two-syllable words with long vowels when someone shows me.\nI can try to spell long vowel words when someone helps me with the rules."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -4542,15 +4516,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Fluency",
   "text": "Read grade-level text orally with accuracy, appropriate rate, and expression on successive readings.",
-  "ee_code": "EE.RF.2.4.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can read a text aloud smoothly, with the right speed and expression, without help.\nI can improve my fluency each time I reread a text, sounding more like natural speech.",
    "cc_at_target": "I can read grade-level text aloud with good speed and expression.\nI can read a text more accurately and with better expression when I practice reading it again.",
    "cc_approaching": "I can read aloud with some expression and at a good speed with guidance.\nI can read better and more smoothly after practicing a text several times.",
-   "cc_emerging": "I can read aloud with help and improve my reading speed when someone supports me.\nI can practice reading a text and get better each time with guidance.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can read aloud with help and improve my reading speed when someone supports me.\nI can practice reading a text and get better each time with guidance."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -4611,7 +4584,7 @@
   "cluster": "Key Ideas & Details",
   "text": "Develop and answer questions to demonstrate an understanding of key ideas and details in a text. (RI&RL)",
   "ee_code": "EE.R.2.1",
-  "ee_text": "hen given guidance and support, answer “who”, “what” and “where” questions in familiar texts. (RI&RL)",
+  "ee_text": "When given guidance and support, answer “who”, “what” and “where” questions in familiar texts. (RI&RL)",
   "crosswalk": [
    "RL.2.1",
    "RI.2.1"
@@ -4799,7 +4772,7 @@
   "course": "",
   "strand": "Reading",
   "cluster": "Craft & Structure",
-  "text": "I can identify examples of how illustrations, text features, and details support the point of view or purpose of the text. (RI&RL)",
+  "text": "Identify examples of how illustrations, text features, and details support the point of view or purpose of the text. (RI&RL)",
   "ee_code": "EE.R.2.6",
   "ee_text": "With guidance and support, identify words and graphic representations that connect to the point of view, topic, or important details of the text. (RI&RL)",
   "crosswalk": [
@@ -5126,15 +5099,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Transitions: use transitions to link and build connections between ideas, text, and events.",
-  "ee_code": "EE.W.2.3.b",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use a variety of transitions to smoothly connect ideas and events in my writing.\nI can choose transitions that make my writing flow naturally and clearly.",
    "cc_at_target": "I can use transitions like \"because,\" \"then,\" and \"next\" to connect ideas and events in my writing.\nI can make my writing flow better by using simple transitions.",
    "cc_approaching": "I can use basic transitions like \"and\" or \"then\" to link ideas and events, with some support.\nI can try to connect events in my writing with guidance.",
-   "cc_emerging": "I can use simple words like \"and\" or \"next\" to connect ideas in my writing, with help.\nI can try to link two ideas in my writing with support.",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can use simple words like \"and\" or \"next\" to connect ideas in my writing, with help.\nI can try to link two ideas in my writing with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -5159,15 +5131,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Word Choice (including domain specific): use descriptive words to demonstrate creativity and to providevivid examples of feelings, events, and images.",
-  "ee_code": "EE.W.2.3.c",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use creative and descriptive words to vividly describe characters’ feelings, actions, and settings in my writing.\nI can paint a clear picture with words to help readers imagine the events in my story.",
    "cc_at_target": "I can use descriptive words to show how characters feel or what is happening in my writing.\nI can describe events and images in my story using words that help readers understand.",
    "cc_approaching": "I can use a few descriptive words to describe characters’ feelings or actions, with some support.\nI can try to use words that make my story clearer with guidance.",
-   "cc_emerging": "I can try to use simple words to describe how someone feels or what happens in my writing, with help.\nI can name feelings or describe an event in basic terms with support.",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can try to use simple words to describe how someone feels or what happens in my writing, with help.\nI can name feelings or describe an event in basic terms with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -5191,16 +5162,15 @@
   "course": "",
   "strand": "Writing",
   "cluster": "Production & Distribution of Writing",
-  "text": "I can with guidance and support from adults, produce writing in which the development and organization are culturally-sustaining and rhetorically authentic to task and purpose. (Grade- specific expectations for writing types are defined in standards 1-3 above.)",
-  "ee_code": "EE.W.2.4",
-  "ee_text": "(Begins in grade 3)",
+  "text": "With guidance and support from adults, produce writing in which the development and organization are culturally-sustaining and rhetorically authentic to task and purpose. (Grade- specific expectations for writing types are defined in standards 1-3 above.)",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can write about a topic in a way that reflects my culture and is authentic to the task, without help.\nI can organize and develop my writing to show who I am and what is important to me.",
    "cc_at_target": "I can write about a topic that shows my culture or experiences, and organize my ideas clearly, with some guidance.\nI can make sure my writing matches the task and purpose with help.",
    "cc_approaching": "I can write about something important to me, and with support, make sure it fits the task and purpose.\nI can try to organize my writing and include details about my experiences with help.",
-   "cc_emerging": "I can write about my ideas or culture with help, and organize my writing with support from an adult.\nI can get help to make my writing match the task or purpose, while sharing something about my experiences.",
-   "ee_at_target": "(Begins in grade 3)"
+   "cc_emerging": "I can write about my ideas or culture with help, and organize my writing with support from an adult.\nI can get help to make my writing match the task or purpose, while sharing something about my experiences."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -5224,7 +5194,7 @@
   "course": "",
   "strand": "Writing",
   "cluster": "Production & Distribution of Writing",
-  "text": "I can with guidance and support from adults and peers, focus on a topic and strengthen writing as needed by revising and editing.",
+  "text": "With guidance and support from adults and peers, focus on a topic and strengthen writing as needed by revising and editing.",
   "ee_code": "EE.W.2.5",
   "ee_text": "With guidance and support from adults, focus their own drawing, dictation, or writing on a topic and add more details to strengthen their drawing, dictation, or writing as needed.",
   "crosswalk": [],
@@ -5259,7 +5229,7 @@
   "course": "",
   "strand": "Writing",
   "cluster": "Production & Distribution of Writing",
-  "text": "I can with guidance and support from adults, use a variety of digital tools to produce and publish writing, including in collaboration with peers. Learn to produce writing through printing (including forming most printed upper- and lower-case letters), cursive, or typing.",
+  "text": "With guidance and support from adults, use a variety of digital tools to produce and publish writing, including in collaboration with peers. Learn to produce writing through printing (including forming most printed upper- and lower-case letters), cursive, or typing.",
   "ee_code": "EE.W.2.6",
   "ee_text": "With guidance and support from adults and peers, use technology (including assistive technologies) to produce and publish writing. Learn to produce writing through printing (including forming upper and lower case letters).",
   "crosswalk": [],
@@ -5364,7 +5334,7 @@
   "course": "",
   "strand": "Writing",
   "cluster": "Inquiry to Build & Present Knowledge",
-  "text": "I can with guidance and support from adults and peers, recall and use facts from literary and informational text to support reflection and inquiry on characters, setting, key details, specified information, and ideas presented in a text.",
+  "text": "With guidance and support from adults and peers, recall and use facts from literary and informational text to support reflection and inquiry on characters, setting, key details, specified information, and ideas presented in a text.",
   "ee_code": "EE.W.2.9",
   "ee_text": "With guidance and support from adults, recall key details from literary or informational texts.",
   "crosswalk": [],
@@ -5799,15 +5769,14 @@
   "strand": "Language",
   "cluster": "Vocabulary Acquisition and use",
   "text": "Use a common root word as a clue to the meaning of an unknown word.",
-  "ee_code": "EE.L.2.2.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use root words to figure out the meaning of new words independently.\nI can explain how the root word helps me understand the meaning of a more complex word.",
    "cc_at_target": "I can use a common root word to help me understand the meaning of new words.\nI can find root words in unfamiliar words to help me understand their meanings.",
    "cc_approaching": "I can recognize root words and use them to understand new words with some help.\nI can try to use root words to figure out word meanings when guided.",
-   "cc_emerging": "I can recognize that some words have a root word, and with help, I can use it to understand the word’s meaning.\nI can try to use a root word to help me understand a new word when someone helps me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize that some words have a root word, and with help, I can use it to understand the word’s meaning.\nI can try to use a root word to help me understand a new word when someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -5832,15 +5801,14 @@
   "strand": "Language",
   "cluster": "Vocabulary Acquisition and use",
   "text": "Use individual words to predict meaning of compound words (e.g., birdhouse).",
-  "ee_code": "EE.L.2.2.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can break down compound words and use the individual words to predict their meaning easily.\nI can explain how the meaning of a compound word comes from its smaller parts.",
    "cc_at_target": "I can use the meaning of individual words to figure out what a compound word like \"birdhouse\" means.\nI can understand how two words combine to make the meaning of a compound word.",
    "cc_approaching": "I can break apart a compound word and try to use the smaller words to understand its meaning, with help.\nI can try to guess the meaning of a compound word by looking at the individual words with guidance.",
-   "cc_emerging": "I can recognize a compound word and use the smaller words to help me understand its meaning when someone helps me.\nI can try to use the words I know to understand the meaning of a compound word with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize a compound word and use the smaller words to help me understand its meaning when someone helps me.\nI can try to use the words I know to understand the meaning of a compound word with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -5941,7 +5909,7 @@
   "course": "",
   "strand": "Language",
   "cluster": "Vocabulary Acquisition and use",
-  "text": "I can identify real-life connections between words and their use (e.g., describe foods that are juicy).",
+  "text": "Identify real-life connections between words and their use (e.g., describe foods that are juicy).",
   "ee_code": "EE.L.2.3.b",
   "ee_text": "Demonstrate understanding of word relationships and use. b. Identify real-life connections between words and their use (e.g., happy: “I am happy.”).",
   "crosswalk": [],
@@ -6013,7 +5981,7 @@
   "cluster": "Vocabulary Acquisition and use",
   "text": "Demonstrate an ability to collaboratively and independently build vocabulary knowledge when encountering unknown words including cultural, general academic, and discipline-specific terms and phrases; use vocabulary appropriate to the context and situation. use adjectives and adverbs to describe (e.g., when other kids are happy, that makes me happy.).",
   "ee_code": "EE.L.2.4",
-  "ee_text": "se words acquired through conversations, being read to, and during shared reading activities.",
+  "ee_text": "Use words acquired through conversations, being read to, and during shared reading activities.",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I exhibit sophisticated, flexible skills in building extensive vocabulary knowledge, whether collaboratively or independently. I effortlessly understand and use a wide range of words, including those from complex cultural, academic, and technical contexts. My vocabulary use is consistently appropriate and nuanced. I expertly employ a rich repertoire of adjectives and adverbs to vividly describe.",
@@ -6152,15 +6120,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose in conventions with commas in greetings and closings;",
-  "ee_code": "EE.L.2.6.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can correctly use commas in greetings and closings of letters or emails and explain why they are needed.\nI can write a letter with proper punctuation and explain the purpose of using commas in different places.",
    "cc_at_target": "I can use commas correctly when writing greetings like \"Dear Mom,\" and closings like \"Sincerely,\" in a letter.\nI can explain why commas are needed in greetings and closings when writing.",
    "cc_approaching": "I can use commas in greetings and closings with help, like when writing \"Dear Teacher,\" or \"Best regards,\" in a letter.\nI can try to add commas in the right places with guidance.",
-   "cc_emerging": "I can try to use commas when writing a greeting or closing in a letter, with help.\nI can follow an example to put a comma after \"Dear\" or \"Sincerely,\" in a letter with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can try to use commas when writing a greeting or closing in a letter, with help.\nI can follow an example to put a comma after \"Dear\" or \"Sincerely,\" in a letter with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -6185,15 +6152,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose in conventions with apostrophes in contractions and frequently occurring possessives.",
-  "ee_code": "EE.L.2.6.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use apostrophes correctly in both contractions like \"don't\" and possessive words like \"Sarah's book\" and explain why they are used.\nI can write sentences with contractions and possessive nouns and explain how apostrophes change the meaning of the word.",
    "cc_at_target": "I can use apostrophes in contractions like \"can't\" and in possessive words like \"John's pencil.\"\nI can explain how to use apostrophes in contractions and to show possession in my writing.",
    "cc_approaching": "I can use apostrophes in contractions and possessives, like \"it's\" and \"the dog's bone,\" with some help.\nI can try to use apostrophes in my writing with guidance.",
-   "cc_emerging": "I can recognize that apostrophes are used in contractions like \"can't\" and in possessive words like \"Jane's book,\" with help.\nI can try to use apostrophes in a word when someone helps me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize that apostrophes are used in contractions like \"can't\" and in possessive words like \"Jane's book,\" with help.\nI can try to use apostrophes in a word when someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -6254,7 +6220,7 @@
   "cluster": "Phonics & Word Recognition",
   "text": "Know and apply grade-level phonics and word analysis skills in decoding words. a. Identify and know the meaning of the most common prefixes and derivational suffixes.",
   "ee_code": "EE.RF.3.3.a",
-  "ee_text": "se letter-sound knowledge to read words. a. In context, demonstrate basic knowledge of letter-sound correspondences.",
+  "ee_text": "Use letter-sound knowledge to read words. a. In context, demonstrate basic knowledge of letter-sound correspondences.",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can apply my knowledge of prefixes and suffixes to analyze the meaning of complex words and phrases in grade-level texts.",
@@ -6323,15 +6289,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Decode multisyllable words that include all learned syllable patterns (see previous grade level standards for specific targets).",
-  "ee_code": "EE.RF.3.3.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can read long, unfamiliar words by breaking them into syllables and checking that the word makes sense.",
    "cc_at_target": "I can decode multisyllable words that use all the syllable patterns I have learned.",
    "cc_approaching": "I can break a two-syllable word into parts and read each part with support.",
-   "cc_emerging": "I can clap the syllables in a spoken word and read short one-syllable words with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can clap the syllables in a spoken word and read short one-syllable words with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -6403,15 +6368,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Phonics & Word Recognition",
   "text": "Apply common encoding rules: • Know when to drop the final e when adding endings. (Silent-e vowel pattern base word). • Know when to double the final consonant when adding a suffix.",
-  "ee_code": "EE.RF.3.3.e",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can apply the drop-e and doubling rules to new words and explain why I used each rule.",
    "cc_at_target": "I can drop a final e or double a final consonant correctly when I add an ending (hope, hoping; hop, hopping).",
    "cc_approaching": "I can add -ing or -ed to a word using a rule chart with support.",
-   "cc_emerging": "I can add -s or -ing to a simple word with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can add -s or -ing to a simple word with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -6511,15 +6475,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Fluency",
   "text": "use context to confirm or self- correct word recognition and understanding, rereading as necessary.",
-  "ee_code": "EE.RF.3.4.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can independently use context to confirm or correct word recognition and understanding without the need for prompting.\nI automatically reread parts of the text to ensure full comprehension and accuracy when encountering difficult words.",
    "cc_at_target": "I can use context to confirm or self-correct word recognition and understanding with minimal support.\nI recognize when rereading is necessary to help clarify meaning or correct a mistake.",
    "cc_approaching": "I can use context to correct most words with some adult support, but I may need guidance to confirm understanding.\nI may reread parts of the text when prompted by an adult to help correct or confirm word recognition.",
-   "cc_emerging": "I can, with support, use context to recognize or correct a few familiar words, but I struggle to confirm understanding.\nI need ongoing reminders and support to reread text for clarification or self-correction.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can, with support, use context to recognize or correct a few familiar words, but I struggle to confirm understanding.\nI need ongoing reminders and support to reread text for clarification or self-correction."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -6697,7 +6660,7 @@
   "cluster": "",
   "text": "Identify parts of stories, dramas, and poems using terms such as chapter, scene, and stanza. (RL) Identify and use text features to build comprehension. (RI)",
   "ee_code": "EE.R.3.5",
-  "ee_text": "ith guidance and support, determine the beginning, middle, and end of a familiar story with a logical order (RL) and use text features including headings and key words to locate information in a text (RI).",
+  "ee_text": "With guidance and support, determine the beginning, middle, and end of a familiar story with a logical order (RL) and use text features including headings and key words to locate information in a text (RI).",
   "crosswalk": [
    "RL.3.5",
    "RI.3.5"
@@ -6846,7 +6809,7 @@
   "course": "",
   "strand": "Reading",
   "cluster": "Integration of Knowledge & Ideas",
-  "text": "ecognize genres and make connections to other texts, ideas, cultural perspectives, identities, eras, personal events, and situations. (RI&RL)",
+  "text": "Recognize genres and make connections to other texts, ideas, cultural perspectives, identities, eras, personal events, and situations. (RI&RL)",
   "ee_code": "EE.R.3.9",
   "ee_text": "Identify similarities between two texts and recognize that texts reflect one’s own and others’ culture. (RI&RL)",
   "crosswalk": [
@@ -6886,7 +6849,7 @@
   "cluster": "Text Types & Purposes",
   "text": "Compose reflective, formal, and creative writing, which may happen simultaneously or independently, for a variety of high-stakes and low-stakes purposes.",
   "ee_code": "EE.W.3.1",
-  "ee_text": "ith guidance and support, use drawing, dictating, or writing to compose writing for a variety of high-stakes and low-stakes purposes.",
+  "ee_text": "With guidance and support, use drawing, dictating, or writing to compose writing for a variety of high-stakes and low-stakes purposes.",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can write complex and sophisticated essays and stories that engage the reader and convey my ideas effectively.\nI can use my writing to persuade, inform, and entertain others.\nI can use my writing to advocate for myself and others.\nI can use my writing to make a difference in the world.",
@@ -7060,15 +7023,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Transitions: use prompts, words, and phrases to signal event order and to link and build connections between ideas, text, and events.",
-  "ee_code": "EE.W.3.3.b",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use a variety of transition words and phrases to connect ideas and events smoothly.",
    "cc_at_target": "I can use words and phrases to show event order and link ideas, text and events.",
    "cc_approaching": "I can use first, next and last to order events with a word bank.",
-   "cc_emerging": "I can use and or then to join ideas with help.",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can use and or then to join ideas with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -7098,15 +7060,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Word Choice (including domain specific): use words familiar to the student for emphasis, addition, contrast, or order to connect categories or information, and to convey meaning.",
-  "ee_code": "EE.W.3.3.c",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can choose exact words to add emphasis, contrast or order and explain my choice.",
    "cc_at_target": "I can use familiar words to add emphasis, addition, contrast or order and connect my ideas.",
    "cc_approaching": "I can use also, but or then from a word bank to connect ideas.",
-   "cc_emerging": "I can use a few topic words to tell about a picture with help.",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can use a few topic words to tell about a picture with help."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -7135,9 +7096,9 @@
   "course": "",
   "strand": "Writing",
   "cluster": "Production & Distribution of Writing",
-  "text": "ith support from adults and peers, produce writing in which the development and organization are culturally-sustaining and rhetorically authentic to task and purpose. (Grade-specific expectations for writing types are defined in standards 1-3 above.)",
+  "text": "With support from adults and peers, produce writing in which the development and organization are culturally-sustaining and rhetorically authentic to task and purpose. (Grade-specific expectations for writing types are defined in standards 1-3 above.)",
   "ee_code": "EE.W.3.4",
-  "ee_text": "ith guidance and support, produce writing that is appropriate for an explicitly stated task, and expresses more than one idea.",
+  "ee_text": "With guidance and support, produce writing that is appropriate for an explicitly stated task, and expresses more than one idea.",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can independently produce well-developed, culturally-relevant writing that clearly communicates my purpose and engages my audience in a meaningful way.",
@@ -7170,9 +7131,9 @@
   "course": "",
   "strand": "Writing",
   "cluster": "Production & Distribution of Writing",
-  "text": "ith guidance and support from adults and peers, respond to questions and suggestions from peers and add details to strengthen writing as needed by planning, revising, and editing.",
+  "text": "With guidance and support from adults and peers, respond to questions and suggestions from peers and add details to strengthen writing as needed by planning, revising, and editing.",
   "ee_code": "EE.W.3.5",
-  "ee_text": "ith guidance and support from adults and peers, including questions or suggestions, revise their own writing, dictation, or pictures.",
+  "ee_text": "With guidance and support from adults and peers, including questions or suggestions, revise their own writing, dictation, or pictures.",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can independently respond to feedback, plan, revise, and edit my writing to effectively strengthen it, and I can provide constructive feedback to my peers to help them improve their writing.",
@@ -7205,9 +7166,9 @@
   "course": "",
   "strand": "Writing",
   "cluster": "Production & Distribution of Writing",
-  "text": "ith guidance and support from adults and peers, use digital tools to produce and publish writing, including in collaboration with peers. Learn to produce writing through printing, cursive, or typing.",
+  "text": "With guidance and support from adults and peers, use digital tools to produce and publish writing, including in collaboration with peers. Learn to produce writing through printing, cursive, or typing.",
   "ee_code": "EE.W.3.6",
-  "ee_text": "ith guidance and support from adults, use digital tools to produce writing while interacting and collaborating with others. Learn to produce writing through printing.",
+  "ee_text": "With guidance and support from adults, use digital tools to produce writing while interacting and collaborating with others. Learn to produce writing through printing.",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can independently use a variety of digital tools to produce and publish high-quality, multi-paragraph writing, collaborating effectively with my peers. I can fluently produce writing through printing, cursive, or typing, and I use these skills to communicate my ideas in real-world situations.",
@@ -7241,8 +7202,8 @@
   "strand": "Writing",
   "cluster": "Inquiry to Build & Present Knowledge",
   "text": "Conduct short inquiry projectsthat build knowledge about a topic.",
-  "ee_code": "EE..W.3.7",
-  "ee_text": "EE..W.3.7 . with guidance and support, identify information about a shared or independent inquiry topic.",
+  "ee_code": "EE.W.3.7",
+  "ee_text": "With guidance and support, identify information about a shared or independent inquiry topic.",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can independently conduct thorough inquiry projects that allow me to develop in-depth knowledge about a topic, and I can effectively present my findings to others.",
@@ -7312,7 +7273,7 @@
   "cluster": "Inquiry to Build & Present Knowledge",
   "text": "Recall facts from literary or informational texts to support reflection and inquiry.",
   "ee_code": "EE.W.3.9",
-  "ee_text": "ith guidance and support from adults, recall key details from literary or informational texts and generate reflection or inquiry questions based on a reading of a literary or informational text.",
+  "ee_text": "With guidance and support from adults, recall key details from literary or informational texts and generate reflection or inquiry questions based on a reading of a literary or informational text.",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can thoroughly recall and analyze relevant facts from texts, using them to develop insightful reflections and meaningful questions that demonstrate a deep understanding of the subject matter.",
@@ -7667,15 +7628,14 @@
   "strand": "Language",
   "cluster": "Knowledge of Language",
   "text": "Recognize differences between the conventions of written and spoken English.",
-  "ee_code": "EE.L.3.1.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can analyze how key words and phrases contribute to the overall meaning and impact of a text. I can use my understanding of word choice to create vivid and engaging writing and speaking. I can explain how different word choices can affect the tone and meaning of a text. I can use my knowledge of word choice to improve my communication skills in a variety of situations.",
    "cc_at_target": "I can identify key words and phrases that help readers understand a topic. I can choose words and phrases for effect when writing and speaking.",
    "cc_approaching": "I can sometimes point out words or phrases that seem important in a story or text.",
-   "cc_emerging": "I can identify some basic words in a story or text.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can identify some basic words in a story or text."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -7690,8 +7650,7 @@
    "cc_advanced": "I can explain several differences between written and spoken English and choose the right one for my purpose.",
    "cc_at_target": "I can recognize differences between the conventions of written and spoken English.",
    "cc_approaching": "I can tell one difference between how I talk and how I write with support.",
-   "cc_emerging": "I can tell whether a sentence is spoken or written with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can tell whether a sentence is spoken or written with help."
   },
   "descriptor_flag_note": "CC descriptors describe key words and phrases (L.3.1.c), not written versus spoken English."
  },
@@ -7828,15 +7787,14 @@
   "strand": "Language",
   "cluster": "Knowledge of Language",
   "text": "Use resources to determine word meanings.",
-  "ee_code": "EE.L.3.2.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use my understanding of words and their real-life connections to learn new words more easily. I can explain how the meaning of a word relates to its context and use this knowledge to improve my comprehension and vocabulary. I can use my understanding of words to make inferences and draw conclusions when reading.",
    "cc_at_target": "I can make connections between words and how they are used in real life.",
    "cc_approaching": "I can sometimes connect a new word to something I already know, but I may need help.",
-   "cc_emerging": "I can identify some familiar words in a story or text.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can identify some familiar words in a story or text."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -7851,8 +7809,7 @@
    "cc_advanced": "I can choose the best resource, print or digital, to find and check word meanings.",
    "cc_at_target": "I can use resources such as dictionaries and glossaries to determine word meanings.",
    "cc_approaching": "I can look up a word in a picture or student dictionary with support.",
-   "cc_emerging": "I can ask an adult what a word means.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can ask an adult what a word means."
   },
   "descriptor_flag_note": "CC descriptors describe real-life word connections (L.3.3.c), not using resources to find word meanings."
  },
@@ -7995,7 +7952,7 @@
   "cluster": "Knowledge of Language",
   "text": "Demonstrate an ability to collaboratively and independently build vocabulary knowledge when encountering unknown words including cultural, general academic, and discipline-specific terms and phrases; use vocabulary appropriate to the context and situation. a. Identify and use phrases that signal spatial and temporal relationships (e.g., after dinner that night, we went looking for them.).",
   "ee_code": "EE.L.3.4",
-  "ee_text": "se words acquired through conversations, being read to, and during shared reading activities. a. Demonstrate understanding of words that signal spatial and temporal relationships (e.g., behind, under, after, soon, next, later).",
+  "ee_text": "Use words acquired through conversations, being read to, and during shared reading activities. a. Demonstrate understanding of words that signal spatial and temporal relationships (e.g., behind, under, after, soon, next, later).",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can identify and correct errors in subject-verb agreement in my own writing and the writing of others. I can explain the rules of subject-verb agreement and apply them consistently in my writing and speaking.",
@@ -8155,15 +8112,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Simple and compound sentences",
-  "ee_code": "EE.L.3.5.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can combine ideas into compound sentences on purpose and explain how they help my writing flow.",
    "cc_at_target": "I can write simple and compound sentences and explain why I used each kind.",
    "cc_approaching": "I can join two simple sentences with and, but or so using a frame.",
-   "cc_emerging": "I can say or write a simple sentence with a model.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can say or write a simple sentence with a model."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -8312,15 +8268,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose in conventions with possessives.",
-  "ee_code": "EE.L.3.6.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use apostrophes to show possession consistently, even in sentences with multiple possessives or irregular nouns.\nI can explain the differences between singular and plural possessives and demonstrate how to use them correctly in writing.",
    "cc_at_target": "I can correctly use apostrophes to show possession (e.g., \"John’s book\") in my writing.\nI can explain that possessives show ownership or belonging in a sentence.",
    "cc_approaching": "I can use apostrophes to show possession in some places but may need reminders to use them consistently.\nI can explain that possessives show ownership with some support but may need help identifying where they should be used.",
-   "cc_emerging": "I can use apostrophes for possessives with significant help, but I often need adult guidance to understand their purpose.\nI need help to explain how possessives show ownership or when to use apostrophes correctly.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can use apostrophes for possessives with significant help, but I often need adult guidance to understand their purpose.\nI need help to explain how possessives show ownership or when to use apostrophes correctly."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -8345,15 +8300,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Use spelling patterns and generalizations (e.g., word families, position-based spellings, syllable patterns, ending rules, meaningful word parts) in writing words.",
-  "ee_code": "EE.L.3.6.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can consistently apply complex spelling patterns and generalizations (such as position-based spelling and meaningful word parts) to spell unfamiliar words correctly.\nI can explain how and why certain spelling rules apply in different contexts, such as when changing base words to fit new word forms.",
    "cc_at_target": "I can apply spelling patterns (such as word families or syllable patterns) to write words correctly.\nI can use rules like adding \"-ed\" or \"-ing\" and apply spelling generalizations in my writing.",
    "cc_approaching": "I can apply some spelling patterns, but I may need reminders to use them consistently in my writing.\nI can use some basic spelling rules but need support to apply them in new contexts.",
-   "cc_emerging": "I can use familiar spelling patterns with adult support, but I need help recognizing or applying new ones in my writing.\nI need guidance to apply basic spelling rules or generalizations when writing words.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can use familiar spelling patterns with adult support, but I need help recognizing or applying new ones in my writing.\nI need guidance to apply basic spelling rules or generalizations when writing words."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -8588,15 +8542,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Fluency",
   "text": "Use context to confirm or self- correct word recognition and understanding, rereading as necessary.",
-  "ee_code": "EE.RF.4.4.c",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use context clues to confirm or correct the meaning of a word without needing to reread (e.g., \"I knew the word 'fossil' meant an old bone because of the words around it\").\nI can quickly reread parts of the text to make sure I understand unfamiliar words (e.g., \"I reread the sentence to confirm the word 'plunge' meant to dive\").",
    "cc_at_target": "I can use context clues to figure out or correct the meaning of a word while reading (e.g., \"I used the other words in the sentence to figure out that 'hatch' means 'to open'\").\nI can reread parts of a text to help me understand a difficult word (e.g., \"I reread the paragraph to make sure 'vast' meant something big\").",
    "cc_approaching": "I can use context clues with some help to figure out or correct a word's meaning (e.g., \"I used other words in the sentence to figure out 'burst' meant to pop\").\nI can reread parts of a sentence with help to understand a word (e.g., \"With help, I reread the sentence to understand 'strange' means unusual\").",
-   "cc_emerging": "I can recognize that I need to check a word's meaning and ask for help (e.g., \"I asked for help when I wasn't sure if 'giant' meant big or small\").\nI can try to reread a word or sentence when someone helps me (e.g., \"With help, I reread the word 'quick' and knew it meant fast\").",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can recognize that I need to check a word's meaning and ask for help (e.g., \"I asked for help when I wasn't sure if 'giant' meant big or small\").\nI can try to reread a word or sentence when someone helps me (e.g., \"With help, I reread the word 'quick' and knew it meant fast\")."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -9143,15 +9096,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Transitions: Use phrases to signal event order and to link and build connections between ideas, text, and events.",
-  "ee_code": "EE.W.4.3.b",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use transition phrases like \"after that\" or \"meanwhile\" to smoothly connect events and ideas in my writing (e.g., \"I used 'after that' to show what happened next in the story\").\nI can use complex transitions to link ideas and create a clear flow in my writing (e.g., \"I used 'on the other hand' to show a contrast between two ideas\").",
    "cc_at_target": "I can use phrases like \"first,\" \"next,\" and \"finally\" to show the order of events in my writing (e.g., \"I used 'first' to show what happened at the beginning of the story\").\nI can use transition words to connect ideas and make my writing easier to follow.",
    "cc_approaching": "I can use simple transition words like \"then\" and \"after\" to show event order in my writing with help (e.g., \"I wrote 'then' to show what happened next\").\nI can try to connect my ideas using basic phrases with guidance.",
-   "cc_emerging": "I can use simple words like \"and\" or \"next\" to show the order of events with help (e.g., \"I used 'next' to show what happened after the first event\").\nI can try to link ideas together in my writing with support.",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can use simple words like \"and\" or \"next\" to show the order of events with help (e.g., \"I used 'next' to show what happened after the first event\").\nI can try to link ideas together in my writing with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -9176,15 +9128,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Word Choice (including domain specific): Experiment with words to provide emphasis, addition, contrast, or order to connect themes and ideas.",
-  "ee_code": "EE.W.4.3.c",
-  "ee_text": "Not Applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can experiment with words like \"moreover\" or \"in contrast\" to emphasize important ideas and connect themes in my writing (e.g., \"I used 'moreover' to add extra information to my point\").\nI can choose specific words to show differences or similarities between ideas (e.g., \"I used 'in contrast' to highlight the differences between two events\").",
    "cc_at_target": "I can use words like \"also,\" \"but,\" and \"therefore\" to add details or show contrast in my writing (e.g., \"I used 'also' to add more information to my topic\").\nI can use words to emphasize key ideas and show connections between themes.",
    "cc_approaching": "I can use simple words like \"and\" or \"but\" to add information or show contrast with help (e.g., \"I used 'and' to add more details to my sentence\").\nI can try to use words to connect ideas and themes with guidance.",
-   "cc_emerging": "I can use basic words like \"and\" or \"too\" to add more information with help (e.g., \"I said 'too' to show something extra happened\").\nI can try to use words to show how ideas are related with support.",
-   "ee_at_target": "Not Applicable"
+   "cc_emerging": "I can use basic words like \"and\" or \"too\" to add more information with help (e.g., \"I said 'too' to show something extra happened\").\nI can try to use words to show how ideas are related with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -10205,15 +10156,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose of language choice with order of adjective",
-  "ee_code": "EE.L.4.5.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can correctly use multiple adjectives in the right order, such as \"a big red balloon,\" and explain why they are in that order.\nI can vary my use of adjectives to make my writing more descriptive and accurate.",
    "cc_at_target": "I can use adjectives in the correct order, such as \"a small blue car,\" in my writing.\nI can explain the proper order for adjectives, such as size before color.",
    "cc_approaching": "I can use two adjectives like \"big\" and \"yellow\" in my writing with help, and I can try to put them in the right order (e.g., \"a big yellow ball\").\nI can explain the order of adjectives with support.",
-   "cc_emerging": "I can use simple adjectives like \"big\" and \"small\" in my writing with help (e.g., \"a small dog\").\nI can try to put two adjectives together with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can use simple adjectives like \"big\" and \"small\" in my writing with help (e.g., \"a small dog\").\nI can try to put two adjectives together with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -10378,15 +10328,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose in conventions with commas and quotation marks for quotations,.",
-  "ee_code": "EE.L.4.6.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use commas and quotation marks correctly when writing dialogue, such as \"He said, 'Let's go to the park,'\" and explain why they are used.\nI can easily identify and correct errors in dialogue punctuation in my writing.",
    "cc_at_target": "I can use commas and quotation marks correctly when quoting someone in my writing (e.g., \"She said, 'I love reading'\").\nI can explain why I use quotation marks and commas to show dialogue.",
    "cc_approaching": "I can use quotation marks and commas with some help when writing what someone says (e.g., \"He said, 'I like ice cream'\").\nI can try to explain why quotation marks are used when quoting someone with support.",
-   "cc_emerging": "I can try to use quotation marks and commas when someone helps me write what someone says (e.g., \"With help, I wrote, 'She said, \"Come here\"'\").\nI can try to add punctuation to show when someone is talking in my writing with guidance.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can try to use quotation marks and commas when someone helps me write what someone says (e.g., \"With help, I wrote, 'She said, \"Come here\"'\").\nI can try to add punctuation to show when someone is talking in my writing with guidance."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -10411,15 +10360,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose in conventions with commas in compound sentences",
-  "ee_code": "EE.L.4.6.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use commas correctly in compound sentences, like \"I finished my homework, and then I played outside,\" and explain why the comma is needed.\nI can easily identify and correct missing commas in compound sentences in my writing.",
    "cc_at_target": "I can use commas correctly to join two ideas in a compound sentence (e.g., \"I went to the park, and I played soccer\").\nI can explain why I use a comma before conjunctions like \"and\" or \"but\" in a compound sentence.",
    "cc_approaching": "I can use commas in compound sentences with some help (e.g., \"I cleaned my room, and I watched TV\").\nI can try to explain why I use a comma in a compound sentence with support.",
-   "cc_emerging": "I can try to use commas when joining two simple sentences with help (e.g., \"I ate lunch, and I went to school\").\nI can try to understand where to place a comma in a sentence when someone supports me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can try to use commas when joining two simple sentences with help (e.g., \"I ate lunch, and I went to school\").\nI can try to understand where to place a comma in a sentence when someone supports me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -10584,15 +10532,14 @@
   "strand": "Reading Foundational Skills",
   "cluster": "Fluency",
   "text": "Use context to confirm or self- correct word recognition and understanding, rereading as necessary.",
-  "ee_code": "EE.RF.5.4.c",
-  "ee_text": "Not Applicable.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can quickly use context clues to figure out unfamiliar words and confirm their meanings without needing to reread (e.g., \"I knew 'accelerate' meant to go faster because of the other words around it\").\nI can reread parts of the text to make sure I understand unfamiliar words and correct mistakes (e.g., \"I reread the sentence to confirm that 'evaporate' means to disappear as steam\").",
    "cc_at_target": "I can use context clues to figure out or correct the meaning of a word while reading (e.g., \"I used the other words in the paragraph to understand that 'glimpse' means a quick look\").\nI can reread parts of the text to help me understand difficult words (e.g., \"I reread the paragraph to confirm that 'stumble' meant to trip\").",
    "cc_approaching": "I can use context clues with some help to figure out or correct word meanings (e.g., \"I used other words in the sentence to guess that 'burst' means to pop\").\nI can reread parts of a sentence with support to better understand a word (e.g., \"With help, I reread the sentence to understand 'rare' means uncommon\").",
-   "cc_emerging": "I can recognize when I need help with a word’s meaning and ask for assistance (e.g., \"I asked for help when I wasn’t sure if 'delicate' meant fragile or strong\").\nI can try to reread a word or sentence with help to confirm the meaning (e.g., \"With help, I reread the sentence and learned that 'quick' means fast\").",
-   "ee_at_target": "Not Applicable."
+   "cc_emerging": "I can recognize when I need help with a word’s meaning and ask for assistance (e.g., \"I asked for help when I wasn’t sure if 'delicate' meant fragile or strong\").\nI can try to reread a word or sentence with help to confirm the meaning (e.g., \"With help, I reread the sentence and learned that 'quick' means fast\")."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -11136,15 +11083,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Transitions: Use a variety of transitional words and phrases that logically connect and develop ideas.",
-  "ee_code": "EE.W.5.3.b",
-  "ee_text": "Not applicable.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use advanced transitional phrases like \"as a result\" and \"on the other hand\" to logically connect and develop ideas (e.g., \"I used 'as a result' to show the effect of an action in my writing\").\nI can vary my transitions to link complex ideas smoothly in my writing.",
    "cc_at_target": "I can use transitions like \"first,\" \"next,\" and \"finally\" to connect ideas and show the order of events (e.g., \"I used 'next' to show what happened after the first event\").\nI can logically connect ideas in my writing using a variety of transition words.",
    "cc_approaching": "I can use basic transition words like \"then\" and \"after\" to connect ideas with some help (e.g., \"I used 'then' to show what happened next\").\nI can try to link ideas using simple transitions with guidance.",
-   "cc_emerging": "I can use simple words like \"and\" or \"next\" to connect ideas in my writing with help (e.g., \"I wrote 'next' to show the next event in my story\").\nI can try to connect ideas using basic transitions when someone helps me.",
-   "ee_at_target": "Not applicable."
+   "cc_emerging": "I can use simple words like \"and\" or \"next\" to connect ideas in my writing with help (e.g., \"I wrote 'next' to show the next event in my story\").\nI can try to connect ideas using basic transitions when someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -11169,15 +11115,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Word Choice (including domain specific): Creatively select unique words for emphasis, addition, contrast, or order.",
-  "ee_code": "EE.W.5.3.c",
-  "ee_text": "Not applicable.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can creatively use unique words to emphasize important points and show contrasts in my writing (e.g., \"I used 'significantly' to emphasize how important the discovery was\").\nI can select words to make my writing stand out and enhance the connection between ideas.",
    "cc_at_target": "I can use specific words like \"also,\" \"but,\" and \"therefore\" to add details or show contrasts (e.g., \"I used 'therefore' to connect the cause and effect in my argument\").\nI can experiment with word choices to emphasize key points in my writing.",
    "cc_approaching": "I can use simple words like \"and\" or \"but\" to add information or show contrast with some help (e.g., \"I used 'and' to add more details in my paragraph\").\nI can try to choose different words to make my writing clearer, with support.",
-   "cc_emerging": "I can use basic words like \"and\" or \"too\" to add information with help (e.g., \"I said 'too' to show something extra happened\").\nI can try to use simple words to connect ideas when someone helps me.",
-   "ee_at_target": "Not applicable."
+   "cc_emerging": "I can use basic words like \"and\" or \"too\" to add information with help (e.g., \"I said 'too' to show something extra happened\").\nI can try to use simple words to connect ideas when someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -11902,15 +11847,14 @@
   "strand": "Language",
   "cluster": "Vocabulary Acquisition and Use",
   "text": "Interpret similes and metaphors in context.",
-  "ee_code": "EE.L.5.3.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can easily interpret similes and metaphors in a text and explain their meaning (e.g., \"I understood that 'as quick as a fox' means someone is fast and clever\").\nI can use similes and metaphors in my own writing to make comparisons.",
    "cc_at_target": "I can interpret similes and metaphors in a text with some guidance (e.g., \"I figured out that 'a blanket of snow' means a thick layer of snow covered the ground\").\nI can understand comparisons made with similes and metaphors in stories or poems.",
    "cc_approaching": "I can identify similes and metaphors in a text with help and try to understand their meaning (e.g., \"With help, I figured out 'as strong as an ox' means someone is very strong\").\nI can try to interpret a simile or metaphor with support.",
-   "cc_emerging": "I can recognize a simile or metaphor when someone helps me (e.g., \"With help, I learned 'as light as a feather' means something is very light\").\nI can try to understand what a comparison means with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize a simile or metaphor when someone helps me (e.g., \"With help, I learned 'as light as a feather' means something is very light\").\nI can try to understand what a comparison means with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -12110,15 +12054,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose of language choice with correlative conjunctions.",
-  "ee_code": "EE.L.5.5.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use correlative conjunctions like \"either...or\" and \"neither...nor\" in my writing to link ideas and explain their use (e.g., \"I used 'either...or' to show two possible choices\").\nI can easily identify and correct errors when using correlative conjunctions in my writing.",
    "cc_at_target": "I can use correlative conjunctions in sentences (e.g., \"I used 'both...and' to connect two ideas in my sentence\").\nI can explain how correlative conjunctions help join related ideas in writing.",
    "cc_approaching": "I can use correlative conjunctions like \"either...or\" with some help (e.g., \"With help, I wrote 'either' and 'or' to show a choice between two things\").\nI can try to explain how these conjunctions connect ideas with support.",
-   "cc_emerging": "I can recognize correlative conjunctions like \"both...and\" and try to use them with help (e.g., \"With help, I used 'both' and 'and' in my sentence\").\nI can try to understand how these words work when someone helps me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize correlative conjunctions like \"both...and\" and try to use them with help (e.g., \"With help, I used 'both' and 'and' in my sentence\").\nI can try to understand how these words work when someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -12143,15 +12086,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Appropriately use and explain the intended purpose of language choice with use of “they” and “their” when referring to singular people or ideas.",
-  "ee_code": "EE.L.5.5.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can correctly use \"they\" and \"their\" to refer to a singular person in my writing (e.g., \"I wrote 'They went to the store' to refer to one person\").\nI can explain how \"they\" and \"their\" are used to refer to singular people without confusing the reader.",
    "cc_at_target": "I can use \"they\" and \"their\" correctly to refer to a singular person (e.g., \"I used 'they' to refer to one student in my sentence\").\nI can explain how to use these words in a sentence to avoid confusion.",
    "cc_approaching": "I can use \"they\" and \"their\" with help when referring to a single person (e.g., \"With help, I wrote 'They went to the store' to talk about one person\").\nI can try to explain how these words are used with support.",
-   "cc_emerging": "I can recognize when to use \"they\" and \"their\" to refer to a single person with help (e.g., \"With help, I used 'their' to talk about someone's book\").\nI can try to understand how to use these words in a sentence when someone helps me.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can recognize when to use \"they\" and \"their\" to refer to a single person with help (e.g., \"With help, I used 'their' to talk about someone's book\").\nI can try to understand how to use these words in a sentence when someone helps me."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -12211,15 +12153,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Demonstrate contextually appropriate use of the conventions of standardized English capitalization, punctuation, and spelling when writing. Discern when and where it is appropriate to use standardized English. Appropriately use and explain the intended purpose in conventions with: b. italics, underlining, quotes with titles; and",
-  "ee_code": "EE.L.5.6.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can read grade-level text with accuracy and fluency, understanding the meaning as I read (e.g., \"I read a complex paragraph and understood the main idea immediately\").\nI can comprehend complex text without needing to reread, using fluency and accuracy to support my understanding.",
    "cc_at_target": "I can read grade-level text with good accuracy and fluency, which helps me understand what I am reading (e.g., \"I read a paragraph fluently and understood the main idea\").\nI can understand most of the text I read the first time without needing to reread.",
    "cc_approaching": "I can read with some accuracy and fluency but may need help understanding parts of the text (e.g., \"I read the text aloud but needed help to understand what it meant\").\nI can reread parts of the text with support to improve my comprehension.",
-   "cc_emerging": "I can try to read grade-level text with help, improving my fluency and accuracy with practice (e.g., \"With help, I read the sentence more accurately and understood its meaning\").\nI can understand the text better when someone helps me with the difficult parts.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can try to read grade-level text with help, improving my fluency and accuracy with practice (e.g., \"With help, I read the sentence more accurately and understood its meaning\").\nI can understand the text better when someone helps me with the difficult parts."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -12234,8 +12175,7 @@
    "cc_advanced": "I can choose italics, underlining or quotation marks correctly for any kind of title and explain the rule.",
    "cc_at_target": "I can use italics, underlining or quotation marks correctly to show titles of works.",
    "cc_approaching": "I can put quotation marks around a story title using a model.",
-   "cc_emerging": "I can find a title in a sentence with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can find a title in a sentence with help."
   },
   "descriptor_flag_note": "CC descriptors describe reading fluency (RF.5.4), copied with the wrong standard text; L.5.6.b is italics, underlining and quotation marks with titles."
  },
@@ -13801,15 +13741,14 @@
   "strand": "Language",
   "cluster": "Vocabulary Acquisition & Use",
   "text": "Demonstrate understanding of figurative language, word relationships, and nuances in word meanings. c. Use the relationship between particular words (e.g., cause and effect) to better understand each of the words.",
-  "ee_code": "EE.L.6.3.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can explain how word relationships, such as cause and effect or part and whole, deepen meaning in complex texts.",
    "cc_at_target": "I can use the relationship between words, such as cause and effect, to understand each word better.",
    "cc_approaching": "I can sort word pairs by relationship (cause and effect) using a chart with support.",
-   "cc_emerging": "I can match a cause picture to an effect picture with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can match a cause picture to an effect picture with help."
   },
   "descriptor_source": "draft",
   "power_standard": null,
@@ -15659,15 +15598,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Demonstrate contextually appropriate use of the conventions of standardized English grammar and usage when writing or speaking. Discern when and where it is appropriate to use standardized English. Appropriately use and explain the intended purpose of language choice with: c. recognizing and correcting dangling modifiers.",
-  "ee_code": "EE.L.7.5.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can find and fix dangling modifiers in my own and others' writing and explain the confusion they cause.",
    "cc_at_target": "I can recognize and correct dangling modifiers.",
    "cc_approaching": "I can fix a dangling modifier in a given sentence using a model.",
-   "cc_emerging": "I can tell which picture matches a sentence with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can tell which picture matches a sentence with help."
   },
   "descriptor_source": "draft",
   "power_standard": null,
@@ -17361,15 +17299,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Demonstrate contextually appropriate use of the conventions of standardized English grammar and usage when writing or speaking. Discern when and where it is appropriate to use standardized English. Appropriately use and explain the intended purpose of language choice with: c. recognizing and correcting shifts in verb voice and mood.",
-  "ee_code": "EE.L.8.5.c",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can find and fix shifts in verb voice and mood in my own and others' writing and explain the confusion they cause.",
    "cc_at_target": "I can recognize and correct inappropriate shifts in verb voice and mood.",
    "cc_approaching": "I can fix a verb shift in a given sentence using a model.",
-   "cc_emerging": "I can tell which of two sentences sounds right with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can tell which of two sentences sounds right with help."
   },
   "descriptor_source": "draft",
   "power_standard": null,
@@ -17438,15 +17375,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Demonstrate contextually appropriate use of the conventions of standardized English capitalization, punctuation, and spelling when writing. Discern when and where it is appropriate to use standardized English. Appropriately use and explain the intended purpose in conventions with: b. ellipsis to indicate an omission, and",
-  "ee_code": "EE.L.8.6.b",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use ellipses to show omissions in quotations and explain how they keep the original meaning.",
    "cc_at_target": "I can use an ellipsis to show an omission and explain its purpose.",
    "cc_approaching": "I can use an ellipsis to shorten a quote using a model.",
-   "cc_emerging": "I can find an ellipsis in a sentence with help.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can find an ellipsis in a sentence with help."
   },
   "descriptor_source": "draft",
   "power_standard": null,
@@ -18573,15 +18509,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Transitions: use appropriate and varied transitions to link the major sections of the text, create cohesion, and clarify the relationships among complex ideas and concepts.",
-  "ee_code": "EE.W.9-10.3.b",
-  "ee_text": "N/A",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use a wide variety of transitions to effectively connect and develop complex ideas.",
    "cc_at_target": "I can use appropriate and varied transitions to link the major sections of the text, create cohesion, and clarify the relationships among complex ideas and concepts.",
    "cc_approaching": "I can use basic transitions to connect ideas in my writing.",
-   "cc_emerging": "I can use simple linking words such as and, then or because with support.",
-   "ee_at_target": "N/A"
+   "cc_emerging": "I can use simple linking words such as and, then or because with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -18608,15 +18543,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Transitions: use appropriate and varied transitions to link the major sections of the text, create cohesion, and clarify the relationships among complex ideas and concepts.",
-  "ee_code": "EE.W.9-10.3.b",
-  "ee_text": "N/A",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use a wide variety of transitions to effectively connect and develop complex ideas.",
    "cc_at_target": "I can use appropriate and varied transitions to link the major sections of the text, create cohesion, and clarify the relationships among complex ideas and concepts.",
    "cc_approaching": "I can use basic transitions to connect ideas in my writing.",
-   "cc_emerging": "I can use simple linking words such as and, then or because with support.",
-   "ee_at_target": "N/A"
+   "cc_emerging": "I can use simple linking words such as and, then or because with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -18643,15 +18577,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Word Choice (including domain specific): use culturally- sustaining language and domain-specific vocabulary to manage the complexity of the topic. use telling details and sensory language to convey a vivid picture of thoughts, ideas, and experiences.",
-  "ee_code": "EE.W.9-10.3.c",
-  "ee_text": "N/A",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use precise and domain-specific word choice, phrases, and clauses to create cohesion and clarify relationships, and sensory language to vividly describe experiences and events.",
    "cc_at_target": "I can use culturally-sustaining language and domain-specific vocabulary to manage the complexity of the topic. I can use telling details and sensory language to convey a vivid picture of thoughts, ideas, and experiences.",
    "cc_approaching": "I can use some sensory language and basic word choice to describe experiences and events.",
-   "cc_emerging": "I can use drawing, dictating, and writing to create detailed texts with minimal support.\nI can Create a well-structured story or essay with clear details, transitions, and temporal words with some guidance.",
-   "ee_at_target": "N/A"
+   "cc_emerging": "I can use drawing, dictating, and writing to create detailed texts with minimal support.\nI can Create a well-structured story or essay with clear details, transitions, and temporal words with some guidance."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -18666,8 +18599,7 @@
    "cc_advanced": "I can use precise, culturally-sustaining and subject-specific language and telling details to manage complex topics vividly.",
    "cc_at_target": "I can use culturally-sustaining language, domain-specific vocabulary, telling details and sensory language to convey a vivid picture.",
    "cc_approaching": "I can add subject words and sensory details from a word bank to my writing.",
-   "cc_emerging": "I can use a few topic words and simple describing words with support.",
-   "ee_at_target": "N/A"
+   "cc_emerging": "I can use a few topic words and simple describing words with support."
   },
   "descriptor_flag_note": "CC Emerging descriptor describes drawing and dictating (an EE-level skill), not word choice."
  },
@@ -18683,15 +18615,14 @@
   "strand": "Writing",
   "cluster": "Text Types & Purposes",
   "text": "Word Choice (including domain specific): use culturally- sustaining language and domain-specific vocabulary to manage the complexity of the topic. use telling details and sensory language to convey a vivid picture of thoughts, ideas, and experiences.",
-  "ee_code": "EE.W.9-10.3.c",
-  "ee_text": "N/A",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can use precise and domain-specific word choice, phrases, and clauses to create cohesion and clarify relationships, and sensory language to vividly describe experiences and events.",
    "cc_at_target": "I can use culturally-sustaining language and domain-specific vocabulary to manage the complexity of the topic. I can use telling details and sensory language to convey a vivid picture of thoughts, ideas, and experiences.",
    "cc_approaching": "I can use some sensory language and basic word choice to describe experiences and events.",
-   "cc_emerging": "I can use drawing, dictating, and writing to create detailed texts with minimal support.\nI can Create a well-structured story or essay with clear details, transitions, and temporal words with some guidance.",
-   "ee_at_target": "N/A"
+   "cc_emerging": "I can use drawing, dictating, and writing to create detailed texts with minimal support.\nI can Create a well-structured story or essay with clear details, transitions, and temporal words with some guidance."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -18706,8 +18637,7 @@
    "cc_advanced": "I can use precise, culturally-sustaining and subject-specific language and telling details to manage complex topics vividly.",
    "cc_at_target": "I can use culturally-sustaining language, domain-specific vocabulary, telling details and sensory language to convey a vivid picture.",
    "cc_approaching": "I can add subject words and sensory details from a word bank to my writing.",
-   "cc_emerging": "I can use a few topic words and simple describing words with support.",
-   "ee_at_target": "N/A"
+   "cc_emerging": "I can use a few topic words and simple describing words with support."
   },
   "descriptor_flag_note": "CC Emerging descriptor describes drawing and dictating (an EE-level skill), not word choice."
  },
@@ -19913,15 +19843,14 @@
   "strand": "Language",
   "cluster": "Knowledge of Language",
   "text": "Recognize standardized guidelines and style manuals exist for various disciplines (e.g., Modern Language association [MLA] in English; American Psychological association [APA] in education, science, and psychology); write and edit work so that it conforms to the expectations of the discipline and writing situation.",
-  "ee_code": "EE.L.9-10.1.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can recognize and apply standardized guidelines and style manuals for various disciplines, (e.g., Modern Language association [MLA] in English; American Psychological association [APA] in education, science, and psychology); write and edit work so that it conforms to the expectations of the discipline and writing situation.",
    "cc_at_target": "I can recognize and use guidelines and style manuals for different subjects (e.g., MLA for English, APA for science). I can write and edit my work to meet the expectations for each subject.",
    "cc_approaching": "I can follow some standardized guidelines for writing and editing with support.",
-   "cc_emerging": "I can copy a source title in the right place using a citation template with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can copy a source title in the right place using a citation template with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -19948,15 +19877,14 @@
   "strand": "Language",
   "cluster": "Knowledge of Language",
   "text": "Recognize standardized guidelines and style manuals exist for various disciplines (e.g., Modern Language association [MLA] in English; American Psychological association [APA] in education, science, and psychology); write and edit work so that it conforms to the expectations of the discipline and writing situation.",
-  "ee_code": "EE.L.9-10.1.d",
-  "ee_text": "Not applicable",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can recognize and apply standardized guidelines and style manuals for various disciplines, (e.g., Modern Language association [MLA] in English; American Psychological association [APA] in education, science, and psychology); write and edit work so that it conforms to the expectations of the discipline and writing situation.",
    "cc_at_target": "I can recognize and use guidelines and style manuals for different subjects (e.g., MLA for English, APA for science). I can write and edit my work to meet the expectations for each subject.",
    "cc_approaching": "I can follow some standardized guidelines for writing and editing with support.",
-   "cc_emerging": "I can copy a source title in the right place using a citation template with support.",
-   "ee_at_target": "Not applicable"
+   "cc_emerging": "I can copy a source title in the right place using a citation template with support."
   },
   "descriptor_source": "school",
   "power_standard": null,
@@ -23405,15 +23333,14 @@
   "strand": "Language",
   "cluster": "Knowledge of Language",
   "text": "Demonstrate an understanding of how language functions in different cultures, contexts, and disciplines; apply this knowledge to comprehend more fully when reading and listening, and make effective choices when composing, creating, and speaking. d. Recognize standardized guidelines and style manuals exist for various disciplines (e.g., MLA in English; APA in education, science, and psychology); write and edit work so that it conforms to the expectations of the discipline and writing situation.",
-  "ee_code": "EE.L.11-12.1.d",
-  "ee_text": "Not applicable.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can apply MLA, APA or other style manuals accurately and explain why disciplines use different conventions.",
    "cc_at_target": "I can recognize that disciplines have style manuals, such as MLA and APA, and write and edit work to meet those expectations.",
    "cc_approaching": "I can format a citation or heading in MLA using a template.",
-   "cc_emerging": "I can copy a source title in the right place with help.",
-   "ee_at_target": "Not applicable."
+   "cc_emerging": "I can copy a source title in the right place with help."
   },
   "descriptor_source": "draft",
   "power_standard": null,
@@ -23443,15 +23370,14 @@
   "strand": "Language",
   "cluster": "Knowledge of Language",
   "text": "Demonstrate an understanding of how language functions in different cultures, contexts, and disciplines; apply this knowledge to comprehend more fully when reading and listening, and make effective choices when composing, creating, and speaking. d. Recognize standardized guidelines and style manuals exist for various disciplines (e.g., MLA in English; APA in education, science, and psychology); write and edit work so that it conforms to the expectations of the discipline and writing situation.",
-  "ee_code": "EE.L.11-12.1.d",
-  "ee_text": "Not applicable.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can apply MLA, APA or other style manuals accurately and explain why disciplines use different conventions.",
    "cc_at_target": "I can recognize that disciplines have style manuals, such as MLA and APA, and write and edit work to meet those expectations.",
    "cc_approaching": "I can format a citation or heading in MLA using a template.",
-   "cc_emerging": "I can copy a source title in the right place with help.",
-   "ee_at_target": "Not applicable."
+   "cc_emerging": "I can copy a source title in the right place with help."
   },
   "descriptor_source": "draft",
   "power_standard": null,
@@ -24027,15 +23953,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Demonstrate contextually appropriate use of the conventions of standardized English grammar and usage when writing or speaking. Discern when and where it is appropriate to use standardized English. Appropriately use and explain the intended purpose of language choice. b. Identify ways in which usage and conventions vary and are sometimes contested.",
-  "ee_code": "EE.L.11-12.5.b",
-  "ee_text": "Not applicable.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can analyze how and why usage varies across communities and evaluate arguments about contested usage.",
    "cc_at_target": "I can identify ways that usage and conventions vary and are sometimes contested.",
    "cc_approaching": "I can name one example of a word or phrase used differently in two places with support.",
-   "cc_emerging": "I can notice that people say things in different ways with help.",
-   "ee_at_target": "Not applicable."
+   "cc_emerging": "I can notice that people say things in different ways with help."
   },
   "descriptor_source": "draft",
   "power_standard": null,
@@ -24065,15 +23990,14 @@
   "strand": "Language",
   "cluster": "Conventions of Standardized English",
   "text": "Demonstrate contextually appropriate use of the conventions of standardized English grammar and usage when writing or speaking. Discern when and where it is appropriate to use standardized English. Appropriately use and explain the intended purpose of language choice. b. Identify ways in which usage and conventions vary and are sometimes contested.",
-  "ee_code": "EE.L.11-12.5.b",
-  "ee_text": "Not applicable.",
+  "ee_code": "",
+  "ee_text": "",
   "crosswalk": [],
   "descriptors": {
    "cc_advanced": "I can analyze how and why usage varies across communities and evaluate arguments about contested usage.",
    "cc_at_target": "I can identify ways that usage and conventions vary and are sometimes contested.",
    "cc_approaching": "I can name one example of a word or phrase used differently in two places with support.",
-   "cc_emerging": "I can notice that people say things in different ways with help.",
-   "ee_at_target": "Not applicable."
+   "cc_emerging": "I can notice that people say things in different ways with help."
   },
   "descriptor_source": "draft",
   "power_standard": null,

@@ -3,6 +3,8 @@
 K-5 rows come from the school's CCEE Math sheet (descriptors copied); 6-12 from the parsed Wisconsin docs + drafts.
 Usage: python3 build_math_json.py
 """
+import sys
+import os
 import json, re, glob
 import openpyxl
 
@@ -158,6 +160,10 @@ for r in merged6:
         "source": "Wisconsin Standards for Mathematics (2021); Wisconsin Essential Elements for Mathematics (2022)",
         "text_source": "official", "wi_tags": r["wi_tags"], "major_cluster": r["major_cluster"],
     })
+# Nov 2026 cleanup (scripts/cleanup_rules.py): removed rows, placeholder Essential Element links, text and code fixes.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "."))
+import cleanup_rules  # noqa: E402
+rows = cleanup_rules.apply_main(rows)
 json.dump(rows, open("data/standards/math.json", "w"), indent=1, ensure_ascii=False)
 from collections import Counter
 print(len(rows), sorted(Counter(r["grade"] for r in rows).items(), key=lambda x: ("K0123456789".index(x[0][0]) if x[0] != "10" and x[0] != "11" and x[0] != "12" else 20 + int(x[0]))))

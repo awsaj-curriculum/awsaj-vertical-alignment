@@ -33,15 +33,27 @@ def norm_code(raw, ee=False):
     c = re.sub(r"\s+", "", str(raw or "")).rstrip(".")
     c = c.replace("9.10", "9-10").replace("11.12", "11-12")
     if ee:
-        c = re.sub(r"^EE\.?", "", c)
+        c = re.sub(r"^EE\.*", "", c)    # also the school typo "EE..W.3.7"
     c = re.sub(r"^(RF|R|W|SL|L)\.?(K|\d+(?:-\d+)?)\.", r"\1.\2.", c)
     return ("EE." + c) if ee and c else c
 
 
+CODE_AT_START = r"^(EE\.*)?[A-Z]{1,2}\s*\.?\s*(K|\d+(?:[-.]\d+)?)\s*\.\s*\d+"
+
+
 def strip_code(text, code):
-    """Remove the leading code (any spacing/punctuation variant) from a 'Code & Standard' cell."""
+    """Remove the leading code (any spacing/punctuation variant) from a 'Code & Standard' cell.
+
+    A part letter ("W.3.2.a") is only a letter on its own. Some cells start the sentence in lower case right after the
+    code ("W.3.4. with support ...", "EE..W.3.7 . with guidance ..."); that first letter used to be read as a part
+    letter and dropped ("ith support"). It is now kept and capitalised (Nov 2026 cleanup)."""
     t = flat(text)
-    t = re.sub(r"^(EE\.?)?[A-Z]{1,2}\s*\.?\s*(K|\d+(?:[-.]\d+)?)\s*\.\s*\d+(\s*\.\s*[a-z](-[a-z])?)?\s*\.?\s*:?\s*", "", t)
+    m = re.match(CODE_AT_START + r"(\s*\.\s*[a-z](-[a-z])?(?![A-Za-z]))?\s*\.?\s*:?\s*", t)
+    if m:
+        rest = t[m.end():]
+        if re.match(CODE_AT_START + r"\s*\.\s*[a-z][a-z]", t) and rest[:1].islower():
+            rest = rest[0].upper() + rest[1:]
+        t = rest
     return t.strip()
 
 
@@ -122,6 +134,8 @@ for tab in ["KG", "G1", "G2", "G3", "G4", "G5"]:
         else:
             code = norm_code(C)
             text = strip_code(D, code)
+        if text.startswith("I can "):   # a few Grade 2 cells hold the standard as an "I can" statement
+            text = text[6].upper() + text[7:]
         prev_code = code
         ee_code = norm_code(F, ee=True) if F and flat(F) not in ("N/A",) else ""
         ee_text = strip_code(G, ee_code) if G else ""
