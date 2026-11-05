@@ -79,6 +79,14 @@ M.EE.1.NBT.1.a/b; ratings moved). The 161 ratings deleted or moved are kept as t
 Load / Undo (`put_back`) skip them. `cleanup_rules.py` is applied by every subject build, `build_all_standards.py` (subject
 files -> all_standards.json), `build_ee_rows.py` (no K-5 Social Studies or Science EEs), `build_site_data.py` and
 `load_supabase.py` (loads all_standards + essential_elements). A full backup was taken first (Excel, kept outside the repo).
+Excel export (Tim, Nov 2026; Saved copies box, `exportExcel()` in app.js, migration 008): the live ratings or any saved copy,
+every grade and subject or one grade and/or subject (the same parts as Clear). Sheets as the database backup: About (instance,
+kind, scope, date saved, date exported, part, row counts), Ratings (readable) (subject, set, grade, code, standard text, level
+in words, team, updated_at), then standards, ratings, rating_events, comments, team_sets, teams, rating_archives,
+rating_archive_rows. For a saved copy the ratings are its `rating_archive_rows` joined to the standards. Built in the
+browser from public reads with SheetJS 0.18.5 from cdnjs (pinned with an integrity hash, loaded only when someone exports).
+Needs the PIN (Tim): `check_pin` checks it in the database first. Never reads `app_settings`. File name
+`Vertical_Alignment_<copy name or Live>_<YYYY-MM-DD>.xlsx`.
 
 ## Rating scale and colours
 Awsaj brand (from awsaj.qa logo and stylesheet): dark green #024638 (frame, headings, buttons), greys #56595A / #75787B,
@@ -201,6 +209,23 @@ weak/strong link or strongest/weakest): "Breaks down" (a settled break, last ste
 one; a split standard's parts share a `grp` in prereqs.json and count as one) vs "Not taught on a suggested link"
 (AI or wording links only); "Taught at
 every step" = 2+ grades, every standard rated and at least introduced. Run it after build_site_data.py.
+Report (Tim, Nov 2026; Report tab, `renderReport()` and the `rp*` functions in app.js): one printable report from the live
+ratings, A4, about 30 pages (Tim: under 30; 40-50 would be acceptable if ever needed). Part 1 K-12 overview (subject rings,
+key findings, the three schools side by side, every grade x subject cell, where progressions break by grade, progression status,
+priority / power), then Parts 2-4 for K-5, 6-8 and 9-12 (findings, grade x subject, progressions, then each subject: strands by
+grade with the two thinnest marked, confirmed gaps, not taught where asked, progressions that break down, priority / power below
+in depth, introduced never in depth, possible duplication, each standard with its K-12 strip), Part 5 how to read it. Findings
+are sentences computed from the same checks as the other pages (`analyse`, `laneInfo`, `progFlags`): rated share, highest and
+lowest subject, whole-grade patterns (most subjects 10+ points below their own share), subject-specific dips (20+), change of
+school (5 to 6, 8 to 9, 15+ points), progression findings and where they gather, prerequisite gaps that cross schools, gaps,
+introduced never in depth, priority vs all, duplication, Essential Elements apart. Lists are cut to their first items ("and N
+more (page) on the site"). Each part starts a new page; subjects flow. Every section has a "?" (`report`, `rp_*`).
+Reports tab (Tim, Nov 2026; `renderReport()`, `rpDoc(kind, band)`): a table of every report x grades (K-12, K-5, 6-8, 9-12):
+Overall (above), Coverage map, Gaps and repetition, Grade dashboards, Progressions, Priority and power standards (Audit), plus the
+Excel downloads (`expRow()`, same PIN export as Saved copies). Each analysis page's exports bar has "PDF report" (`pageReport()`:
+choose the grades, it opens that page's report on the Reports tab and prints). The address keeps `report` and `band`. Findings
+are tagged by topic (`rpFindings(..., only)`) so each report keeps its own. Every report is 30 A4 pages or fewer with Nov 2026
+data (Overall K-12 30, Priority and power K-12 29, Gaps K-12 22, the rest 4-18).
 All subjects (Tim, Oct 2026): the Subject box on Coverage map, Gaps, Dashboard, Progressions and Audit also offers "All subjects"
 (`ALL`, `ALL_VIEWS`): `renderAllSubjects()` draws each subject in turn under a dark green band (`withSubject()`), puts what
 belongs to every subject (Back, grade arrows, the grade summary, the map's band buttons) above the sections, and clicks inside a

@@ -1093,3 +1093,67 @@ body.touring #tour .tour-nav button { font-size: 17px; padding: 10px 18px; }
 .copy-fallback { position: fixed; left: 50%; top: 20%; transform: translateX(-50%); z-index: 2000; width: min(560px, calc(100vw - 24px)); background: #000; color: #fff; border-radius: 12px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
 .copy-fallback textarea { width: 100%; height: 160px; font: 14px/1.4 inherit; border-radius: 8px; padding: 8px; color: #000; }
 .copy-fallback p { margin: 0 0 8px; }
+/* Report (Tim, Nov 2026): one printable K-12 report. Each part starts a new page when printed. */
+body[data-view="report"] .filters { display: none; }
+.rp { max-width: 1100px; margin: 0 auto; }
+.rp-tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 4px 0 14px; }
+.rp-cover { background: #fff; border: 1px solid var(--line); border-top: 6px solid var(--brand); border-radius: 12px; padding: 28px 30px; margin-bottom: 18px; }
+.rp-cover h1 { font-size: 34px; color: var(--brand); margin: 6px 0 4px; }
+.rp-sub { font-size: 17px; color: var(--ink-2); margin: 0 0 12px; }
+.rp-toc { margin: 14px 0; padding-left: 20px; } .rp-toc li { margin: 3px 0; }
+.rp-def { font-size: 13px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 10px; }
+.rp-def .lv { margin-left: 6px; }
+.rp-part { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; margin-bottom: 18px; }
+.rp-part h2 { color: var(--brand); font-size: 24px; margin: 0 0 10px; border-bottom: 3px solid var(--brand); padding-bottom: 6px; }
+.rp-part h3 { color: var(--brand); font-size: 17px; margin: 18px 0 6px; }
+.rp-part h4 { font-size: 13.5px; margin: 8px 0 4px; }
+.rp-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.rp-card { display: flex; gap: 10px; align-items: center; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+.rp-card > div { display: flex; flex-direction: column; font-size: 13px; } .rp-card b { font-size: 15px; }
+.rp-find { margin: 4px 0 6px 18px; padding: 0; } .rp-find li { margin: 5px 0; line-height: 1.45; }
+.rp table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+.rp th, .rp td { border: 1px solid var(--line); padding: 4px 6px; text-align: left; vertical-align: middle; }
+.rp thead th { background: var(--brand-tint); color: var(--brand-ink); }
+.rp-mx td .mini, .rp-bt td .mini, .rp-st td .mini, .rp-line .mini { display: flex; width: 100%; min-width: 40px; margin-bottom: 2px; }
+.rp-line .mini { display: inline-flex; width: 140px; vertical-align: middle; }
+.rp-n { display: block; font-size: 12px; } .rp-s { display: block; font-size: 11px; color: var(--muted); }
+.rp td.rp-na { color: var(--muted); text-align: center; background: #FAFBFB; }
+.rp td.rp-low { outline: 2px solid var(--accent); outline-offset: -2px; }
+.rp-tr td { text-align: center; font-size: 12px; min-width: 26px; } .rp-tr .rp-edge { border-left: 3px solid var(--ink); }
+.rp-cap { font-size: 11.5px; color: var(--muted); margin: 4px 0 8px; } .rp-cap .lv { width: 10px; height: 10px; }
+.rp-sb { display: flex; height: 12px; min-width: 160px; border-radius: 3px; overflow: hidden; gap: 1px; background: #fff; } .rp-sb i { display: block; }
+.rp-dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; vertical-align: middle; }
+.rp-subj { border-top: 2px solid var(--line); margin-top: 14px; padding-top: 4px; }
+.rp-line { font-size: 13px; margin: 2px 0 6px; }
+.rp-st th:first-child { width: 28%; } .rp-st tr.rp-thin th { color: var(--brand-ink); }
+.rp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.rp-list { margin: 0; padding: 0; list-style: none; font-size: 12px; } .rp-list li { padding: 3px 0; border-bottom: 1px solid #EEF1F2; line-height: 1.35; }
+.rp-list li { display: grid; grid-template-columns: auto 1fr; gap: 1px 8px; align-items: start; } .rp-list .rp-t { grid-column: 1 / -1; } .rp-list li:not(:has(.rp-ev)) { display: block; } .rp-list .mstrip { margin-top: 3px; }
+.rp-more { font-size: 11.5px; color: var(--muted); margin: 2px 0 6px; }
+.rp-cols > div, .rp-cards > div { min-width: 0; } .rp-list .rp-t, .rp-find li { overflow-wrap: anywhere; }
+@media (max-width: 760px) { .rp-cards { grid-template-columns: 1fr 1fr; } .rp-cols { grid-template-columns: 1fr; } .rp-part, .rp-cover { padding: 14px; } .rp table { font-size: 11px; } .rp-mx, .rp-tr, .rp-st, .rp-bt { display: block; overflow-x: auto; } }
+@media print {
+  body[data-view="report"] header, body[data-view="report"] .tabs, body[data-view="report"] .legend-bar, body[data-view="report"] #print-meta, .rp-tools { display: none !important; }
+  .rp { max-width: none; } .rp-cover, .rp-part { border: 0; border-radius: 0; padding: 0; margin: 0; }
+  .rp-cover { min-height: 250mm; padding-top: 30mm; } .rp-cover h1 { font-size: 30pt; }
+  .rp-part { break-before: page; } .rp-subj { border-top: 1.5px solid #024638; margin-top: 8mm; } .rp-subj-head { break-inside: avoid; } .rp-cols > div { break-inside: avoid; }
+  .rp table { font-size: 8.5pt; } .rp th, .rp td { padding: 2px 4px; } .rp tr { break-inside: avoid; }
+  .rp-find li, .rp-list li { break-inside: avoid; } .rp-part h3, .rp-part h4 { break-after: avoid; }
+  .rp-cards { grid-template-columns: repeat(4, 1fr); } .rp-cols { grid-template-columns: 1fr 1fr; }
+}
+/* Reports tab (Tim, Nov 2026): the list of every report by grades, the Excel downloads, then the chosen report. */
+.rp-hub { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 14px; }
+.rp-hub h2 { color: var(--brand); margin: 0 0 6px; }
+.rp-hubt tr.on th { color: var(--brand); } .rp-hubt tr.on { background: var(--brand-tint); }
+.rp-bands { display: flex; gap: 6px; flex-wrap: wrap; } .rp-bands button { padding: 4px 10px; font-size: 13px; }
+.rp-bands button.on { outline: 3px solid var(--accent); outline-offset: 1px; }
+.pin-dlg .rp-bands { margin: 10px 0; } .pin-dlg .rp-bands button { font-size: 15px; padding: 8px 14px; }
+.rp-num td { text-align: center; } .rp-tot th, .rp-tot td { font-weight: 700; background: #FAFBFB; }
+.rp-grade { margin-top: 14px; border-top: 1.5px solid var(--line); padding-top: 4px; }
+.rp-rev > li > ul { margin: 2px 0 6px 16px; padding: 0; }
+@media (max-width: 760px) { .rp-hubt, .rp-num { display: block; overflow-x: auto; } }
+@media print {
+  .rp-hub { display: none !important; }
+  .rp-grade { break-inside: avoid; border-top: 1.5px solid #024638; margin-top: 6mm; }
+}
+.rp-line .rp-sb { display: inline-flex; width: 220px; min-width: 0; vertical-align: middle; }

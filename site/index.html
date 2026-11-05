@@ -34,6 +34,7 @@
   <button role="tab" data-view="gaps">Gaps &amp; repetition</button>
   <button role="tab" data-view="dashboard">Grade dashboard</button>
   <button role="tab" data-view="ladder">Progressions</button>
+  <button role="tab" data-view="report">Reports</button>
   <button role="tab" data-view="activity">Activity</button>
   <button role="tab" data-view="plans">Vertical Alignment Audit <span class="soon">Part 2</span></button>
   <span class="sync" id="sync" aria-live="polite"></span><button type="button" class="help" data-help="sync" aria-label="What is this?">?</button>
@@ -56,7 +57,7 @@
   <div class="exports">
     <button class="ghost" id="x-csv" title="Download the current view as a spreadsheet">CSV</button>
     <button class="ghost" id="x-png" title="Download a grid as an image: the Audit's K-12 grid for the chosen grade, or the coverage map's Matched across grades rows">PNG</button>
-    <button class="ghost" id="x-pdf" title="Print or save this view as an A4 PDF with every finding">PDF</button><button class="ghost" id="x-pdf-f" title="Print or save as A4 PDF with the findings only: leaves out the long informational lists (moves, reinforcement, unknown, full grids)">PDF: findings</button><button type="button" class="help" data-help="exports" aria-label="What is this?">?</button>
+    <button class="ghost" id="x-pdf" title="Print or save this view as an A4 PDF with every finding">PDF</button><button class="ghost" id="x-pdf-f" title="Print or save as A4 PDF with the findings only: leaves out the long informational lists (moves, reinforcement, unknown, full grids)">PDF: findings</button><button class="ghost" id="x-report" title="A designed PDF report of this page for K-12, K-5, 6-8 or 9-12">PDF report</button><button type="button" class="help" data-help="pdf_report" aria-label="What is this?">?</button><button type="button" class="help" data-help="exports" aria-label="What is this?">?</button>
   </div>
 </section>
 
@@ -67,6 +68,7 @@
   <section class="view" id="view-gaps" hidden></section>
   <section class="view" id="view-dashboard" hidden></section>
   <section class="view" id="view-ladder" hidden></section>
+  <section class="view" id="view-report" hidden></section>
   <section class="view" id="view-activity" hidden></section>
   <section class="view" id="view-plans" hidden></section>
 </main>
