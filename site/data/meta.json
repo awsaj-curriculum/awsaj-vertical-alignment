@@ -7,7 +7,7 @@
     "WI-CC-MATH",
     "WI-EE-MATH"
    ],
-   "count": 693
+   "count": 628
   },
   {
    "name": "ELA",
@@ -16,7 +16,7 @@
     "WI-CC-ELA",
     "WI-EE-ELA"
    ],
-   "count": 1114
+   "count": 1048
   },
   {
    "name": "Science",
@@ -27,7 +27,7 @@
     "WI-EE-SCI",
     "WI-SCI"
    ],
-   "count": 582
+   "count": 573
   },
   {
    "name": "Social Studies",
@@ -55,7 +55,7 @@
   "11",
   "12"
  ],
- "built": "2026-10-25",
+ "built": "2026-11-05",
  "teams": [
   {
    "name": "Vertical Alignment Committee",

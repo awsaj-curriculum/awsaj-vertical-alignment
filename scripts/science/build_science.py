@@ -9,6 +9,7 @@ Inputs (all parsed by the other scripts in scripts/science/ into data/source/sci
   data/descriptors/science/*.json  draft descriptors (keys 'NGSS:<code>', 'WI:<code>', 'EE:<ee code>')
 Run: python3 -I scripts/science/build_science.py
 """
+import sys
 import json, re, glob, difflib, os
 from collections import OrderedDict, defaultdict
 
@@ -300,6 +301,10 @@ for r in rows:
     if not b: r['grade_is_suggested'] = False; continue
     r['grade_is_suggested'] = placed[(r['framework'], r['code'])] != BAND_GRADES[b]
 
+# Nov 2026 cleanup (scripts/cleanup_rules.py): removed rows, placeholder Essential Element links, text and code fixes.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import cleanup_rules  # noqa: E402
+rows = cleanup_rules.apply_main(rows)
 os.makedirs(ROOT + '/data/standards', exist_ok=True)
 json.dump(rows, open(ROOT + '/data/standards/science.json', 'w'), indent=1, ensure_ascii=False)
 json.dump(missing, open(SRC + 'descriptors_needed.json', 'w'), indent=1, ensure_ascii=False)

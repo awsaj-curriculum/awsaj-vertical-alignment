@@ -2,7 +2,10 @@
 
 Usage: SUPABASE_URL=... SUPABASE_ANON_KEY=... LOAD_TOKEN=... python3 load_supabase.py
 """
-import json, os, urllib.request
+import json, os, sys, urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cleanup_rules  # noqa: E402
 
 URL, KEY, TOKEN = os.environ["SUPABASE_URL"], os.environ["SUPABASE_ANON_KEY"], os.environ["LOAD_TOKEN"]
 COLS = {"subject", "framework", "code", "grade", "grade_band", "grade_is_suggested", "division", "course", "strand",
@@ -18,7 +21,9 @@ def rpc(table, rows):
         return json.loads(r.read())
 
 
-rows = json.load(open("data/standards/all_standards.json"))
+# Main sets plus the Essential Elements, with the Nov 2026 cleanup rules applied (removed rows never go back in).
+rows = cleanup_rules.apply(json.load(open("data/standards/all_standards.json"))
+                           + json.load(open("data/standards/essential_elements.json")))
 out = []
 for r in rows:
     o = {k: r.get(k) for k in COLS}

@@ -82,7 +82,7 @@
   "course": "",
   "strand": "Standard 4: Culture",
   "cluster": "",
-  "text": "Identify regional folk heroes, stories, or songs that have contributed to the development of a history.",
+  "text": "Identify regional folk heroes, stories, or songs that have contributed to the development of a region’s cultural history.",
   "ee_code": "",
   "ee_text": "",
   "crosswalk": [
@@ -457,39 +457,6 @@
  {
   "subject": "Social Studies",
   "framework": "AERO-SS",
-  "code": "3.2.b",
-  "grade": "1",
-  "grade_band": "K-2",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 3: Geography",
-  "cluster": "",
-  "text": "Explain the concept of location.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.Geog1.a.1",
-   "SS.Geog1.c.1"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can explain why location is important and use maps or directions to describe places clearly. Example: I can explain how knowing the location of the airport helps people travel easily in Qatar.",
-   "cc_at_target": "I can explain the concept of location by describing where places are in Qatar using words like “near,” “far,” “north,” or “south.” Example: I can explain that the Museum of Islamic Art is near the Corniche in Doha.",
-   "cc_approaching": "I can describe where some places are with help using simple words. Example: I can say that my school is near the park, but I need help explaining more details about its location.",
-   "cc_emerging": "I can recognize places but don’t yet understand what location means. Example: I can point to my school or home but cannot explain where they are.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "",
-  "descriptors_suggested": null,
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
   "code": "4.2.b",
   "grade": "1",
   "grade_band": "K-2",
@@ -556,38 +523,6 @@
  {
   "subject": "Social Studies",
   "framework": "AERO-SS",
-  "code": "5.2.b",
-  "grade": "1",
-  "grade_band": "K-2",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 5: Society and Identity",
-  "cluster": "",
-  "text": "Distinguish themselves as individuals from others.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.BH1.a.2"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can explain why understanding differences and group behavior is important and suggest ways to work well with others. Example: I can explain how respecting differences helps my group work better and share ideas to make group activities fair and fun.",
-   "cc_at_target": "I can explain how I am different from others and how people behave when they are in groups. Example: I can say that in my class, some students like to work alone while others like working in groups.",
-   "cc_approaching": "I can describe some ways I am like and different from others with help. Example: I can say that I like playing soccer and my friend likes basketball, but I need help explaining why people act differently in groups.",
-   "cc_emerging": "I can talk about myself but don’t yet understand how I am different from others. Example: I can say “I like apples” but don’t know how others might be different.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "",
-  "descriptors_suggested": null,
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
   "code": "5.2.d",
   "grade": "1",
   "grade_band": "K-2",
@@ -649,39 +584,6 @@
   "descriptor_source": "draft",
   "power_standard": null,
   "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf')",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
-  "code": "6.2.b",
-  "grade": "1",
-  "grade_band": "K-2",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 6: Government",
-  "cluster": "",
-  "text": "Identify sources and purposes of authority in various settings (e.g., mayor, chief, ruler, principal, and teacher).",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.PS3.c.1",
-   "SS.PS1.a.K-1"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can explain how different types of authority work in real life and share ideas about using authority fairly and respectfully. Example: I can compare how a majlis leader and a school principal both listen to others and make decisions for their communities.",
-   "cc_at_target": "I can identify different sources of authority in Qatar and explain how they help keep order in schools, communities, and the country. Example: I can explain that school principals make decisions for the school, and that Qatar’s leaders make laws to help people live safely together.",
-   "cc_approaching": "I can describe some sources of authority with help and begin to explain where they have power. Example: I can say that a teacher makes rules in the classroom, but I need help explaining how that helps everyone learn.",
-   "cc_emerging": "I can name some people who are in charge, but I am still learning what they do. Example: I can say “teacher” or “police officer,” but I don’t yet understand how they help make rules or decisions.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "",
-  "descriptors_suggested": null,
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
   "text_source": "official"
  },
  {
@@ -1185,39 +1087,6 @@
   "descriptor_source": "school",
   "power_standard": null,
   "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
-  "code": "4.2.c",
-  "grade": "2",
-  "grade_band": "K-2",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 4: Culture",
-  "cluster": "",
-  "text": "Describe how people from different cultures interact with the environment, such as the use of resources, shelter and transportation.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.BH2.b.1",
-   "SS.Geog5.b.2"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can compare how two cultures use resources, shelter, and transportation and explain why they are different.",
-   "cc_at_target": "I can describe how people from different cultures interact with the environment, such as using resources, shelter, and transportation.",
-   "cc_approaching": "I can give one example of how a culture uses the land or sea, with help.",
-   "cc_emerging": "I can match pictures of homes or transport to the place where people use them.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "",
-  "descriptors_suggested": null,
-  "descriptor_source": "draft",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
   "text_source": "official"
  },
  {
@@ -2406,7 +2275,7 @@
   "course": "",
   "strand": "Standard 3: Geography",
   "cluster": "",
-  "text": "Describe ways physical and human-made features have changed over time.",
+  "text": "Describe ways that the earth’s physical and human-made features have changed over time.",
   "ee_code": "",
   "ee_text": "",
   "crosswalk": [
@@ -2759,39 +2628,6 @@
  {
   "subject": "Social Studies",
   "framework": "AERO-SS",
-  "code": "1.5.c",
-  "grade": "5",
-  "grade_band": "3-5",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 1: Time, Continuity, and Change",
-  "cluster": "",
-  "text": "Identify cause and effect relationships in history.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.Hist1.a.i",
-   "SS.Hist1.b.i"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can analyze a Qatari historical event using different sources and explain how cause and effect shaped the present. Example: I can compare an old newspaper and a current report to show how oil affected modern Qatar.",
-   "cc_at_target": "I can explain both the causes and effects of a Qatari historical event using both primary and secondary sources. Example: I can use photos and articles to explain how oil discovery changed Qatari society.",
-   "cc_approaching": "I can describe a cause or effect of a Qatari historical event using one type of source. Example: I can explain that oil discovery led to economic growth using a textbook.",
-   "cc_emerging": "I can name a historical event in Qatar but cannot explain why it happened or what it caused. Example: I can say the discovery of oil was important, but not why or how.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "",
-  "descriptors_suggested": null,
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
   "code": "1.5.d",
   "grade": "5",
   "grade_band": "3-5",
@@ -2855,45 +2691,6 @@
    "cc_at_target": "I can explain the major ways groups, societies, and nations interact, such as trade, cultural exchange, and international organizations.",
    "cc_approaching": "I can name one way Qatar interacts with another country, with help.",
    "cc_emerging": "I can name a country that Qatar is friends with.",
-   "ee_at_target": ""
-  },
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
-  "code": "3.5.c",
-  "grade": "5",
-  "grade_band": "3-5",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 3: Geography",
-  "cluster": "",
-  "text": "Apply concepts such as location, distance, direction, scale, movement and region.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.Geog1.a.4-5",
-   "SS.Geog1.c.4-5"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can compare different regions in Qatar and explain how natural resources shape land use. Example: I can describe how oil fields in Dukhan led to industrial land use.",
-   "cc_at_target": "I can use geography terms to explain where and why people live and work in Qatar. Example: I can explain how Qatar’s coast led to fishing villages like Al Wakrah.",
-   "cc_approaching": "I can describe Qatar’s location and give one reason for its settlement pattern. Example: I can say people live in Doha because it's near the sea.",
-   "cc_emerging": "I can name cities in Qatar but struggle to explain where they are or why people live there. Example: I know Doha is a city but not why it’s important.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "School descriptor may not match this standard",
-  "descriptors_suggested": {
-   "cc_advanced": "I can use location, distance, direction, scale, movement, and region to solve a map problem.",
-   "cc_at_target": "I can apply concepts such as location, distance, direction, scale, movement, and region.",
-   "cc_approaching": "I can use a compass rose and a scale to describe two places on a map, with help.",
-   "cc_emerging": "I can find Qatar on a map.",
    "ee_at_target": ""
   },
   "descriptor_source": "school",
@@ -3031,45 +2828,6 @@
   "descriptor_source": "draft",
   "power_standard": null,
   "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf')",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
-  "code": "4.5.c",
-  "grade": "5",
-  "grade_band": "3-5",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 4: Culture",
-  "cluster": "",
-  "text": "Explain the main ideas in folktales, legends, songs, myths and stories of heroism that describe the history and traditions of various cultures.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.BH2.b.4",
-   "SS.Hist3.b.i"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can reflect on how my identity is shaped by both Qatari and global cultures. Example: I can explain how growing up in Qatar and studying international languages shapes who I am.",
-   "cc_at_target": "I can explain how both family and Qatari culture shape my identity and values. Example: I can explain how respect and hospitality from Qatari culture guide how I treat others.",
-   "cc_approaching": "I can describe how a family or cultural tradition influences a person’s identity. Example: I can explain how wearing traditional clothes makes me feel connected to Qatar.",
-   "cc_emerging": "I can name something my family or culture does but can’t explain how it shapes who I am. Example: I can say my family speaks Arabic but not how that affects me.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "School descriptor may not match this standard",
-  "descriptors_suggested": {
-   "cc_advanced": "I can explain what a folktale or legend teaches about a culture's values and compare it with a story from Qatar.",
-   "cc_at_target": "I can explain the main ideas in folktales, legends, songs, myths, and stories of heroism from different cultures.",
-   "cc_approaching": "I can retell part of a folktale or legend and name its hero, with help.",
-   "cc_emerging": "I can listen to a folktale and name one character.",
-   "ee_at_target": ""
-  },
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
   "text_source": "official"
  },
  {
@@ -3337,45 +3095,6 @@
  {
   "subject": "Social Studies",
   "framework": "AERO-SS",
-  "code": "6.5.c",
-  "grade": "5",
-  "grade_band": "3-5",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 6: Government",
-  "cluster": "",
-  "text": "Identify community leaders, local and national government officials, and world leaders.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.PS3.a.4-5",
-   "SS.PS3.c.4-5"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can compare Qatar’s system to another country and explain how laws affect daily life. Example: I can compare Qatar’s monarchy to a democracy and explain how traffic laws affect behavior.",
-   "cc_at_target": "I can explain how Qatar’s government works and why laws are important. Example: I can explain how the Emir leads the country and laws keep people safe.",
-   "cc_approaching": "I can describe a law or part of Qatar’s political system. Example: I can say Qatar has laws to protect the environment.",
-   "cc_emerging": "I can name a leader in Qatar but don’t understand what they do or what laws are for. Example: I know Qatar has an Emir but not what his job is.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "School descriptor may not match this standard",
-  "descriptors_suggested": {
-   "cc_advanced": "I can explain the job of a community leader, a national official, and a world leader and how they connect.",
-   "cc_at_target": "I can identify community leaders, local and national government officials, and world leaders.",
-   "cc_approaching": "I can name one community leader and one national leader, with help.",
-   "cc_emerging": "I can name a leader at my school.",
-   "ee_at_target": ""
-  },
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
   "code": "6.5.i",
   "grade": "5",
   "grade_band": "3-5",
@@ -3437,44 +3156,6 @@
   "descriptor_source": "draft",
   "power_standard": null,
   "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf')",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
-  "code": "7.5.c",
-  "grade": "5",
-  "grade_band": "3-5",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 7: Production, Distribution, and Consumption",
-  "cluster": "",
-  "text": "Describe how changes in transportation and communication have affected trade and economic activities.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.Geog3.b.4"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can explain how global trade and technology change the kinds of jobs people do in Qatar. Example: I can explain how automation in gas plants is changing labour needs.",
-   "cc_at_target": "I can explain how trade affects jobs and the economy in Qatar. Example: I can explain how gas exports create jobs in shipping and engineering.",
-   "cc_approaching": "I can describe a reason why Qatar trades with other countries. Example: I can say Qatar trades gas because other countries need energy.",
-   "cc_emerging": "I can name something Qatar trades but not explain why or how it affects people’s work. Example: I know Qatar exports gas but not why.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "School descriptor may not match this standard",
-  "descriptors_suggested": {
-   "cc_advanced": "I can explain how changes in shipping and the internet changed trade in Qatar over time.",
-   "cc_at_target": "I can describe how changes in transportation and communication have affected trade and economic activities.",
-   "cc_approaching": "I can name one way transport or communication helps trade, with help.",
-   "cc_emerging": "I can name a way goods travel, such as by ship.",
-   "ee_at_target": ""
-  },
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
   "text_source": "official"
  },
  {
@@ -3573,45 +3254,6 @@
   "descriptor_source": "draft",
   "power_standard": null,
   "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf')",
-  "text_source": "official"
- },
- {
-  "subject": "Social Studies",
-  "framework": "AERO-SS",
-  "code": "8.5.c",
-  "grade": "5",
-  "grade_band": "3-5",
-  "grade_is_suggested": false,
-  "division": "Elementary",
-  "course": "",
-  "strand": "Standard 8: Science, Technology, and Society",
-  "cluster": "",
-  "text": "Describe ways that tools and techniques can have both positive and negative effects.",
-  "ee_code": "",
-  "ee_text": "",
-  "crosswalk": [
-   "SS.BH4.a.i",
-   "SS.Geog5.a.3-4"
-  ],
-  "crosswalk_is_suggested": true,
-  "descriptors": {
-   "cc_advanced": "I can analyze how technology influences values in Qatar and compare to the past. Example: I can explain how the internet changed ideas about education compared to the past when books were the main source.",
-   "cc_at_target": "I can explain how technology in Qatar changes beliefs or values over time. Example: I can explain how medical technology changed people’s beliefs about health and aging.",
-   "cc_approaching": "I can describe how one technology changed life or ideas in Qatar. Example: I can say social media changes how people share opinions.",
-   "cc_emerging": "I can name a technology in Qatar but not how it affects people’s thinking or values. Example: I can say Qatar uses solar panels but not how it changes beliefs.",
-   "ee_at_target": ""
-  },
-  "descriptor_flag": "School descriptor may not match this standard",
-  "descriptors_suggested": {
-   "cc_advanced": "I can weigh the positive and negative effects of a technology and suggest how to reduce the negatives.",
-   "cc_at_target": "I can describe ways tools and techniques can have both positive and negative effects.",
-   "cc_approaching": "I can name one good effect and one bad effect of a tool, with help.",
-   "cc_emerging": "I can say if a tool is helpful.",
-   "ee_at_target": ""
-  },
-  "descriptor_source": "school",
-  "power_standard": null,
-  "source": "AERO Social Studies Curriculum Framework: K-5 Learning Progression (school copy, 'Social Studies Standards K-5 Aero .pdf'); placement and descriptors: Awsaj 'Social Studies Standards.xlsx' (K-5 report-card sheet)",
   "text_source": "official"
  },
  {
