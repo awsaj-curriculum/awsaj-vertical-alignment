@@ -1141,3 +1141,19 @@ body[data-view="report"] .filters { display: none; }
   .rp-find li, .rp-list li { break-inside: avoid; } .rp-part h3, .rp-part h4 { break-after: avoid; }
   .rp-cards { grid-template-columns: repeat(4, 1fr); } .rp-cols { grid-template-columns: 1fr 1fr; }
 }
+/* Reports tab (Tim, Nov 2026): the list of every report by grades, the Excel downloads, then the chosen report. */
+.rp-hub { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 14px; }
+.rp-hub h2 { color: var(--brand); margin: 0 0 6px; }
+.rp-hubt tr.on th { color: var(--brand); } .rp-hubt tr.on { background: var(--brand-tint); }
+.rp-bands { display: flex; gap: 6px; flex-wrap: wrap; } .rp-bands button { padding: 4px 10px; font-size: 13px; }
+.rp-bands button.on { outline: 3px solid var(--accent); outline-offset: 1px; }
+.pin-dlg .rp-bands { margin: 10px 0; } .pin-dlg .rp-bands button { font-size: 15px; padding: 8px 14px; }
+.rp-num td { text-align: center; } .rp-tot th, .rp-tot td { font-weight: 700; background: #FAFBFB; }
+.rp-grade { margin-top: 14px; border-top: 1.5px solid var(--line); padding-top: 4px; }
+.rp-rev > li > ul { margin: 2px 0 6px 16px; padding: 0; }
+@media (max-width: 760px) { .rp-hubt, .rp-num { display: block; overflow-x: auto; } }
+@media print {
+  .rp-hub { display: none !important; }
+  .rp-grade { break-inside: avoid; border-top: 1.5px solid #024638; margin-top: 6mm; }
+}
+.rp-line .rp-sb { display: inline-flex; width: 220px; min-width: 0; vertical-align: middle; }

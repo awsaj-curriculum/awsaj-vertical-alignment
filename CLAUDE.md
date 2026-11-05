@@ -220,6 +220,12 @@ lowest subject, whole-grade patterns (most subjects 10+ points below their own s
 school (5 to 6, 8 to 9, 15+ points), progression findings and where they gather, prerequisite gaps that cross schools, gaps,
 introduced never in depth, priority vs all, duplication, Essential Elements apart. Lists are cut to their first items ("and N
 more (page) on the site"). Each part starts a new page; subjects flow. Every section has a "?" (`report`, `rp_*`).
+Reports tab (Tim, Nov 2026; `renderReport()`, `rpDoc(kind, band)`): a table of every report x grades (K-12, K-5, 6-8, 9-12):
+Overall (above), Coverage map, Gaps and repetition, Grade dashboards, Progressions, Priority and power standards (Audit), plus the
+Excel downloads (`expRow()`, same PIN export as Saved copies). Each analysis page's exports bar has "PDF report" (`pageReport()`:
+choose the grades, it opens that page's report on the Reports tab and prints). The address keeps `report` and `band`. Findings
+are tagged by topic (`rpFindings(..., only)`) so each report keeps its own. Every report is 30 A4 pages or fewer with Nov 2026
+data (Overall K-12 30, Priority and power K-12 29, Gaps K-12 22, the rest 4-18).
 All subjects (Tim, Oct 2026): the Subject box on Coverage map, Gaps, Dashboard, Progressions and Audit also offers "All subjects"
 (`ALL`, `ALL_VIEWS`): `renderAllSubjects()` draws each subject in turn under a dark green band (`withSubject()`), puts what
 belongs to every subject (Back, grade arrows, the grade summary, the map's band buttons) above the sections, and clicks inside a
