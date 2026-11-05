@@ -450,6 +450,10 @@
       <div class="copy-row"><b>Clear a part</b> <label>Grade ${sel("clr-g", GRADES.map((g) => [g, gname(g)]), "Every grade")}</label>
         <label>Subject ${sel("clr-s", S.meta.subjects.map((x) => [x.name, x.name]), "Every subject")}</label>
         <button type="button" class="ghost sm danger" data-act="clear-part" data-pick="1">Clear</button> ${hb("clear")}</div>
+      <div class="copy-row"><b>Export to Excel</b> <label>Ratings <select id="exp-c"><option value="">Live (the ratings now)</option>${list.map((x) => `<option value="${x.id}">${esc(x.kind === "save" ? x.name : COPY_KIND[x.kind])} (${esc(when(x.created_at))})</option>`).join("")}</select></label>
+        <label>Grade ${sel("exp-g", GRADES.map((g) => [g, gname(g)]), "Every grade")}</label>
+        <label>Subject ${sel("exp-s", S.meta.subjects.map((x) => [x.name, x.name]), "Every subject")}</label>
+        <button type="button" class="ghost sm" data-act="copy-export">Export</button> ${hb("export")}</div>
       <table class="prog copies-t"><thead><tr><th>Copy</th><th>Ratings</th><th>When</th><th></th></tr></thead><tbody>
       ${list.map((x) => `<tr><td><b>${esc(x.kind === "save" ? x.name : COPY_KIND[x.kind])}</b><br><small class="muted">${esc(what(x))}${x.undone_at ? ` · undone ${esc(when(x.undone_at))}` : ""}</small></td><td>${x.row_count}</td><td class="muted">${esc(when(x.created_at))}</td><td class="prog-act">${acts(x)}</td></tr>`).join("") || `<tr><td colspan="4" class="muted">No saved copies yet.</td></tr>`}
       </tbody></table>`;
@@ -476,6 +480,14 @@
       const x = byId(b.dataset.id); if (!x) return;
       const a = await askPin(`Undo: ${COPY_KIND[x.kind]}`, `Puts back the ratings this change replaced (${esc(x.scope)}, ${x.row_count} rating${x.row_count === 1 ? "" : "s"}): all of it, or choose one grade or subject. The ratings in that part now are kept as a copy first.`, { grade: x.grade, subject: x.subject }); if (!a) return;
       await copyCall("undo_copy", { p_pin: a.pin, p_archive_id: x.id, p_grade: a.grade, p_subject: a.subject, p_device: dev }, (r) => `Undone (${partLabel(a.grade, a.subject)}): ${r} rating${r === 1 ? "" : "s"} put back.`);
+    } else if (act === "copy-export") {
+      const id = $("#exp-c").value || null, g = $("#exp-g").value || null, sub = $("#exp-s").value || null, x = id ? byId(id) : null;
+      const a = await askPin("Export to Excel", `Saves an Excel file of ${x ? `the copy <b>${esc(x.kind === "save" ? x.name : COPY_KIND[x.kind])}</b>` : "the <b>live</b> ratings"} (${esc(partLabel(g, sub))}), with every table the site uses. Nothing changes on the site.`); if (!a) return;
+      try { await rpc("check_pin", { p_pin: a.pin }); }
+      catch (err) { toast(/wrong pin/i.test(err.message) ? "Wrong PIN. Nothing was exported." : "That did not work: " + err.message); return; }
+      toast("Building the Excel file…");
+      try { const r = await exportExcel(x, g, sub); toast(`Saved ${r.file}: ${r.ratings} rating${r.ratings === 1 ? "" : "s"}.`); }
+      catch (err) { toast("The export did not work: " + err.message); }
     } else if (act === "copy-delete") {
       const x = byId(b.dataset.id); if (!x) return;
       const a = await askPin(`Delete "${x.kind === "save" ? x.name : COPY_KIND[x.kind]}"`, `Deletes this copy for good${x.kind === "save" ? "" : ", so it can no longer be undone"}. The ratings on the site do not change.`); if (!a) return;
@@ -671,6 +683,76 @@
           <li><b>Lists</b> show the first items; every list is complete on the site page named after it (Gaps, Progressions, Grade dashboard). The coloured strip before each standard shows its rating in every grade, K to 12, with its suggested grade outlined.</li>
           <li><b>Not yet included.</b> Part 2 (what the weekly plans show) has not run. The ratings describe teaching exposure across all the grade's classes, not student learning.</li>
         </ul></section></div>`;
+  }
+  // Excel export (Tim, Nov 2026): the live ratings or any saved copy, all of it or one grade and/or subject (the same parts
+  // as Clear), with the same sheets as the database backup: About, Ratings (readable), then the raw tables. For a saved copy
+  // the ratings are that copy's rows (rating_archive_rows), joined to the standards. Built in this browser from public reads
+  // with SheetJS (pinned, loaded only when someone exports); the PIN is checked by the database first (check_pin, migration
+  // 008). app_settings (the PIN hash) is never read.
+  const XLSX_SRC = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+  const XLSX_SRI = "sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==";
+  function loadXlsx() {
+    if (window.XLSX) return Promise.resolve(window.XLSX);
+    return new Promise((ok, bad) => {
+      const el = document.createElement("script"); el.src = XLSX_SRC; el.integrity = XLSX_SRI; el.crossOrigin = "anonymous";
+      el.onload = () => (window.XLSX ? ok(window.XLSX) : bad(new Error("the Excel library did not start")));
+      el.onerror = () => { el.remove(); bad(new Error("the Excel library could not be loaded")); };
+      document.head.appendChild(el);
+    });
+  }
+  const EXPORT_TABLES = ["standards", "ratings", "rating_events", "comments", "team_sets", "teams", "rating_archives", "rating_archive_rows"];
+  const LEVEL_WORDS = { 0: "Not taught", 1: "Introduced/Exposed", 2: "Taught in depth" };
+  async function exportExcel(copy, g, sub) {
+    const XLSX = await loadXlsx();
+    const id = copy ? Number(copy.id) : null;
+    const [standards, rated, events, comments, sets, teams, archives, archRows] = await Promise.all([
+      getAll("standards?select=*&order=id"),
+      id ? getAll(`rating_archive_rows?select=framework,code,grade,level,team,updated_at&archive_id=eq.${id}&order=framework,code,grade`) : getAll("ratings?select=*&order=framework,code,grade"),
+      getAll("rating_events?select=*&order=id"), getAll("comments?select=*&order=id"), getAll("team_sets?select=*&order=team,subject"),
+      getAll("teams?select=*&order=id"), getAll("rating_archives?select=*&order=id"),
+      getAll("rating_archive_rows?select=*&order=archive_id,framework,code,grade" + (id ? `&archive_id=eq.${id}` : ""))]);
+    const fwSub = new Map(standards.map((x) => [x.framework, x.subject]));
+    const inPart = (x) => (!g || x.grade === g) && (!sub || fwSub.get(x.framework) === sub);
+    const teamOk = (t) => (!g || (t.grades || []).includes(g)) && (!sub || (t.subjects || []).includes(sub));
+    const teamByName = new Map(teams.map((t) => [t.name, t]));
+    const T = {
+      standards: standards.filter(inPart), ratings: rated.filter(inPart), rating_events: events.filter(inPart), comments: comments.filter(inPart),
+      team_sets: sets.filter((x) => (!sub || x.subject === sub) && (!g || !teamByName.has(x.team) || (teamByName.get(x.team).grades || []).includes(g))),
+      teams: teams.filter(teamOk), rating_archives: archives, rating_archive_rows: archRows.filter(inPart),
+    };
+    // Ratings (readable): a rating keyed to a band standard placed in another grade is matched on set + code.
+    const exact = new Map(standards.map((x) => [rkey(x.framework, x.code, x.grade), x])), any = new Map();
+    for (const x of standards) if (!any.has(x.framework + "|" + x.code)) any.set(x.framework + "|" + x.code, x);
+    const readable = T.ratings.map((r) => {
+      let st = exact.get(rkey(r.framework, r.code, r.grade)), note = "";
+      if (!st) { st = any.get(r.framework + "|" + r.code); note = st ? `Rated in ${gname(r.grade)}; the standard is placed in ${gname(st.grade)}` : "No standard on the site"; }
+      return { subject: st ? st.subject : fwSub.get(r.framework) || "", framework: r.framework, grade: r.grade, code: r.code, "standard text": st ? st.text : "",
+        level: r.level, "level (words)": LEVEL_WORDS[r.level] ?? "", team: r.team || "", updated_at: r.updated_at || "", note };
+    });
+    const cell = (v) => { if (v == null) return ""; if (typeof v === "object") v = JSON.stringify(v); return typeof v === "string" && v.length > 32000 ? v.slice(0, 32000) + " [cut: longer than an Excel cell]" : v; };
+    const sheet = (rows) => {
+      if (!rows.length) return XLSX.utils.aoa_to_sheet([["(no rows)"]]);
+      const cols = []; for (const r of rows) for (const k of Object.keys(r)) if (!cols.includes(k)) cols.push(k);
+      return XLSX.utils.aoa_to_sheet([cols, ...rows.map((r) => cols.map((k) => cell(r[k])))]);
+    };
+    const now = new Date(), pad = (n) => String(n).padStart(2, "0");
+    const day = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+    const name = copy ? (copy.kind === "save" ? copy.name : `${COPY_KIND[copy.kind]} ${copy.name}`) : "Live";
+    const about = [["Awsaj K-12 Vertical Alignment: Excel export"], [],
+      ["Instance", name], ["Kind", copy ? `${COPY_KIND[copy.kind]} (${copy.kind})` : "Live ratings on the site"],
+      ["Scope of the copy", copy ? copy.scope : "Every grade, every subject"],
+      ["Date saved", copy ? new Date(copy.created_at).toLocaleString() : "Not a saved copy (live)"],
+      ["Date exported", now.toLocaleString()], ["Part exported", partLabel(g, sub)],
+      ["Ratings come from", copy ? `Saved copy rows (rating_archive_rows, archive_id ${id}), joined to the standards` : "The ratings table (live)"],
+      ["Not included", "app_settings (it holds the PIN hash)"], [], ["Sheet", "Rows"], ["Ratings (readable)", readable.length],
+      ...EXPORT_TABLES.map((t) => [t, T[t].length])];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(about), "About");
+    XLSX.utils.book_append_sheet(wb, sheet(readable), "Ratings (readable)");
+    for (const t of EXPORT_TABLES) XLSX.utils.book_append_sheet(wb, sheet(T[t]), t);
+    const file = `Vertical_Alignment_${name.replace(/[\\/:*?"<>|]+/g, "-").replace(/\s+/g, "_")}_${day}.xlsx`;
+    XLSX.writeFile(wb, file);
+    return { file, ratings: readable.length };
   }
   function rerender() {
     if (S.subjFor) { S.needRerender = true; return; }
@@ -2657,7 +2739,7 @@
     else if (act === "links") teamLinks();
     else if (act === "prog-filter") { S.progFilter = b.dataset.f; teamLinks(); }
     else if (act === "prog-by") { S.progBy = b.dataset.b; teamLinks(); }
-    else if (["clear-part", "copy-save", "copy-new", "copy-load", "copy-undo", "copy-delete"].includes(act)) copyAct(act, b);
+    else if (["clear-part", "copy-save", "copy-new", "copy-load", "copy-undo", "copy-delete", "copy-export"].includes(act)) copyAct(act, b);
     // Every unfinished team's reminder (each ends with its link), then all the links on their own, one per line.
     else if (act === "copy-all-reminders") { const team = S.progBy === "team", rows = (team ? teamProgressRows() : gradeProgressRows()).filter((x) => x.status < 2);
       const t = rows.length ? rows.map(team ? reminderText : gradeReminder).join("\n\n") + "\n\nLinks:\n" + rows.map((x) => `${team ? `${x.t.name}, ${x.subject}` : gname(x.g)}: ${x.u}`).join("\n") : "";

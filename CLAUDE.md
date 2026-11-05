@@ -79,6 +79,14 @@ M.EE.1.NBT.1.a/b; ratings moved). The 161 ratings deleted or moved are kept as t
 Load / Undo (`put_back`) skip them. `cleanup_rules.py` is applied by every subject build, `build_all_standards.py` (subject
 files -> all_standards.json), `build_ee_rows.py` (no K-5 Social Studies or Science EEs), `build_site_data.py` and
 `load_supabase.py` (loads all_standards + essential_elements). A full backup was taken first (Excel, kept outside the repo).
+Excel export (Tim, Nov 2026; Saved copies box, `exportExcel()` in app.js, migration 008): the live ratings or any saved copy,
+every grade and subject or one grade and/or subject (the same parts as Clear). Sheets as the database backup: About (instance,
+kind, scope, date saved, date exported, part, row counts), Ratings (readable) (subject, set, grade, code, standard text, level
+in words, team, updated_at), then standards, ratings, rating_events, comments, team_sets, teams, rating_archives,
+rating_archive_rows. For a saved copy the ratings are its `rating_archive_rows` joined to the standards. Built in the
+browser from public reads with SheetJS 0.18.5 from cdnjs (pinned with an integrity hash, loaded only when someone exports).
+Needs the PIN (Tim): `check_pin` checks it in the database first. Never reads `app_settings`. File name
+`Vertical_Alignment_<copy name or Live>_<YYYY-MM-DD>.xlsx`.
 
 ## Rating scale and colours
 Awsaj brand (from awsaj.qa logo and stylesheet): dark green #024638 (frame, headings, buttons), greys #56595A / #75787B,
