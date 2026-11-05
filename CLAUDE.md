@@ -65,6 +65,14 @@ separate from Load), `delete_copy`. Each needs the clear PIN, checked only in th
 what they replace as a copy (`rating_archives` / `rating_archive_rows`, kinds clear / load / undo) and log each change in
 `rating_events`. Undoing a single rating stays open to everyone with no PIN (Tim). The 215 test ratings were cleared on
 Oct 25, 2026 (copy "Cleared" kept).
+Excel export (Tim, Nov 2026; Saved copies box, `exportExcel()` in app.js, migration 008): the live ratings or any saved copy,
+every grade and subject or one grade and/or subject (the same parts as Clear). Sheets as the database backup: About (instance,
+kind, scope, date saved, date exported, part, row counts), Ratings (readable) (subject, set, grade, code, standard text, level
+in words, team, updated_at), then standards, ratings, rating_events, comments, team_sets, teams, rating_archives,
+rating_archive_rows. For a saved copy the ratings are its `rating_archive_rows` joined to the standards. Built in the
+browser from public reads with SheetJS 0.18.5 from cdnjs (pinned with an integrity hash, loaded only when someone exports).
+Needs the PIN (Tim): `check_pin` checks it in the database first. Never reads `app_settings`. File name
+`Vertical_Alignment_<copy name or Live>_<YYYY-MM-DD>.xlsx`.
 
 ## Rating scale and colours
 Awsaj brand (from awsaj.qa logo and stylesheet): dark green #024638 (frame, headings, buttons), greys #56595A / #75787B,
