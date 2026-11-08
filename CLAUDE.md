@@ -224,7 +224,7 @@ Reports tab (Tim, Nov 2026; `renderReport()`, `rpDoc(kind, band)`): a table of e
 Overall (above), Coverage map, Gaps and repetition, Grade dashboards, Progressions, Priority and power standards (Audit), plus the
 Excel downloads (`expRow()`, same PIN export as Saved copies). Each analysis page's exports bar has "PDF report" (`pageReport()`:
 choose the grades, it opens that page's report on the Reports tab and prints). The address keeps `report` and `band`. Findings
-are tagged by topic (`rpFindings(..., only)`) so each report keeps its own. Every report is 30 A4 pages or fewer with Nov 2026
+are tagged by topic (`rpFindings(..., only)`) so each report keeps its own. Subject (Tim, Nov 2026): the Reports tab's Subject box and the PDF report dialog (starts on the page's subject) give any report for one subject (`S.rp.subject`, address `rsubject`; `rpDoc` keeps only that subject in `D.subs`). Every report is 30 A4 pages or fewer with Nov 2026
 data (Overall K-12 30, Priority and power K-12 29, Gaps K-12 22, the rest 4-18).
 All subjects (Tim, Oct 2026): the Subject box on Coverage map, Gaps, Dashboard, Progressions and Audit also offers "All subjects"
 (`ALL`, `ALL_VIEWS`): `renderAllSubjects()` draws each subject in turn under a dark green band (`withSubject()`), puts what
