@@ -3235,6 +3235,9 @@
     $("#team").innerHTML = `<option value="">Choose your team</option>` + Object.entries(groups).map(([g, ts]) => `<optgroup label="${g}">${ts.map((t) => `<option>${esc(t.name)}</option>`).join("")}</optgroup>`).join("");
     // A team link (?team=...&subject=...) locks the site to that team: no team picker, no other grades.
     // A grade link (?grade=6) locks it to one grade with every subject of that grade.
+    // Links to a committee page from slides, reports or email (Tim, Nov 2026). PowerPoint and some mail apps drop the part of
+    // a link after "#", so those links carry the page in "?open=view=gaps&subject=..." instead; it becomes the address "#...".
+    { const op = new URLSearchParams(location.search).get("open"); if (op && /(^|&)view=/.test(op)) history.replaceState(null, "", location.pathname + "#" + op); }
     const qp = new URLSearchParams(location.search), lt = S.teams.find((t) => t.name === qp.get("team") && t.name !== "Vertical Alignment Committee");
     const lg = (qp.get("grade") || "").toUpperCase(), lgTeam = !lt && GRADES.includes(lg) && S.meta.subjects.map((s) => teamOf(lg, s.name)).find(Boolean);
     if (lt) { const ls = qp.get("subject"); S.lock = { team: lt.name, subject: lt.subjects.includes(ls) ? ls : null }; document.body.dataset.lock = "1"; setTeam(lt.name); }
@@ -3242,6 +3245,9 @@
     // Many people share devices, so every new visit starts on the team page (Tim, Oct 2026). The team is kept only for
     // this browser tab (a reload stays on it); a new tab or a new visit asks again.
     else { let saved = qp.get("resume") ? qp.get("t") || "" : ""; if (!saved) try { saved = sessionStorage.getItem("va_team") || ""; } catch (e) { /* storage blocked: ask again */ }
+      // A link that names a committee page opens it straight away, without stopping at "Choose your team" (anyone can
+      // choose the committee there; the link only saves the step).
+      if (!saved && /(^#|&)view=(?!flow)/.test(location.hash)) saved = "Vertical Alignment Committee";
       if (saved) tabTeam(saved);
       if (saved && S.teams.some((t) => t.name === saved)) { $("#team").value = saved; setTeam(saved); } }
     const rs = qp.get("resume") ? qp : null;
