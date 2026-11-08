@@ -3154,6 +3154,7 @@
       S.f.subject = S.team.subjects[0]; S.f.grade = S.team.grades[0]; S.f.division = "all"; S.f.strand = "";
       S.f.framework = defaultFramework(S.f.subject, S.f.grade);
     }
+    if (S.team && isCommittee() && S.linkHash) { const h = S.linkHash; S.linkHash = null; history.replaceState(null, "", h); if (applyHash()) return; }
     showView(!S.team || !isCommittee() ? "flow" : S.view === "flow" ? "rate" : S.view);
     refreshFilterOptions(); rerender();
   }
@@ -3247,6 +3248,9 @@
     if (rs) { if (rs.get("how")) try { sessionStorage.setItem("va_howto", JSON.stringify(rs.get("how").split("~"))); } catch (e) { /* storage blocked */ }
       if (rs.get("x") && S.team) S.explore = true; }
     const v = store.get("va_view"); S.applyingHash = false;
+    // A link to a committee page (from a report, slide or email) opened in a new tab has no team yet: keep the page it
+    // names and open it once "Vertical Alignment Committee" is chosen (setTeam).
+    if (/(^#|&)view=/.test(location.hash) && mode() !== "full") S.linkHash = location.hash;
     if (applyHash()) { /* the address named the page and filters */ }
     else if (mode() === "full" && v && v !== "flow" && $(`.tabs [data-view="${v}"]`)) $(`.tabs [data-view="${v}"]`).click();
     else { showView(mode() === "full" ? "rate" : "flow"); refreshFilterOptions(); rerender(); }
