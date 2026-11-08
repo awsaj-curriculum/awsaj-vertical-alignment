@@ -531,7 +531,7 @@
     // Cells well below their subject's K-12 share in depth (10 points or more, 5+ rated) get an orange outline.
     const avg = Object.fromEntries(D.subs.map((s) => { const c = D.agg(s, GRADES); return [s, ratedN(c) ? c[2] / ratedN(c) : 0]; }));
     const low = (x) => ratedN(x.c) >= 5 && x.c[2] / ratedN(x.c) <= avg[x.s] - 0.1;
-    return `<table class="rp-mx"><thead><tr><th>Grade</th>${D.subs.map((s) => `<th>${esc(s)}</th>`).join("")}</tr></thead><tbody>
+    return `<table class="rp-mx${D.subs.length === 1 ? " rp-one" : ""}"><thead><tr><th>Grade</th>${D.subs.map((s) => `<th>${esc(s)}</th>`).join("")}</tr></thead><tbody>
       ${gs.map((g) => `<tr><th>${esc(gname(g))}</th>${D.subs.map((s) => rpMapCell(D.cell[s][g], low(D.cell[s][g]))).join("")}</tr>`).join("")}</tbody></table>
       <p class="rp-cap">Each cell: the grade's own standards in that subject (main sets; Essential Elements are counted apart). Bar: ${LEVEL_SHORT.map((l, i) => `<i class="lv lv-${i}"></i> ${l.toLowerCase()}`).reverse().join(", ")}, white not rated. % in depth is of the rated standards. ${note || "Orange outline: 10 points or more below the subject's K-12 share in depth."}</p>`;
   }
@@ -596,10 +596,11 @@
     return out;
   }
   function rpBandTable(D) {
-    return `<table class="rp-bt"><thead><tr><th></th>${D.subs.map((s) => `<th colspan="2">${esc(s)}</th>`).join("")}<th colspan="2">All subjects</th></tr>
-      <tr><th></th>${[...D.subs, ""].map(() => "<th>In depth</th><th>Rated</th>").join("")}</tr></thead><tbody>
+    const one = D.subs.length === 1;
+    return `<table class="rp-bt"><thead><tr><th></th>${D.subs.map((s) => `<th colspan="2">${esc(s)}</th>`).join("")}${one ? "" : `<th colspan="2">All subjects</th>`}</tr>
+      <tr><th></th>${[...D.subs, ...(one ? [] : [""])].map(() => "<th>In depth</th><th>Rated</th>").join("")}</tr></thead><tbody>
       ${RB.map(([k, n, gs]) => { const cs = D.subs.map((s) => [D.agg(s, gs), gs.reduce((t, g) => t + D.cell[s][g].main.length, 0)]), all = sumC(cs.map((x) => x[0])), nAll = cs.reduce((t, x) => t + x[1], 0);
-        return `<tr><th>${esc(n)} (${k})</th>${cs.map(([c, nn]) => `<td>${miniBar(c)}<b>${pctTxt(c)}</b></td><td>${pc(ratedN(c), nn)}%</td>`).join("")}<td>${miniBar(all)}<b>${pctTxt(all)}</b></td><td>${pc(ratedN(all), nAll)}%</td></tr>`; }).join("")}
+        return `<tr><th>${esc(n)} (${k})</th>${cs.map(([c, nn]) => `<td>${miniBar(c)}<b>${pctTxt(c)}</b></td><td>${pc(ratedN(c), nn)}%</td>`).join("")}${one ? "" : `<td>${miniBar(all)}<b>${pctTxt(all)}</b></td><td>${pc(ratedN(all), nAll)}%</td>`}</tr>`; }).join("")}
       </tbody></table>`;
   }
   function rpPriority(D, bands = RB) {
@@ -654,7 +655,7 @@
   };
   const VIEW_KIND = { heatmap: "heatmap", gaps: "gaps", dashboard: "dashboard", ladder: "ladder", plans: "plans" };
   const DIV_BAND = { all: "K-12", Elementary: "K-5", "K-2": "K-5", "3-5": "K-5", Middle: "6-8", High: "9-12" };
-  S.rp = { kind: "all", band: "K-12" };
+  S.rp = { kind: "all", band: "K-12", subject: "" };   // subject "" = every subject
   const rpBullets = (arr) => (arr.length ? `<ul class="rp-find">${arr.map((t) => `<li>${t}</li>`).join("")}</ul>` : `<p class="muted">Nothing to report yet for these grades.</p>`);
   function rpCards(D, gs) {
     return `<div class="rp-cards">${D.subs.map((s) => { const c = D.agg(s, gs), n = gs.reduce((t, g) => t + D.cell[s][g].main.length, 0);
@@ -736,7 +737,9 @@
         </ul></section>`;
   }
   // One report: a cover, its parts (each starts a new page when printed) and how to read it.
-  function rpDoc(kind, band, D) {
+  function rpDoc(kind, band, D0, subject) {
+    // One subject (Tim, Nov 2026): the same report with only that subject's standards and findings.
+    const D = subject ? { ...D0, subs: D0.subs.filter((x) => x === subject) } : D0;
     const [bl, gs] = RP_BAND[band], bands = band === "K-12" ? RB : RB.filter((b) => b[0] === band), parts = [];
     const add = (title, help, html) => parts.push([title, help, html]);
     const bandPart = (k, g2) => `<h3>Key findings</h3>${rpBullets(rpFindings(D, g2, k))}<h3>Every grade and subject</h3>${rpMatrix(D, g2)}<h3>Progressions in these grades</h3>${rpProgTable(D, g2)}${D.subs.map((s) => rpSubject(D, s, g2, k)).join("")}`;
@@ -765,7 +768,7 @@
       add("Grade by grade", "rp_prio_grades", gs.map((g) => rpPrioGrade(D, g, gs.length)).join("") || `<p class="muted">No priority or power standards are named for these grades.</p>`);
     }
     const when = new Date().toLocaleString([], { dateStyle: "long", timeStyle: "short" }), last = [...S.ratings.values()].reduce((m, r) => (r.updated_at > m ? r.updated_at : m), "");
-    const title = kind === "all" ? (band === "K-12" ? "K-12 Vertical Alignment Report" : `Vertical Alignment Report: ${bl}`) : `${RP_KIND[kind][0]}: ${bl}`;
+    const title = (subject ? `${subject} · ` : "") + (kind === "all" ? (band === "K-12" ? "K-12 Vertical Alignment Report" : `Vertical Alignment Report: ${bl}`) : `${RP_KIND[kind][0]}: ${bl}`);
     return `<section class="rp-cover"><p class="eyebrow">Awsaj Academy · K-12 Vertical Alignment Committee</p><h1>${esc(title)}</h1>
         <p class="rp-sub">${esc(RP_KIND[kind][1])}</p>
         <p>From the grade teams' ratings (Part 1) as of ${esc(when)}${last ? ` (latest rating ${esc(new Date(last).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }))})` : ""} · ${S.ratings.size} ratings</p>
@@ -786,30 +789,32 @@
     const el = $("#view-report");
     if (!S.lastSync && !S.ratings.size) { el.innerHTML = `<div class="panel empty">Loading the ratings…</div>`; return; }
     if (!S.copies && !S.copiesLoading) { S.copiesLoading = true; getAll("rating_archives?select=*&order=created_at.desc").then((l) => { S.copies = l; if (S.view === "report") rerender(); }).catch(() => { S.copies = []; }); }
-    const { kind, band } = S.rp, D = rpData();
+    const { kind, band } = S.rp, subject = S.rp.subject || "", D = rpData();
     const btn = (k, b) => `<button type="button" class="${kind === k && band === b ? "on" : ""}" data-act="rp-pick" data-k="${k}" data-b="${b}" aria-pressed="${kind === k && band === b}">${b}</button>`;
     el.innerHTML = `<div class="rp">
       <section class="rp-hub"><h2>Reports ${hb("reports")}</h2>
         <p class="muted">Every report is worked out from the ratings on the site now. Choose one to see it below, then print it or save it as a PDF (A4). Each page also has a PDF report button for its own report.</p>
+        <p><label class="rp-subj-pick">Subject <select id="rp-subj"><option value="">All subjects</option>${S.meta.subjects.map((x) => `<option ${subject === x.name ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select></label> ${hb("rp_subject_pick")}</p>
         <table class="rp-hubt"><thead><tr><th>Report</th><th>What it shows</th><th>Grades</th></tr></thead><tbody>
         ${Object.entries(RP_KIND).map(([k, [n, d]]) => `<tr class="${kind === k ? "on" : ""}"><th>${esc(n)}</th><td class="muted">${esc(d)}</td><td class="rp-bands">${Object.keys(RP_BAND).map((b) => btn(k, b)).join("")}</td></tr>`).join("")}</tbody></table>
         <h3>Excel downloads ${hb("export")}</h3><p class="muted">Every table the site uses, for the live ratings or any saved copy, all of it or one grade and/or subject. Needs the PIN.</p>${expRow(S.copies)}</section>
-      <div class="rp-tools"><button type="button" data-act="rp-print">Print or save as PDF</button> <span class="muted">Showing: <b>${esc(kind === "all" ? "Overall report" : RP_KIND[kind][0])}, ${esc(RP_BAND[band][0])}</b>. A4; each part starts a new page.</span></div>
-      ${rpDoc(kind, band, D)}</div>`;
+      <div class="rp-tools"><button type="button" data-act="rp-print">Print or save as PDF</button> <span class="muted">Showing: <b>${esc(kind === "all" ? "Overall report" : RP_KIND[kind][0])}, ${esc(RP_BAND[band][0])}, ${esc(subject || "all subjects")}</b>. A4; each part starts a new page.</span></div>
+      ${rpDoc(kind, band, D, subject)}</div>`;
   }
   // "PDF report" on a page: choose the grades, then that page's report opens on the Reports tab and prints.
   function askBand(kind) {
     return new Promise((done) => {
-      const d = document.createElement("dialog"); d.className = "pin-dlg"; const dflt = DIV_BAND[S.f.division] || "K-12";
-      d.innerHTML = `<form method="dialog"><h3>${esc(RP_KIND[kind][0])}</h3><p>${esc(RP_KIND[kind][1])} Which grades?</p>
+      const d = document.createElement("dialog"); d.className = "pin-dlg"; const dflt = DIV_BAND[S.f.division] || "K-12", sub0 = S.f.subject !== ALL ? S.f.subject : "";
+      d.innerHTML = `<form method="dialog"><h3>${esc(RP_KIND[kind][0])}</h3><p>${esc(RP_KIND[kind][1])}</p>
+        <p><label>Subject <select name="subj"><option value="">All subjects</option>${S.meta.subjects.map((x) => `<option ${sub0 === x.name ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select></label></p><p>Which grades?</p>
         <div class="rp-bands">${Object.entries(RP_BAND).map(([b, [l]]) => `<button value="${b}" class="${b === dflt ? "" : "ghost"}">${esc(l)}</button>`).join("")}</div>
         <div class="pin-btns"><button value="" class="ghost">Cancel</button></div></form>`;
-      document.body.appendChild(d); d.onclose = () => { const v = d.returnValue; d.remove(); done(v || null); }; d.showModal();
+      document.body.appendChild(d); d.onclose = () => { const v = d.returnValue, sub = d.querySelector('[name="subj"]').value; d.remove(); done(v ? { band: v, subject: sub } : null); }; d.showModal();
     });
   }
   async function pageReport() {
-    const kind = VIEW_KIND[S.view] || "all", band = await askBand(kind); if (!band) return;
-    S.rp = { kind, band }; showView("report"); rerender(); scrollTo(0, 0);
+    const kind = VIEW_KIND[S.view] || "all", pick = await askBand(kind); if (!pick) return;
+    S.rp = { kind, band: pick.band, subject: pick.subject }; showView("report"); rerender(); scrollTo(0, 0);
     setTimeout(() => window.print(), 700);
   }
   // Excel export (Tim, Nov 2026): the live ratings or any saved copy, all of it or one grade and/or subject (the same parts
@@ -2826,7 +2831,7 @@
     if (S.view === "ladder" && S.lane) p.set("lane", S.lane);
     if (S.view === "ladder" && S.pgStatus) p.set("check", S.pgStatus);
     if (S.view === "heatmap" && mapMode() === "rows") p.set("mode", "rows");
-    if (S.view === "report") { p.set("report", S.rp.kind); p.set("band", S.rp.band); }
+    if (S.view === "report") { p.set("report", S.rp.kind); p.set("band", S.rp.band); if (S.rp.subject) p.set("rsubject", S.rp.subject); }
     // The first write only fills in the address (or finds it already right, for an opened link); every later change
     // is a new history entry, so Back returns to the page before it.
     const h = "#" + p.toString();
@@ -2841,7 +2846,7 @@
     if (!(S.f.division in DIV) && !(S.f.division in BAND)) S.f.division = "all";
     S.lane = p.get("lane") || null; S.pgStatus = p.get("check") || ""; S.backTo = null;
     if (v === "heatmap") S.mapMode = p.get("mode") === "rows" ? "rows" : "tiles";
-    if (v === "report") S.rp = { kind: RP_KIND[p.get("report")] ? p.get("report") : "all", band: RP_BAND[p.get("band")] ? p.get("band") : "K-12" };
+    if (v === "report") S.rp = { kind: RP_KIND[p.get("report")] ? p.get("report") : "all", band: RP_BAND[p.get("band")] ? p.get("band") : "K-12", subject: S.meta.subjects.some((x) => x.name === p.get("rsubject")) ? p.get("rsubject") : "" };
     S.applyingHash = true; showView(v); refreshFilterOptions(); rerender(); S.applyingHash = false;
     return true;
   }
@@ -2934,7 +2939,7 @@
     else if (act === "sets-cancel") { S.flow.choose = null; rerender(); }
     else if (act === "open-full") openFullPage();
     else if (act === "rp-print") window.print();
-    else if (act === "rp-pick") { S.rp = { kind: b.dataset.k, band: b.dataset.b }; rerender(); $(".rp-tools").scrollIntoView({ behavior: "smooth" }); }
+    else if (act === "rp-pick") { S.rp = { ...S.rp, kind: b.dataset.k, band: b.dataset.b }; rerender(); $(".rp-tools").scrollIntoView({ behavior: "smooth" }); }
     else if (act === "walk") startWalk();
     else if (act === "walk-exit") { setTeam(""); tabTeam(""); scrollTo({ top: 0 }); }
     else if (act === "tour") { if (!S.tour) { S.tour = { i: TOUR.findIndex((x) => x.page === "rate") }; tourShow(); } }
@@ -3126,7 +3131,8 @@
   });
   bindF("#f-subject", "subject"); bindF("#f-framework", "framework"); bindF("#f-division", "division"); bindF("#f-grade", "grade"); bindF("#f-strand", "strand"); bindF("#f-search", "search");
   bindF("#f-mark", "mark"); bindF("#f-order", "order");
-  document.addEventListener("change", (ev) => { if (ev.target.id === "pg-group") { S.pgGroup = ev.target.value; rerender(); } });
+  document.addEventListener("change", (ev) => { if (ev.target.id === "pg-group") { S.pgGroup = ev.target.value; rerender(); }
+    if (ev.target.id === "rp-subj") { S.rp = { ...S.rp, subject: ev.target.value }; rerender(); } });
   $("#team").addEventListener("change", (ev) => { setTeam(ev.target.value); tabTeam(ev.target.value); });
   $("#x-csv").addEventListener("click", exportCSV); $("#x-png").addEventListener("click", exportPNG); $("#x-pdf").addEventListener("click", () => window.print());
   // Findings only: the same print without the long informational lists (moves, reinforcement, unknown, full grids).

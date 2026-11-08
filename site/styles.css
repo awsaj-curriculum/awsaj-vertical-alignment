@@ -1157,3 +1157,4 @@ body[data-view="report"] .filters { display: none; }
   .rp-grade { break-inside: avoid; border-top: 1.5px solid #024638; margin-top: 6mm; }
 }
 .rp-line .rp-sb { display: inline-flex; width: 220px; min-width: 0; vertical-align: middle; }
+.rp table.rp-mx.rp-one { width: 60%; } @media (max-width: 760px) { .rp table.rp-mx.rp-one { width: 100%; } }
