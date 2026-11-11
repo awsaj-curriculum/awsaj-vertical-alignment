@@ -12,6 +12,19 @@
 <link rel="stylesheet" href="styles.css?v=dev">
 </head>
 <body>
+<section id="landing" class="landing" hidden aria-labelledby="landing-title">
+  <div class="landing-in">
+    <div class="landing-brand"><img src="awsaj-symbol.svg" alt="" width="56" height="56"><div><div class="school">Awsaj Academy</div><h1 id="landing-title">K-12 Vertical Alignment</h1></div>
+      <button type="button" class="help" data-help="landing" aria-label="What is this?">?</button></div>
+    <p class="landing-lead">Every team has rated how each standard is taught in their grade. Choose where to go.</p>
+    <div class="landing-cards">
+      <a class="landing-card l1" href="./?open=view%3Dheatmap"><span class="eb">Part 1</span><b>The Data</b><span>Every standard and every rating: the coverage map, gaps, grade dashboards, progressions and reports.</span><span class="go">Open the data &rarr;</span></a>
+      <a class="landing-card l2" href="journey.html"><span class="eb">Part 2</span><b>Our Findings</b><span>What our ratings tell us: a step-by-step walkthrough for the whole school, each grade band and each subject, with questions and options for our next steps, and PDFs to download.</span><span class="go">See our findings &rarr;</span></a>
+    </div>
+    <p class="landing-foot">Need the team rating page? <a href="./?rate=1">Open it here</a>.</p>
+  </div>
+</section>
+<script>(function () { if (!location.search && !location.hash) { document.getElementById("landing").hidden = false; document.documentElement.classList.add("on-landing"); } })();</script>
 <header class="top">
   <a class="brand" href="./" data-act="home" title="Back to the team page, to choose or change your team">
     <img class="mark" src="awsaj-symbol.svg" alt="" width="44" height="44">

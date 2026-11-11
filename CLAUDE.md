@@ -88,6 +88,9 @@ browser from public reads with SheetJS 0.18.5 from cdnjs (pinned with an integri
 Needs the PIN (Tim): `check_pin` checks it in the database first. Never reads `app_settings`. File name
 `Vertical_Alignment_<copy name or Live>_<YYYY-MM-DD>.xlsx`.
 
+## Landing page
+Tim, Nov 2026 (rating done): a plain visit to the site (no ?query, no #hash) opens a landing page in index.html (`#landing`, Part 2 look: four-colour wash, navy, frosted cards) with "Part 1: The Data" (`./?open=view%3Dheatmap`, the full site as the committee) and "Part 2: Our Findings" (`journey.html`), plus a small link to the team rating page (`./?rate=1`). Every link with an address (team links, ?grade=, ?open=, #view=) skips it. `html.on-landing` hides the rest of the page; help key `landing`. Part 2's back button is "Home" (`./`).
+
 ## Part 2: data walkthrough (journey.html)
 Tim, Nov 2026: Part 2 of the site is now the analytical walkthrough of the Part 1 ratings, "Part 2: What our ratings tell us"
 (`site/journey.html`, a link in the committee's tab bar with a "?" (`part2` in help.js); the old Vertical Alignment Audit tab is
