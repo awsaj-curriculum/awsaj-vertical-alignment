@@ -83,7 +83,7 @@ function itemHTML(stop, si, ii, it, sec) {
 function sectionParts(stop, P, si) {
   const sec = P.sections[si], [eb, h] = SECNAME[sec.key] || [sec.title, sec.title], n = CHUNK[sec.key] || 5, items = sec.items, chunks = [];
   if (sec.key === "ourpart") {
-    return `<section class="part joined" id="p-${sec.key}"><span class="eyebrow">${eb}</span><h2>Our part in the story</h2>${EXP(stop, "ourpart")}<div class="ourpart"><div class="ophead"><p>Options to discuss and act on. Pick what fits your team, change it, or add your own.</p></div><div class="opgrid">${items.map((it, ii) => { const [href, label] = linkFor(stop, `${it.text} ${it.data || ""}`); return `<div data-si="${si}" data-ii="${ii}"><h3>${inl(it.title || "")}</h3><p>${inl(it.text)}</p>${it.data ? `<p class="dnote">(Data: ${inl(it.data)})${fnHTML(stop, it)}</p>` : ""}<p><a class="ilink" href="${href}" target="_blank" rel="noopener">${label} ↗</a></p>${EDITING ? `<div class="eacts">${btnE(`data-edit-item="${si}:${ii}"`, "Edit")}${btnE(`data-del-item="${si}:${ii}"`, "Delete")}</div>` : ""}</div>`; }).join("")}</div></div>${EDITING ? `<div class="eacts sec">${btnE(`data-add-item="${si}"`, "+ Add an option")}${btnE(`data-del-sec="${si}"`, "Delete this section")}</div>` : ""}<div class="partacts"><button class="btn cta" type="button" data-reflect="${stop}">Reflection questions on screen</button></div></section>`;
+    return `<section class="part joined" id="p-${sec.key}"><span class="eyebrow">${eb}</span><h2>Our part in the story</h2>${EXP(stop, "ourpart")}<div class="ourpart"><div class="ophead"><p>Options to discuss and act on. Pick what fits your team, change it, or add your own.</p></div><div class="opgrid">${items.map((it, ii) => { const [href, label] = linkFor(stop, `${it.text} ${it.data || ""}`); return `<div data-si="${si}" data-ii="${ii}"><h3>${inl(it.title || "")}</h3><p>${inl(it.text)}</p>${it.data ? `<p class="dnote">(Data: ${inl(it.data)})${fnHTML(stop, it)}</p>` : ""}<p><a class="ilink" href="${href}" target="_blank" rel="noopener">${label} ↗</a></p>${EDITING ? `<div class="eacts">${btnE(`data-edit-item="${si}:${ii}"`, "Edit")}${btnE(`data-del-item="${si}:${ii}"`, "Delete")}</div>` : ""}</div>`; }).join("")}</div></div>${EDITING ? `<div class="eacts sec">${btnE(`data-add-item="${si}"`, "+ Add an option")}${btnE(`data-del-sec="${si}"`, "Delete this section")}</div>` : ""}</section>`;
   }
   for (let i = 0; i < items.length; i += n) chunks.push(i);
   if (EDITING || !chunks.length) chunks.splice(0, chunks.length, 0);
@@ -108,8 +108,8 @@ function mdChunks(src, max = 900) {   // splits markdown into screen-sized piece
 }
 
 /* PDF downloads (survey-free copies on the Vertical Alignment site) */
-const PDFS = [["whole", "The whole walkthrough, K-12", "Part2_Whole_walkthrough_K-12.pdf"], ["k-5", "Elementary, K-5", "Part2_K-5.pdf"], ["g6-8", "Middle school, Grades 6-8", "Part2_Grades_6-8.pdf"], ["g9-12", "High school, Grades 9-12", "Part2_Grades_9-12.pdf"],
-  ["math", "Math, K-12", "Part2_Math_K-12.pdf"], ["ela", "ELA, K-12", "Part2_ELA_K-12.pdf"], ["science", "Science, K-12", "Part2_Science_K-12.pdf"], ["social-studies", "Social Studies, K-12", "Part2_Social_Studies_K-12.pdf"]];
+const PDFS = [["whole", "K-12 summary (the whole walkthrough)", "Part2_Whole_walkthrough_K-12.pdf"], ["k-5", "Elementary, K-5", "Part2_K-5.pdf"], ["g6-8", "Middle school, Grades 6-8", "Part2_Grades_6-8.pdf"], ["g9-12", "High school, Grades 9-12", "Part2_Grades_9-12.pdf"],
+  ["math", "Math, K-12", "Part2_Math_K-12.pdf"], ["science", "Science, K-12", "Part2_Science_K-12.pdf"], ["social-studies", "Social Studies, K-12", "Part2_Social_Studies_K-12.pdf"], ["ela", "ELA, K-12", "Part2_ELA_K-12.pdf"]];
 const pdfHref = (f) => SITE + "pdf/part2/" + f;
 const pdfFor = (id) => { const x = PDFS.find((r) => r[0] === id) || (id === "next" ? PDFS[0] : null); return x ? pdfHref(x[2]) : ""; };
 function pdfPart() { return `<section class="part" id="p-pdfs"><span class="eyebrow">About the data</span><h2>Download as PDF</h2>${EXPH("Printable A4 copies of this walkthrough: the whole thing, each grade band and each subject. Each one starts with How to read the data.", "Teams can take their own band or subject into a meeting, print it, and write on it.")}<ol class="wl">${PDFS.map(([, t, f]) => `<li><div class="itxt"><b>${t}</b> <a class="ilink" href="${pdfHref(f)}" target="_blank" rel="noopener">Download PDF &darr;</a></div></li>`).join("")}</ol></section>`; }
@@ -186,3 +186,7 @@ function jumpTo(id) { const el = document.getElementById(id); if (!el) return;
 document.addEventListener("click", (e) => { const a = e.target.closest("a[data-fn]"); if (!a) return; e.preventDefault();
   const st = a.dataset.fnstop, id = a.dataset.fn, cur = parse().id;
   if (st && st !== cur) { location.hash = st; setTimeout(() => jumpTo(id.startsWith("p-") ? id : id), 700); } else jumpTo(id); });
+
+/* Download PDF menu: every PDF, this part's own first and marked */
+function pdfMenu(id) { const own = PDFS.find((r) => r[0] === id); return `<details class="pdfmenu"><summary class="btn cta">Download PDF &darr;</summary><div class="pdflist" role="list">${PDFS.map(([k, t, f]) => `<a role="listitem" href="${pdfHref(f)}" target="_blank" rel="noopener"${own && own[0] === k ? ' class="own"' : ""}>${t}${own && own[0] === k ? " <small>(this part)</small>" : ""}</a>`).join("")}</div></details>`; }
+

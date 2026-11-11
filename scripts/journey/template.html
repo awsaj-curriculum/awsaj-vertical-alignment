@@ -244,7 +244,7 @@ body.presenting .story > .part.on { width: 100%; }
 @media (max-height: 820px) { body.presenting.step0:not(.at-map) #sky > #hero { display: none; } }
 
 /* neon green highlight on the choices (Tim): grade bands on the route and the four subjects */
-:root { --neon: #C6FF1A; }
+:root { --neon: var(--cta); }
 #heroText .pick { margin: 0; font-size: clamp(1rem, 1.35vw, 1.2rem); max-width: 30ch; background: rgba(255,255,255,.7); border-left: 5px solid var(--neon); border-radius: 0 12px 12px 0; padding: 10px 14px; }
 #map .stg rect.h { transition: fill .15s ease; }
 #map .stg:hover rect.h, #map .stg:focus-visible rect.h { fill: var(--neon); }
@@ -254,21 +254,42 @@ body.presenting .story > .part.on { width: 100%; }
 #below .second a { border-radius: 12px; transition: background-color .15s ease; padding-inline: 12px; }
 #below .second a:hover, #below .second a:focus-visible { background: var(--neon); }
 @media (prefers-reduced-motion: reduce) { #map .stg rect.h, .subjects a, #below .second a { transition: none; } }
+
+.pdfmenu { position: relative; } .pdfmenu > summary { list-style: none; cursor: pointer; } .pdfmenu > summary::-webkit-details-marker { display: none; }
+.pdfmenu[open] { flex-basis: 100%; } .pdfmenu[open] > summary { margin-bottom: 10px; }
+.pdflist { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; background: rgba(255,255,255,.85); border: 1px solid var(--line); border-radius: 16px; padding: 8px; }
+.pdflist a { padding: 10px 14px; border-radius: 10px; text-decoration: none; font-weight: 600; color: var(--navy); }
+.pdflist a:hover, .pdflist a:focus-visible { background: var(--neon); outline: none; } .pdflist a.own { font-weight: 800; } .pdflist small { font-weight: 500; color: var(--navy-2); }
+@media print { .pdfmenu { display: none !important; } }
+#heroText { pointer-events: none; } #heroText a, #heroText button, #heroText .btn { pointer-events: auto; }
+
+/* subjects sit beside "What this is", as a 2 x 2 grid up under the route (Tim) */
+.belowgrid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 48px; align-items: start; margin-bottom: 8px; }
+.belowgrid .frame { margin-bottom: 0; border-bottom: 0; padding-bottom: 0; }
+.subjbox { display: grid; gap: 12px; position: relative; z-index: 3; }
+.subjbox .subjects { grid-template-columns: 1fr 1fr; margin-top: 0; background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.85); border-radius: 22px; overflow: hidden; box-shadow: 0 18px 40px -28px rgba(16,24,70,.35); }
+.subjbox .subjects a { border-left: 0 !important; border-radius: 0; padding: 22px 22px 22px !important; min-height: 118px; }
+.subjbox .subjects a:nth-child(2n) { border-left: 1.5px solid var(--line) !important; }
+.subjbox .subjects a:nth-child(n+3) { border-top: 1.5px solid var(--line); }
+.subjbox .subjects .rule { margin-bottom: 14px; }
+.subjbox .subjects b { font-size: clamp(1.4rem, 2.2vw, 2rem); }
+@media (min-width: 1280px) { .subjbox { margin-top: -120px; } } @media (min-width: 1600px) { .subjbox { margin-top: -150px; } }
+@media (max-width: 860px) { .belowgrid { grid-template-columns: 1fr; gap: 28px; } }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
 <div id="sky">
   <header id="nav"><div class="wrap"><a class="brand" href="#map" aria-label="Awsaj Academy, journey map">/*LOGO*/<span>Awsaj<br>Academy</span></a><a class="vaback" href="./" title="Back to the start page: Part 1 or Part 2">&larr; Home</a><nav id="navLinks" aria-label="Sections"></nav><button class="btn" id="presentBtn" type="button" hidden>Show all on one page</button><button class="btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button></div></header>
   <section id="hero" aria-label="Journey map">
-    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><p class="pick"><b>Pick a grade band or a subject to see its story.</b> Click K-5, 6-8 or 9-12 on the route, or a subject below.</p><a class="btn cta" href="#whole">Explore the whole-school story <span class="arr">→</span></a></div>
+    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><p class="pick"><b>Pick a grade band or a subject to see its story.</b> Click K-5, 6-8 or 9-12, or a subject.</p><a class="btn cta" href="#whole">Explore the whole-school story <span class="arr">→</span></a></div>
     <svg id="map" role="group" aria-label="The route from Kindergarten to Grade 12. Choose a grade or a stage."></svg>
     <button class="btn" id="whole-route" type="button" hidden>← Whole route</button>
   </section>
 </div>
 <section id="below"><div class="wrap">
-  <div class="frame reveal"><span class="eyebrow">What this is</span><p class="lead">This is your data. Every figure here comes from the ratings that you, our teachers, entered for the standards you teach.</p><p>These are the findings from that work, shown back to all of us as one picture from Kindergarten to Grade 12. They are not a judgement of any teacher, grade or subject. They are where we start: each part of the story ends with <b>Our part in the story</b>, options for how we might improve the curriculum together.</p><p>Every chart and finding links to the full data on the <a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/" target="_blank" rel="noopener">Vertical Alignment site ↗</a>, where you can see each standard and each rating.</p></div>
-  <span class="eyebrow reveal">Pick a subject to see its story</span>
-  <div class="subjects"><a class="reveal" style="--i:0;--c:var(--lime)" href="#math"><span class="rule"></span><b>Math</b><span class="arr">→</span></a><a class="reveal" style="--i:1;--c:var(--blue)" href="#ela"><span class="rule"></span><b>ELA</b><span class="arr">→</span></a><a class="reveal" style="--i:2;--c:var(--magenta)" href="#science"><span class="rule"></span><b>Science</b><span class="arr">→</span></a><a class="reveal" style="--i:3;--c:var(--amber)" href="#social-studies"><span class="rule"></span><b>Social Studies</b><span class="arr">→</span></a></div>
+  <div class="belowgrid"><div class="frame reveal"><span class="eyebrow">What this is</span><p class="lead">This is your data. Every figure here comes from the ratings that you, our teachers, entered for the standards you teach.</p><p>These are the findings from that work, shown back to all of us as one picture from Kindergarten to Grade 12. They are not a judgement of any teacher, grade or subject. They are where we start: each part of the story ends with <b>Our part in the story</b>, options for how we might improve the curriculum together.</p><p>Every chart and finding links to the full data on the <a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/" target="_blank" rel="noopener">Vertical Alignment site ↗</a>, where you can see each standard and each rating.</p></div>
+  <div class="subjbox"><span class="eyebrow reveal">Pick a subject to see its story</span>
+  <div class="subjects"><a class="reveal" style="--i:0;--c:var(--lime)" href="#math"><span class="rule"></span><b>Math</b><span class="arr">→</span></a><a class="reveal" style="--i:1;--c:var(--blue)" href="#ela"><span class="rule"></span><b>ELA</b><span class="arr">→</span></a><a class="reveal" style="--i:2;--c:var(--magenta)" href="#science"><span class="rule"></span><b>Science</b><span class="arr">→</span></a><a class="reveal" style="--i:3;--c:var(--amber)" href="#social-studies"><span class="rule"></span><b>Social Studies</b><span class="arr">→</span></a></div></div></div>
   <div class="second reveal"><a href="#next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-6-6-10.5a6 6 0 0 1 12 0C18 15 12 21 12 21z"/><circle cx="12" cy="10.5" r="2"/></svg><span class="t">Where we go next</span><span class="arr">→</span></a><a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-5M10 20v-9M15 20V7M20 20V4"/></svg><span class="t">About the data</span><span class="arr">→</span></a></div>
 </div></section>
 <main id="story" aria-live="polite"></main>
@@ -376,7 +397,7 @@ function gradeExplain(g) { const xs = D.subjects.map((s) => [s, D.cells[s][g].ma
 function gradeCard(g) { const st = stageOf(g); return `<section class="gradecard" style="--c:${st.accent}"><span class="eyebrow">${st.label} · ${st.name}</span><h2>${gname(g)} at a glance</h2>${gradeExplain(g)}${LEGEND}${hbars(D.subjects.map((s) => [s, D.cells[s][g].main]), gname(g) + ": share taught in depth, introduced and not taught, by subject")}<div class="partacts"><a class="btn" href="${link("dashboard", { subject: "All subjects", grade: g })}" target="_blank" rel="noopener">Open the ${gname(g)} dashboard ↗</a></div></section>`; }
 function storyHTML(id, grade) {
   const S_ = SECTIONS[id], acc = ACCENT[id]; CURSEC = id;
-  return `<div class="wrap story" style="--acc:${acc}">${grade ? gradeCard(grade) : ""}<div class="shead"><span class="eyebrow">${S_.sub}</span><h1>${S_.title}</h1><p>${S_.lead()}</p>${kpiStrip(id)}${kpiFor(id) && WT.EXPLAIN ? EXPH(WT.EXPLAIN.see.kpi, WT.EXPLAIN.kpi) : ""}<p class="fromyou"><b>These findings come from the ratings you entered as teachers.</b> They show what teachers reported as taught across each grade, not what students know or can do. We are sharing them back so we can see the whole picture together and decide how we move forward. Each part ends with options for our part in the story. Every item links to the data on the Vertical Alignment site.</p><div class="acts">${S_.qs && S_.qs.length ? `<button class="btn cta" type="button" data-reflect="${id}">Reflection questions</button>` : ""}<button class="btn" type="button" id="toggleAll">Show all on one page</button>${id !== "about" ? `<a class="btn" href="${DATALINK[id]}" target="_blank" rel="noopener">Open this data on the Vertical Alignment site ↗</a>` : ""}${pdfFor(id) ? `<a class="btn" href="${pdfFor(id)}" target="_blank" rel="noopener">Download PDF &darr;</a>` : ""}</div></div>${S_.parts()}</div>`;
+  return `<div class="wrap story" style="--acc:${acc}">${grade ? gradeCard(grade) : ""}<div class="shead"><span class="eyebrow">${S_.sub}</span><h1>${S_.title}</h1><p>${S_.lead()}</p>${kpiStrip(id)}${kpiFor(id) && WT.EXPLAIN ? EXPH(WT.EXPLAIN.see.kpi, WT.EXPLAIN.kpi) : ""}<p class="fromyou"><b>These findings come from the ratings you entered as teachers.</b> They show what teachers reported as taught across each grade, not what students know or can do. We are sharing them back so we can see the whole picture together and decide how we move forward. Each part ends with options for our part in the story. Every item links to the data on the Vertical Alignment site.</p><div class="acts">${id !== "about" ? pdfMenu(id) : ""}<button class="btn" type="button" id="toggleAll">Show all on one page</button>${id !== "about" ? `<a class="btn" href="${DATALINK[id]}" target="_blank" rel="noopener">Open this data on the Vertical Alignment site ↗</a>` : ""}</div></div>${S_.parts()}</div>`;
 }
 function render(first) {
   const nx = parse(), changed = nx.id !== cur.id, story = $("#story"); const fromMapClick = render.fromMap; render.fromMap = false;
