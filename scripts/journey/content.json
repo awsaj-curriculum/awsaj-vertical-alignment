@@ -198,12 +198,12 @@
 },
 {
 "data": "Introduced somewhere and in depth nowhere: ELA 241, Math 186, Social Studies 105, Science 49",
-"text": "For the 581 standards that are introduced but never in depth, which grade is the natural home for each?",
+"text": "For the 581 standards that are introduced in their own grade but never taken to depth, which should that grade take to depth, and which can stay introduced?",
 "cat": "Improving the curriculum"
 },
 {
 "data": "222 in K-5, 52 in 6-8, 7 in 9-12",
-"text": "Of the 281 standards no grade teaches, which should we place, and which can we agree we do not use?",
+"text": "Of the 281 standards no grade teaches, which should their own grade start teaching, and which can we agree we do not use?",
 "cat": "Improving the curriculum"
 },
 {
@@ -469,7 +469,7 @@
 "items": [
 {
 "data": "Language is 10% in depth in K-5, with 43 of the 100 ELA standards no grade teaches and 52 of the 174 introduced only",
-"text": "Language has the most ELA standards no grade takes to depth: which grade takes grammar, conventions and vocabulary to depth, and when?",
+"text": "Language has the most ELA standards no grade takes to depth: how could each grade take its own grammar, conventions and vocabulary standards to depth?",
 "cat": "Improving the curriculum"
 },
 {
@@ -504,7 +504,7 @@
 },
 {
 "data": "12 K-5 Physical Science standards are taught by no grade; 9 hand-over gaps run from them into Grade 8 and Grade 10",
-"text": "Which K-5 Physical Science ideas do Grade 8 and Grade 10 rely on, and where could they live in K-5?",
+"text": "Which K-5 Physical Science ideas do Grade 8 and Grade 10 rely on, and how could the K-5 grades they belong to teach them?",
 "cat": "Knowing the bands above and below"
 },
 {
@@ -1277,7 +1277,7 @@
 "items": [
 {
 "data": "Measurement and Data 23% in depth in K-5; Statistics and Probability 0% in 6-8; 1 of 38 ratings in high school",
-"text": "Where should data and statistics live, given they appear in every band and reach almost no depth after Grade 5?",
+"text": "How could each grade take its own data and statistics standards further, given they appear in every band and reach almost no depth after Grade 5?",
 "cat": "Improving the curriculum"
 },
 {
@@ -1563,7 +1563,7 @@
 },
 {
 "data": "Language is 10%, 45% and 30% in depth by band; it holds 50 of 128 confirmed gaps and 84 of 241 introduced-only standards",
-"text": "Who owns Language (grammar, conventions, vocabulary) in each band, and how is it taught: on its own, or through reading and writing?",
+"text": "How is each grade's Language (grammar, conventions, vocabulary) taught: on its own, or through reading and writing, and what would take it to depth?",
 "cat": "Improving the curriculum"
 },
 {
@@ -1864,7 +1864,7 @@
 },
 {
 "data": "Physical Science 12, Earth and Space 8, Engineering 2, Life Science 2",
-"text": "For the 24 K-5 standards no grade teaches, which should we place and which do we choose not to use?",
+"text": "For the 24 K-5 standards no grade teaches, which should their own grade start teaching, and which do we choose not to use?",
 "cat": "Improving the curriculum"
 },
 {
@@ -1879,7 +1879,7 @@
 },
 {
 "data": "12 K-5 Physical Science standards are taught by no grade; 9 hand-over gaps run from them into Grades 8 and 10",
-"text": "Which K-5 Physical Science ideas do Grade 8 and Grade 10 most rely on, and where could they be placed?",
+"text": "Which K-5 Physical Science ideas do Grade 8 and Grade 10 most rely on, and how could the K-5 grades they belong to teach them?",
 "cat": "Knowing the bands above and below"
 },
 {
@@ -1920,7 +1920,7 @@
 },
 {
 "title": "Knowing the bands above and below",
-"text": "In K-5, we could place the Physical Science standards that Grade 8 and Grade 10 build on.",
+"text": "In K-5, each grade could start teaching its own Physical Science standards that Grade 8 and Grade 10 build on.",
 "data": "12 K-5 Physical Science standards taught by no grade; 9 hand-over gaps run into Grades 8 and 10"
 },
 {
