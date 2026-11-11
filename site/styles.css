@@ -1158,3 +1158,7 @@ body[data-view="report"] .filters { display: none; }
 }
 .rp-line .rp-sb { display: inline-flex; width: 220px; min-width: 0; vertical-align: middle; }
 .rp table.rp-mx.rp-one { width: 60%; } @media (max-width: 760px) { .rp table.rp-mx.rp-one { width: 100%; } }
+
+/* Part 2 link in the tab bar (opens the data walkthrough page, journey.html) */
+.tabs .tablink { color: var(--brand); font-weight: 700; text-decoration: none; padding: 10px 12px; border-bottom: 3px solid transparent; white-space: nowrap; }
+.tabs .tablink:hover, .tabs .tablink:focus-visible { border-bottom-color: var(--brand); }
