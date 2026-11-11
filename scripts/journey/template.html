@@ -276,12 +276,13 @@ body.presenting .story > .part.on { width: 100%; }
 @media (min-width: 1280px) { .subjbox { margin-top: -120px; } } @media (min-width: 1600px) { .subjbox { margin-top: -150px; } }
 @media (max-width: 860px) { .belowgrid { grid-template-columns: 1fr; gap: 28px; } }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
+#heroText h1 { font-size: clamp(2.3rem, 4.6vw, 4.8rem); } #heroText .btn.cta { max-width: 330px; white-space: normal; line-height: 1.25; text-align: left; }
 </style>
 
 <div id="sky">
   <header id="nav"><div class="wrap"><a class="brand" href="#map" aria-label="Awsaj Academy, journey map">/*LOGO*/<span>Awsaj<br>Academy</span></a><a class="vaback" href="./" title="Back to the start page: Part 1 or Part 2">&larr; Home</a><nav id="navLinks" aria-label="Sections"></nav><button class="btn" id="presentBtn" type="button" hidden>Show all on one page</button><button class="btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button></div></header>
   <section id="hero" aria-label="Journey map">
-    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><p class="pick"><b>Pick a grade band or a subject to see its story.</b> Click K-5, 6-8 or 9-12, or a subject.</p><a class="btn cta" href="#whole">Explore the whole-school story <span class="arr">→</span></a></div>
+    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><p class="pick"><b>Pick a grade band or a subject to see its story.</b> Click K-5, 6-8 or 9-12, or a subject.</p><a class="btn cta" href="#whole">Click here to explore the whole&#8209;school K&#8209;12 story <span class="arr">→</span></a></div>
     <svg id="map" role="group" aria-label="The route from Kindergarten to Grade 12. Choose a grade or a stage."></svg>
     <button class="btn" id="whole-route" type="button" hidden>← Whole route</button>
   </section>
