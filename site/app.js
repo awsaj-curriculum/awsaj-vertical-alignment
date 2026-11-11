@@ -733,7 +733,7 @@
           <li><b>Possible duplication</b>: taught in depth again after its suggested grade. <b>Reinforcement</b>: taught in depth in more than one grade of its own band.</li>
           <li><b>Patterns.</b> A "whole-grade pattern" is a grade where most subjects sit 10 points or more below their own share in depth for the same grades. A "change of school" compares Grade 5 with Grade 6 and Grade 8 with Grade 9.</li>
           <li><b>Lists</b> show the first items; every list is complete on the site page named after it. The coloured strip before each standard shows its rating in every grade, K to 12, with its suggested grade outlined.</li>
-          <li><b>Not yet included.</b> Part 2 (what the weekly plans show) has not run. The ratings describe teaching exposure across all the grade's classes, not student learning.</li>
+          <li><b>Not yet included.</b> The curriculum audit (what the weekly plans show) has not run yet. The ratings describe teaching exposure across all the grade's classes, not student learning.</li>
         </ul></section>`;
   }
   // One report: a cover, its parts (each starts a new page when printed) and how to read it.
@@ -2523,7 +2523,7 @@
   // its layout with empty states, so the committee can see what Part 2 will report.
   const ev = (f, c, g) => S.evidence && S.evidence.items[`${f}|${c}|${g}`];
   function evidenceFor(e) {
-    if (!S.evidence) return `<p class="muted">Part 2 has not run yet. When it does, this shows which 2025-26 and 2026-27 plans include this standard, in which weeks, and whether the code was cited or inferred.</p>`;
+    if (!S.evidence) return `<p class="muted">The curriculum audit has not run yet. When it does, this shows which 2025-26 and 2026-27 plans include this standard, in which weeks, and whether the code was cited or inferred.</p>`;
     const rows = GRADES.map((g) => ({ g, x: ev(e.f, e.c, g) })).filter((r) => r.x);
     if (!rows.length) return `<p class="muted">Not found in the plans.</p>`;
     return `<ul class="comments">${rows.map(({ g, x }) => `<li><b>${esc(gname(g))}</b>: ${x.weeks} week${x.weeks === 1 ? "" : "s"} (${LEVEL[x.level].toLowerCase()}, ${x.match})
@@ -2624,18 +2624,18 @@
     const empty = (cols, msg) => `<tr class="placeholder"><td colspan="${cols}">${msg}</td></tr>`;
     const gridList = ordered(auditGrid(g), g).map((e, i) => [e, i]).sort((a, b) => (forGrade(b[0], g) - forGrade(a[0], g)) || a[1] - b[1]).map(([e]) => e);
     const part2 = `<div class="tbl-scroll"><h3>Says vs shows ${hb("p_svs")}</h3><p class="muted">Standards where the team's rating and the plans differ for ${esc(gname(g))}.</p>
-      <table class="svs"><thead><tr><th>Code</th><th>Team says (Part 1)</th><th>Plans show (Part 2)</th><th>Note</th></tr></thead>
-      <tbody>${ready ? svsRows || empty(4, "No differences in this view.") : empty(4, "Fills in when Part 2 runs.")}</tbody></table>
+      <table class="svs"><thead><tr><th>Code</th><th>Team says (Part 1)</th><th>Plans show (curriculum audit)</th><th>Note</th></tr></thead>
+      <tbody>${ready ? svsRows || empty(4, "No differences in this view.") : empty(4, "Fills in when the curriculum audit runs.")}</tbody></table>
       <h3>Below and above grade in the plans ${hb("p_offgrade")}</h3><p class="muted">Standards from other grades that appear in ${esc(gname(g))}'s plans.</p>
       <table class="svs"><thead><tr><th>Code</th><th>Suggested grade</th><th>Weeks in ${esc(gname(g))} plans</th><th>Below or above</th></tr></thead>
       <tbody>${ready ? off.map(({ e, x }) => `<tr><td>${codeHTML(e)}</td><td>${e.pl.map(gl).join(", ")}</td><td>${x.weeks} (${x.match})</td>
-        <td>${GRADES.indexOf(e.pl[0]) < GRADES.indexOf(g) ? "Below grade (review or remediation)" : "Above grade (extension)"}</td></tr>`).join("") || empty(4, "None found.") : empty(4, "Fills in when Part 2 runs.")}</tbody></table>
+        <td>${GRADES.indexOf(e.pl[0]) < GRADES.indexOf(g) ? "Below grade (review or remediation)" : "Above grade (extension)"}</td></tr>`).join("") || empty(4, "None found.") : empty(4, "Fills in when the curriculum audit runs.")}</tbody></table>
       <h3>Plan sources ${hb("p_sources")}</h3>
       <table class="svs"><thead><tr><th>Plan</th><th>Year</th><th>Grade</th><th>Type</th><th>Notes</th></tr></thead>
       <tbody>${ready ? S.evidence.sources.filter((s) => s.grade === g).map((s) => `<tr><td><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></td><td>${esc(s.year)}</td><td>${esc(gname(s.grade))}</td><td>${esc(s.kind)}</td><td>${s.carried_forward ? "Copied forward from last year" : ""}</td></tr>`).join("") || empty(5, "No plans read for this grade yet.") :
         empty(5, "Elementary weekly and unit plans, Middle and High school unit and lesson plans (2026-27, with 2025-26 for weeks not yet planned).")}</tbody></table></div>`;
     el.innerHTML = `<div class="panel"><h2>Vertical Alignment Audit: ${esc(gname(g))} · ${esc(S.f.subject)}${courseOf(g, S.f.subject) && courseOf(g, S.f.subject) !== S.f.subject ? ` (${esc(courseOf(g, S.f.subject))})` : ""} ${hb("plans")}</h2>
-      <p class="lede">What the school's curriculum documents say about ${esc(gname(g))}, side by side with what the team said in Part 1. ${ready ? `Plans last read ${esc(S.evidence.built)} · ${S.evidence.sources.length} plan files.` : `${SHOW_PLANS ? `The <span class="mk mk-pn">✓ In curriculum docs</span> and <span class="mk mk-pr">★ Priority / power</span> marks come` : `The <span class="mk mk-pr">★ Priority</span> (6-12) and <span class="mk mk-pr">★ Power</span> (K-5) marks come`} from the Ma3loomat course documents (Grades 6-12) and the Curriculum Hub (K-5). The week-by-week reading of plans (Part 2) has not run yet.`}</p></div>
+      <p class="lede">What the school's curriculum documents say about ${esc(gname(g))}, side by side with what the team said in Part 1. ${ready ? `Plans last read ${esc(S.evidence.built)} · ${S.evidence.sources.length} plan files.` : `${SHOW_PLANS ? `The <span class="mk mk-pn">✓ In curriculum docs</span> and <span class="mk mk-pr">★ Priority / power</span> marks come` : `The <span class="mk mk-pr">★ Priority</span> (6-12) and <span class="mk mk-pr">★ Power</span> (K-5) marks come`} from the Ma3loomat course documents (Grades 6-12) and the Curriculum Hub (K-5). The week-by-week reading of plans (the curriculum audit) has not run yet.`}</p></div>
     ${docsPanel(list, g)}
     <div class="panel"><h2>Before and after ${esc(gname(g))} ${hb("p_ba")}</h2>
       <p class="lede">Each ${esc(S.f.subject)} standard suggested for ${esc(gname(g))}${S.f.strand ? " in " + esc(S.f.strand) : ""}, with the standards it needs first from earlier grades and the standards that build on it in later grades, each with the rating of every grade it is placed in. A pink outline marks a neighbour that every grade rating it says is not taught (and no grade that might teach it is still to rate). Each link says what kind it is and where it comes from: Coherence Map (Math), same anchor standard (ELA, official; "part matched by wording" when the anchor has several parts), suggested (check), or closest wording (inferred). Official links come first, and every rating shows its grade.</p>
@@ -2643,7 +2643,7 @@
       <details class="sub" data-sec="aud-grid" ${isOpen("aud-grid") ? "open" : ""}><summary><b>Every grade's rating of these standards (K-12 grid)</b> ${hb("p_heat")}</summary>
       <p class="muted">One row per standard ${esc(gname(g))} works with: first those suggested for it, then those from other grades that it rates or that its documents name. Most standards are rated only by their own grade, so most squares in other grades stay white; a coloured square elsewhere means another grade also teaches it. The ${esc(gl(g))} column is highlighted. A bar under a square <span class="plan-key"></span> marks a grade whose documents cite the standard, and an orange corner <span class="prio-key"></span> a grade that names it a priority or power standard.</p>
       ${standardGrid(gridList, GRADES)}</details></div>
-    <details class="panel p2" data-sec="aud-part2" ${isOpen("aud-part2", ready) ? "open" : ""}><summary><h2>Part 2: week-by-week plans ${ready ? "" : '<span class="soon">not run yet</span>'}</h2></summary>
+    <details class="panel p2" data-sec="aud-part2" ${isOpen("aud-part2", ready) ? "open" : ""}><summary><h2>Curriculum audit: week-by-week plans ${ready ? "" : '<span class="soon">not run yet</span>'}</h2></summary>
       <ol class="steps">
         <li><b>Read the plans ${hb("p_sources")}</b>2026-27 unit and weekly plans for every grade, with 2025-26 filling weeks not planned yet.</li>
         <li><b>Find the standards ${hb("p_match")}</b>Codes named in a plan are <i>cited</i>; content without a code is matched by reading the content and labelled <i>inferred</i>.</li>
@@ -2712,7 +2712,7 @@
       <div class="box" style="margin-top:14px"><h3>In the school's curriculum documents ${hb("d_marks")}</h3>
         <p class="mks">${e.pr ? e.pr.map((g) => `<span class="mk mk-pr">★ ${prName(g)} ${gl(g)}</span>`).join(" ") : ""} ${(SHOW_PLANS && e.pn) ? (SHOW_PLANS && e.pn).map((g) => `<span class="mk mk-pn">✓ In ${gl(g)} curriculum docs</span>`).join(" ") : ""}</p>
         <p class="muted" style="margin:6px 0 0">${!e.pr && !(SHOW_PLANS && e.pn) ? "No grade's curriculum documents name this standard yet." : `${(SHOW_PLANS && e.pn) ? "Cited in the curriculum documents of " + (SHOW_PLANS && e.pn).map(gname).join(", ") + ". " : ""}${e.pr ? ["Priority", "Power"].map((k) => { const gs = e.pr.filter((x) => prName(x) === k); return gs.length ? `Named a ${k.toLowerCase()} standard for ${gs.map(gname).join(", ")}. ` : ""; }).join("") : ""}`}${e.pa ? ` ${e.pa.map(gname).join(", ")} ${e.pa.length > 1 ? "were" : "was"} given this standard to rate because ${e.pa.length > 1 ? "their" : "its"} curriculum docs cite it.` : ""}</p>
-        <h3 style="margin-top:10px">Curriculum evidence (Part 2) ${hb("d_evidence")}</h3>${evidenceFor(e)}</div>
+        <h3 style="margin-top:10px">Curriculum evidence (curriculum audit) ${hb("d_evidence")}</h3>${evidenceFor(e)}</div>
       <div class="box" style="margin-top:14px"><h3>What it needs first, and what it leads to ${hb("d_pre")}</h3>${preBox(e)}</div>
       <div class="box" style="margin-top:14px"><h3>Progressions it belongs to ${hb("d_prog")}</h3>${progBox(e)}</div>
       ${d.descriptor_flag ? `<div class="flagbox">${hb("d_flag")} <b>Committee review:</b> ${esc(d.descriptor_flag)}. A suggested version is shown beside the school descriptor.</div>` : ""}
