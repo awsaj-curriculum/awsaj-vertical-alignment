@@ -47,7 +47,7 @@ function linkFor(stop, text) {
   const gm = t.match(/\bGrade (\d{1,2})\b|\b(Kindergarten)\b/g);
   if (/priority|power standard/.test(lc)) return [link("plans", { subject: c.subject === "All subjects" ? "Math" : c.subject, grade: gm && gm.length === 1 ? (gm[0] === "Kindergarten" ? "K" : gm[0].split(" ")[1]) : "5" }), "Priority and power (Audit)"];
   if (/progression|hand-over|build on|builds on|needs first/.test(lc)) return [link("ladder", c), "Progressions"];
-  if (/no grade teaches|not taught where|not taught in (their|its) own grade|not taught in any grade|gap|never in depth|not owned|introduced and never|introduced only|met but/.test(lc)) return [link("gaps", c), "Gaps and repetition"];
+  if (/no grade teaches|not taught where|not taught in (their|its) own grade|not taught in any grade|not taught in the (grade|course)|gap|never in depth|not owned|introduced and never|introduced only|met but/.test(lc)) return [link("gaps", c), "Gaps and repetition"];
   if (gm && gm.length === 1) { const g = gm[0] === "Kindergarten" ? "K" : gm[0].split(" ")[1]; return [link("dashboard", { subject: c.subject, grade: g }), `${gm[0]} dashboard`]; }
   return [link("heatmap", c), "Coverage map"];
 }

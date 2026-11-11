@@ -36,7 +36,7 @@
 },
 {
 "title": "Standards not taught where they belong.",
-"text": "281 standards are rated not taught by the grade they belong to (or, for standards shared across grades, by every grade that shares them). A further 172 are not taught where they were placed, with other grades not asked.",
+"text": "281 standards are rated not taught by the grade they belong to (or, for standards shared across grades, by every grade that shares them). A further 172 are rated not taught in the grade or course where they fit best (other grades were not asked to rate them).",
 "cat": "Gaps"
 },
 {
@@ -317,7 +317,7 @@
 },
 {
 "title": "Social Studies.",
-"text": "64% of ratings are not taught. Only Kindergarten (40%) and Grade 5 (10%) have anything in depth. A further 24 Social Studies standards are not taught in the grade where they were placed.",
+"text": "64% of ratings are not taught. Only Kindergarten (40%) and Grade 5 (10%) have anything in depth. A further 24 Social Studies standards are rated not taught in the grade where they fit best.",
 "cat": "Gaps"
 },
 {
@@ -608,7 +608,7 @@
 },
 {
 "title": "Standards not taught in any grade they belong to.",
-"text": "52 in 6-8 (ELA 24, Social Studies 18, Math 10). A further 29 Science standards are not taught where they were placed.",
+"text": "52 in 6-8 (ELA 24, Social Studies 18, Math 10). A further 29 Science standards are rated not taught in the grade where they fit best.",
 "cat": "Gaps"
 },
 {
@@ -709,7 +709,7 @@
 },
 {
 "title": "Science looks organised by discipline.",
-"text": "Grade 6 carries Earth and Space (67% in depth). Grade 8 carries Physical Science (62%) and Engineering (100%). Life Science sits mainly in Grade 7 (15%). Standards placed in a grade that teaches a different discipline show as \"not taught\".",
+"text": "Grade 6 carries Earth and Space (67% in depth). Grade 8 carries Physical Science (62%) and Engineering (100%). Life Science sits mainly in Grade 7 (15%). Standards that fit a grade but belong to a discipline it does not teach are rated not taught.",
 "cat": "Choices and capacity"
 },
 {
@@ -718,8 +718,8 @@
 "cat": "Choices and capacity"
 },
 {
-"title": "So Science \"not taught\" may mean \"taught in another grade\".",
-"text": "The 29 Science standards not taught where placed were placed by suggestion. This is a placement question before it is a gap.",
+"title": "Some Science standards fall outside the discipline their grade teaches.",
+"text": "29 Science standards are rated not taught in the grade where they fit best, mostly because that grade teaches a different discipline. The open question is how and when those standards are taught.",
 "cat": "Choices and capacity"
 },
 {
@@ -754,8 +754,8 @@
 "cat": "Improving the curriculum"
 },
 {
-"data": "29 Science standards not taught where placed; Earth and Space 67% in depth in Grade 6, Physical Science 62% in Grade 8",
-"text": "Does each Science discipline have a clear home grade, and do the standards on the site sit in the grade that teaches them?",
+"data": "29 Science standards not taught in the grade where they fit; Earth and Space 67% in depth in Grade 6, Physical Science 62% in Grade 8",
+"text": "When a grade teaches mainly one Science discipline, how are the standards from the other disciplines in that grade taught?",
 "cat": "Improving the curriculum"
 },
 {
@@ -831,8 +831,8 @@
 },
 {
 "title": "Knowing the bands above and below",
-"text": "In Science, we could confirm which grade owns each discipline, so the site shows standards in the grade that teaches them.",
-"data": "29 Science standards not taught where placed; Earth and Space 67% in Grade 6, Physical Science 62% in Grade 8"
+"text": "In Science, each grade could plan how it will teach the standards that fall outside its main discipline.",
+"data": "29 Science standards not taught in the grade where they fit; Earth and Space 67% in Grade 6, Physical Science 62% in Grade 8"
 },
 {
 "title": "A concrete action we could take",
@@ -899,7 +899,7 @@
 },
 {
 "title": "Few confirmed gaps.",
-"text": "Only 7 standards are confirmed as not taught in any grade or course they belong to. A further 119 are not taught in the course where they were placed, with other grades not asked (Math 77, Social Studies 22, Science 20).",
+"text": "Only 7 standards are confirmed as not taught in any grade or course they belong to. A further 119 are rated not taught in the course where they fit best (Math 77, Social Studies 22, Science 20).",
 "cat": "Gaps"
 },
 {
@@ -979,8 +979,8 @@
 "cat": "Choices and capacity"
 },
 {
-"title": "\"Not taught\" often means \"not in this course\".",
-"text": "High school Math, Science and Social Studies standards were placed in courses by suggestion. The 119 standards not taught where placed may be taught in another year, or belong to a course few students take. This is worth settling before anything is called a gap.",
+"title": "Some standards are not taught in the course where they fit.",
+"text": "High school Math, Science and Social Studies standards were each placed in the course where they fit best. 119 of them are rated not taught in that course. Each course team can say which of these it plans to take on and which it leaves out on purpose.",
 "cat": "Choices and capacity"
 },
 {
@@ -1000,7 +1000,7 @@
 },
 {
 "title": "High school is our most settled band.",
-"text": "It has the highest share in depth, the fewest confirmed gaps (7, partly because 119 standards placed by suggestion cannot be confirmed) and the fewest ELA and Science breaks. The picture here is less about holes and more about choices between courses.",
+"text": "It has the highest share in depth, the fewest confirmed gaps (7, with a further 119 standards not taught in the course where they fit) and the fewest ELA and Science breaks. The picture here is less about holes and more about choices between courses.",
 "cat": "Other notable"
 },
 {
@@ -1031,12 +1031,12 @@
 },
 {
 "data": "51% of high school Math ratings are not taught, with no confirmed gaps",
-"text": "For the 77 Math standards not taught where placed, are they taught in another course, or have we chosen to leave them?",
+"text": "For the 77 Math standards not taught in the course where they fit, which should that course start teaching, and which have we chosen to leave out?",
 "cat": "Improving the curriculum"
 },
 {
-"data": "119 standards not taught where placed: Math 77, Social Studies 22, Science 20",
-"text": "Do the standards on the site sit in the courses that teach them, and who should confirm the placements?",
+"data": "119 standards not taught in the course where they fit: Math 77, Social Studies 22, Science 20",
+"text": "For the 119 standards not taught in the course where they fit, which should each course take on, and who decides?",
 "cat": "Improving the curriculum"
 },
 {
@@ -1093,7 +1093,7 @@
 {
 "title": "Improving the curriculum",
 "text": "In high school, we could agree, course by course, which standards each course owns and which it leaves out on purpose.",
-"data": "119 standards not taught where placed: Math 77, Social Studies 22, Science 20"
+"data": "119 standards not taught in the course where they fit: Math 77, Social Studies 22, Science 20"
 },
 {
 "title": "Working across grade levels",
@@ -1164,8 +1164,8 @@
 "cat": "Gaps"
 },
 {
-"title": "Not taught where placed.",
-"text": "77 high school standards, in courses where they were placed by suggestion.",
+"title": "Not taught in the course where they fit.",
+"text": "77 high school standards are rated not taught in the course where they fit best.",
 "cat": "Gaps"
 },
 {
@@ -1291,7 +1291,7 @@
 "cat": "Improving the curriculum"
 },
 {
-"data": "51% of high school Math is not taught; 11 of 21 strands have nothing in depth; 77 standards not taught where placed",
+"data": "51% of high school Math is not taught; 11 of 21 strands have nothing in depth; 77 standards not taught in the course where they fit",
 "text": "Which high school strands have we chosen not to teach, and does each student's pathway still reach what the SAT asks?",
 "cat": "Improving the curriculum"
 },
@@ -1696,8 +1696,8 @@
 "cat": "Gaps"
 },
 {
-"title": "Not taught where placed.",
-"text": "49 standards in Grades 6 to 12 (29 in middle school, 20 in high school), where grade placement was a suggestion.",
+"title": "Not taught in the grade or course where they fit.",
+"text": "49 standards in Grades 6 to 12 (29 in middle school, 20 in high school) are rated not taught in the grade or course where they fit best.",
 "cat": "Gaps"
 },
 {
@@ -1798,12 +1798,12 @@
 },
 {
 "title": "Each secondary grade seems to own a discipline.",
-"text": "Grade 6 Earth and Space, Grade 8 Physical Science and Engineering, Grade 9 Earth and Space, Grade 10 Physical Science, Grade 11 Life Science, and Grade 12 Physical Science (6 of 9 in depth). Grade 7 holds nearly half of the middle school Life Science standards, mostly introduced. Standards placed in a grade that teaches a different discipline show as not taught.",
+"text": "Grade 6 Earth and Space, Grade 8 Physical Science and Engineering, Grade 9 Earth and Space, Grade 10 Physical Science, Grade 11 Life Science, and Grade 12 Physical Science (6 of 9 in depth). Grade 7 holds nearly half of the middle school Life Science standards, mostly introduced. Standards that fit a grade but belong to a discipline it does not teach are rated not taught.",
 "cat": "Choices and capacity"
 },
 {
-"title": "So much of secondary \"not taught\" may be a placement question.",
-"text": "There are no confirmed Science gaps in Grades 6 to 12. The 49 standards not taught where placed may simply sit in the wrong year on our map.",
+"title": "Secondary Science gaps sit where a grade's discipline ends.",
+"text": "There are no confirmed Science gaps in Grades 6 to 12, but 49 standards are rated not taught in the grade or course where they fit, mostly outside the discipline that grade teaches.",
 "cat": "Choices and capacity"
 },
 {
@@ -1858,8 +1858,8 @@
 "cat": "Improving the curriculum"
 },
 {
-"data": "No confirmed Science gaps in Grades 6 to 12, but 49 standards are not taught where placed",
-"text": "Should the standards on the site be moved to the grades that teach each discipline, so the picture is accurate?",
+"data": "No confirmed Science gaps in Grades 6 to 12, but 49 standards are not taught in the grade or course where they fit",
+"text": "How will the 49 standards that fall outside each grade's main discipline be taught?",
 "cat": "Improving the curriculum"
 },
 {
@@ -1973,7 +1973,7 @@
 },
 {
 "title": "Standards not taught in any grade they belong to.",
-"text": "59 confirmed (K-5 38, 6-8 18, 9-12 3). A further 46 are not taught where placed.",
+"text": "59 confirmed (K-5 38, 6-8 18, 9-12 3). A further 46 are rated not taught in the grade or course where they fit.",
 "cat": "Gaps"
 },
 {
@@ -2124,8 +2124,8 @@
 "cat": "Improving the curriculum"
 },
 {
-"data": "22 high school standards are not taught where placed; Grade 9 Geography is 92% introduced while other strands that year are not taught",
-"text": "On the site, do the high school standards sit in the courses that teach them?",
+"data": "22 high school standards are not taught in the course where they fit; Grade 9 Geography is 92% introduced while other strands that year are not taught",
+"text": "Which of the 22 high school standards not taught in their course should that course take on?",
 "cat": "Improving the curriculum"
 },
 {
@@ -2211,7 +2211,7 @@
 "method": {
 "key": "method",
 "title": "Method, sources and limits",
-"intro": "Every figure in this paper was computed from the ratings sheet and cross-checked against the site. Where the site's band and K-12 views differ (progressions), the paper says which it uses. Percentages are rounded half up, as on the site.\n\n**What was read**\n\n| Source | How it was used | How fully it was read |\n| --- | --- | --- |\n| Ratings sheet, \"All Standards and Ratings K-12\" (9 Nov 2026) | Every figure | All 2,166 rows |\n| Organized ratings workbook | Cross-check of totals | All tabs |\n| 20 Findings decks (band and subject) | Cross-check, questions and next-step themes | All slides and speaker notes |\n| K-12 Reports PDF (118 pages) | Cross-check | First 80 pages scanned by search; a few read directly |\n| 7 other Reports PDFs | Cross-check of headline figures | Scanned by search, not read page by page |\n\n**How terms are used**\n\n- **Rated standards.** One rating is one standard in one grade. A standard shared by several grades is counted once for each grade that rated it.\n- **At least introduced.** Rated in depth or introduced.\n- **Not taught where it belongs (confirmed).** The grade the standard belongs to rated it not taught (for a standard shared across grades, every grade that shares it did). In Math and ELA each standard belongs to one grade, so this means that grade's team rated it not taught; it does not mean other grades should have taught it.\n- **Not taught where placed.** The grade it was placed in rated it not taught, and other grades that could teach it were not asked.\n- **Introduced, never in depth (met but not owned).** Introduced in at least one grade and in depth in none.\n- **Progression finding.** An automatic check on a chain of linked standards: a step not taught, or a standard in depth while the one it builds on is not taught.\n- **Taught at every step.** Every standard in the chain, across two or more grades, is at least introduced.\n- **Progression.** A chain of linked standards across grades. Official links are the Coherence Map (Math), anchor standards (ELA) and the standards' own structure (Science, Social Studies). Other links are suggestions.\n- **Instructional capacity.** The average number of standards one grade rated in depth, introduced and not taught in a year (all ratings divided by the number of grades), rounded.\n- **Hand-over gap.** A standard taught in depth while a standard it builds on, placed in an earlier school, is rated not taught.\n- **Priority and power standards.** Standards the school's own documents name: power standards in K-5, priority standards in 6-12.\n\n**Limits to keep in view**\n\n- Ratings are teachers' judgements of teaching across a grade. They are not observations and not student results.\n- Grades may have read \"in depth\" differently. Uniform ratings across a whole grade are a reason to check how the scale was read; the paper points these out so teams can discuss them.\n- The ratings are what teachers reported as taught. They do not measure what students know or can do.\n- Each team rated its own subject. Literacy taught in Science and Social Studies, and Math taught in Science, may not show in the ELA and Math ratings.\n- Middle school Science and high school Math, Science and Social Studies standards were placed in grades and courses by suggestion. \"Not taught\" there can mean \"taught in another year\". 24 K-5 Social Studies standards are also not taught in the grade where they were placed.\n- Band counts of progressions look only at steps inside the band, so they do not add up to the K-12 figure.\n- Literacy audit figures come from the 2026 PK-5 literacy audit of weekly plans.\n- Some strands have few standards in a grade, so a single rating can move a percentage a long way. Counts are given where this matters.\n- Suggested links between standards (most ELA, Science and Social Studies hand-overs) have not been checked by teachers.\n\n**Status.** This is a draft for the Vertical Alignment Committee. Each finding should be checked with the teams concerned before it is treated as settled. The planned review of weekly and unit plans (Part 2) will test many of these patterns against what is actually planned.",
+"intro": "Every figure in this paper was computed from the ratings sheet and cross-checked against the site. Where the site's band and K-12 views differ (progressions), the paper says which it uses. Percentages are rounded half up, as on the site.\n\n**What was read**\n\n| Source | How it was used | How fully it was read |\n| --- | --- | --- |\n| Ratings sheet, \"All Standards and Ratings K-12\" (9 Nov 2026) | Every figure | All 2,166 rows |\n| Organized ratings workbook | Cross-check of totals | All tabs |\n| 20 Findings decks (band and subject) | Cross-check, questions and next-step themes | All slides and speaker notes |\n| K-12 Reports PDF (118 pages) | Cross-check | First 80 pages scanned by search; a few read directly |\n| 7 other Reports PDFs | Cross-check of headline figures | Scanned by search, not read page by page |\n\n**How terms are used**\n\n- **Rated standards.** One rating is one standard in one grade. A standard shared by several grades is counted once for each grade that rated it.\n- **At least introduced.** Rated in depth or introduced.\n- **Not taught where it belongs (confirmed).** The grade the standard belongs to rated it not taught (for a standard shared across grades, every grade that shares it did). In Math and ELA each standard belongs to one grade, so this means that grade's team rated it not taught; it does not mean other grades should have taught it.\n- **Not taught where it fits.** Each standard was placed in the grade or course where it fits best, and that grade or course rated it not taught. Other grades were not asked to rate it.\n- **Introduced, never in depth (met but not owned).** Introduced in at least one grade and in depth in none.\n- **Progression finding.** An automatic check on a chain of linked standards: a step not taught, or a standard in depth while the one it builds on is not taught.\n- **Taught at every step.** Every standard in the chain, across two or more grades, is at least introduced.\n- **Progression.** A chain of linked standards across grades. Official links are the Coherence Map (Math), anchor standards (ELA) and the standards' own structure (Science, Social Studies). Other links are suggestions.\n- **Instructional capacity.** The average number of standards one grade rated in depth, introduced and not taught in a year (all ratings divided by the number of grades), rounded.\n- **Hand-over gap.** A standard taught in depth while a standard it builds on, placed in an earlier school, is rated not taught.\n- **Priority and power standards.** Standards the school's own documents name: power standards in K-5, priority standards in 6-12.\n\n**Limits to keep in view**\n\n- Ratings are teachers' judgements of teaching across a grade. They are not observations and not student results.\n- Grades may have read \"in depth\" differently. Uniform ratings across a whole grade are a reason to check how the scale was read; the paper points these out so teams can discuss them.\n- The ratings are what teachers reported as taught. They do not measure what students know or can do.\n- Each team rated its own subject. Literacy taught in Science and Social Studies, and Math taught in Science, may not show in the ELA and Math ratings.\n- Middle school Science and high school Math, Science and Social Studies standards were placed in the grade or course where each fits best. 24 K-5 Social Studies standards are also rated not taught in the grade where they fit.\n- Band counts of progressions look only at steps inside the band, so they do not add up to the K-12 figure.\n- Literacy audit figures come from the 2026 PK-5 literacy audit of weekly plans.\n- Some strands have few standards in a grade, so a single rating can move a percentage a long way. Counts are given where this matters.\n- Suggested links between standards (most ELA, Science and Social Studies hand-overs) have not been checked by teachers.\n\n**Status.** This is a draft for the Vertical Alignment Committee. Each finding should be checked with the teams concerned before it is treated as settled. The planned review of weekly and unit plans (Part 2) will test many of these patterns against what is actually planned.",
 "sections": []
 },
 "EXPLAIN": {
@@ -2278,9 +2278,9 @@
 "glance": "Science is often all or nothing: a topic is either taught deeply or not taught that year.",
 "grades": "Depth changes from year to year, which may simply follow which units each grade runs.",
 "data": "When Science is taught, it is more often in depth than introduced. The open question is which year each topic lives in.",
-"patterns": "Much of \"not taught\" in secondary Science may be a placement question, and Science also carries a lot of literacy.",
+"patterns": "Much of \"not taught\" in secondary Science is standards outside the discipline each grade teaches, and Science also carries a lot of literacy.",
 "questions": "These questions are about a shared K-12 map of Science units, so every strand has a home.",
-"table": "Each band takes between a quarter and a half of its Science to depth. Middle school leaves the most not taught, possibly a placement question."
+"table": "Each band takes between a quarter and a half of its Science to depth. Middle school leaves the most not taught, mostly standards outside each grade's discipline."
 },
 "social-studies": {
 "glance": "Social Studies is mostly introduced. This is where a few shared choices could make the biggest difference.",
