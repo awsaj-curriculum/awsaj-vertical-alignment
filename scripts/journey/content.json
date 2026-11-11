@@ -35,8 +35,8 @@
 "cat": "Gaps"
 },
 {
-"title": "Standards no grade teaches.",
-"text": "281 standards are rated not taught by every grade that could teach them. A further 172 are not taught where they were placed, with other grades not asked.",
+"title": "Standards not taught where they belong.",
+"text": "281 standards are rated not taught by the grade they belong to (or, for standards shared across grades, by every grade that shares them). A further 172 are not taught where they were placed, with other grades not asked.",
 "cat": "Gaps"
 },
 {
@@ -203,7 +203,7 @@
 },
 {
 "data": "222 in K-5, 52 in 6-8, 7 in 9-12",
-"text": "Of the 281 standards no grade teaches, which should their own grade start teaching, and which can we agree we do not use?",
+"text": "Of the 281 standards rated not taught where they belong, which should their own grade start teaching, and which can we agree we do not use?",
 "cat": "Improving the curriculum"
 },
 {
@@ -238,7 +238,7 @@
 },
 {
 "text": "When we open the Gaps page for our grade and subject and check 3 confirmed gaps together, is each one really not taught?",
-"data": "281 standards are rated not taught by every grade that could teach them",
+"data": "281 standards are rated not taught by the grade or grades they belong to",
 "cat": "How we rate and plan"
 },
 {
@@ -326,7 +326,7 @@
 "cat": "Gaps"
 },
 {
-"title": "Standards no grade teaches.",
+"title": "Standards not taught in their own grade.",
 "text": "222 in K-5: ELA 100, Math 60, Social Studies 38, Science 24.",
 "cat": "Gaps"
 },
@@ -408,7 +408,7 @@
 },
 {
 "title": "Physical Science in K-5 matters later.",
-"text": "Twelve Physical Science standards are taught by no K-5 grade. Nine of the 17 Science hand-over gaps start here and feed Grade 8 and Grade 10 Physical Science, which are among our strongest results.",
+"text": "Twelve K-5 Physical Science standards are rated not taught by their own grade. Nine of the 17 Science hand-over gaps start here and feed Grade 8 and Grade 10 Physical Science, which are among our strongest results.",
 "cat": "Handoffs"
 },
 {
@@ -432,8 +432,8 @@
 "cat": "Language and literacy"
 },
 {
-"title": "Language holds many of the ELA standards no grade teaches.",
-"text": "Language has 43 of the 100 ELA standards no grade teaches, and 52 of the 174 that are only introduced.",
+"title": "Language holds many of the ELA standards not taught in their own grade.",
+"text": "Language has 43 of the 100 ELA standards rated not taught by their own grade, and 52 of the 174 that are only introduced.",
 "cat": "Language and literacy"
 },
 {
@@ -468,8 +468,8 @@
 "title": "Moving forward",
 "items": [
 {
-"data": "Language is 10% in depth in K-5, with 43 of the 100 ELA standards no grade teaches and 52 of the 174 introduced only",
-"text": "Language has the most ELA standards no grade takes to depth: how could each grade take its own grammar, conventions and vocabulary standards to depth?",
+"data": "Language is 10% in depth in K-5, with 43 of the 100 ELA standards not taught in their own grade and 52 of the 174 introduced only",
+"text": "Language has the most ELA standards never taken to depth: how could each grade take its own grammar, conventions and vocabulary standards to depth?",
 "cat": "Improving the curriculum"
 },
 {
@@ -498,12 +498,12 @@
 "cat": "Working across grade levels"
 },
 {
-"data": "0 of 30 fractions ratings in depth in Grades 3 to 5, 63% not taught; 19 fractions standards taught by no grade",
+"data": "0 of 30 fractions ratings in depth in Grades 3 to 5, 63% not taught; 19 fractions standards not taught in their own grade",
 "text": "Fractions begin in Grade 3 and feed ratios and algebra: what would a Grade 3 to Grade 6 plan for fractions look like?",
 "cat": "Knowing the bands above and below"
 },
 {
-"data": "12 K-5 Physical Science standards are taught by no grade; 9 hand-over gaps run from them into Grade 8 and Grade 10",
+"data": "12 K-5 Physical Science standards are not taught in their own grade; 9 hand-over gaps run from them into Grade 8 and Grade 10",
 "text": "Which K-5 Physical Science ideas do Grade 8 and Grade 10 rely on, and how could the K-5 grades they belong to teach them?",
 "cat": "Knowing the bands above and below"
 },
@@ -513,12 +513,12 @@
 "cat": "Knowing the bands above and below"
 },
 {
-"data": "Depth moves 16%, 21%, 55%, 2%, 12%, 24% from Kindergarten to Grade 5; 222 K-5 standards are taught by no grade",
+"data": "Depth moves 16%, 21%, 55%, 2%, 12%, 24% from Kindergarten to Grade 5; 222 K-5 standards are not taught in their own grade",
 "text": "Which 5 K-5 standards should every class in the next grade be able to rely on, and how would the next teacher know?",
 "cat": "Knowing the bands above and below"
 },
 {
-"data": "222 K-5 standards are taught by no grade, and 34 hand-over gaps begin in K-5",
+"data": "222 K-5 standards are not taught in their own grade, and 34 hand-over gaps begin in K-5",
 "text": "Which K-5 standards do we most want every child to hold securely before Grade 6?",
 "cat": "Knowing the bands above and below"
 },
@@ -607,7 +607,7 @@
 "cat": "Gaps"
 },
 {
-"title": "Standards no grade teaches.",
+"title": "Standards not taught in any grade they belong to.",
 "text": "52 in 6-8 (ELA 24, Social Studies 18, Math 10). A further 29 Science standards are not taught where they were placed.",
 "cat": "Gaps"
 },
@@ -899,7 +899,7 @@
 },
 {
 "title": "Few confirmed gaps.",
-"text": "Only 7 standards are confirmed as taught by no grade. A further 119 are not taught in the course where they were placed, with other grades not asked (Math 77, Social Studies 22, Science 20).",
+"text": "Only 7 standards are confirmed as not taught in any grade or course they belong to. A further 119 are not taught in the course where they were placed, with other grades not asked (Math 77, Social Studies 22, Science 20).",
 "cat": "Gaps"
 },
 {
@@ -945,7 +945,7 @@
 },
 {
 "title": "Strong Physical Science sits on thin foundations.",
-"text": "Six high school Science standards taught in depth build on K-5 standards that no K-5 grade teaches. Five of those are Physical Science.",
+"text": "Six high school Science standards taught in depth build on K-5 standards rated not taught by their own K-5 grade. Five of those are Physical Science.",
 "cat": "Handoffs"
 },
 {
@@ -1065,7 +1065,7 @@
 "cat": "Knowing the bands above and below"
 },
 {
-"data": "All 15 Grade 10 Physical Science standards are in depth; 5 build on K-5 Physical Science standards no grade teaches",
+"data": "All 15 Grade 10 Physical Science standards are in depth; 5 build on K-5 Physical Science standards not taught in their own grade",
 "text": "Which K-5 and middle school Physical Science ideas does Grade 10 wish students arrived with?",
 "cat": "Knowing the bands above and below"
 },
@@ -1159,7 +1159,7 @@
 "cat": "Gaps"
 },
 {
-"title": "Standards no grade teaches.",
+"title": "Standards not taught in their own grade.",
 "text": "70 confirmed: 60 in K-5 and 10 in 6-8, none in high school. Most are in Fractions (19), Operations and Algebraic Thinking (15) and Measurement and Data (15).",
 "cat": "Gaps"
 },
@@ -1226,7 +1226,7 @@
 },
 {
 "title": "Kindergarten gaps are foundational ones.",
-"text": "Among the 60 K-5 standards no grade teaches are counting to 100, addition and subtraction word problems, and composing and decomposing numbers within 10. Grade 1 then teaches standards in depth that build on them.",
+"text": "Kindergarten rated counting to 100, addition and subtraction word problems, and composing and decomposing numbers within 10 as not taught; they are among the 60 K-5 Math standards rated not taught by their own grade. Grade 1 then teaches standards in depth that build on them.",
 "cat": "Handoffs"
 },
 {
@@ -1425,7 +1425,7 @@
 "cat": "Gaps"
 },
 {
-"title": "Standards no grade teaches.",
+"title": "Standards not taught in their own grade.",
 "text": "128 confirmed: 100 in K-5, 24 in 6-8, 4 in 9-12. Language has 50 of them and Reading 29.",
 "cat": "Gaps"
 },
@@ -1497,7 +1497,7 @@
 },
 {
 "title": "Language is the thread that never fully catches up.",
-"text": "It is the thinnest strand in every band (10%, 45%, 30%), holds the most standards no grade takes to depth, and 5 of the 19 hand-over gaps start from Grade 4 Language standards.",
+"text": "It is the thinnest strand in every band (10%, 45%, 30%), holds the most standards never taken to depth, and 5 of the 19 hand-over gaps start from Grade 4 Language standards.",
 "cat": "Language and literacy"
 },
 {
@@ -1691,7 +1691,7 @@
 "cat": "Gaps"
 },
 {
-"title": "Standards no grade teaches.",
+"title": "Standards not taught in their own grade.",
 "text": "24 confirmed, all in K-5: Physical Science 12, Earth and Space 8, Engineering 2, Life Science 2.",
 "cat": "Gaps"
 },
@@ -1763,7 +1763,7 @@
 },
 {
 "title": "Physical Science is a through-line worth protecting.",
-"text": "It builds from 31% to 40% to 88%. But 12 K-5 Physical Science standards are taught by no grade, and 9 hand-over gaps run from those into Grade 8 and Grade 10 Physical Science.",
+"text": "It builds from 31% to 40% to 88%. But 12 K-5 Physical Science standards are rated not taught by their own grade, and 9 hand-over gaps run from those into Grade 8 and Grade 10 Physical Science.",
 "cat": "Handoffs"
 },
 {
@@ -1864,7 +1864,7 @@
 },
 {
 "data": "Physical Science 12, Earth and Space 8, Engineering 2, Life Science 2",
-"text": "For the 24 K-5 standards no grade teaches, which should their own grade start teaching, and which do we choose not to use?",
+"text": "For the 24 K-5 standards rated not taught by their own grade, which should their own grade start teaching, and which do we choose not to use?",
 "cat": "Improving the curriculum"
 },
 {
@@ -1878,7 +1878,7 @@
 "cat": "Working across grade levels"
 },
 {
-"data": "12 K-5 Physical Science standards are taught by no grade; 9 hand-over gaps run from them into Grades 8 and 10",
+"data": "12 K-5 Physical Science standards are not taught in their own grade; 9 hand-over gaps run from them into Grades 8 and 10",
 "text": "Which K-5 Physical Science ideas do Grade 8 and Grade 10 most rely on, and how could the K-5 grades they belong to teach them?",
 "cat": "Knowing the bands above and below"
 },
@@ -1921,7 +1921,7 @@
 {
 "title": "Knowing the bands above and below",
 "text": "In K-5, each grade could start teaching its own Physical Science standards that Grade 8 and Grade 10 build on.",
-"data": "12 K-5 Physical Science standards taught by no grade; 9 hand-over gaps run into Grades 8 and 10"
+"data": "12 K-5 Physical Science standards not taught in their own grade; 9 hand-over gaps run into Grades 8 and 10"
 },
 {
 "title": "A concrete action we could take",
@@ -1972,7 +1972,7 @@
 "cat": "Gaps"
 },
 {
-"title": "Standards no grade teaches.",
+"title": "Standards not taught in any grade they belong to.",
 "text": "59 confirmed (K-5 38, 6-8 18, 9-12 3). A further 46 are not taught where placed.",
 "cat": "Gaps"
 },
@@ -2211,7 +2211,7 @@
 "method": {
 "key": "method",
 "title": "Method, sources and limits",
-"intro": "Every figure in this paper was computed from the ratings sheet and cross-checked against the site. Where the site's band and K-12 views differ (progressions), the paper says which it uses. Percentages are rounded half up, as on the site.\n\n**What was read**\n\n| Source | How it was used | How fully it was read |\n| --- | --- | --- |\n| Ratings sheet, \"All Standards and Ratings K-12\" (9 Nov 2026) | Every figure | All 2,166 rows |\n| Organized ratings workbook | Cross-check of totals | All tabs |\n| 20 Findings decks (band and subject) | Cross-check, questions and next-step themes | All slides and speaker notes |\n| K-12 Reports PDF (118 pages) | Cross-check | First 80 pages scanned by search; a few read directly |\n| 7 other Reports PDFs | Cross-check of headline figures | Scanned by search, not read page by page |\n\n**How terms are used**\n\n- **Rated standards.** One rating is one standard in one grade. A standard shared by several grades is counted once for each grade that rated it.\n- **At least introduced.** Rated in depth or introduced.\n- **No grade teaches it (confirmed).** Every grade that could teach the standard rated it not taught.\n- **Not taught where placed.** The grade it was placed in rated it not taught, and other grades that could teach it were not asked.\n- **Introduced, never in depth (met but not owned).** Introduced in at least one grade and in depth in none.\n- **Progression finding.** An automatic check on a chain of linked standards: a step not taught, or a standard in depth while the one it builds on is not taught.\n- **Taught at every step.** Every standard in the chain, across two or more grades, is at least introduced.\n- **Progression.** A chain of linked standards across grades. Official links are the Coherence Map (Math), anchor standards (ELA) and the standards' own structure (Science, Social Studies). Other links are suggestions.\n- **Instructional capacity.** The average number of standards one grade rated in depth, introduced and not taught in a year (all ratings divided by the number of grades), rounded.\n- **Hand-over gap.** A standard taught in depth while a standard it builds on, placed in an earlier school, is rated not taught.\n- **Priority and power standards.** Standards the school's own documents name: power standards in K-5, priority standards in 6-12.\n\n**Limits to keep in view**\n\n- Ratings are teachers' judgements of teaching across a grade. They are not observations and not student results.\n- Grades may have read \"in depth\" differently. Uniform ratings across a whole grade are a reason to check how the scale was read; the paper points these out so teams can discuss them.\n- The ratings are what teachers reported as taught. They do not measure what students know or can do.\n- Each team rated its own subject. Literacy taught in Science and Social Studies, and Math taught in Science, may not show in the ELA and Math ratings.\n- Middle school Science and high school standards were placed in grades and courses by suggestion. \"Not taught\" there can mean \"taught in another year\". 24 K-5 Social Studies standards are also not taught in the grade where they were placed.\n- Band counts of progressions look only at steps inside the band, so they do not add up to the K-12 figure.\n- Literacy audit figures come from the 2026 PK-5 literacy audit of weekly plans.\n- Some strands have few standards in a grade, so a single rating can move a percentage a long way. Counts are given where this matters.\n- Suggested links between standards (most ELA, Science and Social Studies hand-overs) have not been checked by teachers.\n\n**Status.** This is a draft for the Vertical Alignment Committee. Each finding should be checked with the teams concerned before it is treated as settled. The planned review of weekly and unit plans (Part 2) will test many of these patterns against what is actually planned.",
+"intro": "Every figure in this paper was computed from the ratings sheet and cross-checked against the site. Where the site's band and K-12 views differ (progressions), the paper says which it uses. Percentages are rounded half up, as on the site.\n\n**What was read**\n\n| Source | How it was used | How fully it was read |\n| --- | --- | --- |\n| Ratings sheet, \"All Standards and Ratings K-12\" (9 Nov 2026) | Every figure | All 2,166 rows |\n| Organized ratings workbook | Cross-check of totals | All tabs |\n| 20 Findings decks (band and subject) | Cross-check, questions and next-step themes | All slides and speaker notes |\n| K-12 Reports PDF (118 pages) | Cross-check | First 80 pages scanned by search; a few read directly |\n| 7 other Reports PDFs | Cross-check of headline figures | Scanned by search, not read page by page |\n\n**How terms are used**\n\n- **Rated standards.** One rating is one standard in one grade. A standard shared by several grades is counted once for each grade that rated it.\n- **At least introduced.** Rated in depth or introduced.\n- **Not taught where it belongs (confirmed).** The grade the standard belongs to rated it not taught (for a standard shared across grades, every grade that shares it did). In Math and ELA each standard belongs to one grade, so this means that grade's team rated it not taught; it does not mean other grades should have taught it.\n- **Not taught where placed.** The grade it was placed in rated it not taught, and other grades that could teach it were not asked.\n- **Introduced, never in depth (met but not owned).** Introduced in at least one grade and in depth in none.\n- **Progression finding.** An automatic check on a chain of linked standards: a step not taught, or a standard in depth while the one it builds on is not taught.\n- **Taught at every step.** Every standard in the chain, across two or more grades, is at least introduced.\n- **Progression.** A chain of linked standards across grades. Official links are the Coherence Map (Math), anchor standards (ELA) and the standards' own structure (Science, Social Studies). Other links are suggestions.\n- **Instructional capacity.** The average number of standards one grade rated in depth, introduced and not taught in a year (all ratings divided by the number of grades), rounded.\n- **Hand-over gap.** A standard taught in depth while a standard it builds on, placed in an earlier school, is rated not taught.\n- **Priority and power standards.** Standards the school's own documents name: power standards in K-5, priority standards in 6-12.\n\n**Limits to keep in view**\n\n- Ratings are teachers' judgements of teaching across a grade. They are not observations and not student results.\n- Grades may have read \"in depth\" differently. Uniform ratings across a whole grade are a reason to check how the scale was read; the paper points these out so teams can discuss them.\n- The ratings are what teachers reported as taught. They do not measure what students know or can do.\n- Each team rated its own subject. Literacy taught in Science and Social Studies, and Math taught in Science, may not show in the ELA and Math ratings.\n- Middle school Science and high school standards were placed in grades and courses by suggestion. \"Not taught\" there can mean \"taught in another year\". 24 K-5 Social Studies standards are also not taught in the grade where they were placed.\n- Band counts of progressions look only at steps inside the band, so they do not add up to the K-12 figure.\n- Literacy audit figures come from the 2026 PK-5 literacy audit of weekly plans.\n- Some strands have few standards in a grade, so a single rating can move a percentage a long way. Counts are given where this matters.\n- Suggested links between standards (most ELA, Science and Social Studies hand-overs) have not been checked by teachers.\n\n**Status.** This is a draft for the Vertical Alignment Committee. Each finding should be checked with the teams concerned before it is treated as settled. The planned review of weekly and unit plans (Part 2) will test many of these patterns against what is actually planned.",
 "sections": []
 },
 "EXPLAIN": {
