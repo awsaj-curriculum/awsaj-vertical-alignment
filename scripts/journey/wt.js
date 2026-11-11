@@ -7,7 +7,11 @@ const B = D.band, SUBJ = D.subjects, C = D.cells, S = D.school;
 const BANDKEY = { "k-5": "K-5", "g6-8": "6-8", "g9-12": "9-12" };
 const SUBKEY = { math: "Math", ela: "ELA", science: "Science", "social-studies": "Social Studies" };
 const DIVN = { "K-5": "Elementary", "6-8": "Middle", "9-12": "High" };
-const SECNAME = { data: ["What the numbers say", "Key data"], patterns: ["What we notice", "Patterns, trends and comparisons"], questions: ["Questions and our part in the story", "Questions to ponder"], ourpart: ["Questions and our part in the story", "Options to discuss and act on"] };
+const SECNAME = { data: ["Section 1 of 3", "Key facts"], patterns: ["Section 2 of 3", "Relevant patterns"], questions: ["Section 3 of 3", "Where do we go next?"], ourpart: ["Section 3 of 3", "Options to discuss and act on"] };
+/* a small map at the start of each section (Tim, Nov 2026): the three sections as stops on a rising route, this one marked */
+const SECSTOPS = [["data", "Key facts"], ["patterns", "Relevant patterns"], ["questions", "Where do we go next?"]];
+function secMap(stop, key) { const at = SECSTOPS.findIndex((x) => x[0] === key); if (at < 0) return "";
+  return `<div class="secmap" role="img" aria-label="${esc(NAV[stop] || "")}: section ${at + 1} of 3, ${SECSTOPS[at][1]}"><div class="smtop"><span class="smwhere">${esc(NAV[stop] || "")} &middot; Our curriculum journey</span><span class="smnow">Section ${at + 1}: ${SECSTOPS[at][1]}</span></div><div class="smroute" aria-hidden="true"><svg viewBox="0 0 100 64" preserveAspectRatio="none"><path d="M2,57 C9,57 11,52 16.67,52 C33,52 35,32 50,32 S67,12 83.33,12 C90,12 94,11 98,10" fill="none" stroke="#101846" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>${SECSTOPS.map((_, i) => `<span class="smdot ${i < at ? "done" : i === at ? "here" : "next"}" style="--x:${[16.67, 50, 83.33][i]}%;--y:${[12, 32, 52][i]}px">${i < at ? "&#10003;" : i + 1}</span>`).join("")}</div><div class="smlabs">${SECSTOPS.map(([k, t], i) => `<span class="smlab ${i < at ? "done" : i === at ? "here" : "next"}"><span class="smn">${i + 1}.</span> ${t}${i === at ? "<small>You are here</small>" : ""}</span>`).join("")}</div></div>`; }
 const CHUNK = { data: 4, patterns: 3, questions: 4, ourpart: 4 };
 const STOPS = ["whole", "k-5", "g6-8", "g9-12", "math", "ela", "science", "social-studies"];
 const NAV = { whole: "Whole school", "k-5": "K-5", "g6-8": "6-8", "g9-12": "9-12", math: "Math", ela: "ELA", science: "Science", "social-studies": "Social Studies", next: "Where we go next", about: "About the data" };
@@ -65,7 +69,7 @@ function fnTarget(stop, it) {
   const want = numTok(it.data); if (!want.size) return null; const P = WT[stop]; let best = null, bs = 0;
   (P?.sections || []).forEach((sec, si) => { if (!["data", "patterns"].includes(sec.key)) return; sec.items.forEach((x, ii) => { if (x === it) return;
     const have = numTok(`${x.title || ""} ${x.text}`); let sc = 0; want.forEach((t) => { if (have.has(t)) sc += /%/.test(t) ? 1.5 : 1; });
-    if (sc > bs) { bs = sc; best = { id: `it-${stop}-${si}-${ii}`, label: `${sec.key === "data" ? "Key data" : "Pattern"} ${ii + 1}` }; } }); });
+    if (sc > bs) { bs = sc; best = { id: `it-${stop}-${si}-${ii}`, label: `${sec.key === "data" ? "Key fact" : "Pattern"} ${ii + 1}` }; } }); });
   if (best && bs >= 1) return best;
   return /\bGrade|\bG\d|\bKindergarten/.test(it.data) ? { id: "p-grades", label: "Grade by grade chart" } : { id: "p-glance", label: "At a glance chart" };
 }
@@ -88,7 +92,7 @@ function sectionParts(stop, P, si) {
   for (let i = 0; i < items.length; i += n) chunks.push(i);
   if (EDITING || !chunks.length) chunks.splice(0, chunks.length, 0);
   return chunks.map((start, ci) => { const part = EDITING ? items : items.slice(start, start + n), more = !EDITING && chunks.length > 1 ? ` <span class="pof">${ci + 1} of ${chunks.length}</span>` : "";
-    return `<section class="part${ci ? " cont" : ""}" id="p-${sec.key}-${ci}"><span class="eyebrow">${eb}</span><h2>${sec.key === "questions" ? "Questions and our part in the story" : esc(sec.title === h ? h : sec.title)}${more}</h2>${EXP(stop, sec.key)}${part.some((x) => x.cat) ? `<p class="cats"><span>Themes:</span> ${[...new Set(part.map((x) => x.cat).filter(Boolean))].map(esc).join(" · ")}</p>` : ""}${part.length ? `<ol class="${sec.key === "questions" ? "qs" : "wl"}" start="${start + 1}">${part.map((it, k) => itemHTML(stop, si, start + k, it, sec.key)).join("")}</ol>` : `<p class="note">No items in this section.</p>`}${EDITING ? `<div class="eacts sec">${btnE(`data-add-item="${si}"`, "+ Add an item")}${btnE(`data-del-sec="${si}"`, "Delete this section")}</div>` : ""}</section>`; }).join("");
+    return `<section class="part${ci ? " cont" : ""}" id="p-${sec.key}-${ci}">${ci ? "" : secMap(stop, sec.key)}<span class="eyebrow">${eb}</span><h2>${esc(h)}${more}</h2>${EXP(stop, sec.key)}${part.some((x) => x.cat) ? `<p class="cats"><span>Themes:</span> ${[...new Set(part.map((x) => x.cat).filter(Boolean))].map(esc).join(" · ")}</p>` : ""}${part.length ? `<ol class="${sec.key === "questions" ? "qs" : "wl"}" start="${start + 1}">${part.map((it, k) => itemHTML(stop, si, start + k, it, sec.key)).join("")}</ol>` : `<p class="note">No items in this section.</p>`}${EDITING ? `<div class="eacts sec">${btnE(`data-add-item="${si}"`, "+ Add an item")}${btnE(`data-del-sec="${si}"`, "Delete this section")}</div>` : ""}</section>`; }).join("");
 }
 function stopParts(stop) {
   const P = WT[stop]; if (!P) return "";
