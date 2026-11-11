@@ -88,6 +88,16 @@ browser from public reads with SheetJS 0.18.5 from cdnjs (pinned with an integri
 Needs the PIN (Tim): `check_pin` checks it in the database first. Never reads `app_settings`. File name
 `Vertical_Alignment_<copy name or Live>_<YYYY-MM-DD>.xlsx`.
 
+## Part 2: data walkthrough (journey.html)
+Tim, Nov 2026: Part 2 of the site is now the analytical walkthrough of the Part 1 ratings, "Part 2: What our ratings tell us"
+(`site/journey.html`, a link in the committee's tab bar with a "?" (`part2` in help.js); the old Vertical Alignment Audit tab is
+hidden until the curriculum audit runs). Whole school, K-5, 6-8, 9-12 and the four subjects, each: charts, Key data, Patterns,
+then "Questions and our part in the story", with "What you are seeing / What it adds to our story" on every slide, footnote links
+to the figure on the page, links to this site's views, step-by-step mode (arrows, Page Up/Down, Enter, scroll) or one page, and
+print to PDF. Built by `python3 scripts/journey/build.py` from `scripts/journey/` (template, content.json, data.json, js). The
+public copy has NO teacher-survey content or numbers (Tim): the survey notes stay only in his private copy, PDF and doc.
+Tone rules: what teachers reported as taught, not what students know; speak softly about grades that rated nothing in depth.
+
 ## Rating scale and colours
 Awsaj brand (from awsaj.qa logo and stylesheet): dark green #024638 (frame, headings, buttons), greys #56595A / #75787B,
 and the four symbol ribbons: orange #ED8B00, blue #0092BC, magenta #D00070, lime #78BE21. Font: Barlow (free, DIN-like;
