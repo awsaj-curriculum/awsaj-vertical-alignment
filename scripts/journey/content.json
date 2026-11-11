@@ -2,7 +2,7 @@
 "howto": {
 "key": "howto",
 "title": "How to read this paper",
-"intro": "This paper walks through what our teachers reported about how our standards are taught, from Kindergarten to Grade 12. It has eight parts: the whole school, the three grade bands, and the four subjects. Each part has three sections: Facts, Patterns, and Moving forward (questions for teams to take forward, and options for our part in the story).\n\n**Where the numbers come from.** Every figure is computed from the ratings sheet of 9 November 2026 (2,166 standards, 2,709 ratings, last rating 8 November) and checked against the Vertical Alignment reports and findings decks.\n\n**The three ratings.**\n\n| Rating | What it means |\n| --- | --- |\n| Taught in depth | ALL classes in the grade consistently teach, reteach, review and assess the standard |\n| Introduced / exposed | Anything in between: some classes, or taught briefly (for example, 3 of 5 classes) |\n| Not taught | No class in the grade teaches it |\n\n**Four things to hold in mind while reading.**\n\n- The ratings are what teachers reported as taught across a whole grade. They are not a measure of what students know or can do, and they do not judge any teacher.\n- \"In depth\" is all or nothing. Teams may have read that more or less strictly, so a low figure can reflect a stricter reading, not less teaching. Where this matters most, the paper says so. Where a team rated nothing in depth, we read it as careful use of an all-or-nothing scale, not as an absence of teaching.\n- Each team rated its own subject's standards. Much literacy (vocabulary, academic language, speaking, writing, reading non-fiction) is also taught through Science and Social Studies, and that teaching may not show in the ELA ratings.\n- Shares are of the main grade-level ratings (one standard in one grade). Essential Elements (the alternate standards) are counted apart.\n\n**We cannot teach everything equally.** No school can take every standard to depth, and that is not the goal. The goal is to choose on purpose: which standards we teach in depth, which we introduce, and which we leave out, and to plan that proportion together across the grades. The ratings show the mix we have now, so we can decide the mix we want.\n\n**Instructional capacity.** How many standards a grade actually takes to depth, introduces or leaves out in a year, worked out from the ratings (the average for one grade). It is not a target and not a judgement: it describes what our teaching time holds now, so we can decide together how to use it.\n\n**Categories.** In every part, each section groups its items under the same categories, in the same order, so a team can follow one kind of observation across the whole school, its band and its subject. Facts: Bright spots, Gaps, Breadth without depth, Anomalies and Other notable. Patterns: Trends across the grades, Handoffs, Language and literacy, How we rated, Choices and capacity, Toward the SAT and Other notable. Moving forward: Improving the curriculum, Working across grade levels, Knowing the bands above and below, and How we rate and plan. A category with nothing in it is left out.\n\n**How each part is laid out.** Three sections, each opening with a small map that shows where you are: Facts, then Patterns, then Moving forward (questions to ponder, then options for our part in the story: improving the curriculum, working across grade levels, knowing the bands above and below, and a concrete action). Every pattern carries its figures in the text, and every question ends with the data behind it, in brackets and italics. The questions are invitations, not conclusions. Our strengths are named alongside the places where we might build.",
+"intro": "This paper walks through what our teachers reported about how our standards are taught, from Kindergarten to Grade 12. It has eight parts: the whole school, the three grade bands, and the four subjects. Each part has three sections: Facts, Patterns, and Moving forward (questions for teams to take forward, and options for our part in the story).\n\n**Where the numbers come from.** Every figure is computed from the ratings sheet of 9 November 2026 (2,166 standards, 2,709 ratings, last rating 8 November) and checked against the Vertical Alignment reports and findings decks.\n\n**The three ratings.**\n\n| Rating | What it means |\n| --- | --- |\n| Taught in depth | ALL classes in the grade consistently teach, reteach, review and assess the standard |\n| Introduced / exposed | Anything in between: some classes, or taught briefly (for example, 3 of 5 classes) |\n| Not taught | No class in the grade teaches it |\n\n**Four things to hold in mind while reading.**\n\n- The ratings are what teachers reported as taught across a whole grade. They are not a measure of what students know or can do, and they do not judge any teacher.\n- \"In depth\" is all or nothing. Teams may have read that more or less strictly, so a low figure can reflect a stricter reading, not less teaching. Where this matters most, the paper says so. Where a team rated nothing in depth, we read it as careful use of an all-or-nothing scale, not as an absence of teaching.\n- Each team rated its own subject's standards. Much literacy (vocabulary, academic language, speaking, writing, reading non-fiction) is also taught through Science and Social Studies, and that teaching may not show in the ELA ratings.\n- Shares are of the main grade-level ratings (one standard in one grade). Essential Elements (the alternate standards) are counted apart.\n\n**We cannot teach everything equally.** No school can take every standard to depth, and that is not the goal. The goal is to choose on purpose: which standards we teach in depth, which we introduce, and which we leave out, and to plan that proportion together across the grades. The ratings show the mix we have now, so we can decide the mix we want.\n\n**Instructional capacity.** How many standards a grade actually takes to depth, introduces or leaves out in a year, worked out from the ratings (the average for one grade). It is not a target and not a judgement: it describes what our teaching time holds now, so we can decide together how to use it.\n\n**Categories.** In every part, each section groups its items under the same categories, in the same order, so a team can follow one kind of observation across the whole school, its band and its subject. Facts: Bright spots, Gaps, Breadth without depth, Anomalies and Other notable. Patterns: Trends across the grades, Handoffs, Language and literacy, Essential Elements, How we rated, Choices and capacity, Toward the SAT and Other notable. Moving forward: Improving the curriculum, Working across grade levels, Knowing the bands above and below, and How we rate and plan. A category with nothing in it is left out.\n\n**How each part is laid out.** Three sections, each opening with a small map that shows where you are: Facts, then Patterns, then Moving forward (questions to ponder, then options for our part in the story: improving the curriculum, working across grade levels, knowing the bands above and below, and a concrete action). Every pattern carries its figures in the text, and every question ends with the data behind it, in brackets and italics. The questions are invitations, not conclusions. Our strengths are named alongside the places where we might build.",
 "sections": []
 },
 "whole": {
@@ -131,19 +131,19 @@
 "cat": "Language and literacy"
 },
 {
+"title": "Literacy lives in every subject.",
+"text": "ELA is rated by ELA teams, yet much vocabulary, academic language, speaking and non-fiction reading is taught through Science and Social Studies. The 2026 literacy audit of weekly plans found about two-fifths of vocabulary teaching, speaking and non-fiction in those subjects. ELA's thinner strands (Language 10% in depth in K-5) may be taught more than the ELA ratings show.",
+"cat": "Language and literacy"
+},
+{
 "title": "Essential Elements are rated in depth far more often in K-5.",
 "text": "56% of K-5 Essential Elements are in depth against 21% of the main standards. This may show where much of our real teaching sits, or it may show that teams rated the support they give.",
-"cat": "Language and literacy"
+"cat": "Essential Elements"
 },
 {
 "title": "Essential Elements are rated far above the main standards in several grades.",
 "text": "In depth, main standards against Essential Elements: Grade 1 21% against 74%, Grade 2 55% against 75%, Grade 3 2% against 64%, Grade 5 24% against 73%. Only Grade 9 is lower (24% against 19%). Much deep teaching may be happening at the level students are at.",
-"cat": "Language and literacy"
-},
-{
-"title": "Literacy lives in every subject.",
-"text": "ELA is rated by ELA teams, yet much vocabulary, academic language, speaking and non-fiction reading is taught through Science and Social Studies. The 2026 literacy audit of weekly plans found about two-fifths of vocabulary teaching, speaking and non-fiction in those subjects. ELA's thinner strands (Language 10% in depth in K-5) may be taught more than the ELA ratings show.",
-"cat": "Language and literacy"
+"cat": "Essential Elements"
 },
 {
 "title": "Grade 2 and Grade 3 rated very differently.",
@@ -432,11 +432,6 @@
 "cat": "Language and literacy"
 },
 {
-"title": "Grade 3 may be teaching at the level students are at.",
-"text": "Grade 3 rated most of its Essential Elements in depth (Math 59%, ELA 66%) and kept \"in depth\" for none of its grade-level standards. Grades 1 and 5 show the same pattern more mildly (Essential Elements 74% and 73% in depth against 21% and 24%). One reading: teams teach in depth at the level students are at, and kept \"in depth\" for the grade-level standard itself.",
-"cat": "Language and literacy"
-},
-{
 "title": "Language holds many of the ELA standards no grade teaches.",
 "text": "Language has 43 of the 100 ELA standards no grade teaches, and 52 of the 174 that are only introduced.",
 "cat": "Language and literacy"
@@ -445,6 +440,11 @@
 "title": "Literacy is also taught through Science and Social Studies.",
 "text": "K-5 classes teach vocabulary, talk and non-fiction reading inside Science and Social Studies units, which the ELA ratings may not capture. K-5 Science reaches 29% in depth, above K-5 ELA (19%).",
 "cat": "Language and literacy"
+},
+{
+"title": "Grade 3 may be teaching at the level students are at.",
+"text": "Grade 3 rated most of its Essential Elements in depth (Math 59%, ELA 66%) and kept \"in depth\" for none of its grade-level standards. Grades 1 and 5 show the same pattern more mildly (Essential Elements 74% and 73% in depth against 21% and 24%). One reading: teams teach in depth at the level students are at, and kept \"in depth\" for the grade-level standard itself.",
+"cat": "Essential Elements"
 },
 {
 "title": "Grade 2 and Grade 3 are 53 points apart.",
@@ -964,14 +964,14 @@
 "cat": "Language and literacy"
 },
 {
-"title": "Essential Elements in Social Studies outpace the main standards.",
-"text": "22% in depth against 3%. In Science they are also slightly ahead (55% against 48%).",
-"cat": "Language and literacy"
-},
-{
 "title": "Science and Social Studies carry literacy too.",
 "text": "High school Science (48% in depth) uses reading, data and argument writing that ELA standards describe. Social Studies inquiry (all 10 standards not taught in Grades 9 and 10) may be close to the research ELA teaches in depth.",
 "cat": "Language and literacy"
+},
+{
+"title": "Essential Elements in Social Studies outpace the main standards.",
+"text": "22% in depth against 3%. In Science they are also slightly ahead (55% against 48%).",
+"cat": "Essential Elements"
 },
 {
 "title": "Priority Math is deepest in Grades 9 and 10.",
@@ -1232,7 +1232,7 @@
 {
 "title": "K-5 Essential Elements tell a second story.",
 "text": "82% of K-5 Math Essential Elements are in depth (95% in Grades 1 and 5). Much deep Math teaching may be happening at the Essential Element level, which the main ratings do not show.",
-"cat": "Language and literacy"
+"cat": "Essential Elements"
 },
 {
 "title": "In middle school the two sets agree.",
@@ -1511,14 +1511,14 @@
 "cat": "Language and literacy"
 },
 {
-"title": "Grade 3 may be teaching more than its rating shows.",
-"text": "The team kept \"in depth\" for its Essential Elements (66%) rather than for the grade-level standards. Writing and Speaking and Listening are introduced in full.",
-"cat": "Language and literacy"
-},
-{
 "title": "Literacy is also taught in Science and Social Studies.",
 "text": "These are ELA teams' ratings of ELA lessons. Vocabulary, academic language, speaking and writing are also taught in Science and Social Studies, so ELA standards such as Language and informational reading may be taught more than this part shows. The 2026 literacy audit found about two-fifths of vocabulary teaching, speaking and non-fiction outside the literacy block.",
 "cat": "Language and literacy"
+},
+{
+"title": "Grade 3 may be teaching more than its rating shows.",
+"text": "The team kept \"in depth\" for its Essential Elements (66%) rather than for the grade-level standards. Writing and Speaking and Listening are introduced in full.",
+"cat": "Essential Elements"
 },
 {
 "title": "Kindergarten and Grade 4 rated few standards in depth at either level.",
@@ -2053,14 +2053,14 @@
 "cat": "Language and literacy"
 },
 {
-"title": "Essential Elements again run ahead in high school.",
-"text": "In Grade 10, 5 of 9 Essential Elements are in depth while the team has not yet rated a main standard in depth. Deep teaching may be happening at that level.",
-"cat": "Language and literacy"
-},
-{
 "title": "Social Studies may be where much literacy happens.",
 "text": "Units on families, communities and Qatar carry a lot of vocabulary, speaking and non-fiction reading. Teams may rate this time as literacy rather than Social Studies, which could be part of why Social Studies depth looks low.",
 "cat": "Language and literacy"
+},
+{
+"title": "Essential Elements again run ahead in high school.",
+"text": "In Grade 10, 5 of 9 Essential Elements are in depth while the team has not yet rated a main standard in depth. Deep teaching may be happening at that level.",
+"cat": "Essential Elements"
 },
 {
 "title": "Grade 7 rated most standards not taught.",
@@ -2316,6 +2316,7 @@
 "Trends across the grades",
 "Handoffs",
 "Language and literacy",
+"Essential Elements",
 "How we rated",
 "Choices and capacity",
 "Toward the SAT",
