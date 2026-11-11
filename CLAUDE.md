@@ -93,8 +93,8 @@ Tim, Nov 2026: Part 2 of the site is now the analytical walkthrough of the Part 
 (`site/journey.html`, a link in the committee's tab bar with a "?" (`part2` in help.js); the old Vertical Alignment Audit tab is
 hidden until the curriculum audit runs). Whole school, K-5, 6-8, 9-12 and the four subjects, each: charts, Key data, Patterns,
 then "Questions and our part in the story", with "What you are seeing / What it adds to our story" on every slide, footnote links
-to the figure on the page, links to this site's views, step-by-step mode (arrows, Page Up/Down, Enter, scroll) or one page, and
-print to PDF. Built by `python3 scripts/journey/build.py` from `scripts/journey/` (template, content.json, data.json, js). The
+to the figure on the page, links to this site's views, step by step only (arrows, Page Up/Down, Enter, scroll; Tim removed
+"show all on one page"), print to PDF. Items carry a theme (`cat`, same ten themes in every part, `CATS` in content.json). Built by `python3 scripts/journey/build.py` from `scripts/journey/` (template, content.json, data.json, js). The
 public copy has NO teacher-survey content or numbers (Tim): the survey notes stay only in his private copy, PDF and doc.
 Tone rules: what teachers reported as taught, not what students know; speak softly about grades that rated nothing in depth.
 

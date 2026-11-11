@@ -236,6 +236,12 @@ body.presenting .story { min-height: calc(100vh - 160px); min-height: calc(100dv
 body.presenting.step0 .story { min-height: 0; align-content: start; }
 body.presenting .story > .part.on { width: 100%; }
 .panel .colchart, .panel table.heat, .panel .hbars { margin-inline: auto; }
+
+.catchip { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--navy-2); background: rgba(16,24,70,.06); border-radius: 999px; padding: 2px 10px; margin: 0 8px 4px 0; vertical-align: 2px; }
+.story > .part > p.cats { width: 100%; max-width: 1180px; margin: -4px auto 0; font-size: .9rem; color: var(--navy-2); } p.cats span { font-weight: 700; color: var(--navy); }
+@media print { .catchip { background: none; border: 1px solid #ccd; } }
+#presentBtn, #pEnd, #toggleAll { display: none !important; }
+@media (max-height: 820px) { body.presenting.step0:not(.at-map) #sky > #hero { display: none; } }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
@@ -351,10 +357,14 @@ function intro() {
 /* ================= routing and story ================= */
 const parse = () => { const h = (location.hash || "#map").slice(1), m = /^grade-(k|\d{1,2})$/i.exec(h); if (m) { const g = m[1].toUpperCase(); if (D.grades.includes(g)) return { id: stageOf(g).id, grade: g }; } return { id: ORDER.includes(h) ? h : "map", grade: null }; };
 let cur = { id: null, grade: null }, presenting = false, step = 0, swapTimer;
-function gradeCard(g) { const st = stageOf(g); return `<section class="gradecard" style="--c:${st.accent}"><span class="eyebrow">${st.label} · ${st.name}</span><h2>${gname(g)} at a glance</h2>${LEGEND}${hbars(D.subjects.map((s) => [s, D.cells[s][g].main]), gname(g) + ": share taught in depth, introduced and not taught, by subject")}<div class="partacts"><a class="btn" href="${link("dashboard", { subject: "All subjects", grade: g })}" target="_blank" rel="noopener">Open the ${gname(g)} dashboard ↗</a></div></section>`; }
+function gradeExplain(g) { const xs = D.subjects.map((s) => [s, D.cells[s][g].main]).filter(([, m]) => m && m.rated); if (!xs.length) return "";
+  const hi = xs.reduce((a, b) => (b[1].pDeep > a[1].pDeep ? b : a));
+  const adds = hi[1].pDeep > 0 ? `In ${gname(g)}, ${hi[0]} has the most taught in depth (${hi[1].pDeep}%). Comparing the bars shows where this grade's teaching time goes deepest, as a starting point for its team's conversation.` : `${gname(g)} has not yet rated a standard in depth in any subject; most are introduced. That is a place to start a conversation, not a judgement.`;
+  return EXPH(`One bar for each subject in ${gname(g)}: green is taught in depth, blue is introduced, pink is not taught.`, adds); }
+function gradeCard(g) { const st = stageOf(g); return `<section class="gradecard" style="--c:${st.accent}"><span class="eyebrow">${st.label} · ${st.name}</span><h2>${gname(g)} at a glance</h2>${gradeExplain(g)}${LEGEND}${hbars(D.subjects.map((s) => [s, D.cells[s][g].main]), gname(g) + ": share taught in depth, introduced and not taught, by subject")}<div class="partacts"><a class="btn" href="${link("dashboard", { subject: "All subjects", grade: g })}" target="_blank" rel="noopener">Open the ${gname(g)} dashboard ↗</a></div></section>`; }
 function storyHTML(id, grade) {
   const S_ = SECTIONS[id], acc = ACCENT[id]; CURSEC = id;
-  return `<div class="wrap story" style="--acc:${acc}">${grade ? gradeCard(grade) : ""}<div class="shead"><span class="eyebrow">${S_.sub}</span><h1>${S_.title}</h1><p>${S_.lead()}</p>${kpiStrip(id)}<p class="fromyou"><b>These findings come from the ratings you entered as teachers.</b> They show what teachers reported as taught across each grade, not what students know or can do. We are sharing them back so we can see the whole picture together and decide how we move forward. Each part ends with options for our part in the story. Every item links to the data on the Vertical Alignment site.</p><div class="acts"><button class="btn cta" type="button" data-reflect="${id}">Reflection questions</button><button class="btn" type="button" id="toggleAll">Show all on one page</button><a class="btn" href="${DATALINK[id]}" target="_blank" rel="noopener">Open this data on the Vertical Alignment site ↗</a></div></div>${S_.parts()}</div>`;
+  return `<div class="wrap story" style="--acc:${acc}">${grade ? gradeCard(grade) : ""}<div class="shead"><span class="eyebrow">${S_.sub}</span><h1>${S_.title}</h1><p>${S_.lead()}</p>${kpiStrip(id)}${kpiFor(id) && WT.EXPLAIN ? EXPH(WT.EXPLAIN.see.kpi, WT.EXPLAIN.kpi) : ""}<p class="fromyou"><b>These findings come from the ratings you entered as teachers.</b> They show what teachers reported as taught across each grade, not what students know or can do. We are sharing them back so we can see the whole picture together and decide how we move forward. Each part ends with options for our part in the story. Every item links to the data on the Vertical Alignment site.</p><div class="acts"><button class="btn cta" type="button" data-reflect="${id}">Reflection questions</button><button class="btn" type="button" id="toggleAll">Show all on one page</button><a class="btn" href="${DATALINK[id]}" target="_blank" rel="noopener">Open this data on the Vertical Alignment site ↗</a></div></div>${S_.parts()}</div>`;
 }
 function render(first) {
   const nx = parse(), changed = nx.id !== cur.id, story = $("#story"); const fromMapClick = render.fromMap; render.fromMap = false;
