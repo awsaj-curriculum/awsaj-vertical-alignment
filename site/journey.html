@@ -336,6 +336,18 @@ ol.wl > li { padding-left: 10px !important; } ol.wl > li, ol.qs > li { border-ra
 .smlab small { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #3B4268; margin-top: 2px; }
 @media (max-width: 560px) { .smroute { height: 52px; } .smlab { font-size: .85rem; } }
 @media print { .secmap { break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .story > .part:has(> .secmap) { break-before: page; } .smlab { font-size: .9rem; } .smnow { font-size: 1.15rem; } }
+
+/* closing card */
+.endcard { text-align: left; }
+.endcard .endlead { margin: 0; font-size: 1.15rem; color: var(--navy-2, #3B4268); }
+.endtiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 18px; margin-top: 8px; }
+.endtile { display: grid; gap: 8px; align-content: start; padding: 22px 22px 20px; border-radius: 18px; text-decoration: none; color: var(--navy); background: radial-gradient(70% 90% at 0% 0%, #D7CFF0 0%, transparent 70%), radial-gradient(70% 90% at 100% 100%, #CCE5DF 0%, transparent 70%), #F3F4F8; border: 1px solid rgba(255,255,255,.9); box-shadow: 0 14px 30px -24px rgba(16,24,70,.45); transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease; min-height: 150px; }
+.endtile b { font-size: 1.2rem; line-height: 1.25; } .endtile > span:last-child { color: #3B4268; }
+.endic { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 1.3rem; font-weight: 800; background: var(--cta); color: var(--navy); }
+.endtile:hover, .endtile:focus-visible { transform: translateY(-3px); background: var(--neon); box-shadow: 0 20px 36px -24px rgba(16,24,70,.55); outline: none; }
+.endtile:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .endtile { transition: none; } .endtile:hover { transform: none; } }
+@media print { .endcard { display: none !important; } }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
@@ -675,8 +687,12 @@ function gradeExplain(g) { const xs = D.subjects.map((s) => [s, D.cells[s][g].ma
 function gradeCard(g) { const st = stageOf(g); return `<section class="gradecard" style="--c:${st.accent}"><span class="eyebrow">${st.label} · ${st.name}</span><h2>${gname(g)} at a glance</h2>${gradeExplain(g)}${LEGEND}${hbars(D.subjects.map((s) => [s, D.cells[s][g].main]), gname(g) + ": share taught in depth, introduced and not taught, by subject")}<div class="partacts"><a class="btn" href="${link("dashboard", { subject: "All subjects", grade: g })}" target="_blank" rel="noopener">Open the ${gname(g)} dashboard ↗</a></div></section>`; }
 function storyHTML(id, grade) {
   const S_ = SECTIONS[id], acc = ACCENT[id]; CURSEC = id;
-  return `<div class="wrap story" style="--acc:${acc}">${grade ? gradeCard(grade) : ""}<div class="shead"><span class="eyebrow">${S_.sub}</span><h1>${S_.title}</h1><p>${S_.lead()}</p>${kpiStrip(id)}${kpiFor(id) && WT.EXPLAIN ? EXPH(WT.EXPLAIN.see.kpi, WT.EXPLAIN.kpi) : ""}<p class="fromyou"><b>These findings come from the ratings you entered as teachers.</b> They show what teachers reported as taught across each grade, not what students know or can do. We are sharing them back so we can see the whole picture together and decide how we move forward. Each part ends with options for our part in the story. Every item links to the data on the Vertical Alignment site.</p><div class="acts">${id !== "about" ? pdfMenu(id) : ""}<button class="btn" type="button" id="toggleAll">Show all on one page</button>${id !== "about" ? `<a class="btn" href="${DATALINK[id]}" target="_blank" rel="noopener">Open this data on the Vertical Alignment site ↗</a>` : ""}</div></div>${S_.parts()}</div>`;
+  return `<div class="wrap story" style="--acc:${acc}">${grade ? gradeCard(grade) : ""}<div class="shead"><span class="eyebrow">${S_.sub}</span><h1>${S_.title}</h1><p>${S_.lead()}</p>${kpiStrip(id)}${kpiFor(id) && WT.EXPLAIN ? EXPH(WT.EXPLAIN.see.kpi, WT.EXPLAIN.kpi) : ""}<p class="fromyou"><b>These findings come from the ratings you entered as teachers.</b> They show what teachers reported as taught across each grade, not what students know or can do. We are sharing them back so we can see the whole picture together and decide how we move forward. Each part ends with options for our part in the story. Every item links to the data on the Vertical Alignment site.</p><div class="acts">${id !== "about" ? pdfMenu(id) : ""}<button class="btn" type="button" id="toggleAll">Show all on one page</button>${id !== "about" ? `<a class="btn" href="${DATALINK[id]}" target="_blank" rel="noopener">Open this data on the Vertical Alignment site ↗</a>` : ""}</div></div>${S_.parts()}${endCard(id)}</div>`;
 }
+/* closing card (Tim, Nov 2026): the last step of every part offers three choices */
+function endCard(id) { const nm = NAV[id] || SECTIONS[id].title, pdf = typeof pdfFor === "function" ? pdfFor(id) : "", data = id !== "about" ? DATALINK[id] : "";
+  const tile = (href, ext, ic, t, s) => `<a class="endtile" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="endic" aria-hidden="true">${ic}</span><b>${t}</b><span>${s}</span></a>`;
+  return `<section class="part endcard" id="p-end"><span class="eyebrow">The end of this part</span><h2>You have reached the end of ${nm}</h2><p class="endlead">Where would you like to go from here?</p><div class="endtiles">${pdf ? tile(pdf, true, "&darr;", "Download this part as a PDF", "To print or take into your team meeting.") : ""}${data ? tile(data, true, "&#8599;", `Open the ${nm} data on the Vertical Alignment site`, "To check the figures standard by standard.") : ""}${tile("#map", false, "&#8634;", "Back to the journey map", "To pick another grade band or subject.")}</div></section>`; }
 function render(first) {
   const nx = parse(), changed = nx.id !== cur.id, story = $("#story"); const fromMapClick = render.fromMap; render.fromMap = false;
   $("#navLinks").innerHTML = ORDER.map((s) => `<a href="#${s}" ${s === nx.id ? 'aria-current="page"' : ""}>${navName(s)}</a>`).join(""); $("#navLinks").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", "false");
@@ -754,7 +770,7 @@ buildMap(); render(true); if (parse().id === "map") intro(); else introDone = tr
   const atBottom = () => scrollY + innerHeight >= document.documentElement.scrollHeight - 4, atTop = () => scrollY <= 4;
   function move(dir) { const now = Date.now(); if (now < lock) return; const ss = slides(); const n = step + dir; if (n < 0 || n >= ss.length) return; lock = now + 900; acc = 0; hint.classList.remove("on"); showStep(n); window.scrollTo({ top: 0, behavior: "auto" }); }
   addEventListener("wheel", (e) => { if (!presenting || !$("#reflect").hidden) return; if (Date.now() < lock) { if ((e.deltaY > 0 && atBottom()) || (e.deltaY < 0 && atTop())) e.preventDefault(); return; }
-    if (e.deltaY > 0 && atBottom()) { e.preventDefault(); acc += e.deltaY; hint.classList.add("on"); if (acc > 140) move(1); }
+    if (e.deltaY > 0 && atBottom()) { e.preventDefault(); acc += e.deltaY; if (step < slides().length - 1) hint.classList.add("on"); if (acc > 140) move(1); }
     else if (e.deltaY < 0 && atTop()) { e.preventDefault(); acc += e.deltaY; if (acc < -140) move(-1); }
     else { acc = 0; hint.classList.remove("on"); } }, { passive: false });
   addEventListener("touchstart", (e) => { ty = e.touches[0].clientY; }, { passive: true });
