@@ -299,20 +299,40 @@ body.presenting .story > .part.on { width: 100%; }
   .ourpart { background: transparent !important; }
   a.ilink { color: #1F3A93 !important; }
 }
+
+/* "Pick a ..." prompts (Tim): one on the route for the grade bands, one above the subjects */
+.pickhint { margin: 0; justify-self: start; font-weight: 800; font-size: clamp(1.05rem, 1.5vw, 1.35rem); color: var(--navy); background: var(--neon); border-radius: 999px; padding: 8px 18px; box-shadow: 0 10px 24px -16px rgba(16,24,70,.5); }
+#pickBand { justify-self: start; font-size: clamp(1rem, 1.4vw, 1.3rem); }
+.wholecta { justify-self: stretch; justify-content: space-between; max-width: none !important; }
+body:not(.at-map) #pickBand { display: none; }
+@media print { #pickBand { display: none; } }
+
+/* alternating shading on findings, questions and options (Tim) */
+ol.wl > li:nth-child(even), ol.qs > li:nth-child(even) { background: rgba(16,24,70,.07); }
+ol.wl > li, ol.qs > li { border-radius: 10px; padding-left: 10px !important; padding-right: 10px; }
+.opgrid > div:nth-child(even) { background: rgba(16,24,70,.07); border-radius: 10px; }
+@media print { ol.wl > li:nth-child(even), ol.qs > li:nth-child(even) { background: #EDEFF6 !important; } ol.wl > li:nth-child(odd), ol.qs > li:nth-child(odd) { background: #fff !important; } .opgrid > div:nth-child(even) { background: #EDEFF6 !important; } }
+
+/* three matching green buttons; the start area uses the full width (Tim, Nov 2026) */
+#pickBand, .pickhint, .wholecta { background: var(--cta) !important; border: 0 !important; color: var(--navy); font-weight: 800; font-size: clamp(1rem, 1.25vw, 1.2rem) !important; line-height: 1.25; padding: 12px 24px !important; min-height: 50px; border-radius: 999px; box-shadow: 0 10px 24px -16px rgba(16,24,70,.5); justify-self: start !important; display: inline-flex; align-items: center; gap: 10px; max-width: 100% !important; white-space: normal; }
+.wholecta .arr { margin-left: 4px; }
+#below > .wrap { max-width: none; }
+@media (min-width: 901px) { .belowgrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(48px, 7vw, 140px); } }
+.belowgrid .frame { max-width: 62ch; }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
 <div id="sky">
   <header id="nav"><div class="wrap"><a class="brand" href="#map" aria-label="Awsaj Academy, journey map">/*LOGO*/<span>Awsaj<br>Academy</span></a><a class="vaback" href="./" title="Back to the start page: Part 1 or Part 2">&larr; Home</a><nav id="navLinks" aria-label="Sections"></nav><button class="btn" id="presentBtn" type="button" hidden>Show all on one page</button><button class="btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button></div></header>
   <section id="hero" aria-label="Journey map">
-    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><p class="pick"><b>Pick a grade band or a subject to see its story.</b> Click K-5, 6-8 or 9-12, or a subject.</p><a class="btn cta" href="#whole">Click here to explore the whole&#8209;school K&#8209;12 story <span class="arr">→</span></a></div>
+    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><p id="pickBand" class="pickhint">Pick a grade band to see its story <span aria-hidden="true">&#8600;</span></p></div>
     <svg id="map" role="group" aria-label="The route from Kindergarten to Grade 12. Choose a grade or a stage."></svg>
     <button class="btn" id="whole-route" type="button" hidden>← Whole route</button>
   </section>
 </div>
 <section id="below"><div class="wrap">
   <div class="belowgrid"><div class="frame reveal"><span class="eyebrow">What this is</span><p class="lead">This is your data. Every figure here comes from the ratings that you, our teachers, entered for the standards you teach.</p><p>These are the findings from that work, shown back to all of us as one picture from Kindergarten to Grade 12. They are not a judgement of any teacher, grade or subject. They are where we start: each part of the story ends with <b>Our part in the story</b>, options for how we might improve the curriculum together.</p><p>Every chart and finding links to the full data on the <a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/" target="_blank" rel="noopener">Vertical Alignment site ↗</a>, where you can see each standard and each rating.</p></div>
-  <div class="subjbox"><span class="eyebrow reveal">Pick a subject to see its story</span>
+  <div class="subjbox"><a class="btn cta wholecta reveal" href="#whole">Click here to explore the whole&#8209;school K&#8209;12 story <span class="arr">→</span></a><p class="pickhint reveal">Pick a subject to see its story <span aria-hidden="true">&#8600;</span></p>
   <div class="subjects"><a class="reveal" style="--i:0;--c:var(--lime)" href="#math"><span class="rule"></span><b>Math</b><span class="arr">→</span></a><a class="reveal" style="--i:1;--c:var(--blue)" href="#ela"><span class="rule"></span><b>ELA</b><span class="arr">→</span></a><a class="reveal" style="--i:2;--c:var(--magenta)" href="#science"><span class="rule"></span><b>Science</b><span class="arr">→</span></a><a class="reveal" style="--i:3;--c:var(--amber)" href="#social-studies"><span class="rule"></span><b>Social Studies</b><span class="arr">→</span></a></div></div></div>
   <div class="second reveal"><a href="#next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-6-6-10.5a6 6 0 0 1 12 0C18 15 12 21 12 21z"/><circle cx="12" cy="10.5" r="2"/></svg><span class="t">Where we go next</span><span class="arr">→</span></a><a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-5M10 20v-9M15 20V7M20 20V4"/></svg><span class="t">About the data</span><span class="arr">→</span></a></div>
 </div></section>
@@ -345,7 +365,7 @@ function kpiStrip(id) { const k = kpiFor(id); if (!k) return ""; const f = (n, s
 const STAGES = [{ id: "k-5", label: "K-5", name: "Primary", accent: "#80BC00", grades: ["K", "1", "2", "3", "4", "5"] }, { id: "g6-8", label: "6-8", name: "Middle school", accent: "#3099BE", grades: ["6", "7", "8"] }, { id: "g9-12", label: "9-12", name: "High school", accent: "#CB0068", grades: ["9", "10", "11", "12"] }];
 const ACCENT = { whole: "#80BC00", "k-5": "#80BC00", "g6-8": "#3099BE", "g9-12": "#CB0068", math: "#80BC00", ela: "#3099BE", science: "#CB0068", "social-studies": "#ED9200", next: "#80BC00", about: "#3099BE" };
 const GEO = {
-  wide: { vb: [0, 0, 1672, 600], path: "M435,543 C520,530 650,508 779,494 C835,487 808,440 880,430 C940,422 1000,408 1048,402 C1104,395 1082,354 1143,345 C1186,339 1192,330 1228,322 C1290,308 1340,296 1392,292 L1472,292",
+  wide: { vb: [214, 83, 1456, 522.5], path: "M435,543 C520,530 650,508 779,494 C835,487 808,440 880,430 C940,422 1000,408 1048,402 C1104,395 1082,354 1143,345 C1186,339 1192,330 1228,322 C1290,308 1340,296 1392,292 L1472,292",
     pts: { K: [435, 543], 1: [507, 531], 2: [578, 519], 3: [647, 508], 4: [714, 501], 5: [779, 494], 6: [880, 430], 7: [963, 412], 8: [1048, 402], 9: [1143, 345], 10: [1228, 322], 11: [1312, 302], 12: [1392, 292] },
     labels: { "k-5": [537, 418, 507], "g6-8": [865, 306, 880], "g9-12": [1144, 195, 1143] }, r: 21, fs: 22, end: [1472, 292], land: ["M0,520 Q420,440 900,520 T1672,470 V600 H0Z", "M0,560 Q500,500 1000,560 T1672,530 V600 H0Z"] },
   tall: { vb: [0, -70, 390, 670], path: "M40,548 C120,540 250,520 340,500 C392,488 392,410 250,402 C120,395 20,380 78,340 C120,318 220,308 300,290 C388,270 380,206 240,206 C90,206 20,180 60,152 C100,130 180,108 262,96",
@@ -359,7 +379,7 @@ const at = (t) => road.getPointAtLength(LEN * t);
 function buildMap() {
   geo = matchMedia("(max-width: 760px)").matches ? GEO.tall : GEO.wide; const svg = $("#map"), r = geo.r, [ex, ey] = geo.end;
   cam = geo.vb.slice(); svg.setAttribute("viewBox", cam.join(" "));
-  svg.innerHTML = `${geo.land.map((d, i) => `<path d="${d}" fill="#fff" opacity="${0.18 + i * 0.1}"/>`).join("")}
+  svg.innerHTML = `<g transform="translate(${Math.max(0, geo.vb[0])} ${Math.max(0, geo.vb[1])})">${geo.land.map((d, i) => `<path d="${d}" fill="#fff" opacity="${0.18 + i * 0.1}"/>`).join("")}</g>
     <path id="road" d="${geo.path}" fill="none" stroke="#101846" stroke-width="${geo === GEO.wide ? 3.5 : 3}" stroke-linecap="round" stroke-linejoin="round"/>
     <g id="ticks"></g><g id="stages"></g>
     <g id="dest"><line x1="${ex}" y1="${ey + 16}" x2="${ex}" y2="${ey - 52}" stroke="#101846" stroke-width="3.5" stroke-linecap="round"/><circle cx="${ex}" cy="${ey - 52}" r="5" fill="#101846"/>
@@ -508,5 +528,7 @@ buildMap(); render(true); if (parse().id === "map") intro(); else introDone = tr
   const syncSnap = () => document.documentElement.classList.toggle("snap", !presenting && !!SECTIONS[parse().id]);
   const _spS = setPresent; setPresent = function (on) { _spS(on); syncSnap(); }; addEventListener("hashchange", () => setTimeout(syncSnap, 50)); document.addEventListener("click", () => setTimeout(syncSnap, 50)); setTimeout(syncSnap, 300);
 })();
+
+
 /*MOTION*/
 </script>
