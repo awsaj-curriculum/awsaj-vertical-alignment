@@ -40,11 +40,6 @@
 "cat": "Gaps"
 },
 {
-"title": "Coverage is steady by band.",
-"text": "The share at least introduced is 63% in K-5, 61% in 6-8 and 63% in 9-12. By grade it ranges from 37% (Grade 3) to 78% (Grade 1).",
-"cat": "Breadth without depth"
-},
-{
 "title": "Introduced, never in depth.",
 "text": "581 standards are introduced in at least one grade and in depth in none (Math 186, ELA 241, Science 49, Social Studies 105).",
 "cat": "Breadth without depth"
@@ -58,6 +53,11 @@
 "title": "Depth by grade swings widely.",
 "text": "From 55% in Grade 2 to 2% in Grade 3, then between 12% and 34% for every grade from Grade 4 to Grade 12.",
 "cat": "Anomalies"
+},
+{
+"title": "Coverage is steady by band.",
+"text": "The share at least introduced is 63% in K-5, 61% in 6-8 and 63% in 9-12. By grade it ranges from 37% (Grade 3) to 78% (Grade 1).",
+"cat": "Other notable"
 },
 {
 "title": "Every rating is in.",
@@ -126,11 +126,6 @@
 "cat": "Handoffs"
 },
 {
-"title": "\"Introduced\" is our usual rating.",
-"text": "In Math and ELA, 44% to 45% of ratings are introduced. This may fit a school where students learn language and content together, and where teaching often needs to be supported and revisited before it can be assessed for every class.",
-"cat": "Language and literacy"
-},
-{
 "title": "Literacy lives in every subject.",
 "text": "ELA is rated by ELA teams, yet much vocabulary, academic language, speaking and non-fiction reading is taught through Science and Social Studies. The 2026 literacy audit of weekly plans found about two-fifths of vocabulary teaching, speaking and non-fiction in those subjects. ELA's thinner strands (Language 10% in depth in K-5) may be taught more than the ELA ratings show.",
 "cat": "Language and literacy"
@@ -174,6 +169,11 @@
 "title": "Grades 6, 8 and 12 carry the most standards.",
 "text": "Grade 8 rated 164 grade-level standards and Grades 6 and 12 rated 163 each, against 103 in Kindergarten. Middle school Social Studies alone asks each grade to rate 64.",
 "cat": "Choices and capacity"
+},
+{
+"title": "\"Introduced\" is our usual rating.",
+"text": "In Math and ELA, 44% to 45% of ratings are introduced. This may fit a school where students learn language and content together, and where teaching often needs to be supported and revisited before it can be assessed for every class.",
+"cat": "Other notable"
 }
 ]
 },
@@ -744,11 +744,6 @@
 "title": "Moving forward",
 "items": [
 {
-"data": "Grade 7 ELA is 70% in depth; Reading 89%",
-"text": "What is the ELA team doing in Grade 7 that brings so much to depth, and what could travel to other subjects?",
-"cat": "Improving the curriculum"
-},
-{
 "data": "Life Science is 47% in depth in K-5, 7% in 6-8 with 67% not taught, and 50% in Grade 11",
 "text": "Where should Life Science reach depth between K-5 and Grade 11?",
 "cat": "Improving the curriculum"
@@ -772,6 +767,11 @@
 "text": "With about 160 standards per grade, which could middle school agree to leave out on purpose, and which would it introduce only?",
 "data": "6-8 mix: 20% in depth, 41% introduced, 39% not taught; about 63 standards per grade not taught",
 "cat": "Improving the curriculum"
+},
+{
+"data": "Grade 7 ELA is 70% in depth; Reading 89%",
+"text": "What is the ELA team doing in Grade 7 that brings so much to depth, and what could travel to other subjects?",
+"cat": "Working across grade levels"
 },
 {
 "data": "Math in depth is 32% in Grade 5, 0% in Grades 6 to 8, and 30% in Grade 9",
@@ -883,11 +883,6 @@
 "cat": "Bright spots"
 },
 {
-"title": "Math starts strong and thins.",
-"text": "30% in depth in Grade 9, then 14%, 5% and 6%. Across the band, 51% of Math ratings are not taught.",
-"cat": "Gaps"
-},
-{
 "title": "Math strands not yet rated in depth.",
 "text": "Trigonometric Functions, Similarity and Trigonometry, Conditional Probability, Making Inferences, Using Probability, Vectors and Matrices, Circles, Geometric Measurement, Building Functions, Linear, Quadratic and Exponential Models, and Expressing Geometric Properties (11 of 21 strands).",
 "cat": "Gaps"
@@ -911,6 +906,11 @@
 "title": "Introduced, never in depth.",
 "text": "128 standards are introduced and never in depth: Math 52, Social Studies 36, ELA 29, Science 11.",
 "cat": "Breadth without depth"
+},
+{
+"title": "Math starts strong and thins.",
+"text": "30% in depth in Grade 9, then 14%, 5% and 6%. Across the band, 51% of Math ratings are not taught.",
+"cat": "Other notable"
 },
 {
 "title": "The band in 3 numbers.",
@@ -1516,6 +1516,11 @@
 "cat": "Language and literacy"
 },
 {
+"title": "Background from the literacy audit of weekly plans.",
+"text": "That audit found grammar and vocabulary instruction regular in only one or two elementary grades. The ratings agree: Language is the strand most often introduced and never taken to depth.",
+"cat": "Language and literacy"
+},
+{
 "title": "Grade 3 may be teaching more than its rating shows.",
 "text": "The team kept \"in depth\" for its Essential Elements (66%) rather than for the grade-level standards. Writing and Speaking and Listening are introduced in full.",
 "cat": "Essential Elements"
@@ -1539,11 +1544,6 @@
 "title": "The SAT road in ELA is well built at the top.",
 "text": "Reading (61%) and Writing (54%) are strong in high school. Language conventions (30%) may be the area where the SAT asks for more than we currently take to depth.",
 "cat": "Toward the SAT"
-},
-{
-"title": "Background from the literacy audit of weekly plans.",
-"text": "That audit found grammar and vocabulary instruction regular in only one or two elementary grades. The ratings agree: Language is the strand most often introduced and never taken to depth.",
-"cat": "Who we teach"
 }
 ]
 },
@@ -1686,11 +1686,6 @@
 "cat": "Bright spots"
 },
 {
-"title": "Engineering.",
-"text": "20% in depth K-12, with 2 bright spots: Grade 8 (100%) and Grade 11 (75%).",
-"cat": "Gaps"
-},
-{
 "title": "Hand-overs.",
 "text": "17 standards taught in depth in Grades 6 to 10 build on a K-5 standard rated not taught: 11 land in middle school and 6 in high school. All rest on suggested links, not official ones, so each is worth checking first.",
 "cat": "Gaps"
@@ -1719,6 +1714,11 @@
 "title": "Life Science by band.",
 "text": "47% in K-5, 7% in 6-8, 50% in 9-12.",
 "cat": "Anomalies"
+},
+{
+"title": "Engineering.",
+"text": "20% in depth K-12, with 2 bright spots: Grade 8 (100%) and Grade 11 (75%).",
+"cat": "Other notable"
 },
 {
 "title": "Depth by grade.",
@@ -2048,11 +2048,6 @@
 "cat": "Language and literacy"
 },
 {
-"title": "Time may be the simplest explanation.",
-"text": "With language and reading as the first job in every band, Social Studies may be taught through topics and vocabulary. That fits \"introduced\" as the usual rating.",
-"cat": "Language and literacy"
-},
-{
 "title": "Social Studies may be where much literacy happens.",
 "text": "Units on families, communities and Qatar carry a lot of vocabulary, speaking and non-fiction reading. Teams may rate this time as literacy rather than Social Studies, which could be part of why Social Studies depth looks low.",
 "cat": "Language and literacy"
@@ -2066,6 +2061,11 @@
 "title": "Grade 7 rated most standards not taught.",
 "text": "Grades 6 and 8 introduce about half of the 64 standards; Grade 7 rates 91% not taught. This may be about scheduling or course focus that year.",
 "cat": "How we rated"
+},
+{
+"title": "Time may be the simplest explanation.",
+"text": "With language and reading as the first job in every band, Social Studies may be taught through topics and vocabulary. That fits \"introduced\" as the usual rating.",
+"cat": "Choices and capacity"
 },
 {
 "title": "The subject is introduced, rarely deepened.",
