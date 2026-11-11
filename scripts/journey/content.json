@@ -45,7 +45,7 @@
 "cat": "Breadth without depth"
 },
 {
-"title": "Fifteen grade-and-subject combinations have not yet rated a standard in depth.",
+"title": "Fifteen grade-and-subject combinations rated all their standards, and none in depth.",
 "text": "Math in Grades 3, 6, 7 and 8; ELA in Kindergarten and Grade 3; Science in Grade 1; Social Studies in Grades 1, 2, 3, 4, 8, 9, 10 and 12. Each is a place to start a conversation, not a judgement: these teams may simply have read \"in depth\" most strictly.",
 "cat": "Anomalies"
 },
@@ -107,7 +107,7 @@
 },
 {
 "title": "Each subject has its own shape.",
-"text": "ELA rises from 19% in K-5 to 53% and 51% in the secondary bands. Science rises to 48% in high school. In middle school, Math introduces almost everything and has not yet rated a standard in depth. Social Studies stays between 3% and 6% throughout.",
+"text": "ELA rises from 19% in K-5 to 53% and 51% in the secondary bands. Science rises to 48% in high school. In middle school, Math introduces almost everything and rated none of its standards in depth. Social Studies stays between 3% and 6% throughout.",
 "cat": "Trends across the grades"
 },
 {
@@ -208,7 +208,7 @@
 },
 {
 "data": "15 grade-and-subject combinations at 0%, 8 of them in Social Studies and 4 in Math",
-"text": "Where a team has not yet rated a standard in depth, which 3 or 4 standards might it choose to take there first, and what support would help?",
+"text": "Where a team rated none of its standards in depth, which 3 or 4 standards might it choose to take there first, and what support would help?",
 "cat": "Improving the curriculum"
 },
 {
@@ -388,7 +388,7 @@
 "items": [
 {
 "title": "Social Studies starts well and fades.",
-"text": "Kindergarten has 40% in depth. Grades 1 to 4 have not yet rated a Social Studies standard in depth, and Grades 2, 3 and 4 rate 73% to 89% not taught, perhaps because much of that time goes to literacy.",
+"text": "Kindergarten has 40% in depth. Grades 1 to 4 rated none of their Social Studies standards in depth, and Grades 2, 3 and 4 rate 73% to 89% not taught, perhaps because much of that time goes to literacy.",
 "cat": "Trends across the grades"
 },
 {
@@ -423,7 +423,7 @@
 },
 {
 "title": "Kindergarten introduces widely in Math and Science but not yet in ELA.",
-"text": "Kindergarten has not yet rated an ELA standard in depth, and 93% of its Language standards are not taught. Speaking and Listening is the exception: every standard is introduced.",
+"text": "Kindergarten rated none of its ELA standards in depth, and 93% of its Language standards are not taught. Speaking and Listening is the exception: every standard is introduced.",
 "cat": "Language and literacy"
 },
 {
@@ -473,7 +473,7 @@
 "cat": "Improving the curriculum"
 },
 {
-"data": "No standard yet rated in depth in Grades 1 to 4; not taught 57%, 74%, 89% and 73%",
+"data": "No standard rated in depth in Grades 1 to 4; not taught 57%, 74%, 89% and 73%",
 "text": "How can we embed Social Studies standards in the reading and writing we already teach in Grades 1 to 4?",
 "cat": "Improving the curriculum"
 },
@@ -633,7 +633,7 @@
 },
 {
 "title": "Math is almost entirely \"introduced\".",
-"text": "The team has not yet rated any of its 81 standards in depth, which may reflect a strict reading of \"every class\"; 71 are introduced (88%) and 10 not taught. Grade 7 is 96% introduced and Grade 8 is 93%.",
+"text": "The team rated all 81 standards and none in depth, which may reflect a strict reading of \"every class\"; 71 are introduced (88%) and 10 not taught. Grade 7 is 96% introduced and Grade 8 is 93%.",
 "cat": "Anomalies"
 },
 {
@@ -724,12 +724,12 @@
 },
 {
 "title": "Capacity shows what a middle school grade carries in a year.",
-"text": "A middle school grade takes about 32 standards to depth across its four subjects (about 8 per subject), introduces about 65 and does not teach about 63, out of about 160 rated, the most standards per grade of any band. By subject, per grade: ELA about 23 in depth of 44 rated, Science 7 of 25, Social Studies 2 of 64, and Math none yet of 27 (24 introduced). As shares of each subject's standards: ELA 53% in depth, 29% introduced, 18% not taught; Math 0% in depth, 88% introduced, 12% not taught; Science 27% in depth, 19% introduced, 54% not taught; Social Studies 3% in depth, 38% introduced, 59% not taught. Capacity here means how many standards a grade's teaching time actually holds in a year. It is not a target and not a judgement.",
+"text": "A middle school grade takes about 32 standards to depth across its four subjects (about 8 per subject), introduces about 65 and does not teach about 63, out of about 160 rated, the most standards per grade of any band. By subject, per grade: ELA about 23 in depth of 44 rated, Science 7 of 25, Social Studies 2 of 64, and Math none of 27 (24 introduced). As shares of each subject's standards: ELA 53% in depth, 29% introduced, 18% not taught; Math 0% in depth, 88% introduced, 12% not taught; Science 27% in depth, 19% introduced, 54% not taught; Social Studies 3% in depth, 38% introduced, 59% not taught. Capacity here means how many standards a grade's teaching time actually holds in a year. It is not a target and not a judgement.",
 "cat": "Choices and capacity"
 },
 {
 "title": "Two subjects, two very different pictures.",
-"text": "ELA has the highest share in depth of any band and subject pairing in the school (53%). Math, which introduces almost everything, has not yet rated a standard in depth. Both are taught to the same students, so the difference is worth exploring together.",
+"text": "ELA has the highest share in depth of any band and subject pairing in the school (53%). Math, which introduces almost everything, rated none of its standards in depth. Both are taught to the same students, so the difference is worth exploring together.",
 "cat": "Other notable"
 },
 {
@@ -789,7 +789,7 @@
 "cat": "Knowing the bands above and below"
 },
 {
-"data": "71 of 81 Math ratings are introduced; none yet rated in depth",
+"data": "71 of 81 Math ratings are introduced; none rated in depth",
 "text": "When the Math team rated a standard \"introduced\", what did they picture, and what would \"in depth\" need that is not yet in place?",
 "cat": "How we rate and plan"
 },
@@ -822,7 +822,7 @@
 {
 "title": "Improving the curriculum",
 "text": "In middle school Math, we could choose 10 standards to take to depth next year, starting with ratios and expressions.",
-"data": "71 of 81 Math ratings are introduced; none yet rated in depth"
+"data": "71 of 81 Math ratings are introduced; none rated in depth"
 },
 {
 "title": "Working across grade levels",
@@ -883,7 +883,7 @@
 "cat": "Bright spots"
 },
 {
-"title": "Math strands not yet rated in depth.",
+"title": "Math strands with no standard rated in depth.",
 "text": "Trigonometric Functions, Similarity and Trigonometry, Conditional Probability, Making Inferences, Using Probability, Vectors and Matrices, Circles, Geometric Measurement, Building Functions, Linear, Quadratic and Exponential Models, and Expressing Geometric Properties (11 of 21 strands).",
 "cat": "Gaps"
 },
@@ -1004,7 +1004,7 @@
 "cat": "Other notable"
 },
 {
-"title": "Social Studies inquiry is not yet rated as taught.",
+"title": "Social Studies inquiry is rated not taught.",
 "text": "All 10 Inquiry standards are rated not taught in both Grade 9 and Grade 10. Grade 9 Geography is the exception in coverage: 92% introduced.",
 "cat": "Other notable"
 }
@@ -1175,7 +1175,7 @@
 },
 {
 "title": "Middle school Math.",
-"text": "71 of 81 ratings are introduced, and none is yet rated in depth.",
+"text": "71 of 81 ratings are introduced, and none is rated in depth.",
 "cat": "Anomalies"
 },
 {
@@ -1211,7 +1211,7 @@
 },
 {
 "title": "We are strongest in number, thinner in what number leads to.",
-"text": "Counting and place value are solid (place value is 60% in depth). Fractions, ratios, and expressions and equations, the strands that carry students from arithmetic to algebra, are not yet rated in depth from Grade 3 to Grade 8.",
+"text": "Counting and place value are solid (place value is 60% in depth). Fractions, ratios, and expressions and equations, the strands that carry students from arithmetic to algebra, have no standard rated in depth from Grade 3 to Grade 8.",
 "cat": "Handoffs"
 },
 {
@@ -1256,7 +1256,7 @@
 },
 {
 "title": "Capacity shows what a grade carries in Math each year.",
-"text": "A grade takes about 6 Math standards to depth a year, introduces about 16 and does not teach about 14, out of about 35 rated. In K-5 it is about 8 of 29, in middle school none yet of 27 (24 introduced), in high school about 7 of 52. As shares of Math standards: K-5 29% in depth, 36% introduced, 35% not taught; 6-8 0% in depth, 88% introduced, 12% not taught; 9-12 14% in depth, 35% introduced, 51% not taught. Capacity here means how many standards a grade's teaching time actually holds in a year. It is not a target and not a judgement.",
+"text": "A grade takes about 6 Math standards to depth a year, introduces about 16 and does not teach about 14, out of about 35 rated. In K-5 it is about 8 of 29, in middle school none of 27 (24 introduced), in high school about 7 of 52. As shares of Math standards: K-5 29% in depth, 36% introduced, 35% not taught; 6-8 0% in depth, 88% introduced, 12% not taught; 9-12 14% in depth, 35% introduced, 51% not taught. Capacity here means how many standards a grade's teaching time actually holds in a year. It is not a target and not a judgement.",
 "cat": "Choices and capacity"
 },
 {
@@ -1406,7 +1406,7 @@
 },
 {
 "title": "Kindergarten.",
-"text": "No standard is yet rated in depth, and 60% are not taught; this is where reading and writing begin. Language is 93% not taught and Reading 78%. Every Speaking and Listening standard is introduced.",
+"text": "No standard is rated in depth, and 60% are not taught; this is where reading and writing begin. Language is 93% not taught and Reading 78%. Every Speaking and Listening standard is introduced.",
 "cat": "Gaps"
 },
 {
@@ -1532,7 +1532,7 @@
 },
 {
 "title": "Power standards are not yet secure in K-5.",
-"text": "Kindergarten names 47 power standards; the team has not yet rated any of them in depth, and 62% are not taught yet. In secondary the picture reverses: priorities are in depth more often than ELA as a whole.",
+"text": "Kindergarten names 47 power standards; the team rated none of them in depth, and 62% are not taught. In secondary the picture reverses: priorities are in depth more often than ELA as a whole.",
 "cat": "Choices and capacity"
 },
 {
@@ -1818,7 +1818,7 @@
 },
 {
 "title": "Grade 1 is the exception to the pattern.",
-"text": "75% introduced and none yet rated in depth, with only Engineering not taught. Grade 1 appears to touch Science widely and lightly.",
+"text": "75% introduced and none rated in depth, with only Engineering not taught. Grade 1 appears to touch Science widely and lightly.",
 "cat": "Other notable"
 }
 ]
@@ -1957,12 +1957,12 @@
 "cat": "Gaps"
 },
 {
-"title": "K-5 strands not yet rated in depth.",
+"title": "K-5 strands with no standard rated in depth.",
 "text": "Government, Culture, Production and Consumption, and Science, Technology and Society.",
 "cat": "Gaps"
 },
 {
-"title": "Secondary strands not yet rated in depth.",
+"title": "Secondary strands with no standard rated in depth.",
 "text": "Inquiry Practices (70 ratings), History (60) and Political Science (44).",
 "cat": "Gaps"
 },
@@ -2029,7 +2029,7 @@
 },
 {
 "title": "Social Studies starts well in Kindergarten.",
-"text": "Kindergarten's 40% is one of that grade's strongest results, close to Science (46%). Grades 1 to 4 have not yet rated a standard in depth. The question is what changes after Kindergarten.",
+"text": "Kindergarten's 40% is one of that grade's strongest results, close to Science (46%). Grades 1 to 4 rated none of their standards in depth. The question is what changes after Kindergarten.",
 "cat": "Trends across the grades"
 },
 {
@@ -2054,7 +2054,7 @@
 },
 {
 "title": "Essential Elements again run ahead in high school.",
-"text": "In Grade 10, 5 of 9 Essential Elements are in depth while the team has not yet rated a main standard in depth. Deep teaching may be happening at that level.",
+"text": "In Grade 10, 5 of 9 Essential Elements are in depth while the team rated none of its main standards in depth. Deep teaching may be happening at that level.",
 "cat": "Essential Elements"
 },
 {
@@ -2144,7 +2144,7 @@
 "cat": "Improving the curriculum"
 },
 {
-"data": "Kindergarten is 40% in depth; Grades 1 to 4 have not yet rated a standard in depth",
+"data": "Kindergarten is 40% in depth; Grades 1 to 4 rated none of their standards in depth",
 "text": "What does Kindergarten do in Social Studies that could continue into Grades 1 to 4?",
 "cat": "Working across grade levels"
 },
@@ -2243,7 +2243,7 @@
 "table": "Grade 2 carries the most depth in three subjects, and Social Studies is light after Kindergarten. Each team can find its own cell."
 },
 "g6-8": {
-"glance": "ELA is the strength of middle school. Math covers almost everything and has not yet rated a standard in depth.",
+"glance": "ELA is the strength of middle school. Math covers almost everything and rated none of its standards in depth.",
 "grades": "Each middle school grade has its own mix, and Science seems to give each grade its own discipline.",
 "data": "Two very different pictures sit side by side here, which makes middle school a good place to compare how teams read the scale.",
 "patterns": "Many differences here may come from how courses are scheduled and how strictly \"in depth\" was read, not from how much is taught.",
