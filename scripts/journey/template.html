@@ -244,7 +244,7 @@ body.presenting .story > .part.on { width: 100%; }
 @media (max-height: 820px) { body.presenting.step0:not(.at-map) #sky > #hero { display: none; } }
 
 /* neon green highlight on the choices (Tim): grade bands on the route and the four subjects */
-:root { --neon: var(--cta); }
+:root { --neon: #DAEF80; } /* the start-button green #B5DF00 at 50% */
 #heroText .pick { margin: 0; font-size: clamp(1rem, 1.35vw, 1.2rem); max-width: 30ch; background: rgba(255,255,255,.7); border-left: 5px solid var(--neon); border-radius: 0 12px 12px 0; padding: 10px 14px; }
 #map .stg rect.h { transition: fill .15s ease; }
 #map .stg:hover rect.h, #map .stg:focus-visible rect.h { fill: var(--neon); }
@@ -275,8 +275,31 @@ body.presenting .story > .part.on { width: 100%; }
 .subjbox .subjects b { font-size: clamp(1.4rem, 2.2vw, 2rem); }
 @media (min-width: 1280px) { .subjbox { margin-top: -120px; } } @media (min-width: 1600px) { .subjbox { margin-top: -150px; } }
 @media (max-width: 860px) { .belowgrid { grid-template-columns: 1fr; gap: 28px; } }
-.vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 #heroText h1 { font-size: clamp(2.3rem, 4.6vw, 4.8rem); } #heroText .btn.cta { max-width: 330px; white-space: normal; line-height: 1.25; text-align: left; }
+
+/* ---- themed print (Tim, Nov 2026): the Part 2 look on paper ---- */
+@media print {
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .story > .shead { background: radial-gradient(60% 90% at 0% 0%, #D7CFF0 0%, transparent 70%), radial-gradient(55% 80% at 100% 0%, #BCD9EC 0%, transparent 70%), radial-gradient(60% 90% at 100% 100%, #CCE5DF 0%, transparent 70%), radial-gradient(60% 90% at 0% 100%, #F6EAD7 0%, transparent 70%), #F3F4F8 !important; border-radius: 16px !important; padding: 18px 20px 16px !important; border: 0 !important; }
+  .story > .shead h1 { color: #101846; }
+  .kpi { background: rgba(255,255,255,.85) !important; border: 1px solid #fff !important; border-radius: 12px !important; }
+  .story > .part, .story > .gradecard { background: #F7F8FB !important; border: 1px solid #E3E7EF !important; border-radius: 14px !important; padding: 12px 16px 12px !important; }
+  .story > .part.cont, .story > .part.joined { border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; border-top: 0 !important; margin-top: -26px !important; }
+  .story > .part:has(+ .part.cont), .story > .part:has(+ .part.joined) { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important; border-bottom: 0 !important; }
+  .part > .eyebrow { color: #3B4268; } .part > .eyebrow::before { background: var(--acc, #80BC00) !important; transform: none !important; }
+  .part h2 { color: #101846; border-bottom: 2px solid var(--acc, #80BC00); padding-bottom: 4px; }
+  .explain { background: #EEF0FA !important; border-left: 4px solid var(--acc, #80BC00) !important; border-radius: 0 10px 10px 0 !important; }
+  .catchip { background: #101846 !important; color: #fff !important; border: 0 !important; }
+  p.cats { display: none !important; }
+  ol.wl > li { border-bottom-color: #E3E7EF; } ol.wl > li::marker, ol.qs > li::marker { color: var(--acc, #101846); font-weight: 800; }
+  .dnote { color: #3B4268 !important; }
+  .mdx table thead th, table.glance thead th { background: #101846 !important; color: #fff !important; padding: 5px 8px; }
+  .mdx table tbody tr:nth-child(even) td { background: #EEF1F7 !important; }
+  .opgrid > div { background: #fff !important; border: 1px solid #E3E7EF !important; border-radius: 10px; padding: 8px 10px !important; }
+  .ourpart { background: transparent !important; }
+  a.ilink { color: #1F3A93 !important; }
+}
+.vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
 <div id="sky">
