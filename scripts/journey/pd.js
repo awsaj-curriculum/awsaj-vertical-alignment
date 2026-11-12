@@ -1,0 +1,53 @@
+/* ================= Part 1: All-staff session (Tim, Nov 2026: "From Standards to Student Success") =================
+   Full-screen slides in the same look as the rest of the page. Elements with class "frag" appear one at a time
+   (each press of Next shows the next one before moving to the next slide). About 20 minutes in all. */
+const PD_SECS = [["thanks", "Thank you"], ["data", "Our data"], ["standard", "What is a standard?"], ["goal", "Today's work"]];
+function pdMap(key) { const at = PD_SECS.findIndex((x) => x[0] === key);
+  return `<div class="pdmap" aria-label="Where we are in the session">${PD_SECS.map(([k, t], i) => `<span class="pdm${i < at ? " done" : i === at ? " now" : ""}"><i>${i < at ? "&#10003;" : i + 1}</i>${t}</span>`).join('<span class="pdl" aria-hidden="true"></span>')}</div>`; }
+const pdSlide = (id, sec, h, body, cls = "", bridge = "") => `<section class="part pd ${cls}" id="pd-${id}">${pdMap(sec)}${h ? `<h2>${h}</h2>` : ""}${body}${bridge ? `<p class="bridge frag"><span aria-hidden="true">&rarr;</span> ${bridge}</p>` : ""}</section>`;
+const fmt = (n) => Number(n).toLocaleString("en-US");
+
+/* the K-12 road to the Awsaj Graduate, drawn as it appears */
+function pdRoad() {
+  const G = ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], x0 = 60, dx = 66, y0 = 330, band = (i) => (i < 6 ? "#80BC00" : i < 9 ? "#3099BE" : "#CB0068");
+  const pts = G.map((g, i) => [x0 + i * dx, y0 - i * 17 - (i >= 6 ? 26 : 0) - (i >= 9 ? 26 : 0)]);
+  const end = [x0 + 13 * dx + 40, pts[12][1] - 40];
+  const d = "M" + pts.map((p) => p.join(" ")).join(" L") + ` L${end[0]} ${end[1]}`;
+  return `<svg class="pdroad" viewBox="0 0 1060 380" role="img" aria-label="The road from Kindergarten to Grade 12, ending at an Awsaj Graduate in the SAT / US Diploma track">
+    <path class="road" d="${d}" pathLength="1"/>
+    ${pts.map((p, i) => `<g class="cp2" style="--d:${0.15 + i * 0.11}s"><circle cx="${p[0]}" cy="${p[1]}" r="15" fill="${i ? "#fff" : "#ED9200"}" stroke="${band(i)}" stroke-width="3.5"/><text x="${p[0]}" y="${p[1] + 5}" text-anchor="middle">${G[i]}</text></g>`).join("")}
+    <g class="goal2"><circle cx="${end[0]}" cy="${end[1]}" r="30" fill="#B5DF00" stroke="#101846" stroke-width="3"/><path d="M${end[0] - 18} ${end[1] - 2} l18 -9 l18 9 l-18 9 z M${end[0] - 10} ${end[1] + 3} v8 q10 6 20 0 v-8" fill="#101846"/>
+    <text class="gl" x="${end[0] - 40}" y="${end[1] - 8}" text-anchor="end">An Awsaj Graduate</text><text class="gs" x="${end[0] - 40}" y="${end[1] + 14}" text-anchor="end">SAT / US Diploma track</text></g>
+    <g class="bands"><text x="${x0 + 2.5 * dx}" y="372" text-anchor="middle" fill="#5d8a00">K-5</text><text x="${x0 + 7 * dx}" y="372" text-anchor="middle" fill="#1f7898">6-8</text><text x="${x0 + 10.5 * dx}" y="372" text-anchor="middle" fill="#a80056">9-12</text></g></svg>`;
+}
+
+/* Today's work: a staircase from Grade 12 down */
+function pdStairs() {
+  const G = ["12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1", "K"];
+  return `<div class="stairs" aria-label="We start at Grade 12 and work down">${G.map((g, i) => `<div class="stair${i === 0 ? " top" : ""}" style="--i:${i}"><b>${g === "K" ? "K" : "Grade " + g}</b>${i === 0 ? "<span>Start here</span>" : ""}</div>`).join("")}</div>`;
+}
+
+function pdParts() {
+  const S0 = D.school.main, B = D.band, sec = (k) => (WT.whole?.sections || []).find((x) => x.key === k)?.items || [];
+  const cards = (items, q) => `<ol class="pdcards">${items.slice(0, 3).map((it, i) => `<li class="frag" style="--i:${i}"><span class="n">${i + 1}</span>${it.cat ? `<span class="catchip">${esc(it.cat)}</span>` : ""}${q ? `<b>${inl(it.text)}</b>${it.step ? `<span class="step"><b>First step:</b> ${inl(it.step)}</span>` : ""}` : `<b>${inl(it.title || "")}</b><span>${inl(it.text)}</span>`}</li>`).join("")}</ol>`;
+  const atLeast = S0.deep + S0.intro;
+  const tiles = [[fmt(D.nRatings), "ratings entered"], ["Every", "team rated every standard it was asked about"], [fmt(S0.deep), "times a grade said: all our classes teach this in depth"], [fmt(atLeast), "times a grade said: we teach this, at least as an introduction"]];
+  const bands = Object.keys(B), lo = (k) => Math.min(...bands.map((b) => B[b].all[k])), hi = (k) => Math.max(...bands.map((b) => B[b].all[k]));
+  return [
+    pdSlide("thanks", "thanks", "", `<div class="pdhero"><p class="eyebrow">All-staff session</p><h2 class="big">Thank you.</h2><p class="pdlead">You rated how every standard is taught, Kindergarten to Grade 12.</p></div>
+      <div class="pdtiles">${tiles.map(([n, t], i) => `<div class="pdtile frag" style="--i:${i}"><b>${n}</b><span>${t}</span></div>`).join("")}</div>`, "center", "Your ratings show what we teach. Why does that matter?"),
+    pdSlide("why", "thanks", "Why we are doing this", `<p class="pdlead">Every standard we teach is a step on this road.</p>${pdRoad()}<p class="pdnote frag">This work focuses on the <b>SAT / US Diploma track</b>: making sure each step builds to the next.</p>`, "", "So how does what we teach line up along this road?"),
+    pdSlide("pattern", "data", "We rated in a similar pattern across the school", `<p class="pdlead">In every school: ${lo("pDeep")}% to ${hi("pDeep")}% taught in depth, ${lo("pIntro")}% to ${hi("pIntro")}% introduced, ${lo("pNot")}% to ${hi("pNot")}% not taught.</p><div class="panel">${capChart("whole", 1)}</div><p class="howto">Each bar is an average grade in a year, all four subjects. Grade-level standards only.</p>`, "", "We rate what we teach in a similar way across the school. But do those standards line up across grades and across schools?"),
+    pdSlide("facts", "data", "3 facts", cards(sec("data")), "", "What do these facts show when we put them side by side?"),
+    pdSlide("patterns", "data", "3 patterns", cards(sec("patterns").filter((x) => !String(x.title || "").startsWith("Background"))), "", "Is what we teach in depth, and what we leave out, preparing students to graduate on the SAT / US Diploma track?"),
+    pdSlide("ponder", "data", "3 things to ponder", cards(sec("questions"), true), "", "That is what we focus on today. And all of this data is yours to explore."),
+    pdSlide("explore", "data", "It is all on our Vertical Alignment site", `<div class="pdqr"><div class="qrbox">/*QR*/</div><div><p class="pdlead">Explore every standard and every rating, any time.</p><p class="url">awsaj-curriculum.github.io/<wbr>awsaj-vertical-alignment</p><p class="pdnote">We will come back to this data as we look at specific gaps.</p></div></div>`, "center", "To choose what matters most, we first need a shared picture of what a standard is."),
+    pdSlide("standard", "standard", "What is a standard?", `<p class="pdlead">A standard says what students should <b>know and be able to do</b> by the end of a grade or course. It guides our teaching and sets clear expectations.</p>
+      <div class="flow">${[["Standard", "The goal for the year"], ["Lesson objective", "Today's step towards it"], ["Instruction", "How we teach it"], ["Assessment", "How students show they have learned it"]].map(([t, s], i) => `<div class="fstep frag" style="--i:${i}"><b>${t}</b><span>${s}</span></div>`).join('<span class="farr" aria-hidden="true">&rarr;</span>')}</div>`, "", "Let us look at one standard from the end of the road: Grade 12."),
+    pdSlide("unpack", "standard", "Breaking down a standard", `<div class="stdcard"><span class="code">RI.11-12.10</span><span class="strand">Reading Informational Text</span><p>By the end of Grade 12, read and comprehend literary nonfiction at the high end of the Grades 11-CCR text complexity band independently and proficiently.</p></div>
+      <div class="kseg">${[["Knowledge", "Literary nonfiction, and how complex texts communicate information and ideas."], ["Skills", "Read, comprehend and make sense of complex texts independently."], ["Vocabulary", "Literary nonfiction, text complexity, comprehension, independently, proficiently."], ["Evidence of learning", "Independently read a complex literary nonfiction text and show understanding."]].map(([t, s], i) => `<div class="krow frag" style="--i:${i}"><b>${t}</b><span>${s}</span></div>`).join("")}</div>
+      <p class="pdnote frag">We describe what students learn, not the activities we use to teach it.</p>`, "", "If this is where students need to be in Grade 12, what must each grade before it build?"),
+    pdSlide("goal", "goal", "Today's work", `<p class="pdlead">We begin at the end of the road and work back.</p><div class="goalgrid">${pdStairs()}<ol class="goalsteps">${["Each team gets its grade or course standards.", "Choose the most important ones: the standards we want <b>taught in depth</b>.", "Start at Grade 12 and work down: does each grade prepare students for the grade above?"].map((t, i) => `<li class="frag" style="--i:${i}">${t}</li>`).join("")}</ol></div><p class="pdnote frag">We probably will not finish today. That is expected: this is a first draft.</p>`),
+    pdSlide("go", "goal", "", `<div class="pdhero"><h2 class="big">Thank you.</h2><p class="pdlead">Please go to your subject groups.</p></div><div class="pdsubj">${[["math", "Math", "var(--lime)"], ["ela", "ELA", "var(--blue)"], ["science", "Science", "var(--magenta)"], ["social-studies", "Social Studies", "var(--amber)"]].map(([h, t, c], i) => `<a class="frag" style="--i:${i};--c:${c}" href="#${h}"><span class="rule"></span><b>${t}</b><span class="arr">&rarr;</span></a>`).join("")}</div>`, "center")
+  ].join("");
+}
