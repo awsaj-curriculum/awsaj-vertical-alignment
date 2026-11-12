@@ -508,7 +508,9 @@ function fnTarget(stop, it) {
     const have = numTok(`${x.title || ""} ${x.text}`); let sc = 0; want.forEach((t) => { if (have.has(t)) sc += /%/.test(t) ? 1.5 : 1; });
     if (sc > bs) { bs = sc; best = { id: `it-${stop}-${si}-${ii}`, label: `${sec.key === "data" ? "Fact" : "Pattern"} ${ii + 1}` }; } }); });
   if (best && bs >= 1) return best;
-  return /\bGrade|\bG\d|\bKindergarten/.test(it.data) ? { id: "p-grades", label: "Grade by grade chart" } : { id: "p-glance", label: "At a glance chart" };
+  if (/\bGrade|\bG\d|\bKindergarten/.test(it.data)) return { id: "p-grades", label: "Grade by grade chart" };
+  if (stop === "whole" && !/\b(K-5|6-8|9-12)\b/.test(it.data)) return { id: "p-capacity-2", label: "capacity by subject chart" };
+  return { id: "p-glance", label: "At a glance chart" };
 }
 function fnHTML(stop, it) { const t = it.data && fnTarget(stop, it); return t ? `<sup class="fn"><a href="#${t.id}" data-fn="${t.id}" data-fnstop="${stop}" title="Where this figure is shown on the page">see ${t.label}</a></sup>` : ""; }
 
@@ -534,7 +536,7 @@ function sectionParts(stop, P, si) {
 function stopParts(stop) {
   const P = WT[stop]; if (!P) return "";
   const ctx = ctxOf(stop), glance = restMd(P.intro);
-  return `<section class="part" id="p-glance"><span class="eyebrow">The picture</span><h2>At a glance: our curricular capacity</h2>${EXP(stop, "glance")}${EDITING ? `<div class="eacts">${btnE('data-edit-intro="1"', "Edit the introduction and table")}</div>` : ""}<div class="panel">${capChart(stop, stop === "whole" ? 2 : 1)}<p class="howto">Curricular capacity: what an average grade reports taking to depth, introducing or not teaching in a year. From ${S_RATED(stop)} grade-level ratings, Essential Elements apart. Not a target.</p></div><div class="partacts"><a class="btn" href="${link("heatmap", ctx)}" target="_blank" rel="noopener">Open the coverage map on the site ↗</a></div></section>
+  return `<section class="part" id="p-glance"><span class="eyebrow">The picture</span><h2>At a glance: our curricular capacity${stop === "whole" ? ' <span class="pof">by grade band</span>' : ""}</h2>${stop === "whole" ? EXPH("An average grade in a year, by grade band: green in depth, blue introduced, pink not taught, with the number of standards.", capSentence(stop)) : EXP(stop, "glance")}${EDITING ? `<div class="eacts">${btnE('data-edit-intro="1"', "Edit the introduction and table")}</div>` : ""}<div class="panel">${capChart(stop, 1)}<p class="howto">Curricular capacity: what an average grade reports taking to depth, introducing or not teaching in a year. From ${S_RATED(stop)} grade-level ratings, Essential Elements apart. Not a target.</p></div><div class="partacts"><a class="btn" href="${link("heatmap", ctx)}" target="_blank" rel="noopener">Open the coverage map on the site ↗</a></div></section>
     <section class="part" id="p-grades"><span class="eyebrow">The picture</span><h2>Grade by grade</h2>${EXP(stop, "grades")}<div class="panel">${gradeChart(stop)}</div><div class="partacts"><a class="btn" href="${link("dashboard", { subject: ctx.subject, grade: BANDKEY[stop] ? D.bands[BANDKEY[stop]][0] : "3" })}" target="_blank" rel="noopener">Open the grade dashboards ↗</a><a class="btn" href="${link("gaps", ctx)}" target="_blank" rel="noopener">Gaps and repetition ↗</a><a class="btn" href="${link("ladder", ctx)}" target="_blank" rel="noopener">Progressions ↗</a></div></section>
     ${capPart(stop)}
     ${P.sections.map((_, si) => sectionParts(stop, P, si)).join("")}`;
@@ -664,8 +666,8 @@ function capSentence(stop) {
   const s = SUBKEY[stop], v = capOf(ALLG(), [s]); return `In ${s}, the average grade takes ${v.pDeep}% of its grade-level standards to depth in a year (about ${v.deep} of ${v.rated}), introduces ${v.pIntro}% (${v.intro}) and does not teach ${v.pNot}% (${v.not}). Across all four subjects, the average grade K-12 takes ${k.pDeep}% to depth (about ${k.deep} of ${k.rated}).`;
 }
 function capPart(stop) {
-  const one = (half) => `<section class="part" id="p-capacity${half === 2 ? "-2" : ""}"><span class="eyebrow">The picture</span><h2>Our curricular capacity${stop === "whole" ? ` <span class="pof">${half === 2 ? "by subject" : "by grade band"}</span>` : BANDKEY[stop] ? ` <span class="pof">${half === 2 ? "by grade" : "by subject"}</span>` : ""}</h2>${EXPH(`One bar per average grade in a year, with the number of standards beside it; the school average last.`, capSentence(stop))}<div class="panel">${capChart(stop, half)}</div></section>`;
-  return stop === "whole" ? one(1) : BANDKEY[stop] ? one(2) : "";
+  const one = (half) => `<section class="part" id="p-capacity${half === 2 ? "-2" : ""}"><span class="eyebrow">The picture</span><h2>Our curricular capacity${stop === "whole" ? ` <span class="pof">${half === 2 ? "by subject" : "by grade band"}</span>` : BANDKEY[stop] ? ` <span class="pof">${half === 2 ? "by grade" : "by subject"}</span>` : ""}</h2>${stop === "whole" ? EXP(stop, "glance") : EXPH(`One bar per average grade in a year, with the number of standards beside it; the school average last.`, capSentence(stop))}<div class="panel">${capChart(stop, half)}</div></section>`;
+  return stop === "whole" ? one(2) : BANDKEY[stop] ? one(2) : "";
 }
 
 function kpiFor(id) { const m = { whole: D.school.main, "k-5": D.band["K-5"]?.all, "g6-8": D.band["6-8"]?.all, "g9-12": D.band["9-12"]?.all, math: D.school.bySubject.Math, ela: D.school.bySubject.ELA, science: D.school.bySubject.Science, "social-studies": D.school.bySubject["Social Studies"] }; return m[id]; }
