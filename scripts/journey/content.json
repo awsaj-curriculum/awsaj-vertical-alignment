@@ -30,8 +30,8 @@
 "cat": "Gaps"
 },
 {
-"title": "Introduced, never in depth.",
-"text": "581 standards are introduced in at least one grade and in depth in none (Math 186, ELA 241, Science 49, Social Studies 105).",
+"title": "Introduced, not taken to depth.",
+"text": "581 standards are rated introduced by the grade (or grades) that rate them, and in depth by none: Math 186, ELA 241, Science 49, Social Studies 105.",
 "cat": "Breadth without depth"
 },
 {
@@ -78,7 +78,7 @@
 "items": [
 {
 "text": "Which standards matter most for our students to reach in depth, given where they start, and do we agree on that list across K-12?",
-"data": "581 standards introduced and never in depth; 676 priority and power ratings below in depth",
+"data": "581 standards introduced, not taken to depth; 676 priority and power ratings below in depth",
 "step": "We could agree a short, shared K-12 list of standards every class takes to depth, starting with priority or power standards now rated introduced.",
 "cat": "Improving the curriculum"
 },
@@ -140,8 +140,8 @@
 "cat": "Gaps"
 },
 {
-"title": "Introduced, never in depth.",
-"text": "294 standards are introduced and never in depth: ELA 174, Math 63, Social Studies 29, Science 28. Grade 1 at least introduces 78% of its standards, the highest of any grade K-12.",
+"title": "Introduced, not taken to depth.",
+"text": "294 standards are introduced by their grade but not taken to depth: ELA 174, Math 63, Social Studies 29, Science 28. Grade 1 at least introduces 78% of its standards, the highest of any grade K-12.",
 "cat": "Breadth without depth"
 }
 ]
@@ -240,7 +240,7 @@
 "cat": "Gaps"
 },
 {
-"title": "159 standards are introduced but never in depth.",
+"title": "159 standards are introduced, not taken to depth.",
 "text": "Math 71, Social Studies 40, ELA 38 and Science 10. In Math, Ratios and Proportional Relationships and Functions have no standard rated not taught.",
 "cat": "Breadth without depth"
 },
@@ -288,7 +288,7 @@
 "items": [
 {
 "text": "If Math introduces almost every standard, which 10 would we choose to take to depth first?",
-"data": "71 Math standards introduced and never in depth; 10 not taught",
+"data": "71 Math standards introduced, not taken to depth; 10 not taught",
 "step": "We could choose 10 middle school Math standards to take to depth next year, starting with ratios and expressions.",
 "cat": "Improving the curriculum"
 },
@@ -350,7 +350,7 @@
 "cat": "Gaps"
 },
 {
-"title": "128 standards are introduced but never in depth.",
+"title": "128 standards are introduced, not taken to depth.",
 "text": "Math 52, Social Studies 36, ELA 29 and Science 11. In Math, 11 of 21 strands have no standard in depth.",
 "cat": "Breadth without depth"
 }
@@ -455,7 +455,7 @@
 "cat": "Gaps"
 },
 {
-"title": "186 standards are introduced, never in depth.",
+"title": "186 standards are introduced, not taken to depth.",
 "text": "63 in K-5, 71 in 6-8 and 52 in 9-12.",
 "cat": "Breadth without depth"
 }
@@ -498,7 +498,7 @@
 "items": [
 {
 "text": "Which 10 Math standards per grade would we protect if we could only take 10 to depth?",
-"data": "17% of Math in depth K-12; 186 standards introduced and never in depth",
+"data": "17% of Math in depth K-12; 186 standards introduced, not taken to depth",
 "step": "We could agree a short list of Math standards per grade that every class takes to depth, protected in the timetable.",
 "cat": "Improving the curriculum"
 },
@@ -560,7 +560,7 @@
 "cat": "Gaps"
 },
 {
-"title": "241 standards are introduced, never in depth.",
+"title": "241 standards are introduced, not taken to depth.",
 "text": "174 in K-5, 38 in 6-8 and 29 in 9-12. Language has 84 and Writing 59.",
 "cat": "Breadth without depth"
 }
@@ -848,7 +848,7 @@
 "method": {
 "key": "method",
 "title": "Method, sources and limits",
-"intro": "Every figure in this paper was computed from the ratings sheet and cross-checked against the site. Where the site's band and K-12 views differ (progressions), the paper says which it uses. Percentages are rounded half up, as on the site.\n\n**What was read**\n\n| Source | How it was used | How fully it was read |\n| --- | --- | --- |\n| Ratings sheet, \"All Standards and Ratings K-12\" (9 Nov 2026) | Every figure | All 2,166 rows |\n| Organized ratings workbook | Cross-check of totals | All tabs |\n| 20 Findings decks (band and subject) | Cross-check, questions and next-step themes | All slides and speaker notes |\n| K-12 Reports PDF (118 pages) | Cross-check | First 80 pages scanned by search; a few read directly |\n| 7 other Reports PDFs | Cross-check of headline figures | Scanned by search, not read page by page |\n\n**How terms are used**\n\n- **Rated standards.** One rating is one standard in one grade. A standard shared by several grades is counted once for each grade that rated it.\n- **At least introduced.** Rated in depth or introduced.\n- **Not taught where it belongs (confirmed).** The grade the standard belongs to rated it not taught (for a standard shared across grades, every grade that shares it did). In Math and ELA each standard belongs to one grade, so this means that grade's team rated it not taught; it does not mean other grades should have taught it.\n- **Not taught where it fits.** Each standard was placed in the grade or course where it fits best, and that grade or course rated it not taught. Other grades were not asked to rate it.\n- **Introduced, never in depth (met but not owned).** Introduced in at least one grade and in depth in none.\n- **Progression finding.** An automatic check on a chain of linked standards: a step not taught, or a standard in depth while the one it builds on is not taught.\n- **Taught at every step.** Every standard in the chain, across two or more grades, is at least introduced.\n- **Progression.** A chain of linked standards across grades. Official links are the Coherence Map (Math), anchor standards (ELA) and the standards' own structure (Science, Social Studies). Other links are suggestions.\n- **Curricular capacity.** The average number of standards one grade rated in depth, introduced and not taught in a year (all ratings divided by the number of grades), rounded.\n- **Hand-over gap.** A standard taught in depth while a standard it builds on, placed in an earlier school, is rated not taught.\n- **Priority and power standards.** Standards the school's own documents name: power standards in K-5, priority standards in 6-12.\n\n**Limits to keep in view**\n\n- Ratings are teachers' judgements of teaching across a grade. They are not observations and not student results.\n- Grades may have read \"in depth\" differently. Uniform ratings across a whole grade are a reason to check how the scale was read; the paper points these out so teams can discuss them.\n- Each team rated its own subject. Literacy taught in Science and Social Studies, and Math taught in Science, may not show in the ELA and Math ratings.\n- Middle school Science and high school Math, Science and Social Studies standards were placed in the grade or course where each fits best. 24 K-5 Social Studies standards are also rated not taught in the grade where they fit.\n- Band counts of progressions look only at steps inside the band, so they do not add up to the K-12 figure.\n- Literacy audit figures come from the 2026 PK-5 literacy audit of weekly plans.\n- Some strands have few standards in a grade, so a single rating can move a percentage a long way. Counts are given where this matters.\n- Suggested links between standards (most ELA, Science and Social Studies hand-overs) have not been checked by teachers.\n\n**Status.** This is a draft for the Vertical Alignment Committee. Each finding should be checked with the teams concerned before it is treated as settled. The planned review of weekly and unit plans (Part 2) will test many of these patterns against what is actually planned.",
+"intro": "Every figure in this paper was computed from the ratings sheet and cross-checked against the site. Where the site's band and K-12 views differ (progressions), the paper says which it uses. Percentages are rounded half up, as on the site.\n\n**What was read**\n\n| Source | How it was used | How fully it was read |\n| --- | --- | --- |\n| Ratings sheet, \"All Standards and Ratings K-12\" (9 Nov 2026) | Every figure | All 2,166 rows |\n| Organized ratings workbook | Cross-check of totals | All tabs |\n| 20 Findings decks (band and subject) | Cross-check, questions and next-step themes | All slides and speaker notes |\n| K-12 Reports PDF (118 pages) | Cross-check | First 80 pages scanned by search; a few read directly |\n| 7 other Reports PDFs | Cross-check of headline figures | Scanned by search, not read page by page |\n\n**How terms are used**\n\n- **Rated standards.** One rating is one standard in one grade. A standard shared by several grades is counted once for each grade that rated it.\n- **At least introduced.** Rated in depth or introduced.\n- **Not taught where it belongs (confirmed).** The grade the standard belongs to rated it not taught (for a standard shared across grades, every grade that shares it did). In Math and ELA each standard belongs to one grade, so this means that grade's team rated it not taught; it does not mean other grades should have taught it.\n- **Not taught where it fits.** Each standard was placed in the grade or course where it fits best, and that grade or course rated it not taught. Other grades were not asked to rate it.\n- **Introduced, not taken to depth.** Rated introduced by the grade (or grades) that rate it, and in depth by none. Most standards belong to one grade, so this counts what each grade introduces without taking to depth; it does not mean another grade should teach it again.\n- **Progression finding.** An automatic check on a chain of linked standards: a step not taught, or a standard in depth while the one it builds on is not taught.\n- **Taught at every step.** Every standard in the chain, across two or more grades, is at least introduced.\n- **Progression.** A chain of linked standards across grades. Official links are the Coherence Map (Math), anchor standards (ELA) and the standards' own structure (Science, Social Studies). Other links are suggestions.\n- **Curricular capacity.** The average number of standards one grade rated in depth, introduced and not taught in a year (all ratings divided by the number of grades), rounded.\n- **Hand-over gap.** A standard taught in depth while a standard it builds on, placed in an earlier school, is rated not taught.\n- **Priority and power standards.** Standards the school's own documents name: power standards in K-5, priority standards in 6-12.\n\n**Limits to keep in view**\n\n- Ratings are teachers' judgements of teaching across a grade. They are not observations and not student results.\n- Grades may have read \"in depth\" differently. Uniform ratings across a whole grade are a reason to check how the scale was read; the paper points these out so teams can discuss them.\n- Each team rated its own subject. Literacy taught in Science and Social Studies, and Math taught in Science, may not show in the ELA and Math ratings.\n- Middle school Science and high school Math, Science and Social Studies standards were placed in the grade or course where each fits best. 24 K-5 Social Studies standards are also rated not taught in the grade where they fit.\n- Band counts of progressions look only at steps inside the band, so they do not add up to the K-12 figure.\n- Literacy audit figures come from the 2026 PK-5 literacy audit of weekly plans.\n- Some strands have few standards in a grade, so a single rating can move a percentage a long way. Counts are given where this matters.\n- Suggested links between standards (most ELA, Science and Social Studies hand-overs) have not been checked by teachers.\n\n**Status.** This is a draft for the Vertical Alignment Committee. Each finding should be checked with the teams concerned before it is treated as settled. The planned review of weekly and unit plans (Part 2) will test many of these patterns against what is actually planned.",
 "sections": []
 },
 "EXPLAIN": {
