@@ -136,7 +136,7 @@ function buildSections() {
     get qs() { const q = (WT[st]?.sections || []).find((x) => x.key === "questions"); return q ? q.items.map((it) => inl(it.text)) : []; } };
   SECTIONS.next = { nav: NAV.next, title: "Moving forward: a summary", sub: "A summary of the grade bands and subjects", lead: () => "One question and first step from each part. We cannot teach every standard equally, so these are about choosing what we take to depth.", parts: nextParts,
     get qs() { return STOPS.map((st) => { const q = (WT[st]?.sections || []).find((x) => x.key === "questions"); return q && q.items[0] ? inl(q.items[0].text) : ""; }).filter(Boolean); } };
-  SECTIONS.staff = { nav: NAV.staff, title: "From Standards to Student Success", sub: "Part 1 · All-staff session · about 20 minutes", lead: () => "Our ratings, why they matter, and today's work.", parts: pdParts, qs: [] };
+  SECTIONS.staff = { nav: NAV.staff, title: "From Standards to Student Success", sub: "Part 1 · All-staff session", lead: () => "Our ratings, why they matter, and today's work.", parts: pdParts, qs: [] };
   SECTIONS.about = { nav: NAV.about, title: "About the data", sub: "Where the numbers come from and how to read them", lead: () => inl(firstPara(WT.howto?.intro)), parts: aboutParts, qs: [] };
 }
 buildSections();
