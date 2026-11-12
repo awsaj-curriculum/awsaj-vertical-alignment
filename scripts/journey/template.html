@@ -356,6 +356,17 @@ ol.wl > li { padding-left: 10px !important; } ol.wl > li, ol.qs > li { border-ra
 .grpn small { font-weight: 600; opacity: .85; }
 .grpd { font-weight: 500; color: #3B4268; font-size: .98rem; }
 @media print { .grph.again { display: none !important; } .grpn { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: #101846 !important; color: #fff !important; } .grph { break-after: avoid; } }
+
+/* instructional capacity chart */
+.cap { display: grid; grid-template-columns: minmax(150px, 240px) 1fr minmax(130px, 170px); gap: 6px 14px; align-items: center; margin-top: 6px; }
+.caplab { font-weight: 600; color: var(--navy); line-height: 1.15; font-size: .98rem; } .caplab.own, .caplab.cmp { font-weight: 800; }
+.capbar > div { display: flex; height: 24px; border-radius: 7px; overflow: hidden; min-width: 40px; }
+.capbar span { display: grid; place-items: center; color: #fff; font-weight: 800; font-size: .82rem; min-width: 0; overflow: hidden; }
+.capbar .d { background: var(--deep); color: var(--navy); } .capbar .i { background: var(--intro); } .capbar .n { background: var(--not); }
+.capval { color: var(--navy); font-size: .95rem; white-space: nowrap; } .capval b { font-size: 1.05rem; } .capval small { color: #3B4268; }
+.caplab.cmp, .capbar.cmp, .capval.cmp { border-top: 1.5px dashed var(--line); padding-top: 8px; margin-top: 4px; }
+@media (max-width: 640px) { .cap { grid-template-columns: 1fr; gap: 2px; } .capval { margin-bottom: 8px; } .capbar.cmp, .capval.cmp { border-top: 0; padding-top: 0; margin-top: 0; } }
+@media print { .capbar span { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 

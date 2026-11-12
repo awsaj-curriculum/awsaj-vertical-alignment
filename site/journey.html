@@ -356,6 +356,17 @@ ol.wl > li { padding-left: 10px !important; } ol.wl > li, ol.qs > li { border-ra
 .grpn small { font-weight: 600; opacity: .85; }
 .grpd { font-weight: 500; color: #3B4268; font-size: .98rem; }
 @media print { .grph.again { display: none !important; } .grpn { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: #101846 !important; color: #fff !important; } .grph { break-after: avoid; } }
+
+/* instructional capacity chart */
+.cap { display: grid; grid-template-columns: minmax(150px, 240px) 1fr minmax(130px, 170px); gap: 6px 14px; align-items: center; margin-top: 6px; }
+.caplab { font-weight: 600; color: var(--navy); line-height: 1.15; font-size: .98rem; } .caplab.own, .caplab.cmp { font-weight: 800; }
+.capbar > div { display: flex; height: 24px; border-radius: 7px; overflow: hidden; min-width: 40px; }
+.capbar span { display: grid; place-items: center; color: #fff; font-weight: 800; font-size: .82rem; min-width: 0; overflow: hidden; }
+.capbar .d { background: var(--deep); color: var(--navy); } .capbar .i { background: var(--intro); } .capbar .n { background: var(--not); }
+.capval { color: var(--navy); font-size: .95rem; white-space: nowrap; } .capval b { font-size: 1.05rem; } .capval small { color: #3B4268; }
+.caplab.cmp, .capbar.cmp, .capval.cmp { border-top: 1.5px dashed var(--line); padding-top: 8px; margin-top: 4px; }
+@media (max-width: 640px) { .cap { grid-template-columns: 1fr; gap: 2px; } .capval { margin-bottom: 8px; } .capbar.cmp, .capval.cmp { border-top: 0; padding-top: 0; margin-top: 0; } }
+@media print { .capbar span { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
@@ -520,6 +531,7 @@ function stopParts(stop) {
   const ctx = ctxOf(stop), glance = restMd(P.intro);
   return `<section class="part" id="p-glance"><span class="eyebrow">The picture</span><h2>At a glance</h2>${EXP(stop, "glance")}${EDITING ? `<div class="eacts">${btnE('data-edit-intro="1"', "Edit the introduction and table")}</div>` : ""}<div class="panel">${LEGEND}${glanceChart(stop)}<p class="howto">How to read this: each bar is 100% of the grade-level ratings. Green is taught in depth, blue is introduced or exposed, pink is not taught. Essential Elements are counted apart.</p></div><div class="partacts"><a class="btn" href="${link("heatmap", ctx)}" target="_blank" rel="noopener">Open the coverage map on the site ↗</a></div></section>${glance ? `<section class="part cont" id="p-glance-t"><span class="eyebrow">The picture</span><h2>At a glance <span class="pof">2 of 2</span></h2>${EXP(stop, "table")}<div class="mdx">${md(glance)}</div></section>` : ""}
     <section class="part" id="p-grades"><span class="eyebrow">The picture</span><h2>Grade by grade</h2>${EXP(stop, "grades")}<div class="panel">${gradeChart(stop)}</div><div class="partacts"><a class="btn" href="${link("dashboard", { subject: ctx.subject, grade: BANDKEY[stop] ? D.bands[BANDKEY[stop]][0] : "3" })}" target="_blank" rel="noopener">Open the grade dashboards ↗</a><a class="btn" href="${link("gaps", ctx)}" target="_blank" rel="noopener">Gaps and repetition ↗</a><a class="btn" href="${link("ladder", ctx)}" target="_blank" rel="noopener">Progressions ↗</a></div></section>
+    ${capPart(stop)}
     ${P.sections.map((_, si) => sectionParts(stop, P, si)).join("")}`;
 }
 function nextParts() {   // Moving forward (summary): every part's "Our part in the story" and one question from every part, grouped by category
@@ -626,6 +638,32 @@ function pdfMenu(id) { const own = PDFS.find((r) => r[0] === id); return `<detai
 function groupsHTML(stop, si, start, part, key, cont) {
   const gs = []; part.forEach((it, k) => { const c = it.cat || "Other notable"; if (!gs.length || gs[gs.length - 1].c !== c) gs.push({ c, k, list: [] }); gs[gs.length - 1].list.push(it); });
   return gs.map((g, gi) => `<div class="grp"><h3 class="grph${gi === 0 && cont ? " again" : ""}"><span class="grpn">${esc(g.c)}${gi === 0 && cont ? " <small>(continued)</small>" : ""}</span>${CATDESC[g.c] ? `<span class="grpd">${CATDESC[g.c]}</span>` : ""}</h3><ol class="${key === "questions" ? "qs" : "wl"}" start="${start + g.k + 1}" style="counter-reset: q ${start + g.k}">${g.list.map((it, j) => itemHTML(stop, si, start + g.k + j, it, key, true)).join("")}</ol></div>`).join("");
+}
+
+/* Instructional (curricular) capacity (Tim, Nov 2026): per grade, on average, how many grade-level standards a grade takes to depth,
+   introduces or does not teach in a year, by its teams' own ratings. Essential Elements are counted apart. Rounded half up. */
+const rnd = (x) => Math.floor(x + 0.5);
+function capOf(grades, subs) { let d = 0, i = 0, n = 0; subs.forEach((s) => grades.forEach((g) => { const m = D.cells[s] && D.cells[s][g] && D.cells[s][g].main; if (m) { d += m.deep; i += m.intro; n += m.not; } })); const k = grades.length, r = d + i + n;
+  return { deep: rnd(d / k), intro: rnd(i / k), not: rnd(n / k), rated: rnd(r / k), pDeep: r ? rnd(100 * d / r) : 0, pIntro: r ? rnd(100 * i / r) : 0, pNot: r ? rnd(100 * n / r) : 0 }; }
+const ALLG = () => [].concat(...Object.values(D.bands));
+function capRows(stop) {
+  const K12 = ["Average grade, K-12, all subjects", capOf(ALLG(), SUBJ), "cmp"];
+  if (stop === "whole") return [["Average grade, K-12, all subjects", capOf(ALLG(), SUBJ), "own"], ...Object.keys(D.bands).map((b) => [`A ${b} grade, all subjects`, capOf(D.bands[b], SUBJ)]), ...SUBJ.map((s) => [`${s}, average grade K-12`, capOf(ALLG(), [s])])];
+  if (BANDKEY[stop]) { const b = BANDKEY[stop], gs = D.bands[b]; return [[`A ${b} grade, all subjects`, capOf(gs, SUBJ), "own"], ...SUBJ.map((s) => [`${s} in ${b}`, capOf(gs, [s])]), K12]; }
+  const s = SUBKEY[stop]; return [[`${s}, average grade K-12`, capOf(ALLG(), [s]), "own"], ...Object.keys(D.bands).map((b) => [`${s} in ${b}`, capOf(D.bands[b], [s])]), K12];
+}
+function capChart(stop) {
+  const rows = capRows(stop), max = Math.max(...rows.map((r) => r[1].rated));
+  return `${LEGEND}<div class="cap" role="img" aria-label="Instructional capacity: standards per grade taught in depth, introduced and not taught">${rows.map(([lab, v, k]) => `<div class="caplab${k ? " " + k : ""}">${esc(lab)}</div><div class="capbar${k ? " " + k : ""}"><div style="width:${(100 * v.rated / max).toFixed(1)}%">${[["d", v.deep], ["i", v.intro], ["n", v.not]].filter((x) => x[1]).map(([c, n]) => `<span class="${c}" style="flex:${n}">${n}</span>`).join("")}</div></div><div class="capval${k ? " " + k : ""}"><b>${v.deep}</b> of ${v.rated} in depth <small>(${v.pDeep}%)</small></div>`).join("")}</div>`;
+}
+function capSentence(stop) {
+  const k = capOf(ALLG(), SUBJ);
+  if (stop === "whole") return `On average, a grade takes about ${k.deep} of its ${k.rated} grade-level standards to depth in a year across its four subjects (about ${rnd(k.deep / 4)} per subject), introduces about ${k.intro} and does not teach about ${k.not}.`;
+  if (BANDKEY[stop]) { const b = BANDKEY[stop], v = capOf(D.bands[b], SUBJ); return `A ${b} grade takes about ${v.deep} of its ${v.rated} standards to depth in a year, introduces about ${v.intro} and does not teach about ${v.not}. The average grade K-12 takes about ${k.deep} of ${k.rated} to depth.`; }
+  const s = SUBKEY[stop], v = capOf(ALLG(), [s]); return `In ${s}, the average grade takes about ${v.deep} of its ${v.rated} standards to depth in a year, introduces about ${v.intro} and does not teach about ${v.not}. Across all four subjects, the average grade K-12 takes about ${k.deep} of ${k.rated} to depth.`;
+}
+function capPart(stop) {
+  return `<section class="part" id="p-capacity"><span class="eyebrow">The picture</span><h2>Our instructional capacity</h2>${EXPH(`Each bar is one average grade in a year. Its length is how many grade-level standards that grade rates, and the coloured parts show how many it takes to depth, introduces or does not teach. ${stop === "whole" ? "The first line is the average grade K-12 across all four subjects; the lines below break it down by grade band and by subject." : "The last line is the average grade K-12, all subjects, for comparison."}`, capSentence(stop))}<div class="panel">${capChart(stop)}<p class="howto">Our instructional (or curricular) capacity is how much a grade currently takes to depth, introduces and leaves untaught in a year, by its teams' own ratings. It is not a measure of teaching time, and it is not a target. It helps us choose on purpose which standards to protect for depth. Essential Elements are counted apart.</p></div></section>`;
 }
 
 function kpiFor(id) { const m = { whole: D.school.main, "k-5": D.band["K-5"]?.all, "g6-8": D.band["6-8"]?.all, "g9-12": D.band["9-12"]?.all, math: D.school.bySubject.Math, ela: D.school.bySubject.ELA, science: D.school.bySubject.Science, "social-studies": D.school.bySubject["Social Studies"] }; return m[id]; }
