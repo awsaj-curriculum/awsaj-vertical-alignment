@@ -18,7 +18,7 @@ function secMap(stop, key) { const at = SECSTOPS.findIndex((x) => x[0] === key);
   return `<div class="secmap" role="img" aria-label="${esc(NAV[stop] || "")}: section ${at + 1} of 3, ${SECSTOPS[at][1]}"><div class="smtop"><span class="smwhere">${esc(NAV[stop] || "")} &middot; Our curriculum journey</span><span class="smnow">Section ${at + 1}: ${SECSTOPS[at][1]}</span></div><div class="smroute" aria-hidden="true"><svg viewBox="0 0 100 64" preserveAspectRatio="none"><path d="M2,57 C9,57 11,52 16.67,52 C33,52 35,32 50,32 S67,12 83.33,12 C90,12 94,11 98,10" fill="none" stroke="#101846" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>${SECSTOPS.map((_, i) => `<span class="smdot ${i < at ? "done" : i === at ? "here" : "next"}" style="--x:${[16.67, 50, 83.33][i]}%;--y:${[12, 32, 52][i]}px">${i < at ? "&#10003;" : i + 1}</span>`).join("")}</div><div class="smlabs">${SECSTOPS.map(([k, t], i) => `<span class="smlab ${i < at ? "done" : i === at ? "here" : "next"}"><span class="smn">${i + 1}.</span> ${t}${i === at ? "<small>You are here</small>" : ""}</span>`).join("")}</div></div>`; }
 const CHUNK = { data: 4, patterns: 3, questions: 3, ourpart: 4 };
 const STOPS = ["whole", "k-5", "g6-8", "g9-12", "math", "ela", "science", "social-studies"];
-const NAV = { whole: "Whole school", "k-5": "K-5", "g6-8": "6-8", "g9-12": "9-12", math: "Math", ela: "ELA", science: "Science", "social-studies": "Social Studies", next: "Moving forward", about: "About the data" };
+const NAV = { staff: "All-staff session", whole: "Whole school", "k-5": "K-5", "g6-8": "6-8", "g9-12": "9-12", math: "Math", ela: "ELA", science: "Science", "social-studies": "Social Studies", next: "Moving forward", about: "About the data" };
 const SUBTITLE = { whole: "Kindergarten to Grade 12, all four subjects", "k-5": "Elementary, Kindergarten to Grade 5", "g6-8": "Middle school, Grades 6 to 8", "g9-12": "High school, Grades 9 to 12", math: "Math, Kindergarten to Grade 12", ela: "ELA, Kindergarten to Grade 12", science: "Science, Kindergarten to Grade 12", "social-studies": "Social Studies, Kindergarten to Grade 12" };
 let CURSEC = "", EDITING = false;
 
@@ -136,11 +136,12 @@ function buildSections() {
     get qs() { const q = (WT[st]?.sections || []).find((x) => x.key === "questions"); return q ? q.items.map((it) => inl(it.text)) : []; } };
   SECTIONS.next = { nav: NAV.next, title: "Moving forward: a summary", sub: "A summary of the grade bands and subjects", lead: () => "One question and first step from each part. We cannot teach every standard equally, so these are about choosing what we take to depth.", parts: nextParts,
     get qs() { return STOPS.map((st) => { const q = (WT[st]?.sections || []).find((x) => x.key === "questions"); return q && q.items[0] ? inl(q.items[0].text) : ""; }).filter(Boolean); } };
+  SECTIONS.staff = { nav: NAV.staff, title: "From Standards to Student Success", sub: "Part 1 · All-staff session · about 20 minutes", lead: () => "Our ratings, why they matter, and today's work.", parts: pdParts, qs: [] };
   SECTIONS.about = { nav: NAV.about, title: "About the data", sub: "Where the numbers come from and how to read them", lead: () => inl(firstPara(WT.howto?.intro)), parts: aboutParts, qs: [] };
 }
 buildSections();
 const SOON = {};
-const ORDER = ["whole", "k-5", "g6-8", "g9-12", "math", "ela", "science", "social-studies", "next", "about"];
+const ORDER = ["staff", "whole", "k-5", "g6-8", "g9-12", "math", "ela", "science", "social-studies", "next", "about"];
 const navName = (id) => NAV[id];
 
 /* ---------- editing (Editors and the owner only; saved to the page's database, so everyone sees the same content) ---------- */

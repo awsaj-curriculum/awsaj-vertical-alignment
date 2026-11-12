@@ -372,20 +372,85 @@ ol.wl > li { padding-left: 10px !important; } ol.wl > li, ol.qs > li { border-ra
 .caplab.cmp, .capbar.cmp, .capval.cmp { border-top: 1.5px dashed var(--line); padding-top: 6px; margin-top: 2px; } .caplab.own, .capval.own { color: var(--navy); } .capbar.own > div { box-shadow: 0 0 0 2px var(--navy); }
 @media (max-width: 640px) { .cap { grid-template-columns: 1fr; gap: 2px; } .capval { margin-bottom: 8px; } .capbar.cmp, .capval.cmp { border-top: 0; padding-top: 0; margin-top: 0; } }
 @media print { .capbar span { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .story > #p-grades, .story > #p-capacity, .story > #p-capacity-2 { break-before: page; } .cap { grid-template-columns: 150px 1fr 250px; } }
+
+/* ===== Part 1: All-staff session slides (Tim, Nov 2026): same wash, navy and glass, bigger type for the projector ===== */
+.pd { text-align: left; }
+.pd h2 { font-size: clamp(2rem, 3.6vw, 3rem); margin: 6px 0 14px; }
+.pd .pdlead { font-size: clamp(1.15rem, 1.7vw, 1.5rem); font-weight: 500; max-width: 46ch; margin: 0 0 18px; }
+.pd .pdnote { font-size: 1.15rem; margin-top: 18px; padding: 12px 18px; border-left: 4px solid var(--cta); background: rgba(255,255,255,.55); border-radius: 10px; max-width: 70ch; }
+.pdmap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.pdm { display: inline-flex; align-items: center; gap: 8px; } .pdm i { font-style: normal; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--navy); background: #fff; color: var(--navy); font-size: .8rem; }
+.pdm.done i { background: var(--navy); color: #fff; } .pdm.now { color: var(--navy); } .pdm.now i { background: var(--cta); box-shadow: 0 0 0 5px rgba(181,223,0,.35); }
+.pdl { flex: 0 1 46px; height: 2px; background: var(--line); border-radius: 2px; }
+.pd.center .pdhero { text-align: center; } .pd.center .pdhero p { margin-left: auto; margin-right: auto; }
+.pdhero .big { font-size: clamp(3.4rem, 8vw, 6.4rem); line-height: 1; letter-spacing: -.02em; margin: 6px 0 10px; }
+.pdtiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 26px; }
+.pdtile { background: rgba(255,255,255,.72); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.9); border-radius: 18px; padding: 20px 18px; box-shadow: 0 10px 30px rgba(16,24,70,.08); }
+.pdtile b { display: block; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1; color: var(--navy); } .pdtile span { display: block; margin-top: 8px; font-size: 1rem; color: var(--navy-2); }
+.pdroad { width: 100%; height: auto; max-height: 52vh; display: block; margin: 4px auto 0; overflow: visible; }
+.pdroad .road { fill: none; stroke: var(--navy); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.pdroad text { font: 700 14px var(--font); fill: var(--navy); } .pdroad .gl { font-size: 24px; font-weight: 800; } .pdroad .gs { font-size: 16px; font-weight: 700; fill: var(--navy-2); } .pdroad .bands text { font-size: 15px; font-weight: 800; letter-spacing: .08em; }
+.pd.on .pdroad .road { animation: pdDraw 1.8s ease-out both; } .pd.on .pdroad .cp2 { animation: pdPop .4s ease-out both; animation-delay: var(--d); } .pd.on .pdroad .goal2 { animation: pdPop .5s ease-out 1.6s both; }
+@keyframes pdDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } } @keyframes pdPop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.pdroad .cp2, .pdroad .goal2 { transform-box: fill-box; transform-origin: center; }
+.pdcards { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 14px; }
+.pdcards li { display: grid; grid-template-columns: 52px 1fr; column-gap: 16px; align-items: start; background: rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.9); border-radius: 18px; padding: 18px 22px; box-shadow: 0 8px 24px rgba(16,24,70,.07); font-size: 1.12rem; }
+.pdcards .n { grid-row: span 3; width: 46px; height: 46px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 1.3rem; }
+.pdcards .catchip { justify-self: start; } .pdcards b { font-size: 1.28rem; line-height: 1.25; } .pdcards li > span:not(.n):not(.catchip) { color: var(--navy-2); margin-top: 4px; } .pdcards .step { font-size: 1.05rem; color: var(--navy-2); }
+.pdqr { display: grid; grid-template-columns: minmax(200px, 300px) 1fr; gap: 40px; align-items: center; max-width: 980px; margin: 10px auto 0; }
+.qrbox { background: #fff; border-radius: 20px; padding: 16px; box-shadow: 0 12px 34px rgba(16,24,70,.12); } .qrbox svg { width: 100%; height: auto; display: block; }
+.pdqr .url { font-size: 1.35rem; font-weight: 800; color: var(--navy); word-break: break-word; margin: 6px 0 12px; }
+.flow { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.fstep { flex: 1 1 180px; background: rgba(255,255,255,.75); border-radius: 18px; padding: 20px; border-top: 6px solid var(--cta); box-shadow: 0 8px 24px rgba(16,24,70,.07); }
+.fstep:first-child { border-top-color: var(--navy); } .fstep b { display: block; font-size: 1.35rem; } .fstep span { display: block; margin-top: 6px; color: var(--navy-2); font-size: 1.05rem; }
+.farr { align-self: center; font-size: 1.8rem; font-weight: 800; color: var(--navy-2); }
+.stdcard { background: var(--navy); color: #fff; border-radius: 20px; padding: 22px 26px; max-width: 900px; } .stdcard p { color: #fff; font-size: 1.25rem; max-width: none; margin-top: 8px; font-style: italic; }
+.stdcard .code { font-weight: 800; font-size: 1.4rem; margin-right: 12px; } .stdcard .strand { color: var(--cta); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: .9rem; }
+.kseg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; max-width: 1100px; }
+.krow { background: rgba(255,255,255,.75); border-radius: 16px; padding: 16px 20px; border-left: 6px solid var(--lime); box-shadow: 0 6px 18px rgba(16,24,70,.06); }
+.krow:nth-child(2) { border-left-color: var(--blue); } .krow:nth-child(3) { border-left-color: var(--amber); } .krow:nth-child(4) { border-left-color: var(--magenta); }
+.krow b { display: block; font-size: 1.2rem; } .krow span { display: block; color: var(--navy-2); margin-top: 4px; font-size: 1.05rem; }
+.goalgrid { display: grid; grid-template-columns: minmax(260px, 420px) 1fr; gap: 36px; align-items: center; }
+.stairs { display: grid; gap: 4px; } .stair { margin-left: calc(var(--i) * 16px); background: rgba(255,255,255,.7); border-radius: 10px; padding: 4px 12px; font-size: .9rem; display: flex; justify-content: space-between; border-left: 5px solid var(--line); }
+.stair:nth-child(-n+4) { border-left-color: var(--magenta); } .stair:nth-child(n+5):nth-child(-n+7) { border-left-color: var(--blue); } .stair:nth-child(n+8) { border-left-color: var(--lime); }
+.stair.top { background: var(--cta); font-size: 1.05rem; padding: 8px 14px; } .stair.top span { font-weight: 800; }
+.pd.on .stair { animation: pdPop .35s ease-out both; animation-delay: calc(var(--i) * 70ms); }
+.goalsteps { margin: 0; padding-left: 1.4em; display: grid; gap: 16px; font-size: 1.3rem; } .goalsteps li { padding-left: 6px; }
+.pdsubj { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px; }
+.pdsubj a { display: grid; gap: 10px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,.75); text-decoration: none; box-shadow: 0 8px 24px rgba(16,24,70,.08); transition: transform .18s; }
+.pdsubj a:hover { transform: translateY(-3px); } .pdsubj .rule { width: 46px; height: 5px; border-radius: 4px; background: var(--c); } .pdsubj b { font-size: 1.5rem; }
+/* one at a time: fragments appear on Next while presenting; always visible otherwise and in print */
+body.presenting .pd .frag { opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease; }
+body.presenting .pd .frag.shown { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { body.presenting .pd .frag { transition: none; } .pd.on .pdroad .road, .pd.on .pdroad .cp2, .pd.on .pdroad .goal2, .pd.on .stair { animation: none; } }
+.pdstory > .shead { text-align: center; } .pdstory > .shead h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); } .pdstory > .shead p { margin: 12px auto 0; font-size: 1.3rem; }
+@media (max-width: 760px) { .pdtiles, .pdsubj { grid-template-columns: repeat(2, 1fr); } .pdqr, .goalgrid, .kseg { grid-template-columns: 1fr; } .farr { display: none; } }
+@media print { .pd .frag { opacity: 1 !important; transform: none !important; } .pd { break-before: page; } }
+
+body.presenting .pdstory > .shead h1 { font-size: clamp(2.8rem, 6.4vw, 5rem); } body.presenting .pdstory > .shead p { font-size: 1.35rem; margin: 14px auto 0; } body.presenting .pdstory > .shead .eyebrow { font-size: .95rem; }
+body.presenting .story > .pd h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); } body.presenting .story > .pd .pdhero .big { font-size: clamp(3.6rem, 8vw, 6.4rem); }
+.pdroad { max-height: 38vh; } .pdroad .gs { font-size: 15px; }
+.stairs { gap: 2px; } .stair { padding: 2px 10px; font-size: .82rem; } .stair.top { padding: 6px 12px; font-size: 1rem; }
+.stdcard { padding: 16px 22px; } .stdcard p { font-size: 1.12rem; } .kseg { gap: 10px; margin-top: 12px; } .krow { padding: 12px 18px; }
+@media (max-height: 820px) { .pd .pdlead { margin-bottom: 10px; } .pd .pdnote { margin-top: 10px; padding: 8px 14px; } .pdcards li { padding: 12px 18px; } .pdcards b { font-size: 1.15rem; } }
+#pickBand.pdstart { text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+
+.pd .bridge { margin-top: 22px; padding: 14px 20px; border-radius: 14px; background: var(--navy); color: #fff; font-size: clamp(1.1rem, 1.6vw, 1.35rem); font-weight: 600; max-width: 62ch; display: flex; gap: 12px; align-items: baseline; }
+.pd .bridge span { color: var(--cta); font-weight: 800; } .pd.center .bridge { margin-left: auto; margin-right: auto; }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
 <div id="sky">
   <header id="nav"><div class="wrap"><a class="brand" href="#map" aria-label="Awsaj Academy, journey map">/*LOGO*/<span>Awsaj<br>Academy</span></a><a class="vaback" href="./" title="Back to the start page: Part 1 or Part 2">&larr; Home</a><nav id="navLinks" aria-label="Sections"></nav><button class="btn" id="presentBtn" type="button" hidden>Show all on one page</button><button class="btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button></div></header>
   <section id="hero" aria-label="Journey map">
-    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><p id="pickBand" class="pickhint">Pick a grade band to see its story <span aria-hidden="true">&#8600;</span></p></div>
+    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><a id="pickBand" class="pickhint pdstart" href="#staff">Part 1: Start the all-staff session <span class="arr">→</span></a></div>
     <svg id="map" role="group" aria-label="The route from Kindergarten to Grade 12. Choose a grade or a stage."></svg>
     <button class="btn" id="whole-route" type="button" hidden>← Whole route</button>
   </section>
 </div>
 <section id="below"><div class="wrap">
   <div class="belowgrid"><div class="frame reveal"><span class="eyebrow">What this is</span><p class="lead">This is your data: the ratings you, our teachers, entered for the standards you teach, K-12.</p><p>Every chart links to the full data on the <a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/" target="_blank" rel="noopener">Vertical Alignment site ↗</a>.</p></div>
-  <div class="subjbox"><a class="btn cta wholecta reveal" href="#whole">Click here to explore the whole&#8209;school K&#8209;12 story <span class="arr">→</span></a><p class="pickhint reveal">Pick a subject to see its story <span aria-hidden="true">&#8600;</span></p>
+  <div class="subjbox"><a class="btn cta wholecta reveal" href="#whole">Click here to explore the whole&#8209;school K&#8209;12 story <span class="arr">→</span></a><p class="pickhint reveal"><b>Part 2:</b> pick your subject <span aria-hidden="true">&#8600;</span></p>
   <div class="subjects"><a class="reveal" style="--i:0;--c:var(--lime)" href="#math"><span class="rule"></span><b>Math</b><span class="arr">→</span></a><a class="reveal" style="--i:1;--c:var(--blue)" href="#ela"><span class="rule"></span><b>ELA</b><span class="arr">→</span></a><a class="reveal" style="--i:2;--c:var(--magenta)" href="#science"><span class="rule"></span><b>Science</b><span class="arr">→</span></a><a class="reveal" style="--i:3;--c:var(--amber)" href="#social-studies"><span class="rule"></span><b>Social Studies</b><span class="arr">→</span></a></div></div></div>
   <div class="second reveal"><a href="#next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-6-6-10.5a6 6 0 0 1 12 0C18 15 12 21 12 21z"/><circle cx="12" cy="10.5" r="2"/></svg><span class="t">Moving forward</span><span class="arr">→</span></a><a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-5M10 20v-9M15 20V7M20 20V4"/></svg><span class="t">About the data</span><span class="arr">→</span></a></div>
 </div></section>
@@ -494,7 +559,7 @@ function gradeExplain(g) { const xs = D.subjects.map((s) => [s, D.cells[s][g].ma
 function gradeCard(g) { const st = stageOf(g); return `<section class="gradecard" style="--c:${st.accent}"><span class="eyebrow">${st.label} · ${st.name}</span><h2>${gname(g)} at a glance</h2>${gradeExplain(g)}${LEGEND}${hbars(D.subjects.map((s) => [s, D.cells[s][g].main]), gname(g) + ": share taught in depth, introduced and not taught, by subject")}<div class="partacts"><a class="btn" href="${link("dashboard", { subject: "All subjects", grade: g })}" target="_blank" rel="noopener">Open the ${gname(g)} dashboard ↗</a></div></section>`; }
 function storyHTML(id, grade) {
   const S_ = SECTIONS[id], acc = ACCENT[id]; CURSEC = id;
-  return `<div class="wrap story" style="--acc:${acc}">${grade ? gradeCard(grade) : ""}<div class="shead"><span class="eyebrow">${S_.sub}</span><h1>${S_.title}</h1><p>${S_.lead()}</p><div class="acts">${id !== "about" ? pdfMenu(id) : ""}<button class="btn" type="button" id="toggleAll">Show all on one page</button>${id !== "about" ? `<a class="btn" href="${DATALINK[id]}" target="_blank" rel="noopener">Open this data on the Vertical Alignment site ↗</a>` : ""}</div></div>${S_.parts()}${endCard(id)}</div>`;
+  return `<div class="wrap story${id === "staff" ? " pdstory" : ""}" style="--acc:${acc || "#80BC00"}">${grade ? gradeCard(grade) : ""}<div class="shead"><span class="eyebrow">${S_.sub}</span><h1>${S_.title}</h1><p>${S_.lead()}</p>${id === "staff" ? "" : `<div class="acts">`}${id !== "about" && id !== "staff" ? pdfMenu(id) : ""}${id === "staff" ? "" : `<button class="btn" type="button" id="toggleAll">Show all on one page</button>${id !== "about" ? `<a class="btn" href="${DATALINK[id]}" target="_blank" rel="noopener">Open this data on the Vertical Alignment site ↗</a>` : ""}</div>`}</div>${S_.parts()}${id === "staff" ? "" : endCard(id)}</div>`;
 }
 /* closing card (Tim, Nov 2026): the last step of every part offers three choices */
 function endCard(id) { const nm = NAV[id] || SECTIONS[id].title, pdf = typeof pdfFor === "function" ? pdfFor(id) : "", data = id !== "about" ? DATALINK[id] : "";
@@ -531,13 +596,13 @@ document.addEventListener("click", (e) => {
 const slideEls = () => $$(".story > .shead, .story > .part");
 /* presenter frames: a part is shown as up to three screens: the finding, the possible explanations, our part in the story */
 const FRAME = { a: "" };
-const slides = () => slideEls().map((el) => ({ el, f: "a" }));
+const slides = () => slideEls().flatMap((el) => { const n = el.querySelectorAll(".frag").length; return Array.from({ length: n + 1 }, (_, f) => ({ el, f })); });
 let allMode = false;
 function setPresent(on) { presenting = on && !!SECTIONS[parse().id]; document.body.classList.toggle("presenting", presenting); $("#pbar").hidden = !presenting; if (presenting && document.activeElement) document.activeElement.blur(); $("#presentBtn").textContent = presenting ? "Show all on one page" : "Step by step"; const tb = $("#toggleAll"); if (tb) tb.textContent = presenting ? "Show all on one page" : "Go step by step"; if (!presenting) document.body.classList.remove("step0"); if (!presenting) slideEls().forEach((s) => { s.classList.remove("on"); s.removeAttribute("data-f"); }); }
-function showStep(n, keepScroll) { const ss = slides(); if (!ss.length) return; step = Math.max(0, Math.min(ss.length - 1, n)); slideEls().forEach((el) => el.classList.remove("on")); const s = ss[step]; s.el.classList.add("on"); s.el.dataset.f = s.f;
+function showStep(n, keepScroll) { const ss = slides(); if (!ss.length) return; step = Math.max(0, Math.min(ss.length - 1, n)); slideEls().forEach((el) => el.classList.remove("on")); const s = ss[step]; s.el.classList.add("on"); s.el.dataset.f = s.f; s.el.querySelectorAll(".frag").forEach((x, i) => x.classList.toggle("shown", i < s.f)); const fr = s.f ? s.el.querySelectorAll(".frag")[s.f - 1] : null; if (fr && !keepScroll) { const r = fr.getBoundingClientRect(), bar = ($("#pbar")?.offsetHeight || 0) + 16; if (r.bottom > innerHeight - bar) window.scrollBy({ top: r.bottom - innerHeight + bar, behavior: REDUCED.matches ? "auto" : "smooth" }); }
   document.body.classList.toggle("step0", step === 0); const h = s.el.querySelector("h2");
-  $("#pCount").textContent = `${step + 1} of ${ss.length}`; $("#pWhere").textContent = h ? h.textContent : "Start"; $("#pPrev").disabled = step === 0; $("#pNext").disabled = step === ss.length - 1;
-  $("#pFill").style.width = ((step + 1) / ss.length) * 100 + "%"; if (!keepScroll) window.scrollTo(0, 0); }
+  const els = slideEls(), si = els.indexOf(s.el); $("#pCount").textContent = `${si + 1} of ${els.length}`; $("#pWhere").textContent = h ? h.textContent : "Start"; $("#pPrev").disabled = step === 0; $("#pNext").disabled = step === ss.length - 1;
+  $("#pFill").style.width = ((step + 1) / ss.length) * 100 + "%"; if (!keepScroll && (!s.f || showStep.lastEl !== s.el)) window.scrollTo(0, 0); showStep.lastEl = s.el; }
 let lastKey = 0;
 addEventListener("keydown", (e) => {
   if (!$("#reflect").hidden) { if (e.key === "Escape") closeReflect(); return; }
