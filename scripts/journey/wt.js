@@ -87,7 +87,7 @@ const EXP = (stop, key) => { const X = WT.EXPLAIN; if (!X) return ""; if (key ==
 const EXPX = (k) => { const X = WT.EXPLAIN?.extra?.[k]; return X ? EXPH(X[0], X[1]) : ""; };
 function itemHTML(stop, si, ii, it, sec, grouped) {
   const [href, label] = linkFor(stop, `${it.title || ""} ${it.text || ""} ${it.data || ""}`);
-  const body = sec === "questions" ? `<b>${inl(it.text)}</b>${it.data ? ` <span class="dnote">(Data: ${inl(it.data)})${fnHTML(stop, it)}</span>` : ""}${it.step ? `<span class="step"><b>First step:</b> ${inl(it.step)}</span>` : ""}` : `${it.title ? `<b>${inl(it.title)}</b> ` : ""}${inl(it.text)}${it.data ? ` <span class="dnote">(Data: ${inl(it.data)})${fnHTML(stop, it)}</span>` : ""}`;
+  const body = sec === "questions" ? `<b>${inl(it.text)}</b>${it.data ? ` <span class="dnote">(Data: ${inl(it.data)})${fnHTML(stop, it)}</span>` : ""}${it.step ? `<span class="step"><b>First step:</b> ${inl(it.step)}</span>` : ""}` : `${it.title ? `<b>${inl(it.title)}</b> ` : ""}${inl(it.text).replace(/\n/g, "<br>")}${it.data ? ` <span class="dnote">(Data: ${inl(it.data)})${fnHTML(stop, it)}</span>` : ""}`;
   return `<li id="it-${stop}-${si}-${ii}" data-si="${si}" data-ii="${ii}"><div class="itxt">${it.cat && !grouped ? `<span class="catchip">${esc(it.cat)}</span>` : ""}${body} <a class="ilink" href="${href}" target="_blank" rel="noopener">${label} ↗</a></div>${EDITING ? `<div class="eacts">${btnE(`data-edit-item="${si}:${ii}"`, "Edit")}${btnE(`data-del-item="${si}:${ii}"`, "Delete")}</div>` : ""}</li>`;
 }
 function sectionParts(stop, P, si) {
