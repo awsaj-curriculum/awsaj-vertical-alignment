@@ -765,7 +765,7 @@ function pdRoad() {
     ${pts.map((p, i) => `<g class="cp2" style="--d:${0.15 + i * 0.11}s"><circle cx="${p[0]}" cy="${p[1]}" r="15" fill="${i ? "#fff" : "#ED9200"}" stroke="${band(i)}" stroke-width="3.5"/><text x="${p[0]}" y="${p[1] + 5}" text-anchor="middle">${G[i]}</text></g>`).join("")}
     <g class="goal2"><circle cx="${end[0]}" cy="${end[1]}" r="30" fill="#B5DF00" stroke="#101846" stroke-width="3"/><path d="M${end[0] - 18} ${end[1] - 2} l18 -9 l18 9 l-18 9 z M${end[0] - 10} ${end[1] + 3} v8 q10 6 20 0 v-8" fill="#101846"/>
     <text class="gl" x="${end[0] - 40}" y="${end[1] - 8}" text-anchor="end">An Awsaj Graduate</text><text class="gs" x="${end[0] - 40}" y="${end[1] + 14}" text-anchor="end">SAT / US Diploma track</text></g>
-    <g class="bands"><text x="${x0 + 2.5 * dx}" y="372" text-anchor="middle" fill="#5d8a00">K-5</text><text x="${x0 + 7 * dx}" y="372" text-anchor="middle" fill="#1f7898">6-8</text><text x="${x0 + 10.5 * dx}" y="372" text-anchor="middle" fill="#a80056">9-12</text></g></svg>`;
+    <g class="bands">${[["K-5", 2, 3, "#5d8a00"], ["6-8", 7, 7, "#1f7898"], ["9-12", 10, 11, "#a80056"]].map(([t, a, b, c]) => `<text x="${(pts[a][0] + pts[b][0]) / 2}" y="${(pts[a][1] + pts[b][1]) / 2 + 40}" text-anchor="middle" fill="${c}">${t}</text>`).join("")}</g></svg>`;
 }
 
 /* Today's work: a staircase from Grade 12 down */
