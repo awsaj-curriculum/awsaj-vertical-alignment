@@ -28,13 +28,14 @@
     if (RM() || !G()) return;
     gsap.killTweensOf(el);
     gsap.fromTo(el, { y: 70 * dir, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out", clearProps: "transform" });
-    const kids = $$(":scope > .eyebrow, :scope > h2, :scope > h1, :scope > p, :scope > .panel, :scope > .kpis, :scope > .mdx, :scope > .partacts, ol > li, .opgrid > div, .hyp > div, .subjgrid > div", el);
+    const kids = $$(":scope > .eyebrow, :scope > h2, :scope > h1, :scope > p, :scope > .panel, :scope > .kpis, :scope > .mdx, :scope > .partacts, ol > li, .opgrid > div, .hyp > div, .subjgrid > div", el).filter((k) => !k.classList.contains("frag"));   // points shown one click at a time keep their own reveal
     gsap.killTweensOf(kids); gsap.fromTo(kids, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "power2.out", stagger: 0.05, delay: 0.08, clearProps: "transform,opacity" });
     $$(".eyebrow", el).forEach((e) => e.classList.remove("drawn")); requestAnimationFrame(() => $$(".eyebrow", el).forEach((e) => e.classList.add("drawn")));
     grow(el);
   }
   const _showStep = showStep;
-  showStep = function (n, keepScroll) { const dir = n >= lastStep ? 1 : -1; _showStep(n, keepScroll); lastStep = step; const s = slides()[step]; if (s) enterStep(s.el, dir); };
+  let lastEnterEl = null;
+  showStep = function (n, keepScroll) { const dir = n >= lastStep ? 1 : -1; _showStep(n, keepScroll); lastStep = step; const s = slides()[step]; if (s && s.el !== lastEnterEl) { lastEnterEl = s.el; enterStep(s.el, dir); } };   // a new point on the same slide does not replay the slide's entrance
 
   /* one-page mode: reveal parts as they scroll in */
   function scrollReveals() {

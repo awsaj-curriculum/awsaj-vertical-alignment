@@ -437,6 +437,12 @@ body.presenting .story > .pd h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); } bod
 
 .pd .bridge { margin-top: 22px; padding: 14px 20px; border-radius: 14px; background: var(--navy); color: #fff; font-size: clamp(1.1rem, 1.6vw, 1.35rem); font-weight: 600; max-width: 62ch; display: flex; gap: 12px; align-items: baseline; }
 .pd .bridge span { color: var(--cta); font-weight: 800; } .pd.center .bridge { margin-left: auto; margin-right: auto; }
+
+/* all-staff title slide: the route and the title share one background (Tim) */
+body.in-staff.presenting.step0 #sky { background: transparent; } body.in-staff.presenting.step0 #sky::before, body.in-staff.presenting.step0 #sky::after { display: none; }
+body.in-staff.presenting.step0 .story > .shead { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; margin-top: -10px; }
+body.in-staff.presenting.step0 .story > .shead::before, body.in-staff.presenting.step0 .story > .shead::after { display: none; }
+body.in-staff.presenting.step0 #map .land { display: none; }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
@@ -497,7 +503,7 @@ const at = (t) => road.getPointAtLength(LEN * t);
 function buildMap() {
   geo = matchMedia("(max-width: 760px)").matches ? GEO.tall : GEO.wide; const svg = $("#map"), r = geo.r, [ex, ey] = geo.end;
   cam = geo.vb.slice(); svg.setAttribute("viewBox", cam.join(" "));
-  svg.innerHTML = `<g transform="translate(${Math.max(0, geo.vb[0])} ${Math.max(0, geo.vb[1])})">${geo.land.map((d, i) => `<path d="${d}" fill="#fff" opacity="${0.18 + i * 0.1}"/>`).join("")}</g>
+  svg.innerHTML = `<g transform="translate(${Math.max(0, geo.vb[0])} ${Math.max(0, geo.vb[1])})">${geo.land.map((d, i) => `<path class="land" d="${d}" fill="#fff" opacity="${0.18 + i * 0.1}"/>`).join("")}</g>
     <path id="road" d="${geo.path}" fill="none" stroke="#101846" stroke-width="${geo === GEO.wide ? 3.5 : 3}" stroke-linecap="round" stroke-linejoin="round"/>
     <g id="ticks"></g><g id="stages"></g>
     <g id="dest"><line x1="${ex}" y1="${ey + 16}" x2="${ex}" y2="${ey - 52}" stroke="#101846" stroke-width="3.5" stroke-linecap="round"/><circle cx="${ex}" cy="${ey - 52}" r="5" fill="#101846"/>
@@ -568,7 +574,7 @@ function endCard(id) { const nm = NAV[id] || SECTIONS[id].title, pdf = typeof pd
 function render(first) {
   const nx = parse(), changed = nx.id !== cur.id, story = $("#story"); const fromMapClick = render.fromMap; render.fromMap = false;
   $("#navLinks").innerHTML = ORDER.map((s) => `<a href="#${s}" ${s === nx.id ? 'aria-current="page"' : ""}>${navName(s)}</a>`).join(""); $("#navLinks").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", "false");
-  document.body.classList.toggle("at-map", nx.id === "map"); $("#presentBtn").hidden = !SECTIONS[nx.id];
+  document.body.classList.toggle("at-map", nx.id === "map"); document.body.classList.toggle("in-staff", nx.id === "staff"); $("#presentBtn").hidden = !SECTIONS[nx.id];
   const stage = STAGES.some((s) => s.id === nx.id) ? nx.id : null;
   if (nx.id === "map" || !changed || first) { /* keep scroll */ }
   travel(stage, nx.grade, first);
