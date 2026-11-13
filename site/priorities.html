@@ -157,7 +157,10 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 #revbox.tracing .rc:not(.sel):not(.lit) { opacity: .3; }
 .rc .why { display: block; font-size: .8rem; font-weight: 700; color: #8a4f00; margin-top: 4px; } .rc .why:empty { display: none; }
 .nls { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; } .nl { font-size: .72rem; font-weight: 700; border-radius: 999px; padding: 1px 8px; background: #EEF0F6; color: var(--navy-2); }
-.rc.cp { max-width: 250px; font-size: .84rem; padding: 7px 10px; } .rc.cp .t { -webkit-line-clamp: 2; }
+.rc.cp { flex: 0 1 236px; font-size: .8rem; padding: 7px 10px; border-width: 2px; } .rc.cp .t { -webkit-line-clamp: 2; } .rc.cp .alt { display: none; } .rc.cp .code { font-size: .86rem; }
+.rc.cp .more { display: inline; margin: 0; font-size: .72rem; } .rc.cp .nb { min-width: 20px; height: 20px; font-size: .72rem; } .rc.dim { border-style: dashed; }
+.dashbox { display: inline-block; width: 22px; height: 14px; border: 2px dashed var(--line); border-radius: 4px; background: #fff; }
+.flagstrip h2 { font-size: 1.2rem; } .flagstrip .sglist { margin-top: 12px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
 .prow.me { background: rgba(181,223,0,.16); border-radius: 12px; padding-left: 10px; padding-right: 10px; }
 .prow .lab a { text-decoration: none; } .prow .lab a:hover { text-decoration: underline; }
 .sgwrap { overflow-x: auto; }
@@ -177,7 +180,7 @@ td.me .cellb { border-color: var(--navy); } td.gap .cellb { border: 2px dashed v
 .vl { display: grid; gap: 2px; font-size: .82rem; color: var(--navy-2); margin-top: 3px; } .vl .warn { color: #8a4f00; font-weight: 700; }
 @media (max-width: 1100px) { .revgrid { grid-template-columns: 1fr; } .side { position: static; max-height: none; } .vtabs { grid-template-columns: 1fr; } .vlab { max-width: none; } }
 /* progression: every grade as a row of cards (no lines) */
-.prow { display: grid; grid-template-columns: 190px 1fr; gap: 14px; align-items: start; padding: 12px 0; border-top: 1px solid var(--line); }
+.prow { display: grid; grid-template-columns: 160px 1fr; gap: 14px; align-items: start; padding: 12px 0; border-top: 1px solid var(--line); }
 .prow:first-child { border-top: 0; } .prow .lab { font-weight: 800; } .prow .lab small { display: block; font-weight: 600; color: var(--muted); font-size: .82rem; }
 .cards { display: flex; flex-wrap: wrap; gap: 8px; }
 .pc { padding: 7px 11px; border-radius: 12px; background: #fff; border: 2px solid var(--line); font-size: .86rem; max-width: 260px; }
@@ -565,7 +568,7 @@ function rcard(s, g, p, M, compact) {
   let tags = ""; if (tagsOn(s)) { const v = vert(s, g, k);
     if (v.up && !v.up.empty && v.up.none) tags += `<span class="nl" title="Connects to nothing ${esc(gname(v.up.h))} chose">&uarr; No link above</span>`;
     if (v.down && !v.down.empty && v.down.none) tags += `<span class="nl" title="Connects to nothing ${esc(gname(v.down.h))} chose">&darr; No link below</span>`; }
-  return `<div class="rc${compact ? " cp" : ""}" data-trace="${esc(id)}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(e.c)}${n ? `, connection ${n}` : ""}: show what it connects to"><div class="rch"><div>${fw(e)}</div>${badge}</div><span class="t">${esc(e.t)}</span>${p.note && !compact ? `<p class="nt">${esc(p.note)}</p>` : ""}${tags ? `<span class="nls">${tags}</span>` : ""}<span class="why"></span><button class="more" type="button" data-std="${esc(k)}" data-sg="${g}" aria-haspopup="dialog">Show all</button></div>`;
+  return `<div class="rc${compact ? " cp" : ""}${compact && statusOf(s, g) !== "approved" ? " dim" : ""}" data-trace="${esc(id)}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(e.c)}${n ? `, connection ${n}` : ""}: show what it connects to"><div class="rch"><div>${fw(e)}</div>${badge}</div><span class="t">${esc(e.t)}</span>${p.note && !compact ? `<p class="nt">${esc(p.note)}</p>` : ""}${tags ? `<span class="nls">${tags}</span>` : ""}<span class="why"></span><button class="more" type="button" data-std="${esc(k)}" data-sg="${g}" aria-haspopup="dialog">Show all</button></div>`;
 }
 /* click to trace: the chosen standard and what it connects to light up, the rest fade */
 function trace(id) {
@@ -582,7 +585,7 @@ function trace(id) {
 const nearestAbove = (g, T) => T.reduce((best, x) => (best == null || GRADES.indexOf(x) > GRADES.indexOf(best) ? x : best), null);
 
 /* the side panel: questions worked out from the lists shown, never instructions; "Not for us" sets one aside on this laptop */
-function sideHTML(s, g, T) {
+function sideHTML(s, g, T, strip) {
   const lib = library(s, g), mine = picksOf(s, g), mk = new Set(mine.map(pk)), ed = canEdit() && statusOf(s, g) !== "approved", off = dismissedSet(), items = [];
   const code = (k, x = g) => `<button class="lnk" type="button" data-std="${esc(k)}" data-sg="${x}"${x === g && ed ? ' data-tick="1"' : ""}>${esc(k.split("|")[1])}</button>`;
   const push = (kind, id, label, body) => items.push({ kind, id: `${s}|${g}|${kind}|${id}`, label, body });
@@ -607,6 +610,10 @@ function sideHTML(s, g, T) {
   const newT = mine.filter((q) => D.ratings.get(`${pk(q)}|${g}`) === 0);
   if (newT.length) push("new", newT.map(pk).sort().join(","), "Flag: from Part 1", `<p>Rated <b>Not taught</b> in Part 1, so ${newT.length === 1 ? "this would be" : "these would be"} new teaching:</p><ul>${newT.map((q) => `<li>${code(pk(q))}</li>`).join("")}</ul><p>Is there time to teach ${newT.length === 1 ? "it" : "them"} in depth?</p>`);
   const vis = items.filter((x) => REV.showOff || !off.has(x.id)), hid = items.filter((x) => off.has(x.id)).length;
+  const list = `${vis.length ? `<ul class="sglist">${vis.map((x) => `<li class="sg k-${x.kind}${off.has(x.id) ? " off" : ""}"><span class="kind">${x.label}</span>${x.body}<button class="nfu" type="button" data-dismiss="${esc(x.id)}">${off.has(x.id) ? "Bring back" : "Not for us"}</button></li>`).join("")}</ul>` : `<p class="empty">Nothing to suggest right now.</p>`}
+    ${hid ? `<button class="nfu" type="button" data-showoff="1">${REV.showOff ? "Hide" : "Show"} ${hid} set aside</button>` : ""}`;
+  const live = items.length - hid;
+  if (strip) return `<section class="panel flagstrip${REV.flagsOpen ? " open" : ""}" aria-label="Have you thought about"><div class="row-acts"><h2>Have you thought about...?</h2>${help("side")}<span class="saved">${live} flag${live === 1 ? "" : "s"} for ${gname(g)}, for the group to talk about. Nothing here has to be chosen.</span><span style="flex:1"></span><button class="btn small" type="button" data-flags="1" aria-expanded="${!!REV.flagsOpen}">${REV.flagsOpen ? "Hide the flags" : "Show the flags"}</button></div>${REV.flagsOpen ? list : ""}</section>`;
   return `<aside class="panel side" aria-label="Have you thought about"><h2>Have you thought about...?${help("side")}</h2><p class="saved">Flags for the group to talk about, worked out from the lists. Nothing here has to be chosen.</p>
     ${vis.length ? `<ul class="sglist">${vis.map((x) => `<li class="sg k-${x.kind}${off.has(x.id) ? " off" : ""}"><span class="kind">${x.label}</span>${x.body}<button class="nfu" type="button" data-dismiss="${esc(x.id)}">${off.has(x.id) ? "Bring back" : "Not for us"}</button></li>`).join("")}</ul>` : `<p class="empty">Nothing to suggest right now.</p>`}
     ${hid ? `<button class="nfu" type="button" data-showoff="1">${REV.showOff ? "Hide" : "Show"} ${hid} set aside</button>` : ""}</aside>`;
@@ -658,7 +665,7 @@ function reviewV(s, g, r) {
     <div class="revtools"><div class="dens" role="group" aria-label="Connections">Connections:${chip("data-lm", "o", LM, "Official")}${chip("data-lm", "a", LM, "Official and suggested")}${chip("data-lm", "n", LM, "Off")}${help("links")}</div></div>`;
   const pickers = mode === "cols" ? `<div class="row-acts colpick">${[["a", "Left column", a], ["b", "Middle column", b], ["g", "Being reviewed", g]].map(([k, l, v]) => `<label class="cpick">${l}<select data-col="${k}">${k === "b" ? `<option value="-"${v === "-" ? " selected" : ""}>None</option>` : ""}${gopts(s, v)}</select></label>`).join("")}</div>`
     : `<div class="row-acts colpick"><label class="cpick">Being reviewed<select data-col="g">${gopts(s, g)}</select></label><span style="flex:1"></span><a class="btn small" href="#s=${S}&v=list">Print our depth standards</a><a class="btn small" href="#s=${S}&v=show&g=12">Show on screen</a><button class="btn small" type="button" data-excel="${esc(s)}">Excel</button></div>`;
-  const legend = LM === "n" || mode === "strand" ? "" : `<p class="legend"><span><span class="nb">1</span> Same number: these standards connect (an official link or the same standard)</span>${LM === "a" ? `<span><span class="nb sug">1</span> A suggested link: check it</span>` : ""}<span>Click a standard to see how it connects.</span></p>`;
+  const legend = mode === "strand" ? "" : `<p class="legend">${mode === "prog" ? `<span><span class="dashbox"></span> Dashed: not yet agreed by the group</span>` : ""}${LM === "n" ? "" : `<span><span class="nb">1</span> Same number: these standards connect (an official link or the same standard)</span>${LM === "a" ? `<span><span class="nb sug">1</span> A suggested link: check it</span>` : ""}<span>Click a standard to see how it connects.</span>`}</p>`;
   const note = LM === "o" && !["Math", "ELA"].includes(s) ? `<p class="cnote">${esc(s)} has no official links between grades, so only the same standard chosen in two grades gets a number. Choose <b>Official and suggested</b> to see possible links, and check them.</p>` : "";
   const col = (x, i) => { const ps = picksOf(s, x), xs = statusOf(s, x);
     const prof = x === "12" ? (() => { const p = D.profile[s] || {}; return `<div class="prof"><b>The Awsaj Graduate</b>${p.knowledge || p.skills || p.application ? `${p.knowledge ? `<span><b>Knowledge.</b> ${esc(p.knowledge)}</span>` : ""}${p.skills ? `<span><b>Skills.</b> ${esc(p.skills)}</span>` : ""}${p.application ? `<span><b>Application.</b> ${esc(p.application)}</span>` : ""}` : `<span class="empty">Not written yet.</span>`}<a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a></div>`; })() : "";
@@ -673,7 +680,7 @@ function reviewV(s, g, r) {
     : mode === "prog" ? `Every grade's depth standards, Grade 12 down. Does ${gname(g)} prepare students for ${above(g) ? gtext(s, above(g)) : "the Awsaj Graduate"}?`
     : "How many depth standards each grade chose in each strand. Look for strands that stop and start again.";
   return `<div class="stack"><div class="panel stack"><h1>Review: ${esc(gtext(s, g))} ${esc(s)}${help("review")}</h1><p class="lead">${lead}</p>${sum ? `<div>${sum}</div>` : ""}${tools}${pickers}${legend}${note}</div>
-    <div class="revgrid"><div id="revbox">${body}</div>${sideHTML(s, g, T)}</div>
+    ${mode === "cols" ? `<div class="revgrid"><div id="revbox">${body}</div>${sideHTML(s, g, T, false)}</div>` : `${sideHTML(s, g, T, true)}<div id="revbox">${body}</div>`}
     <div class="panel"><h2>Questions for the group${help("rquestions")}</h2><ol class="qs"><li>Will these standards prepare students for what ${up ? gtext(s, up) : "the Awsaj Graduate"} has chosen?</li><li>Is anything the grade above needs missing here?</li><li>Can every class teach, reteach, review and assess each of these in depth?</li></ol>
       <p class="saved" style="margin-top:10px">Some standards will have no partner in the grade above. That is expected: do not force a connection.</p>
       <div class="row-acts" style="margin-top:14px"><span class="pill st-${st}">${STATUS[st]}</span><span style="flex:1"></span>${st === "approved" ? `<button class="btn" type="button" data-agree="0">Reopen</button>` : `<button class="btn cta" type="button" data-agree="1"${mine.length ? "" : " disabled"}>Agreed as a group</button>`}<a class="btn" href="#s=${S}&g=${g}&v=choose">Back to the list</a></div></div></div>`;
@@ -753,6 +760,7 @@ document.addEventListener("click", (ev) => {
   const bd = ev.target.closest("[data-band]"); if (bd) { keepScroll = true; location.hash = href({ s: r.s, g: r.g, v: "review", m: "strand", band: bd.dataset.band }); return; }
   const ce = ev.target.closest("[data-cell]"); if (ce) { REV.cell = REV.cell === ce.dataset.cell ? null : ce.dataset.cell; render(true); const d = $("#celldet"); if (d) d.scrollIntoView({ block: "nearest" }); return; }
   const di = ev.target.closest("[data-dismiss]"); if (di) { const o = dismissedSet(); if (o.has(di.dataset.dismiss)) o.delete(di.dataset.dismiss); else o.add(di.dataset.dismiss); store.set("pd_dismiss", JSON.stringify([...o])); render(true); return; }
+  if (ev.target.closest("[data-flags]")) { REV.flagsOpen = !REV.flagsOpen; render(true); return; }
   if (ev.target.closest("[data-showoff]")) { REV.showOff = !REV.showOff; render(true); return; }
   const sgo = ev.target.closest("[data-strandgo]"); if (sgo) { const g2 = sgo.dataset.sg || r.g; chooseV.f = { k: r.s + g2, q: "", strand: sgo.dataset.strandgo, only: "" }; location.hash = href({ s: r.s, g: g2, v: "choose" }); return; }
   const ogo = ev.target.closest("[data-onlygo]"); if (ogo) { chooseV.f = { k: r.s + r.g, q: "", strand: "", only: ogo.dataset.onlygo }; location.hash = href({ s: r.s, g: r.g, v: "choose" }); return; }
