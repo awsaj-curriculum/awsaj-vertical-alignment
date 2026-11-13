@@ -150,6 +150,7 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .sg ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; } .sg li { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .lnk { border: 0; background: none; padding: 0; font-weight: 800; text-decoration: underline; cursor: pointer; color: var(--navy); text-align: left; }
 .src { font-size: .75rem; color: var(--muted); }
+.addb { border: 1.5px solid var(--navy); background: var(--cta); border-radius: 999px; padding: 1px 10px; font-weight: 700; font-size: .78rem; cursor: pointer; margin-left: auto; } .addb:hover { background: var(--cta-2); }
 .nfu { justify-self: start; border: 0; background: none; padding: 0; font-size: .8rem; text-decoration: underline; color: var(--muted); cursor: pointer; }
 .nb { display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 800; font-size: .8rem; border: 2px solid var(--navy); flex: none; }
 .nb.sug { background: #fff; color: var(--navy); border-style: dashed; }
@@ -291,7 +292,7 @@ const HELP = {
   sum: "How many of the grade above's chosen standards connect (by an official link or the same standard) to at least one standard chosen in this grade. A low number is a question for the group, not a target: some courses start new strands.",
   pickers: "Choose which grades to show. Left column: where we are heading (Grade 12 unless you change it). Middle column: the grade above (None hides it). Being reviewed: the grade the group is talking about and agreeing on.",
   links: "Where the numbers come from. Official: in Math, the Coherence Map (Student Achievement Partners), which shows which standard leads to which; in ELA, the same anchor standard one grade apart; in every subject, the same standard chosen in two grades. Suggested: links written by AI or matched by wording, marked check. Science and Social Studies only have suggested links, so they show only when you choose Official and suggested. Off hides the numbers, the flags about links and the no link notes. This laptop remembers your choice.",
-  side: "Flags the site works out from the lists shown, for the group to talk about. They never mean a standard must be chosen. A foundation: a standard the grade above chose builds on standards here that are not chosen. No link above: standards chosen here that connect to nothing chosen above (fine if they start something new). A strand: the grade above chose from a strand where this grade chose nothing. From Part 1: school priority or power standards not chosen, and chosen standards rated Not taught (new teaching). Click a code to read the standard. Not for us sets a flag aside on this laptop only; Show set aside brings it back.",
+  side: "Flags the site works out from the lists shown, for the group to talk about. They never mean a standard must be chosen. A foundation: a standard the grade above chose builds on standards here that are not chosen. No link above: standards chosen here that connect to nothing chosen above (fine if they start something new). A strand: the grade above chose from a strand where this grade chose nothing. From Part 1: school priority or power standards not chosen, and chosen standards rated Not taught (new teaching). Click a code to read the standard; Add to Grade X puts a suggested standard straight on the list of the grade being reviewed (not once the list is agreed), and Recent changes on that grade's page can undo it. Not for us sets a flag aside on this laptop only; Show set aside brings it back.",
   strand: "One row per strand, one column per grade (K-12, or one school). Each cell: how many focus standards that grade chose in that strand, of how many it has. The bar shows the chosen ones by their Part 1 rating (green in depth, blue introduced, pink not taught, grey not rated). Hatched: no standards in that strand in that grade. Gap?: none chosen here, though a grade before and a grade after chose some in this strand. Arrows (Math and ELA, or with suggested links on): how many chosen here connect to nothing chosen in the grade above or below. Click a cell to list its standards, what each connects to above and below, or that nothing connects.",
   rquestions: "Questions to guide the talk. When the group agrees on this set of standards, the leader presses Agreed as a group and enters the PIN. The list is then locked; the leader can reopen it.",
   profile: "What an Awsaj graduate on the SAT / US Diploma pathway should know and be able to do in this subject. It opens once Grade 12 has chosen its focus standards, and teams can change it as the work goes on.",
@@ -633,13 +634,15 @@ const nearestAbove = (g, T) => T.reduce((best, x) => (best == null || GRADES.ind
 function sideHTML(s, g, T, strip) {
   const lib = library(s, g), mine = picksOf(s, g), mk = new Set(mine.map(pk)), ed = canEdit() && statusOf(s, g) !== "approved", off = dismissedSet(), items = [];
   const code = (k, x = g) => `<button class="lnk" type="button" data-std="${esc(k)}" data-sg="${x}"${x === g && ed ? ' data-tick="1"' : ""}>${esc(k.split("|")[1])}</button>`;
+  // Tim, Nov 2026: add a suggested standard straight from the flag to the grade being reviewed (the flag stays a question)
+  const add = (k) => (!ed ? "" : mk.has(k) ? `<span class="src">Added</span>` : `<button class="addb" type="button" data-add="${esc(k)}" aria-label="Add ${esc(k.split("|")[1])} to ${esc(gname(g))}">Add to ${esc(gname(g))}</button>`);
   const push = (kind, id, label, body) => items.push({ kind, id: `${s}|${g}|${kind}|${id}`, label, body });
   // foundations the grade above needs
   if (LM !== "n") T.forEach((tg) => picksOf(s, tg).forEach((u) => { const uk = pk(u);
     if (mine.some((q) => linkOf(pk(q), uk))) return;
     const c = lib.filter((e) => !mk.has(key(e))).map((e) => ({ e, l: linkOf(uk, key(e)) })).filter((x) => x.l && (x.l.t === "same" || x.l.needs));
     if (!c.length) return; const one = c.length === 1;
-    push("found", tg + "|" + uk, "Flag: a foundation", `<p><b>${gname(tg)} chose ${code(uk, tg)}.</b> It builds on ${one ? "this" : "these"} ${gname(g)} standard${one ? "" : "s"}, not chosen here:</p><ul>${c.slice(0, 4).map((x) => `<li>${code(key(x.e))}<span class="src">${x.l.t === "same" ? "same standard" : SRC[x.l.src]}</span></li>`).join("")}${c.length > 4 ? `<li class="src">and ${c.length - 4} more</li>` : ""}</ul><p>Worth a look? It may be taught well enough without being a focus standard.</p>`); }));
+    push("found", tg + "|" + uk, "Flag: a foundation", `<p><b>${gname(tg)} chose ${code(uk, tg)}.</b> It builds on ${one ? "this" : "these"} ${gname(g)} standard${one ? "" : "s"}, not chosen here:</p><ul>${c.slice(0, 6).map((x) => `<li>${code(key(x.e))}<span class="src">${x.l.t === "same" ? "same standard" : SRC[x.l.src]}</span>${add(key(x.e))}</li>`).join("")}${c.length > 6 ? `<li class="src">and ${c.length - 6} more</li>` : ""}</ul><p>Worth a look? It may be taught well enough without being a focus standard.</p>`); }));
   // chosen here, no link to anything chosen above
   const Tp = T.flatMap((tg) => picksOf(s, tg));
   if (tagsOn(s) && Tp.length) { const lone = mine.filter((q) => !Tp.some((u) => linkOf(pk(q), pk(u))));
@@ -648,7 +651,8 @@ function sideHTML(s, g, T, strip) {
   const up = nearestAbove(g, T);
   if (up) { const cnt = {}; picksOf(s, up).forEach((u) => { const e = stdOf(s, u); if (e.s) cnt[e.s] = (cnt[e.s] || 0) + 1; });
     Object.entries(cnt).forEach(([st, n]) => { const avail = lib.filter((e) => e.s === st).length; if (n < 2 || !avail || mine.some((q) => stdOf(s, q).s === st)) return;
-      push("strand", st, "Flag: a strand", `<p>${gname(up)} chose ${n} <b>${esc(st)}</b> standards; ${gname(g)} chose none (${avail} in this strand). Worth a look?</p><button class="lnk" type="button" data-strandgo="${esc(st)}">See them</button>`); }); }
+      const inS = lib.filter((e) => e.s === st);
+      push("strand", st, "Flag: a strand", `<p>${gname(up)} chose ${n} <b>${esc(st)}</b> standards; ${gname(g)} chose none (${avail} in this strand). Worth a look?</p><ul>${inS.slice(0, 6).map((e) => `<li>${code(key(e))}${add(key(e))}</li>`).join("")}${inS.length > 6 ? `<li class="src">and ${inS.length - 6} more</li>` : ""}</ul><button class="lnk" type="button" data-strandgo="${esc(st)}">See them all</button>`); }); }
   // from Part 1: school priority or power standards not chosen; chosen standards rated Not taught
   const prAll = lib.filter((e) => prMark(e, g)), prOut = prAll.filter((e) => !mk.has(key(e))), word = K5.includes(g) ? "power" : "priority";
   if (prOut.length && prAll.length < lib.length) push("prio", String(prOut.length), "Flag: from Part 1", `<p>${prOut.length} of ${prAll.length} school ${word} standards for ${gname(g)} are not chosen. Worth a look?</p><button class="lnk" type="button" data-onlygo="pr">See them</button>`);
@@ -799,6 +803,7 @@ document.addEventListener("click", (ev) => {
   if (ev.target.closest("[data-dlgclose]") || ev.target.id === "stdDlg") { $("#stdDlg").close(); return; }
   const dp = ev.target.closest("[data-dlgpick]"); if (dp) { const e = findStd(r.s, dp.dataset.dlgpick); if (e) { setPick(r.s, r.g, e, !isPicked(r.s, r.g, key(e))); openStd(r.s, r.g, key(e), true); } return; }
   const mo = ev.target.closest("[data-more]"); if (mo) { openStd(r.s, r.g, mo.dataset.more, true); return; }
+  const ad = ev.target.closest("[data-add]"); if (ad) { const e = findStd(r.s, ad.dataset.add); if (e && !isPicked(r.s, r.g, key(e))) { setPick(r.s, r.g, e, true); toast(`${e.c} added to ${gname(r.g)}. Recent changes on its page can undo it.`); } return; }
   const sd = ev.target.closest("[data-std]"); if (sd) { openStd(r.s, sd.dataset.sg, sd.dataset.std, sd.dataset.tick === "1"); return; }
   const rm = ev.target.closest("[data-rmode]"); if (rm) { location.hash = href({ s: r.s, g: r.g || "12", v: "review", m: rm.dataset.rmode === "cols" ? "" : rm.dataset.rmode, a: r.a, b: r.b, band: r.band }); return; }
   const lm = ev.target.closest("[data-lm]"); if (lm) { LM = lm.dataset.lm; store.set("pd_links", LM); render(true); return; }
