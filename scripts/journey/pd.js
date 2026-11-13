@@ -29,7 +29,7 @@ function pdStairs() {
 
 function pdParts() {
   const S0 = D.school.main, B = D.band, sec = (k) => (WT.whole?.sections || []).find((x) => x.key === k)?.items || [];
-  const cards = (items, q) => `<ol class="pdcards">${items.slice(0, 3).map((it, i) => `<li class="frag" style="--i:${i}"><span class="n">${i + 1}</span>${it.cat ? `<span class="catchip">${esc(it.cat)}</span>` : ""}${q ? `<b>${i !== 1 ? '<span class="todaytag">Today</span>' : ""}${inl(it.text)}</b>${it.step ? `<span class="step"><b>First step:</b> ${inl(it.step)}</span>` : ""}` : `<b>${inl(it.title || "")}</b><span>${inl(it.text).replace(/\n/g, "<br>")}</span>`}</li>`).join("")}</ol>`;
+  const cards = (items, q) => `<ol class="pdcards">${items.slice(0, 3).map((it, i) => `<li class="frag" style="--i:${i}"><span class="n">${i + 1}</span>${it.cat ? `<span class="catchip">${esc(it.cat)}</span>` : ""}${q ? `<b>${inl(it.text)}</b>` : `<b>${inl(it.title || "")}</b><span>${inl(it.text).replace(/\n/g, "<br>")}</span>`}</li>`).join("")}</ol>`;
   const atLeast = S0.deep + S0.intro;
   const tiles = [[fmt(D.nRatings), "ratings entered"], ["Every", "team rated every standard it was asked about"], [fmt(S0.deep), "times a grade said: all our classes teach this in depth"], [fmt(atLeast), "times a grade said: we teach this, at least as an introduction"]];
   const bands = Object.keys(B), lo = (k) => Math.min(...bands.map((b) => B[b].all[k])), hi = (k) => Math.max(...bands.map((b) => B[b].all[k]));
