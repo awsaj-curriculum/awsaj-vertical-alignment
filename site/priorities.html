@@ -152,8 +152,9 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .src { font-size: .75rem; color: var(--muted); }
 .addb { border: 1.5px solid var(--navy); background: var(--cta); border-radius: 999px; padding: 1px 10px; font-weight: 700; font-size: .78rem; cursor: pointer; margin-left: auto; } .addb:hover { background: var(--cta-2); }
 .nfu { justify-self: start; border: 0; background: none; padding: 0; font-size: .8rem; text-decoration: underline; color: var(--muted); cursor: pointer; }
-.nb { display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 800; font-size: .8rem; border: 2px solid var(--navy); flex: none; }
-.nb.sug { background: #fff; color: var(--navy); border-style: dashed; }
+.nb { --gc: var(--navy); display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; background: var(--gc); color: #fff; font-weight: 800; font-size: .8rem; border: 2px solid var(--gc); flex: none; }
+.nb.sug { background: #fff; color: var(--gc); border-style: dashed; } .nb.sm { min-width: 19px; height: 19px; font-size: .68rem; padding: 0 4px; border-width: 1.5px; }
+.legend .nb + .nb { margin-left: -2px; } .cchips { display: flex; flex-wrap: wrap; gap: 2px; }
 .rch { display: flex; justify-content: space-between; gap: 8px; align-items: start; }
 .rc { cursor: pointer; transition: opacity .2s; } .rc .more { margin-top: 4px; font-size: .78rem; display: block; }
 .rc.sel { border-color: var(--navy); box-shadow: 0 0 0 2px var(--navy); } .rc.lit { border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber); background: #FFF8EC; }
@@ -286,12 +287,12 @@ const HELP = {
   library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many standards on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard in a popup with Add or Remove. Hints: the Part 1 rating (in One line, a coloured dot: green in depth, blue introduced, pink not taught), and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
   picks: "The standards this grade or course wants taught in depth. Anyone can add or remove a standard; the list is shared and saves as you go. Add a short note on why a standard is essential if it helps the review. When you have finished, mark the list ready for the group. Print this list gives a paper copy of every standard with tick boxes, for teams that start on paper.",
   changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change and undo is kept in the history.",
-  review: "One review page with three ways to view the lists. Side by side: Grade 12 with the learner profile, the grade above and the grade being reviewed (outlined); change any column with the grade boxes. Whole progression: every grade's choices from Grade 12 down, the grade being reviewed highlighted. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The line at the top counts how many of the grade above's standards connect to something chosen here. Matching numbers mark standards that connect; click a standard to light up what it connects to and read how, and Show all opens the whole standard. The group decides which connections matter: some standards have no partner, and that is fine.",
+  review: "One review page with three ways to view the lists. Side by side: Grade 12 with the learner profile, the grade above and the grade being reviewed (outlined); change any column with the grade boxes. Whole progression: every grade's choices from Grade 12 down, the grade being reviewed highlighted. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The line at the top counts how many of the grade above's standards connect to something chosen here. Each line of connected standards across the grades has its own number and colour, the same in all three views (on the cards, and as small chips in the By strand cells): each standard joins its closest connection in the grade above (the same standard first, then an official link). Click a standard to light up everything it connects to and read how; Show all opens the whole standard. The group decides which connections matter: some standards have no partner, and that is fine.",
   practice: "Opens a practice copy of this page with Math already filled in: 10 to 15 made-up focus standards in every grade, some lists agreed, a learner profile and some history, so you can try choosing, reviewing, agreeing, printing and exporting with full lists. Your practice changes are kept on this laptop only and never touch the real lists. Start the practice again resets it.",
   views: "Three ways to look at the same lists. Side by side: Grade 12 with the learner profile, the grade above and this grade, next to each other. Whole progression: every grade's choices, Grade 12 down. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The numbers, the flags and Agreed as a group work the same in every view.",
   sum: "How many of the grade above's chosen standards connect (by an official link or the same standard) to at least one standard chosen in this grade. A low number is a question for the group, not a target: some courses start new strands.",
   pickers: "Choose which grades to show. Left column: where we are heading (Grade 12 unless you change it). Middle column: the grade above (None hides it). Being reviewed: the grade the group is talking about and agreeing on.",
-  links: "Where the numbers come from. Official: in Math, the Coherence Map (Student Achievement Partners), which shows which standard leads to which; in ELA, the same anchor standard one grade apart; in every subject, the same standard chosen in two grades. Suggested: links written by AI or matched by wording, marked check. Science and Social Studies only have suggested links, so they show only when you choose Official and suggested. Off hides the numbers, the flags about links and the no link notes. This laptop remembers your choice.",
+  links: "Where the numbers and colours come from. Official: in Math, the Coherence Map (Student Achievement Partners), which shows which standard leads to which; in ELA, the same anchor standard one grade apart; in every subject, the same standard chosen in two grades. Suggested: links written by AI or matched by wording, marked check. Science and Social Studies only have suggested links, so they show only when you choose Official and suggested. Off hides the numbers, the flags about links and the no link notes. This laptop remembers your choice.",
   side: "Flags the site works out from the lists shown, for the group to talk about. They never mean a standard must be chosen. A foundation: a standard the grade above chose builds on standards here that are not chosen. No link above: standards chosen here that connect to nothing chosen above (fine if they start something new). A strand: the grade above chose from a strand where this grade chose nothing. From Part 1: school priority or power standards not chosen, and chosen standards rated Not taught (new teaching). Click a code to read the standard; Add to Grade X puts a suggested standard straight on the list of the grade being reviewed (not once the list is agreed), and Recent changes on that grade's page can undo it. Not for us sets a flag aside on this laptop only; Show set aside brings it back.",
   strand: "One row per strand, one column per grade (K-12, or one school). Each cell: how many focus standards that grade chose in that strand, of how many it has. The bar shows the chosen ones by their Part 1 rating (green in depth, blue introduced, pink not taught, grey not rated). Hatched: no standards in that strand in that grade. Gap?: none chosen here, though a grade before and a grade after chose some in this strand. Arrows (Math and ELA, or with suggested links on): how many chosen here connect to nothing chosen in the grade above or below. Click a cell to list its standards, what each connects to above and below, or that nothing connects.",
   rquestions: "Questions to guide the talk. When the group agrees on this set of standards, the leader presses Agreed as a group and enters the PIN. The list is then locked; the leader can reopen it.",
@@ -592,25 +593,43 @@ function vert(s, g, k) {
   return out;
 }
 /* numbers: standards linked across the grades shown share a number (one number per connected group) */
+/* Threads (Tim, Nov 2026: the same numbers and colours in all three views): one numbering for the whole subject. Working
+   from Grade 12 down, each chosen standard joins its closest connection in the nearest grade above (up to two grades up):
+   the same standard first, then an official link, then a suggested one (when shown), the smaller thread on a tie. So a
+   number follows one line of connected standards down the grades instead of merging into a few huge groups. */
+const GCOL = ["#101846", "#00897B", "#7C4DFF", "#B8860B", "#8D6E63", "#3949AB", "#546E7A", "#8E24AA", "#827717", "#37474F"];
+const gcol = (n) => GCOL[(n - 1) % GCOL.length];
+function threadModel(s) {
+  const byG = {}; GRADES.forEach((g) => { byG[g] = picksOf(s, g).map((p) => ({ g, k: pk(p), id: g + "|" + pk(p) })); });
+  const grp = new Map(), size = new Map(), solid = new Set(), rank = (l) => (l.t === "same" ? 0 : l.t === "off" ? 1 : 2); let n = 0;
+  for (const g of GRADES) for (const c of byG[g]) {
+    let best = null;
+    for (let up = above(g), step = 0; up && step < 2 && !best; up = above(up), step++)
+      for (const a of byG[up]) { const l = linkOf(c.k, a.k); if (!l) continue;
+        if (!best || rank(l) < rank(best.l) || (rank(l) === rank(best.l) && size.get(grp.get(a.id)) < size.get(grp.get(best.a.id)))) best = { a, l }; }
+    if (best) { const G = grp.get(best.a.id); grp.set(c.id, G); size.set(G, size.get(G) + 1); if (best.l.t !== "sug") { solid.add(c.id); solid.add(best.a.id); } }
+    else { grp.set(c.id, ++n); size.set(n, 1); }
+  }
+  const num = new Map(), ren = new Map(); let m = 0;
+  for (const g of GRADES) for (const c of byG[g]) { const G = grp.get(c.id); if (size.get(G) < 2) continue; if (!ren.has(G)) ren.set(G, ++m); num.set(c.id, ren.get(G)); }
+  return { num, solid };
+}
+const nbadge = (n, solid, small) => `<span class="nb${solid ? "" : " sug"}${small ? " sm" : ""}" style="--gc:${gcol(n)}" title="${solid ? `Thread ${n}: standards with this number connect across the grades` : `Thread ${n}: a suggested link, check it`}">${n}</span>`;
+/* the links among the grades shown (for click to trace), and the subject's thread numbers */
 function connModel(s, grades) {
   const cards = []; grades.forEach((g) => picksOf(s, g).forEach((p) => cards.push({ g, k: pk(p), id: g + "|" + pk(p) })));
-  const numbered = grades.length <= 3;   // numbers only side by side; in the whole progression they would merge into a few huge groups
-  const par = cards.map((_, i) => i), find = (i) => (par[i] === i ? i : (par[i] = find(par[i])));
-  const edges = new Map(cards.map((c) => [c.id, []])), solid = new Set();
+  const edges = new Map(cards.map((c) => [c.id, []]));
   for (let i = 0; i < cards.length; i++) for (let j = i + 1; j < cards.length; j++) { const A = cards[i], B = cards[j]; if (A.g === B.g) continue;
-    const l = linkOf(A.k, B.k); if (!l) continue; par[find(i)] = find(j);
-    edges.get(A.id).push({ g: B.g, k: B.k, l }); edges.get(B.id).push({ g: A.g, k: A.k, l: linkOf(B.k, A.k) || l });
-    if (l.t !== "sug") { solid.add(A.id); solid.add(B.id); } }
-  const size = new Map(); cards.forEach((c, i) => { const r = find(i); size.set(r, (size.get(r) || 0) + 1); });
-  const num = new Map(), rn = new Map(); let n = 0;
-  if (numbered) cards.forEach((c, i) => { const r = find(i); if (size.get(r) < 2) return; if (!rn.has(r)) rn.set(r, ++n); num.set(c.id, rn.get(r)); });
-  return { num, edges, solid };
+    const l = linkOf(A.k, B.k); if (!l) continue;
+    edges.get(A.id).push({ g: B.g, k: B.k, l }); edges.get(B.id).push({ g: A.g, k: A.k, l: linkOf(B.k, A.k) || l }); }
+  const T = threadModel(s);
+  return { num: T.num, edges, solid: T.solid };
 }
 const REV = { sel: null, M: null, cell: null, cellS: null, showOff: false };
 const dismissedSet = () => { try { return new Set(JSON.parse(store.get("pd_dismiss") || "[]")); } catch (e) { return new Set(); } };
 function rcard(s, g, p, M, compact) {
   const k = pk(p), id = g + "|" + k, e = stdOf(s, p), n = M.num.get(id);
-  const badge = n ? `<span class="nb${M.solid.has(id) ? "" : " sug"}" title="${M.solid.has(id) ? "Connects to the standards with the same number" : "A suggested link: check it"}">${n}</span>` : "";
+  const badge = n ? nbadge(n, M.solid.has(id)) : "";
   let tags = ""; if (tagsOn(s)) { const v = vert(s, g, k);
     if (v.up && !v.up.empty && v.up.none) tags += `<span class="nl" title="Connects to nothing ${esc(gname(v.up.h))} chose">&uarr; No link above</span>`;
     if (v.down && !v.down.empty && v.down.none) tags += `<span class="nl" title="Connects to nothing ${esc(gname(v.down.h))} chose">&darr; No link below</span>`; }
@@ -682,15 +701,18 @@ function strandGrid(s, g, r) {
     const seg = [[2, "r2"], [1, "r1"], [0, "r0"], [undefined, "rn"]].map(([v, c]) => `<i class="${c}" style="width:${((100 * ch.filter((e) => lv(e) === v).length) / L.length).toFixed(1)}%"></i>`).join("");
     let noUp = 0, noDn = 0; if (tagsOn(s)) ch.forEach((e) => { const v = vert(s, x, key(e)); if (v.up && !v.up.empty && v.up.none) noUp++; if (v.down && !v.down.empty && v.down.none) noDn++; });
     const i = K12.indexOf(x), gap = !ch.length && K12.slice(0, i).some((y) => chosenIn(st, y)) && K12.slice(i + 1).some((y) => chosenIn(st, y));
-    const id = st + "|" + x, sel = REV.cell === id;
-    return `<td class="${x === g ? "me" : ""}${gap ? " gap" : ""}${sel ? " sel" : ""}"><button class="cellb" type="button" data-cell="${esc(id)}" aria-pressed="${sel}" aria-label="${esc(gname(x))}, ${esc(st)}: ${ch.length} of ${L.length} chosen${gap ? ", possible gap" : ""}"><span class="cbar">${seg}</span><span class="cn"><b>${ch.length}</b> of ${L.length}</span>${gap ? `<span class="gapl">Gap?</span>` : ""}${noUp || noDn ? `<span class="nlc" title="Chosen here but connected to nothing chosen in the grade above (up arrow) or below (down arrow)">${noUp ? `&uarr;${noUp}` : ""}${noUp && noDn ? " " : ""}${noDn ? `&darr;${noDn}` : ""}</span>` : ""}</button></td>`; };
+    const id = st + "|" + x, sel = REV.cell === id, TM = REV.M || { num: new Map(), solid: new Set() };
+    const tn = [...new Set(ch.map((e) => TM.num.get(x + "|" + key(e))).filter(Boolean))].sort((a, b) => a - b);
+    const chips = tn.length ? `<span class="cchips">${tn.map((n) => nbadge(n, ch.some((e) => TM.num.get(x + "|" + key(e)) === n && TM.solid.has(x + "|" + key(e))), true)).join("")}</span>` : "";
+    return `<td class="${x === g ? "me" : ""}${gap ? " gap" : ""}${sel ? " sel" : ""}"><button class="cellb" type="button" data-cell="${esc(id)}" aria-pressed="${sel}" aria-label="${esc(gname(x))}, ${esc(st)}: ${ch.length} of ${L.length} chosen${gap ? ", possible gap" : ""}"><span class="cbar">${seg}</span><span class="cn"><b>${ch.length}</b> of ${L.length}</span>${chips}${gap ? `<span class="gapl">Gap?</span>` : ""}${noUp || noDn ? `<span class="nlc" title="Chosen here but connected to nothing chosen in the grade above (up arrow) or below (down arrow)">${noUp ? `&uarr;${noUp}` : ""}${noUp && noDn ? " " : ""}${noDn ? `&darr;${noDn}` : ""}</span>` : ""}</button></td>`; };
   const head = `<tr><th class="st">Strand</th>${gs.map((x) => `<th class="${x === g ? "me" : ""}" title="${esc(gtext(s, x))}: ${STATUS[statusOf(s, x)]}">${x === "K" ? "K" : "G" + x}<small>${picksOf(s, x).length} chosen</small></th>`).join("")}</tr>`;
   const body = rows.map((st) => `<tr><th class="sth" scope="row">${esc(st)}</th>${gs.map((x) => cell(st, x)).join("")}</tr>`).join("");
   let det = "";
   if (REV.cell && REV.cellS === s) { const j = REV.cell.lastIndexOf("|"), st = REV.cell.slice(0, j), x = REV.cell.slice(j + 1), L = libs[x] ? libs[x].filter((e) => e.s === st) : [], ch = L.filter((e) => isPicked(s, x, key(e)));
+    const TM = REV.M || { num: new Map() };
     const vline = (v, lab) => !v ? `<span>${lab}: ${lab === "Above" ? "the end of the road" : "the start of the road"}</span>` : !tagsOn(s) ? "" : v.empty ? `<span>${lab} (${esc(gname(v.h))}): has not chosen yet</span>`
       : v.none ? `<span class="warn">${lab} (${esc(gname(v.h))}): no connected standard chosen</span>` : `<span>${lab}: ${v.hits.map((h) => esc(linkWords(h.l, v.h, h.q.code))).join("; ")}</span>`;
-    if (L.length) det = `<div class="celldet" id="celldet"><h3>${esc(gtext(s, x))} · ${esc(st)}: ${ch.length} of ${L.length} chosen</h3>${ch.length ? `<ul class="clist">${ch.map((e) => { const v = vert(s, x, key(e)); return `<li><button class="lnk" type="button" data-std="${esc(key(e))}" data-sg="${x}">${esc(e.c)}</button> <span class="t1">${esc(e.t)}</span><span class="vl">${vline(v.up, "Above")}${vline(v.down, "Below")}</span></li>`; }).join("")}</ul>` : `<p class="empty">None chosen in this strand.</p>`}
+    if (L.length) det = `<div class="celldet" id="celldet"><h3>${esc(gtext(s, x))} · ${esc(st)}: ${ch.length} of ${L.length} chosen</h3>${ch.length ? `<ul class="clist">${ch.map((e) => { const v = vert(s, x, key(e)), tnum = TM.num.get(x + "|" + key(e)); return `<li>${tnum ? nbadge(tnum, (REV.M.solid || new Set()).has(x + "|" + key(e)), true) + " " : ""}<button class="lnk" type="button" data-std="${esc(key(e))}" data-sg="${x}">${esc(e.c)}</button> <span class="t1">${esc(e.t)}</span><span class="vl">${vline(v.up, "Above")}${vline(v.down, "Below")}</span></li>`; }).join("")}</ul>` : `<p class="empty">None chosen in this strand.</p>`}
       ${!tagsOn(s) && LM !== "n" ? `<p class="saved">${esc(s)} has no official links between grades. Choose Official and suggested to see possible ones.</p>` : ""}<p style="margin-top:8px"><button class="lnk" type="button" data-strandgo="${esc(st)}" data-sg="${x}">Open ${esc(gname(x))}'s ${esc(st)} standards</button></p></div>`; }
   return `<div class="panel"><div class="row-acts" style="margin-bottom:8px">${[["all", "K-12"], ["k5", "K-5"], ["68", "6-8"], ["912", "9-12"]].map(([k, t]) => `<button class="chip" type="button" data-band="${k}" aria-pressed="${band === k}">${t}</button>`).join("")}${help("strand")}</div>
     <div class="sgwrap"><table class="sgrid"><thead>${head}</thead><tbody>${body}</tbody></table></div>
@@ -701,7 +723,7 @@ function reviewV(s, g, r) {
   const S = encodeURIComponent(s), st = statusOf(s, g), mode = ["prog", "strand"].includes(r.m) ? r.m : "cols";
   const a = r.a && GRADES.includes(r.a) ? r.a : "12", b = r.b === "-" || GRADES.includes(r.b) ? r.b : above(g) && above(g) !== a ? above(g) : "-";
   const cols = [...new Set([a, b, g])].filter((x) => x !== "-");
-  const M = (REV.M = connModel(s, mode === "cols" ? cols : mode === "prog" ? GRADES : []));
+  const M = (REV.M = connModel(s, mode === "cols" ? cols : GRADES));
   const T = mode === "cols" ? cols.filter((x) => GRADES.indexOf(x) < GRADES.indexOf(g)) : above(g) ? [above(g)] : [];
   const up = nearestAbove(g, T), mine = picksOf(s, g);
   let sum = "";
@@ -714,7 +736,7 @@ function reviewV(s, g, r) {
   const links = `<div class="lsel"><label class="cpick">Links<select data-lmsel="1">${[["o", "Official"], ["a", "Official and suggested"], ["n", "Off"]].map(([k, l]) => `<option value="${k}"${LM === k ? " selected" : ""}>${l}</option>`).join("")}</select></label>${help("links")}</div>`;
   const pickers = `<div class="row-acts colpick">${mode === "cols" ? [["a", "Left column", a], ["b", "Middle column", b], ["g", "Being reviewed", g]].map(([k, l, v]) => `<label class="cpick">${l}<select data-col="${k}">${k === "b" ? `<option value="-"${v === "-" ? " selected" : ""}>None</option>` : ""}${gopts(s, v)}</select></label>`).join("")
     : `<label class="cpick">Being reviewed<select data-col="g">${gopts(s, g)}</select></label>`}${help("pickers")}<span style="flex:1"></span>${links}</div>`;
-  const legend = mode === "strand" ? "" : `<p class="legend">${LM === "n" ? "" : mode === "prog" ? `<span>Click a standard to light up what it connects to in the other grades.</span>` : `<span><span class="nb">1</span> Same number: they connect${LM === "a" ? ` (<span class="nb sug">1</span> suggested, check)` : ""}. Click one to see how.</span>`}${mode === "prog" ? `<span><span class="dashbox"></span> Dashed: not agreed yet</span>` : ""}</p>`;
+  const legend = `<p class="legend">${LM === "n" ? "" : `<span>${nbadge(1, true, true)}${nbadge(2, true, true)}${nbadge(3, true, true)} Same number and colour: one line of connected standards across the grades${LM === "a" ? ` (dashed: suggested, check)` : ""}. ${mode === "strand" ? "Click a cell to see its standards." : "Click a standard to see how it connects."}</span>`}${mode === "prog" ? `<span><span class="dashbox"></span> Dashed card: not agreed yet</span>` : ""}</p>`;
   const note = LM === "o" && !["Math", "ELA"].includes(s) ? `<p class="cnote">${esc(s)} has no official links between grades, so only the same standard chosen in two grades gets a number. Choose <b>Official and suggested</b> to see possible links, and check them.</p>` : "";
   const col = (x, i) => { const ps = picksOf(s, x), xs = statusOf(s, x);
     const prof = x === "12" ? (() => { const p = D.profile[s] || {}; return `<div class="prof"><b>The Awsaj Graduate</b>${p.knowledge || p.skills || p.application ? `${p.knowledge ? `<span><b>Knowledge.</b> ${esc(p.knowledge)}</span>` : ""}${p.skills ? `<span><b>Skills.</b> ${esc(p.skills)}</span>` : ""}${p.application ? `<span><b>Application.</b> ${esc(p.application)}</span>` : ""}` : `<span class="empty">Not written yet.</span>`}<a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a></div>`; })() : "";
