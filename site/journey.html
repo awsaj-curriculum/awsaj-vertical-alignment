@@ -440,6 +440,7 @@ body.presenting .story > .pd h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); } bod
 
 .pd .bridge { margin-top: 22px; padding: 14px 20px; border-radius: 14px; background: var(--navy); color: #fff; font-size: clamp(1.1rem, 1.6vw, 1.35rem); font-weight: 600; max-width: 62ch; display: flex; gap: 12px; align-items: baseline; }
 .pd .bridge span { color: var(--cta); font-weight: 800; } .pd .bridge { margin-left: auto; margin-right: auto; width: fit-content; justify-content: center; text-align: center; }   /* Tim, Nov 2026: the navy bridge lines are centred on every slide */
+#pd-ponder .bridge { max-width: none; } @media (min-width: 900px) { #pd-ponder .bridge { white-space: nowrap; } }   /* Tim, Nov 2026: slide 6's bar on one line */
 
 /* all-staff title slide: the route and the title share one background (Tim) */
 body.in-staff.presenting.step0 #sky { background: transparent; } body.in-staff.presenting.step0 #sky::before, body.in-staff.presenting.step0 #sky::after { display: none; }
