@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Part 2: Our depth standards</title>
+<title>Part 2: Our focus standards</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* Part 2 of the PD (Tim, Nov 2026): each grade or course chooses its depth standards, the ones we want taught in depth for
-   the SAT / US Diploma track, from Grade 12 down. ("Depth standards", not "priority standards": the school already has
+/* Part 2 of the PD (Tim, Nov 2026): each grade or course chooses its focus standards, the ones we want taught in depth for
+   the SAT / US Diploma pathway, from Grade 12 down. ("Focus standards", not "priority standards": the school already has
    Priority (6-12) and Power (K-5) standards.) Same look as the PD slides: four-colour wash, navy type, glass panels, lime.
    No automatic link lines between grades (Tim: do not force connections); the group decides in discussion. */
 :root {
@@ -47,7 +47,9 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .expect { padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.85); border-left: 5px solid var(--blue); max-width: 90ch; font-size: .98rem; }
 .expect b { display: block; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--navy-2); margin-bottom: 2px; }
 .qbtn { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--navy); background: #fff; font-weight: 800; cursor: pointer; font-size: .85rem; line-height: 1; vertical-align: 3px; margin-left: 8px; }
-.helpbox { margin-top: 10px; padding: 12px 16px; border-radius: 12px; background: #fff; border-left: 4px solid var(--cta); font-size: .98rem; max-width: 80ch; font-weight: 400; letter-spacing: 0; line-height: 1.45; }
+.qwrap { position: relative; display: inline-block; vertical-align: middle; }
+.helpbox { position: absolute; left: 0; top: calc(100% + 8px); z-index: 40; width: min(380px, 86vw); padding: 12px 16px; border-radius: 12px; background: #fff; border-left: 4px solid var(--cta); box-shadow: 0 18px 40px -12px rgba(16,24,70,.4); font-size: .95rem; font-weight: 400; letter-spacing: 0; line-height: 1.45; text-transform: none; text-align: left; color: var(--navy); white-space: normal; }
+.helpbox.rt { left: auto; right: 0; }
 /* home */
 .subjects { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .subj { display: grid; gap: 10px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,.78); text-decoration: none; box-shadow: 0 8px 24px rgba(16,24,70,.08); }
@@ -116,7 +118,7 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .rcol { display: grid; gap: 10px; align-content: start; }
 .rcol.me { border: 2px solid var(--navy); }
 .cpick { display: grid; gap: 4px; font-weight: 700; font-size: .85rem; color: var(--navy-2); } .cpick select { font-weight: 800; font-size: 1rem; color: var(--navy); }
-.colpick { align-items: end; gap: 14px; } .rcol h3 { font-size: 1.3rem; } .rcol h3 small { display: block; font-size: .9rem; font-weight: 600; color: var(--muted); }
+.colpick { align-items: end; gap: 14px; } .lsel { display: flex; flex-wrap: wrap; align-items: end; gap: 6px; justify-content: flex-end; } .lsel select { font-weight: 600; font-size: .9rem; } .lsel .qbtn { margin: 0 0 8px; } .lsel .helpbox { flex-basis: 100%; } .rcol h3 { font-size: 1.3rem; } .rcol h3 small { display: block; font-size: .9rem; font-weight: 600; color: var(--muted); }
 .cmeta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: .9rem; color: var(--navy-2); }
 .cnote { font-size: .88rem; color: var(--navy-2); border-left: 4px solid var(--blue); padding: 4px 10px; background: rgba(255,255,255,.7); border-radius: 0 8px 8px 0; }
 .rlist { display: grid; gap: 8px; }
@@ -131,8 +133,8 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 /* review: view tabs, numbers, tracing, the side panel of flags, the strand grid */
 .vtabs { display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); gap: 8px; align-items: stretch; }
 .vlab { font-weight: 800; font-size: .85rem; color: var(--navy-2); align-self: center; max-width: 110px; line-height: 1.2; }
-.vtab { border: 2px solid var(--line); background: rgba(255,255,255,.8); border-radius: 14px; padding: 8px 12px; text-align: left; cursor: pointer; display: grid; gap: 2px; }
-.vtab b { font-size: 1rem; } .vtab span { font-size: .82rem; color: var(--muted); line-height: 1.3; }
+.vtab { border: 2px solid var(--line); background: rgba(255,255,255,.8); border-radius: 12px; padding: 6px 12px; text-align: left; cursor: pointer; display: grid; gap: 2px; }
+.vtab b { font-size: .95rem; } .vtab span { font-size: .78rem; color: var(--muted); line-height: 1.3; }
 .vtab[aria-pressed="true"] { border-color: var(--navy); background: var(--navy); color: #fff; } .vtab[aria-pressed="true"] span { color: #DDE1EE; }
 .revtools { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
 .legend { font-size: .88rem; color: var(--navy-2); display: flex; gap: 6px 16px; flex-wrap: wrap; align-items: center; }
@@ -277,21 +279,24 @@ function expectNote(s, g) {
   return "K-5 uses AERO Social Studies: 10 to 20 standards per grade across the same AERO strands.";
 }
 const HELP = {
-  home: "Each grade or course chooses its depth standards: the standards we want every class to teach in depth for students on the SAT / US Diploma track. We call them depth standards because the school already has Priority (6-12) and Power (K-5) standards. We start at Grade 12 and work down, so each grade can check it prepares students for the grade above.",
+  home: "Each grade or course chooses its focus standards: the standards we want every class to teach in depth for students on the SAT / US Diploma pathway. Focus standards are the standards required for success toward graduation and success in the course. The school's own Priority (6-12) and Power (K-5) standards are marked with a star to help the review. We start at Grade 12 and work down, so each grade can check it prepares students for the grade above.",
   ladder: "Every grade or course for this subject, from Grade 12 down. Anyone can open any grade at any time and change its list. Draft: still choosing. Ready for the group: the team has finished and the list waits for the group review. Agreed by the group: the group has talked it through and the leader has confirmed it with the PIN; it is then locked.",
-  exports: "Print our depth standards: a printable list of every grade, Grade 12 down, with notes and the learner profile. Show on screen: one grade at a time in large type, for a projector. Excel: every chosen standard, the status of every list and the learner profile, in one file.",
-  library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your depth standards. Text: Short shows two lines of each standard, One line fits many standards on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard in a popup with Add or Remove. Hints: the Part 1 rating (in One line, a coloured dot: green in depth, blue introduced, pink not taught), and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
+  exports: "Print our focus standards: a printable list of every grade, Grade 12 down, with notes and the learner profile. Show on screen: one grade at a time in large type, for a projector. Excel: every chosen standard, the status of every list and the learner profile, in one file.",
+  library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many standards on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard in a popup with Add or Remove. Hints: the Part 1 rating (in One line, a coloured dot: green in depth, blue introduced, pink not taught), and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
   picks: "The standards this grade or course wants taught in depth. Anyone can add or remove a standard; the list is shared and saves as you go. Add a short note on why a standard is essential if it helps the review. When you have finished, mark the list ready for the group. Print this list gives a paper copy of every standard with tick boxes, for teams that start on paper.",
   changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change and undo is kept in the history.",
   review: "One review page with three ways to view the lists. Side by side: Grade 12 with the learner profile, the grade above and the grade being reviewed (outlined); change any column with the grade boxes. Whole progression: every grade's choices from Grade 12 down, the grade being reviewed highlighted. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The line at the top counts how many of the grade above's standards connect to something chosen here. Matching numbers mark standards that connect; click a standard to light up what it connects to and read how, and Show all opens the whole standard. The group decides which connections matter: some standards have no partner, and that is fine.",
+  views: "Three ways to look at the same lists. Side by side: Grade 12 with the learner profile, the grade above and this grade, next to each other. Whole progression: every grade's choices, Grade 12 down. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The numbers, the flags and Agreed as a group work the same in every view.",
+  sum: "How many of the grade above's chosen standards connect (by an official link or the same standard) to at least one standard chosen in this grade. A low number is a question for the group, not a target: some courses start new strands.",
+  pickers: "Choose which grades to show. Left column: where we are heading (Grade 12 unless you change it). Middle column: the grade above (None hides it). Being reviewed: the grade the group is talking about and agreeing on.",
   links: "Where the numbers come from. Official: in Math, the Coherence Map (Student Achievement Partners), which shows which standard leads to which; in ELA, the same anchor standard one grade apart; in every subject, the same standard chosen in two grades. Suggested: links written by AI or matched by wording, marked check. Science and Social Studies only have suggested links, so they show only when you choose Official and suggested. Off hides the numbers, the flags about links and the no link notes. This laptop remembers your choice.",
   side: "Flags the site works out from the lists shown, for the group to talk about. They never mean a standard must be chosen. A foundation: a standard the grade above chose builds on standards here that are not chosen. No link above: standards chosen here that connect to nothing chosen above (fine if they start something new). A strand: the grade above chose from a strand where this grade chose nothing. From Part 1: school priority or power standards not chosen, and chosen standards rated Not taught (new teaching). Click a code to read the standard. Not for us sets a flag aside on this laptop only; Show set aside brings it back.",
-  strand: "One row per strand, one column per grade (K-12, or one school). Each cell: how many depth standards that grade chose in that strand, of how many it has. The bar shows the chosen ones by their Part 1 rating (green in depth, blue introduced, pink not taught, grey not rated). Hatched: no standards in that strand in that grade. Gap?: none chosen here, though a grade before and a grade after chose some in this strand. Arrows (Math and ELA, or with suggested links on): how many chosen here connect to nothing chosen in the grade above or below. Click a cell to list its standards, what each connects to above and below, or that nothing connects.",
+  strand: "One row per strand, one column per grade (K-12, or one school). Each cell: how many focus standards that grade chose in that strand, of how many it has. The bar shows the chosen ones by their Part 1 rating (green in depth, blue introduced, pink not taught, grey not rated). Hatched: no standards in that strand in that grade. Gap?: none chosen here, though a grade before and a grade after chose some in this strand. Arrows (Math and ELA, or with suggested links on): how many chosen here connect to nothing chosen in the grade above or below. Click a cell to list its standards, what each connects to above and below, or that nothing connects.",
   rquestions: "Questions to guide the talk. When the group agrees on this set of standards, the leader presses Agreed as a group and enters the PIN. The list is then locked; the leader can reopen it.",
-  profile: "What an Awsaj graduate on the SAT / US Diploma track should know and be able to do in this subject. It opens once Grade 12 has chosen its depth standards, and teams can change it as the work goes on.",
+  profile: "What an Awsaj graduate on the SAT / US Diploma pathway should know and be able to do in this subject. It opens once Grade 12 has chosen its focus standards, and teams can change it as the work goes on.",
   show: "One grade at a time in large type, for a projector. Use the arrow keys, Page Up / Page Down or a clicker to move between grades. Full screen hides everything else; press Escape to leave it.",
   paper: "A paper copy of every standard this grade or course can choose from, with a tick box and a line for notes. Teams that start on paper give the finished copy to the leader, who ticks the same standards on the site.",
-  list: "Our depth standards for this subject, Grade 12 down, ready to print: the learner profile, then each grade or course with its status, its standards and the team's notes."
+  list: "Our focus standards for this subject, Grade 12 down, ready to print: the learner profile, then each grade or course with its status, its standards and the team's notes."
 };
 const Q = new URLSearchParams(location.search), PRACTICE = Q.get("practice") === "1", TEAM = Q.get("team") || "", TOUR = Q.get("tour") === "1";
 const FRAMED = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
@@ -417,25 +422,27 @@ async function exportExcel(only) {
       ps.forEach((p) => { const e = stdOf(s, p), lv = D.ratings.get(`${p.framework}|${p.code}|${g}`);
         picks.push({ Subject: s, Grade: g, Course: course(s, g), Status: STATUS[st], Set: p.framework, Code: p.code, "Other code": e.f ? ccss(e) : "", Strand: e.s || "", Standard: e.t || "", Note: p.note || "", "Part 1 rating": lv != null ? RWORD[lv] : "Not rated", "School Priority / Power": prMark(e, g) }); }); }));
     const prof = subs.map((s) => { const p = D.profile[s] || {}; return { Subject: s, "Essential knowledge": p.knowledge || "", "Essential skills": p.skills || "", "Application and independence": p.application || "" }; });
-    const about = [{ Item: "What this is", Value: "Depth standards chosen in the PD (From Standards to Student Success), Grade 12 down." }, { Item: "Subjects", Value: subs.join(", ") }, { Item: "Exported", Value: today }, { Item: "Source", Value: PRACTICE ? "Practice mode (not saved)" : "Live database" }];
+    const about = [{ Item: "What this is", Value: "Focus standards chosen in the PD (From Standards to Student Success), Grade 12 down." }, { Item: "Subjects", Value: subs.join(", ") }, { Item: "Exported", Value: today }, { Item: "Source", Value: PRACTICE ? "Practice mode (not saved)" : "Live database" }];
     const add = (rows, name, w) => { const ws = X.utils.json_to_sheet(rows.length ? rows : [{ Note: "Nothing yet." }]); if (w) ws["!cols"] = w.map((x) => ({ wch: x })); X.utils.book_append_sheet(wb, ws, name); };
-    add(about, "About", [14, 90]); add(picks, "Depth standards", [14, 6, 24, 20, 12, 16, 24, 30, 80, 40, 16, 12]); add(lists, "Status of each list", [14, 6, 24, 20, 10, 12]); add(prof, "Learner profile", [14, 60, 60, 60]);
-    X.writeFile(wb, `Depth_standards_${only ? only.replace(/ /g, "_") : "All_subjects"}_${today}.xlsx`); toast("Excel file downloaded.");
+    add(about, "About", [14, 90]); add(picks, "Focus standards", [14, 6, 24, 20, 12, 16, 24, 30, 80, 40, 16, 12]); add(lists, "Status of each list", [14, 6, 24, 20, 10, 12]); add(prof, "Learner profile", [14, 60, 60, 60]);
+    X.writeFile(wb, `Focus_standards_${only ? only.replace(/ /g, "_") : "All_subjects"}_${today}.xlsx`); toast("Excel file downloaded.");
   } catch (err) { toast("Excel not made: " + err.message); }
 }
 
 /* ================= views ================= */
 const route = () => { const h = new URLSearchParams(location.hash.slice(1)); return { s: h.get("s"), g: h.get("g"), v: h.get("v") || "", a: h.get("a"), b: h.get("b"), m: h.get("m"), band: h.get("band") }; };
 const href = (o) => "#" + new URLSearchParams(Object.entries(o).filter(([, v]) => v)).toString();
-const help = (k) => `<button class="qbtn" type="button" data-help="${k}" aria-expanded="false" aria-label="What is this?">?</button><div class="helpbox" data-helpbox="${k}" hidden>${esc(HELP[k])}</div>`;
+/* "?" help: a small popup beside the button (Tim: help popups everywhere); a click elsewhere or Escape closes it */
+const help = (k) => `<span class="qwrap"><button class="qbtn" type="button" data-help="${k}" aria-expanded="false" aria-label="What is this?">?</button><span class="helpbox" data-helpbox="${k}" role="note" hidden>${esc(HELP[k])}</span></span>`;
+const closeHelp = (except) => $$(".helpbox:not([hidden])").forEach((b) => { if (b !== except) { b.hidden = true; const q = b.previousElementSibling; if (q) q.setAttribute("aria-expanded", "false"); } });
 const fw = (e) => `<span class="code">${esc(e.c)}</span><span class="alt">${esc(ccss(e))}</span>`;
 const expect = (s, g) => `<p class="expect"><b>What to expect</b>${esc(expectNote(s, g))}</p>`;
 const gopts = (s, sel) => GRADES.map((g) => `<option value="${g}"${g === sel ? " selected" : ""}>${esc(gtext(s, g))}</option>`).join("");
 
 function header(r) {
-  const S = encodeURIComponent(r.s || ""), c = [`<a href="#">Depth standards</a>`]; if (r.s) c.push(`<span>/</span><a href="#s=${S}">${esc(r.s)}</a>`);
+  const S = encodeURIComponent(r.s || ""), c = [`<a href="#">Focus standards</a>`]; if (r.s) c.push(`<span>/</span><a href="#s=${S}">${esc(r.s)}</a>`);
   if (r.g && r.v !== "show") c.push(`<span>/</span><a href="#s=${S}&g=${r.g}&v=choose">${gname(r.g)}</a>`);
-  const lab = { review: "Review", profile: "Learner profile", paper: "Print this list", list: "Print our depth standards", show: "Show on screen" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
+  const lab = { review: "Review", profile: "Learner profile", paper: "Print this list", list: "Print our focus standards", show: "Show on screen" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
   $("#crumbs").innerHTML = c.join("");
   $("#who").innerHTML = (PRACTICE ? `<span class="pill practice">Practice: nothing is saved</span>` : "") + (TEAM ? `<span class="pill team">Team: ${esc(TEAM)}</span>` : "")
     + (FRAMED && !TOUR ? `<a class="btn small" href="${esc(location.href)}" target="_blank" rel="noopener" title="Open this page in its own tab, for presenting">Open full page ↗</a>` : "") + `<a class="btn small" href="journey.html">PD slides</a>`;
@@ -447,7 +454,7 @@ async function render(keep) {
   if (r.s) await loadSubject(r.s); if (r.v === "review") await loadLinks(); if (REV.cellS !== r.s) { REV.cell = null; REV.cellS = r.s; }
   if (r.s && r.g && r.v === "choose" && !D.ev[r.s + "|" + r.g]) { D.ev[r.s + "|" + r.g] = []; loadEvents(r.s, r.g).then(() => { if (!editingText()) render(true); }); }
   const app = $("#app");
-  const note = !PRACTICE && !D.dbReady ? `<p class="notice">Saving is not switched on yet: the leader needs to add the depth standards tables to the database. You can look around, or try <a href="?practice=1${location.hash}">practice mode</a>.</p>` : "";
+  const note = !PRACTICE && !D.dbReady ? `<p class="notice">Saving is not switched on yet: the leader needs to add the focus standards tables to the database. You can look around, or try <a href="?practice=1${location.hash}">practice mode</a>.</p>` : "";
   const v = !r.s ? homeV() : r.v === "profile" ? profileV(r.s) : r.v === "list" ? listV(r.s) : r.v === "show" ? showV(r.s, r.g)
     : !r.g ? subjectV(r.s) : r.v === "review" ? reviewV(r.s, r.g, r) : r.v === "paper" ? paperV(r.s, r.g) : chooseV(r.s, r.g);
   app.innerHTML = note + v; document.body.classList.toggle("fs", !!document.fullscreenElement);
@@ -456,8 +463,9 @@ async function render(keep) {
 }
 
 function homeV() {
-  return `<div class="stack"><div class="panel stack"><p class="pill">Part 2 · Subject sessions</p><h1>Our depth standards${help("home")}</h1><p class="lead">Choose the standards each grade or course will teach in depth, so students graduate ready for the SAT / US Diploma track. We start at Grade 12 and work down.</p>
-    <div class="steps3"><div><b>1. Choose</b>Each team ticks the standards that matter most in its grade or course.</div><div><b>2. Review</b>The group reads each list beside the grade above and Grade 12: does it prepare students for them?</div><div><b>3. Agree</b>When the group agrees on the set, the leader confirms it with the PIN.</div></div>
+  return `<div class="stack"><div class="panel stack"><p class="pill">Part 2 · Subject sessions</p><h1>Our focus standards${help("home")}</h1><p class="lead">Review our standards and identify those most important for student success in the SAT / US Diploma pathway. We start at Grade 12 and work down.</p>
+    <p class="expect"><b>Focus standards</b>The standards required for success toward graduation and success in the course.</p>
+    <div class="steps3"><div><b>1. Review and choose</b>Each team reviews its grade or course standards and ticks the ones that matter most.</div><div><b>2. Review</b>The group reads each list beside the grade above and Grade 12: does it prepare students for them?</div><div><b>3. Agree</b>When the group agrees on the set, the leader confirms it with the PIN.</div></div>
     <div class="row-acts"><button class="btn small" type="button" data-excel="">Excel: all subjects</button></div></div>
     <div class="subjects">${SUBJ.map(([s, , c]) => `<a class="subj" style="--c:${c}" href="#s=${encodeURIComponent(s)}"><span class="rule"></span><b>${s}</b><span>Grade 12 down to Kindergarten</span></a>`).join("")}</div></div>`;
 }
@@ -467,9 +475,9 @@ function subjectV(s) {
   const rows = GRADES.map((g) => { const n = picksOf(s, g).length, st = statusOf(s, g), lib = library(s, g).length; const bc = ["9", "10", "11", "12"].includes(g) ? "var(--magenta)" : ["6", "7", "8"].includes(g) ? "var(--blue)" : "var(--lime)";
     return `<div class="lrow" style="--bc:${bc}"><div class="g">${glab(s, g)}</div><div class="meta"><span class="pill st-${st}">${STATUS[st]}</span><span>${n} of ${lib} standards chosen</span></div>
       <div class="acts"><a class="btn small cta" href="#s=${S}&g=${g}&v=choose">Choose</a><a class="btn small" href="#s=${S}&g=${g}&v=review">Review</a></div></div>`; }).join("");
-  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: depth standards${help("ladder")}</h1><p class="lead">From Grade 12 down. Any grade can start at any time. Each list is a draft until its team marks it ready; then the group reviews it and agrees it together.</p>
-    <div class="row-acts"><a class="btn cta" href="#s=${S}&g=12&v=review&m=prog">Review the whole progression</a><a class="btn" href="#s=${S}&v=list">Print our depth standards</a><a class="btn" href="#s=${S}&v=show&g=12">Show on screen</a><button class="btn" type="button" data-excel="${esc(s)}">Excel</button>${help("exports")}</div></div>
-    <div class="panel profilecard stack"><h2>The Awsaj Graduate in ${esc(s)}</h2>${g12 ? `<p>${p.knowledge || p.skills || p.application ? "Our learner profile for the SAT / US Diploma track." : "Grade 12 has chosen its standards: the learner profile is open."}</p><a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a>` : `<p class="lead" style="font-size:1rem">Opens once Grade 12 has chosen its depth standards.</p>`}</div>
+  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: focus standards${help("ladder")}</h1><p class="lead">From Grade 12 down. Any grade can start at any time. Each list is a draft until its team marks it ready; then the group reviews it and agrees it together.</p>
+    <div class="row-acts"><a class="btn cta" href="#s=${S}&g=12&v=review&m=prog">Review the whole progression</a><a class="btn" href="#s=${S}&v=list">Print our focus standards</a><a class="btn" href="#s=${S}&v=show&g=12">Show on screen</a><button class="btn" type="button" data-excel="${esc(s)}">Excel</button>${help("exports")}</div></div>
+    <div class="panel profilecard stack"><h2>The Awsaj Graduate in ${esc(s)}</h2>${g12 ? `<p>${p.knowledge || p.skills || p.application ? "Our learner profile for the SAT / US Diploma pathway." : "Grade 12 has chosen its standards: the learner profile is open."}</p><a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a>` : `<p class="lead" style="font-size:1rem">Opens once Grade 12 has chosen its focus standards.</p>`}</div>
     <div class="ladderlist">${rows}</div></div>`;
 }
 
@@ -497,14 +505,14 @@ function chooseV(s, g) {
     const op = chooseV.open.has(k);
     return `${sh}<div class="std${on ? " on" : ""}${op ? " open" : ""}"><button class="tick" type="button" data-pick="${esc(k)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(e.c)}"${ed ? "" : " disabled"}>${on ? "&#10003;" : "+"}</button><div class="sbody"><span class="shead">${fw(e)}</span><p class="stext" data-more="${esc(k)}">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}" title="${RATING[lv][1]}">${RATING[lv][1]}</span>` : ""}${pm ? `<span class="h pr" title="School ${pm.toLowerCase()} standard">&#9733;<span class="w"> School ${pm.toLowerCase()} standard</span></span>` : ""}</div><button class="more" type="button" data-more="${esc(k)}" aria-haspopup="dialog">Show all</button></div></div>`; }).join("");
   const plist = picked.map((p) => { const e = stdOf(s, p); return `<div class="pitem"><div class="row"><span>${fw(e)}</span>${ed ? `<button class="x" type="button" data-pick="${esc(key(e))}" aria-label="Remove ${esc(e.c)}">Remove</button>` : ""}</div><p class="stext">${esc(e.t)}</p>${ed ? `<input type="text" maxlength="500" placeholder="Why it is essential (optional)" value="${esc(p.note)}" data-note="${esc(key(e))}" aria-label="Note for ${esc(e.c)}">` : p.note ? `<p class="saved">${esc(p.note)}</p>` : ""}</div>`; }).join("");
-  return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth, so students are ready for ${up ? gtext(s, up) : "graduation on the SAT / US Diploma track"}?</p>
+  return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth, so students are ready for ${up ? gtext(s, up) : "graduation on the SAT / US Diploma pathway"}?</p>
     ${expect(s, g)}${st === "approved" ? `<p class="saved">The group has agreed this list, so it is locked. The leader can reopen it.</p>` : ""}</div>
     <div class="choose"><section class="panel" aria-label="Library"><h2>Our standards${help("library")}</h2>
       <div class="tools"><input type="search" id="q" placeholder="Search by code or words" value="${esc(f.q)}" aria-label="Search the standards"><select id="strand" aria-label="Strand"><option value="">All strands</option>${strands.map((x) => `<option${x === f.strand ? " selected" : ""}>${esc(x)}</option>`).join("")}</select></div>
       <div class="chips" role="group" aria-label="Show">${[["", "All"], ["on", "Chosen"], ["pr", `★ School ${K5.includes(g) ? "power" : "priority"} standards`]].map(([k, t]) => `<button class="chip" type="button" data-only="${k}" aria-pressed="${f.only === k}">${t}</button>`).join("")}</div>
       <div class="dens" role="group" aria-label="How much of each standard to show">Text:${[["short", "Short"], ["line", "One line"], ["full", "Full"]].map(([k, t]) => `<button class="chip" type="button" data-dens="${k}" aria-pressed="${DENS === k}">${t}</button>`).join("")}</div>
       <p class="saved" style="margin:10px 0">${rows.length} of ${lib.length} standards shown</p><div class="lib" data-d="${DENS}">${items || `<p class="empty">No standards match.</p>`}</div></section>
-    <aside class="panel picks" aria-label="Our depth standards"><h2>Our depth standards${help("picks")}</h2>
+    <aside class="panel picks" aria-label="Our focus standards"><h2>Our focus standards${help("picks")}</h2>
       <div class="count"><b>${picked.length}</b><span>chosen</span><span class="pill st-${st}">${STATUS[st]}</span></div>
       <div class="plist" data-d="${DENS}">${plist || `<p class="empty">Tick standards in the library to add them here.</p>`}</div>
       <div class="row-acts">${canEdit() && st === "draft" ? `<button class="btn cta" type="button" data-status="ready"${picked.length ? "" : " disabled"}>Mark ready for the group</button>` : ""}${canEdit() && st === "ready" ? `<button class="btn" type="button" data-status="draft">Back to draft</button>` : ""}<a class="btn" href="#s=${S}&g=${g}&v=review">Review</a><a class="btn" href="#s=${S}&g=${g}&v=paper">Print this list</a></div>
@@ -594,7 +602,7 @@ function sideHTML(s, g, T, strip) {
     if (mine.some((q) => linkOf(pk(q), uk))) return;
     const c = lib.filter((e) => !mk.has(key(e))).map((e) => ({ e, l: linkOf(uk, key(e)) })).filter((x) => x.l && (x.l.t === "same" || x.l.needs));
     if (!c.length) return; const one = c.length === 1;
-    push("found", tg + "|" + uk, "Flag: a foundation", `<p><b>${gname(tg)} chose ${code(uk, tg)}.</b> It builds on ${one ? "this" : "these"} ${gname(g)} standard${one ? "" : "s"}, not chosen here:</p><ul>${c.slice(0, 4).map((x) => `<li>${code(key(x.e))}<span class="src">${x.l.t === "same" ? "same standard" : SRC[x.l.src]}</span></li>`).join("")}${c.length > 4 ? `<li class="src">and ${c.length - 4} more</li>` : ""}</ul><p>Worth a look? It may be taught well enough without being a depth standard.</p>`); }));
+    push("found", tg + "|" + uk, "Flag: a foundation", `<p><b>${gname(tg)} chose ${code(uk, tg)}.</b> It builds on ${one ? "this" : "these"} ${gname(g)} standard${one ? "" : "s"}, not chosen here:</p><ul>${c.slice(0, 4).map((x) => `<li>${code(key(x.e))}<span class="src">${x.l.t === "same" ? "same standard" : SRC[x.l.src]}</span></li>`).join("")}${c.length > 4 ? `<li class="src">and ${c.length - 4} more</li>` : ""}</ul><p>Worth a look? It may be taught well enough without being a focus standard.</p>`); }));
   // chosen here, no link to anything chosen above
   const Tp = T.flatMap((tg) => picksOf(s, tg));
   if (tagsOn(s) && Tp.length) { const lone = mine.filter((q) => !Tp.some((u) => linkOf(pk(q), pk(u))));
@@ -658,14 +666,14 @@ function reviewV(s, g, r) {
   let sum = "";
   if (!above(g)) sum = `<p class="sumline">${gname(g)} is the end of the road: read its list against the learner profile.</p>`;
   else if (up && LM !== "n") { const ups = picksOf(s, up); if (!ups.length) sum = `<p class="sumline">${esc(gtext(s, up))} has not chosen yet.</p>`;
-    else { const n = ups.filter((u) => mine.some((q) => linkOf(pk(q), pk(u)))).length; sum = `<p class="sumline">${n} of ${ups.length} ${gname(up)} depth standards connect to a standard chosen in ${gname(g)}.</p><div class="sumbar" aria-hidden="true"><i style="width:${Math.round((100 * n) / ups.length)}%"></i></div>`; } }
+    else { const n = ups.filter((u) => mine.some((q) => linkOf(pk(q), pk(u)))).length; sum = `<p class="sumline">${n} of ${ups.length} ${gname(up)} focus standards connect to a standard chosen in ${gname(g)}. ${help("sum")}</p><div class="sumbar" aria-hidden="true"><i style="width:${Math.round((100 * n) / ups.length)}%"></i></div>`; } }
   const chip = (attr, val, cur, label) => `<button class="chip" type="button" ${attr}="${val}" aria-pressed="${val === cur}">${label}</button>`;
   const VIEWS = [["cols", "Side by side", "Grade 12, the grade above and this grade, next to each other"], ["prog", "Whole progression", "Every grade's choices, Grade 12 down"], ["strand", "By strand", "How many each grade chose in each strand, to spot gaps"]];
-  const tools = `<div class="vtabs" role="group" aria-label="Three ways to view the lists"><span class="vlab">Three ways to view the lists</span>${VIEWS.map(([k, t, d]) => `<button class="vtab" type="button" data-rmode="${k}" aria-pressed="${k === mode}"><b>${t}</b><span>${d}</span></button>`).join("")}</div>
-    <div class="revtools"><div class="dens" role="group" aria-label="Connections">Connections:${chip("data-lm", "o", LM, "Official")}${chip("data-lm", "a", LM, "Official and suggested")}${chip("data-lm", "n", LM, "Off")}${help("links")}</div></div>`;
-  const pickers = mode === "cols" ? `<div class="row-acts colpick">${[["a", "Left column", a], ["b", "Middle column", b], ["g", "Being reviewed", g]].map(([k, l, v]) => `<label class="cpick">${l}<select data-col="${k}">${k === "b" ? `<option value="-"${v === "-" ? " selected" : ""}>None</option>` : ""}${gopts(s, v)}</select></label>`).join("")}</div>`
-    : `<div class="row-acts colpick"><label class="cpick">Being reviewed<select data-col="g">${gopts(s, g)}</select></label><span style="flex:1"></span><a class="btn small" href="#s=${S}&v=list">Print our depth standards</a><a class="btn small" href="#s=${S}&v=show&g=12">Show on screen</a><button class="btn small" type="button" data-excel="${esc(s)}">Excel</button></div>`;
-  const legend = mode === "strand" ? "" : `<p class="legend">${mode === "prog" ? `<span><span class="dashbox"></span> Dashed: not yet agreed by the group</span>` : ""}${LM === "n" ? "" : `<span><span class="nb">1</span> Same number: these standards connect (an official link or the same standard)</span>${LM === "a" ? `<span><span class="nb sug">1</span> A suggested link: check it</span>` : ""}<span>Click a standard to see how it connects.</span>`}</p>`;
+  const tools = `<div class="vtabs" role="group" aria-label="Three ways to view the lists"><span class="vlab">Three ways to view the lists ${help("views")}</span>${VIEWS.map(([k, t, d]) => `<button class="vtab" type="button" data-rmode="${k}" aria-pressed="${k === mode}"><b>${t}</b><span>${d}</span></button>`).join("")}</div>`;
+  const links = `<div class="lsel"><label class="cpick">Links<select data-lmsel="1">${[["o", "Official"], ["a", "Official and suggested"], ["n", "Off"]].map(([k, l]) => `<option value="${k}"${LM === k ? " selected" : ""}>${l}</option>`).join("")}</select></label>${help("links")}</div>`;
+  const pickers = `<div class="row-acts colpick">${mode === "cols" ? [["a", "Left column", a], ["b", "Middle column", b], ["g", "Being reviewed", g]].map(([k, l, v]) => `<label class="cpick">${l}<select data-col="${k}">${k === "b" ? `<option value="-"${v === "-" ? " selected" : ""}>None</option>` : ""}${gopts(s, v)}</select></label>`).join("")
+    : `<label class="cpick">Being reviewed<select data-col="g">${gopts(s, g)}</select></label>`}${help("pickers")}<span style="flex:1"></span>${links}</div>`;
+  const legend = mode === "strand" ? "" : `<p class="legend">${LM === "n" ? "" : `<span><span class="nb">1</span> Same number: they connect${LM === "a" ? ` (<span class="nb sug">1</span> suggested, check)` : ""}. Click one to see how.</span>`}${mode === "prog" ? `<span><span class="dashbox"></span> Dashed: not agreed yet</span>` : ""}</p>`;
   const note = LM === "o" && !["Math", "ELA"].includes(s) ? `<p class="cnote">${esc(s)} has no official links between grades, so only the same standard chosen in two grades gets a number. Choose <b>Official and suggested</b> to see possible links, and check them.</p>` : "";
   const col = (x, i) => { const ps = picksOf(s, x), xs = statusOf(s, x);
     const prof = x === "12" ? (() => { const p = D.profile[s] || {}; return `<div class="prof"><b>The Awsaj Graduate</b>${p.knowledge || p.skills || p.application ? `${p.knowledge ? `<span><b>Knowledge.</b> ${esc(p.knowledge)}</span>` : ""}${p.skills ? `<span><b>Skills.</b> ${esc(p.skills)}</span>` : ""}${p.application ? `<span><b>Application.</b> ${esc(p.application)}</span>` : ""}` : `<span class="empty">Not written yet.</span>`}<a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a></div>`; })() : "";
@@ -676,9 +684,7 @@ function reviewV(s, g, r) {
     : mode === "prog" ? `<div class="panel">${GRADES.map((x) => { const ps = picksOf(s, x), xs = statusOf(s, x);
         return `<div class="prow${x === g ? " me" : ""}"><div class="lab"><a href="${href({ s, g: x, v: "review", m: "prog" })}" title="Review this grade">${glab(s, x)}</a><small>${STATUS[xs]} · ${ps.length}</small></div><div class="cards">${ps.map((p) => rcard(s, x, p, M, true)).join("") || `<p class="empty">No standards chosen yet.</p>`}</div></div>`; }).join("")}</div>`
     : strandGrid(s, g, r);
-  const lead = mode === "cols" ? `Read the lists side by side. Does ${gname(g)} prepare students for ${up ? gtext(s, up) : "the Awsaj Graduate"}${up && up !== "12" ? " and for Grade 12" : ""}?`
-    : mode === "prog" ? `Every grade's depth standards, Grade 12 down. Does ${gname(g)} prepare students for ${above(g) ? gtext(s, above(g)) : "the Awsaj Graduate"}?`
-    : "How many depth standards each grade chose in each strand. Look for strands that stop and start again.";
+  const lead = `Does ${gname(g)} prepare students for ${above(g) ? gtext(s, above(g)) : "the Awsaj Graduate"}?`;
   return `<div class="stack"><div class="panel stack"><h1>Review: ${esc(gtext(s, g))} ${esc(s)}${help("review")}</h1><p class="lead">${lead}</p>${sum ? `<div>${sum}</div>` : ""}${tools}${pickers}${legend}${note}</div>
     ${mode === "cols" ? `<div class="revgrid"><div id="revbox">${body}</div>${sideHTML(s, g, T, false)}</div>` : `${sideHTML(s, g, T, true)}<div id="revbox">${body}</div>`}
     <div class="panel"><h2>Questions for the group${help("rquestions")}</h2><ol class="qs"><li>Will these standards prepare students for what ${up ? gtext(s, up) : "the Awsaj Graduate"} has chosen?</li><li>Is anything the grade above needs missing here?</li><li>Can every class teach, reteach, review and assess each of these in depth?</li></ol>
@@ -686,13 +692,13 @@ function reviewV(s, g, r) {
       <div class="row-acts" style="margin-top:14px"><span class="pill st-${st}">${STATUS[st]}</span><span style="flex:1"></span>${st === "approved" ? `<button class="btn" type="button" data-agree="0">Reopen</button>` : `<button class="btn cta" type="button" data-agree="1"${mine.length ? "" : " disabled"}>Agreed as a group</button>`}<a class="btn" href="#s=${S}&g=${g}&v=choose">Back to the list</a></div></div></div>`;
 }
 
-/* printable: Our depth standards for one subject, Grade 12 down */
+/* printable: Our focus standards for one subject, Grade 12 down */
 function listV(s) {
   const p = D.profile[s] || {}, today = new Date().toLocaleDateString([], { day: "numeric", month: "long", year: "numeric" });
   const grades = GRADES.map((g) => { const ps = picksOf(s, g), st = statusOf(s, g);
     return `<h2>${esc(gtext(s, g))} <span class="pill st-${st}">${STATUS[st]}</span></h2>${ps.length ? `<table><thead><tr><th style="width:22%">Standard</th><th>What students learn</th><th style="width:26%">Note</th></tr></thead><tbody>${ps.map((q) => { const e = stdOf(s, q); return `<tr><td>${fw(e)}</td><td>${esc(e.t)}</td><td class="pnote">${esc(q.note)}</td></tr>`; }).join("")}</tbody></table>` : `<p class="empty">No standards chosen yet.</p>`}`; }).join("");
   return `<div class="stack"><div class="row-acts noprint"><button class="btn cta" type="button" onclick="print()">Print</button><a class="btn" href="#s=${encodeURIComponent(s)}">Back</a>${help("list")}</div>
-    <article class="doc"><h1>Our depth standards: ${esc(s)}</h1><p class="sub">The standards each grade or course will teach in depth, Grade 12 down. ${today}.</p>
+    <article class="doc"><h1>Our focus standards: ${esc(s)}</h1><p class="sub">The standards each grade or course will teach in depth, Grade 12 down. ${today}.</p>
     ${p.knowledge || p.skills || p.application ? `<h2>The Awsaj Graduate in ${esc(s)}</h2><p><b>Essential knowledge.</b> ${esc(p.knowledge)}</p><p style="margin-top:6px"><b>Essential skills.</b> ${esc(p.skills)}</p><p style="margin-top:6px"><b>Application and independence.</b> ${esc(p.application)}</p>` : ""}${grades}</article></div>`;
 }
 
@@ -702,7 +708,7 @@ function paperV(s, g) {
   let last = ""; const rows = lib.map((e) => { const lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g), sh = e.s !== last ? `<tr><td colspan="3" style="font-weight:800;background:#F3F4F8">${esc(e.s)}</td></tr>` : ""; last = e.s;
     return `${sh}<tr><td style="width:34px"><span class="box"></span></td><td style="width:24%">${fw(e)}${lv != null ? `<span class="alt">Part 1: ${RWORD[lv]}</span>` : ""}${pm ? `<span class="alt">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}</td><td>${esc(e.t)}<div class="noteline"></div></td></tr>`; }).join("");
   return `<div class="stack"><div class="row-acts noprint"><button class="btn cta" type="button" onclick="print()">Print</button><a class="btn" href="#s=${encodeURIComponent(s)}&g=${g}&v=choose">Back</a>${help("paper")}</div>
-    <article class="doc"><h1>Depth standards: ${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub">Tick the standards every class must teach in depth, so students are ready for ${above(g) ? esc(gtext(s, above(g))) : "graduation on the SAT / US Diploma track"}. Add a note if it helps the review.</p>
+    <article class="doc"><h1>Focus standards: ${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub">Tick the standards every class must teach in depth, so students are ready for ${above(g) ? esc(gtext(s, above(g))) : "graduation on the SAT / US Diploma pathway"}. Add a note if it helps the review.</p>
     <p class="expect" style="margin-top:10px"><b>What to expect</b>${esc(expectNote(s, g))}</p><div class="fill"><span>Group</span><span>Date</span></div>
     <table><thead><tr><th></th><th>Standard</th><th>What students learn, and a note</th></tr></thead><tbody>${rows}</tbody></table></article></div>`;
 }
@@ -711,14 +717,14 @@ function paperV(s, g) {
 function showV(s, g) {
   g = GRADES.includes(g) ? g : "12"; const S = encodeURIComponent(s), ps = picksOf(s, g), st = statusOf(s, g), i = GRADES.indexOf(g);
   return `<div class="show"><div><div class="row-acts noprint" style="justify-content:flex-end"><a class="btn small" href="#s=${S}&v=show&g=${GRADES[i - 1] || g}"${i ? "" : " hidden"}>&uarr; ${i ? esc(gname(GRADES[i - 1])) : ""}</a><a class="btn small" href="#s=${S}&v=show&g=${GRADES[i + 1] || g}"${i < GRADES.length - 1 ? "" : " hidden"}>&darr; ${i < GRADES.length - 1 ? esc(gname(GRADES[i + 1])) : ""}</a><button class="btn small" type="button" data-fs="1">${document.fullscreenElement ? "Leave full screen" : "Full screen"}</button><a class="btn small" href="#s=${S}">Close</a>${help("show")}</div>
-    <h1>${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub"><span class="pill st-${st}">${STATUS[st]}</span> &nbsp;${ps.length} depth standards</p></div>
+    <h1>${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub"><span class="pill st-${st}">${STATUS[st]}</span> &nbsp;${ps.length} focus standards</p></div>
     <div class="showlist">${ps.length ? ps.map((p) => { const e = stdOf(s, p); return `<div><b>${esc(e.c)}</b>${esc(e.t)}</div>`; }).join("") : `<p class="empty" style="font-size:1.3rem">No standards chosen yet.</p>`}</div>
-    <p class="saved">Our depth standards, Grade 12 down · ${i + 1} of ${GRADES.length} · arrow keys or a clicker move between grades</p></div>`;
+    <p class="saved">Our focus standards, Grade 12 down · ${i + 1} of ${GRADES.length} · arrow keys or a clicker move between grades</p></div>`;
 }
 
 function profileV(s) {
   const p = D.profile[s] || {}, open = picksOf(s, "12").length > 0, ed = open && canEdit();
-  return `<div class="stack"><div class="panel stack"><h1>The Awsaj Graduate in ${esc(s)}${help("profile")}</h1><p class="lead">What should a graduate on the SAT / US Diploma track know and be able to do in ${esc(s)}?</p>${open ? "" : `<p class="notice">This opens once Grade 12 has chosen its depth standards.</p>`}</div>
+  return `<div class="stack"><div class="panel stack"><h1>The Awsaj Graduate in ${esc(s)}${help("profile")}</h1><p class="lead">What should a graduate on the SAT / US Diploma pathway know and be able to do in ${esc(s)}?</p>${open ? "" : `<p class="notice">This opens once Grade 12 has chosen its focus standards.</p>`}</div>
     <div class="panel pform"><label><b>Essential knowledge</b><textarea id="pk" maxlength="2000"${ed ? "" : " readonly"} placeholder="The knowledge and concepts every graduate understands">${esc(p.knowledge)}</textarea></label>
     <label><b>Essential skills</b><textarea id="ps" maxlength="2000"${ed ? "" : " readonly"} placeholder="What graduates can do on their own">${esc(p.skills)}</textarea></label>
     <label><b>Application and independence</b><textarea id="pa" maxlength="2000"${ed ? "" : " readonly"} placeholder="How graduates apply it, solve problems and communicate">${esc(p.application)}</textarea></label>
@@ -739,15 +745,17 @@ function openStd(s, g, k, canTick) {
   const e = findStd(s, k); if (!e) return; const lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g), on = isPicked(s, g, k), p = picksOf(s, g).find((x) => `${x.framework}|${x.code}` === k);
   const ok = canTick && canEdit() && statusOf(s, g) !== "approved";
   $("#sdBody").innerHTML = `<p class="strandl">${esc(gtext(s, g))} ${esc(s)} · ${esc(e.s || "")}</p><h3 id="sdCode" style="margin-top:6px;font-size:1.4rem">${esc(e.c)}</h3><span class="alt">${esc(ccss(e))}</span>
-    <p class="sdtext">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}">${RATING[lv][1]}</span>` : `<span class="h">Not rated in Part 1</span>`}${pm ? `<span class="h pr">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}${on ? `<span class="h st-approved">Chosen as a depth standard</span>` : ""}</div>
+    <p class="sdtext">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}">${RATING[lv][1]}</span>` : `<span class="h">Not rated in Part 1</span>`}${pm ? `<span class="h pr">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}${on ? `<span class="h st-approved">Chosen as a focus standard</span>` : ""}</div>
     ${p && p.note ? `<p class="saved" style="margin-top:10px"><b>Note:</b> ${esc(p.note)}</p>` : ""}${connBox(s, g, k)}
-    <div class="row-acts" style="justify-content:flex-end;margin-top:18px">${ok ? `<button class="btn ${on ? "" : "cta"}" type="button" data-dlgpick="${esc(k)}">${on ? "Remove from our depth standards" : "Add to our depth standards"}</button>` : ""}<button class="btn" type="button" data-dlgclose="1">Close</button></div>`;
+    <div class="row-acts" style="justify-content:flex-end;margin-top:18px">${ok ? `<button class="btn ${on ? "" : "cta"}" type="button" data-dlgpick="${esc(k)}">${on ? "Remove from our focus standards" : "Add to our focus standards"}</button>` : ""}<button class="btn" type="button" data-dlgclose="1">Close</button></div>`;
   const d = $("#stdDlg"); if (!d.open) d.showModal();
 }
 
 /* ================= events ================= */
 document.addEventListener("click", (ev) => {
-  const t = ev.target.closest("[data-help]"); if (t) { const b = $(`[data-helpbox="${t.dataset.help}"]`); b.hidden = !b.hidden; t.setAttribute("aria-expanded", !b.hidden); return; }
+  const t = ev.target.closest("[data-help]"); if (t) { const b = t.nextElementSibling; closeHelp(b); b.hidden = !b.hidden; t.setAttribute("aria-expanded", !b.hidden);
+    if (!b.hidden) { b.classList.remove("rt"); const r0 = b.getBoundingClientRect(); if (r0.right > innerWidth - 12) b.classList.add("rt"); } return; }
+  if (!ev.target.closest(".helpbox")) closeHelp();
   const r = route();
   const pk = ev.target.closest("[data-pick]"); if (pk && !pk.disabled) { const e = findStd(r.s, pk.dataset.pick); if (e) setPick(r.s, r.g, e, !isPicked(r.s, r.g, key(e))); return; }
   const un = ev.target.closest("[data-undo]"); if (un) { const e = findStd(r.s, un.dataset.undo); if (e) setPick(r.s, r.g, e, un.dataset.on === "1", un.dataset.note || "", true); return; }
@@ -779,12 +787,14 @@ document.addEventListener("change", (ev) => {
   const r = route();
   if (ev.target.id === "strand") { chooseV.f.strand = ev.target.value; render(true); }
   const n = ev.target.closest("[data-note]"); if (n) { const e = findStd(r.s, n.dataset.note); if (e) setPick(r.s, r.g, e, true, n.value.trim()); }
+  if (ev.target.matches("[data-lmsel]")) { LM = ev.target.value; store.set("pd_links", LM); ev.target.blur(); render(true); return; }
   const c = ev.target.closest("[data-col]"); if (c) { const val = (x) => { const el = $(`[data-col="${x}"]`); return el ? el.value : r[x]; }; const cur = { a: val("a"), b: val("b"), g: r.g }; cur[c.dataset.col] = c.value; c.blur(); keepScroll = true; location.hash = href({ s: r.s, g: cur.g, v: "review", m: r.m, a: cur.a, b: cur.b, band: r.band }); }
 });
 addEventListener("fullscreenchange", () => render(true));
 document.addEventListener("keydown", (e) => { const tr = e.target.matches && e.target.matches("[data-trace]") ? e.target : null;
   if (tr && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); trace(REV.sel === tr.dataset.trace ? null : tr.dataset.trace); }
-  else if (e.key === "Escape" && REV.sel && !$("#stdDlg").open) trace(null); });
+  else if (e.key === "Escape" && REV.sel && !$("#stdDlg").open) trace(null);
+  if (e.key === "Escape") closeHelp(); });
 addEventListener("keydown", (e) => { const r = route(); if (r.v !== "show" || e.target.closest("input, textarea, select") || e.repeat) return; const i = GRADES.indexOf(GRADES.includes(r.g) ? r.g : "12");
   const go = (j) => { if (j >= 0 && j < GRADES.length) { e.preventDefault(); location.hash = href({ s: r.s, v: "show", g: GRADES[j] }); } };
   if (["PageDown", "ArrowRight", "ArrowDown", " ", "n", "N"].includes(e.key)) go(i + 1); else if (["PageUp", "ArrowLeft", "ArrowUp", "p", "P"].includes(e.key)) go(i - 1); });
