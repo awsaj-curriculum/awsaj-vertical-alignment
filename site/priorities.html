@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Part 2: Our priority standards</title>
+<title>Part 2: Our depth standards</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* Part 2 of the PD (Tim, Nov 2026): each grade or course chooses its priority standards, the ones we want taught in depth for
+/* Part 2 of the PD (Tim, Nov 2026): each grade or course chooses its depth standards, the ones we want taught in depth for
    the SAT / US Diploma track, from Grade 12 down. Same look as the PD slides: four-colour wash, navy type, glass panels, lime. */
 :root {
   --navy: #101846; --navy-2: #3B4268; --muted: #5A6080; --line: #D5DAE3; --cta: #B5DF00; --cta-2: #A6CF00;
@@ -127,13 +127,13 @@ const COURSE = { Math: { 9: "Algebra 1", 10: "Geometry", 11: "Algebra 2", 12: "P
   Science: { 9: "Earth Environmental Science", 10: "Physics", 11: "Biology", 12: "Chemistry" }, "Social Studies": { 9: "Geography", 10: "World History 10", 11: "Economics", 12: "World History 12" } };
 const RATING = { 2: ["r2", "Rated: in depth"], 1: ["r1", "Rated: introduced"], 0: ["r0", "Rated: not taught"] };
 const HELP = {
-  home: "Each grade or course chooses its priority standards: the standards we want every class to teach in depth for students on the SAT / US Diploma track. We start at Grade 12 and work down, so each grade can check it prepares students for the grade above.",
+  home: "Each grade or course chooses its depth standards: the standards we want every class to teach in depth for students on the SAT / US Diploma track. We start at Grade 12 and work down, so each grade can check it prepares students for the grade above.",
   ladder: "Every grade or course for this subject, from Grade 12 down. Anyone can open any grade and change its list. Draft: still choosing. Ready: the team has finished and the list waits for the group review. Approved: the group has reviewed it against the grade above, and the leader has approved it. An approved list guides the grade below.",
-  library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your priority standards. Hints: the Part 1 rating, a star when the school already names it a priority or power standard, and an orange mark when an approved grade above builds on it.",
+  library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your depth standards. Hints: the Part 1 rating, a star when the school already names it a priority or power standard, and an orange mark when an approved grade above builds on it.",
   picks: "The standards this grade or course wants taught in depth. Anyone can add or remove a standard; the list is shared and saves as you go. The guide is about a third of your standards: a target, not a limit. Add a short note on why a standard is essential if it helps the review. When you have finished, mark the list ready for review.",
   review: "This grade's picks sit under the grade above. A line joins two standards when one builds on the other (from the site's progression links) or when it is the same standard. Orange marks a standard the grade above builds on that this grade has not picked: a question for the group, not an error. Some courses, such as Geometry after Algebra 1, have few direct links; that is expected.",
-  progression: "Every grade's priority standards for this subject, from Grade 12 down, with lines where one standard builds on another. Dashed cards belong to lists that are not yet approved.",
-  profile: "What an Awsaj graduate on the SAT / US Diploma track should know and be able to do in this subject. It opens once Grade 12 has chosen its priority standards, and teams can change it as the work goes on."
+  progression: "Every grade's depth standards for this subject, from Grade 12 down, with lines where one standard builds on another. Dashed cards belong to lists that are not yet approved.",
+  profile: "What an Awsaj graduate on the SAT / US Diploma track should know and be able to do in this subject. It opens once Grade 12 has chosen its depth standards, and teams can change it as the work goes on."
 };
 const Q = new URLSearchParams(location.search), PRACTICE = Q.get("practice") === "1", TEAM = Q.get("team") || "";
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -233,7 +233,7 @@ const help = (k) => `<button class="qbtn" type="button" data-help="${k}" aria-ex
 const fw = (e) => `<span class="code">${esc(e.c)}</span><span class="alt">${esc(ccss(e))}</span>`;
 
 function header(r) {
-  const c = [`<a href="#">Priority standards</a>`]; if (r.s) c.push(`<span>/</span><a href="#s=${encodeURIComponent(r.s)}">${esc(r.s)}</a>`);
+  const c = [`<a href="#">Depth standards</a>`]; if (r.s) c.push(`<span>/</span><a href="#s=${encodeURIComponent(r.s)}">${esc(r.s)}</a>`);
   if (r.g) c.push(`<span>/</span><a href="#s=${encodeURIComponent(r.s)}&g=${r.g}&v=choose">${gname(r.g)}</a>`);
   if (r.v === "review") c.push(`<span>/</span><span>Review</span>`); if (r.v === "progression") c.push(`<span>/</span><span>Progression</span>`); if (r.v === "profile") c.push(`<span>/</span><span>Learner profile</span>`);
   $("#crumbs").innerHTML = c.join("");
@@ -244,14 +244,14 @@ async function render(keep) {
   const r = route(), y = scrollY; header(r); reviewV.flagged = null;
   if (r.s) await loadSubject(r.s);
   const app = $("#app");
-  const note = !PRACTICE && !D.dbReady ? `<p class="notice">Saving is not switched on yet: the leader needs to add the priority standards tables to the database. You can look around, or try <a href="?practice=1${location.hash}">practice mode</a>.</p>` : "";
+  const note = !PRACTICE && !D.dbReady ? `<p class="notice">Saving is not switched on yet: the leader needs to add the depth standards tables to the database. You can look around, or try <a href="?practice=1${location.hash}">practice mode</a>.</p>` : "";
   app.innerHTML = note + (!r.s ? homeV() : !r.g && !r.v ? subjectV(r.s) : r.v === "progression" ? progressionV(r.s) : r.v === "profile" ? profileV(r.s) : r.v === "review" ? reviewV(r.s, r.g) : chooseV(r.s, r.g));
   if (r.v === "review" || r.v === "progression") requestAnimationFrame(drawLinks);
   if (keep) scrollTo(0, y); else scrollTo(0, 0);
 }
 
 function homeV() {
-  return `<div class="stack"><div class="panel stack"><p class="pill">Part 2 · Subject sessions</p><h1>Our priority standards${help("home")}</h1><p class="lead">Choose the standards each grade or course will teach in depth, so students graduate ready for the SAT / US Diploma track. We start at Grade 12 and work down.</p>
+  return `<div class="stack"><div class="panel stack"><p class="pill">Part 2 · Subject sessions</p><h1>Our depth standards${help("home")}</h1><p class="lead">Choose the standards each grade or course will teach in depth, so students graduate ready for the SAT / US Diploma track. We start at Grade 12 and work down.</p>
     <div class="steps3"><div><b>1. Choose</b>Each team ticks the standards that matter most in its grade or course.</div><div><b>2. Review</b>The group checks each list against the grade above: does it prepare students for it?</div><div><b>3. Approve</b>The leader approves the list, and it guides the grade below.</div></div></div>
     <div class="subjects">${SUBJ.map(([s, , c]) => `<a class="subj" style="--c:${c}" href="#s=${encodeURIComponent(s)}"><span class="rule"></span><b>${s}</b><span>Grade 12 down to Kindergarten</span></a>`).join("")}</div></div>`;
 }
@@ -261,9 +261,9 @@ function subjectV(s) {
   const rows = GRADES.map((g) => { const n = picksOf(s, g).length, st = statusOf(s, g), lib = library(s, g).length; const bc = ["9", "10", "11", "12"].includes(g) ? "var(--magenta)" : ["6", "7", "8"].includes(g) ? "var(--blue)" : "var(--lime)";
     return `<div class="lrow" style="--bc:${bc}"><div class="g">${glab(s, g)}</div><div class="meta"><span class="pill st-${st}">${STATUS[st]}</span><span>${n} of ${lib} standards chosen</span></div>
       <div class="acts"><a class="btn small${canEdit(s, g) ? " cta" : ""}" href="#s=${encodeURIComponent(s)}&g=${g}&v=choose">${canEdit(s, g) ? "Choose" : "Open"}</a><a class="btn small" href="#s=${encodeURIComponent(s)}&g=${g}&v=review">Review</a></div></div>`; }).join("");
-  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: priority standards${help("ladder")}</h1><p class="lead">From Grade 12 down. Each list is a draft until its team marks it ready; then the group reviews it with the grade above.</p>
+  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: depth standards${help("ladder")}</h1><p class="lead">From Grade 12 down. Each list is a draft until its team marks it ready; then the group reviews it with the grade above.</p>
     <div class="acts" style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn cta" href="#s=${encodeURIComponent(s)}&v=progression">See the progression</a></div></div>
-    <div class="panel profilecard stack"><h2>The Awsaj Graduate in ${esc(s)}</h2>${g12 ? `<p>${p.knowledge || p.skills || p.application ? "Our learner profile for the SAT / US Diploma track." : "Grade 12 has chosen its standards: the learner profile is open."}</p><a class="btn small" href="#s=${encodeURIComponent(s)}&v=profile">Open the learner profile</a>` : `<p class="lead" style="font-size:1rem">Opens once Grade 12 has chosen its priority standards.</p>`}</div>
+    <div class="panel profilecard stack"><h2>The Awsaj Graduate in ${esc(s)}</h2>${g12 ? `<p>${p.knowledge || p.skills || p.application ? "Our learner profile for the SAT / US Diploma track." : "Grade 12 has chosen its standards: the learner profile is open."}</p><a class="btn small" href="#s=${encodeURIComponent(s)}&v=profile">Open the learner profile</a>` : `<p class="lead" style="font-size:1rem">Opens once Grade 12 has chosen its depth standards.</p>`}</div>
     <div class="ladderlist">${rows}</div></div>`;
 }
 
@@ -284,7 +284,7 @@ function chooseV(s, g) {
       <div class="tools"><input type="search" id="q" placeholder="Search by code or words" value="${esc(f.q)}" aria-label="Search the standards"><select id="strand" aria-label="Strand"><option value="">All strands</option>${strands.map((x) => `<option${x === f.strand ? " selected" : ""}>${esc(x)}</option>`).join("")}</select></div>
       <div class="chips" role="group" aria-label="Show">${[["", "All"], ["on", "Chosen"], ["pr", "★ Priority or power"], ...(need.size ? [["need", `${gname(up)} builds on`]] : [])].map(([k, t]) => `<button class="chip" type="button" data-only="${k}" aria-pressed="${f.only === k}">${t}</button>`).join("")}</div>
       <p class="saved" style="margin:10px 0">${rows.length} of ${lib.length} standards shown</p><div class="lib">${items || `<p class="empty">No standards match.</p>`}</div></section>
-    <aside class="panel picks" aria-label="Our priority standards"><h2>Our priority standards${help("picks")}</h2>
+    <aside class="panel picks" aria-label="Our depth standards"><h2>Our depth standards${help("picks")}</h2>
       <div class="count"><b>${picked.length}</b><span>chosen · a guide is about ${guide} (a third)</span></div><div class="bar"><i style="width:${pct}%"></i></div>
       <p><span class="pill st-${st}">${STATUS[st]}</span></p>
       <div class="plist">${plist || `<p class="empty">Tick standards in the library to add them here.</p>`}</div>
@@ -308,7 +308,7 @@ function drawLinks() {
 }
 function reviewV(s, g) {
   const up = above(g), ps = picksOf(s, g), st = statusOf(s, g);
-  if (!up) { const p = D.profile[s] || {}; return `<div class="stack"><div class="panel stack"><h1>Review: ${gname(g)} ${esc(s)}${help("review")}</h1><p class="lead">Grade 12 sits at the end of the road. Read its priority standards against the learner profile: do they describe the Awsaj graduate on the SAT / US Diploma track?</p></div>
+  if (!up) { const p = D.profile[s] || {}; return `<div class="stack"><div class="panel stack"><h1>Review: ${gname(g)} ${esc(s)}${help("review")}</h1><p class="lead">Grade 12 sits at the end of the road. Read its depth standards against the learner profile: do they describe the Awsaj graduate on the SAT / US Diploma track?</p></div>
     <div class="cols2"><div class="panel"><h2>The Awsaj Graduate</h2>${p.knowledge || p.skills || p.application ? `<p><b>Knowledge.</b> ${esc(p.knowledge)}</p><p style="margin-top:8px"><b>Skills.</b> ${esc(p.skills)}</p><p style="margin-top:8px"><b>Application and independence.</b> ${esc(p.application)}</p>` : `<p class="empty">The learner profile is not written yet.</p>`}<p style="margin-top:10px"><a class="btn small" href="#s=${encodeURIComponent(s)}&v=profile">Open the learner profile</a></p></div>
     <div class="panel"><h2>${gname(g)}: ${ps.length} chosen</h2><div class="flow"><svg class="links" aria-hidden="true"></svg>${rowsHTML(s, [g])}</div></div></div>${approveBar(s, g, st)}</div>`; }
   const upPicks = picksOf(s, up), mine = new Set(ps.map((p) => `${p.framework}|${p.code}`)), lib = library(s, g);
@@ -319,17 +319,17 @@ function reviewV(s, g) {
     <p class="lead">${gname(up)} ${esc(s)} is ${STATUS[statusOf(s, up)].toLowerCase()}. Lines join standards where one builds on the other.</p>
     <div class="legend"><span><i></i>Builds on, or the same standard</span><span><i class="f"></i>A question for the group</span></div></div>
     <div class="panel"><div class="flow"><svg class="links" aria-hidden="true"></svg>${rowsHTML(s, [up, g])}</div></div>
-    <div class="cols2"><div class="panel"><h2>Questions for the group</h2>${flags.length ? `<ul class="flags">${flags.map(([k, need]) => { const e = findStd(s, k) || { c: k.split("|")[1] }; return `<li><b>${esc(e.c)}</b> (${gname(up)}) builds on ${need.slice(0, 3).map((n) => `<b>${esc(n.c)}</b>`).join(", ")}${need.length > 3 ? ` and ${need.length - 3} more` : ""} in ${gname(g)}, not chosen here. Should one of them be a priority?</li>`; }).join("")}</ul>` : `<p>No open questions: every ${gname(up)} priority standard that builds on a ${gname(g)} standard has a partner here, or has no direct link.</p>`}</div>
-    <div class="panel"><h2>No direct link to ${gname(up)}</h2>${lone.length ? `<p>${lone.length} of ${ps.length} chosen standards have no direct link to a ${gname(up)} priority. That can be right: some grades and courses (Geometry after Algebra 1, for example) start new strands. Is each one still essential?</p>` : `<p>Every chosen standard links to a ${gname(up)} priority.</p>`}</div></div>${approveBar(s, g, st)}</div>`;
+    <div class="cols2"><div class="panel"><h2>Questions for the group</h2>${flags.length ? `<ul class="flags">${flags.map(([k, need]) => { const e = findStd(s, k) || { c: k.split("|")[1] }; return `<li><b>${esc(e.c)}</b> (${gname(up)}) builds on ${need.slice(0, 3).map((n) => `<b>${esc(n.c)}</b>`).join(", ")}${need.length > 3 ? ` and ${need.length - 3} more` : ""} in ${gname(g)}, not chosen here. Should one of them be a depth standard?</li>`; }).join("")}</ul>` : `<p>No open questions: every ${gname(up)} depth standard that builds on a ${gname(g)} standard has a partner here, or has no direct link.</p>`}</div>
+    <div class="panel"><h2>No direct link to ${gname(up)}</h2>${lone.length ? `<p>${lone.length} of ${ps.length} chosen standards have no direct link to a ${gname(up)} depth standard. That can be right: some grades and courses (Geometry after Algebra 1, for example) start new strands. Is each one still essential?</p>` : `<p>Every chosen standard links to a ${gname(up)} depth standard.</p>`}</div></div>${approveBar(s, g, st)}</div>`;
 }
 const approveBar = (s, g, st) => `<div class="panel" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="pill st-${st}">${STATUS[st]}</span><span class="saved">The group talks the list through together; then the leader approves it with the PIN.</span><span style="flex:1"></span>${st === "approved" ? `<button class="btn" type="button" data-approve="0">Reopen</button>` : `<button class="btn cta" type="button" data-approve="1"${picksOf(s, g).length ? "" : " disabled"}>Approve after the review</button>`}<a class="btn" href="#s=${encodeURIComponent(s)}&g=${g}&v=choose">Back to the list</a></div>`;
 function progressionV(s) {
-  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: the progression${help("progression")}</h1><p class="lead">Our priority standards from Grade 12 down. Lines join standards where one builds on the other.</p><div class="legend"><span><i></i>Builds on, or the same standard</span><span>Dashed: not yet approved</span></div></div>
+  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: the progression${help("progression")}</h1><p class="lead">Our depth standards from Grade 12 down. Lines join standards where one builds on the other.</p><div class="legend"><span><i></i>Builds on, or the same standard</span><span>Dashed: not yet approved</span></div></div>
     <div class="panel"><div class="flow"><svg class="links" aria-hidden="true"></svg>${rowsHTML(s, GRADES)}</div></div></div>`;
 }
 function profileV(s) {
   const p = D.profile[s] || {}, open = picksOf(s, "12").length > 0, ed = open && (PRACTICE || D.dbReady);
-  return `<div class="stack"><div class="panel stack"><h1>The Awsaj Graduate in ${esc(s)}${help("profile")}</h1><p class="lead">What should a graduate on the SAT / US Diploma track know and be able to do in ${esc(s)}?</p>${open ? "" : `<p class="notice">This opens once Grade 12 has chosen its priority standards.</p>`}</div>
+  return `<div class="stack"><div class="panel stack"><h1>The Awsaj Graduate in ${esc(s)}${help("profile")}</h1><p class="lead">What should a graduate on the SAT / US Diploma track know and be able to do in ${esc(s)}?</p>${open ? "" : `<p class="notice">This opens once Grade 12 has chosen its depth standards.</p>`}</div>
     <div class="panel pform"><label><b>Essential knowledge</b><textarea id="pk" maxlength="2000"${ed ? "" : " readonly"} placeholder="The knowledge and concepts every graduate understands">${esc(p.knowledge)}</textarea></label>
     <label><b>Essential skills</b><textarea id="ps" maxlength="2000"${ed ? "" : " readonly"} placeholder="What graduates can do on their own">${esc(p.skills)}</textarea></label>
     <label><b>Application and independence</b><textarea id="pa" maxlength="2000"${ed ? "" : " readonly"} placeholder="How graduates apply it, solve problems and communicate">${esc(p.application)}</textarea></label>
