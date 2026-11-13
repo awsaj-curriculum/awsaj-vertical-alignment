@@ -439,7 +439,7 @@ body.presenting .story > .pd h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); } bod
 #pickBand.pdstart { text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
 
 .pd .bridge { margin-top: 22px; padding: 14px 20px; border-radius: 14px; background: var(--navy); color: #fff; font-size: clamp(1.1rem, 1.6vw, 1.35rem); font-weight: 600; max-width: 62ch; display: flex; gap: 12px; align-items: baseline; }
-.pd .bridge span { color: var(--cta); font-weight: 800; } .pd.center .bridge { margin-left: auto; margin-right: auto; }
+.pd .bridge span { color: var(--cta); font-weight: 800; } .pd .bridge { margin-left: auto; margin-right: auto; width: fit-content; justify-content: center; text-align: center; }   /* Tim, Nov 2026: the navy bridge lines are centred on every slide */
 
 /* all-staff title slide: the route and the title share one background (Tim) */
 body.in-staff.presenting.step0 #sky { background: transparent; } body.in-staff.presenting.step0 #sky::before, body.in-staff.presenting.step0 #sky::after { display: none; }
