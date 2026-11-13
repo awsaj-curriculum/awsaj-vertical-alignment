@@ -8,7 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* Part 2 of the PD (Tim, Nov 2026): each grade or course chooses its depth standards, the ones we want taught in depth for
-   the SAT / US Diploma track, from Grade 12 down. Same look as the PD slides: four-colour wash, navy type, glass panels, lime. */
+   the SAT / US Diploma track, from Grade 12 down. ("Depth standards", not "priority standards": the school already has
+   Priority (6-12) and Power (K-5) standards.) Same look as the PD slides: four-colour wash, navy type, glass panels, lime.
+   No automatic link lines between grades (Tim: do not force connections); the group decides in discussion. */
 :root {
   --navy: #101846; --navy-2: #3B4268; --muted: #5A6080; --line: #D5DAE3; --cta: #B5DF00; --cta-2: #A6CF00;
   --lime: #80BC00; --blue: #3099BE; --magenta: #CB0068; --amber: #ED9200;
@@ -30,29 +32,32 @@ header.top .wrap { display: flex; align-items: center; gap: 14px; min-height: 64
 .brand { font-weight: 800; text-decoration: none; line-height: 1.05; }
 .crumbs { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; font-weight: 600; font-size: .95rem; }
 .crumbs a { text-decoration: none; padding: 6px 8px; border-radius: 8px; } .crumbs a:hover { background: rgba(16,24,70,.06); } .crumbs span { color: var(--muted); }
-.who { margin-left: auto; display: flex; gap: 8px; align-items: center; font-size: .9rem; }
+.who { margin-left: auto; display: flex; gap: 8px; align-items: center; font-size: .9rem; flex-wrap: wrap; }
 .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-weight: 700; font-size: .82rem; background: rgba(16,24,70,.07); white-space: nowrap; }
 .pill.team { background: var(--navy); color: #fff; } .pill.practice { background: var(--amber); color: #fff; }
 .st-draft { background: rgba(16,24,70,.07); } .st-ready { background: #DCEBF5; color: #0d4f6b; } .st-approved { background: var(--cta); color: var(--navy); }
 .btn { border: 1.5px solid var(--navy); background: transparent; border-radius: 999px; padding: 9px 18px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 42px; }
 .btn:hover { background: rgba(16,24,70,.06); } .btn.cta { background: var(--cta); border-color: var(--cta); } .btn.cta:hover { background: var(--cta-2); }
 .btn.small { min-height: 34px; padding: 5px 12px; font-size: .9rem; } .btn[disabled] { opacity: .45; cursor: default; }
+.row-acts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .panel { background: var(--glass); backdrop-filter: blur(8px) saturate(1.2); border: 1px solid var(--glass-b); border-radius: 22px; padding: clamp(16px, 2.4vw, 28px); box-shadow: 0 18px 40px -28px rgba(16,24,70,.35); }
 main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .lead { font-size: 1.15rem; color: var(--navy-2); max-width: 70ch; }
 .notice { padding: 12px 16px; border-radius: 14px; background: #FFF4E0; border-left: 5px solid var(--amber); font-weight: 600; }
+.expect { padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.85); border-left: 5px solid var(--blue); max-width: 90ch; font-size: .98rem; }
+.expect b { display: block; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--navy-2); margin-bottom: 2px; }
 .qbtn { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--navy); background: #fff; font-weight: 800; cursor: pointer; font-size: .85rem; line-height: 1; vertical-align: 3px; margin-left: 8px; }
-.helpbox { margin-top: 10px; padding: 12px 16px; border-radius: 12px; background: #fff; border-left: 4px solid var(--cta); font-size: .98rem; max-width: 80ch; }
+.helpbox { margin-top: 10px; padding: 12px 16px; border-radius: 12px; background: #fff; border-left: 4px solid var(--cta); font-size: .98rem; max-width: 80ch; font-weight: 400; letter-spacing: 0; line-height: 1.45; }
 /* home */
 .subjects { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .subj { display: grid; gap: 10px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,.78); text-decoration: none; box-shadow: 0 8px 24px rgba(16,24,70,.08); }
 .subj .rule { width: 46px; height: 5px; border-radius: 4px; background: var(--c); } .subj b { font-size: 1.5rem; } .subj span { color: var(--muted); font-size: .95rem; }
-.steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; counter-reset: s; }
+.steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .steps3 > div { background: rgba(255,255,255,.7); border-radius: 16px; padding: 16px 18px; border-top: 5px solid var(--cta); }
 .steps3 b { display: block; font-size: 1.1rem; margin-bottom: 4px; }
 /* subject: grade ladder */
 .ladderlist { display: grid; gap: 8px; }
-.lrow { display: grid; grid-template-columns: 170px 1fr auto; gap: 14px; align-items: center; padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,.75); border-left: 6px solid var(--bc, var(--line)); }
+.lrow { display: grid; grid-template-columns: 210px 1fr auto; gap: 14px; align-items: center; padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,.75); border-left: 6px solid var(--bc, var(--line)); }
 .lrow .g { font-weight: 800; font-size: 1.1rem; } .lrow .g small { display: block; font-weight: 600; color: var(--muted); font-size: .85rem; }
 .lrow .meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; color: var(--navy-2); }
 .lrow .acts { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
@@ -61,60 +66,118 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .choose { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(320px, 1fr); gap: 20px; align-items: start; }
 .tools { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
 .tools input[type=search] { flex: 1 1 240px; padding: 10px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; }
-.tools select { padding: 9px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; }
+.tools select, .cpick select { padding: 9px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; }
 .chips { display: flex; gap: 6px; flex-wrap: wrap; }
 .chip { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 12px; font-weight: 600; cursor: pointer; font-size: .9rem; }
 .chip[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
 .lib { display: grid; gap: 8px; max-height: 68vh; overflow: auto; padding-right: 4px; }
 .strandh { font-weight: 800; font-size: .95rem; margin: 10px 0 2px; color: var(--navy-2); }
 .std { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.82); border: 1.5px solid transparent; }
-.std.on { border-color: var(--lime); background: #F4FAE6; } .std.need { box-shadow: inset 4px 0 0 var(--amber); }
+.std.on { border-color: var(--lime); background: #F4FAE6; }
 .tick { width: 40px; height: 40px; border-radius: 12px; border: 2px solid var(--navy); background: #fff; cursor: pointer; font-weight: 800; font-size: 1.2rem; display: grid; place-items: center; }
 .std.on .tick { background: var(--lime); border-color: var(--lime); color: #fff; } .tick[disabled] { opacity: .4; cursor: default; }
+/* text size in the library (remembered on this laptop): short = two lines with Show all, line = one line per standard, full */
+.sbody .shead { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; } .sbody .shead .alt { display: inline; }
+.more { border: 0; background: none; padding: 0; font-weight: 700; font-size: .82rem; text-decoration: underline; cursor: pointer; color: var(--navy-2); margin-top: 2px; }
+.lib[data-d="full"] .more { display: none; }
+.lib[data-d="short"] .std:not(.open) .stext, .plist[data-d="short"] .stext, .plist[data-d="line"] .stext { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.lib[data-d="short"] .std, .lib[data-d="line"] .std { padding: 9px 12px; gap: 10px; grid-template-columns: 34px 1fr; }
+.lib[data-d="short"] .tick, .lib[data-d="line"] .tick { width: 34px; height: 34px; font-size: 1rem; border-radius: 10px; }
+.lib[data-d="short"] .stext { font-size: .93rem; margin-top: 2px; }
+.lib[data-d="line"] { gap: 3px; } .lib[data-d="line"] .std { align-items: center; border-radius: 10px; padding: 5px 10px; } .lib[data-d="line"] .std.open { align-items: start; padding: 10px 12px; }
+.lib[data-d="line"] .std:not(.open) .sbody { display: grid; grid-template-columns: 118px minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
+.lib[data-d="line"] .std:not(.open) .alt { display: none; }
+.lib[data-d="line"] .std:not(.open) .stext { margin: 0; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lib[data-d="line"] .std:not(.open) .hints { margin: 0; flex-wrap: nowrap; }
+.lib[data-d="line"] .std:not(.open) .h { font-size: 0; width: 14px; height: 14px; padding: 0; } .lib[data-d="line"] .std:not(.open) .h.pr { font-size: .8rem; width: auto; height: auto; background: none; }
+.lib[data-d="line"] .std:not(.open) .h.pr .w { display: none; }
+.dens { display: flex; gap: 6px; align-items: center; font-weight: 700; font-size: .88rem; margin-top: 8px; }
 .code { font-weight: 800; } .alt { font-style: italic; color: var(--muted); font-size: .82rem; display: block; }
 .stext { margin-top: 4px; color: var(--navy-2); font-size: .97rem; }
 .hints { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
 .h { font-size: .78rem; font-weight: 700; border-radius: 999px; padding: 2px 9px; background: rgba(16,24,70,.07); }
-.h.pr { background: #FFE9C7; color: #8a4f00; } .h.need { background: var(--amber); color: #fff; }
+.h.pr { background: #FFE9C7; color: #8a4f00; }
 .h.r2 { background: var(--deep); color: #fff; } .h.r1 { background: var(--intro); color: #fff; } .h.r0 { background: var(--not); color: #fff; }
 .picks { position: sticky; top: 84px; }
-.count { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; } .count b { font-size: 2.2rem; line-height: 1; }
-.bar { height: 10px; border-radius: 6px; background: rgba(16,24,70,.08); overflow: hidden; margin: 8px 0 4px; } .bar > i { display: block; height: 100%; background: var(--lime); border-radius: 6px; }
-.plist { display: grid; gap: 8px; max-height: 46vh; overflow: auto; margin: 12px 0; }
+.count { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: 10px; } .count b { font-size: 2.2rem; line-height: 1; }
+.plist { display: grid; gap: 8px; max-height: 40vh; overflow: auto; margin: 12px 0; }
 .pitem { padding: 10px 12px; border-radius: 12px; background: #fff; display: grid; gap: 6px; }
 .pitem .row { display: flex; gap: 8px; align-items: baseline; justify-content: space-between; }
 .pitem input { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: .9rem; }
 .x { border: 0; background: none; cursor: pointer; font-weight: 800; color: var(--magenta); }
-/* review and progression: rows of picks with lines between linked standards */
-.flow { position: relative; display: grid; gap: 42px; padding: 8px 0; }
-.flow svg.links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
-.frow { position: relative; z-index: 1; display: grid; grid-template-columns: 150px 1fr; gap: 14px; align-items: start; }
-.frow .lab { font-weight: 800; padding-top: 6px; } .frow .lab small { display: block; font-weight: 600; color: var(--muted); font-size: .82rem; }
-.cards { display: flex; flex-wrap: wrap; gap: 8px; min-height: 44px; }
-.pc { padding: 7px 11px; border-radius: 12px; background: #fff; border: 2px solid var(--line); font-size: .86rem; max-width: 260px; cursor: default; }
-.pc b { display: block; font-size: .9rem; } .pc.linked { border-color: var(--navy); } .pc.flag { border-color: var(--amber); background: #FFF4E0; }
-.pc.dim { opacity: .82; border-style: dashed; } .pc .t { color: var(--navy-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.empty { color: var(--muted); font-style: italic; padding-top: 8px; }
-.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .88rem; color: var(--navy-2); }
-.legend i { display: inline-block; width: 22px; height: 0; border-top: 2.5px solid var(--navy); vertical-align: middle; margin-right: 6px; }
-.legend i.f { border-top: 0; width: 14px; height: 14px; border-radius: 4px; background: #FFF4E0; border: 2px solid var(--amber); }
-.flags { display: grid; gap: 8px; } .panel h2 + p, .panel h2 + ul, .panel h2 + div { margin-top: 12px; } .flags li { margin-left: 18px; }
-.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.changes { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
+.changes h3 { font-size: 1rem; }
+.chlist { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; max-height: 24vh; overflow: auto; font-size: .9rem; }
+.chlist li { display: flex; gap: 8px; align-items: center; justify-content: space-between; padding: 5px 8px; border-radius: 8px; background: rgba(255,255,255,.7); }
+.chlist .when { color: var(--muted); font-size: .8rem; white-space: nowrap; }
+.undo { border: 1.5px solid var(--navy); background: #fff; border-radius: 999px; padding: 2px 10px; font-weight: 700; cursor: pointer; font-size: .8rem; }
+/* review: three columns side by side */
+.rcols { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 16px; align-items: start; }
+.rcol { display: grid; gap: 10px; align-content: start; }
+.rcol.me { border: 2px solid var(--navy); }
+.cpick { display: grid; gap: 4px; font-weight: 700; font-size: .85rem; color: var(--navy-2); } .cpick select { font-weight: 800; font-size: 1rem; color: var(--navy); }
+.colpick { align-items: end; gap: 14px; } .rcol h3 { font-size: 1.3rem; } .rcol h3 small { display: block; font-size: .9rem; font-weight: 600; color: var(--muted); }
+.cmeta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: .9rem; color: var(--navy-2); }
+.cnote { font-size: .88rem; color: var(--navy-2); border-left: 4px solid var(--blue); padding: 4px 10px; background: rgba(255,255,255,.7); border-radius: 0 8px 8px 0; }
+.rlist { display: grid; gap: 8px; }
+.rc { padding: 9px 12px; border-radius: 12px; background: #fff; border: 1.5px solid var(--line); font-size: .9rem; }
+.rc .t { color: var(--navy-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-top: 2px; }
+.rc .nt { margin-top: 4px; font-style: italic; color: var(--muted); font-size: .85rem; }
+.same { display: inline-block; margin-top: 5px; font-size: .76rem; font-weight: 700; border-radius: 999px; padding: 1px 8px; background: #EEF0F6; }
+.prof { padding: 12px 14px; border-radius: 14px; background: #fff; border-left: 5px solid var(--cta); font-size: .92rem; display: grid; gap: 6px; }
+.prof b { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+.empty { color: var(--muted); font-style: italic; padding-top: 4px; }
+.qs { margin: 10px 0 0 20px; display: grid; gap: 6px; }
+/* progression: every grade as a row of cards (no lines) */
+.prow { display: grid; grid-template-columns: 190px 1fr; gap: 14px; align-items: start; padding: 12px 0; border-top: 1px solid var(--line); }
+.prow:first-child { border-top: 0; } .prow .lab { font-weight: 800; } .prow .lab small { display: block; font-weight: 600; color: var(--muted); font-size: .82rem; }
+.cards { display: flex; flex-wrap: wrap; gap: 8px; }
+.pc { padding: 7px 11px; border-radius: 12px; background: #fff; border: 2px solid var(--line); font-size: .86rem; max-width: 260px; }
+.pc b { display: block; font-size: .9rem; } .pc.dim { border-style: dashed; } .pc .t { color: var(--navy-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 textarea { width: 100%; min-height: 120px; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px; background: #fff; resize: vertical; }
 .pform { display: grid; gap: 14px; } .pform label b { display: block; margin-bottom: 4px; } .saved { color: var(--muted); font-size: .88rem; }
-dialog { border: 0; border-radius: 18px; padding: 22px; max-width: 420px; box-shadow: 0 30px 60px rgba(16,24,70,.3); } dialog::backdrop { background: rgba(16,24,70,.35); }
+/* documents to print: the paper list for one grade and the subject list */
+.doc { background: #fff; border-radius: 18px; padding: clamp(16px, 3vw, 36px); box-shadow: 0 18px 40px -28px rgba(16,24,70,.35); }
+.doc h1 { font-size: 2rem; } .doc h2 { font-size: 1.35rem; margin-top: 22px; padding-top: 12px; border-top: 2px solid var(--navy); }
+.doc .sub { color: var(--navy-2); margin-top: 6px; }
+.doc table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .9rem; }
+.doc th { text-align: left; background: var(--navy); color: #fff; padding: 6px 8px; font-size: .8rem; }
+.doc td { border-bottom: 1px solid #C9CEDB; padding: 7px 8px; vertical-align: top; }
+.doc .box { width: 18px; height: 18px; border: 2px solid var(--navy); border-radius: 3px; display: inline-block; }
+.doc .noteline { border-bottom: 1px solid #9AA0B8; height: 22px; margin-top: 6px; }
+.doc .fill { display: flex; gap: 24px; margin-top: 12px; } .doc .fill span { flex: 1; border-bottom: 1px solid #9AA0B8; padding-bottom: 2px; color: var(--muted); font-size: .85rem; }
+.doc .pnote { font-style: italic; color: var(--muted); }
+/* on-screen display: one grade at a time, large */
+.show { min-height: calc(100vh - 140px); display: grid; grid-template-rows: auto 1fr auto; gap: 18px; }
+.show h1 { font-size: clamp(2.2rem, 4.4vw, 4rem); } .show .sub { font-size: 1.3rem; color: var(--navy-2); margin-top: 6px; }
+.showlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; align-content: start; }
+.showlist div { background: rgba(255,255,255,.88); border-radius: 16px; padding: 14px 18px; font-size: 1.12rem; border-left: 6px solid var(--lime); }
+.showlist b { display: block; font-size: 1.2rem; }
+body.fs header.top { display: none; } body.fs main { padding-top: 16px; }
+dialog { border: 0; border-radius: 18px; padding: 22px; max-width: 440px; box-shadow: 0 30px 60px rgba(16,24,70,.3); } dialog::backdrop { background: rgba(16,24,70,.35); }
+#stdDlg { max-width: 640px; width: calc(100% - 32px); } #stdDlg .sdtext { font-size: 1.08rem; margin: 12px 0; line-height: 1.5; } #stdDlg .strandl { color: var(--muted); font-weight: 700; font-size: .85rem; }
+.stext[data-more], .rc[data-std], .pc[data-std] { cursor: pointer; }
 dialog input { width: 100%; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 10px; margin: 10px 0; }
 #toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 999px; font-weight: 600; z-index: 50; }
-@media (max-width: 900px) { .subjects, .steps3 { grid-template-columns: 1fr 1fr; } .choose, .cols2 { grid-template-columns: 1fr; } .picks { position: static; } .lrow { grid-template-columns: 1fr; } .frow { grid-template-columns: 1fr; } }
+@media (max-width: 1000px) { .rcols { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .subjects, .steps3 { grid-template-columns: 1fr 1fr; } .choose { grid-template-columns: 1fr; } .picks { position: static; } .lrow, .prow { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .subjects, .steps3 { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-@media print { header.top, .tools, .acts, .tick, .qbtn, .btn { display: none !important; } body { background: #fff; } .panel { box-shadow: none; border: 1px solid #ccd; } .lib, .plist { max-height: none; overflow: visible; } }
+@page { size: A4 portrait; margin: 14mm; }
+@media print {
+  header.top, .tools, .acts, .row-acts, .tick, .qbtn, .helpbox, .btn, .undo, .noprint { display: none !important; }
+  body { background: #fff; font-size: 11pt; } main { padding: 0; } .wrap { max-width: none; padding: 0; }
+  .panel, .doc { box-shadow: none; border: 0; padding: 0; backdrop-filter: none; background: #fff; }
+  .lib, .plist, .chlist { max-height: none; overflow: visible; }
+  .doc th { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .doc tr { break-inside: avoid; } .doc h2 { break-after: avoid; }
+}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap"><a class="brand" href="./">Awsaj<br>Academy</a><nav class="crumbs" id="crumbs" aria-label="Where you are"></nav><div class="who" id="who"></div></div></header>
 <main><div class="wrap" id="app" aria-live="polite"><p class="lead">Loading the standards…</p></div></main>
-<dialog id="pinDlg"><form method="dialog"><h3 id="pinTitle">Leader approval</h3><p id="pinText" class="lead" style="font-size:1rem">Enter the leader PIN to approve this list.</p><input id="pinIn" type="password" autocomplete="off" inputmode="numeric" aria-label="Leader PIN"><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" value="cancel">Cancel</button><button class="btn cta" value="ok" id="pinOk">Approve</button></div></form></dialog>
+<dialog id="pinDlg"><form method="dialog"><h3 id="pinTitle">Agreed as a group</h3><p id="pinText" style="margin-top:8px"></p><input id="pinIn" type="password" autocomplete="off" inputmode="numeric" aria-label="Leader PIN"><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" value="cancel">Cancel</button><button class="btn cta" value="ok" id="pinOk">Agreed</button></div></form></dialog>
+<dialog id="stdDlg" aria-labelledby="sdCode"><div id="sdBody"></div></dialog>
 <div id="toast" hidden role="status"></div>
 <script src="config.js"></script>
 <script>
@@ -123,101 +186,154 @@ dialog input { width: 100%; padding: 10px 12px; border: 1.5px solid var(--line);
 const CFG = window.VA_CONFIG, H = { apikey: CFG.supabaseKey, Authorization: "Bearer " + CFG.supabaseKey };
 const SUBJ = [["Math", "math", "var(--lime)"], ["ELA", "ela", "var(--blue)"], ["Science", "science", "var(--magenta)"], ["Social Studies", "social_studies", "var(--amber)"]];
 const GRADES = ["12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1", "K"];   // from the end of the road down
+const K5 = ["K", "1", "2", "3", "4", "5"];
 const COURSE = { Math: { 9: "Algebra 1", 10: "Geometry", 11: "Algebra 2", 12: "Pre-Calculus" }, ELA: { 9: "English 9", 10: "English 10", 11: "English 11", 12: "English 12" },
   Science: { 9: "Earth Environmental Science", 10: "Physics", 11: "Biology", 12: "Chemistry" }, "Social Studies": { 9: "Geography", 10: "World History 10", 11: "Economics", 12: "World History 12" } };
 const RATING = { 2: ["r2", "Rated: in depth"], 1: ["r1", "Rated: introduced"], 0: ["r0", "Rated: not taught"] };
+const RWORD = { 2: "Taught in depth", 1: "Introduced", 0: "Not taught" };
+const STATUS = { draft: "Draft", ready: "Ready for the group", approved: "Agreed by the group" };
+/* What to expect for each grade or course (Tim: set the right expectations, do not force connections). Counts are from the
+   site's standards data (Nov 2026). */
+function expectNote(s, g) {
+  const c = COURSE[s] && COURSE[s][g];
+  if (s === "Math") return ({
+    12: "Pre-Calculus draws on many high school strands. It is the end of the road, so choose with the learner profile in mind.",
+    11: "Algebra 2 shares 18 standards with Pre-Calculus. Choosing the same standard in both courses is fine when both take it further.",
+    10: "Geometry starts new strands (congruence, circles, measurement), so it shares almost nothing with Algebra 2. Few links to the course above are expected.",
+    9: "Algebra 1 leads into Algebra 2 more than into Geometry, the course above it. Look two courses up as well as one.",
+    8: "Grade 8 is the last grade before the high school courses. Its standards rarely match a course standard one to one."
+  })[g] || "Each grade has its own standards. The same strands run through the grades, but a standard may have no partner in the grade above. That is fine.";
+  if (s === "ELA") return ({
+    12: "Grades 11 and 12 share the same 47 standards (the 11-12 band). Grade 12 chooses first.",
+    11: "Grades 11 and 12 share the same 47 standards. Grade 11 may choose the same ones as Grade 12, or different ones to share the work.",
+    10: "Grades 9 and 10 share the same 43 standards (the 9-10 band). Grade 10 chooses first.",
+    9: "Grades 9 and 10 share the same 43 standards. Grade 9 may choose the same ones as Grade 10, or different ones to share the work.",
+    5: "Reading Foundational Skills end in Grade 5, so they have no partner in Grade 6."
+  })[g] || "Each grade has its own version of the same anchor standards (for example R.6.1 and R.7.1), so many standards have a match in the grade above, but not all.";
+  if (s === "Science") {
+    if (c) return `High school Science is organised by course, not as a grade-to-grade ladder. ${c} has its own discipline, so few standards link to the course above. Only the four engineering design standards are in every course.`;
+    if (g === "8") return "Grade 8 leads into four separate high school courses, so few of its standards link to the Grade 9 course.";
+    if (g === "6" || g === "7") return "Middle school uses the NGSS 6-8 standards, spread across Grades 6 to 8. A few are placed in two grades.";
+    if (g === "5") return "Grade 6 uses a different set (NGSS) from K-5 (AERO), so the codes will not match. Compare the ideas, not the codes.";
+    return "K-5 uses AERO Science: a few standards per grade across four strands. Many topics do not continue straight into the next grade.";
+  }
+  if (c) return g === "12" ? "World History 12 is the end of the road. Its standards cover history, political science, the behavioural sciences and inquiry."
+    : `${c} has its own discipline, plus the 10 Inquiry Practices standards that every high school course shares. Few links to the course above are expected.`;
+  if (g === "8") return "Grades 6, 7 and 8 share the same 64 Wisconsin standards (a 6-8 band). Grade 8 chooses first; the high school courses above are organised by discipline.";
+  if (g === "6" || g === "7") return "Grades 6, 7 and 8 share the same 64 Wisconsin standards (a 6-8 band). Grades may choose the same standards or share them out.";
+  if (g === "5") return "Grade 6 uses a different set (Wisconsin) from K-5 (AERO), so the codes will not match. Compare the ideas, not the codes.";
+  return "K-5 uses AERO Social Studies: 10 to 20 standards per grade across the same AERO strands.";
+}
 const HELP = {
-  home: "Each grade or course chooses its depth standards: the standards we want every class to teach in depth for students on the SAT / US Diploma track. We start at Grade 12 and work down, so each grade can check it prepares students for the grade above.",
-  ladder: "Every grade or course for this subject, from Grade 12 down. Anyone can open any grade and change its list. Draft: still choosing. Ready: the team has finished and the list waits for the group review. Approved: the group has reviewed it against the grade above, and the leader has approved it. An approved list guides the grade below.",
-  library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your depth standards. Hints: the Part 1 rating, a star when the school already names it a priority or power standard, and an orange mark when an approved grade above builds on it.",
-  picks: "The standards this grade or course wants taught in depth. Anyone can add or remove a standard; the list is shared and saves as you go. The guide is about a third of your standards: a target, not a limit. Add a short note on why a standard is essential if it helps the review. When you have finished, mark the list ready for review.",
-  review: "This grade's picks sit under the grade above. A line joins two standards when one builds on the other (from the site's progression links) or when it is the same standard. Orange marks a standard the grade above builds on that this grade has not picked: a question for the group, not an error. Some courses, such as Geometry after Algebra 1, have few direct links; that is expected.",
-  progression: "Every grade's depth standards for this subject, from Grade 12 down, with lines where one standard builds on another. Dashed cards belong to lists that are not yet approved.",
-  profile: "What an Awsaj graduate on the SAT / US Diploma track should know and be able to do in this subject. It opens once Grade 12 has chosen its depth standards, and teams can change it as the work goes on."
+  home: "Each grade or course chooses its depth standards: the standards we want every class to teach in depth for students on the SAT / US Diploma track. We call them depth standards because the school already has Priority (6-12) and Power (K-5) standards. We start at Grade 12 and work down, so each grade can check it prepares students for the grade above.",
+  ladder: "Every grade or course for this subject, from Grade 12 down. Anyone can open any grade at any time and change its list. Draft: still choosing. Ready for the group: the team has finished and the list waits for the group review. Agreed by the group: the group has talked it through and the leader has confirmed it with the PIN; it is then locked.",
+  exports: "Print our depth standards: a printable list of every grade, Grade 12 down, with notes and the learner profile. Show on screen: one grade at a time in large type, for a projector. Excel: every chosen standard, the status of every list and the learner profile, in one file.",
+  library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your depth standards. Text: Short shows two lines of each standard, One line fits many standards on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard in a popup with Add or Remove. Hints: the Part 1 rating (in One line, a coloured dot: green in depth, blue introduced, pink not taught), and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
+  picks: "The standards this grade or course wants taught in depth. Anyone can add or remove a standard; the list is shared and saves as you go. Add a short note on why a standard is essential if it helps the review. When you have finished, mark the list ready for the group. Print this list gives a paper copy of every standard with tick boxes, for teams that start on paper.",
+  changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change and undo is kept in the history.",
+  review: "Three lists side by side: Grade 12 with the learner profile, the grade above, and the grade being reviewed (outlined). Change any column with the grade boxes at the top. Click a standard to read all of it. There are no automatic lines between standards: the group decides the connections in the discussion. A small tag marks the same standard chosen in two columns.",
+  rquestions: "Questions to guide the talk. When the group agrees on this set of standards, the leader presses Agreed as a group and enters the PIN. The list is then locked; the leader can reopen it.",
+  progression: "Every grade's depth standards for this subject, from Grade 12 down. Dashed cards belong to lists the group has not agreed yet.",
+  profile: "What an Awsaj graduate on the SAT / US Diploma track should know and be able to do in this subject. It opens once Grade 12 has chosen its depth standards, and teams can change it as the work goes on.",
+  show: "One grade at a time in large type, for a projector. Use the arrow keys, Page Up / Page Down or a clicker to move between grades. Full screen hides everything else; press Escape to leave it.",
+  paper: "A paper copy of every standard this grade or course can choose from, with a tick box and a line for notes. Teams that start on paper give the finished copy to the leader, who ticks the same standards on the site.",
+  list: "Our depth standards for this subject, Grade 12 down, ready to print: the learner profile, then each grade or course with its status, its standards and the team's notes."
 };
-const Q = new URLSearchParams(location.search), PRACTICE = Q.get("practice") === "1", TEAM = Q.get("team") || "";
+const Q = new URLSearchParams(location.search), PRACTICE = Q.get("practice") === "1", TEAM = Q.get("team") || "", TOUR = Q.get("tour") === "1";
+const FRAMED = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const gname = (g) => (g === "K" ? "Kindergarten" : "Grade " + g);
-const glab = (s, g) => (COURSE[s] && COURSE[s][g] ? `${gname(g)}<small>${esc(COURSE[s][g])}</small>` : gname(g));
+const course = (s, g) => (COURSE[s] && COURSE[s][g]) || "";
+const glab = (s, g) => (course(s, g) ? `${gname(g)}<small>${esc(course(s, g))}</small>` : gname(g));
+const gtext = (s, g) => (course(s, g) ? `${gname(g)} (${course(s, g)})` : gname(g));
 const above = (g) => { const i = GRADES.indexOf(g); return i > 0 ? GRADES[i - 1] : null; };
-const below = (g) => { const i = GRADES.indexOf(g); return i < GRADES.length - 1 ? GRADES[i + 1] : null; };
 const toast = (m) => { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), 3200); };
 
 /* ================= data ================= */
-const D = { meta: null, idx: {}, prereq: {}, back: {}, ratings: new Map(), picks: [], status: [], profile: {}, dbReady: true, loaded: {} };
+const D = { meta: null, idx: {}, det: {}, ratings: new Map(), picks: [], status: [], profile: {}, ev: {}, dbReady: true };
 async function getAll(path) { const out = []; for (let from = 0; ; from += 1000) { const r = await fetch(`${CFG.supabaseUrl}/rest/v1/${path}`, { headers: { ...H, "Range-Unit": "items", Range: `${from}-${from + 999}` } }); if (!r.ok) { const e = new Error(await r.text()); e.status = r.status; throw e; } const rows = await r.json(); out.push(...rows); if (rows.length < 1000) return out; } }
 async function rpc(fn, body) { const r = await fetch(`${CFG.supabaseUrl}/rest/v1/rpc/${fn}`, { method: "POST", headers: { ...H, "Content-Type": "application/json" }, body: JSON.stringify(body) }); if (!r.ok) { let m = await r.text(); try { m = JSON.parse(m).message || m; } catch (e) { /* text */ } throw new Error(m); } return null; }
 async function loadSubject(s) {
-  if (D.loaded[s]) return; const slug = SUBJ.find((x) => x[0] === s)[1];
-  D.idx[s] = await (await fetch(`data/index_${slug}.json`)).json(); D.loaded[s] = true;
+  if (D.idx[s]) return; const slug = SUBJ.find((x) => x[0] === s)[1];
+  D.idx[s] = await (await fetch(`data/index_${slug}.json`)).json();
   // the index keeps a shortened text; the detail file has the full wording
-  fetch(`data/detail_${slug}.json`).then((r) => r.json()).then((det) => { const full = {}; for (const [k, v] of Object.entries(det)) { const kk = k.split("|").slice(0, 2).join("|"); if (v && v.text && !full[kk]) full[kk] = v.text; }
+  D.det[s] = fetch(`data/detail_${slug}.json`).then((r) => r.json()).then((det) => { const full = {}; for (const [k, v] of Object.entries(det)) { const kk = k.split("|").slice(0, 2).join("|"); if (v && v.text && !full[kk]) full[kk] = v.text; }
     D.idx[s].forEach((e) => { const t = full[key(e)]; if (t) e.t = t; }); if (route().s === s && !editingText()) render(true); }).catch(() => {});
 }
 async function loadPD() {
-  if (PRACTICE) { if (!D.seeded && Q.get("sample") === "1") seedSample(); D.picks = D.picks || []; return; }
+  if (PRACTICE) { if (!D.seeded && Q.get("sample") === "1") seedSample(); return; }
   try { const [p, st, pr] = await Promise.all([getAll("pd_picks?select=*"), getAll("pd_status?select=*"), getAll("pd_profile?select=*")]); D.picks = p; D.status = st; D.profile = Object.fromEntries(pr.map((r) => [r.subject, r])); D.dbReady = true; }
   catch (e) { D.dbReady = false; D.picks = []; D.status = []; D.profile = {}; }
 }
-/* the guided walk-through (pd-tour.html) opens practice mode with a small made-up example: Grade 12 Math approved, Grade 11 a draft */
+/* the latest changes to one list (the stress test and setup lines are left out) */
+const hiddenTeam = (t) => /^stress test|^setup check$/.test(t || "");
+async function loadEvents(s, g) {
+  if (PRACTICE || !D.dbReady) { D.ev[s + "|" + g] = D.ev[s + "|" + g] || []; return; }
+  try { const rows = await getAll(`pd_events?select=id,kind,subject,grade,framework,code,detail,team,created_at&subject=eq.${encodeURIComponent(s)}&grade=eq.${encodeURIComponent(g)}&team=not.like.stress*&team=neq.setup%20check&order=id.desc&limit=25`);
+    D.ev[s + "|" + g] = rows.filter((r) => !hiddenTeam(r.team)).slice(0, 25); } catch (e) { /* the list stays as it was */ }
+}
+const logLocal = (kind, s, g, f = "", c = "", detail = "") => { const k = s + "|" + g; (D.ev[k] = D.ev[k] || []).unshift({ id: "L" + Date.now() + Math.random(), kind, subject: s, grade: g, framework: f, code: c, detail, team: TEAM, created_at: new Date().toISOString() }); };
+/* the guided walk-through (pd-tour.html) opens practice mode with a small made-up example: Grade 12 Math agreed, Grade 11 ready */
 function seedSample() {
   D.seeded = true;
   const P = (g, c, note = "") => ({ subject: "Math", grade: g, framework: "WI-CC-MATH", code: c, note, team: "Sample" });
   D.picks = [P("12", "M.A.CED.A.4", "Rearranging formulas is everywhere on the SAT."), P("12", "M.F.IF.A.3"), P("12", "M.F.IF.B.6"), P("12", "M.F.BF.A.1"), P("11", "M.F.BF.A.1"), P("11", "M.F.BF.A.2"), P("11", "M.F.LE.A.2")];
   D.status = [{ subject: "Math", grade: "12", status: "approved" }, { subject: "Math", grade: "11", status: "ready" }];
   D.profile = { Math: { subject: "Math", knowledge: "Linear, quadratic and exponential functions; equations and inequalities; the ideas behind rates of change.", skills: "Model a situation with a function, rearrange formulas, solve multi-step problems without a calculator.", application: "Choose a method, explain the reasoning in words, and check whether an answer makes sense." } };
+  const t = (m) => new Date(Date.now() - m * 60000).toISOString(), E = (kind, c, m) => ({ id: "S" + m, kind, subject: "Math", grade: "11", framework: c ? "WI-CC-MATH" : "", code: c, detail: "", team: "Sample", created_at: t(m) });
+  D.ev["Math|11"] = [E("ready", "", 2), E("pick", "M.F.LE.A.2", 4), E("unpick", "M.F.IF.A.1", 6), E("pick", "M.F.BF.A.2", 8), E("pick", "M.F.BF.A.1", 9)];
 }
 async function boot() {
-  const [meta, pre] = await Promise.all([fetch("data/meta.json").then((r) => r.json()), fetch("data/prereqs.json").then((r) => r.json())]);
-  D.meta = meta; D.prereq = pre;
-  for (const [to, list] of Object.entries(pre)) for (const l of list) (D.back[l[0]] = D.back[l[0]] || []).push(to);   // from -> what builds on it
+  D.meta = await fetch("data/meta.json").then((r) => r.json());
   try { const rs = await getAll("ratings?select=framework,code,grade,level"); rs.forEach((r) => D.ratings.set(`${r.framework}|${r.code}|${r.grade}`, r.level)); } catch (e) { /* hints only */ }
-  await loadPD(); render(); addEventListener("hashchange", render);
-  if (!PRACTICE) setInterval(async () => { if (document.hidden || busy) return; await loadPD(); if (!editingText()) render(true); }, 20000);
+  await loadPD(); render(); addEventListener("hashchange", () => { const k = keepScroll; keepScroll = false; render(k); });
+  if (!PRACTICE) setInterval(async () => { if (document.hidden || busy) return; const r = route(); await loadPD(); if (r.g && r.v === "choose") await loadEvents(r.s, r.g); if (!editingText()) render(true); }, 20000);
 }
-const editingText = () => { const a = document.activeElement; return a && /INPUT|TEXTAREA/.test(a.tagName); };
-let busy = 0;
+const editingText = () => { const a = document.activeElement; return a && /INPUT|TEXTAREA|SELECT/.test(a.tagName); };
+let busy = 0, keepScroll = false;
+const store = { get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) { /* this laptop keeps nothing */ } } };
+let DENS = ["short", "line", "full"].includes(store.get("pd_text")) ? store.get("pd_text") : "short";
 
 /* the standards a grade or course chooses from: its grade-level standards in the set the school uses (no Essential Elements) */
-const mainFW = (s, g) => { const k = ["K", "1", "2", "3", "4", "5"].includes(g); return s === "Math" ? ["WI-CC-MATH"] : s === "ELA" ? ["WI-CC-ELA"] : s === "Science" ? [k ? "AERO-SCI" : "NGSS"] : [k ? "AERO-SS" : "WI-SS"]; };
+const mainFW = (s, g) => { const k = K5.includes(g); return s === "Math" ? ["WI-CC-MATH"] : s === "ELA" ? ["WI-CC-ELA"] : s === "Science" ? [k ? "AERO-SCI" : "NGSS"] : [k ? "AERO-SS" : "WI-SS"]; };
 const library = (s, g) => (D.idx[s] || []).filter((e) => mainFW(s, g).includes(e.f) && (e.pl || []).includes(g));
 const key = (e) => `${e.f}|${e.c}`;
 const findStd = (s, k) => (D.idx[s] || []).find((e) => key(e) === k);
+const stdOf = (s, p) => findStd(s, `${p.framework}|${p.code}`) || { c: p.code, f: p.framework, t: "", s: "" };
 const picksOf = (s, g) => D.picks.filter((p) => p.subject === s && p.grade === g);
 const isPicked = (s, g, k) => D.picks.some((p) => p.subject === s && p.grade === g && `${p.framework}|${p.code}` === k);
 const statusOf = (s, g) => (D.status.find((x) => x.subject === s && x.grade === g) || {}).status || "draft";
-const STATUS = { draft: "Draft", ready: "Ready for review", approved: "Approved" };
-/* links between two standards: one builds on the other (prerequisite map), or it is the same standard */
-const builds = (a, b) => a === b || (D.prereq[b] || []).some((l) => l[0] === a) || (D.prereq[a] || []).some((l) => l[0] === b);
+const prMark = (e, g) => ((e.pr || []).includes(g) ? (K5.includes(g) ? "Power" : "Priority") : "");
 function ccss(e) { const m = e.f === "WI-CC-MATH" && e.c.match(/^M\.([K0-9]+|N|A|F|G|SP)\.([A-Z]{1,4})\.([A-D])\.(\d+)(?:\.([a-z]))?$/); if (m) { const [, d, dom, clu, n, sub] = m, t = `${clu}.${n}${sub || ""}`; return "CCSS " + (/^[K0-9]+$/.test(d) ? `${d}.${dom}.${t}` : `HS${d === "SP" ? "S" : d}-${dom}.${t}`); }
   if (e.f === "WI-CC-ELA") return e.cw && e.cw.length ? "CCSS " + e.cw.join(" · ") : "New in Wisconsin 2020 (no CCSS code)";
   if (e.wi) return "Wisconsin match: " + e.wi.join(" · ");
   return e.f === "WI-SS" ? "Wisconsin Social Studies" : e.f === "WI-CC-MATH" ? "New in Wisconsin 2021 (no CCSS code)" : e.f.startsWith("AERO") ? "AERO" : e.f; }
-const canEdit = () => PRACTICE || D.dbReady;   // Tim: anyone can open any grade and change it (collaborative); only approving needs the PIN
-const teamFor = (s, g) => { const t = D.meta.teams.find((x) => x.name !== "Vertical Alignment Committee" && x.subjects.includes(s) && x.grades.includes(g)); return t ? t.name : ""; };
-const teamLink = (s, g) => { const u = new URL(location.href); u.search = "?team=" + encodeURIComponent(teamFor(s, g)); u.hash = `s=${encodeURIComponent(s)}&g=${g}&v=choose`; return u.toString(); };
+const canEdit = () => PRACTICE || D.dbReady;   // Tim: anyone can open any grade and change it (collaborative); only agreeing needs the PIN
 
 /* ================= writes (practice keeps everything on this screen only) ================= */
-async function setPick(s, g, e, on, note = "") {
-  if (!canEdit(s, g)) return; if (statusOf(s, g) === "approved") { toast("This list is approved. Ask the leader to reopen it."); return; }
-  const k = key(e); D.picks = D.picks.filter((p) => !(p.subject === s && p.grade === g && `${p.framework}|${p.code}` === k));
+async function setPick(s, g, e, on, note = "", undoing = false) {
+  if (!canEdit()) return; if (statusOf(s, g) === "approved") { toast("The group has agreed this list. Ask the leader to reopen it."); return; }
+  const k = key(e), was = isPicked(s, g, k); D.picks = D.picks.filter((p) => !(p.subject === s && p.grade === g && `${p.framework}|${p.code}` === k));
   if (on) D.picks.push({ subject: s, grade: g, framework: e.f, code: e.c, note, team: TEAM });
-  render(true); if (PRACTICE) return;
-  busy++; try { await rpc("pd_set_pick", { p_subject: s, p_grade: g, p_framework: e.f, p_code: e.c, p_on: on, p_note: note, p_team: TEAM }); }
-  catch (err) { toast("Not saved: " + err.message); await loadPD(); render(true); } finally { busy--; }
+  if (on !== was || undoing) logLocal(on ? "pick" : "unpick", s, g, e.f, e.c, note);
+  render(true); if (PRACTICE) { if (undoing) toast(on ? `${e.c} put back.` : `${e.c} taken off.`); return; }
+  busy++; try { await rpc("pd_set_pick", { p_subject: s, p_grade: g, p_framework: e.f, p_code: e.c, p_on: on, p_note: note, p_team: TEAM }); if (undoing) toast(on ? `${e.c} put back.` : `${e.c} taken off.`); }
+  catch (err) { toast("Not saved: " + err.message); await loadPD(); }
+  finally { busy--; if (on !== was || undoing) { await loadEvents(s, g); render(true); } }
 }
 async function setStatus(s, g, st) {
-  if (PRACTICE) { setLocalStatus(s, g, st); return render(true); }
-  busy++; try { await rpc("pd_set_status", { p_subject: s, p_grade: g, p_status: st, p_team: TEAM }); setLocalStatus(s, g, st); toast(st === "ready" ? "Marked ready for review." : "Back to draft."); }
+  if (PRACTICE) { setLocalStatus(s, g, st); logLocal(st, s, g); return render(true); }
+  busy++; try { await rpc("pd_set_status", { p_subject: s, p_grade: g, p_status: st, p_team: TEAM }); setLocalStatus(s, g, st); toast(st === "ready" ? "Marked ready for the group." : "Back to draft."); await loadEvents(s, g); }
   catch (err) { toast("Not saved: " + err.message); } finally { busy--; render(true); }
 }
 const setLocalStatus = (s, g, st) => { const x = D.status.find((y) => y.subject === s && y.grade === g); if (x) x.status = st; else D.status.push({ subject: s, grade: g, status: st }); };
-function approve(s, g, on) {
-  if (PRACTICE) { setLocalStatus(s, g, on ? "approved" : "ready"); toast(on ? "Approved (practice)." : "Reopened (practice)."); return render(true); }
-  const dlg = $("#pinDlg"); $("#pinTitle").textContent = on ? `Approve ${gname(g)} ${s}` : `Reopen ${gname(g)} ${s}`; $("#pinText").textContent = on ? "After the group review, enter the leader PIN to approve this list. It is then locked and guides the grade below." : "Enter the leader PIN to reopen this list so the team can change it.";
-  $("#pinOk").textContent = on ? "Approve" : "Reopen"; $("#pinIn").value = ""; dlg.showModal();
-  dlg.onclose = async () => { if (dlg.returnValue !== "ok") return; busy++; try { await rpc("pd_approve", { p_pin: $("#pinIn").value, p_subject: s, p_grade: g, p_on: on }); setLocalStatus(s, g, on ? "approved" : "ready"); toast(on ? "Approved." : "Reopened."); } catch (err) { toast(/PIN/i.test(err.message) ? "Wrong PIN." : "Not saved: " + err.message); } finally { busy--; render(true); } };
+function agree(s, g, on) {
+  if (PRACTICE) { setLocalStatus(s, g, on ? "approved" : "ready"); logLocal(on ? "approve" : "reopen", s, g); toast(on ? "Agreed by the group (practice)." : "Reopened (practice)."); return render(true); }
+  const dlg = $("#pinDlg"); $("#pinTitle").textContent = on ? `Agreed as a group: ${gtext(s, g)} ${s}` : `Reopen ${gtext(s, g)} ${s}`;
+  $("#pinText").textContent = on ? "When the group agrees on this set of standards, the leader enters the PIN. The list is then locked." : "Enter the leader PIN to reopen this list so it can be changed again.";
+  $("#pinOk").textContent = on ? "Agreed" : "Reopen"; $("#pinIn").value = ""; dlg.showModal();
+  dlg.onclose = async () => { if (dlg.returnValue !== "ok") return; busy++; try { await rpc("pd_approve", { p_pin: $("#pinIn").value, p_subject: s, p_grade: g, p_on: on }); setLocalStatus(s, g, on ? "approved" : "ready"); toast(on ? "Agreed by the group." : "Reopened."); } catch (err) { toast(/PIN/i.test(err.message) ? "Wrong PIN." : "Not saved: " + err.message); } finally { busy--; render(true); } };
 }
 async function saveProfile(s) {
   const v = { p_subject: s, p_knowledge: $("#pk").value, p_skills: $("#ps").value, p_application: $("#pa").value, p_team: TEAM };
@@ -226,114 +342,195 @@ async function saveProfile(s) {
   busy++; try { await rpc("pd_set_profile", v); toast("Learner profile saved."); } catch (err) { toast("Not saved: " + err.message); } finally { busy--; }
 }
 
+/* ================= Excel (every chosen standard, every list's status, the learner profiles; public data, no PIN) ================= */
+const XLSX_SRC = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+const XLSX_SRI = "sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==";
+function loadXlsx() {
+  if (window.XLSX) return Promise.resolve(window.XLSX);
+  return new Promise((ok, bad) => { const el = document.createElement("script"); el.src = XLSX_SRC; el.integrity = XLSX_SRI; el.crossOrigin = "anonymous";
+    el.onload = () => (window.XLSX ? ok(window.XLSX) : bad(new Error("the Excel library did not start"))); el.onerror = () => { el.remove(); bad(new Error("the Excel library could not be loaded")); }; document.head.appendChild(el); });
+}
+async function exportExcel(only) {
+  toast("Building the Excel file…");
+  try {
+    const subs = only ? [only] : SUBJ.map((x) => x[0]); await Promise.all(subs.map(loadSubject)); await Promise.all(subs.map((s) => D.det[s])); if (!PRACTICE) await loadPD();
+    const X = await loadXlsx(), wb = X.utils.book_new(), today = new Date().toISOString().slice(0, 10);
+    const picks = [], lists = [];
+    subs.forEach((s) => GRADES.forEach((g) => { const ps = picksOf(s, g), st = statusOf(s, g);
+      lists.push({ Subject: s, Grade: g, Course: course(s, g), Status: STATUS[st], "Standards chosen": ps.length, "Standards to choose from": library(s, g).length });
+      ps.forEach((p) => { const e = stdOf(s, p), lv = D.ratings.get(`${p.framework}|${p.code}|${g}`);
+        picks.push({ Subject: s, Grade: g, Course: course(s, g), Status: STATUS[st], Set: p.framework, Code: p.code, "Other code": e.f ? ccss(e) : "", Strand: e.s || "", Standard: e.t || "", Note: p.note || "", "Part 1 rating": lv != null ? RWORD[lv] : "Not rated", "School Priority / Power": prMark(e, g) }); }); }));
+    const prof = subs.map((s) => { const p = D.profile[s] || {}; return { Subject: s, "Essential knowledge": p.knowledge || "", "Essential skills": p.skills || "", "Application and independence": p.application || "" }; });
+    const about = [{ Item: "What this is", Value: "Depth standards chosen in the PD (From Standards to Student Success), Grade 12 down." }, { Item: "Subjects", Value: subs.join(", ") }, { Item: "Exported", Value: today }, { Item: "Source", Value: PRACTICE ? "Practice mode (not saved)" : "Live database" }];
+    const add = (rows, name, w) => { const ws = X.utils.json_to_sheet(rows.length ? rows : [{ Note: "Nothing yet." }]); if (w) ws["!cols"] = w.map((x) => ({ wch: x })); X.utils.book_append_sheet(wb, ws, name); };
+    add(about, "About", [14, 90]); add(picks, "Depth standards", [14, 6, 24, 20, 12, 16, 24, 30, 80, 40, 16, 12]); add(lists, "Status of each list", [14, 6, 24, 20, 10, 12]); add(prof, "Learner profile", [14, 60, 60, 60]);
+    X.writeFile(wb, `Depth_standards_${only ? only.replace(/ /g, "_") : "All_subjects"}_${today}.xlsx`); toast("Excel file downloaded.");
+  } catch (err) { toast("Excel not made: " + err.message); }
+}
+
 /* ================= views ================= */
-const route = () => { const h = new URLSearchParams(location.hash.slice(1)); return { s: h.get("s"), g: h.get("g"), v: h.get("v") || "" }; };
-const go = (o) => { location.hash = new URLSearchParams(Object.entries(o).filter(([, v]) => v)).toString(); };
+const route = () => { const h = new URLSearchParams(location.hash.slice(1)); return { s: h.get("s"), g: h.get("g"), v: h.get("v") || "", a: h.get("a"), b: h.get("b") }; };
+const href = (o) => "#" + new URLSearchParams(Object.entries(o).filter(([, v]) => v)).toString();
 const help = (k) => `<button class="qbtn" type="button" data-help="${k}" aria-expanded="false" aria-label="What is this?">?</button><div class="helpbox" data-helpbox="${k}" hidden>${esc(HELP[k])}</div>`;
 const fw = (e) => `<span class="code">${esc(e.c)}</span><span class="alt">${esc(ccss(e))}</span>`;
+const expect = (s, g) => `<p class="expect"><b>What to expect</b>${esc(expectNote(s, g))}</p>`;
+const gopts = (s, sel) => GRADES.map((g) => `<option value="${g}"${g === sel ? " selected" : ""}>${esc(gtext(s, g))}</option>`).join("");
 
 function header(r) {
-  const c = [`<a href="#">Depth standards</a>`]; if (r.s) c.push(`<span>/</span><a href="#s=${encodeURIComponent(r.s)}">${esc(r.s)}</a>`);
-  if (r.g) c.push(`<span>/</span><a href="#s=${encodeURIComponent(r.s)}&g=${r.g}&v=choose">${gname(r.g)}</a>`);
-  if (r.v === "review") c.push(`<span>/</span><span>Review</span>`); if (r.v === "progression") c.push(`<span>/</span><span>Progression</span>`); if (r.v === "profile") c.push(`<span>/</span><span>Learner profile</span>`);
+  const S = encodeURIComponent(r.s || ""), c = [`<a href="#">Depth standards</a>`]; if (r.s) c.push(`<span>/</span><a href="#s=${S}">${esc(r.s)}</a>`);
+  if (r.g && r.v !== "show") c.push(`<span>/</span><a href="#s=${S}&g=${r.g}&v=choose">${gname(r.g)}</a>`);
+  const lab = { review: "Review", progression: "Progression", profile: "Learner profile", paper: "Print this list", list: "Print our depth standards", show: "Show on screen" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
   $("#crumbs").innerHTML = c.join("");
-  $("#who").innerHTML = (PRACTICE ? `<span class="pill practice">Practice: nothing is saved</span>` : "") + (TEAM ? `<span class="pill team">Team: ${esc(TEAM)}</span>` : "") + `<a class="btn small" href="journey.html">PD slides</a>`;
+  $("#who").innerHTML = (PRACTICE ? `<span class="pill practice">Practice: nothing is saved</span>` : "") + (TEAM ? `<span class="pill team">Team: ${esc(TEAM)}</span>` : "")
+    + (FRAMED && !TOUR ? `<a class="btn small" href="${esc(location.href)}" target="_blank" rel="noopener" title="Open this page in its own tab, for presenting">Open full page ↗</a>` : "") + `<a class="btn small" href="journey.html">PD slides</a>`;
 }
 
 async function render(keep) {
-  const r = route(), y = scrollY; header(r); reviewV.flagged = null;
+  const r = route(), y = scrollY; header(r);
   if (r.s) await loadSubject(r.s);
+  if (r.s && r.g && r.v === "choose" && !D.ev[r.s + "|" + r.g]) { D.ev[r.s + "|" + r.g] = []; loadEvents(r.s, r.g).then(() => { if (!editingText()) render(true); }); }
   const app = $("#app");
   const note = !PRACTICE && !D.dbReady ? `<p class="notice">Saving is not switched on yet: the leader needs to add the depth standards tables to the database. You can look around, or try <a href="?practice=1${location.hash}">practice mode</a>.</p>` : "";
-  app.innerHTML = note + (!r.s ? homeV() : !r.g && !r.v ? subjectV(r.s) : r.v === "progression" ? progressionV(r.s) : r.v === "profile" ? profileV(r.s) : r.v === "review" ? reviewV(r.s, r.g) : chooseV(r.s, r.g));
-  if (r.v === "review" || r.v === "progression") requestAnimationFrame(drawLinks);
+  const v = !r.s ? homeV() : r.v === "progression" ? progressionV(r.s) : r.v === "profile" ? profileV(r.s) : r.v === "list" ? listV(r.s) : r.v === "show" ? showV(r.s, r.g)
+    : !r.g ? subjectV(r.s) : r.v === "review" ? reviewV(r.s, r.g, r) : r.v === "paper" ? paperV(r.s, r.g) : chooseV(r.s, r.g);
+  app.innerHTML = note + v; document.body.classList.toggle("fs", !!document.fullscreenElement);
   if (keep) scrollTo(0, y); else scrollTo(0, 0);
 }
 
 function homeV() {
   return `<div class="stack"><div class="panel stack"><p class="pill">Part 2 · Subject sessions</p><h1>Our depth standards${help("home")}</h1><p class="lead">Choose the standards each grade or course will teach in depth, so students graduate ready for the SAT / US Diploma track. We start at Grade 12 and work down.</p>
-    <div class="steps3"><div><b>1. Choose</b>Each team ticks the standards that matter most in its grade or course.</div><div><b>2. Review</b>The group checks each list against the grade above: does it prepare students for it?</div><div><b>3. Approve</b>The leader approves the list, and it guides the grade below.</div></div></div>
+    <div class="steps3"><div><b>1. Choose</b>Each team ticks the standards that matter most in its grade or course.</div><div><b>2. Review</b>The group reads each list beside the grade above and Grade 12: does it prepare students for them?</div><div><b>3. Agree</b>When the group agrees on the set, the leader confirms it with the PIN.</div></div>
+    <div class="row-acts"><button class="btn small" type="button" data-excel="">Excel: all subjects</button></div></div>
     <div class="subjects">${SUBJ.map(([s, , c]) => `<a class="subj" style="--c:${c}" href="#s=${encodeURIComponent(s)}"><span class="rule"></span><b>${s}</b><span>Grade 12 down to Kindergarten</span></a>`).join("")}</div></div>`;
 }
 
 function subjectV(s) {
-  const p = D.profile[s] || {}, g12 = picksOf(s, "12").length;
+  const S = encodeURIComponent(s), p = D.profile[s] || {}, g12 = picksOf(s, "12").length;
   const rows = GRADES.map((g) => { const n = picksOf(s, g).length, st = statusOf(s, g), lib = library(s, g).length; const bc = ["9", "10", "11", "12"].includes(g) ? "var(--magenta)" : ["6", "7", "8"].includes(g) ? "var(--blue)" : "var(--lime)";
     return `<div class="lrow" style="--bc:${bc}"><div class="g">${glab(s, g)}</div><div class="meta"><span class="pill st-${st}">${STATUS[st]}</span><span>${n} of ${lib} standards chosen</span></div>
-      <div class="acts"><a class="btn small${canEdit(s, g) ? " cta" : ""}" href="#s=${encodeURIComponent(s)}&g=${g}&v=choose">${canEdit(s, g) ? "Choose" : "Open"}</a><a class="btn small" href="#s=${encodeURIComponent(s)}&g=${g}&v=review">Review</a></div></div>`; }).join("");
-  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: depth standards${help("ladder")}</h1><p class="lead">From Grade 12 down. Each list is a draft until its team marks it ready; then the group reviews it with the grade above.</p>
-    <div class="acts" style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn cta" href="#s=${encodeURIComponent(s)}&v=progression">See the progression</a></div></div>
-    <div class="panel profilecard stack"><h2>The Awsaj Graduate in ${esc(s)}</h2>${g12 ? `<p>${p.knowledge || p.skills || p.application ? "Our learner profile for the SAT / US Diploma track." : "Grade 12 has chosen its standards: the learner profile is open."}</p><a class="btn small" href="#s=${encodeURIComponent(s)}&v=profile">Open the learner profile</a>` : `<p class="lead" style="font-size:1rem">Opens once Grade 12 has chosen its depth standards.</p>`}</div>
+      <div class="acts"><a class="btn small cta" href="#s=${S}&g=${g}&v=choose">Choose</a><a class="btn small" href="#s=${S}&g=${g}&v=review">Review</a></div></div>`; }).join("");
+  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: depth standards${help("ladder")}</h1><p class="lead">From Grade 12 down. Any grade can start at any time. Each list is a draft until its team marks it ready; then the group reviews it and agrees it together.</p>
+    <div class="row-acts"><a class="btn cta" href="#s=${S}&v=progression">See the progression</a><a class="btn" href="#s=${S}&v=list">Print our depth standards</a><a class="btn" href="#s=${S}&v=show&g=12">Show on screen</a><button class="btn" type="button" data-excel="${esc(s)}">Excel</button>${help("exports")}</div></div>
+    <div class="panel profilecard stack"><h2>The Awsaj Graduate in ${esc(s)}</h2>${g12 ? `<p>${p.knowledge || p.skills || p.application ? "Our learner profile for the SAT / US Diploma track." : "Grade 12 has chosen its standards: the learner profile is open."}</p><a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a>` : `<p class="lead" style="font-size:1rem">Opens once Grade 12 has chosen its depth standards.</p>`}</div>
     <div class="ladderlist">${rows}</div></div>`;
 }
 
+/* the latest changes, with Undo on the newest change to each standard while it still holds */
+function changesHTML(s, g, ed) {
+  const ev = D.ev[s + "|" + g] || [], seen = new Set();
+  const when = (t) => { const d = new Date(t); return isNaN(d) ? "" : d.toLocaleString([], { weekday: "short", hour: "2-digit", minute: "2-digit" }); };
+  const items = ev.slice(0, 15).map((x) => {
+    const k = `${x.framework}|${x.code}`, e = x.code ? findStd(s, k) || { c: x.code, f: x.framework } : null;
+    let txt = { pick: "Added", unpick: "Removed", ready: "Marked ready for the group", draft: "Back to draft", approve: "Agreed by the group", reopen: "Reopened", profile: "Learner profile saved" }[x.kind] || x.kind, btn = "";
+    if (e) { txt += ` <b>${esc(x.code)}</b>`;
+      if (!seen.has(k)) { seen.add(k); const now = isPicked(s, g, k);
+        if (ed && ((x.kind === "pick" && now) || (x.kind === "unpick" && !now))) btn = `<button class="undo" type="button" data-undo="${esc(k)}" data-on="${x.kind === "unpick" ? 1 : 0}" data-note="${esc(lastNote(ev, k))}" aria-label="Undo: ${x.kind === "pick" ? "take off" : "put back"} ${esc(x.code)}">Undo</button>`; } }
+    return `<li><span>${txt}${x.team && x.team !== "Undo" && !hiddenTeam(x.team) ? ` <span class="when">· ${esc(x.team)}</span>` : ""}</span><span class="row-acts"><span class="when">${when(x.created_at)}</span>${btn}</span></li>`; }).join("");
+  return `<div class="changes"><h3>Recent changes${help("changes")}</h3>${items ? `<ul class="chlist">${items}</ul>` : `<p class="empty">No changes yet.</p>`}</div>`;
+}
+const lastNote = (ev, k) => { const p = ev.find((x) => x.kind === "pick" && `${x.framework}|${x.code}` === k && x.detail); return p ? p.detail : ""; };
+
 function chooseV(s, g) {
-  const lib = library(s, g), picked = picksOf(s, g), st = statusOf(s, g), ed = canEdit(s, g) && st !== "approved", up = above(g);
-  const f = chooseV.f = chooseV.f && chooseV.f.k === s + g ? chooseV.f : { k: s + g, q: "", strand: "", only: "" };
-  // standards an approved grade above builds on
-  const need = new Set(); if (up && statusOf(s, up) === "approved") picksOf(s, up).forEach((p) => { const k = `${p.framework}|${p.code}`; lib.forEach((e) => { if (builds(key(e), k)) need.add(key(e)); }); });
+  const S = encodeURIComponent(s), lib = library(s, g), picked = picksOf(s, g), st = statusOf(s, g), ed = canEdit() && st !== "approved", up = above(g);
+  const f = chooseV.f = chooseV.f && chooseV.f.k === s + g ? chooseV.f : { k: s + g, q: "", strand: "", only: "" }; if (!chooseV.open || chooseV.openK !== s + g) { chooseV.open = new Set(); chooseV.openK = s + g; }
   const strands = [...new Set(lib.map((e) => e.s))];
-  const rows = lib.filter((e) => (!f.q || (e.c + " " + e.t).toLowerCase().includes(f.q.toLowerCase())) && (!f.strand || e.s === f.strand) && (f.only !== "pr" || (e.pr || []).includes(g)) && (f.only !== "need" || need.has(key(e))) && (f.only !== "on" || isPicked(s, g, key(e))));
-  let last = ""; const items = rows.map((e) => { const k = key(e), on = isPicked(s, g, k), lv = D.ratings.get(`${e.f}|${e.c}|${g}`); const sh = e.s !== last ? `<p class="strandh">${esc(e.s)}</p>` : ""; last = e.s;
-    return `${sh}<div class="std${on ? " on" : ""}${need.has(k) ? " need" : ""}"><button class="tick" type="button" data-pick="${esc(k)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(e.c)}"${ed ? "" : " disabled"}>${on ? "&#10003;" : "+"}</button><div>${fw(e)}<p class="stext">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}">${RATING[lv][1]}</span>` : ""}${(e.pr || []).includes(g) ? `<span class="h pr">&#9733; ${["K", "1", "2", "3", "4", "5"].includes(g) ? "Power" : "Priority"} standard</span>` : ""}${need.has(k) ? `<span class="h need">${gname(up)} builds on this</span>` : ""}</div></div></div>`; }).join("");
-  const guide = Math.max(1, Math.round(lib.length / 3)), pct = Math.min(100, Math.round((picked.length / guide) * 100));
-  const plist = picked.map((p) => { const e = findStd(s, `${p.framework}|${p.code}`) || { c: p.code, f: p.framework, t: "" }; return `<div class="pitem"><div class="row"><span>${fw(e)}</span>${ed ? `<button class="x" type="button" data-pick="${esc(key(e))}" aria-label="Remove ${esc(e.c)}">Remove</button>` : ""}</div><p class="stext">${esc(e.t)}</p>${ed ? `<input type="text" maxlength="500" placeholder="Why it is essential (optional)" value="${esc(p.note)}" data-note="${esc(key(e))}">` : p.note ? `<p class="saved">${esc(p.note)}</p>` : ""}</div>`; }).join("");
-  return `<div class="stack"><div class="panel"><h1>${glab(s, g).replace("<small>", " · ").replace("</small>", "")} ${esc(s)}</h1><p class="lead" style="margin-top:8px">Which of these standards must every class teach in depth, so students are ready for ${up ? gname(up) : "graduation on the SAT / US Diploma track"}?</p>
-    ${st === "approved" ? `<p class="saved" style="margin-top:8px">This list is approved and locked. The leader can reopen it.</p>` : ""}</div>
+  const rows = lib.filter((e) => (!f.q || (e.c + " " + e.t).toLowerCase().includes(f.q.toLowerCase())) && (!f.strand || e.s === f.strand) && (f.only !== "pr" || (e.pr || []).includes(g)) && (f.only !== "on" || isPicked(s, g, key(e))));
+  let last = ""; const items = rows.map((e) => { const k = key(e), on = isPicked(s, g, k), lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g); const sh = e.s !== last ? `<p class="strandh">${esc(e.s)}</p>` : ""; last = e.s;
+    const op = chooseV.open.has(k);
+    return `${sh}<div class="std${on ? " on" : ""}${op ? " open" : ""}"><button class="tick" type="button" data-pick="${esc(k)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(e.c)}"${ed ? "" : " disabled"}>${on ? "&#10003;" : "+"}</button><div class="sbody"><span class="shead">${fw(e)}</span><p class="stext" data-more="${esc(k)}">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}" title="${RATING[lv][1]}">${RATING[lv][1]}</span>` : ""}${pm ? `<span class="h pr" title="School ${pm.toLowerCase()} standard">&#9733;<span class="w"> School ${pm.toLowerCase()} standard</span></span>` : ""}</div><button class="more" type="button" data-more="${esc(k)}" aria-haspopup="dialog">Show all</button></div></div>`; }).join("");
+  const plist = picked.map((p) => { const e = stdOf(s, p); return `<div class="pitem"><div class="row"><span>${fw(e)}</span>${ed ? `<button class="x" type="button" data-pick="${esc(key(e))}" aria-label="Remove ${esc(e.c)}">Remove</button>` : ""}</div><p class="stext">${esc(e.t)}</p>${ed ? `<input type="text" maxlength="500" placeholder="Why it is essential (optional)" value="${esc(p.note)}" data-note="${esc(key(e))}" aria-label="Note for ${esc(e.c)}">` : p.note ? `<p class="saved">${esc(p.note)}</p>` : ""}</div>`; }).join("");
+  return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth, so students are ready for ${up ? gtext(s, up) : "graduation on the SAT / US Diploma track"}?</p>
+    ${expect(s, g)}${st === "approved" ? `<p class="saved">The group has agreed this list, so it is locked. The leader can reopen it.</p>` : ""}</div>
     <div class="choose"><section class="panel" aria-label="Library"><h2>Our standards${help("library")}</h2>
       <div class="tools"><input type="search" id="q" placeholder="Search by code or words" value="${esc(f.q)}" aria-label="Search the standards"><select id="strand" aria-label="Strand"><option value="">All strands</option>${strands.map((x) => `<option${x === f.strand ? " selected" : ""}>${esc(x)}</option>`).join("")}</select></div>
-      <div class="chips" role="group" aria-label="Show">${[["", "All"], ["on", "Chosen"], ["pr", "★ Priority or power"], ...(need.size ? [["need", `${gname(up)} builds on`]] : [])].map(([k, t]) => `<button class="chip" type="button" data-only="${k}" aria-pressed="${f.only === k}">${t}</button>`).join("")}</div>
-      <p class="saved" style="margin:10px 0">${rows.length} of ${lib.length} standards shown</p><div class="lib">${items || `<p class="empty">No standards match.</p>`}</div></section>
+      <div class="chips" role="group" aria-label="Show">${[["", "All"], ["on", "Chosen"], ["pr", `★ School ${K5.includes(g) ? "power" : "priority"} standards`]].map(([k, t]) => `<button class="chip" type="button" data-only="${k}" aria-pressed="${f.only === k}">${t}</button>`).join("")}</div>
+      <div class="dens" role="group" aria-label="How much of each standard to show">Text:${[["short", "Short"], ["line", "One line"], ["full", "Full"]].map(([k, t]) => `<button class="chip" type="button" data-dens="${k}" aria-pressed="${DENS === k}">${t}</button>`).join("")}</div>
+      <p class="saved" style="margin:10px 0">${rows.length} of ${lib.length} standards shown</p><div class="lib" data-d="${DENS}">${items || `<p class="empty">No standards match.</p>`}</div></section>
     <aside class="panel picks" aria-label="Our depth standards"><h2>Our depth standards${help("picks")}</h2>
-      <div class="count"><b>${picked.length}</b><span>chosen · a guide is about ${guide} (a third)</span></div><div class="bar"><i style="width:${pct}%"></i></div>
-      <p><span class="pill st-${st}">${STATUS[st]}</span></p>
-      <div class="plist">${plist || `<p class="empty">Tick standards in the library to add them here.</p>`}</div>
-      <div class="acts" style="display:flex;gap:8px;flex-wrap:wrap">${canEdit(s, g) && st === "draft" ? `<button class="btn cta" type="button" data-status="ready"${picked.length ? "" : " disabled"}>Mark ready for review</button>` : ""}${canEdit(s, g) && st === "ready" ? `<button class="btn" type="button" data-status="draft">Back to draft</button>` : ""}<a class="btn" href="#s=${encodeURIComponent(s)}&g=${g}&v=review">Review with ${up ? gname(up) : "the learner profile"}</a></div></aside></div></div>`;
+      <div class="count"><b>${picked.length}</b><span>chosen</span><span class="pill st-${st}">${STATUS[st]}</span></div>
+      <div class="plist" data-d="${DENS}">${plist || `<p class="empty">Tick standards in the library to add them here.</p>`}</div>
+      <div class="row-acts">${canEdit() && st === "draft" ? `<button class="btn cta" type="button" data-status="ready"${picked.length ? "" : " disabled"}>Mark ready for the group</button>` : ""}${canEdit() && st === "ready" ? `<button class="btn" type="button" data-status="draft">Back to draft</button>` : ""}<a class="btn" href="#s=${S}&g=${g}&v=review">Review</a><a class="btn" href="#s=${S}&g=${g}&v=paper">Print this list</a></div>
+      ${changesHTML(s, g, ed)}</aside></div></div>`;
 }
 
-/* rows of picks, lines between linked standards in neighbouring rows */
-function rowsHTML(s, gs) {
-  return gs.map((g) => { const ps = picksOf(s, g), st = statusOf(s, g);
-    return `<div class="frow" data-g="${g}"><div class="lab">${glab(s, g)}<small>${STATUS[st]} · ${ps.length}</small></div><div class="cards">${ps.length ? ps.map((p) => { const k = `${p.framework}|${p.code}`, e = findStd(s, k) || { c: p.code, t: "" };
-      return `<div class="pc${st === "approved" ? "" : " dim"}" data-k="${esc(k)}" data-g="${g}" title="${esc(e.t)}"><b>${esc(e.c)}</b><span class="t">${esc(e.t)}</span></div>`; }).join("") : `<p class="empty">No standards chosen yet.</p>`}</div></div>`; }).join("");
+/* review: three lists side by side, no automatic links (Tim: the group decides the connections) */
+function reviewV(s, g, r) {
+  const S = encodeURIComponent(s), st = statusOf(s, g);
+  const a = r.a && GRADES.includes(r.a) ? r.a : "12", b = r.b === "-" || GRADES.includes(r.b) ? r.b : above(g) && above(g) !== a ? above(g) : "-";
+  const cols = [...new Set([a, b, g])].filter((x) => x !== "-"), shown = Object.fromEntries(cols.map((x) => [x, new Set(picksOf(s, x).map((p) => `${p.framework}|${p.code}`))]));
+  const col = (x, i) => { const ps = picksOf(s, x), xs = statusOf(s, x), which = x === g ? "g" : x === a && i === 0 ? "a" : "b";
+    const prof = x === "12" ? (() => { const p = D.profile[s] || {}; return `<div class="prof"><b>The Awsaj Graduate</b>${p.knowledge || p.skills || p.application ? `${p.knowledge ? `<span><b>Knowledge.</b> ${esc(p.knowledge)}</span>` : ""}${p.skills ? `<span><b>Skills.</b> ${esc(p.skills)}</span>` : ""}${p.application ? `<span><b>Application.</b> ${esc(p.application)}</span>` : ""}` : `<span class="empty">Not written yet.</span>`}<a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a></div>`; })() : "";
+    const cards = ps.map((p) => { const k = `${p.framework}|${p.code}`, e = stdOf(s, p), also = cols.filter((y) => y !== x && shown[y].has(k));
+      return `<div class="rc" data-std="${esc(k)}" data-sg="${x}" tabindex="0" role="button" aria-haspopup="dialog">${fw(e)}<span class="t">${esc(e.t)}</span>${p.note ? `<p class="nt">${esc(p.note)}</p>` : ""}${also.length ? `<span class="same">Same standard in ${also.map(gname).join(", ")}</span>` : ""}</div>`; }).join("");
+    return `<section class="panel rcol${x === g ? " me" : ""}"><p class="cpick">${x === g ? "Being reviewed" : i === 0 ? "Where we are heading" : "The grade above"}</p><h3>${glab(s, x)}</h3>
+      ${prof}<div class="cmeta"><span class="pill st-${xs}">${STATUS[xs]}</span><span>${ps.length} chosen</span></div><p class="cnote">${esc(expectNote(s, x))}</p>
+      <div class="rlist">${cards || `<p class="empty">No standards chosen yet.</p>`}</div></section>`; };
+  const up = cols.length > 1 ? cols[cols.length - 2] : null;
+  return `<div class="stack"><div class="panel stack"><h1>Review: ${esc(gtext(s, g))} ${esc(s)}${help("review")}</h1><p class="lead">Read the lists side by side. Does ${gname(g)} prepare students for ${up && up !== g ? gtext(s, up) : "the Awsaj Graduate"}${up && up !== "12" && up !== g ? " and for Grade 12" : ""}?</p>
+    <div class="row-acts colpick">${[["a", "Left column", a], ["b", "Middle column", b], ["g", "Being reviewed", g]].map(([k, l, v]) => `<label class="cpick">${l}<select data-col="${k}">${k === "b" ? `<option value="-"${v === "-" ? " selected" : ""}>None</option>` : ""}${gopts(s, v)}</select></label>`).join("")}</div></div>
+    <div class="rcols" style="--n:${cols.length}">${cols.map(col).join("")}</div>
+    <div class="panel"><h2>Questions for the group${help("rquestions")}</h2><ol class="qs"><li>Will these standards prepare students for what ${up && up !== g ? gtext(s, up) : "the Awsaj Graduate"} has chosen?</li><li>Is anything the grade above needs missing here?</li><li>Can every class teach, reteach, review and assess each of these in depth?</li></ol>
+      <p class="saved" style="margin-top:10px">Some standards will have no partner in the grade above. That is expected: do not force a connection.</p>
+      <div class="row-acts" style="margin-top:14px"><span class="pill st-${st}">${STATUS[st]}</span><span style="flex:1"></span>${st === "approved" ? `<button class="btn" type="button" data-agree="0">Reopen</button>` : `<button class="btn cta" type="button" data-agree="1"${picksOf(s, g).length ? "" : " disabled"}>Agreed as a group</button>`}<a class="btn" href="#s=${S}&g=${g}&v=choose">Back to the list</a></div></div></div>`;
 }
-function drawLinks() {
-  $$(".flow").forEach((fl) => { const svg = $("svg.links", fl), box = fl.getBoundingClientRect(), rows = $$(".frow", fl); let path = "";
-    for (let i = 0; i < rows.length - 1; i++) { const up = $$(".pc", rows[i]), dn = $$(".pc", rows[i + 1]);
-      up.forEach((a) => dn.forEach((b) => { if (!builds(b.dataset.k, a.dataset.k)) return; a.classList.add("linked"); b.classList.add("linked");
-        const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect(), x1 = ra.left + ra.width / 2 - box.left, y1 = ra.bottom - box.top, x2 = rb.left + rb.width / 2 - box.left, y2 = rb.top - box.top, my = (y1 + y2) / 2;
-        path += `<path d="M${x1} ${y1} C${x1} ${my} ${x2} ${my} ${x2} ${y2}" fill="none" stroke="#101846" stroke-width="2" stroke-opacity=".55"/>`; })); }
-    svg.innerHTML = path;
-    if (reviewV.flagged && rows.length === 2) $$(".pc", rows[0]).forEach((c) => c.classList.toggle("flag", reviewV.flagged.has(c.dataset.k))); });
-}
-function reviewV(s, g) {
-  const up = above(g), ps = picksOf(s, g), st = statusOf(s, g);
-  if (!up) { const p = D.profile[s] || {}; return `<div class="stack"><div class="panel stack"><h1>Review: ${gname(g)} ${esc(s)}${help("review")}</h1><p class="lead">Grade 12 sits at the end of the road. Read its depth standards against the learner profile: do they describe the Awsaj graduate on the SAT / US Diploma track?</p></div>
-    <div class="cols2"><div class="panel"><h2>The Awsaj Graduate</h2>${p.knowledge || p.skills || p.application ? `<p><b>Knowledge.</b> ${esc(p.knowledge)}</p><p style="margin-top:8px"><b>Skills.</b> ${esc(p.skills)}</p><p style="margin-top:8px"><b>Application and independence.</b> ${esc(p.application)}</p>` : `<p class="empty">The learner profile is not written yet.</p>`}<p style="margin-top:10px"><a class="btn small" href="#s=${encodeURIComponent(s)}&v=profile">Open the learner profile</a></p></div>
-    <div class="panel"><h2>${gname(g)}: ${ps.length} chosen</h2><div class="flow"><svg class="links" aria-hidden="true"></svg>${rowsHTML(s, [g])}</div></div></div>${approveBar(s, g, st)}</div>`; }
-  const upPicks = picksOf(s, up), mine = new Set(ps.map((p) => `${p.framework}|${p.code}`)), lib = library(s, g);
-  const flags = []; upPicks.forEach((p) => { const k = `${p.framework}|${p.code}`; const need = lib.filter((e) => builds(key(e), k) && key(e) !== k && !mine.has(key(e))); if (need.length && !ps.some((q) => builds(`${q.framework}|${q.code}`, k))) flags.push([k, need]); });
-  reviewV.flagged = new Set(flags.map((f) => f[0]));
-  const lone = ps.filter((p) => !upPicks.some((q) => builds(`${p.framework}|${p.code}`, `${q.framework}|${q.code}`)));
-  return `<div class="stack"><div class="panel stack"><h1>Review: does ${gname(g)} prepare students for ${gname(up)}?${help("review")}</h1>
-    <p class="lead">${gname(up)} ${esc(s)} is ${STATUS[statusOf(s, up)].toLowerCase()}. Lines join standards where one builds on the other.</p>
-    <div class="legend"><span><i></i>Builds on, or the same standard</span><span><i class="f"></i>A question for the group</span></div></div>
-    <div class="panel"><div class="flow"><svg class="links" aria-hidden="true"></svg>${rowsHTML(s, [up, g])}</div></div>
-    <div class="cols2"><div class="panel"><h2>Questions for the group</h2>${flags.length ? `<ul class="flags">${flags.map(([k, need]) => { const e = findStd(s, k) || { c: k.split("|")[1] }; return `<li><b>${esc(e.c)}</b> (${gname(up)}) builds on ${need.slice(0, 3).map((n) => `<b>${esc(n.c)}</b>`).join(", ")}${need.length > 3 ? ` and ${need.length - 3} more` : ""} in ${gname(g)}, not chosen here. Should one of them be a depth standard?</li>`; }).join("")}</ul>` : `<p>No open questions: every ${gname(up)} depth standard that builds on a ${gname(g)} standard has a partner here, or has no direct link.</p>`}</div>
-    <div class="panel"><h2>No direct link to ${gname(up)}</h2>${lone.length ? `<p>${lone.length} of ${ps.length} chosen standards have no direct link to a ${gname(up)} depth standard. That can be right: some grades and courses (Geometry after Algebra 1, for example) start new strands. Is each one still essential?</p>` : `<p>Every chosen standard links to a ${gname(up)} depth standard.</p>`}</div></div>${approveBar(s, g, st)}</div>`;
-}
-const approveBar = (s, g, st) => `<div class="panel" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="pill st-${st}">${STATUS[st]}</span><span class="saved">The group talks the list through together; then the leader approves it with the PIN.</span><span style="flex:1"></span>${st === "approved" ? `<button class="btn" type="button" data-approve="0">Reopen</button>` : `<button class="btn cta" type="button" data-approve="1"${picksOf(s, g).length ? "" : " disabled"}>Approve after the review</button>`}<a class="btn" href="#s=${encodeURIComponent(s)}&g=${g}&v=choose">Back to the list</a></div>`;
+
 function progressionV(s) {
-  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: the progression${help("progression")}</h1><p class="lead">Our depth standards from Grade 12 down. Lines join standards where one builds on the other.</p><div class="legend"><span><i></i>Builds on, or the same standard</span><span>Dashed: not yet approved</span></div></div>
-    <div class="panel"><div class="flow"><svg class="links" aria-hidden="true"></svg>${rowsHTML(s, GRADES)}</div></div></div>`;
+  const S = encodeURIComponent(s);
+  const rows = GRADES.map((g) => { const ps = picksOf(s, g), st = statusOf(s, g);
+    return `<div class="prow"><div class="lab">${glab(s, g)}<small>${STATUS[st]} · ${ps.length}</small></div><div class="cards">${ps.length ? ps.map((p) => { const e = stdOf(s, p); return `<div class="pc${st === "approved" ? "" : " dim"}" data-std="${esc(`${p.framework}|${p.code}`)}" data-sg="${g}" tabindex="0" role="button" aria-haspopup="dialog"><b>${esc(e.c)}</b><span class="t">${esc(e.t)}</span></div>`; }).join("") : `<p class="empty">No standards chosen yet.</p>`}</div></div>`; }).join("");
+  return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: the progression${help("progression")}</h1><p class="lead">Our depth standards from Grade 12 down. Dashed: not yet agreed by the group.</p>
+    <div class="row-acts"><a class="btn" href="#s=${S}&v=list">Print our depth standards</a><a class="btn" href="#s=${S}&v=show&g=12">Show on screen</a><button class="btn" type="button" data-excel="${esc(s)}">Excel</button></div></div>
+    <div class="panel">${rows}</div></div>`;
 }
+
+/* printable: Our depth standards for one subject, Grade 12 down */
+function listV(s) {
+  const p = D.profile[s] || {}, today = new Date().toLocaleDateString([], { day: "numeric", month: "long", year: "numeric" });
+  const grades = GRADES.map((g) => { const ps = picksOf(s, g), st = statusOf(s, g);
+    return `<h2>${esc(gtext(s, g))} <span class="pill st-${st}">${STATUS[st]}</span></h2>${ps.length ? `<table><thead><tr><th style="width:22%">Standard</th><th>What students learn</th><th style="width:26%">Note</th></tr></thead><tbody>${ps.map((q) => { const e = stdOf(s, q); return `<tr><td>${fw(e)}</td><td>${esc(e.t)}</td><td class="pnote">${esc(q.note)}</td></tr>`; }).join("")}</tbody></table>` : `<p class="empty">No standards chosen yet.</p>`}`; }).join("");
+  return `<div class="stack"><div class="row-acts noprint"><button class="btn cta" type="button" onclick="print()">Print</button><a class="btn" href="#s=${encodeURIComponent(s)}">Back</a>${help("list")}</div>
+    <article class="doc"><h1>Our depth standards: ${esc(s)}</h1><p class="sub">The standards each grade or course will teach in depth, Grade 12 down. ${today}.</p>
+    ${p.knowledge || p.skills || p.application ? `<h2>The Awsaj Graduate in ${esc(s)}</h2><p><b>Essential knowledge.</b> ${esc(p.knowledge)}</p><p style="margin-top:6px"><b>Essential skills.</b> ${esc(p.skills)}</p><p style="margin-top:6px"><b>Application and independence.</b> ${esc(p.application)}</p>` : ""}${grades}</article></div>`;
+}
+
+/* paper: every standard one grade or course can choose from, with tick boxes and note lines */
+function paperV(s, g) {
+  const lib = library(s, g);
+  let last = ""; const rows = lib.map((e) => { const lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g), sh = e.s !== last ? `<tr><td colspan="3" style="font-weight:800;background:#F3F4F8">${esc(e.s)}</td></tr>` : ""; last = e.s;
+    return `${sh}<tr><td style="width:34px"><span class="box"></span></td><td style="width:24%">${fw(e)}${lv != null ? `<span class="alt">Part 1: ${RWORD[lv]}</span>` : ""}${pm ? `<span class="alt">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}</td><td>${esc(e.t)}<div class="noteline"></div></td></tr>`; }).join("");
+  return `<div class="stack"><div class="row-acts noprint"><button class="btn cta" type="button" onclick="print()">Print</button><a class="btn" href="#s=${encodeURIComponent(s)}&g=${g}&v=choose">Back</a>${help("paper")}</div>
+    <article class="doc"><h1>Depth standards: ${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub">Tick the standards every class must teach in depth, so students are ready for ${above(g) ? esc(gtext(s, above(g))) : "graduation on the SAT / US Diploma track"}. Add a note if it helps the review.</p>
+    <p class="expect" style="margin-top:10px"><b>What to expect</b>${esc(expectNote(s, g))}</p><div class="fill"><span>Group</span><span>Date</span></div>
+    <table><thead><tr><th></th><th>Standard</th><th>What students learn, and a note</th></tr></thead><tbody>${rows}</tbody></table></article></div>`;
+}
+
+/* on screen: one grade at a time, large, for a projector */
+function showV(s, g) {
+  g = GRADES.includes(g) ? g : "12"; const S = encodeURIComponent(s), ps = picksOf(s, g), st = statusOf(s, g), i = GRADES.indexOf(g);
+  return `<div class="show"><div><div class="row-acts noprint" style="justify-content:flex-end"><a class="btn small" href="#s=${S}&v=show&g=${GRADES[i - 1] || g}"${i ? "" : " hidden"}>&uarr; ${i ? esc(gname(GRADES[i - 1])) : ""}</a><a class="btn small" href="#s=${S}&v=show&g=${GRADES[i + 1] || g}"${i < GRADES.length - 1 ? "" : " hidden"}>&darr; ${i < GRADES.length - 1 ? esc(gname(GRADES[i + 1])) : ""}</a><button class="btn small" type="button" data-fs="1">${document.fullscreenElement ? "Leave full screen" : "Full screen"}</button><a class="btn small" href="#s=${S}">Close</a>${help("show")}</div>
+    <h1>${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub"><span class="pill st-${st}">${STATUS[st]}</span> &nbsp;${ps.length} depth standards</p></div>
+    <div class="showlist">${ps.length ? ps.map((p) => { const e = stdOf(s, p); return `<div><b>${esc(e.c)}</b>${esc(e.t)}</div>`; }).join("") : `<p class="empty" style="font-size:1.3rem">No standards chosen yet.</p>`}</div>
+    <p class="saved">Our depth standards, Grade 12 down · ${i + 1} of ${GRADES.length} · arrow keys or a clicker move between grades</p></div>`;
+}
+
 function profileV(s) {
-  const p = D.profile[s] || {}, open = picksOf(s, "12").length > 0, ed = open && (PRACTICE || D.dbReady);
+  const p = D.profile[s] || {}, open = picksOf(s, "12").length > 0, ed = open && canEdit();
   return `<div class="stack"><div class="panel stack"><h1>The Awsaj Graduate in ${esc(s)}${help("profile")}</h1><p class="lead">What should a graduate on the SAT / US Diploma track know and be able to do in ${esc(s)}?</p>${open ? "" : `<p class="notice">This opens once Grade 12 has chosen its depth standards.</p>`}</div>
     <div class="panel pform"><label><b>Essential knowledge</b><textarea id="pk" maxlength="2000"${ed ? "" : " readonly"} placeholder="The knowledge and concepts every graduate understands">${esc(p.knowledge)}</textarea></label>
     <label><b>Essential skills</b><textarea id="ps" maxlength="2000"${ed ? "" : " readonly"} placeholder="What graduates can do on their own">${esc(p.skills)}</textarea></label>
     <label><b>Application and independence</b><textarea id="pa" maxlength="2000"${ed ? "" : " readonly"} placeholder="How graduates apply it, solve problems and communicate">${esc(p.application)}</textarea></label>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">${ed ? `<button class="btn cta" type="button" data-saveprofile="1">Save the learner profile</button>` : ""}<button class="btn" type="button" onclick="print()">Print</button><a class="btn" href="#s=${encodeURIComponent(s)}&g=12&v=choose">Grade 12 standards</a></div></div></div>`;
+    <div class="row-acts">${ed ? `<button class="btn cta" type="button" data-saveprofile="1">Save the learner profile</button>` : ""}<button class="btn" type="button" onclick="print()">Print</button><a class="btn" href="#s=${encodeURIComponent(s)}&g=12&v=choose">Grade 12 standards</a></div></div></div>`;
+}
+
+/* the whole standard in a popup: full text, its Part 1 rating, the school's mark, and Add / Remove on the grade's own page */
+function openStd(s, g, k, canTick) {
+  const e = findStd(s, k); if (!e) return; const lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g), on = isPicked(s, g, k), p = picksOf(s, g).find((x) => `${x.framework}|${x.code}` === k);
+  const ok = canTick && canEdit() && statusOf(s, g) !== "approved";
+  $("#sdBody").innerHTML = `<p class="strandl">${esc(gtext(s, g))} ${esc(s)} · ${esc(e.s || "")}</p><h3 id="sdCode" style="margin-top:6px;font-size:1.4rem">${esc(e.c)}</h3><span class="alt">${esc(ccss(e))}</span>
+    <p class="sdtext">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}">${RATING[lv][1]}</span>` : `<span class="h">Not rated in Part 1</span>`}${pm ? `<span class="h pr">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}${on ? `<span class="h st-approved">Chosen as a depth standard</span>` : ""}</div>
+    ${p && p.note ? `<p class="saved" style="margin-top:10px"><b>Note:</b> ${esc(p.note)}</p>` : ""}
+    <div class="row-acts" style="justify-content:flex-end;margin-top:18px">${ok ? `<button class="btn ${on ? "" : "cta"}" type="button" data-dlgpick="${esc(k)}">${on ? "Remove from our depth standards" : "Add to our depth standards"}</button>` : ""}<button class="btn" type="button" data-dlgclose="1">Close</button></div>`;
+  const d = $("#stdDlg"); if (!d.open) d.showModal();
 }
 
 /* ================= events ================= */
@@ -341,18 +538,31 @@ document.addEventListener("click", (ev) => {
   const t = ev.target.closest("[data-help]"); if (t) { const b = $(`[data-helpbox="${t.dataset.help}"]`); b.hidden = !b.hidden; t.setAttribute("aria-expanded", !b.hidden); return; }
   const r = route();
   const pk = ev.target.closest("[data-pick]"); if (pk && !pk.disabled) { const e = findStd(r.s, pk.dataset.pick); if (e) setPick(r.s, r.g, e, !isPicked(r.s, r.g, key(e))); return; }
+  const un = ev.target.closest("[data-undo]"); if (un) { const e = findStd(r.s, un.dataset.undo); if (e) setPick(r.s, r.g, e, un.dataset.on === "1", un.dataset.note || "", true); return; }
+  if (ev.target.closest("[data-dlgclose]") || ev.target.id === "stdDlg") { $("#stdDlg").close(); return; }
+  const dp = ev.target.closest("[data-dlgpick]"); if (dp) { const e = findStd(r.s, dp.dataset.dlgpick); if (e) { setPick(r.s, r.g, e, !isPicked(r.s, r.g, key(e))); openStd(r.s, r.g, key(e), true); } return; }
+  const mo = ev.target.closest("[data-more]"); if (mo) { openStd(r.s, r.g, mo.dataset.more, true); return; }
+  const sd = ev.target.closest("[data-std]"); if (sd) { openStd(r.s, sd.dataset.sg, sd.dataset.std, false); return; }
+  const dn = ev.target.closest("[data-dens]"); if (dn) { DENS = dn.dataset.dens; store.set("pd_text", DENS); render(true); return; }
   const o = ev.target.closest("[data-only]"); if (o) { chooseV.f.only = o.dataset.only; render(true); return; }
   const st = ev.target.closest("[data-status]"); if (st) { setStatus(r.s, r.g, st.dataset.status); return; }
-  const ap = ev.target.closest("[data-approve]"); if (ap && !ap.disabled) { approve(r.s, r.g, ap.dataset.approve === "1"); return; }
+  const ag = ev.target.closest("[data-agree]"); if (ag && !ag.disabled) { agree(r.s, r.g, ag.dataset.agree === "1"); return; }
+  const xl = ev.target.closest("[data-excel]"); if (xl) { exportExcel(xl.dataset.excel || null); return; }
+  if (ev.target.closest("[data-fs]")) { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen?.().catch(() => toast("Full screen is not allowed here. Try Open full page.")); return; }
   if (ev.target.closest("[data-saveprofile]")) { saveProfile(r.s); return; }
-  const cp = ev.target.closest("[data-copy]"); if (cp) { navigator.clipboard?.writeText(cp.dataset.copy).then(() => toast("Team link copied."), () => toast(cp.dataset.copy)); return; }
 });
 document.addEventListener("input", (ev) => { if (ev.target.id === "q") { chooseV.f.q = ev.target.value; clearTimeout(render.q); render.q = setTimeout(() => { const pos = ev.target.selectionStart; render(true); const i = $("#q"); if (i) { i.focus(); i.setSelectionRange(pos, pos); } }, 200); } });
 document.addEventListener("change", (ev) => {
+  const r = route();
   if (ev.target.id === "strand") { chooseV.f.strand = ev.target.value; render(true); }
-  const n = ev.target.closest("[data-note]"); if (n) { const r = route(), e = findStd(r.s, n.dataset.note); if (e) setPick(r.s, r.g, e, true, n.value.trim()); }
+  const n = ev.target.closest("[data-note]"); if (n) { const e = findStd(r.s, n.dataset.note); if (e) setPick(r.s, r.g, e, true, n.value.trim()); }
+  const c = ev.target.closest("[data-col]"); if (c) { const cur = { a: $('[data-col="a"]').value, b: $('[data-col="b"]').value, g: r.g }; cur[c.dataset.col] = c.value; c.blur(); keepScroll = true; location.hash = href({ s: r.s, g: cur.g, v: "review", a: cur.a, b: cur.b }); }
 });
-addEventListener("resize", () => { clearTimeout(drawLinks.t); drawLinks.t = setTimeout(drawLinks, 150); });
+addEventListener("fullscreenchange", () => render(true));
+document.addEventListener("keydown", (e) => { const sd = e.target.closest && e.target.closest("[data-std]"); if (sd && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openStd(route().s, sd.dataset.sg, sd.dataset.std, false); } });
+addEventListener("keydown", (e) => { const r = route(); if (r.v !== "show" || e.target.closest("input, textarea, select") || e.repeat) return; const i = GRADES.indexOf(GRADES.includes(r.g) ? r.g : "12");
+  const go = (j) => { if (j >= 0 && j < GRADES.length) { e.preventDefault(); location.hash = href({ s: r.s, v: "show", g: GRADES[j] }); } };
+  if (["PageDown", "ArrowRight", "ArrowDown", " ", "n", "N"].includes(e.key)) go(i + 1); else if (["PageUp", "ArrowLeft", "ArrowUp", "p", "P"].includes(e.key)) go(i - 1); });
 boot().catch((e) => { $("#app").innerHTML = `<p class="notice">The page could not load: ${esc(e.message)}</p>`; });
 </script>
 </body>
