@@ -419,7 +419,7 @@ ol.wl > li { padding-left: 10px !important; } ol.wl > li, ol.qs > li { border-ra
 .pdsubj { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px; }
 .pdsubj a { display: grid; gap: 10px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,.75); text-decoration: none; box-shadow: 0 8px 24px rgba(16,24,70,.08); transition: transform .18s; }
 .pdsubj a:hover { transform: translateY(-3px); } .pdsubj .rule { width: 46px; height: 5px; border-radius: 4px; background: var(--c); } .pdsubj b { font-size: 1.5rem; }
-/* one at a time: fragments appear on Next while presenting; always visible otherwise and in print */
+/* fragments: every slide now shows them all at once (Tim, Nov 2026); they still fade in with the slide */
 body.presenting .pd .frag { opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease; }
 body.presenting .pd .frag.shown { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { body.presenting .pd .frag { transition: none; } .pd.on .pdroad .road, .pd.on .pdroad .cp2, .pd.on .pdroad .goal2, .pd.on .stair { animation: none; } }
@@ -926,10 +926,11 @@ document.addEventListener("click", (e) => {
 const slideEls = () => $$(".story > .shead, .story > .part");
 /* presenter frames: a part is shown as up to three screens: the finding, the possible explanations, our part in the story */
 const FRAME = { a: "" };
-const slides = () => slideEls().flatMap((el) => { const n = el.querySelectorAll(".frag").length; return Array.from({ length: n + 1 }, (_, f) => ({ el, f })); });
+/* Tim, Nov 2026: every slide shows all of its content at once (no click-by-click points) */
+const slides = () => slideEls().map((el) => ({ el, f: el.querySelectorAll(".frag").length, all: true }));
 let allMode = false;
 function setPresent(on) { presenting = on && !!SECTIONS[parse().id]; document.body.classList.toggle("presenting", presenting); $("#pbar").hidden = !presenting; if (presenting && document.activeElement) document.activeElement.blur(); $("#presentBtn").textContent = presenting ? "Show all on one page" : "Step by step"; const tb = $("#toggleAll"); if (tb) tb.textContent = presenting ? "Show all on one page" : "Go step by step"; if (!presenting) document.body.classList.remove("step0"); if (!presenting) slideEls().forEach((s) => { s.classList.remove("on"); s.removeAttribute("data-f"); }); }
-function showStep(n, keepScroll) { const ss = slides(); if (!ss.length) return; step = Math.max(0, Math.min(ss.length - 1, n)); slideEls().forEach((el) => el.classList.remove("on")); const s = ss[step]; s.el.classList.add("on"); s.el.dataset.f = s.f; s.el.querySelectorAll(".frag").forEach((x, i) => x.classList.toggle("shown", i < s.f)); const fr = s.f ? s.el.querySelectorAll(".frag")[s.f - 1] : null; if (fr && !keepScroll) { const r = fr.getBoundingClientRect(), bar = ($("#pbar")?.offsetHeight || 0) + 16; if (r.bottom > innerHeight - bar) window.scrollBy({ top: r.bottom - innerHeight + bar, behavior: REDUCED.matches ? "auto" : "smooth" }); }
+function showStep(n, keepScroll) { const ss = slides(); if (!ss.length) return; step = Math.max(0, Math.min(ss.length - 1, n)); slideEls().forEach((el) => el.classList.remove("on")); const s = ss[step]; s.el.classList.add("on"); s.el.dataset.f = s.f; s.el.querySelectorAll(".frag").forEach((x, i) => x.classList.toggle("shown", i < s.f)); const fr = s.f ? s.el.querySelectorAll(".frag")[s.f - 1] : null; if (fr && !keepScroll && !s.all) { const r = fr.getBoundingClientRect(), bar = ($("#pbar")?.offsetHeight || 0) + 16; if (r.bottom > innerHeight - bar) window.scrollBy({ top: r.bottom - innerHeight + bar, behavior: REDUCED.matches ? "auto" : "smooth" }); }
   document.body.classList.toggle("step0", step === 0); const h = s.el.querySelector("h2");
   const els = slideEls(), si = els.indexOf(s.el); $("#pCount").textContent = `${si + 1} of ${els.length}`; $("#pWhere").textContent = h ? h.textContent : "Start"; $("#pPrev").disabled = step === 0; $("#pNext").disabled = step === ss.length - 1;
   $("#pFill").style.width = ((step + 1) / ss.length) * 100 + "%"; if (!keepScroll && (!s.f || showStep.lastEl !== s.el)) window.scrollTo(0, 0); showStep.lastEl = s.el; }
