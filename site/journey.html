@@ -55,7 +55,7 @@ body:not(.at-map) #map { height: min(340px, 44vh); }
 .entry { padding-block: 0 14px; font-size: .9rem; color: var(--navy-2); display: flex; gap: 8px; align-items: center; }
 .entry i { width: 3px; height: 14px; background: var(--amber); display: inline-block; border-radius: 2px; flex: none; }
 body:not(.at-map) .entry, body:not(.at-map) #below { display: none; }
-#map text { font-family: var(--font); fill: var(--navy); } #map .cp, #map .stg { cursor: pointer; outline: none; }
+#map text { font-family: var(--font); fill: var(--navy); } #map .cp, #map .stg { cursor: default; outline: none; pointer-events: none; }
 #map .cp circle.c { fill: #fff; stroke: var(--navy); stroke-width: 3; transition: stroke-width .2s; } #map .cp.k circle.c { fill: var(--amber); }
 #map .cp:hover circle.c, #map .cp:focus-visible circle.c { stroke-width: 5; } #map .cp.sel circle.c { stroke-width: 6; } #map .cp.sel text { text-decoration: underline; }
 #map .cp:focus-visible circle.h, #map .stg:focus-visible rect.h { stroke: var(--navy); stroke-width: 2; stroke-dasharray: 5 4; }
@@ -456,7 +456,7 @@ body.presenting .pd .farr { opacity: 0; transition: opacity .35s ease; } body.pr
 .pd .howq { font-weight: 800; font-size: 1.15rem; margin: 0 0 10px; }
 .pd .pddef { margin-top: 16px; font-size: 1.05rem; padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,.6); border-left: 4px solid var(--cta); }
 .pd .pdintro { font-size: clamp(1rem, 1.3vw, 1.15rem); font-weight: 700; color: var(--navy-2); margin: -6px 0 8px; }
-.second { grid-template-columns: repeat(3, 1fr) !important; } @media (max-width: 760px) { .second { grid-template-columns: 1fr !important; } }
+.second { grid-template-columns: repeat(2, 1fr) !important; } @media (max-width: 760px) { .second { grid-template-columns: 1fr !important; } }
 .vaback { font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; padding: 8px 10px; border-radius: 999px; border: 1.5px solid var(--line); margin-right: 8px; } .vaback:hover { border-color: var(--navy); } @media print { .vaback { display: none; } }
 </style>
 
@@ -472,7 +472,7 @@ body.presenting .pd .farr { opacity: 0; transition: opacity .35s ease; } body.pr
   <div class="belowgrid"><div class="frame reveal"><span class="eyebrow">What this is</span><p class="lead">This is your data: the ratings you, our teachers, entered for the standards you teach, K-12.</p><p>Every chart links to the full data on the <a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/" target="_blank" rel="noopener">Vertical Alignment site ↗</a>.</p></div>
   <div class="subjbox"><p class="pickhint reveal"><b>Part 2:</b> Review our standards <span aria-hidden="true">&#8600;</span></p>
   <div class="subjects"><a class="reveal" style="--i:0;--c:var(--lime)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html#s=Math"><span class="rule"></span><b>Math</b><span class="arr">→</span></a><a class="reveal" style="--i:1;--c:var(--blue)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html#s=ELA"><span class="rule"></span><b>ELA</b><span class="arr">→</span></a><a class="reveal" style="--i:2;--c:var(--magenta)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html#s=Science"><span class="rule"></span><b>Science</b><span class="arr">→</span></a><a class="reveal" style="--i:3;--c:var(--amber)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html#s=Social%20Studies"><span class="rule"></span><b>Social Studies</b><span class="arr">→</span></a></div><p class="practicelink reveal"><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html?practice=1&amp;sample=math#s=Math">Test / Practice version <span class="arr">→</span></a><span>Math filled in with a made-up example, to try everything. Changes stay on your laptop, never in the real lists.</span></p></div></div>
-  <div class="second reveal"><a href="#next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-6-6-10.5a6 6 0 0 1 12 0C18 15 12 21 12 21z"/><circle cx="12" cy="10.5" r="2"/></svg><span class="t">Moving forward</span><span class="arr">→</span></a><a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-5M10 20v-9M15 20V7M20 20V4"/></svg><span class="t">About the data</span><span class="arr">→</span></a><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/pd-tour.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4l14 8-14 8z"/></svg><span class="t">Walk-through of the PD</span><span class="arr">→</span></a></div>
+  <div class="second reveal"><a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-5M10 20v-9M15 20V7M20 20V4"/></svg><span class="t">About the data</span><span class="arr">→</span></a><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/pd-tour.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4l14 8-14 8z"/></svg><span class="t">Walk-through of the PD</span><span class="arr">→</span></a></div>
 </div></section>
 <main id="story" aria-live="polite"></main>
 <div id="tip" hidden></div>
@@ -842,8 +842,8 @@ function buildMap() {
   // path progress of every checkpoint: the nearest point on the curve to its drawn position
   const N = 600, samples = Array.from({ length: N + 1 }, (_, i) => road.getPointAtLength((LEN * i) / N));
   D.grades.forEach((g) => { const [x, y] = geo.pts[g]; let best = 0, bd = 1e9; samples.forEach((p, i) => { const d = (p.x - x) ** 2 + (p.y - y) ** 2; if (d < bd) { bd = d; best = i; } }); T[g] = best / N; });
-  $("#cps").innerHTML = D.grades.map((g) => { const p = at(T[g]), st = stageOf(g); return `<g class="cp ${g === "K" ? "k" : ""}" data-grade="${g}" data-stage="${st.id}" role="button" tabindex="0" aria-label="${gname(g)}, ${st.name}" aria-pressed="false" transform="translate(${p.x} ${p.y})"><circle class="h" r="${r * 1.45}" fill="transparent"/><circle class="c" r="${r}"/><text y="${geo.fs * 0.35}" text-anchor="middle" font-weight="800" font-size="${geo.fs}">${g}</text></g>`; }).join("");
-  $("#stages").innerHTML = STAGES.map((s) => { const [lx, ly, sx] = geo.labels[s.id], base = at(T[s.grades[0] === "K" ? "1" : s.grades[0]]), fs = geo.fs; return `<g class="stg" data-stage="${s.id}" role="button" tabindex="0" aria-label="${s.label}, ${s.name}. Open this stage." aria-pressed="false"><line x1="${sx}" y1="${ly}" x2="${sx}" y2="${base.y - r - 2}" stroke="${s.accent}" stroke-width="3"/><circle cx="${sx}" cy="${ly}" r="8" fill="${s.accent}"/><rect class="h" x="${sx + 12}" y="${ly - fs * 1.2}" width="${fs * 8.4}" height="${fs * 3.1}" rx="6" fill="transparent"/><text class="nm" x="${sx + 22}" y="${ly + fs * 0.25}" font-weight="800" font-size="${fs * 1.45}">${s.label}</text><text x="${sx + 22}" y="${ly + fs * 1.55}" font-weight="500" font-size="${fs * 1.05}">${s.name}</text></g>`; }).join("");
+  $("#cps").innerHTML = D.grades.map((g) => { const p = at(T[g]), st = stageOf(g); return `<g class="cp ${g === "K" ? "k" : ""}" data-grade="${g}" data-stage="${st.id}" aria-label="${gname(g)}, ${st.name}" aria-pressed="false" transform="translate(${p.x} ${p.y})"><circle class="h" r="${r * 1.45}" fill="transparent"/><circle class="c" r="${r}"/><text y="${geo.fs * 0.35}" text-anchor="middle" font-weight="800" font-size="${geo.fs}">${g}</text></g>`; }).join("");
+  $("#stages").innerHTML = STAGES.map((s) => { const [lx, ly, sx] = geo.labels[s.id], base = at(T[s.grades[0] === "K" ? "1" : s.grades[0]]), fs = geo.fs; return `<g class="stg" data-stage="${s.id}" aria-label="${s.label}, ${s.name}. Open this stage." aria-pressed="false"><line x1="${sx}" y1="${ly}" x2="${sx}" y2="${base.y - r - 2}" stroke="${s.accent}" stroke-width="3"/><circle cx="${sx}" cy="${ly}" r="8" fill="${s.accent}"/><rect class="h" x="${sx + 12}" y="${ly - fs * 1.2}" width="${fs * 8.4}" height="${fs * 3.1}" rx="6" fill="transparent"/><text class="nm" x="${sx + 22}" y="${ly + fs * 0.25}" font-weight="800" font-size="${fs * 1.45}">${s.label}</text><text x="${sx + 22}" y="${ly + fs * 1.55}" font-weight="500" font-size="${fs * 1.05}">${s.name}</text></g>`; }).join("");
   $("#ticks").innerHTML = "";
   placeMarker(markerT || T.K); $("#marker").style.opacity = sel.stage ? 1 : 0;
 }
@@ -900,7 +900,7 @@ function endCard(id) { const nm = NAV[id] || SECTIONS[id].title, pdf = typeof pd
   return `<section class="part endcard" id="p-end"><span class="eyebrow">The end of this part</span><h2>You have reached the end of ${nm}</h2><p class="endlead">Where would you like to go from here?</p><div class="endtiles">${pdf ? tile(pdf, true, "&darr;", "Download this part as a PDF", "To print or take into your team meeting.") : ""}${data ? tile(data, true, "&#8599;", `Open the ${nm} data on the Vertical Alignment site`, "To check the figures standard by standard.") : ""}${tile("#map", false, "&#8634;", "Back to the journey map", "To pick another grade band or subject.")}</div></section>`; }
 function render(first) {
   const nx = parse(), changed = nx.id !== cur.id, story = $("#story"); const fromMapClick = render.fromMap; render.fromMap = false;
-  $("#navLinks").innerHTML = ORDER.map((s) => `<a href="#${s}" ${s === nx.id ? 'aria-current="page"' : ""}>${navName(s)}</a>`).join(""); $("#navLinks").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", "false");
+  $("#navLinks").innerHTML = ORDER.filter((s) => !NAV_HIDE.includes(s)).map((s) => `<a href="#${s}" ${s === nx.id ? 'aria-current="page"' : ""}>${navName(s)}</a>`).join(""); $("#navLinks").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", "false");
   document.body.classList.toggle("at-map", nx.id === "map"); document.body.classList.toggle("in-staff", nx.id === "staff"); $("#presentBtn").hidden = !SECTIONS[nx.id];
   const stage = STAGES.some((s) => s.id === nx.id) ? nx.id : null;
   if (nx.id === "map" || !changed || first) { /* keep scroll */ }
@@ -913,10 +913,10 @@ function render(first) {
 addEventListener("hashchange", () => render(false));
 let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { const was = geo; const now = matchMedia("(max-width: 760px)").matches ? GEO.tall : GEO.wide; if (was !== now) { buildMap(); } travel(sel.stage, sel.grade, true); }, 150); });
 const onScroll = () => $("#nav").classList.toggle("solid", scrollY > 8); addEventListener("scroll", onScroll, { passive: true });
+const NAV_HIDE = ["whole", "k-5", "g6-8", "g9-12", "next"];   // Tim, Nov 2026: off the Part 2 start page and menu
 const go = (h, fromMap) => { render.fromMap = fromMap; if (location.hash === "#" + h) render(false); else location.hash = h; };
 document.addEventListener("click", (e) => {
-  const cp = e.target.closest(".cp"); if (cp) return go("grade-" + cp.dataset.grade.toLowerCase(), true);
-  const stg = e.target.closest(".stg"); if (stg) return go(stg.dataset.stage, true);
+  if (e.target.closest("#map .cp, #map .stg")) return;   // the route is a picture only (Tim, Nov 2026)
   if (e.target.closest("#whole-route")) return go("map", true);
   const r = e.target.closest("[data-reflect]"); if (r) return openReflect(r.dataset.reflect);
   if (e.target.closest("#menuBtn")) { const o = $("#navLinks").classList.toggle("open"); $("#menuBtn").setAttribute("aria-expanded", o); return; }
