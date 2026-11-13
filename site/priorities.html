@@ -161,7 +161,7 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .rc.sel { border-color: var(--navy); box-shadow: 0 0 0 2px var(--navy); } .rc.lit { border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber); background: #FFF8EC; }
 #revbox.tracing .rc:not(.sel):not(.lit) { opacity: .3; }
 .rc .why { display: block; font-size: .8rem; font-weight: 700; color: #8a4f00; margin-top: 4px; } .rc .why:empty { display: none; }
-.nls { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; } .nl { font-size: .72rem; font-weight: 700; border-radius: 999px; padding: 1px 8px; background: #EEF0F6; color: var(--navy-2); }
+.nls { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; } .nl.alone, .h.alone { background: #EDE7F6; color: #4527A0; } .nl { font-size: .72rem; font-weight: 700; border-radius: 999px; padding: 1px 8px; background: #EEF0F6; color: var(--navy-2); }
 .rc.cp { flex: 0 1 236px; font-size: .8rem; padding: 7px 10px; border-width: 2px; } .rc.cp .t { -webkit-line-clamp: 2; } .rc.cp .alt { display: none; } .rc.cp .code { font-size: .86rem; }
 .rc.cp .more { display: inline; margin: 0; font-size: .72rem; } .rc.cp .nb { min-width: 20px; height: 20px; font-size: .72rem; } .rc.dim { border-style: dashed; }
 .dashbox { display: inline-block; width: 22px; height: 14px; border: 2px dashed var(--line); border-radius: 4px; background: #fff; }
@@ -211,6 +211,13 @@ textarea { width: 100%; min-height: 120px; border: 1.5px solid var(--line); bord
 .showlist b { display: block; font-size: 1.2rem; }
 body.fs header.top { display: none; } body.fs main { padding-top: 16px; }
 dialog { border: 0; border-radius: 18px; padding: 22px; max-width: 440px; box-shadow: 0 30px 60px rgba(16,24,70,.3); } dialog::backdrop { background: rgba(16,24,70,.35); }
+#lineDlg { max-width: 980px; width: calc(100% - 32px); max-height: 90vh; } .lusum { font-weight: 700; margin-top: 6px; }
+.lurows { display: grid; gap: 6px; margin-top: 12px; } .lurow { display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 8px 10px; border-radius: 12px; background: #F6F7FA; }
+.lurow.self { background: #EEF6D8; } .lurow.isgap { background: #FFF8EC; border: 2px dashed var(--amber); } .lug { font-weight: 800; display: grid; align-content: start; gap: 4px; } .lug small { display: block; font-weight: 600; color: var(--muted); font-size: .8rem; }
+.lucs { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; } .lucard { display: flex; gap: 8px; align-items: flex-start; background: #fff; border: 1.5px solid var(--line); border-radius: 10px; padding: 7px 10px; flex: 1 1 260px; max-width: 420px; font-size: .88rem; }
+.lucard.me { border: 2px solid var(--navy); } .lucard.gapc { border-style: dashed; } .lucard .h { font-size: .7rem; } .lut { margin-top: 2px; color: var(--navy-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.lucard .addb { flex: none; white-space: nowrap; align-self: flex-start; }
+.lunote { flex-basis: 100%; font-size: .85rem; color: var(--navy-2); } .cardacts { display: flex; gap: 12px; } .more.lu { font-weight: 800; }
 .cbox { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: #F3F4F8; font-size: .9rem; } .cbox ul { margin: 6px 0 0 18px; padding: 0; display: grid; gap: 3px; }
 #stdDlg { max-width: 640px; width: calc(100% - 32px); } #stdDlg .sdtext { font-size: 1.08rem; margin: 12px 0; line-height: 1.5; } #stdDlg .strandl { color: var(--muted); font-weight: 700; font-size: .85rem; }
 .stext[data-more], .rc[data-std], .pc[data-std] { cursor: pointer; }
@@ -235,6 +242,7 @@ dialog input { width: 100%; padding: 10px 12px; border: 1.5px solid var(--line);
 <main><div class="wrap" id="app" aria-live="polite"><p class="lead">Loading the standards…</p></div></main>
 <dialog id="pinDlg"><form method="dialog"><h3 id="pinTitle">Agreed as a group</h3><p id="pinText" style="margin-top:8px"></p><input id="pinIn" type="password" autocomplete="off" inputmode="numeric" aria-label="Leader PIN"><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" value="cancel">Cancel</button><button class="btn cta" value="ok" id="pinOk">Agreed</button></div></form></dialog>
 <dialog id="stdDlg" aria-labelledby="sdCode"><div id="sdBody"></div></dialog>
+<dialog id="lineDlg" aria-labelledby="luTitle"><div id="luBody"></div></dialog>
 <div id="toast" hidden role="status"></div>
 <script src="config.js"></script>
 <script>
@@ -255,7 +263,7 @@ function expectNote(s, g) {
   const c = COURSE[s] && COURSE[s][g];
   if (s === "Math") return ({
     12: "Pre-Calculus draws on many high school strands. It is the end of the road, so choose with the learner profile in mind.",
-    11: "Algebra 2 shares 18 standards with Pre-Calculus. Choosing the same standard in both courses is fine when both take it further.",
+    11: "Algebra 2 shares 18 standards with Pre-Calculus. Choosing a shared standard in both courses is fine when both take it further.",
     10: "Geometry starts new strands (congruence, circles, measurement), so it shares almost nothing with Algebra 2. Few links to the course above are expected.",
     9: "Algebra 1 leads into Algebra 2 more than into Geometry, the course above it. Look two courses up as well as one.",
     8: "Grade 8 is the last grade before the high school courses. Its standards rarely match a course standard one to one."
@@ -285,15 +293,15 @@ const HELP = {
   home: "Each grade or course chooses its focus standards: the standards we want every class to teach in depth for students on the SAT / US Diploma pathway. Focus standards are the standards required for success toward graduation and success in the course. The school's own Priority (6-12) and Power (K-5) standards are marked with a star to help the review. We start at Grade 12 and work down, so each grade can check it prepares students for the grade above.",
   ladder: "Every grade or course for this subject, from Grade 12 down. Anyone can open any grade at any time and change its list. Draft: still choosing. Ready for the group: the team has finished and the list waits for the group review. Agreed by the group: the group has talked it through and the leader has confirmed it with the PIN; it is then locked.",
   exports: "Print our focus standards: a printable list of every grade, Grade 12 down, with notes and the learner profile. Show on screen: one grade at a time in large type, for a projector. Excel: every chosen standard, the status of every list and the learner profile, in one file.",
-  library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many standards on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard in a popup with Add or Remove. Hints: the Part 1 rating (in One line, a coloured dot: green in depth, blue introduced, pink not taught), and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
+  library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many standards on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard in a popup with Add or Remove. Stands alone: no standard in any other grade connects to it (Math and ELA, or any subject with suggested links on). Hints: the Part 1 rating (in One line, a coloured dot: green in depth, blue introduced, pink not taught), and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
   picks: "The standards this grade or course wants taught in depth. Anyone can add or remove a standard; the list is shared and saves as you go. Add a short note on why a standard is essential if it helps the review. When you have finished, mark the list ready for the group. Print this list gives a paper copy of every standard with tick boxes, for teams that start on paper.",
   changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change and undo is kept in the history.",
-  review: "One review page with three ways to view the lists. Side by side: Grade 12 with the learner profile, the grade above and the grade being reviewed (outlined); change any column with the grade boxes. Whole progression: every grade's choices from Grade 12 down, the grade being reviewed highlighted. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The line at the top counts how many of the grade above's standards connect to something chosen here. Each line of connected standards across the grades has its own number and colour, the same in all three views (on the cards, and as small chips in the By strand cells): each standard joins its closest connection in the grade above (the same standard first, then an official link). Click a standard to light up everything it connects to and read how; Show all opens the whole standard. The group decides which connections matter: some standards have no partner, and that is fine.",
+  review: "One review page with three ways to view the lists. Side by side: Grade 12 with the learner profile, the grade above and the grade being reviewed (outlined); change any column with the grade boxes. Whole progression: every grade's choices from Grade 12 down, the grade being reviewed highlighted. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The line at the top counts how many of the grade above's standards connect to something chosen here. Each line of connected standards across the grades has its own number and colour, the same in all three views (on the cards, and as small chips in the By strand cells): each standard joins its closest connection in the grade above (a standard the two grades share first, then an official link). Click a standard to light up everything it connects to and read how; Show all opens the whole standard; Stands alone marks a standard that no standard in any other grade connects to; Line up puts the standard and what connects to it in every grade in one place, Grade 12 down, with the gaps (grades that chose nothing on that line, with the standards that would connect and Add buttons). The group decides which connections matter: some standards have no partner, and that is fine.",
   practice: "Opens a practice copy of this page with Math already filled in: 10 to 15 made-up focus standards in every grade, some lists agreed, a learner profile and some history, so you can try choosing, reviewing, agreeing, printing and exporting with full lists. Your practice changes are kept on this laptop only and never touch the real lists. Start the practice again resets it.",
   views: "Three ways to look at the same lists. Side by side: Grade 12 with the learner profile, the grade above and this grade, next to each other. Whole progression: every grade's choices, Grade 12 down. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The numbers, the flags and Agreed as a group work the same in every view.",
-  sum: "How many of the grade above's chosen standards connect (by an official link or the same standard) to at least one standard chosen in this grade. A low number is a question for the group, not a target: some courses start new strands.",
+  sum: "How many of the grade above's chosen standards connect (by an official link or a shared standard) to at least one standard chosen in this grade. A low number is a question for the group, not a target: some courses start new strands.",
   pickers: "Choose which grades to show. Left column: where we are heading (Grade 12 unless you change it). Middle column: the grade above (None hides it). Being reviewed: the grade the group is talking about and agreeing on.",
-  links: "Where the numbers and colours come from. Official: in Math, the Coherence Map (Student Achievement Partners), which shows which standard leads to which; in ELA, the same anchor standard one grade apart; in every subject, the same standard chosen in two grades. Suggested: links written by AI or matched by wording, marked check. Science and Social Studies only have suggested links, so they show only when you choose Official and suggested. Off hides the numbers, the flags about links and the no link notes. This laptop remembers your choice.",
+  links: "Where the numbers and colours come from. Official: in Math, the Coherence Map (Student Achievement Partners), which shows which standard leads to which; in ELA, the same anchor standard one grade apart; in every subject, a shared standard: one that sits in more than one grade's list and is chosen in both (for example high school Math standards placed in two courses, the English 11-12 standards, or Grades 6 to 8 Social Studies). Suggested: links written by AI or matched by wording, marked check. Science and Social Studies only have suggested links, so they show only when you choose Official and suggested. Off hides the numbers, the flags about links and the no link notes. This laptop remembers your choice.",
   side: "Flags the site works out from the lists shown, for the group to talk about. They never mean a standard must be chosen. A foundation: a standard the grade above chose builds on standards here that are not chosen. No link above: standards chosen here that connect to nothing chosen above (fine if they start something new). A strand: the grade above chose from a strand where this grade chose nothing. From Part 1: school priority or power standards not chosen, and chosen standards rated Not taught (new teaching). Click a code to read the standard; Add to Grade X puts a suggested standard straight on the list of the grade being reviewed (not once the list is agreed), and Recent changes on that grade's page can undo it. Not for us sets a flag aside on this laptop only; Show set aside brings it back.",
   strand: "One row per strand, one column per grade (K-12, or one school). Each cell: how many focus standards that grade chose in that strand, of how many it has. The bar shows the chosen ones by their Part 1 rating (green in depth, blue introduced, pink not taught, grey not rated). Hatched: no standards in that strand in that grade. Gap?: none chosen here, though a grade before and a grade after chose some in this strand, however far apart (for example chosen in Grades 6 and 10, none in 7 to 9: all three are marked). In Math the strand names change at Grade 9, so K-8 and 9-12 are compared within themselves; to compare any two grades directly, use Side by side. Arrows (Math and ELA, or with suggested links on): how many chosen here connect to nothing chosen in the grade above or below. Click a cell to list its standards, what each connects to above and below, or that nothing connects.",
   rquestions: "Questions to guide the talk. When the group agrees on this set of standards, the leader presses Agreed as a group and enters the PIN. The list is then locked; the leader can reopen it.",
@@ -386,7 +394,7 @@ async function seedFull(s) {
 async function boot() {
   D.meta = await fetch("data/meta.json").then((r) => r.json());
   try { const rs = await getAll("ratings?select=framework,code,grade,level"); rs.forEach((r) => D.ratings.set(`${r.framework}|${r.code}|${r.grade}`, r.level)); } catch (e) { /* hints only */ }
-  await loadPD(); loadLinks(); render(); addEventListener("hashchange", () => { const k = keepScroll; keepScroll = false; REV.sel = null; render(k); });
+  await loadPD(); loadLinks(); render(); addEventListener("hashchange", () => { const k = keepScroll; keepScroll = false; REV.sel = null; ["#lineDlg", "#stdDlg"].forEach((s) => { const d = $(s); if (d && d.open) d.close(); }); render(k); });
   if (!PRACTICE) setInterval(async () => { if (document.hidden || busy) return; const r = route(); await loadPD(); if (r.g && r.v === "choose") await loadEvents(r.s, r.g); if (!editingText()) render(true); }, 20000);
 }
 const editingText = () => { const a = document.activeElement; return a && /INPUT|TEXTAREA|SELECT/.test(a.tagName); };
@@ -543,7 +551,7 @@ function chooseV(s, g) {
   const rows = lib.filter((e) => (!f.q || (e.c + " " + e.t).toLowerCase().includes(f.q.toLowerCase())) && (!f.strand || e.s === f.strand) && (f.only !== "pr" || (e.pr || []).includes(g)) && (f.only !== "on" || isPicked(s, g, key(e))));
   let last = ""; const items = rows.map((e) => { const k = key(e), on = isPicked(s, g, k), lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g); const sh = e.s !== last ? `<p class="strandh">${esc(e.s)}</p>` : ""; last = e.s;
     const op = chooseV.open.has(k);
-    return `${sh}<div class="std${on ? " on" : ""}${op ? " open" : ""}"><button class="tick" type="button" data-pick="${esc(k)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(e.c)}"${ed ? "" : " disabled"}>${on ? "&#10003;" : "+"}</button><div class="sbody"><span class="shead">${fw(e)}</span><p class="stext" data-more="${esc(k)}">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}" title="${RATING[lv][1]}">${RATING[lv][1]}</span>` : ""}${pm ? `<span class="h pr" title="School ${pm.toLowerCase()} standard">&#9733;<span class="w"> School ${pm.toLowerCase()} standard</span></span>` : ""}</div><button class="more" type="button" data-more="${esc(k)}" aria-haspopup="dialog">Show all</button></div></div>`; }).join("");
+    return `${sh}<div class="std${on ? " on" : ""}${op ? " open" : ""}"><button class="tick" type="button" data-pick="${esc(k)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(e.c)}"${ed ? "" : " disabled"}>${on ? "&#10003;" : "+"}</button><div class="sbody"><span class="shead">${fw(e)}</span><p class="stext" data-more="${esc(k)}">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}" title="${RATING[lv][1]}">${RATING[lv][1]}</span>` : ""}${pm ? `<span class="h pr" title="School ${pm.toLowerCase()} standard">&#9733;<span class="w"> School ${pm.toLowerCase()} standard</span></span>` : ""}${standsAlone(s, g, k) ? `<span class="h alone" title="${ALONE}">Stands alone</span>` : ""}</div><button class="more" type="button" data-more="${esc(k)}" aria-haspopup="dialog">Show all</button></div></div>`; }).join("");
   const plist = picked.map((p) => { const e = stdOf(s, p); return `<div class="pitem"><div class="row"><span>${fw(e)}</span>${ed ? `<button class="x" type="button" data-pick="${esc(key(e))}" aria-label="Remove ${esc(e.c)}">Remove</button>` : ""}</div><p class="stext">${esc(e.t)}</p>${ed ? `<input type="text" maxlength="500" placeholder="Why it is essential (optional)" value="${esc(p.note)}" data-note="${esc(key(e))}" aria-label="Note for ${esc(e.c)}">` : p.note ? `<p class="saved">${esc(p.note)}</p>` : ""}</div>`; }).join("");
   return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth, so students are ready for ${up ? gtext(s, up) : "graduation on the SAT / US Diploma pathway"}?</p>
     ${expect(s, g)}${st === "approved" ? `<p class="saved">The group has agreed this list, so it is locked. The leader can reopen it.</p>` : ""}</div>
@@ -583,9 +591,19 @@ function linkOf(a, b) {
   const l = LINKS.m.get(a) && LINKS.m.get(a).get(b); if (!l || (!l.off && LM !== "a")) return null;
   return { t: l.off ? "off" : "sug", ...l };
 }
-const linkWords = (l, og, oc) => l.t === "same" ? `Same standard, also chosen in ${gname(og)}` : `${l.needs ? `Builds on ${gname(og)}'s ${oc}` : `${gname(og)}'s ${oc} builds on this`} (${SRC[l.src] || "link"})`;
+const linkWords = (l, og, oc) => l.t === "same" ? `${gname(og)} also chose this standard (the two grades share it)` : `${l.needs ? `Builds on ${gname(og)}'s ${oc}` : `${gname(og)}'s ${oc} builds on this`} (${SRC[l.src] || "link"})`;
 /* the "no link above / below" notes only where there is link data: Math and ELA, or any subject with suggested links on */
 const tagsOn = (s) => LM !== "n" && (LM === "a" || s === "Math" || s === "ELA");
+/* "Stands alone": no standard in any other grade connects to it (official links, or suggested too when shown), and no other
+   grade shares it. Only where there is link data to judge by (tagsOn). Tim, Nov 2026: good to note. */
+function standsAlone(s, g, k) {
+  if (!tagsOn(s) || !LINKS.m.size) return false; const e = findStd(s, k); if (!e) return false;
+  if ((e.pl || []).some((x) => x !== g && mainFW(s, x).includes(e.f))) return false;
+  const m = LINKS.m.get(k); if (!m) return true;
+  for (const [b, l] of m) { if (!l.off && l.src !== "anchorp" && LM !== "a") continue;   /* ELA parts matched to their anchor by wording still sit on a progression */ const eb = findStd(s, b); if (eb && (eb.pl || []).some((x) => x !== g)) return false; }
+  return true;
+}
+const ALONE = "Stands alone: no standard in any other grade connects to it";
 /* one standard against the choices of the grade just above and just below */
 function vert(s, g, k) {
   const out = {};
@@ -632,10 +650,10 @@ const dismissedSet = () => { try { return new Set(JSON.parse(store.get("pd_dismi
 function rcard(s, g, p, M, compact) {
   const k = pk(p), id = g + "|" + k, e = stdOf(s, p), n = M.num.get(id);
   const badge = n ? nbadge(n, M.solid.has(id)) : "";
-  let tags = ""; if (tagsOn(s)) { const v = vert(s, g, k);
+  let tags = ""; if (standsAlone(s, g, k)) tags = `<span class="nl alone" title="${ALONE}">Stands alone</span>`; else if (tagsOn(s)) { const v = vert(s, g, k);
     if (v.up && !v.up.empty && v.up.none) tags += `<span class="nl" title="Connects to nothing ${esc(gname(v.up.h))} chose">&uarr; No link above</span>`;
     if (v.down && !v.down.empty && v.down.none) tags += `<span class="nl" title="Connects to nothing ${esc(gname(v.down.h))} chose">&darr; No link below</span>`; }
-  return `<div class="rc${compact ? " cp" : ""}${compact && statusOf(s, g) !== "approved" ? " dim" : ""}" data-trace="${esc(id)}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(e.c)}${n ? `, connection ${n}` : ""}: show what it connects to"><div class="rch"><div>${fw(e)}</div>${badge}</div><span class="t">${esc(e.t)}</span>${p.note && !compact ? `<p class="nt">${esc(p.note)}</p>` : ""}${tags ? `<span class="nls">${tags}</span>` : ""}<span class="why"></span><button class="more" type="button" data-std="${esc(k)}" data-sg="${g}" aria-haspopup="dialog">Show all</button></div>`;
+  return `<div class="rc${compact ? " cp" : ""}${compact && statusOf(s, g) !== "approved" ? " dim" : ""}" data-trace="${esc(id)}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(e.c)}${n ? `, connection ${n}` : ""}: show what it connects to"><div class="rch"><div>${fw(e)}</div>${badge}</div><span class="t">${esc(e.t)}</span>${p.note && !compact ? `<p class="nt">${esc(p.note)}</p>` : ""}${tags ? `<span class="nls">${tags}</span>` : ""}<span class="why"></span><span class="cardacts"><button class="more" type="button" data-std="${esc(k)}" data-sg="${g}" aria-haspopup="dialog">Show all</button><button class="more lu" type="button" data-lineup="${esc(k)}" data-sg="${g}" aria-haspopup="dialog" title="Line up this standard with what connects to it in every grade">Line up</button></span></div>`;
 }
 /* click to trace: the chosen standard and what it connects to light up, the rest fade */
 function trace(id) {
@@ -663,7 +681,7 @@ function sideHTML(s, g, T, strip) {
     if (mine.some((q) => linkOf(pk(q), uk))) return;
     const c = lib.filter((e) => !mk.has(key(e))).map((e) => ({ e, l: linkOf(uk, key(e)) })).filter((x) => x.l && (x.l.t === "same" || x.l.needs));
     if (!c.length) return; const one = c.length === 1;
-    push("found", tg + "|" + uk, "Flag: a foundation", `<p><b>${gname(tg)} chose ${code(uk, tg)}.</b> It builds on ${one ? "this" : "these"} ${gname(g)} standard${one ? "" : "s"}, not chosen here:</p><ul>${c.slice(0, 6).map((x) => `<li>${code(key(x.e))}<span class="src">${x.l.t === "same" ? "same standard" : SRC[x.l.src]}</span>${add(key(x.e))}</li>`).join("")}${c.length > 6 ? `<li class="src">and ${c.length - 6} more</li>` : ""}</ul><p>Worth a look? It may be taught well enough without being a focus standard.</p>`); }));
+    push("found", tg + "|" + uk, "Flag: a foundation", `<p><b>${gname(tg)} chose ${code(uk, tg)}.</b> It builds on ${one ? "this" : "these"} ${gname(g)} standard${one ? "" : "s"}, not chosen here:</p><ul>${c.slice(0, 6).map((x) => `<li>${code(key(x.e))}<span class="src">${x.l.t === "same" ? "shared standard" : SRC[x.l.src]}</span>${add(key(x.e))}</li>`).join("")}${c.length > 6 ? `<li class="src">and ${c.length - 6} more</li>` : ""}</ul><p>Worth a look? It may be taught well enough without being a focus standard.</p>`); }));
   // chosen here, no link to anything chosen above
   const Tp = T.flatMap((tg) => picksOf(s, tg));
   if (tagsOn(s) && Tp.length) { const lone = mine.filter((q) => !Tp.some((u) => linkOf(pk(q), pk(u))));
@@ -739,7 +757,7 @@ function reviewV(s, g, r) {
   const pickers = `<div class="row-acts colpick">${mode === "cols" ? [["a", "Left column", a], ["b", "Middle column", b], ["g", "Being reviewed", g]].map(([k, l, v]) => `<label class="cpick">${l}<select data-col="${k}">${k === "b" ? `<option value="-"${v === "-" ? " selected" : ""}>None</option>` : ""}${gopts(s, v)}</select></label>`).join("")
     : `<label class="cpick">Being reviewed<select data-col="g">${gopts(s, g)}</select></label>`}${help("pickers")}<span style="flex:1"></span>${links}</div>`;
   const legend = `<p class="legend">${LM === "n" ? "" : `<span>${nbadge(1, true, true)}${nbadge(2, true, true)}${nbadge(3, true, true)} Same number and colour: one line of connected standards across the grades${LM === "a" ? ` (dashed: suggested, check)` : ""}. ${mode === "strand" ? "Click a cell to see its standards." : "Click a standard to see how it connects."}</span>`}${mode === "prog" ? `<span><span class="dashbox"></span> Dashed card: not agreed yet</span>` : ""}</p>`;
-  const note = LM === "o" && !["Math", "ELA"].includes(s) ? `<p class="cnote">${esc(s)} has no official links between grades, so only the same standard chosen in two grades gets a number. Choose <b>Official and suggested</b> to see possible links, and check them.</p>` : "";
+  const note = LM === "o" && !["Math", "ELA"].includes(s) ? `<p class="cnote">${esc(s)} has no official links between grades, so only shared standards (one standard chosen in two grades) get a number. Choose <b>Official and suggested</b> to see possible links, and check them.</p>` : "";
   const col = (x, i) => { const ps = picksOf(s, x), xs = statusOf(s, x);
     const prof = x === "12" ? (() => { const p = D.profile[s] || {}; return `<div class="prof"><b>The Awsaj Graduate</b>${p.knowledge || p.skills || p.application ? `${p.knowledge ? `<span><b>Knowledge.</b> ${esc(p.knowledge)}</span>` : ""}${p.skills ? `<span><b>Skills.</b> ${esc(p.skills)}</span>` : ""}${p.application ? `<span><b>Application.</b> ${esc(p.application)}</span>` : ""}` : `<span class="empty">Not written yet.</span>`}<a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a></div>`; })() : "";
     return `<section class="panel rcol${x === g ? " me" : ""}"><p class="cpick">${x === g ? "Being reviewed" : i === 0 ? "Where we are heading" : "The grade above"}</p><h3>${glab(s, x)}</h3>
@@ -796,12 +814,45 @@ function profileV(s) {
     <div class="row-acts">${ed ? `<button class="btn cta" type="button" data-saveprofile="1">Save the learner profile</button>` : ""}<button class="btn" type="button" onclick="print()">Print</button><a class="btn" href="#s=${encodeURIComponent(s)}&g=12&v=choose">Grade 12 standards</a></div></div></div>`;
 }
 
+/* Line up (Tim, Nov 2026): one standard and what connects to it in every grade, in one place, Grade 12 down. From the
+   standard, step a grade at a time up and down: in each grade, the standards that connect to the line so far (official links
+   and the same standard, or suggested ones too when shown). Chosen ones carry the line on; when a grade chose none, its
+   connecting standards show as a gap (with Add) and carry the line on; a grade where nothing connects is stepped over (two at
+   most), so Algebra 2 still lines up with Algebra 1 across Geometry. */
+function lineRows(s, g0, k0) {
+  const rows = new Map([[g0, { ch: [k0], gap: [], self: true }]]);
+  const walk = (next) => { let cur = [k0], g = g0, miss = 0;
+    for (;;) { const ng = next(g); if (!ng) break; g = ng;
+      const cand = library(s, g).map(key).filter((k) => cur.some((x) => x === k || linkOf(k, x)));
+      const ch = cand.filter((k) => isPicked(s, g, k)), gap = cand.filter((k) => !isPicked(s, g, k));
+      if (cand.length) { rows.set(g, { ch, gap }); cur = ch.length ? ch : gap; miss = 0; } else { rows.set(g, { ch: [], gap: [], none: true }); if (++miss >= 2) break; } } };
+  walk(above); walk(below);
+  // trim "nothing connects" rows at the two ends
+  const gs = GRADES.filter((g) => rows.has(g)); while (gs.length && rows.get(gs[0]).none) gs.shift(); while (gs.length && rows.get(gs[gs.length - 1]).none) gs.pop();
+  return gs.map((g) => [g, rows.get(g)]);
+}
+function openLine(s, g0, k0) {
+  const e0 = findStd(s, k0); if (!e0) return; const rows = lineRows(s, g0, k0), T = threadModel(s);
+  const card = (g, k, kind) => { const e = findStd(s, k) || { c: k.split("|")[1], t: "" }, n = T.num.get(g + "|" + k), lv = D.ratings.get(`${k}|${g}`), ed = canEdit() && statusOf(s, g) !== "approved";
+    return `<div class="lucard ${kind}">${n && kind !== "gapc" ? nbadge(n, T.solid.has(g + "|" + k), true) : ""}<div><b>${esc(e.c)}</b>${lv != null ? ` <span class="h ${RATING[lv][0]}">${RATING[lv][1]}</span>` : ""}<p class="lut">${esc(e.t)}</p></div>${kind === "gapc" && ed ? `<button class="addb" type="button" data-addg="${g}" data-add2="${esc(k)}">Add to ${esc(gname(g))}</button>` : ""}</div>`; };
+  const gapsAt = rows.filter(([, r]) => !r.self && !r.ch.length).map(([g]) => gname(g));
+  const sum = rows.length > 1 ? `This line runs from ${gname(rows[0][0])} to ${gname(rows[rows.length - 1][0])}. ${gapsAt.length ? `No standard chosen on it in ${gapsAt.join(", ").replace(/, ([^,]*)$/, " and $1")}.` : "Every grade on it has chosen a standard."}` : `Stands alone: nothing in the grades above or below connects to this standard${LM === "o" ? " by an official link" : ""}.`;
+  $("#luBody").innerHTML = `<p class="strandl">${esc(s)} · ${esc(e0.s || "")}</p><h3 id="luTitle" style="font-size:1.4rem;margin-top:4px">Line up: ${esc(e0.c)} across the grades</h3><p class="lusum">${esc(sum)}</p>
+    <div class="lurows">${rows.map(([g, r]) => `<div class="lurow${r.self ? " self" : ""}${!r.self && !r.ch.length ? " isgap" : ""}"><div class="lug">${glab(s, g)}${!r.self && !r.ch.length && r.gap.length ? `<span class="gapl">Gap</span>` : ""}</div><div class="lucs">
+      ${r.ch.map((k) => card(g, k, k === k0 && r.self ? "me" : "on")).join("")}
+      ${!r.ch.length && r.gap.length ? `<p class="lunote">None chosen here. ${r.gap.length === 1 ? "This standard connects" : "These standards connect"}:</p>${r.gap.slice(0, 6).map((k) => card(g, k, "gapc")).join("")}${r.gap.length > 6 ? `<p class="lunote">and ${r.gap.length - 6} more</p>` : ""}` : ""}
+      ${r.none ? `<p class="lunote">Nothing in ${esc(gname(g))}'s standards connects${LM === "o" ? " by an official link" : ""}.</p>` : ""}</div></div>`).join("")}</div>
+    <p class="saved" style="margin-top:10px">Links: ${LM === "a" ? "official and suggested" : LM === "n" ? "off (only shared standards)" : "official (Coherence Map, anchor standards, shared standards)"}. A gap is a question for the group, not a rule.</p>
+    <div class="row-acts" style="justify-content:flex-end;margin-top:12px"><button class="btn" type="button" data-luclose="1">Close</button></div>`;
+  openLine.at = [s, g0, k0]; const d = $("#lineDlg"); if (!d.open) d.showModal();
+}
+
 /* in the popup: what this standard connects to among the choices of the grade above and below */
 function connBox(s, g, k) {
   if (!LINKS.m.size || LM === "n") return "";
-  const v = vert(s, g, k), line = (x, lab) => !x ? "" : x.empty ? `<li>${lab} (${esc(gname(x.h))}): has not chosen yet.</li>` : x.none ? `<li>${lab} (${esc(gname(x.h))}): ${tagsOn(s) ? "no connected standard chosen." : "nothing chosen is the same standard. Turn on suggested links to see possible ones."}</li>`
+  const v = vert(s, g, k), line = (x, lab) => !x ? "" : x.empty ? `<li>${lab} (${esc(gname(x.h))}): has not chosen yet.</li>` : x.none ? `<li>${lab} (${esc(gname(x.h))}): ${tagsOn(s) ? "no connected standard chosen." : "nothing chosen there is a shared standard. Turn on suggested links to see possible ones."}</li>`
     : x.hits.map((h) => `<li>${lab}: ${esc(linkWords(h.l, x.h, h.q.code))}${h.l.t === "sug" && h.l.why ? ` <span class="src">${esc(h.l.why)}</span>` : ""}</li>`).join("");
-  const body = line(v.up, "Above") + line(v.down, "Below");
+  const body = (standsAlone(s, g, k) ? `<li><b>Stands alone:</b> no standard in any other grade connects to it. It may start or finish something on its own.</li>` : "") + line(v.up, "Above") + line(v.down, "Below");
   return body ? `<div class="cbox"><b>Connections to the grades above and below</b><ul>${body}</ul></div>` : "";
 }
 
@@ -812,7 +863,7 @@ function openStd(s, g, k, canTick) {
   $("#sdBody").innerHTML = `<p class="strandl">${esc(gtext(s, g))} ${esc(s)} · ${esc(e.s || "")}</p><h3 id="sdCode" style="margin-top:6px;font-size:1.4rem">${esc(e.c)}</h3><span class="alt">${esc(ccss(e))}</span>
     <p class="sdtext">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}">${RATING[lv][1]}</span>` : `<span class="h">Not rated in Part 1</span>`}${pm ? `<span class="h pr">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}${on ? `<span class="h st-approved">Chosen as a focus standard</span>` : ""}</div>
     ${p && p.note ? `<p class="saved" style="margin-top:10px"><b>Note:</b> ${esc(p.note)}</p>` : ""}${connBox(s, g, k)}
-    <div class="row-acts" style="justify-content:flex-end;margin-top:18px">${ok ? `<button class="btn ${on ? "" : "cta"}" type="button" data-dlgpick="${esc(k)}">${on ? "Remove from our focus standards" : "Add to our focus standards"}</button>` : ""}<button class="btn" type="button" data-dlgclose="1">Close</button></div>`;
+    <div class="row-acts" style="justify-content:flex-end;margin-top:18px">${ok ? `<button class="btn ${on ? "" : "cta"}" type="button" data-dlgpick="${esc(k)}">${on ? "Remove from our focus standards" : "Add to our focus standards"}</button>` : ""}<button class="btn" type="button" data-lineup="${esc(k)}" data-sg="${g}">Line up across the grades</button><button class="btn" type="button" data-dlgclose="1">Close</button></div>`;
   const d = $("#stdDlg"); if (!d.open) d.showModal();
 }
 
@@ -828,6 +879,9 @@ document.addEventListener("click", (ev) => {
   const dp = ev.target.closest("[data-dlgpick]"); if (dp) { const e = findStd(r.s, dp.dataset.dlgpick); if (e) { setPick(r.s, r.g, e, !isPicked(r.s, r.g, key(e))); openStd(r.s, r.g, key(e), true); } return; }
   const mo = ev.target.closest("[data-more]"); if (mo) { openStd(r.s, r.g, mo.dataset.more, true); return; }
   const ad = ev.target.closest("[data-add]"); if (ad) { const e = findStd(r.s, ad.dataset.add); if (e && !isPicked(r.s, r.g, key(e))) { setPick(r.s, r.g, e, true); toast(`${e.c} added to ${gname(r.g)}. Recent changes on its page can undo it.`); } return; }
+  if (ev.target.closest("[data-luclose]") || ev.target.id === "lineDlg") { $("#lineDlg").close(); return; }
+  const lu = ev.target.closest("[data-lineup]"); if (lu) { if ($("#stdDlg").open) $("#stdDlg").close(); openLine(r.s, lu.dataset.sg, lu.dataset.lineup); return; }
+  const a2 = ev.target.closest("[data-add2]"); if (a2) { const e = findStd(r.s, a2.dataset.add2), g2 = a2.dataset.addg; if (e && !isPicked(r.s, g2, key(e))) { setPick(r.s, g2, e, true).then(() => { if ($("#lineDlg").open) openLine(...openLine.at); }); openLine(...openLine.at); toast(`${e.c} added to ${gname(g2)}.`); } return; }
   const sd = ev.target.closest("[data-std]"); if (sd) { openStd(r.s, sd.dataset.sg, sd.dataset.std, sd.dataset.tick === "1"); return; }
   const rm = ev.target.closest("[data-rmode]"); if (rm) { location.hash = href({ s: r.s, g: r.g || "12", v: "review", m: rm.dataset.rmode === "cols" ? "" : rm.dataset.rmode, a: r.a, b: r.b, band: r.band }); return; }
   const lm = ev.target.closest("[data-lm]"); if (lm) { LM = lm.dataset.lm; store.set("pd_links", LM); render(true); return; }
