@@ -286,6 +286,7 @@ const HELP = {
   picks: "The standards this grade or course wants taught in depth. Anyone can add or remove a standard; the list is shared and saves as you go. Add a short note on why a standard is essential if it helps the review. When you have finished, mark the list ready for the group. Print this list gives a paper copy of every standard with tick boxes, for teams that start on paper.",
   changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change and undo is kept in the history.",
   review: "One review page with three ways to view the lists. Side by side: Grade 12 with the learner profile, the grade above and the grade being reviewed (outlined); change any column with the grade boxes. Whole progression: every grade's choices from Grade 12 down, the grade being reviewed highlighted. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The line at the top counts how many of the grade above's standards connect to something chosen here. Matching numbers mark standards that connect; click a standard to light up what it connects to and read how, and Show all opens the whole standard. The group decides which connections matter: some standards have no partner, and that is fine.",
+  practice: "Opens a practice copy of this page with Math already filled in: 10 to 15 made-up focus standards in every grade, some lists agreed, a learner profile and some history, so you can try choosing, reviewing, agreeing, printing and exporting with full lists. Your practice changes are kept on this laptop only and never touch the real lists. Start the practice again resets it.",
   views: "Three ways to look at the same lists. Side by side: Grade 12 with the learner profile, the grade above and this grade, next to each other. Whole progression: every grade's choices, Grade 12 down. By strand: how many standards each grade chose in each strand, to spot where a strand stops. The numbers, the flags and Agreed as a group work the same in every view.",
   sum: "How many of the grade above's chosen standards connect (by an official link or the same standard) to at least one standard chosen in this grade. A low number is a question for the group, not a target: some courses start new strands.",
   pickers: "Choose which grades to show. Left column: where we are heading (Grade 12 unless you change it). Middle column: the grade above (None hides it). Being reviewed: the grade the group is talking about and agreeing on.",
@@ -322,7 +323,7 @@ async function loadSubject(s) {
     D.idx[s].forEach((e) => { const t = full[key(e)]; if (t) e.t = t; }); if (route().s === s && !editingText()) render(true); }).catch(() => {});
 }
 async function loadPD() {
-  if (PRACTICE) { if (!D.seeded && Q.get("sample") === "1") seedSample(); return; }
+  if (PRACTICE) { if (!D.seeded && Q.get("sample") === "1") seedSample(); else if (!D.seeded && SAMPLE_FULL) await seedFull("Math"); return; }
   try { const [p, st, pr] = await Promise.all([getAll("pd_picks?select=*"), getAll("pd_status?select=*"), getAll("pd_profile?select=*")]); D.picks = p; D.status = st; D.profile = Object.fromEntries(pr.map((r) => [r.subject, r])); D.dbReady = true; }
   catch (e) { D.dbReady = false; D.picks = []; D.status = []; D.profile = {}; }
 }
@@ -345,6 +346,40 @@ function seedSample() {
   const t = (m) => new Date(Date.now() - m * 60000).toISOString(), E = (kind, c, m) => ({ id: "S" + m, kind, subject: "Math", grade: "11", framework: c ? "WI-CC-MATH" : "", code: c, detail: "", team: "Sample", created_at: t(m) });
   D.ev["Math|11"] = [E("ready", "", 2), E("pick", "M.F.LE.A.2", 4), E("unpick", "M.F.IF.A.1", 6), E("pick", "M.F.BF.A.2", 8), E("pick", "M.F.BF.A.1", 9)];
 }
+/* Test / Practice version (Tim, Nov 2026): ?practice=1&sample=math fills Math in with a made-up example, 10 to 15 standards in
+   every grade, chosen the way a team might (rated in depth in Part 1, the school's priority or power standards, and links to
+   the grade above), with a mix of statuses, a learner profile, notes and some history. Nothing is saved. */
+const SAMPLE_FULL = Q.get("sample") === "math";
+const PKEY = "pd_practice_math";
+const savePractice = () => { if (SAMPLE_FULL && D.practiceReady) store.set(PKEY, JSON.stringify({ v: 1, picks: D.picks, status: D.status, profile: D.profile, ev: D.ev })); };
+async function seedFull(s) {
+  D.seeded = true;
+  // read the saved practice first: a redraw while the standards load must never overwrite it
+  try { const k = JSON.parse(store.get(PKEY) || "null"); if (k && k.v === 1 && Array.isArray(k.picks)) { D.picks = k.picks; D.status = k.status || []; D.profile = k.profile || {}; D.ev = k.ev || {}; D.practiceReady = true; return; } } catch (e) { /* start fresh */ }
+  await loadSubject(s); await loadLinks();
+  const N = { 12: 12, 11: 13, 10: 10, 9: 14, 8: 12, 7: 11, 6: 13, 5: 15, 4: 12, 3: 14, 2: 11, 1: 12, K: 10 };
+  const hash = (x) => { let h = 7; for (const ch of x) h = (h * 31 + ch.charCodeAt(0)) % 9973; return h; };
+  const picks = []; let up = [];
+  for (const g of GRADES) {
+    const lib = library(s, g), n = Math.min(N[g], lib.length);
+    const score = (e) => { const k = key(e), lv = D.ratings.get(`${k}|${g}`); let v = lv === 2 ? 3 : lv === 1 ? 1 : 0;
+      if ((e.pr || []).includes(g)) v += 2;
+      if (up.some((u) => u === k || ((LINKS.m.get(k) || new Map()).get(u) || {}).off)) v += 4;
+      return v + hash(k + g) / 10000; };
+    const chosen = new Set(lib.slice().sort((a, b) => score(b) - score(a)).slice(0, n).map(key));
+    const ks = lib.filter((e) => chosen.has(key(e)));
+    ks.forEach((e, i) => picks.push({ subject: s, grade: g, framework: e.f, code: e.c, note: i === 0 ? (g === "12" ? "Essential for the SAT: students meet this in many forms." : g === "K" ? "The foundation for everything that follows." : "") : "", team: "Practice" }));
+    up = ks.map(key);
+  }
+  D.picks = picks;
+  const st = { 12: "approved", 11: "approved", 10: "approved", 9: "ready", 8: "ready", 7: "ready" };
+  D.status = GRADES.map((g) => ({ subject: s, grade: g, status: st[g] || "draft" }));
+  D.profile = { [s]: { subject: s, knowledge: "Linear, quadratic and exponential functions; equations and inequalities; ratios and rates; the ideas behind rates of change and modelling.", skills: "Model a situation with a function, rearrange formulas, solve multi-step problems with and without a calculator, read and use graphs and data.", application: "Choose a method, explain the reasoning in words, check whether an answer makes sense, and work independently on unfamiliar problems." } };
+  const t0 = Date.now(), ev = (g, kind, c, m) => ({ id: "P" + g + m, kind, subject: s, grade: g, framework: c ? "WI-CC-MATH" : "", code: c || "", detail: "", team: "Practice", created_at: new Date(t0 - m * 60000).toISOString() });
+  GRADES.forEach((g) => { const ps = picks.filter((x) => x.grade === g).slice(0, 4); D.ev[s + "|" + g] = [...(st[g] ? [ev(g, st[g] === "approved" ? "approve" : "ready", "", 1)] : []), ...ps.map((x, i) => ev(g, "pick", x.code, 3 + i * 2))]; });
+  D.practiceReady = true;
+}
+
 async function boot() {
   D.meta = await fetch("data/meta.json").then((r) => r.json());
   try { const rs = await getAll("ratings?select=framework,code,grade,level"); rs.forEach((r) => D.ratings.set(`${r.framework}|${r.code}|${r.grade}`, r.level)); } catch (e) { /* hints only */ }
@@ -399,7 +434,7 @@ function agree(s, g, on) {
 async function saveProfile(s) {
   const v = { p_subject: s, p_knowledge: $("#pk").value, p_skills: $("#ps").value, p_application: $("#pa").value, p_team: TEAM };
   D.profile[s] = { subject: s, knowledge: v.p_knowledge, skills: v.p_skills, application: v.p_application };
-  if (PRACTICE) return toast("Saved (practice: on this screen only).");
+  if (PRACTICE) { savePractice(); return toast(SAMPLE_FULL ? "Saved in the practice version on this laptop." : "Saved (practice: on this screen only)."); }
   busy++; try { await rpc("pd_set_profile", v); toast("Learner profile saved."); } catch (err) { toast("Not saved: " + err.message); } finally { busy--; }
 }
 
@@ -444,7 +479,7 @@ function header(r) {
   if (r.g && r.v !== "show") c.push(`<span>/</span><a href="#s=${S}&g=${r.g}&v=choose">${gname(r.g)}</a>`);
   const lab = { review: "Review", profile: "Learner profile", paper: "Print this list", list: "Print our focus standards", show: "Show on screen" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
   $("#crumbs").innerHTML = c.join("");
-  $("#who").innerHTML = (PRACTICE ? `<span class="pill practice">Practice: nothing is saved</span>` : "") + (TEAM ? `<span class="pill team">Team: ${esc(TEAM)}</span>` : "")
+  $("#who").innerHTML = (PRACTICE ? `<span class="pill practice">${SAMPLE_FULL ? "Practice version: saved on this laptop only" : "Practice: nothing is saved"}</span>` : "") + (TEAM ? `<span class="pill team">Team: ${esc(TEAM)}</span>` : "")
     + (FRAMED && !TOUR ? `<a class="btn small" href="${esc(location.href)}" target="_blank" rel="noopener" title="Open this page in its own tab, for presenting">Open full page ↗</a>` : "") + `<a class="btn small" href="journey.html">PD slides</a>`;
 }
 
@@ -454,10 +489,11 @@ async function render(keep) {
   if (r.s) await loadSubject(r.s); if (r.v === "review") await loadLinks(); if (REV.cellS !== r.s) { REV.cell = null; REV.cellS = r.s; }
   if (r.s && r.g && r.v === "choose" && !D.ev[r.s + "|" + r.g]) { D.ev[r.s + "|" + r.g] = []; loadEvents(r.s, r.g).then(() => { if (!editingText()) render(true); }); }
   const app = $("#app");
+  const pnote = SAMPLE_FULL ? `<p class="expect" style="margin-bottom:16px"><b>Test / Practice version</b>Math is filled in with a made-up example (10 to 15 standards in every grade, some lists agreed) so you can try everything. Your changes are kept on this laptop only, never in the real lists; agreeing needs no PIN here. The other subjects are empty. <span class="row-acts" style="margin-top:6px"><button class="btn small" type="button" data-practicereset="1">Start the practice again</button><a class="btn small" href="priorities.html">Leave the practice version</a></span></p>` : "";
   const note = !PRACTICE && !D.dbReady ? `<p class="notice">Saving is not switched on yet: the leader needs to add the focus standards tables to the database. You can look around, or try <a href="?practice=1${location.hash}">practice mode</a>.</p>` : "";
   const v = !r.s ? homeV() : r.v === "profile" ? profileV(r.s) : r.v === "list" ? listV(r.s) : r.v === "show" ? showV(r.s, r.g)
     : !r.g ? subjectV(r.s) : r.v === "review" ? reviewV(r.s, r.g, r) : r.v === "paper" ? paperV(r.s, r.g) : chooseV(r.s, r.g);
-  app.innerHTML = note + v; document.body.classList.toggle("fs", !!document.fullscreenElement);
+  app.innerHTML = pnote + note + v; savePractice(); document.body.classList.toggle("fs", !!document.fullscreenElement);
   if (r.v === "review" && REV.sel) trace(REV.sel);
   if (keep) scrollTo(0, y); else scrollTo(0, 0);
 }
@@ -466,7 +502,7 @@ function homeV() {
   return `<div class="stack"><div class="panel stack"><p class="pill">Part 2 · Subject sessions</p><h1>Our focus standards${help("home")}</h1><p class="lead">Review our standards and identify those most important for student success in the SAT / US Diploma pathway. We start at Grade 12 and work down.</p>
     <p class="expect"><b>Focus standards</b>The standards required for success toward graduation and success in the course.</p>
     <div class="steps3"><div><b>1. Review and choose</b>Each team reviews its grade or course standards and ticks the ones that matter most.</div><div><b>2. Review</b>The group reads each list beside the grade above and Grade 12: does it prepare students for them?</div><div><b>3. Agree</b>When the group agrees on the set, the leader confirms it with the PIN.</div></div>
-    <div class="row-acts"><button class="btn small" type="button" data-excel="">Excel: all subjects</button></div></div>
+    <div class="row-acts"><button class="btn small" type="button" data-excel="">Excel: all subjects</button>${PRACTICE ? "" : `<a class="btn small" href="?practice=1&sample=math#s=Math">Test / Practice version</a>${help("practice")}`}</div></div>
     <div class="subjects">${SUBJ.map(([s, , c]) => `<a class="subj" style="--c:${c}" href="#s=${encodeURIComponent(s)}"><span class="rule"></span><b>${s}</b><span>Grade 12 down to Kindergarten</span></a>`).join("")}</div></div>`;
 }
 
@@ -557,6 +593,7 @@ function vert(s, g, k) {
 /* numbers: standards linked across the grades shown share a number (one number per connected group) */
 function connModel(s, grades) {
   const cards = []; grades.forEach((g) => picksOf(s, g).forEach((p) => cards.push({ g, k: pk(p), id: g + "|" + pk(p) })));
+  const numbered = grades.length <= 3;   // numbers only side by side; in the whole progression they would merge into a few huge groups
   const par = cards.map((_, i) => i), find = (i) => (par[i] === i ? i : (par[i] = find(par[i])));
   const edges = new Map(cards.map((c) => [c.id, []])), solid = new Set();
   for (let i = 0; i < cards.length; i++) for (let j = i + 1; j < cards.length; j++) { const A = cards[i], B = cards[j]; if (A.g === B.g) continue;
@@ -565,7 +602,7 @@ function connModel(s, grades) {
     if (l.t !== "sug") { solid.add(A.id); solid.add(B.id); } }
   const size = new Map(); cards.forEach((c, i) => { const r = find(i); size.set(r, (size.get(r) || 0) + 1); });
   const num = new Map(), rn = new Map(); let n = 0;
-  cards.forEach((c, i) => { const r = find(i); if (size.get(r) < 2) return; if (!rn.has(r)) rn.set(r, ++n); num.set(c.id, rn.get(r)); });
+  if (numbered) cards.forEach((c, i) => { const r = find(i); if (size.get(r) < 2) return; if (!rn.has(r)) rn.set(r, ++n); num.set(c.id, rn.get(r)); });
   return { num, edges, solid };
 }
 const REV = { sel: null, M: null, cell: null, cellS: null, showOff: false };
@@ -673,7 +710,7 @@ function reviewV(s, g, r) {
   const links = `<div class="lsel"><label class="cpick">Links<select data-lmsel="1">${[["o", "Official"], ["a", "Official and suggested"], ["n", "Off"]].map(([k, l]) => `<option value="${k}"${LM === k ? " selected" : ""}>${l}</option>`).join("")}</select></label>${help("links")}</div>`;
   const pickers = `<div class="row-acts colpick">${mode === "cols" ? [["a", "Left column", a], ["b", "Middle column", b], ["g", "Being reviewed", g]].map(([k, l, v]) => `<label class="cpick">${l}<select data-col="${k}">${k === "b" ? `<option value="-"${v === "-" ? " selected" : ""}>None</option>` : ""}${gopts(s, v)}</select></label>`).join("")
     : `<label class="cpick">Being reviewed<select data-col="g">${gopts(s, g)}</select></label>`}${help("pickers")}<span style="flex:1"></span>${links}</div>`;
-  const legend = mode === "strand" ? "" : `<p class="legend">${LM === "n" ? "" : `<span><span class="nb">1</span> Same number: they connect${LM === "a" ? ` (<span class="nb sug">1</span> suggested, check)` : ""}. Click one to see how.</span>`}${mode === "prog" ? `<span><span class="dashbox"></span> Dashed: not agreed yet</span>` : ""}</p>`;
+  const legend = mode === "strand" ? "" : `<p class="legend">${LM === "n" ? "" : mode === "prog" ? `<span>Click a standard to light up what it connects to in the other grades.</span>` : `<span><span class="nb">1</span> Same number: they connect${LM === "a" ? ` (<span class="nb sug">1</span> suggested, check)` : ""}. Click one to see how.</span>`}${mode === "prog" ? `<span><span class="dashbox"></span> Dashed: not agreed yet</span>` : ""}</p>`;
   const note = LM === "o" && !["Math", "ELA"].includes(s) ? `<p class="cnote">${esc(s)} has no official links between grades, so only the same standard chosen in two grades gets a number. Choose <b>Official and suggested</b> to see possible links, and check them.</p>` : "";
   const col = (x, i) => { const ps = picksOf(s, x), xs = statusOf(s, x);
     const prof = x === "12" ? (() => { const p = D.profile[s] || {}; return `<div class="prof"><b>The Awsaj Graduate</b>${p.knowledge || p.skills || p.application ? `${p.knowledge ? `<span><b>Knowledge.</b> ${esc(p.knowledge)}</span>` : ""}${p.skills ? `<span><b>Skills.</b> ${esc(p.skills)}</span>` : ""}${p.application ? `<span><b>Application.</b> ${esc(p.application)}</span>` : ""}` : `<span class="empty">Not written yet.</span>`}<a class="btn small" href="#s=${S}&v=profile">Open the learner profile</a></div>`; })() : "";
@@ -768,6 +805,7 @@ document.addEventListener("click", (ev) => {
   const bd = ev.target.closest("[data-band]"); if (bd) { keepScroll = true; location.hash = href({ s: r.s, g: r.g, v: "review", m: "strand", band: bd.dataset.band }); return; }
   const ce = ev.target.closest("[data-cell]"); if (ce) { REV.cell = REV.cell === ce.dataset.cell ? null : ce.dataset.cell; render(true); const d = $("#celldet"); if (d) d.scrollIntoView({ block: "nearest" }); return; }
   const di = ev.target.closest("[data-dismiss]"); if (di) { const o = dismissedSet(); if (o.has(di.dataset.dismiss)) o.delete(di.dataset.dismiss); else o.add(di.dataset.dismiss); store.set("pd_dismiss", JSON.stringify([...o])); render(true); return; }
+  if (ev.target.closest("[data-practicereset]")) { if (confirm("Start the practice version again? Your practice changes on this laptop will be cleared.")) { try { localStorage.removeItem(PKEY); } catch (e) { /* none */ } location.reload(); } return; }
   if (ev.target.closest("[data-flags]")) { REV.flagsOpen = !REV.flagsOpen; render(true); return; }
   if (ev.target.closest("[data-showoff]")) { REV.showOff = !REV.showOff; render(true); return; }
   const sgo = ev.target.closest("[data-strandgo]"); if (sgo) { const g2 = sgo.dataset.sg || r.g; chooseV.f = { k: r.s + g2, q: "", strand: sgo.dataset.strandgo, only: "" }; location.hash = href({ s: r.s, g: g2, v: "choose" }); return; }
