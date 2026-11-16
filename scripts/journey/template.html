@@ -440,7 +440,19 @@ body.presenting .story > .pd h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); } bod
 
 .pd .bridge { margin-top: 22px; padding: 14px 20px; border-radius: 14px; background: var(--navy); color: #fff; font-size: clamp(1.1rem, 1.6vw, 1.35rem); font-weight: 600; max-width: 62ch; display: flex; gap: 12px; align-items: baseline; }
 .pd .bridge span { color: var(--cta); font-weight: 800; } .pd .bridge { margin-left: auto; margin-right: auto; width: fit-content; justify-content: center; text-align: center; }   /* Tim, Nov 2026: the navy bridge lines are centred on every slide */
-#pd-ponder .bridge { max-width: none; } @media (min-width: 900px) { #pd-ponder .bridge { white-space: nowrap; } }   /* Tim, Nov 2026: slide 6's bar on one line */
+/* Tim, 16 Nov 2026: three sections (The data, The goal, How we get there) */
+.pd .pdbig { font-size: clamp(1.6rem, 2.6vw, 2.3rem); font-weight: 700; line-height: 1.2; margin: 0 0 6px; max-width: 52ch; } .pd .pdbig b { color: var(--navy); background: linear-gradient(transparent 62%, rgba(181,223,0,.55) 62%); }
+.pdgoal3 { list-style: none; padding: 0; margin: 14px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.pdgoal3 li { background: rgba(255,255,255,.85); border-radius: 18px; padding: 20px 22px; border-top: 6px solid var(--cta); display: grid; gap: 8px; align-content: start; }
+.pdgoal3 .n { width: 38px; height: 38px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-weight: 800; }
+.pdgoal3 b { font-size: 1.4rem; } .pdgoal3 span:last-child { font-size: 1.1rem; color: var(--navy-2); }
+.pdimgs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; } .pdimgs.one { grid-template-columns: 1fr; max-width: 1100px; margin-left: auto; margin-right: auto; } .pdimgs.one figure { width: fit-content; margin: 0 auto; } .pdimgs.one img { max-height: 60vh; width: auto; max-width: 100%; }
+.pdimgs figure { margin: 0; background: #fff; border-radius: 14px; padding: 10px; box-shadow: 0 14px 30px -18px rgba(16,24,70,.4); }
+.pdimgs img { width: 100%; height: auto; display: block; border-radius: 6px; } .pdimgs figcaption { margin-top: 8px; font-size: 1.02rem; }
+.stepsgrid { grid-template-columns: 1fr minmax(180px, 240px); } .qrsmall { text-align: center; } .qrsmall .qrbox svg { width: 100%; height: auto; } .qrsmall .url { font-size: .85rem; margin-top: 6px; overflow-wrap: anywhere; }
+.pdgo { display: grid; grid-template-columns: 1fr 1.6fr; gap: 28px; margin-top: 24px; text-align: left; } .pdgo .pdsubj { margin-top: 0; grid-template-columns: repeat(2, 1fr); }
+.pdgr { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; } .pdgr a { display: grid; place-items: center; padding: 16px 8px; border-radius: 14px; background: rgba(255,255,255,.85); text-decoration: none; font-weight: 800; font-size: 1.15rem; border-top: 5px solid var(--lime); }
+@media (max-width: 760px) { .pdgoal3, .pdimgs, .pdgo, .stepsgrid { grid-template-columns: 1fr; } }
 
 /* all-staff title slide: the route and the title share one background (Tim) */
 body.in-staff.presenting.step0 #sky { background: transparent; } body.in-staff.presenting.step0 #sky::before, body.in-staff.presenting.step0 #sky::after { display: none; }
@@ -476,9 +488,9 @@ body.presenting .pd .farr { opacity: 0; transition: opacity .35s ease; } body.pr
 </div>
 <section id="below"><div class="wrap">
   <div class="belowgrid"><div class="frame reveal"><span class="eyebrow">What this is</span><p class="lead">This is your data: the ratings you, our teachers, entered for the standards you teach, K-12.</p><p>Every chart links to the full data on the <a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/" target="_blank" rel="noopener">Vertical Alignment site ↗</a>.</p></div>
-  <div class="subjbox"><p class="pickhint reveal"><b>Part 2:</b> Review our standards <span aria-hidden="true">&#8600;</span></p>
-  <div class="subjects"><a class="reveal" style="--i:0;--c:var(--lime)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html#s=Math"><span class="rule"></span><b>Math</b><span class="arr">→</span></a><a class="reveal" style="--i:1;--c:var(--blue)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html#s=ELA"><span class="rule"></span><b>ELA</b><span class="arr">→</span></a><a class="reveal" style="--i:2;--c:var(--magenta)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html#s=Science"><span class="rule"></span><b>Science</b><span class="arr">→</span></a><a class="reveal" style="--i:3;--c:var(--amber)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html#s=Social%20Studies"><span class="rule"></span><b>Social Studies</b><span class="arr">→</span></a></div><p class="practicelink reveal"><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html?practice=1&amp;sample=math#s=Math">Test / Practice version <span class="arr">→</span></a><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/pdf/facilitator-guide-part2.pdf" target="_blank" rel="noopener">Facilitator guide (PDF) <span class="arr">↗</span></a><span>Math filled in with a made-up example, to try everything. Changes stay on your laptop, never in the real lists.</span></p></div></div>
-  <div class="second reveal"><a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-5M10 20v-9M15 20V7M20 20V4"/></svg><span class="t">About the data</span><span class="arr">→</span></a><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/pd-tour.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4l14 8-14 8z"/></svg><span class="t">Walk-through of the PD</span><span class="arr">→</span></a></div>
+  <div class="subjbox"><p class="pickhint reveal"><b>Part 2:</b> Choose our focus standards <span aria-hidden="true">&#8600;</span></p>
+  <div class="subjects"><a class="reveal" style="--i:0;--c:var(--lime)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html"><span class="rule"></span><b>Elementary (K-5): choose your grade</b><span class="arr">→</span></a><a class="reveal" style="--i:1;--c:var(--blue)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html"><span class="rule"></span><b>Grades 6 to 12: choose your subject</b><span class="arr">→</span></a></div></div></div>
+  <div class="second reveal"><a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-5M10 20v-9M15 20V7M20 20V4"/></svg><span class="t">About the data</span><span class="arr">→</span></a></div>
 </div></section>
 <main id="story" aria-live="polite"></main>
 <div id="tip" hidden></div>
