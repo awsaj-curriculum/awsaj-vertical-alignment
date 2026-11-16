@@ -111,7 +111,7 @@ codes and links to the template (`site/files/Awsaj-Learning-Profile-*.docx`; `PR
 Google Doc copy links) and the filled Grade 12 Pre-Calculus example. Copy format matches the template (Tim): one code per line; Copy all
 = each strand name, then its codes, a blank line between strands. Learning profile wording: "Evidence of learning" (no "(Do)", Tim).
 All-staff slides (Tim, 16 Nov 2026; `scripts/journey/pd.js`, 12 slides, also as PowerPoint): three sections, The data (thank you, why /
-road, capacity, three facts), The goal (our goal: focus standards, organized by strand, a learning profile; the learning profile with
+road, capacity, three facts), The goal (the goal: a unified Awsaj Learning Profile for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the learning profile with
 template pictures in `site/img/pd/`), How we get there (what is a standard, breaking down RI.11-12.10 = the same four parts as the
 profile, the filled Pre-Calculus example, the steps with QR, go to your groups: K-5 grade buttons, 6-12 subjects). The ponder,
 explore and staircase slides are gone; the start page's Part 2 box opens priorities.html; practice and walk-through links removed.
