@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* Part 2 (Tim, Nov 2026, new direction): each grade picks its focus standards (at least a quarter of its standards, about
-   a third is the goal), sees them by strand to print or copy, then fills in the learning profile. ("Focus standards", not
+   a third is the goal), sees them by strand to print or copy, then fills in the Learning Map. ("Focus standards", not
    "priority standards": the school already has Priority (6-12) and Power (K-5) standards.) Same look as the PD pages. */
 :root {
   --navy: #101846; --navy-2: #3B4268; --muted: #5A6080; --line: #D5DAE3; --cta: #B5DF00; --cta-2: #A6CF00;
@@ -188,7 +188,7 @@ dialog { border: 0; border-radius: 18px; padding: 22px; max-width: 440px; box-sh
 <script>
 "use strict";
 /* Focus standards (Tim, Nov 2026, new direction): each grade picks its focus standards (at least a quarter of its standards,
-   about a third is the goal), sees them organised by strand to print or copy, then fills in the learning profile document.
+   about a third is the goal), sees them organised by strand to print or copy, then fills in the Learning Map document.
    K-5 works by grade (four subject tabs); 6-12 by subject, then grade or course. No comparison between grades.
    Saved in the database through pd_set_pick / pd_set_status (status "ready" = "Selected our focus standards"). */
 /* ================= settings ================= */
@@ -200,22 +200,22 @@ const COURSE = { Math: { 9: "Algebra 1", 10: "Geometry", 11: "Algebra 2", 12: "P
 const RATING = { 2: ["r2", "Rated: in depth"], 1: ["r1", "Rated: introduced"], 0: ["r0", "Rated: not taught"] };
 const RWORD = { 2: "Taught in depth", 1: "Introduced", 0: "Not taught" };
 const STATUS = { draft: "Draft", selected: "Selected our focus standards" };
-/* the Awsaj Learning Profile documents (Tim, 16 Nov 2026). Replace these with the Google Doc "Make a copy" links when ready. */
-const PROFILE_DOC = { ELA: "files/Awsaj-Learning-Profile-ELA.docx", other: "files/Awsaj-Learning-Profile-Math-Science-Social-Studies.docx" };
-const PROFILE_EXAMPLE = "files/Awsaj-Learning-Profile-Example-Grade-12-Pre-Calculus.docx";
+/* the Awsaj Learning Map documents (Tim, 16 Nov 2026). Replace these with the Google Doc "Make a copy" links when ready. */
+const PROFILE_DOC = { ELA: "files/Awsaj-Learning-Map-ELA.docx", other: "files/Awsaj-Learning-Map-Math-Science-Social-Studies.docx" };
+const PROFILE_EXAMPLE = "files/Awsaj-Learning-Map-Example-Grade-12-Pre-Calculus.docx";
 /* one-page step-by-step help (Tim, 16 Nov 2026) */
 const HELP_PDF = { k5: "pdf/help-focus-standards-K-5.pdf", ms: "pdf/help-focus-standards-6-12.pdf" };
 const helpLink = (k, small = true) => `<a class="btn${small ? " small" : ""}" href="${HELP_PDF[k]}" target="_blank" rel="noopener">Step-by-step help (PDF) ↗</a>`;
 const profileDoc = (s) => PROFILE_DOC[s === "ELA" ? "ELA" : "other"];
 const HELP = {
-  home: "Each grade chooses its focus standards: the standards required for success toward graduation and success in the course, which every class teaches in depth. Choose at least a quarter of your grade's standards; about a third is a good goal. Then see them by strand, print or copy them, and use them in your learning profile. Elementary (K-5) works by grade, with a tab for each subject. Grades 6 to 12 work by subject, then grade or course. Step-by-step help (PDF) opens a one-page guide with pictures of each step.",
+  home: "Each grade chooses its focus standards: the standards required for success toward graduation and success in the course, which every class teaches in depth. Choose at least a quarter of your grade's standards; about a third is a good goal. Then see them by strand, print or copy them, and use them in your Learning Map. Elementary (K-5) works by grade, with a tab for each subject. Grades 6 to 12 work by subject, then grade or course. Step-by-step help (PDF) opens a one-page guide with pictures of each step.",
   grade: "Your grade's four subjects. Each subject has its own list, count and status. Open a subject to choose its focus standards. Our focus standards shows all four subjects by strand, ready to print or copy.",
   ladder: "Every grade or course for this subject in Grades 6 to 12. Draft: still choosing. Selected our focus standards: the team has chosen at least the minimum and marked the list. Anyone can open any grade and change it; it saves for everyone.",
   library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard. Hints: the Part 1 rating, and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
-  next: "Once a subject's focus standards are selected, move on to the Awsaj Learning Profile: copy your focus codes and paste them into the profile document: one row per strand, the strand name in the Topic or domains column and its codes, one per line, in the Selected focus standards column (Copy codes beside each strand on Our focus standards copies one strand). Open the learning profile opens the template for this subject; the example shows a filled Grade 12 Pre-Calculus profile.",
+  next: "Once a subject's focus standards are selected, move on to the Awsaj Learning Map: copy your focus codes and paste them into the Learning Map document: one row per strand, the strand name in the Topic or domains column and its codes, one per line, in the Selected focus standards column (Copy codes beside each strand on Our focus standards copies one strand). Open the Learning Map opens the template for this subject; the example shows a filled Grade 12 Pre-Calculus profile.",
   picks: "The standards every class in this grade or course will teach in depth, numbered in the order of the standards. The cross takes one off the list; ticking it again on the left puts it back. You need at least a quarter of the standards (the first line on the bar); about a third (the second line) is a good goal. Anyone can add or remove a standard; the list saves as you go, for everyone. When you have at least the minimum, press We selected our focus standards. You can still change the list after; going below the minimum sets it back to Draft.",
   changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change is kept in the history.",
-  focus: "Your focus standards grouped by strand (or domain, or topic), in the order of the standards. Show: Codes only (the default, for the learning profile), Codes and short text, or Codes and full text; Print uses the same choice. Copy codes copies the codes of one strand, one code per line, ready to paste into the Selected focus standards column of the learning profile. Copy all codes copies every strand: the strand name (for the Topic or domains column), then its codes, one per line.",
+  focus: "Your focus standards grouped by strand (or domain, or topic), in the order of the standards. Show: Codes only (the default, for the Learning Map), Codes and short text, or Codes and full text; Print uses the same choice. Copy codes copies the codes of one strand, one code per line, ready to paste into the Selected focus standards column of the Learning Map. Copy all codes copies every strand: the strand name (for the Topic or domains column), then its codes, one per line.",
   paper: "A paper copy of every standard this grade or course can choose from, with a tick box and a line for notes. Teams that start on paper give the finished copy to the leader, who ticks the same standards on the site.",
   exports: "Excel: every chosen focus standard, with its strand, note, Part 1 rating and the status of every list, in one file."
 };
@@ -319,7 +319,7 @@ async function copyText(txt) {
   const ta = document.createElement("textarea"); ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select();
   try { document.execCommand("copy"); toast("Copied."); } catch (e) { prompt("Copy these codes:", txt); } ta.remove();
 }
-/* the same format as the learning profile (Tim): one code per line, as in the Selected focus standards column; Copy all gives
+/* the same format as the Learning Map (Tim): one code per line, as in the Selected focus standards column; Copy all gives
    each strand's name (for the Topic or domains column) with its codes under it, a blank line between strands */
 const codesLine = (list) => list.map((e) => e.c).join("\n");
 const allCodes = (s, g) => groups(s, g).map(([st, list]) => `${st}\n${codesLine(list)}`).join("\n\n");
@@ -387,9 +387,9 @@ async function render(keep) {
 
 function homeV() {
   return `<div class="stack"><div class="panel stack"><p class="pill">Part 2 · Our focus standards</p><h1>Our focus standards${help("home")}</h1>
-    <p class="lead">Each grade chooses its focus standards, sees them by strand, and uses them in its learning profile.</p>
+    <p class="lead">Each grade chooses its focus standards, sees them by strand, and uses them in its Learning Map.</p>
     <p class="expect"><b>Focus standards</b>The standards required for success toward graduation and success in the course. Choose at least a quarter of your grade's standards; about a third is a good goal.</p>
-    <div class="steps3"><div><b>1. Choose</b>Tick the standards every class must teach in depth, at least a quarter of them.</div><div><b>2. See them by strand</b>Your focus standards grouped by strand or domain, to print or copy.</div><div><b>3. Learning profile</b>Fill in the learning profile for your grade and subject, using your focus standards.</div></div>
+    <div class="steps3"><div><b>1. Choose</b>Tick the standards every class must teach in depth, at least a quarter of them.</div><div><b>2. See them by strand</b>Your focus standards grouped by strand or domain, to print or copy.</div><div><b>3. Learning Map</b>Fill in the Learning Map for your grade and subject, using your focus standards.</div></div>
     <div class="row-acts"><button class="btn small" type="button" data-excel="">Excel: all subjects</button>${help("exports")}</div></div>
     <div class="doors"><section class="panel door"><h2>Elementary (K-5)</h2><p class="lead">Choose your grade. You will see your four subjects.</p><p style="margin:-6px 0 12px">${helpLink("k5")}</p>
       <div class="gbtns">${K5.map((g) => { const done = SUBJ.filter(([s]) => statusOf(s, g) === "selected").length; return `<a class="gbtn" href="${href({ g })}">${g}<small>${done} of 4 selected</small></a>`; }).join("")}</div></section>
@@ -436,9 +436,9 @@ const lastNote = (ev, k) => { const p = ev.find((x) => x.kind === "pick" && `${x
 
 const subjTabs = (g, cur) => isK5(g) ? `<nav class="tabs" aria-label="Subjects">${SUBJ.map(([s, , c]) => `<a class="tab" style="--c:${c}" href="${chooseHref(s, g)}"${s === cur ? ' aria-current="page"' : ""}><b>${s}</b><span>${picksOf(s, g).length} of ${library(s, g).length} · ${STATUS[statusOf(s, g)]}</span></a>`).join("")}</nav>` : "";
 
-/* Tim, 16 Nov 2026: once a subject's focus standards are selected, move on to the Awsaj Learning Profile */
-const nextBox = (s, g) => statusOf(s, g) !== "selected" ? "" : `<div class="nextbox"><b>You are ready to move on to the Awsaj Learning Profile.${help("next")}</b><p>Copy your focus codes over to the profile document here.</p>
-  <div class="row-acts"><button class="btn cta" type="button" data-copy="${esc(allCodes(s, g))}">Copy all codes</button><a class="btn" href="${profileDoc(s)}" target="_blank" rel="noopener">Open the learning profile ↗</a><a class="btn small" href="${PROFILE_EXAMPLE}" target="_blank" rel="noopener">See an example ↗</a></div></div>`;
+/* Tim, 16 Nov 2026: once a subject's focus standards are selected, move on to the Awsaj Learning Map */
+const nextBox = (s, g) => statusOf(s, g) !== "selected" ? "" : `<div class="nextbox"><b>You are ready to move on to the Awsaj Learning Map.${help("next")}</b><p>Copy your focus codes over to the Learning Map document here.</p>
+  <div class="row-acts"><button class="btn cta" type="button" data-copy="${esc(allCodes(s, g))}">Copy all codes</button><a class="btn" href="${profileDoc(s)}" target="_blank" rel="noopener">Open the Learning Map ↗</a><a class="btn small" href="${PROFILE_EXAMPLE}" target="_blank" rel="noopener">See an example ↗</a></div></div>`;
 function chooseV(s, g) {
   const lib = library(s, g), picked = picksOf(s, g), st = statusOf(s, g), ed = canEdit(), min = minOf(s, g), goal = goalOf(s, g), n = picked.length;
   const f = chooseV.f = chooseV.f && chooseV.f.k === s + g ? chooseV.f : { k: s + g, q: "", strand: "", only: "" }; if (!chooseV.open || chooseV.openK !== s + g) { chooseV.open = new Set(); chooseV.openK = s + g; }

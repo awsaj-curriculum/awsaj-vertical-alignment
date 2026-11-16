@@ -106,13 +106,16 @@ library order with a cross to take one off (Tim: no Recent changes box; notes ar
 Line up, flags, connections, Stands alone, learner profile, PIN agreeing, practice version (only `?practice=1`, nothing saved, is
 left for testing). Picks still save to `pd_picks` through `pd_set_pick`. The old tool is kept as `site/priorities-v1.html` (not
 linked). The landing page's Part 2 card and the committee tab now open priorities.html. The facilitator guide PDF and pd-tour.html
-describe the old tool. When a list is Selected, a green box says "You are ready to move on to the Awsaj Learning Profile" with Copy all
-codes and links to the template (`site/files/Awsaj-Learning-Profile-*.docx`; `PROFILE_DOC` in priorities.html, to be swapped for the
+describe the old tool. When a list is Selected, a green box says "You are ready to move on to the Awsaj Learning Map" with Copy all
+codes and links to the template (`site/files/Awsaj-Learning-Map-*.docx`; `PROFILE_DOC` in priorities.html, to be swapped for the
 Google Doc copy links) and the filled Grade 12 Pre-Calculus example. Copy format matches the template (Tim): one code per line; Copy all
-= each strand name, then its codes, a blank line between strands. Learning profile wording: "Evidence of learning" (no "(Do)", Tim).
-One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
+= each strand name, then its codes, a blank line between strands. Learning Map wording: "Evidence of learning" (no "(Do)", Tim).
+Name (Tim, 16 Nov 2026): the document is the "Awsaj Learning Map" (was "learning profile"): "A unified Awsaj Learning Map for each
+grade and subject, in one place." The goal slide adds: it sits alongside our curriculum maps (the curriculum map says when we teach
+it); the Learning Map is a whole-school overview of what students learn, to serve our vertical alignment, not a detailed plan.
+Files: `site/files/Awsaj-Learning-Map-*.docx`. One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
 from each door on the picker home and in the header ("Step-by-step help (PDF)"). All-staff slides (Tim, 16 Nov 2026; `scripts/journey/pd.js`, 13 slides, also as PowerPoint, built privately with python-pptx): "Where we are headed today" previews the three parts, then The data (thank you, why /
-road, capacity, three facts), The goal (the goal: a unified Awsaj Learning Profile for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the learning profile with
+road, capacity, three facts), The goal (the goal: a unified Awsaj Learning Map for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the Learning Map with
 template pictures in `site/img/pd/`), How we get there (what is a standard, breaking down RI.11-12.10 = the same four parts as the
 profile, the filled Pre-Calculus example, the steps with QR, go to your groups: K-5 grade buttons, 6-12 subjects). The ponder,
 explore and staircase slides are gone; the start page's Part 2 box opens priorities.html; practice and walk-through links removed.
