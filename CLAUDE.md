@@ -110,7 +110,16 @@ describe the old tool. When a list is Selected, a green box says "You are ready 
 codes and links to the template (`site/files/Awsaj-Learning-Map-*.docx`; `PROFILE_DOC` in priorities.html, to be swapped for the
 Google Doc copy links) and the filled Grade 12 Pre-Calculus example. Copy format matches the template (Tim): one code per line; Copy all
 = each strand name, then its codes, a blank line between strands. Learning Map wording: "Evidence of learning" (no "(Do)", Tim).
-Name (Tim, 16 Nov 2026): the document is the "Awsaj Learning Map" (was "learning profile"): "A unified Awsaj Learning Map for each
+Grade first everywhere (Tim, 16 Nov 2026): the picker home has Elementary (K-5) and Secondary (6-12) grade buttons; every grade page
+(`#g=7`) has four subject tabs (high school shows the course), `#g=7&s=Math&v=choose`, `#g=7&v=focus`; `#s=Math` (subject list)
+still works by address. Drive (Tim allowed an exception to the read-only rule for this one folder only): shared folder "Awsaj Learning
+Maps" (`DRIVE_ROOT` in priorities.html) holds Templates and example, Elementary (K-5) > Kindergarten ... Grade 5, Secondary (6-12) >
+Grade 6 ... Grade 12, one Google Doc per grade and subject ("Grade 10 Science (Physics): Awsaj Learning Map"); `DRIVE` maps each grade
+to [folder, Math, ELA, Science, Social Studies] doc ids; each subject page links to its document and grade folder. Access follows the
+shared folder's sharing (school domain, Editor or Contributor for staff). Progress and messages (`#v=progress`, `progressV()`,
+`buildMsg()`): every grade x subject status with links, and a message maker (all grades or one; Choose / Reminder / Next step:
+Learning Map) to copy or open in email; the site sends nothing itself and cannot see inside the Drive documents. Slides: "Where to
+find your Learning Map" (folder diagram) before the steps; the last slide has Secondary grade buttons. Name (Tim, 16 Nov 2026): the document is the "Awsaj Learning Map" (was "learning profile"): "A unified Awsaj Learning Map for each
 grade and subject, in one place." The goal slide adds: it sits alongside our curriculum maps (the curriculum map says when we teach
 it); the Learning Map is a whole-school overview of what students learn, to serve our vertical alignment, not a detailed plan.
 Files: `site/files/Awsaj-Learning-Map-*.docx`. One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
