@@ -93,7 +93,7 @@ Tim, Nov 2026 (rating done): a plain visit to the site (no ?query, no #hash) ope
 
 ## Part 2: data walkthrough (journey.html)
 NEW DIRECTION (Tim, 16 Nov 2026; replaces the grade-to-grade review below): no comparison between grades. End products: (1) each
-grade picks focus standards, at least 1/4 of its library (every lettered part counted, rounded up) with 1/3 as the goal; (2) those
+grade picks focus standards, at least 1/4 of its library (every lettered part counted, rounded up) with no upper goal: "you can choose more" (Tim; some lists are short, e.g. Grade 12 Social Studies has 5 standards); (2) those
 standards organised by strand (the library's strand field) on screen and for print (Codes only by default; short or full text as
 options) with Copy codes per strand and Copy all codes per subject ("Strand: codes" one line each); (3) teachers fill in the learning
 profile document (Google Doc template: Prerequisite skills; a table of Selected focus standards | Strand or topic | Knowledge | Skills |
