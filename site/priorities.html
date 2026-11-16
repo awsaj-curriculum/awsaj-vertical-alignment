@@ -143,6 +143,7 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .ftext { margin-top: 6px; display: grid; gap: 6px; }
 .ftext div { padding: 6px 0; border-bottom: 1px solid #E3E6EE; } .ftext b { margin-right: 8px; }
 .fsub { margin-top: 26px; } .fsub:first-child { margin-top: 0; }
+.nextbox { padding: 14px 18px; border-radius: 16px; background: #F1F8DC; border: 2px solid var(--cta); display: grid; gap: 8px; } .nextbox b { font-size: 1.15rem; }
 .copyb { border: 1.5px solid var(--navy); background: #fff; border-radius: 999px; padding: 3px 12px; font-weight: 700; cursor: pointer; font-size: .82rem; }
 /* documents to print */
 .doc { background: #fff; border-radius: 18px; padding: clamp(16px, 3vw, 36px); box-shadow: 0 18px 40px -28px rgba(16,24,70,.35); }
@@ -195,14 +196,19 @@ const COURSE = { Math: { 9: "Algebra 1", 10: "Geometry", 11: "Algebra 2", 12: "P
 const RATING = { 2: ["r2", "Rated: in depth"], 1: ["r1", "Rated: introduced"], 0: ["r0", "Rated: not taught"] };
 const RWORD = { 2: "Taught in depth", 1: "Introduced", 0: "Not taught" };
 const STATUS = { draft: "Draft", selected: "Selected our focus standards" };
+/* the Awsaj Learning Profile documents (Tim, 16 Nov 2026). Replace these with the Google Doc "Make a copy" links when ready. */
+const PROFILE_DOC = { ELA: "files/Awsaj-Learning-Profile-ELA.docx", other: "files/Awsaj-Learning-Profile-Math-Science-Social-Studies.docx" };
+const PROFILE_EXAMPLE = "files/Awsaj-Learning-Profile-Example-Grade-12-Pre-Calculus.docx";
+const profileDoc = (s) => PROFILE_DOC[s === "ELA" ? "ELA" : "other"];
 const HELP = {
   home: "Each grade chooses its focus standards: the standards required for success toward graduation and success in the course, which every class teaches in depth. Choose at least a quarter of your grade's standards; about a third is a good goal. Then see them by strand, print or copy them, and use them in your learning profile. Elementary (K-5) works by grade, with a tab for each subject. Grades 6 to 12 work by subject, then grade or course.",
   grade: "Your grade's four subjects. Each subject has its own list, count and status. Open a subject to choose its focus standards. Our focus standards shows all four subjects by strand, ready to print or copy.",
   ladder: "Every grade or course for this subject in Grades 6 to 12. Draft: still choosing. Selected our focus standards: the team has chosen at least the minimum and marked the list. Anyone can open any grade and change it; it saves for everyone.",
   library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard. Hints: the Part 1 rating, and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
+  next: "Once a subject's focus standards are selected, move on to the Awsaj Learning Profile: copy your focus codes and paste them into the profile document: one row per strand, the strand name in the Topic or domains column and its codes, one per line, in the Selected focus standards column (Copy codes beside each strand on Our focus standards copies one strand). Open the learning profile opens the template for this subject; the example shows a filled Grade 12 Pre-Calculus profile.",
   picks: "The standards every class in this grade or course will teach in depth. You need at least a quarter of the standards (the first line on the bar); about a third (the second line) is a good goal. Anyone can add or remove a standard; the list saves as you go, for everyone. Add a short note if it helps. When you have at least the minimum, press We selected our focus standards. You can still change the list after; going below the minimum sets it back to Draft.",
   changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change is kept in the history.",
-  focus: "Your focus standards grouped by strand (or domain, or topic), in the order of the standards. Show: Codes only (the default, for the learning profile), Codes and short text, or Codes and full text; Print uses the same choice. Copy codes copies the codes of one strand; Copy all codes copies every strand, one line each, ready to paste into the Focus standards column of the learning profile.",
+  focus: "Your focus standards grouped by strand (or domain, or topic), in the order of the standards. Show: Codes only (the default, for the learning profile), Codes and short text, or Codes and full text; Print uses the same choice. Copy codes copies the codes of one strand, one code per line, ready to paste into the Selected focus standards column of the learning profile. Copy all codes copies every strand: the strand name (for the Topic or domains column), then its codes, one per line.",
   paper: "A paper copy of every standard this grade or course can choose from, with a tick box and a line for notes. Teams that start on paper give the finished copy to the leader, who ticks the same standards on the site.",
   exports: "Excel: every chosen focus standard, with its strand, note, Part 1 rating and the status of every list, in one file."
 };
@@ -306,8 +312,10 @@ async function copyText(txt) {
   const ta = document.createElement("textarea"); ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select();
   try { document.execCommand("copy"); toast("Copied."); } catch (e) { prompt("Copy these codes:", txt); } ta.remove();
 }
-const codesLine = (list) => list.map((e) => e.c).join(", ");
-const allCodes = (s, g) => groups(s, g).map(([st, list]) => `${st}: ${codesLine(list)}`).join("\n");
+/* the same format as the learning profile (Tim): one code per line, as in the Selected focus standards column; Copy all gives
+   each strand's name (for the Topic or domains column) with its codes under it, a blank line between strands */
+const codesLine = (list) => list.map((e) => e.c).join("\n");
+const allCodes = (s, g) => groups(s, g).map(([st, list]) => `${st}\n${codesLine(list)}`).join("\n\n");
 
 /* ================= Excel (every chosen standard and every list's status; public data, no PIN) ================= */
 const XLSX_SRC = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
@@ -420,6 +428,9 @@ const lastNote = (ev, k) => { const p = ev.find((x) => x.kind === "pick" && `${x
 
 const subjTabs = (g, cur) => isK5(g) ? `<nav class="tabs" aria-label="Subjects">${SUBJ.map(([s, , c]) => `<a class="tab" style="--c:${c}" href="${chooseHref(s, g)}"${s === cur ? ' aria-current="page"' : ""}><b>${s}</b><span>${picksOf(s, g).length} of ${library(s, g).length} · ${STATUS[statusOf(s, g)]}</span></a>`).join("")}</nav>` : "";
 
+/* Tim, 16 Nov 2026: once a subject's focus standards are selected, move on to the Awsaj Learning Profile */
+const nextBox = (s, g) => statusOf(s, g) !== "selected" ? "" : `<div class="nextbox"><b>You are ready to move on to the Awsaj Learning Profile.${help("next")}</b><p>Copy your focus codes over to the profile document here.</p>
+  <div class="row-acts"><button class="btn cta" type="button" data-copy="${esc(allCodes(s, g))}">Copy all codes</button><a class="btn" href="${profileDoc(s)}" target="_blank" rel="noopener">Open the learning profile ↗</a><a class="btn small" href="${PROFILE_EXAMPLE}" target="_blank" rel="noopener">See an example ↗</a></div></div>`;
 function chooseV(s, g) {
   const lib = library(s, g), picked = picksOf(s, g), st = statusOf(s, g), ed = canEdit(), min = minOf(s, g), goal = goalOf(s, g), n = picked.length;
   const f = chooseV.f = chooseV.f && chooseV.f.k === s + g ? chooseV.f : { k: s + g, q: "", strand: "", only: "" }; if (!chooseV.open || chooseV.openK !== s + g) { chooseV.open = new Set(); chooseV.openK = s + g; }
@@ -431,7 +442,7 @@ function chooseV(s, g) {
   const plist = picked.map((p) => { const e = stdOf(s, p); return `<div class="pitem"><div class="row"><span>${fw(e)}</span>${ed ? `<button class="x" type="button" data-pick="${esc(key(e))}" aria-label="Remove ${esc(e.c)}">Remove</button>` : ""}</div><p class="stext">${esc(e.t)}</p>${ed ? `<input type="text" maxlength="500" placeholder="Note (optional)" value="${esc(p.note)}" data-note="${esc(key(e))}" aria-label="Note for ${esc(e.c)}">` : p.note ? `<p class="saved">${esc(p.note)}</p>` : ""}</div>`; }).join("");
   const minMsg = n >= goal ? "You have reached the goal of about a third." : n >= min ? `You have the minimum. About a third (${goal}) is a good goal.` : `Choose ${min - n} more to reach the minimum of ${min} (a quarter).`;
   const fhref = isK5(g) ? href({ g, s, v: "focus" }) : href({ s, g, v: "focus" });
-  return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth? Choose at least ${min} of the ${lib.length} standards (a quarter); about ${goal} (a third) is a good goal.</p>${subjTabs(g, s)}</div>
+  return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth? Choose at least ${min} of the ${lib.length} standards (a quarter); about ${goal} (a third) is a good goal.</p>${subjTabs(g, s)}${nextBox(s, g)}</div>
     <div class="choose"><section class="panel" aria-label="Library"><h2>Our standards${help("library")}</h2>
       <div class="tools"><input type="search" id="q" placeholder="Search by code or words" value="${esc(f.q)}" aria-label="Search the standards"><select id="strand" aria-label="Strand"><option value="">All strands</option>${strands.map((x) => `<option${x === f.strand ? " selected" : ""}>${esc(x)}</option>`).join("")}</select></div>
       <div class="chips" role="group" aria-label="Show">${[["", "All"], ["on", "Chosen"], ["pr", `★ School ${isK5(g) ? "power" : "priority"} standards`]].map(([k, t]) => `<button class="chip" type="button" data-only="${k}" aria-pressed="${f.only === k}">${t}</button>`).join("")}</div>
@@ -452,7 +463,7 @@ function focusOne(s, g) {
   const body = G.length ? `<div class="fgroups">${G.map(([strand, list]) => `<div class="fgroup"><h3><span>${esc(strand)} <span class="saved">(${list.length})</span></span><button class="copyb" type="button" data-copy="${esc(codesLine(list))}">Copy codes</button></h3>
       ${FMODE === "codes" ? `<div class="codes">${list.map((e) => `<span>${esc(e.c)}</span>`).join("")}</div>` : `<div class="ftext">${list.map((e) => { const p = picksOf(s, g).find((x) => `${x.framework}|${x.code}` === key(e)) || {}; return `<div><b>${esc(e.c)}</b>${esc(FMODE === "short" ? short(e.t || "") : e.t)}${p.note ? ` <i class="saved">(${esc(p.note)})</i>` : ""}</div>`; }).join("")}</div>`}</div>`).join("")}</div>` : `<p class="empty">No focus standards chosen yet.</p>`;
   return `<section class="fsub"><h2>${esc(gtext(s, g))} ${esc(s)}</h2><p class="sub">${n} focus standards of ${library(s, g).length} · ${STATUS[st]}</p>
-    <div class="row-acts noprint" style="margin-top:8px">${G.length ? `<button class="btn small" type="button" data-copy="${esc(allCodes(s, g))}">Copy all codes (${esc(s)})</button>` : ""}<a class="btn small" href="${chooseHref(s, g)}">Change the list</a></div>${body}</section>`;
+    ${nextBox(s, g).replace('class="nextbox"', 'class="nextbox noprint"')}<div class="row-acts noprint" style="margin-top:8px">${G.length ? `<button class="btn small" type="button" data-copy="${esc(allCodes(s, g))}">Copy all codes (${esc(s)})</button>` : ""}<a class="btn small" href="${chooseHref(s, g)}">Change the list</a></div>${body}</section>`;
 }
 function focusV(subs, g) {
   const today = new Date().toLocaleDateString([], { day: "numeric", month: "long", year: "numeric" }), one = subs.length === 1;
