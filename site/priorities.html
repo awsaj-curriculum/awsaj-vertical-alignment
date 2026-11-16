@@ -203,9 +203,12 @@ const STATUS = { draft: "Draft", selected: "Selected our focus standards" };
 /* the Awsaj Learning Profile documents (Tim, 16 Nov 2026). Replace these with the Google Doc "Make a copy" links when ready. */
 const PROFILE_DOC = { ELA: "files/Awsaj-Learning-Profile-ELA.docx", other: "files/Awsaj-Learning-Profile-Math-Science-Social-Studies.docx" };
 const PROFILE_EXAMPLE = "files/Awsaj-Learning-Profile-Example-Grade-12-Pre-Calculus.docx";
+/* one-page step-by-step help (Tim, 16 Nov 2026) */
+const HELP_PDF = { k5: "pdf/help-focus-standards-K-5.pdf", ms: "pdf/help-focus-standards-6-12.pdf" };
+const helpLink = (k, small = true) => `<a class="btn${small ? " small" : ""}" href="${HELP_PDF[k]}" target="_blank" rel="noopener">Step-by-step help (PDF) ↗</a>`;
 const profileDoc = (s) => PROFILE_DOC[s === "ELA" ? "ELA" : "other"];
 const HELP = {
-  home: "Each grade chooses its focus standards: the standards required for success toward graduation and success in the course, which every class teaches in depth. Choose at least a quarter of your grade's standards; about a third is a good goal. Then see them by strand, print or copy them, and use them in your learning profile. Elementary (K-5) works by grade, with a tab for each subject. Grades 6 to 12 work by subject, then grade or course.",
+  home: "Each grade chooses its focus standards: the standards required for success toward graduation and success in the course, which every class teaches in depth. Choose at least a quarter of your grade's standards; about a third is a good goal. Then see them by strand, print or copy them, and use them in your learning profile. Elementary (K-5) works by grade, with a tab for each subject. Grades 6 to 12 work by subject, then grade or course. Step-by-step help (PDF) opens a one-page guide with pictures of each step.",
   grade: "Your grade's four subjects. Each subject has its own list, count and status. Open a subject to choose its focus standards. Our focus standards shows all four subjects by strand, ready to print or copy.",
   ladder: "Every grade or course for this subject in Grades 6 to 12. Draft: still choosing. Selected our focus standards: the team has chosen at least the minimum and marked the list. Anyone can open any grade and change it; it saves for everyone.",
   library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard. Hints: the Part 1 rating, and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
@@ -363,6 +366,7 @@ function header(r) {
   const lab = { focus: "Our focus standards", paper: "Print this list" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
   $("#crumbs").innerHTML = c.join("");
   $("#who").innerHTML = (PRACTICE ? `<span class="pill practice">Practice: nothing is saved</span>` : "") + (TEAM ? `<span class="pill team">Team: ${esc(TEAM)}</span>` : "")
+    + (r.g && isK5(r.g) ? helpLink("k5") : r.s ? helpLink("ms") : "")
     + (FRAMED ? `<a class="btn small" href="${esc(location.href)}" target="_blank" rel="noopener" title="Open this page in its own tab">Open full page ↗</a>` : "") + `<a class="btn small" href="./">Home</a>`;
 }
 
@@ -387,9 +391,9 @@ function homeV() {
     <p class="expect"><b>Focus standards</b>The standards required for success toward graduation and success in the course. Choose at least a quarter of your grade's standards; about a third is a good goal.</p>
     <div class="steps3"><div><b>1. Choose</b>Tick the standards every class must teach in depth, at least a quarter of them.</div><div><b>2. See them by strand</b>Your focus standards grouped by strand or domain, to print or copy.</div><div><b>3. Learning profile</b>Fill in the learning profile for your grade and subject, using your focus standards.</div></div>
     <div class="row-acts"><button class="btn small" type="button" data-excel="">Excel: all subjects</button>${help("exports")}</div></div>
-    <div class="doors"><section class="panel door"><h2>Elementary (K-5)</h2><p class="lead">Choose your grade. You will see your four subjects.</p>
+    <div class="doors"><section class="panel door"><h2>Elementary (K-5)</h2><p class="lead">Choose your grade. You will see your four subjects.</p><p style="margin:-6px 0 12px">${helpLink("k5")}</p>
       <div class="gbtns">${K5.map((g) => { const done = SUBJ.filter(([s]) => statusOf(s, g) === "selected").length; return `<a class="gbtn" href="${href({ g })}">${g}<small>${done} of 4 selected</small></a>`; }).join("")}</div></section>
-    <section class="panel door"><h2>Grades 6 to 12</h2><p class="lead">Choose your subject, then your grade or course.</p>
+    <section class="panel door"><h2>Grades 6 to 12</h2><p class="lead">Choose your subject, then your grade or course.</p><p style="margin:-6px 0 12px">${helpLink("ms")}</p>
       <div class="subjects two">${SUBJ.map(([s, , c]) => `<a class="subj" style="--c:${c}" href="${href({ s })}"><span class="rule"></span><b>${s}</b><span>Grades 6 to 12</span></a>`).join("")}</div></section></div></div>`;
 }
 
