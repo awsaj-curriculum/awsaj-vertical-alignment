@@ -101,7 +101,8 @@ Vocabulary | Evidence of learning). `site/priorities.html` was rewritten for thi
 then four subject tabs; `#g=3`, `#g=3&s=Math&v=choose`, `#g=3&v=focus` = all four subjects by strand) and Grades 6 to 12 (subject, then
 grade or course; `#s=Math`, `#s=Math&g=7&v=choose`, `&v=focus`); "We selected our focus standards" unlocks at the minimum (stored
 as pd_status "ready"; shown as Selected only while the list holds the minimum; going below sets it back to draft); kept: Part 1
-rating and Priority / Power hints, notes, Recent changes with Undo, Print this list (paper), Excel; removed: review views, threads,
+rating and Priority / Power hints, Print this list (paper), Excel; the right side is a numbered list of the chosen standards in
+library order with a cross to take one off (Tim: no Recent changes box; notes are no longer edited on screen); removed: review views, threads,
 Line up, flags, connections, Stands alone, learner profile, PIN agreeing, practice version (only `?practice=1`, nothing saved, is
 left for testing). Picks still save to `pd_picks` through `pd_set_pick`. The old tool is kept as `site/priorities-v1.html` (not
 linked). The landing page's Part 2 card and the committee tab now open priorities.html. The facilitator guide PDF and pd-tour.html

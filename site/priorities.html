@@ -102,7 +102,7 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .h.r2 { background: var(--deep); color: #fff; } .h.r1 { background: var(--intro); color: #fff; } .h.r0 { background: var(--not); color: #fff; }
 .picks { position: sticky; top: 84px; }
 .count { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: 10px; } .count b { font-size: 2.2rem; line-height: 1; }
-.plist { display: grid; gap: 8px; max-height: 40vh; overflow: auto; margin: 12px 0; }
+.plist { display: grid; gap: 8px; max-height: 62vh; overflow: auto; margin: 12px 0; }
 .pitem { padding: 10px 12px; border-radius: 12px; background: #fff; display: grid; gap: 6px; }
 .pitem .row { display: flex; gap: 8px; align-items: baseline; justify-content: space-between; }
 .pitem input { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: .9rem; }
@@ -143,6 +143,10 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .ftext { margin-top: 6px; display: grid; gap: 6px; }
 .ftext div { padding: 6px 0; border-bottom: 1px solid #E3E6EE; } .ftext b { margin-right: 8px; }
 .fsub { margin-top: 26px; } .fsub:first-child { margin-top: 0; }
+.olist { margin: 0; padding-left: 2em; display: grid; gap: 6px; } .olist li { padding: 6px 8px; border-radius: 10px; background: #fff; }
+.olist li::marker { font-weight: 800; color: var(--navy-2); } .olist li { display: list-item; } .olist .body { display: inline-grid; gap: 2px; width: calc(100% - 36px); vertical-align: top; }
+.olist .stext { margin: 0; font-size: .88rem; cursor: pointer; } .cross { float: right; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--magenta); color: var(--magenta); background: #fff; font-weight: 800; font-size: 1.35rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.cross:hover { background: var(--magenta); color: #fff; }
 .nextbox { padding: 14px 18px; border-radius: 16px; background: #F1F8DC; border: 2px solid var(--cta); display: grid; gap: 8px; } .nextbox b { font-size: 1.15rem; }
 .copyb { border: 1.5px solid var(--navy); background: #fff; border-radius: 999px; padding: 3px 12px; font-weight: 700; cursor: pointer; font-size: .82rem; }
 /* documents to print */
@@ -206,7 +210,7 @@ const HELP = {
   ladder: "Every grade or course for this subject in Grades 6 to 12. Draft: still choosing. Selected our focus standards: the team has chosen at least the minimum and marked the list. Anyone can open any grade and change it; it saves for everyone.",
   library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard. Hints: the Part 1 rating, and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
   next: "Once a subject's focus standards are selected, move on to the Awsaj Learning Profile: copy your focus codes and paste them into the profile document: one row per strand, the strand name in the Topic or domains column and its codes, one per line, in the Selected focus standards column (Copy codes beside each strand on Our focus standards copies one strand). Open the learning profile opens the template for this subject; the example shows a filled Grade 12 Pre-Calculus profile.",
-  picks: "The standards every class in this grade or course will teach in depth. You need at least a quarter of the standards (the first line on the bar); about a third (the second line) is a good goal. Anyone can add or remove a standard; the list saves as you go, for everyone. Add a short note if it helps. When you have at least the minimum, press We selected our focus standards. You can still change the list after; going below the minimum sets it back to Draft.",
+  picks: "The standards every class in this grade or course will teach in depth, numbered in the order of the standards. The cross takes one off the list; ticking it again on the left puts it back. You need at least a quarter of the standards (the first line on the bar); about a third (the second line) is a good goal. Anyone can add or remove a standard; the list saves as you go, for everyone. When you have at least the minimum, press We selected our focus standards. You can still change the list after; going below the minimum sets it back to Draft.",
   changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change is kept in the history.",
   focus: "Your focus standards grouped by strand (or domain, or topic), in the order of the standards. Show: Codes only (the default, for the learning profile), Codes and short text, or Codes and full text; Print uses the same choice. Copy codes copies the codes of one strand, one code per line, ready to paste into the Selected focus standards column of the learning profile. Copy all codes copies every strand: the strand name (for the Topic or domains column), then its codes, one per line.",
   paper: "A paper copy of every standard this grade or course can choose from, with a tick box and a line for notes. Teams that start on paper give the finished copy to the leader, who ticks the same standards on the site.",
@@ -439,7 +443,9 @@ function chooseV(s, g) {
   let last = ""; const items = rows.map((e) => { const k = key(e), on = isPicked(s, g, k), lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g); const sh = e.s !== last ? `<p class="strandh">${esc(e.s)}</p>` : ""; last = e.s;
     const op = chooseV.open.has(k);
     return `${sh}<div class="std${on ? " on" : ""}${op ? " open" : ""}"><button class="tick" type="button" data-pick="${esc(k)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(e.c)}"${ed ? "" : " disabled"}>${on ? "&#10003;" : "+"}</button><div class="sbody"><span class="shead">${fw(e)}</span><p class="stext" data-more="${esc(k)}">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}" title="${RATING[lv][1]}">${RATING[lv][1]}</span>` : ""}${pm ? `<span class="h pr" title="School ${pm.toLowerCase()} standard">&#9733;<span class="w"> School ${pm.toLowerCase()} standard</span></span>` : ""}</div><button class="more" type="button" data-more="${esc(k)}" aria-haspopup="dialog">Show all</button></div></div>`; }).join("");
-  const plist = picked.map((p) => { const e = stdOf(s, p); return `<div class="pitem"><div class="row"><span>${fw(e)}</span>${ed ? `<button class="x" type="button" data-pick="${esc(key(e))}" aria-label="Remove ${esc(e.c)}">Remove</button>` : ""}</div><p class="stext">${esc(e.t)}</p>${ed ? `<input type="text" maxlength="500" placeholder="Note (optional)" value="${esc(p.note)}" data-note="${esc(key(e))}" aria-label="Note for ${esc(e.c)}">` : p.note ? `<p class="saved">${esc(p.note)}</p>` : ""}</div>`; }).join("");
+  /* Tim, 16 Nov 2026: a numbered list of what is chosen, in the order of the standards; a cross takes one off */
+  const chosen = library(s, g).filter((e) => isPicked(s, g, key(e))).concat(picked.filter((p) => !findStd(s, `${p.framework}|${p.code}`)).map((p) => stdOf(s, p)));
+  const plist = chosen.length ? `<ol class="olist">${chosen.map((e) => `<li><span class="body"><span class="code">${esc(e.c)}</span><span class="stext" data-more="${esc(key(e))}">${esc(e.t)}</span></span>${ed ? `<button class="cross" type="button" data-pick="${esc(key(e))}" aria-label="Cross off ${esc(e.c)}" title="Cross off">&times;</button>` : ""}</li>`).join("")}</ol>` : "";
   const minMsg = n >= goal ? "You have reached the goal of about a third." : n >= min ? `You have the minimum. About a third (${goal}) is a good goal.` : `Choose ${min - n} more to reach the minimum of ${min} (a quarter).`;
   const fhref = isK5(g) ? href({ g, s, v: "focus" }) : href({ s, g, v: "focus" });
   return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth? Choose at least ${min} of the ${lib.length} standards (a quarter); about ${goal} (a third) is a good goal.</p>${subjTabs(g, s)}${nextBox(s, g)}</div>
@@ -451,9 +457,9 @@ function chooseV(s, g) {
     <aside class="panel picks" aria-label="Our focus standards"><h2>Our focus standards${help("picks")}</h2>
       <div class="count"><b>${n}</b><span>of ${lib.length} chosen</span>${stPill(st)}</div>
       ${meter(n, min, goal, lib.length)}<p class="minnote">${minMsg}</p>
-      <div class="plist" data-d="${DENS}">${plist || `<p class="empty">Tick standards in the library to add them here.</p>`}</div>
+      <div class="plist" data-d="short">${plist || `<p class="empty">Tick standards in the list on the left to add them here.</p>`}</div>
       <div class="row-acts">${ed && st === "draft" ? `<button class="btn cta" type="button" data-status="ready"${n >= min && n > 0 ? "" : " disabled"} title="${n >= min ? "" : `Choose at least ${min} first`}">We selected our focus standards</button>` : ""}${ed && st === "selected" ? `<button class="btn small" type="button" data-status="draft">Back to draft</button>` : ""}<a class="btn" href="${fhref}">See them by strand</a><a class="btn" href="${href({ s, g, v: "paper" })}">Print this list</a></div>
-      ${changesHTML(s, g, ed)}</aside></div></div>`;
+</aside></div></div>`;
 }
 
 /* Our focus standards by strand: codes only (default), short or full text; print and copy */
