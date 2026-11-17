@@ -15,6 +15,8 @@ Fixed:
   6a. Two AERO Social Studies texts.  6b. Grade 2 ELA texts that began "I can ".
   6c. Fourteen ELA texts (and ten linked texts) that lost their first letter in the school-sheet parser.
   6d. M.2.NBT.A.1 full text.  6e. Five Essential Element codes.
+Added:
+  6f. M.4.NF.B.3.a (Tim, 17 Nov 2026): Wisconsin 2021 has parts a to d; the parser dropped part a.
 """
 import re
 
@@ -61,6 +63,23 @@ EE_TEXT = {
     ("WI-EE-MATH", "M.EE.1.NBT.1.b"): "Know the count sequence and understand numbers and quantities. b. Count up to 10 objects "
                                       "and represent the quantity with the corresponding numeral.",
 }
+
+
+# 6f. M.4.NF.B.3.a, missing from the parsed Wisconsin 2021 Math (parts b, c and d match word for word). Wording of
+# Wisconsin M.4.NF.B.3.a (the same as Common Core 4.NF.B.3.a). Added before part b; never added twice.
+MISSING_MATH = {("4", "M.4.NF.B.3.a", "M.4.NF.B.3.b"): "Understand addition and subtraction of fractions as joining and separating parts referring to the same whole."}
+
+
+def add_missing(rows):
+    have = {(r["framework"], r["grade"], r["code"]) for r in rows}
+    out = []
+    for r in rows:
+        for (g, code, before), text in MISSING_MATH.items():
+            if r["framework"] == "WI-CC-MATH" and r["grade"] == g and r["code"] == before and ("WI-CC-MATH", g, code) not in have:
+                n = dict(r); n.update(code=code, text=text, ee_code="", ee_text="", crosswalk=[], descriptors={}, descriptor_source="", descriptor_flag="", source="Wisconsin Standards for Mathematics 2021 (added Nov 2026: missing from the school sheet)", text_source="Wisconsin 2021")
+                out.append(n); have.add(("WI-CC-MATH", g, code))
+        out.append(r)
+    return out
 
 
 def restore_letter(t):
@@ -117,7 +136,7 @@ def apply_main(rows):
             if (r["subject"] == "Science" and g in K5 and fw != "WI-SCI") or is_placeholder(r.get("ee_text")):
                 drop_ee_link(r)
         out.append(r)
-    return out
+    return add_missing(out)
 
 
 def apply_ee(rows):
