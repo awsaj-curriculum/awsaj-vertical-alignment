@@ -9,7 +9,8 @@ Read `docs/HANDOFF.md` first (current status and next steps), then `docs/spec.md
 
 ## Hard rules
 - The school Google Drive (account 2sk234@awsaj.qfschools.qa) is **read-only**. Never create, edit, move or delete
-  anything there.
+  anything there. One exception, granted by Tim on 16 Nov 2026: the shared folder "Awsaj Learning Maps"
+  (id 12KSBVoFVzgLNi4aZB8B0lQNFlOtwrP2U) and what is inside it may be created and edited for the Learning Map documents.
 - **No student names or student data** anywhere: not in data files, the database, the site, or commits.
 - Teacher names should not appear on the public site (plan file titles often contain them; strip them).
 - This repo is **public** (GitHub Pages). Never commit downloaded school files (`data/source/` is git-ignored),
@@ -106,25 +107,29 @@ library order with a cross to take one off (Tim: no Recent changes box; notes ar
 Line up, flags, connections, Stands alone, learner profile, PIN agreeing, practice version (only `?practice=1`, nothing saved, is
 left for testing). Picks still save to `pd_picks` through `pd_set_pick`. The old tool is kept as `site/priorities-v1.html` (not
 linked). The landing page's Part 2 card and the committee tab now open priorities.html. The facilitator guide PDF and pd-tour.html
-describe the old tool. When a list is Selected, a green box says "You are ready to move on to the Awsaj Learning Map" with Copy all
+describe the old tool. When a list is Selected, a green box says "You are ready to move on to the Awsaj SAT Pathway Learning Map" with Copy all
 codes and links to the template (`site/files/Awsaj-Learning-Map-*.docx`; `PROFILE_DOC` in priorities.html, to be swapped for the
 Google Doc copy links) and the filled Grade 12 Pre-Calculus example. Copy format matches the template (Tim): one code per line; Copy all
 = each strand name, then its codes, a blank line between strands. Learning Map wording: "Evidence of learning" (no "(Do)", Tim).
-Grade first everywhere (Tim, 16 Nov 2026): the picker home has Elementary (K-5) and Secondary (6-12) grade buttons; every grade page
+Full name (Tim, 17 Nov 2026): "Awsaj SAT Pathway Learning Map" (short form "Learning Map" after first mention; the Drive folder
+keeps its name "Awsaj Learning Maps"). Every document, template and slide carries the draft note "This is our first draft: we will
+keep working on it and polish it in the future." The minimum is worded as "Pick all the standards that need to be taught in depth to
+succeed in this subject (at least a quarter)", never "reach the minimum". Slide 12 is "Your link takes you there" (grade link, subject
+tab, We selected our focus standards, Open our Learning Map; the folder is a one-line backup). Grade first everywhere (Tim, 16 Nov 2026): the picker home has Elementary (K-5) and Secondary (6-12) grade buttons; every grade page
 (`#g=7`) has four subject tabs (high school shows the course), `#g=7&s=Math&v=choose`, `#g=7&v=focus`; `#s=Math` (subject list)
 still works by address. Drive (Tim allowed an exception to the read-only rule for this one folder only): shared folder "Awsaj Learning
 Maps" (`DRIVE_ROOT` in priorities.html) holds Templates and example, Elementary (K-5) > Kindergarten ... Grade 5, Secondary (6-12) >
-Grade 6 ... Grade 12, one Google Doc per grade and subject ("Grade 10 Science (Physics): Awsaj Learning Map"); `DRIVE` maps each grade
+Grade 6 ... Grade 12, one Google Doc per grade and subject ("Grade 10 Science (Physics): Awsaj SAT Pathway Learning Map"); `DRIVE` maps each grade
 to [folder, Math, ELA, Science, Social Studies] doc ids; each subject page links to its document and grade folder. Access follows the
 shared folder's sharing (school domain, Editor or Contributor for staff). Progress and messages (`#v=progress`, `progressV()`,
 `buildMsg()`): every grade x subject status with links, and a message maker (all grades or one; Choose / Reminder / Next step:
 Learning Map) to copy or open in email; the site sends nothing itself and cannot see inside the Drive documents. Slides: "Where to
-find your Learning Map" (folder diagram) before the steps; the last slide has Secondary grade buttons. Name (Tim, 16 Nov 2026): the document is the "Awsaj Learning Map" (was "learning profile"): "A unified Awsaj Learning Map for each
+find your Learning Map" (folder diagram) before the steps; the last slide has Secondary grade buttons. Name (Tim, 16 Nov 2026): the document is the "Awsaj SAT Pathway Learning Map" (was "learning profile"): "A unified Awsaj SAT Pathway Learning Map for each
 grade and subject, in one place." The goal slide adds: it sits alongside our curriculum maps (the curriculum map says when we teach
 it); the Learning Map is a whole-school overview of what students learn, to serve our vertical alignment, not a detailed plan.
 Files: `site/files/Awsaj-Learning-Map-*.docx`. One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
 from each door on the picker home and in the header ("Step-by-step help (PDF)"). All-staff slides (Tim, 16 Nov 2026; `scripts/journey/pd.js`, 13 slides, also as PowerPoint, built privately with python-pptx): "Where we are headed today" previews the three parts, then The data (thank you, why /
-road, capacity, three facts), The goal (the goal: a unified Awsaj Learning Map for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the Learning Map with
+road, capacity, three facts), The goal (the goal: a unified Awsaj SAT Pathway Learning Map for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the Learning Map with
 template pictures in `site/img/pd/`), How we get there (what is a standard, breaking down RI.11-12.10 = the same four parts as the
 profile, the filled Pre-Calculus example, the steps with QR, go to your groups: K-5 grade buttons, 6-12 subjects). The ponder,
 explore and staircase slides are gone; the start page's Part 2 box opens priorities.html; practice and walk-through links removed.
