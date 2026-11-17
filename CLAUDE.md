@@ -100,7 +100,7 @@ options) with Copy codes per strand and Copy all codes per subject ("Strand: cod
 profile document (Google Doc template: Prerequisite skills; a table of Selected focus standards | Strand or topic | Knowledge | Skills |
 Vocabulary | Evidence of learning). `site/priorities.html` was rewritten for this: home has two doors, Elementary (K-5: grade,
 then four subject tabs; `#g=3`, `#g=3&s=Math&v=choose`, `#g=3&v=focus` = all four subjects by strand) and Grades 6 to 12 (subject, then
-grade or course; `#s=Math`, `#s=Math&g=7&v=choose`, `&v=focus`); "We selected our focus standards" unlocks at the minimum (stored
+grade or course; `#s=Math`, `#s=Math&g=7&v=choose`, `&v=focus`); "We selected our focus standards" checks the minimum (Tim, 17 Nov 2026: no minimum on screen, no bars, "min" marks or "at least N"; the quarter is only a gate: pressing the button with fewer shows "Please pick more", `GATE` in priorities.html) (stored
 as pd_status "ready"; shown as Selected only while the list holds the minimum; going below sets it back to draft); kept: Part 1
 rating and Priority / Power hints, Print this list (paper), Excel; the right side is a numbered list of the chosen standards in
 library order with a cross to take one off (Tim: no Recent changes box; notes are no longer edited on screen); removed: review views, threads,

@@ -133,6 +133,7 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .mlabels { position: relative; height: 18px; font-size: .75rem; font-weight: 700; color: var(--navy-2); }
 .mlabels span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
 .minnote { font-size: .9rem; color: var(--navy-2); margin-top: 6px; }
+.minnote.gate { background: #FFF4E0; border: 1px solid var(--amber); border-radius: 10px; padding: 8px 12px; color: var(--navy); font-weight: 600; }
 .gcards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .gcard { display: grid; gap: 8px; padding: 18px; border-radius: 18px; background: rgba(255,255,255,.8); border-top: 5px solid var(--c); }
 .gcard b { font-size: 1.3rem; }
@@ -239,16 +240,16 @@ const mapDoc = (s, g) => { const d = DRIVE[g]; const i = SUBJ.findIndex((x) => x
 const gradeFolder = (g) => (DRIVE[g] ? `https://drive.google.com/drive/folders/${DRIVE[g][0]}` : DRIVE_ROOT);
 const mapLinks = (s, g, small) => `<a class="btn${small ? " small" : ""}" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Open our ${esc(gname(g))} ${esc(s)}${course(s, g) ? ` (${esc(course(s, g))})` : ""} Learning Map ↗</a><a class="btn small" href="${gradeFolder(g)}" target="_blank" rel="noopener">${esc(gname(g))} folder ↗</a>`;
 const HELP = {
-  home: "Vertical Alignment Learning Maps has two parts for every grade and subject. 1. Select Focus Standards: pick all the standards that need to be taught in depth to succeed in the subject (the standards required for success toward graduation and success in the course), at least a quarter; see them by strand and copy the codes. 2. Complete Learning Map: open your grade and subject's Vertical Alignment Learning Map (a Google Doc in the shared folder) and fill it in. Elementary (K-5) and Secondary (6-12) both work by grade, with a tab for each subject (in high school, the course). Step-by-step help (PDF) shows each step with pictures. This is our first draft: we will keep working on it and polish it in the future.",
+  home: "Vertical Alignment Learning Maps has two parts for every grade and subject. 1. Select Focus Standards: pick all the standards that need to be taught in depth to succeed in the subject (the standards required for success toward graduation and success in the course); when you press We selected our focus standards, the site checks that you have at least a quarter; see them by strand and copy the codes. 2. Complete Learning Map: open your grade and subject's Vertical Alignment Learning Map (a Google Doc in the shared folder) and fill it in. Elementary (K-5) and Secondary (6-12) both work by grade, with a tab for each subject (in high school, the course). Step-by-step help (PDF) shows each step with pictures. This is our first draft: we will keep working on it and polish it in the future.",
   grade: "Your grade's four subjects. Each subject has its own list, count and status. Open a subject to choose its focus standards. Our focus standards shows all four subjects by strand, ready to print or copy.",
-  ladder: "Every grade or course for this subject in Secondary (6-12). Draft: still choosing. Selected our focus standards: the team has chosen at least the minimum and marked the list. Anyone can open any grade and change it; it saves for everyone.",
+  ladder: "Every grade or course for this subject in Secondary (6-12). Draft: still choosing. Selected our focus standards: the team has chosen its focus standards (at least a quarter) and marked the list. Anyone can open any grade and change it; it saves for everyone.",
   library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard. Hints: the Part 1 rating, and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
   next: "Once a subject's focus standards are selected, move on to the Vertical Alignment Learning Map. Each grade and subject has its own Google Doc in the shared Drive folder Awsaj Learning Maps (Elementary (K-5) or Secondary (6-12), then your grade); the Open button goes straight to yours: copy your focus codes and paste them into the Learning Map document: one row per strand, the strand name in the Topic or domains column and its codes, one per line, in the Selected focus standards column (Copy codes beside each strand on Our focus standards copies one strand). Open the Learning Map opens the template for this subject; the example shows a filled Grade 12 Pre-Calculus profile.",
   picks: "The standards every class in this grade or course will teach in depth, grouped by strand. Show: Codes (just the codes), Short text (two lines) or Full text; this laptop remembers your choice. Copy codes copies one strand's codes, one per line; Copy all codes copies every strand with its name, ready for the Learning Map. The cross takes one off the list; ticking it again on the left puts it back. Print our focus standards opens a printable page. Pick all the standards that need to be taught in depth to succeed in this subject: at least a quarter (the line on the bar). Anyone can add or remove a standard; the list saves as you go, for everyone. When you have at least the minimum, press We selected our focus standards. You can still change the list after; going below the minimum sets it back to Draft.",
   changes: "The latest changes to this list, newest first, from every laptop. Undo puts back a standard someone added or removed by mistake. Anyone can undo, and every change is kept in the history.",
   focus: "Your focus standards grouped by strand (or domain, or topic), in the order of the standards. Show: Codes only (the default, for the Learning Map), Codes and short text, or Codes and full text; Print uses the same choice. Copy codes copies the codes of one strand, one code per line, ready to paste into the Selected focus standards column of the Learning Map. Copy all codes copies every strand: the strand name (for the Topic or domains column), then its codes, one per line.",
   paper: "A paper copy of every standard this grade or course can choose from, with a tick box and a line for notes. Teams that start on paper give the finished copy to the leader, who ticks the same standards on the site.",
-  progress: "Every grade and subject: Selected (the focus standards are chosen and marked), Draft with how many are chosen of the minimum, or Not started. Click a cell to open that list; Learning Map opens its Google Doc in the shared Drive folder. Use it to follow up, then write a message below.",
+  progress: "Every grade and subject: Selected (the focus standards are chosen and marked), Draft with how many are chosen so far, or Not started. Click a cell to open that list; Learning Map opens its Google Doc in the shared Drive folder. Use it to follow up, then write a message below.",
   message: "Choose a grade (or all grades) and a message: Choose your focus standards (a link to every subject), Reminder (only the lists not yet selected, with how many are chosen), or Next step (only the selected lists, with a link to each Learning Map). Copy the message into an email or chat, or Open in email to start an email with the subject and text filled in. The site does not send anything by itself.",
   exports: "Excel: every chosen focus standard, with its strand, note, Part 1 rating and the status of every list, in one file."
 };
@@ -307,6 +308,8 @@ const stdOf = (s, p) => findStd(s, `${p.framework}|${p.code}`) || { c: p.code, f
 const picksOf = (s, g) => D.picks.filter((p) => p.subject === s && p.grade === g);
 const isPicked = (s, g, k) => D.picks.some((p) => p.subject === s && p.grade === g && `${p.framework}|${p.code}` === k);
 /* the minimum: a quarter of the grade's library, rounded up, every lettered part counted */
+/* Tim, 17 Nov 2026: no minimum on screen; the quarter is only a check when a team presses We selected our focus standards */
+const GATE = {};
 const minOf = (s, g) => Math.ceil(library(s, g).length / 4);   // Tim: no upper goal; teams can choose more
 const rawStatus = (s, g) => (D.status.find((x) => x.subject === s && x.grade === g) || {}).status || "draft";
 /* "Selected our focus standards" is stored as "ready"; it only counts while the list holds the minimum */
@@ -336,7 +339,7 @@ async function setPick(s, g, e, on, note = "", undoing = false) {
   catch (err) { toast("Not saved: " + err.message); await loadPD(); }
   finally { busy--;
     // below the minimum, a selected list goes back to draft
-    if (!on && rawStatus(s, g) === "ready" && picksOf(s, g).length < minOf(s, g)) await setStatus(s, g, "draft", true);
+    if (!on && rawStatus(s, g) === "ready" && picksOf(s, g).length < minOf(s, g)) { GATE[s + "|" + g] = 1; await setStatus(s, g, "draft", true); }
     if (on !== was || undoing) { await loadEvents(s, g); render(true); } }
 }
 async function setStatus(s, g, st, quiet) {
@@ -421,8 +424,8 @@ async function render(keep) {
 function homeV() {
   return `<div class="stack"><div class="panel stack"><p class="pill">Part 2</p><h1>Vertical Alignment Learning Maps${help("home")}</h1>
     <p class="lead">Each grade chooses its focus standards, sees them by strand, and uses them in its Vertical Alignment Learning Map.</p><p class="notice" style="font-weight:600">This is our first draft: we will keep working on it and polish it in the future.</p>
-    <p class="expect"><b>Focus standards</b>The standards required for success toward graduation and success in the course. Pick all the standards that need to be taught in depth to succeed in each subject (at least a quarter).</p>
-    <div class="steps2"><div><b>1. Select Focus Standards</b>Pick all the standards that need to be taught in depth to succeed in the subject (at least a quarter). See them by strand and copy the codes.</div><div><b>2. Complete Learning Map</b>Open your grade and subject's Vertical Alignment Learning Map and fill it in, starting with your focus standards.</div></div>
+    <p class="expect"><b>Focus standards</b>The standards required for success toward graduation and success in the course. Pick all the standards that need to be taught in depth to succeed in each subject.</p>
+    <div class="steps2"><div><b>1. Select Focus Standards</b>Pick all the standards that need to be taught in depth to succeed in the subject. See them by strand and copy the codes.</div><div><b>2. Complete Learning Map</b>Open your grade and subject's Vertical Alignment Learning Map and fill it in, starting with your focus standards.</div></div>
     <div class="row-acts"><a class="btn small" href="#v=progress">Progress and messages</a><button class="btn small" type="button" data-excel="">Excel: all subjects</button>${help("exports")}</div></div>
     <div class="doors"><section class="panel door"><h2>Elementary (K-5)</h2><p class="lead">Choose your grade. You will see your four subjects.</p><p style="margin:-6px 0 12px">${helpLink("k5")}</p>
       <div class="gbtns">${K5.map((g) => { const done = SUBJ.filter(([s]) => statusOf(s, g) === "selected").length; return `<a class="gbtn" href="${href({ g })}">${g}<small>${done} of 4 selected</small></a>`; }).join("")}</div></section>
@@ -438,15 +441,15 @@ const stPill = (st) => `<span class="pill st-${st}">${STATUS[st]}</span>`;
 
 function gradeV(g) {
   const cards = SUBJ.map(([s, , c]) => { const n = picksOf(s, g).length, lib = library(s, g).length, st = statusOf(s, g);
-    return `<div class="gcard" style="--c:${c}"><b>${s}${course(s, g) ? `<small style="display:block;font-size:.9rem;font-weight:600;color:var(--muted)">${esc(course(s, g))}</small>` : ""}</b>${stPill(st)}<span>${n} of ${lib} chosen · at least ${minOf(s, g)}</span>${meter(n, minOf(s, g), lib)}<a class="btn small cta" href="${chooseHref(s, g)}">Choose ${esc(s)} standards</a><a class="btn small" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Learning Map ↗</a></div>`; }).join("");
-  return `<div class="stack"><div class="panel stack"><h1>${gname(g)}: our focus standards${help("grade")}</h1><p class="lead">For each of your four subjects, pick all the standards that need to be taught in depth to succeed in it (at least a quarter).</p>
+    return `<div class="gcard" style="--c:${c}"><b>${s}${course(s, g) ? `<small style="display:block;font-size:.9rem;font-weight:600;color:var(--muted)">${esc(course(s, g))}</small>` : ""}</b>${stPill(st)}<span>${n} of ${lib} chosen</span><a class="btn small cta" href="${chooseHref(s, g)}">Choose ${esc(s)} standards</a><a class="btn small" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Learning Map ↗</a></div>`; }).join("");
+  return `<div class="stack"><div class="panel stack"><h1>${gname(g)}: our focus standards${help("grade")}</h1><p class="lead">For each of your four subjects, pick all the standards that need to be taught in depth to succeed in it.</p>
     <div class="row-acts"><a class="btn cta" href="${href({ g, v: "focus" })}">Our focus standards by strand (all subjects)</a><a class="btn" href="${gradeFolder(g)}" target="_blank" rel="noopener">Our ${esc(gname(g))} Learning Maps folder ↗</a></div></div>
     <div class="gcards">${cards}</div></div>`;
 }
 
 function subjectV(s) {
   const rows = G612.map((g) => { const n = picksOf(s, g).length, st = statusOf(s, g), lib = library(s, g).length; const bc = ["9", "10", "11", "12"].includes(g) ? "var(--magenta)" : "var(--blue)";
-    return `<div class="lrow" style="--bc:${bc}"><div class="g">${glab(s, g)}</div><div class="meta">${stPill(st)}<span>${n} of ${lib} chosen · at least ${minOf(s, g)}</span></div>
+    return `<div class="lrow" style="--bc:${bc}"><div class="g">${glab(s, g)}</div><div class="meta">${stPill(st)}<span>${n} of ${lib} chosen</span></div>
       <div class="acts"><a class="btn small cta" href="${chooseHref(s, g)}">Choose</a><a class="btn small" href="${href({ s, g, v: "focus" })}">By strand</a></div></div>`; }).join("");
   return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: focus standards, Grades 6 to 12${help("ladder")}</h1><p class="lead">Choose your grade or course. Any grade can start at any time.</p>
     <div class="row-acts"><button class="btn" type="button" data-excel="${esc(s)}">Excel</button>${help("exports")}</div></div>
@@ -490,9 +493,9 @@ function chooseV(s, g) {
     ${FMODE === "codes" ? `<div class="pchips">${list.map((e) => `<span class="pchip"><span class="code" data-more="${esc(key(e))}" title="${esc(e.t)}">${esc(e.c)}</span>${cross(e)}</span>`).join("")}</div>`
       : `<ol class="olist" start="${num + 1}">${list.map((e) => { num++; return `<li><span class="body"><span class="code">${esc(e.c)}</span><span class="stext${FMODE === "full" ? " full" : ""}" data-more="${esc(key(e))}">${esc(e.t)}</span></span>${cross(e)}</li>`; }).join("")}</ol>`}</div>`).join("") : "";
   const showBar = `<div class="pshow"><span class="dens" role="group" aria-label="What to show" style="margin:0">Show:${[["codes", "Codes"], ["short", "Short text"], ["full", "Full text"]].map(([k, l]) => `<button class="chip" type="button" data-fmode="${k}" aria-pressed="${FMODE === k}">${l}</button>`).join("")}</span>${G.length ? `<button class="btn small" type="button" data-copy="${esc(allCodes(s, g))}">Copy all codes</button>` : ""}</div>`;
-  const minMsg = n >= min ? "You have at least a quarter. Add any others that need to be taught in depth to succeed in this subject." : `Pick all the standards that need to be taught in depth to succeed in this subject: at least ${min} (a quarter).`;
+  const minMsg = `Please pick more. Every subject needs at least a quarter of its standards as focus standards: at least ${min} of ${lib.length} here (you have ${n}).`;
   const fhref = href({ g, s, v: "focus" });
-  return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth? Choose at least ${min} of the ${lib.length} standards (a quarter);</p>${subjTabs(g, s)}${nextBox(s, g) || `<div class="row-acts">${mapLinks(s, g, true)}</div>`}</div>
+  return `<div class="stack"><div class="panel stack"><h1>${course(s, g) ? `${gname(g)} · ${esc(course(s, g))}` : gname(g)} ${esc(s)}</h1><p class="lead">Which of these standards must every class teach in depth? Choose all the standards that need to be taught in depth to succeed in this subject.</p>${subjTabs(g, s)}${nextBox(s, g) || `<div class="row-acts">${mapLinks(s, g, true)}</div>`}</div>
     <div class="choose"><section class="panel" aria-label="Library"><h2>Our standards${help("library")}</h2>
       <div class="tools"><input type="search" id="q" placeholder="Search by code or words" value="${esc(f.q)}" aria-label="Search the standards"><select id="strand" aria-label="Strand"><option value="">All strands</option>${strands.map((x) => `<option${x === f.strand ? " selected" : ""}>${esc(x)}</option>`).join("")}</select></div>
       <div class="chips" role="group" aria-label="Show">${[["", "All"], ["on", "Chosen"], ["pr", `★ School ${isK5(g) ? "power" : "priority"} standards`]].map(([k, t]) => `<button class="chip" type="button" data-only="${k}" aria-pressed="${f.only === k}">${t}</button>`).join("")}</div>
@@ -500,9 +503,9 @@ function chooseV(s, g) {
       <p class="saved" style="margin:10px 0">${rows.length} of ${lib.length} standards shown</p><div class="lib" data-d="${DENS}">${items || `<p class="empty">No standards match.</p>`}</div></section>
     <aside class="panel picks" aria-label="Our focus standards"><h2>Our focus standards${help("picks")}</h2>
       <div class="count"><b>${n}</b><span>of ${lib.length} chosen</span>${stPill(st)}</div>
-      ${meter(n, min, lib.length)}<p class="minnote">${minMsg}</p>
+      ${GATE[s + "|" + g] && n < min ? `<p class="minnote gate" role="alert">${minMsg}</p>` : ""}
       ${showBar}<div class="plist">${plist || `<p class="empty">Tick standards in the list on the left to add them here.</p>`}</div>
-      <div class="row-acts">${ed && st === "draft" ? `<button class="btn cta" type="button" data-status="ready"${n >= min && n > 0 ? "" : " disabled"} title="${n >= min ? "" : `Choose at least ${min} first`}">We selected our focus standards</button>` : ""}${ed && st === "selected" ? `<button class="btn small" type="button" data-status="draft">Back to draft</button>` : ""}<a class="btn" href="${fhref}">Print our focus standards</a><a class="btn small" href="${href({ s, g, v: "paper" })}">Print the full list (paper)</a></div>
+      <div class="row-acts">${ed && st === "draft" ? `<button class="btn cta" type="button" data-status="ready"${n > 0 ? "" : " disabled"}>We selected our focus standards</button>` : ""}${ed && st === "selected" ? `<button class="btn small" type="button" data-status="draft">Back to draft</button>` : ""}<a class="btn" href="${fhref}">Print our focus standards</a><a class="btn small" href="${href({ s, g, v: "paper" })}">Print the full list (paper)</a></div>
 </aside></div></div>`;
 }
 
@@ -513,8 +516,8 @@ const MSG = { g: "", kind: "start" };
 const subjLabel = (s, g) => `${gname(g)} ${s}${course(s, g) ? ` (${course(s, g)})` : ""}`;
 function buildMsg(g, kind) {
   const grades = g ? [g] : ALLG, out = [];
-  const head = { start: "Dear colleagues,\n\nPlease choose your focus standards for each of your subjects: all the standards that need to be taught in depth to succeed in the subject (at least a quarter). Then press We selected our focus standards.",
-    remind: "Dear colleagues,\n\nA friendly reminder: these lists still need their focus standards: all the standards that need to be taught in depth to succeed in the subject (at least a quarter).",
+  const head = { start: "Dear colleagues,\n\nPlease choose your focus standards for each of your subjects: all the standards that need to be taught in depth to succeed in the subject. Then press We selected our focus standards.",
+    remind: "Dear colleagues,\n\nA friendly reminder: these lists still need their focus standards: all the standards that need to be taught in depth to succeed in the subject.",
     map: "Dear colleagues,\n\nThank you for selecting your focus standards. You are ready to move on to the Vertical Alignment Learning Map: copy your focus codes (Copy all codes on the site) and paste them into your Learning Map document." }[kind];
   out.push(head, "");
   grades.forEach((x) => {
@@ -523,7 +526,7 @@ function buildMsg(g, kind) {
     out.push(`${gname(x)}: ${SITE_URL}#g=${x}`);
     subs.forEach((s) => {
       const n = picksOf(s, x).length, min = minOf(s, x);
-      if (kind === "remind") out.push(`  ${subjLabel(s, x)}: ${n} of at least ${min} chosen. ${SITE_URL}#g=${x}&s=${encodeURIComponent(s)}&v=choose`);
+      if (kind === "remind") out.push(`  ${subjLabel(s, x)}: ${n} chosen so far. ${SITE_URL}#g=${x}&s=${encodeURIComponent(s)}&v=choose`);
       else if (kind === "map") out.push(`  ${subjLabel(s, x)} Learning Map: ${mapDoc(s, x)}`);
       else out.push(`  ${subjLabel(s, x)}: ${SITE_URL}#g=${x}&s=${encodeURIComponent(s)}&v=choose`);
     });
@@ -537,7 +540,7 @@ const MSG_SUBJECT = { start: "Please choose your focus standards", remind: "Remi
 function progressV() {
   const lists = ALLG.length * SUBJ.length, done = ALLG.reduce((a, g) => a + SUBJ.filter(([s]) => statusOf(s, g) === "selected").length, 0);
   const rows = ALLG.map((g) => `<tr><th><a href="${href({ g })}">${esc(gname(g))}</a></th>${SUBJ.map(([s]) => { const n = picksOf(s, g).length, min = minOf(s, g), st = statusOf(s, g);
-    return `<td class="pc ${st}"><a href="${chooseHref(s, g)}" title="${esc(subjLabel(s, g))}">${st === "selected" ? "&#10003; Selected" : n ? `Draft ${n} of ${min}` : "Not started"}</a><a class="docl" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Learning Map ↗</a></td>`; }).join("")}</tr>`).join("");
+    return `<td class="pc ${st}"><a href="${chooseHref(s, g)}" title="${esc(subjLabel(s, g))}">${st === "selected" ? "&#10003; Selected" : n ? `Draft, ${n} chosen` : "Not started"}</a><a class="docl" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Learning Map ↗</a></td>`; }).join("")}</tr>`).join("");
   const text = buildMsg(MSG.g, MSG.kind), mail = `mailto:?subject=${encodeURIComponent(MSG_SUBJECT[MSG.kind])}&body=${encodeURIComponent(text)}`;
   return `<div class="stack"><div class="panel stack"><h1>Progress and messages${help("progress")}</h1><p class="lead">${done} of ${lists} lists have selected their focus standards. Click a cell to open that list.</p>
     <div class="ptable"><table><thead><tr><th>Grade</th>${SUBJ.map(([s]) => `<th>${s}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>
@@ -574,7 +577,7 @@ function paperV(s, g) {
   let last = ""; const rows = lib.map((e) => { const lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g), sh = e.s !== last ? `<tr><td colspan="3" style="font-weight:800;background:#F3F4F8">${esc(e.s)}</td></tr>` : ""; last = e.s;
     return `${sh}<tr><td style="width:34px"><span class="box"></span></td><td style="width:24%">${fw(e)}${lv != null ? `<span class="alt">Part 1: ${RWORD[lv]}</span>` : ""}${pm ? `<span class="alt">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}</td><td>${esc(e.t)}<div class="noteline"></div></td></tr>`; }).join("");
   return `<div class="stack"><div class="row-acts noprint"><button class="btn cta" type="button" onclick="print()">Print</button><a class="btn" href="${chooseHref(s, g)}">Back</a>${help("paper")}</div>
-    <article class="doc"><h1>Focus standards: ${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub">Tick the standards every class must teach in depth: at least ${minOf(s, g)} of ${lib.length} (a quarter);</p>
+    <article class="doc"><h1>Focus standards: ${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub">Tick the standards every class must teach in depth (${lib.length} to choose from).</p>
     <div class="fill"><span>Team</span><span>Date</span></div>
     <table><thead><tr><th></th><th>Standard</th><th>What students learn, and a note</th></tr></thead><tbody>${rows}</tbody></table></article></div>`;
 }
@@ -605,7 +608,7 @@ document.addEventListener("click", (ev) => {
   const fm = ev.target.closest("[data-fmode]"); if (fm) { FMODE = fm.dataset.fmode; store.set("pd_fmode", FMODE); render(true); return; }
   const dn = ev.target.closest("[data-dens]"); if (dn) { DENS = dn.dataset.dens; store.set("pd_text", DENS); render(true); return; }
   const o = ev.target.closest("[data-only]"); if (o) { chooseV.f.only = o.dataset.only; render(true); return; }
-  const st = ev.target.closest("[data-status]"); if (st && !st.disabled) { setStatus(r.s, r.g, st.dataset.status); return; }
+  const st = ev.target.closest("[data-status]"); if (st && !st.disabled) { if (st.dataset.status === "ready" && picksOf(r.s, r.g).length < minOf(r.s, r.g)) { GATE[r.s + "|" + r.g] = 1; render(false); return; } setStatus(r.s, r.g, st.dataset.status); return; }
   const xl = ev.target.closest("[data-excel]"); if (xl) { exportExcel(xl.dataset.excel || null); return; }
 });
 document.addEventListener("input", (ev) => { if (ev.target.id === "q") { chooseV.f.q = ev.target.value; clearTimeout(render.q); render.q = setTimeout(() => { const pos = ev.target.selectionStart; render(true); const i = $("#q"); if (i) { i.focus(); i.setSelectionRange(pos, pos); } }, 200); } });
