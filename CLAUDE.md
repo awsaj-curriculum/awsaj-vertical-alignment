@@ -138,9 +138,12 @@ road, capacity, three facts), The goal (the goal: a unified Vertical Alignment L
 template pictures in `site/img/pd/`), How we get there (what is a standard, breaking down RI.11-12.10 = the same four parts as the
 profile, the filled Pre-Calculus example, the steps with QR, go to your groups: K-5 grade buttons, 6-12 subjects). The ponder,
 explore and staircase slides are gone; the start page's Part 2 box opens priorities.html; practice and walk-through links removed.
-Part 1 all-staff session, reorganized (Tim, 17 Nov 2026; `scripts/journey/pd.js`, 17 slides, about 25 minutes, three parts of
+Part 1 all-staff session, reorganized (Tim, 17 Nov 2026; `scripts/journey/pd.js`, 16 slides, about 25 minutes, three parts of
 about the same length): 1. Introduction and data (today with minutes per part, thanks, why, pattern, facts), 2. Our goal: a unified
-Vertical Alignment Learning Map (goal, the Learning Map, what is a standard, breaking down a standard, Pre-Calculus example),
+Vertical Alignment Learning Map (goal; the Learning Map shown with the filled Pre-Calculus example, "From our focus standards, we
+build a comprehensive vision..."; what is a standard; Breaking down a standard = a mock Learning Map row for RI.11-12.10, `pdFill()`,
+`FILL`, `fillShow()`, `data-steps="5"`: code and strand first, then one column per click, Knowledge, Skills, Vocabulary, Evidence of
+learning; the note says rows work either way: one standard per row, several standards in one row, or one standard over several rows),
 3. How we get there: five click-by-click walkthrough slides (`WALKS`, `pdWalk()`, `walkShow()`; each click moves an amber ring,
 zooms on small things, and shows the step in a black popup with white text beside the ring; `slides()` in the template gives a
 walk slide one step per click): open your grade and subject, pick your focus standards, select then copy by strand (copy ONE

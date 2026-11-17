@@ -436,6 +436,31 @@ ol.wl > li { padding-left: 10px !important; } ol.wl > li, ol.qs > li { border-ra
 .pdgoal3 .mins { display: block; margin-top: 10px; font-style: normal; font-weight: 700; font-size: .95rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .wkz, .wkr, .wki, .wkp { transition: none; animation: none; } }
 @media print { .wkp, .wkr { display: none; } .wkl { display: block; } .wkz { transform: none !important; } }
+/* "Breaking down a standard": a mock Learning Map row, one column per click (Tim, 17 Nov 2026) */
+.stdcard.mini { padding: 14px 22px; max-width: none; } .stdcard.mini p { font-size: 1.08rem; margin-top: 4px; }
+.mkdoc { margin-top: 16px; background: #fff; border-radius: 12px; padding: 18px 20px 20px; box-shadow: 0 16px 40px -18px rgba(16,24,70,.45); font-family: Inter, Arial, sans-serif; }
+.mkh { color: #024638; font-weight: 800; font-size: 1.15rem; border-bottom: 2px solid #024638; padding-bottom: 6px; margin: 0 0 12px; max-width: none; }
+.mkt { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 1rem; color: #222; }
+.mkt th, .mkt td { border: 1px solid #C9D3CF; padding: 9px 10px; vertical-align: top; text-align: left; }
+.mkt th { background: #E6EFEC; color: #024638; font-weight: 800; font-size: 1rem; } .mkt th small { display: block; font-weight: 400; font-style: italic; color: #6B7280; font-size: .78rem; margin-top: 3px; }
+.mkt th:nth-child(1) { width: 12%; } .mkt th:nth-child(2) { width: 13%; } .mkt td.code { font-weight: 600; }
+.mkt ul { margin: 0; padding-left: 1.1em; } .mkt li { margin: 0 0 4px; }
+.mkt .fc ul { opacity: 0; transform: translateY(6px); transition: opacity .45s ease, transform .45s ease; } .mkt .fc.shown ul { opacity: 1; transform: none; }
+.mkt .fh, .mkt .fc { transition: background .35s ease, box-shadow .35s ease; } .mkt .fh.now, .mkt .fc.now { box-shadow: inset 0 0 0 3px var(--amber); } .mkt .fc.now { background: #FFF8EC; }
+.pd.fill .fnote { opacity: 0; transition: opacity .45s ease; } .pd.fill .fnote.shown { opacity: 1; }
+body:not(.presenting) .mkt .fc ul, body:not(.presenting) .pd.fill .fnote { opacity: 1; transform: none; }
+@media print { .mkt .fc ul, .pd.fill .fnote { opacity: 1 !important; transform: none !important; } .mkt .now { box-shadow: none !important; background: none !important; } }
+.mkt th, .mkt th small { text-transform: none !important; letter-spacing: normal !important; }
+.stdcard.mini { padding: 10px 20px; } .stdcard.mini .code { font-size: 1.2rem; } .stdcard.mini p { font-size: 1rem; }
+.mkdoc { margin-top: 12px; padding: 14px 18px 16px; } .mkh { font-size: 1.05rem; margin-bottom: 10px; } .mkt th, .mkt td { padding: 7px 9px; } .mkt { font-size: .98rem; }
+.pd.fill .fnote { margin-top: 12px; padding: 8px 16px; font-size: 1.05rem; }
+#pd-profile .pdlead { font-size: clamp(1.05rem, 1.5vw, 1.3rem); max-width: 70ch; margin-bottom: 10px; }
+#pd-profile .pdimgs img { max-height: calc(100vh - 540px); object-fit: contain; object-position: top left; }
+#pd-profile .pdnote { margin-top: 10px; padding: 8px 16px; font-size: 1rem; }
+#pd-profile .pdimgs figure { display: flex; flex-direction: column; } #pd-profile figcaption { font-size: .95rem; margin-top: 6px; } #pd-profile .pdimgs { margin-top: 4px; }
+.pd.fill h2, #pd-profile h2 { margin-bottom: 8px; } .pd.fill .mkt td { padding-bottom: 5px; } .pd.fill .mkt li { margin-bottom: 2px; } .pd.fill .mkt { font-size: .95rem; }
+.pdsmall { font-size: .95rem; color: var(--muted); margin: 10px 0 0; max-width: none; }
+.pd.fill .fnote { max-width: 1100px; }
 /* fragments: every slide now shows them all at once (Tim, Nov 2026); they still fade in with the slide */
 body.presenting .pd .frag { opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease; }
 body.presenting .pd .frag.shown { opacity: 1; transform: none; }
@@ -667,10 +692,10 @@ const slideEls = () => $$(".story > .shead, .story > .part");
 const FRAME = { a: "" };
 /* Tim, Nov 2026: every slide shows all of its content at once (no click-by-click points) */
 /* Tim, 17 Nov 2026: walkthrough slides (data-walk) take one click per step */
-const slides = () => slideEls().flatMap((el) => el.dataset.walk && typeof WALKS !== "undefined" ? WALKS[el.dataset.walk][1].map((_, w) => ({ el, f: el.querySelectorAll(".frag").length, all: true, w })) : [{ el, f: el.querySelectorAll(".frag").length, all: true }]);
+const slides = () => slideEls().flatMap((el) => { const f = el.querySelectorAll(".frag").length, n = el.dataset.walk && typeof WALKS !== "undefined" ? WALKS[el.dataset.walk][1].length : +(el.dataset.steps || 0); return n ? Array.from({ length: n }, (_, w) => ({ el, f, all: true, w })) : [{ el, f, all: true }]; });
 let allMode = false;
 function setPresent(on) { presenting = on && !!SECTIONS[parse().id]; document.body.classList.toggle("presenting", presenting); $("#pbar").hidden = !presenting; if (presenting && document.activeElement) document.activeElement.blur(); $("#presentBtn").textContent = presenting ? "Show all on one page" : "Step by step"; const tb = $("#toggleAll"); if (tb) tb.textContent = presenting ? "Show all on one page" : "Go step by step"; if (!presenting) document.body.classList.remove("step0"); if (!presenting) slideEls().forEach((s) => { s.classList.remove("on"); s.removeAttribute("data-f"); }); }
-function showStep(n, keepScroll) { const ss = slides(); if (!ss.length) return; step = Math.max(0, Math.min(ss.length - 1, n)); slideEls().forEach((el) => el.classList.remove("on")); const s = ss[step]; s.el.classList.add("on"); if (s.w != null) walkShow(s.el, s.w); s.el.dataset.f = s.f; s.el.querySelectorAll(".frag").forEach((x, i) => x.classList.toggle("shown", i < s.f)); const fr = s.f ? s.el.querySelectorAll(".frag")[s.f - 1] : null; if (fr && !keepScroll && !s.all) { const r = fr.getBoundingClientRect(), bar = ($("#pbar")?.offsetHeight || 0) + 16; if (r.bottom > innerHeight - bar) window.scrollBy({ top: r.bottom - innerHeight + bar, behavior: REDUCED.matches ? "auto" : "smooth" }); }
+function showStep(n, keepScroll) { const ss = slides(); if (!ss.length) return; step = Math.max(0, Math.min(ss.length - 1, n)); slideEls().forEach((el) => el.classList.remove("on")); const s = ss[step]; s.el.classList.add("on"); if (s.w != null) (s.el.dataset.walk ? walkShow : fillShow)(s.el, s.w); s.el.dataset.f = s.f; s.el.querySelectorAll(".frag").forEach((x, i) => x.classList.toggle("shown", i < s.f)); const fr = s.f ? s.el.querySelectorAll(".frag")[s.f - 1] : null; if (fr && !keepScroll && !s.all) { const r = fr.getBoundingClientRect(), bar = ($("#pbar")?.offsetHeight || 0) + 16; if (r.bottom > innerHeight - bar) window.scrollBy({ top: r.bottom - innerHeight + bar, behavior: REDUCED.matches ? "auto" : "smooth" }); }
   document.body.classList.toggle("step0", step === 0); const h = s.el.querySelector("h2");
   const els = slideEls(), si = els.indexOf(s.el); $("#pCount").textContent = `${si + 1} of ${els.length}`; $("#pWhere").textContent = h ? h.textContent : "Start"; $("#pPrev").disabled = step === 0; $("#pNext").disabled = step === ss.length - 1;
   $("#pFill").style.width = ((step + 1) / ss.length) * 100 + "%"; if (!keepScroll && (!s.f || showStep.lastEl !== s.el)) window.scrollTo(0, 0); showStep.lastEl = s.el; }
