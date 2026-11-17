@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Our focus standards</title>
+<title>Vertical Alignment Learning Maps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -53,7 +53,8 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .subjects { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .subj { display: grid; gap: 10px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,.78); text-decoration: none; box-shadow: 0 8px 24px rgba(16,24,70,.08); }
 .subj .rule { width: 46px; height: 5px; border-radius: 4px; background: var(--c); } .subj b { font-size: 1.5rem; } .subj span { color: var(--muted); font-size: .95rem; }
-.steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; } .steps2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.steps2 > div { background: rgba(255,255,255,.7); border-radius: 16px; padding: 16px 18px; border-top: 5px solid var(--cta); } .steps2 b { display: block; font-size: 1.2rem; margin-bottom: 4px; }
 .steps3 > div { background: rgba(255,255,255,.7); border-radius: 16px; padding: 16px 18px; border-top: 5px solid var(--cta); }
 .steps3 b { display: block; font-size: 1.1rem; margin-bottom: 4px; }
 /* subject: grade ladder */
@@ -174,7 +175,7 @@ dialog { border: 0; border-radius: 18px; padding: 22px; max-width: 440px; box-sh
 #toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 999px; font-weight: 600; z-index: 50; }
 @media (max-width: 1000px) { .gbtns, .gbtns.sec { grid-template-columns: repeat(4, 1fr); } .gcards { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 900px) { .subjects, .doors { grid-template-columns: 1fr 1fr; } .choose { grid-template-columns: 1fr; } .picks { position: static; } .lrow { grid-template-columns: 1fr; } .doors { grid-template-columns: 1fr; } }
-@media (max-width: 560px) { .subjects, .gcards, .subjects.two, .steps3 { grid-template-columns: 1fr; } .gbtns { grid-template-columns: repeat(3, 1fr); } .tab { min-width: 0; flex: 1 1 140px; } }
+@media (max-width: 560px) { .subjects, .gcards, .subjects.two, .steps3, .steps2 { grid-template-columns: 1fr; } .gbtns { grid-template-columns: repeat(3, 1fr); } .tab { min-width: 0; flex: 1 1 140px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @page { size: A4 portrait; margin: 14mm; }
 @media print {
@@ -238,7 +239,7 @@ const mapDoc = (s, g) => { const d = DRIVE[g]; const i = SUBJ.findIndex((x) => x
 const gradeFolder = (g) => (DRIVE[g] ? `https://drive.google.com/drive/folders/${DRIVE[g][0]}` : DRIVE_ROOT);
 const mapLinks = (s, g, small) => `<a class="btn${small ? " small" : ""}" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Open our ${esc(gname(g))} ${esc(s)}${course(s, g) ? ` (${esc(course(s, g))})` : ""} Learning Map ↗</a><a class="btn small" href="${gradeFolder(g)}" target="_blank" rel="noopener">${esc(gname(g))} folder ↗</a>`;
 const HELP = {
-  home: "Each grade chooses its focus standards: the standards required for success toward graduation and success in the course, which every class teaches in depth. Pick all the standards that need to be taught in depth to succeed in each subject (at least a quarter). Then see them by strand, print or copy them, and use them in your Learning Map. Elementary (K-5) works by grade, with a tab for each subject. Secondary (6-12) also works by grade, with a tab for each subject (in high school, the course). Step-by-step help (PDF) opens a one-page guide with pictures of each step.",
+  home: "Vertical Alignment Learning Maps has two parts for every grade and subject. 1. Select Focus Standards: pick all the standards that need to be taught in depth to succeed in the subject (the standards required for success toward graduation and success in the course), at least a quarter; see them by strand and copy the codes. 2. Complete Learning Map: open your grade and subject's Awsaj SAT Pathway Learning Map (a Google Doc in the shared folder) and fill it in. Elementary (K-5) and Secondary (6-12) both work by grade, with a tab for each subject (in high school, the course). Step-by-step help (PDF) shows each step with pictures. This is our first draft: we will keep working on it and polish it in the future.",
   grade: "Your grade's four subjects. Each subject has its own list, count and status. Open a subject to choose its focus standards. Our focus standards shows all four subjects by strand, ready to print or copy.",
   ladder: "Every grade or course for this subject in Secondary (6-12). Draft: still choosing. Selected our focus standards: the team has chosen at least the minimum and marked the list. Anyone can open any grade and change it; it saves for everyone.",
   library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard. Hints: the Part 1 rating, and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
@@ -392,7 +393,7 @@ const isK5 = (g) => K5.includes(g);
 const chooseHref = (s, g) => href({ g, s, v: "choose" });
 
 function header(r) {
-  const c = [`<a href="#">Focus standards</a>`];
+  const c = [`<a href="#">Learning Maps</a>`];
   if (r.g) { c.push(`<span>/</span><a href="${href({ g: r.g })}">${gname(r.g)}</a>`); if (r.s) c.push(`<span>/</span><a href="${chooseHref(r.s, r.g)}">${esc(course(r.s, r.g) ? `${r.s} (${course(r.s, r.g)})` : r.s)}</a>`); }
   else { if (r.s) c.push(`<span>/</span><a href="${href({ s: r.s })}">${esc(r.s)}</a>`); if (r.g) c.push(`<span>/</span><a href="${chooseHref(r.s, r.g)}">${esc(gtext(r.s, r.g))}</a>`); }
   const lab = { focus: "Our focus standards", paper: "Print this list", progress: "Progress and messages" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
@@ -418,10 +419,10 @@ async function render(keep) {
 }
 
 function homeV() {
-  return `<div class="stack"><div class="panel stack"><p class="pill">Part 2 · Our focus standards</p><h1>Our focus standards${help("home")}</h1>
+  return `<div class="stack"><div class="panel stack"><p class="pill">Part 2</p><h1>Vertical Alignment Learning Maps${help("home")}</h1>
     <p class="lead">Each grade chooses its focus standards, sees them by strand, and uses them in its Awsaj SAT Pathway Learning Map.</p><p class="notice" style="font-weight:600">This is our first draft: we will keep working on it and polish it in the future.</p>
     <p class="expect"><b>Focus standards</b>The standards required for success toward graduation and success in the course. Pick all the standards that need to be taught in depth to succeed in each subject (at least a quarter).</p>
-    <div class="steps3"><div><b>1. Choose</b>Pick all the standards that need to be taught in depth to succeed in the subject (at least a quarter).</div><div><b>2. See them by strand</b>Your focus standards grouped by strand or domain, to print or copy.</div><div><b>3. Learning Map</b>Fill in the Learning Map for your grade and subject, using your focus standards.</div></div>
+    <div class="steps2"><div><b>1. Select Focus Standards</b>Pick all the standards that need to be taught in depth to succeed in the subject (at least a quarter). See them by strand and copy the codes.</div><div><b>2. Complete Learning Map</b>Open your grade and subject's Awsaj SAT Pathway Learning Map and fill it in, starting with your focus standards.</div></div>
     <div class="row-acts"><a class="btn small" href="#v=progress">Progress and messages</a><button class="btn small" type="button" data-excel="">Excel: all subjects</button>${help("exports")}</div></div>
     <div class="doors"><section class="panel door"><h2>Elementary (K-5)</h2><p class="lead">Choose your grade. You will see your four subjects.</p><p style="margin:-6px 0 12px">${helpLink("k5")}</p>
       <div class="gbtns">${K5.map((g) => { const done = SUBJ.filter(([s]) => statusOf(s, g) === "selected").length; return `<a class="gbtn" href="${href({ g })}">${g}<small>${done} of 4 selected</small></a>`; }).join("")}</div></section>
