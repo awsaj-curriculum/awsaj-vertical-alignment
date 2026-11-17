@@ -393,7 +393,7 @@ function header(r) {
   const lab = { focus: "Our focus standards", paper: "Print this list", progress: "Progress and messages" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
   $("#crumbs").innerHTML = c.join("");
   $("#who").innerHTML = (PRACTICE ? `<span class="pill practice">Practice: nothing is saved</span>` : "") + (TEAM ? `<span class="pill team">Team: ${esc(TEAM)}</span>` : "")
-    + (r.g ? helpLink(isK5(r.g) ? "k5" : "ms") : r.s ? helpLink("ms") : "")
+    + (r.g ? helpLink(isK5(r.g) ? "k5" : "ms") : r.s ? helpLink("ms") : `<a class="btn small" href="${HELP_PDF.k5}" target="_blank" rel="noopener">Help K-5 (PDF) ↗</a><a class="btn small" href="${HELP_PDF.ms}" target="_blank" rel="noopener">Help 6-12 (PDF) ↗</a>`)
     + (FRAMED ? `<a class="btn small" href="${esc(location.href)}" target="_blank" rel="noopener" title="Open this page in its own tab">Open full page ↗</a>` : "") + `<a class="btn small" href="./">Home</a>`;
 }
 
