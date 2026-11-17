@@ -129,7 +129,10 @@ grade and subject, in one place." The goal slide adds: it sits alongside our cur
 it); the Learning Map is a whole-school overview of what students learn, to serve our vertical alignment, not a detailed plan.
 Files: `site/files/Awsaj-Learning-Map-*.docx`. Choose page right panel (Tim, 17 Nov 2026): the chosen standards grouped by strand with Show Codes / Short text / Full text
 (`FMODE`, localStorage `pd_fmode`, shared with the print page), Copy codes per strand, Copy all codes, a cross on each; "Print our
-focus standards" opens the print page (`v=focus`). One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
+focus standards" opens the print page (`v=focus`). Naming (Tim, 17 Nov 2026): Part 2 is "Vertical Alignment Learning Maps" with two parts, 1. Select Focus Standards and 2. Complete
+Learning Map (picker title and home, landing card, committee tab "Part 2: Learning Maps", Part 2 start page). The landing card and
+tab open journey.html again (the Part 2 start page with "Part 1: Start the all-staff session" and the Elementary / Secondary tiles).
+One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
 from each door on the picker home, in the header of every picker page (home: Help K-5 / Help 6-12), on the landing page under the cards and on the Part 2 start page. All-staff slides (Tim, 16 Nov 2026; `scripts/journey/pd.js`, 13 slides, also as PowerPoint, built privately with python-pptx): "Where we are headed today" previews the three parts, then The data (thank you, why /
 road, capacity, three facts), The goal (the goal: a unified Awsaj SAT Pathway Learning Map for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the Learning Map with
 template pictures in `site/img/pd/`), How we get there (what is a standard, breaking down RI.11-12.10 = the same four parts as the
