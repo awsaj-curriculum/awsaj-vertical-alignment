@@ -63,15 +63,12 @@ const WALKS = {
     ["doc-paste", "ksve", "Then, for each row: <b>Knowledge, Skills, Vocabulary</b> and <b>Evidence of learning</b>."],
     ["doc-example", null, "Check your work against the filled example: Grade 12 Pre-Calculus."]]],
   help: ["Where to find help", [
-    ["selected", "help", "<b>Step-by-step help (PDF)</b> is at the top of every page."],
-    ["strand", "q", "Every part of the page has a <b>?</b> that explains it."],
-    ["help-sheet", null, "The one-page help sheet shows every step with pictures. There is one for K-5 and one for 6-12."],
-    ["grade", "folder", "Every Learning Map is also in our shared Drive folder, <b>Awsaj Learning Maps</b>, by grade."]]],
+    ["help-sheet", null, "<b>Step-by-step help (PDF)</b> is at the top of every page: one page with pictures, one for K-5 and one for 6-12."]]],
 };
 /* where the ring sits, how far the picture zooms, and where the black step popup goes (beside the ring, on the picture) */
 function walkView(img, ring) {
   const b = ring && WALKBOX[img] && WALKBOX[img][ring];
-  if (!b) return { ring: "opacity:0", zoom: "--tx:0%;--ty:0%;--z:1", pop: "left:50%;bottom:4%;transform:translateX(-50%)" };
+  if (!b) return { ring: "opacity:0", zoom: "--tx:0%;--ty:0%;--z:1", pop: img === "help-sheet" ? "right:2.5%;top:34%;width:min(28%, 360px)" : "left:50%;bottom:4%;transform:translateX(-50%)" };
   const [x, y, w, h] = b, z = Math.min(2.1, Math.max(1, 0.5 / Math.max(w / 100, h / 100))), cl = (v) => Math.min(0, Math.max(100 - 100 * z, v));
   const tx = cl(50 - (x + w / 2) * z), ty = cl(50 - (y + h / 2) * z), sx = x * z + tx, sy = y * z + ty, sw = w * z, sh = h * z;
   const left = Math.min(62, Math.max(2, sx)), pop = sy + sh < 64 ? `left:${left.toFixed(1)}%;top:${(sy + sh + 3).toFixed(1)}%` : sy > 34 ? `left:${left.toFixed(1)}%;bottom:${(100 - sy + 3).toFixed(1)}%` : sx + sw < 62 ? `left:${(sx + sw + 2).toFixed(1)}%;top:${Math.max(3, sy).toFixed(1)}%` : `right:3%;bottom:4%`;
