@@ -127,7 +127,9 @@ Learning Map) to copy or open in email; the site sends nothing itself and cannot
 find your Learning Map" (folder diagram) before the steps; the last slide has Secondary grade buttons. Name (Tim, 16 Nov 2026): the document is the "Awsaj SAT Pathway Learning Map" (was "learning profile"): "A unified Awsaj SAT Pathway Learning Map for each
 grade and subject, in one place." The goal slide adds: it sits alongside our curriculum maps (the curriculum map says when we teach
 it); the Learning Map is a whole-school overview of what students learn, to serve our vertical alignment, not a detailed plan.
-Files: `site/files/Awsaj-Learning-Map-*.docx`. One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
+Files: `site/files/Awsaj-Learning-Map-*.docx`. Choose page right panel (Tim, 17 Nov 2026): the chosen standards grouped by strand with Show Codes / Short text / Full text
+(`FMODE`, localStorage `pd_fmode`, shared with the print page), Copy codes per strand, Copy all codes, a cross on each; "Print our
+focus standards" opens the print page (`v=focus`). One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
 from each door on the picker home, in the header of every picker page (home: Help K-5 / Help 6-12), on the landing page under the cards and on the Part 2 start page. All-staff slides (Tim, 16 Nov 2026; `scripts/journey/pd.js`, 13 slides, also as PowerPoint, built privately with python-pptx): "Where we are headed today" previews the three parts, then The data (thank you, why /
 road, capacity, three facts), The goal (the goal: a unified Awsaj SAT Pathway Learning Map for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the Learning Map with
 template pictures in `site/img/pd/`), How we get there (what is a standard, breaking down RI.11-12.10 = the same four parts as the
