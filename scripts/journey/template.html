@@ -461,6 +461,8 @@ body:not(.presenting) .mkt .fc ul, body:not(.presenting) .pd.fill .fnote { opaci
 .pd.fill h2, #pd-profile h2 { margin-bottom: 8px; } .pd.fill .mkt td { padding-bottom: 5px; } .pd.fill .mkt li { margin-bottom: 2px; } .pd.fill .mkt { font-size: .95rem; }
 .pdsmall { font-size: .95rem; color: var(--muted); margin: 10px 0 0; max-width: none; }
 .pd.fill .fnote { max-width: 1100px; }
+#pd-learn, #pd-headed, #pd-there { width: 100%; align-self: stretch; box-sizing: border-box; }
+.pd.center .pddiv { padding: 14vh 0 10vh; } .pddiv .big { font-size: clamp(3rem, 7vw, 5.6rem); }
 /* fragments: every slide now shows them all at once (Tim, Nov 2026); they still fade in with the slide */
 body.presenting .pd .frag { opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease; }
 body.presenting .pd .frag.shown { opacity: 1; transform: none; }
@@ -475,7 +477,7 @@ body.presenting .story > .pd h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); } bod
 .stairs { gap: 2px; } .stair { padding: 2px 10px; font-size: .82rem; } .stair.top { padding: 6px 12px; font-size: 1rem; }
 .stdcard { padding: 16px 22px; } .stdcard p { font-size: 1.12rem; } .kseg { gap: 10px; margin-top: 12px; } .krow { padding: 12px 18px; }
 @media (max-height: 820px) { .pd .pdlead { margin-bottom: 10px; } .pd .pdnote { margin-top: 10px; padding: 8px 14px; } .pdcards li { padding: 12px 18px; } .pdcards b { font-size: 1.15rem; } }
-#pickBand.pdstart { text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+#pickBand.pdstart, .pickhint.p2go { text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
 .pdnotes { display: block; margin-top: 10px; font-size: .85rem; font-weight: 600; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; } .pdnotes:hover { color: var(--navy); }
 
 .pd .bridge { margin-top: 22px; padding: 14px 20px; border-radius: 14px; background: var(--navy); color: #fff; font-size: clamp(1.1rem, 1.6vw, 1.35rem); font-weight: 600; max-width: 62ch; display: flex; gap: 12px; align-items: baseline; }
@@ -537,8 +539,7 @@ body.presenting .pd .farr { opacity: 0; transition: opacity .35s ease; } body.pr
 </div>
 <section id="below"><div class="wrap">
   <div class="belowgrid"><div class="frame reveal"><span class="eyebrow">What this is</span><p class="lead">This is your data: the ratings you, our teachers, entered for the standards you teach, K-12.</p><p>Every chart links to the full data on the <a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/" target="_blank" rel="noopener">Vertical Alignment site ↗</a>.</p></div>
-  <div class="subjbox"><p class="pickhint reveal"><b>Part 2:</b> Vertical Alignment Learning Maps <span aria-hidden="true">&#8600;</span></p>
-  <div class="subjects"><a class="reveal" style="--i:0;--c:var(--lime)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html"><span class="rule"></span><b>Elementary (K-5)</b><span class="arr">→</span></a><a class="reveal" style="--i:1;--c:var(--blue)" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html"><span class="rule"></span><b>Secondary (6-12)</b><span class="arr">→</span></a></div><p class="practicelink reveal"><span><b>1.</b> Select Focus Standards <b>2.</b> Complete Learning Map</span></p><p class="practicelink reveal"><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/pdf/help-focus-standards-K-5.pdf" target="_blank" rel="noopener">Help: Elementary (K-5) PDF <span class="arr">↗</span></a><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/pdf/help-focus-standards-6-12.pdf" target="_blank" rel="noopener">Help: Secondary (6-12) PDF <span class="arr">↗</span></a></p></div></div>
+  <div class="subjbox"><a class="pickhint pdstart p2go reveal" href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/priorities.html"><b>Part 2:</b> Vertical Alignment Learning Maps <span class="arr" aria-hidden="true">→</span></a><p class="practicelink reveal"><span><b>1.</b> Select Focus Standards <b>2.</b> Complete Learning Map</span></p><p class="practicelink reveal"><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/pdf/help-focus-standards-K-5.pdf" target="_blank" rel="noopener">Help: Elementary (K-5) PDF <span class="arr">↗</span></a><a href="https://awsaj-curriculum.github.io/awsaj-vertical-alignment/pdf/help-focus-standards-6-12.pdf" target="_blank" rel="noopener">Help: Secondary (6-12) PDF <span class="arr">↗</span></a></p></div></div>
   <div class="second reveal"><a href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-5M10 20v-9M15 20V7M20 20V4"/></svg><span class="t">About the data</span><span class="arr">→</span></a></div>
 </div></section>
 <main id="story" aria-live="polite"></main>
