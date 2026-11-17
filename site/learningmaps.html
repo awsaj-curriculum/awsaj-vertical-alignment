@@ -324,7 +324,7 @@ const logLocal = (kind, s, g, f = "", c = "", detail = "") => { const k = s + "|
 async function boot() {
   try { const rs = await getAll("ratings?select=framework,code,grade,level"); rs.forEach((r) => D.ratings.set(`${r.framework}|${r.code}|${r.grade}`, r.level)); } catch (e) { /* hints only */ }
   await loadPD(); render(); addEventListener("hashchange", () => { const d = $("#stdDlg"); if (d.open) d.close(); render(false); });
-  if (!PRACTICE) setInterval(async () => { if (document.hidden || busy) return; const r = route(); await loadPD(); if (r.s && r.g && r.v === "choose") await loadEvents(r.s, r.g); if (!editingText()) render(true); }, 20000);
+  if (!PRACTICE) setInterval(async () => { if (document.hidden || busy) return; const r = route(), before = JSON.stringify([D.picks, D.status]); await loadPD(); if (r.s && r.g && r.v === "choose") await loadEvents(r.s, r.g); if (JSON.stringify([D.picks, D.status]) === before) return; if (!editingText()) render(true); }, 20000);
 }
 const editingText = () => { const a = document.activeElement; return a && /INPUT|TEXTAREA|SELECT/.test(a.tagName); };
 let busy = 0;
@@ -451,8 +451,13 @@ async function render(keep) {
     : r.s && !r.g ? subjectV(r.s)
     : r.v === "focus" ? focusV([r.s], r.g) : r.v === "paper" ? paperV(r.s, r.g) : chooseV(r.s, r.g);
   document.body.classList.toggle("wide", r.v === "choose");
+  /* Tim, 17 Nov 2026: a redraw (after a tick, or the 20-second check for colleagues' changes) keeps the page where it was,
+     including the standards list and the chosen list, which scroll inside their own boxes */
+  const KEEP = [".lib", ".plist", ".chlist", "aside.picks"];
+  const inner = keep ? KEEP.map((sel) => { const el = $(sel); return el ? [sel, el.scrollTop, el.scrollLeft] : null; }).filter(Boolean) : [];
+  const y2 = scrollY;
   $("#app").innerHTML = note + v;
-  if (keep) scrollTo(0, y); else scrollTo(0, 0);
+  if (keep) { scrollTo(0, y2); inner.forEach(([sel, t, l]) => { const el = $(sel); if (el) { el.scrollTop = t; el.scrollLeft = l; } }); } else scrollTo(0, 0);
 }
 
 function homeV() {
