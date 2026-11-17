@@ -108,7 +108,7 @@ function pdParts() {
   const atLeast = S0.deep + S0.intro;
   const tiles = [[fmt(D.nRatings), "ratings entered"], ["Every", "team rated every standard it was asked about"], [fmt(S0.deep), "times a grade said: all our classes teach this in depth"], [fmt(atLeast), "times a grade said: we teach this, at least as an introduction"]];
   const bands = Object.keys(B), lo = (k) => Math.min(...bands.map((b) => B[b].all[k])), hi = (k) => Math.max(...bands.map((b) => B[b].all[k]));
-  const PRI = SITE + "priorities.html";
+  const PRI = SITE + "learningmaps.html";
   return [
     pdSlide("today", "data", "Where we are headed today", `<ol class="pdgoal3">${[["Introduction and data", "What our vertical alignment survey tells us about what we teach.", "var(--lime)", "About 8 minutes"], ["Our goal: a unified Vertical Alignment Learning Map", "One Learning Map for each grade and subject, in one place, and what a standard is.", "var(--blue)", "About 8 minutes"], ["How we get there", "Step by step: choose our focus standards, copy them by strand, complete the Learning Map, and where to find help.", "var(--magenta)", "About 10 minutes"]].map(([b, s, c, t], i) => `<li class="frag" style="--i:${i};border-top-color:${c}"><span class="n">${i + 1}</span><b>${b}</b><span>${s}</span><em class="mins">${t}</em></li>`).join("")}</ol><p class="pdnote frag" style="margin-top:22px">About 25 minutes together, then we work in our groups.</p>`),
     pdSlide("thanks", "data", "", `<div class="pdhero"><p class="eyebrow">All-staff session</p><h2 class="big">Thank you.</h2><p class="pdlead">You rated how every standard is taught, Kindergarten to Grade 12.</p></div>
