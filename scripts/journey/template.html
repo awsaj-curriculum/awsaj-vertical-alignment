@@ -463,6 +463,7 @@ body:not(.presenting) .mkt .fc ul, body:not(.presenting) .pd.fill .fnote { opaci
 .pd.fill .fnote { max-width: 1100px; }
 #pd-learn, #pd-headed, #pd-there { width: 100%; align-self: stretch; box-sizing: border-box; }
 .pd.center .pddiv { padding: 14vh 0 10vh; } .pddiv .big { font-size: clamp(3rem, 7vw, 5.6rem); }
+#fsGo { position: fixed; inset: 0; z-index: 9999; border: 0; background: rgba(16,24,70,.86); color: #fff; display: grid; place-content: center; gap: 12px; text-align: center; font: inherit; cursor: pointer; } #fsGo b { font-size: clamp(2rem, 4vw, 3.2rem); } #fsGo span { font-size: 1.15rem; opacity: .85; }
 body.isfull #nav { display: none; } body.isfull .story { padding-top: 12px; }
 #pFull { min-height: 40px; }
 /* fragments: every slide now shows them all at once (Tim, Nov 2026); they still fade in with the slide */
@@ -662,7 +663,7 @@ function render(first) {
   const stage = STAGES.some((s) => s.id === nx.id) ? nx.id : null;
   if (nx.id === "map" || !changed || first) { /* keep scroll */ }
   travel(stage, nx.grade, first);
-  const fill = () => { story.innerHTML = nx.id === "map" ? "" : storyHTML(nx.id, nx.grade); story.classList.remove("swap"); if (SECTIONS[nx.id] && !allMode) { setPresent(true); showStep(0, true); } };
+  const fill = () => { story.innerHTML = nx.id === "map" ? "" : storyHTML(nx.id, nx.grade); story.classList.remove("swap"); if (SECTIONS[nx.id] && !allMode) { setPresent(true); showStep(startStep(nx.id), true); } };
   if (changed || nx.grade !== cur.grade) { setPresent(false); clearTimeout(swapTimer); if (first || REDUCED.matches) fill(); else { story.classList.add("swap"); swapTimer = setTimeout(fill, 240); } }
   if (changed && !first) { if (nx.id === "map") window.scrollTo({ top: 0, behavior: REDUCED.matches ? "auto" : "smooth" }); else if (!fromMapClick) window.scrollTo({ top: 0, behavior: "auto" }); }
   cur = nx; onScroll();
@@ -673,14 +674,30 @@ const onScroll = () => $("#nav").classList.toggle("solid", scrollY > 8); addEven
 const NAV_HIDE = ["whole", "k-5", "g6-8", "g9-12", "next"];   // Tim, Nov 2026: off the Part 2 start page and menu
 const go = (h, fromMap) => { render.fromMap = fromMap; if (location.hash === "#" + h) render(false); else location.hash = h; };
 /* Tim, 17 Nov 2026: full screen. Browsers only allow it after a click or key press: the Part 1 start link, the Full screen button
-   in the bottom bar, or F. Esc leaves it. The site menu hides while full screen so the slides use the whole screen. */
+   in the bottom bar, or F. Esc leaves it. The site menu hides while full screen so the slides use the whole screen.
+   Inside the Google Site (a frame that cannot go full screen), the same button and the start link open the session in its own tab
+   on the same slide (?fs=1&step=N); one click there goes full screen without Google's banner, and leaving full screen (Esc or
+   Exit full screen) closes that tab, back to the Google Site. */
+const QS = new URLSearchParams(location.search), FS_TAB = QS.get("fs") === "1";
+const IN_FRAME = (() => { try { return window.top !== window.self; } catch (e) { return true; } })();
+const fsOK = () => !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+let stepUsed = false;
+function startStep(id) { if (id !== "staff" || stepUsed) return 0; stepUsed = true; return Math.max(0, parseInt(QS.get("step") || "0", 10) || 0); }
 const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
 function enterFull() { const d = document.documentElement, r = d.requestFullscreen || d.webkitRequestFullscreen; if (!fsEl() && r) { try { const p = r.call(d); if (p && p.catch) p.catch(() => {}); } catch (e) {} } }
-function toggleFull() { if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } else enterFull(); }
-function fsSync() { const on = !!fsEl(); document.body.classList.toggle("isfull", on); const b = $("#pFull"); if (b) { b.textContent = on ? "Exit full screen" : "Full screen"; b.setAttribute("aria-pressed", on); } }
+function openFullTab(at) { const u = new URL(location.href); u.search = ""; u.searchParams.set("fs", "1"); u.searchParams.set("step", String(at || 0)); u.hash = "staff"; window.open(u.toString(), "_blank"); }
+function toggleFull() { if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } else if (IN_FRAME) openFullTab(presenting ? step : 0); else enterFull(); }
+let wasFull = false;
+function fsSync() { const on = !!fsEl(); document.body.classList.toggle("isfull", on); const b = $("#pFull"); if (b) { b.textContent = on ? "Exit full screen" : "Full screen"; b.setAttribute("aria-pressed", on); }
+  if (FS_TAB && wasFull && !on) { window.close(); } wasFull = wasFull || on; }
 document.addEventListener("fullscreenchange", fsSync); document.addEventListener("webkitfullscreenchange", fsSync);
-document.addEventListener("click", (e) => { if (e.target.closest("#pFull")) { toggleFull(); return; } if (e.target.closest("#pickBand")) enterFull(); });
-addEventListener("DOMContentLoaded", () => { if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) { const b = $("#pFull"); if (b) b.hidden = true; } });
+document.addEventListener("click", (e) => { if (e.target.closest("#pFull")) { toggleFull(); return; }
+  if (e.target.closest("#pickBand")) { if (IN_FRAME) { e.preventDefault(); openFullTab(0); } else enterFull(); } }, true);
+addEventListener("DOMContentLoaded", () => {
+  const b = $("#pFull"); if (b && !fsOK() && !IN_FRAME) b.hidden = true;
+  if (FS_TAB) { const o = document.createElement("button"); o.type = "button"; o.id = "fsGo"; o.innerHTML = "<b>Click to start full screen</b><span>Esc or Exit full screen closes this tab and takes you back.</span>";
+    o.addEventListener("click", () => { enterFull(); o.remove(); }); document.body.appendChild(o); }
+});
 /* Tim, 17 Nov 2026: while presenting, a mouse click anywhere on the slide moves forward (links, buttons and the bar keep their own job) */
 document.addEventListener("click", (e) => {
   if (!presenting || e.button !== 0 || e.defaultPrevented) return;
