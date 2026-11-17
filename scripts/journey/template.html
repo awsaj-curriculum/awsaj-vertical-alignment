@@ -587,7 +587,7 @@ function kpiFor(id) { const m = { whole: D.school.main, "k-5": D.band["K-5"]?.al
 function kpiStrip(id) { const k = kpiFor(id); if (!k) return ""; const f = (n, s, l) => `<div class="kpi"><b data-n="${n}" data-s="${s}">${n.toLocaleString()}${s}</b><span>${l}</span></div>`; return `<div class="kpis" role="list" aria-label="Key figures">${f(k.pDeep, "%", "taught in depth")}${f(k.pDeep + k.pIntro, "%", "at least introduced")}${f(k.pNot, "%", "not taught")}${f(k.rated, "", "grade-level ratings")}</div>`; }
 
 /* ================= the route: one data source ================= */
-const STAGES = [{ id: "k-5", label: "K-5", name: "Primary", accent: "#80BC00", grades: ["K", "1", "2", "3", "4", "5"] }, { id: "g6-8", label: "6-8", name: "Middle school", accent: "#3099BE", grades: ["6", "7", "8"] }, { id: "g9-12", label: "9-12", name: "High school", accent: "#CB0068", grades: ["9", "10", "11", "12"] }];
+const STAGES = [{ id: "k-5", label: "K-5", name: "Elementary", accent: "#80BC00", grades: ["K", "1", "2", "3", "4", "5"] }, { id: "g6-8", label: "6-8", name: "Middle school", accent: "#3099BE", grades: ["6", "7", "8"] }, { id: "g9-12", label: "9-12", name: "High school", accent: "#CB0068", grades: ["9", "10", "11", "12"] }];
 const ACCENT = { whole: "#80BC00", "k-5": "#80BC00", "g6-8": "#3099BE", "g9-12": "#CB0068", math: "#80BC00", ela: "#3099BE", science: "#CB0068", "social-studies": "#ED9200", next: "#80BC00", about: "#3099BE" };
 const GEO = {
   wide: { vb: [214, 83, 1456, 522.5], path: "M435,543 C520,530 650,508 779,494 C835,487 808,440 880,430 C940,422 1000,408 1048,402 C1104,395 1082,354 1143,345 C1186,339 1192,330 1228,322 C1290,308 1340,296 1392,292 L1472,292",
