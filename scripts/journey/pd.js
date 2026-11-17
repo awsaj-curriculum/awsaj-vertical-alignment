@@ -58,8 +58,8 @@ const WALKS = {
     ["doc-top", "title", "Your grade and subject's own Learning Map, in our shared Drive."],
     ["doc-top", "head", "Fill in the top: grade or course, subject, team and date."],
     ["doc-top", "prereq", "<b>Prerequisite skills:</b> what students need to arrive with, from any earlier grade."],
-    ["doc-paste", "codes", "<b>Paste</b> that strand's codes into its own row. Then copy the next strand."],
-    ["doc-paste", "strand", "Write the strand name beside its codes."],
+    ["doc-paste", "codes", "<b>Paste</b> your codes: one standard per row, or several standards in one row, grouped by strand or by a topic you choose (like the Pre-Calculus example). Whatever makes sense in your subject."],
+    ["doc-paste", "strand", "Write the strand or topic beside them."],
     ["doc-paste", "ksve", "Then, for each row: <b>Knowledge, Skills, Vocabulary</b> and <b>Evidence of learning</b>."],
     ["doc-example", null, "Check your work against the filled example: Grade 12 Pre-Calculus."]]],
   help: ["Where to find help", [
