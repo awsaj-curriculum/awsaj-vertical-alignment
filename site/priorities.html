@@ -209,6 +209,17 @@ dialog { border: 0; border-radius: 18px; padding: 22px; max-width: 440px; box-sh
 .tlink { display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; padding: 4px 2px; font-weight: 600; font-size: .95rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; color: var(--navy); }
 .tlink svg, .btn svg { width: 18px; height: 18px; flex: none; } .tsep { width: 1px; height: 22px; background: var(--line); margin: 0 6px; }
 @media (max-width: 900px) { .hero2 { grid-template-columns: 1fr; } }
+
+/* status at a glance on the grade page (Tim, 17 Nov 2026): Not started (grey), In progress (amber), Selected (green, check) */
+.gtop { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.gmark { width: 34px; height: 34px; border-radius: 50%; flex: none; display: grid; place-items: center; font-weight: 800; font-size: 1.15rem; border: 2px dashed #C9CEDA; color: #fff; }
+.gstate { justify-self: start; padding: 3px 12px; border-radius: 999px; font-weight: 700; font-size: .85rem; background: rgba(16,24,70,.07); color: var(--navy-2); }
+.gcard.prog .gstate { background: #FFF1DB; color: #8A4B00; } .gcard.prog .gmark { border: 2px solid var(--amber); background: conic-gradient(var(--amber) 0 50%, #FFF1DB 50% 100%); }
+.gcard.done { background: #F2FADF; box-shadow: inset 0 0 0 2px var(--lime), 0 10px 26px rgba(128,188,0,.18); }
+.gcard.done .gmark { border: 0; background: var(--lime); box-shadow: 0 0 0 4px rgba(128,188,0,.25); }
+.gcard.done .gstate { background: var(--lime); color: #fff; } .gcard.done .gstate::before { content: "\2713  "; }
+.tab.done:not([aria-current]) { background: #F2FADF; } .tab .tchk { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--lime); color: #fff; font-style: normal; font-size: .75rem; margin-right: 6px; vertical-align: 2px; }
+.tab[aria-current] .tchk { background: var(--cta); color: var(--navy); }
 </style>
 </head>
 <body>
@@ -263,7 +274,7 @@ const gradeFolder = (g) => (DRIVE[g] ? `https://drive.google.com/drive/folders/$
 const mapLinks = (s, g, small) => `<a class="btn${small ? " small" : ""}" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Open our ${esc(gname(g))} ${esc(s)}${course(s, g) ? ` (${esc(course(s, g))})` : ""} Learning Map ↗</a><a class="btn small" href="${gradeFolder(g)}" target="_blank" rel="noopener">${esc(gname(g))} folder ↗</a>`;
 const HELP = {
   home: "Vertical Alignment Learning Maps has two parts for every grade and subject. 1. Select Focus Standards: pick all the standards that need to be taught in depth to succeed in the subject (the standards required for success toward graduation and success in the subject); see them by strand and copy the codes. 2. Complete Learning Map: open your grade and subject's Vertical Alignment Learning Map (a Google Doc in the shared folder) and fill it in. Elementary (K-5) and Secondary (6-12) both work by grade, with a tab for each subject (in high school, the course). Step-by-step help (PDF) shows each step with pictures. This is our first draft: we will keep working on it and polish it in the future.",
-  grade: "Your grade's four subjects. Each subject has its own list, count and status. Open a subject to choose its focus standards. Our focus standards shows all four subjects by strand, ready to print or copy.",
+  grade: "Your grade's four subjects. Each subject has its own list and count, and its status: Not started (grey), In progress (amber, some chosen) or Selected (green with a check: the team pressed We selected our focus standards). Open a subject to choose its focus standards. Our focus standards shows all four subjects by strand, ready to print or copy.",
   ladder: "Every grade or course for this subject in Secondary (6-12). Draft: still choosing. Selected our focus standards: the team has chosen its focus standards and marked the list. Anyone can open any grade and change it; it saves for everyone.",
   library: "All the grade-level standards this grade or course rated in Part 1 (Essential Elements are not included). Tick a standard to add it to your focus standards. Text: Short shows two lines of each standard, One line fits many on the screen, Full shows every word; this laptop remembers your choice. Show all, or a click on the words, opens the whole standard. Hints: the Part 1 rating, and a star when the school already names it a Priority (6-12) or Power (K-5) standard.",
   next: "Once a subject's focus standards are selected, move on to the Vertical Alignment Learning Map. Each grade and subject has its own Google Doc in the shared Drive folder Awsaj Learning Maps (Elementary (K-5) or Secondary (6-12), then your grade); the Open button goes straight to yours: copy your focus codes and paste them into the Learning Map document: one row per strand, the strand name in the Topic or domains column and its codes, one per line, in the Selected focus standards column (Copy codes beside each strand on Our focus standards copies one strand). Open the Learning Map opens the template for this subject; the example shows a filled Grade 12 Pre-Calculus profile.",
@@ -465,7 +476,8 @@ const stPill = (st) => `<span class="pill st-${st}">${STATUS[st]}</span>`;
 
 function gradeV(g) {
   const cards = SUBJ.map(([s, , c]) => { const n = picksOf(s, g).length, lib = library(s, g).length, st = statusOf(s, g);
-    return `<div class="gcard" style="--c:${c}"><b>${s}${course(s, g) ? `<small style="display:block;font-size:.9rem;font-weight:600;color:var(--muted)">${esc(course(s, g))}</small>` : ""}</b>${stPill(st)}<span>${n} of ${lib} chosen</span><a class="btn small cta" href="${chooseHref(s, g)}">Choose ${esc(s)} standards</a><a class="btn small" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Learning Map ↗</a></div>`; }).join("");
+    const k = st === "selected" ? "done" : n ? "prog" : "none", lab = { done: "Selected", prog: "In progress", none: "Not started" }[k];
+    return `<div class="gcard ${k}" style="--c:${c}"><div class="gtop"><b>${s}${course(s, g) ? `<small style="display:block;font-size:.9rem;font-weight:600;color:var(--muted)">${esc(course(s, g))}</small>` : ""}</b><span class="gmark" aria-hidden="true">${k === "done" ? "&#10003;" : ""}</span></div><span class="gstate">${lab}</span><span>${n} of ${lib} chosen</span><a class="btn small${k === "done" ? "" : " cta"}" href="${chooseHref(s, g)}">${k === "done" ? `Review ${esc(s)} standards` : `Choose ${esc(s)} standards`}</a><a class="btn small${k === "done" ? " cta" : ""}" href="${mapDoc(s, g)}" target="_blank" rel="noopener">${k === "done" ? "Open our Learning Map ↗" : "Learning Map ↗"}</a></div>`; }).join("");
   return `<div class="stack"><div class="panel stack"><h1>${gname(g)}: our focus standards${help("grade")}</h1><p class="lead">For each of your four subjects, pick all the standards that need to be taught in depth to succeed in it.</p>
     <div class="row-acts"><a class="btn cta" href="${href({ g, v: "focus" })}">Our focus standards by strand (all subjects)</a><a class="btn" href="${gradeFolder(g)}" target="_blank" rel="noopener">Our ${esc(gname(g))} Learning Maps folder ↗</a></div></div>
     <div class="gcards">${cards}</div></div>`;
@@ -495,7 +507,7 @@ function changesHTML(s, g, ed) {
 }
 const lastNote = (ev, k) => { const p = ev.find((x) => x.kind === "pick" && `${x.framework}|${x.code}` === k && x.detail); return p ? p.detail : ""; };
 
-const subjTabs = (g, cur) => g ? `<nav class="tabs" aria-label="Subjects">${SUBJ.map(([s, , c]) => `<a class="tab" style="--c:${c}" href="${chooseHref(s, g)}"${s === cur ? ' aria-current="page"' : ""}><b>${s}${course(s, g) ? ` · ${esc(course(s, g))}` : ""}</b><span>${picksOf(s, g).length} of ${library(s, g).length} · ${STATUS[statusOf(s, g)]}</span></a>`).join("")}</nav>` : "";
+const subjTabs = (g, cur) => g ? `<nav class="tabs" aria-label="Subjects">${SUBJ.map(([s, , c]) => `<a class="tab${statusOf(s, g) === "selected" ? " done" : ""}" style="--c:${c}" href="${chooseHref(s, g)}"${s === cur ? ' aria-current="page"' : ""}><b>${statusOf(s, g) === "selected" ? '<i class="tchk" aria-hidden="true">&#10003;</i>' : ""}${s}${course(s, g) ? ` · ${esc(course(s, g))}` : ""}</b><span>${picksOf(s, g).length} of ${library(s, g).length} · ${statusOf(s, g) === "selected" ? "Selected" : picksOf(s, g).length ? "In progress" : "Not started"}</span></a>`).join("")}</nav>` : "";
 
 /* Tim, 16 Nov 2026: once a subject's focus standards are selected, move on to the Vertical Alignment Learning Map */
 const nextBox = (s, g) => statusOf(s, g) !== "selected" ? "" : `<div class="nextbox"><b>You are ready to move on to the Vertical Alignment Learning Map.${help("next")}</b><p>Open your Learning Map, then copy one strand at a time: press <b>Copy codes</b> beside a strand (on the right) and paste it into that strand's row. This is our first draft: we will keep working on it and polish it in the future.</p>
