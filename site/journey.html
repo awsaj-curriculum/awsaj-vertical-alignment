@@ -463,6 +463,8 @@ body:not(.presenting) .mkt .fc ul, body:not(.presenting) .pd.fill .fnote { opaci
 .pd.fill .fnote { max-width: 1100px; }
 #pd-learn, #pd-headed, #pd-there { width: 100%; align-self: stretch; box-sizing: border-box; }
 .pd.center .pddiv { padding: 14vh 0 10vh; } .pddiv .big { font-size: clamp(3rem, 7vw, 5.6rem); }
+body.isfull #nav { display: none; } body.isfull .story { padding-top: 12px; }
+#pFull { min-height: 40px; }
 /* fragments: every slide now shows them all at once (Tim, Nov 2026); they still fade in with the slide */
 body.presenting .pd .frag { opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease; }
 body.presenting .pd .frag.shown { opacity: 1; transform: none; }
@@ -545,7 +547,7 @@ body.presenting .pd .farr { opacity: 0; transition: opacity .35s ease; } body.pr
 <main id="story" aria-live="polite"></main>
 <div id="tip" hidden></div>
 <div id="reflect" hidden role="dialog" aria-modal="true" aria-label="Reflection questions"><div class="in" id="reflectIn"></div></div>
-<div id="pbar" hidden><div id="pTrack"><div id="pFill"></div></div><button class="btn" id="pPrev" type="button">← Back</button><span class="where"><b id="pCount"></b><span id="pWhere"></span></span><button class="btn cta" id="pNext" type="button">Next →</button><button class="btn" id="pEnd" type="button">Show all</button></div>
+<div id="pbar" hidden><div id="pTrack"><div id="pFill"></div></div><button class="btn" id="pPrev" type="button">← Back</button><span class="where"><b id="pCount"></b><span id="pWhere"></span></span><button class="btn cta" id="pNext" type="button">Next →</button><button class="btn" id="pFull" type="button" title="Full screen (F)">Full screen</button><button class="btn" id="pEnd" type="button">Show all</button></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -1061,6 +1063,15 @@ let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() 
 const onScroll = () => $("#nav").classList.toggle("solid", scrollY > 8); addEventListener("scroll", onScroll, { passive: true });
 const NAV_HIDE = ["whole", "k-5", "g6-8", "g9-12", "next"];   // Tim, Nov 2026: off the Part 2 start page and menu
 const go = (h, fromMap) => { render.fromMap = fromMap; if (location.hash === "#" + h) render(false); else location.hash = h; };
+/* Tim, 17 Nov 2026: full screen. Browsers only allow it after a click or key press: the Part 1 start link, the Full screen button
+   in the bottom bar, or F. Esc leaves it. The site menu hides while full screen so the slides use the whole screen. */
+const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+function enterFull() { const d = document.documentElement, r = d.requestFullscreen || d.webkitRequestFullscreen; if (!fsEl() && r) { try { const p = r.call(d); if (p && p.catch) p.catch(() => {}); } catch (e) {} } }
+function toggleFull() { if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } else enterFull(); }
+function fsSync() { const on = !!fsEl(); document.body.classList.toggle("isfull", on); const b = $("#pFull"); if (b) { b.textContent = on ? "Exit full screen" : "Full screen"; b.setAttribute("aria-pressed", on); } }
+document.addEventListener("fullscreenchange", fsSync); document.addEventListener("webkitfullscreenchange", fsSync);
+document.addEventListener("click", (e) => { if (e.target.closest("#pFull")) { toggleFull(); return; } if (e.target.closest("#pickBand")) enterFull(); });
+addEventListener("DOMContentLoaded", () => { if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) { const b = $("#pFull"); if (b) b.hidden = true; } });
 /* Tim, 17 Nov 2026: while presenting, a mouse click anywhere on the slide moves forward (links, buttons and the bar keep their own job) */
 document.addEventListener("click", (e) => {
   if (!presenting || e.button !== 0 || e.defaultPrevented) return;
@@ -1103,6 +1114,7 @@ addEventListener("keydown", (e) => {
     if (target) target.scrollIntoView({ behavior: REDUCED.matches ? "auto" : "smooth", block: "start" }); else if (fwd) window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" }); return; }
   if (e.repeat || e.target.closest("input, textarea, select")) return; const now = Date.now(); if (now - lastKey < 150) return;
   const onCtl = e.target.closest("button, a, summary");
+  if ((e.key === "f" || e.key === "F") && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); toggleFull(); return; }
   if (["PageDown", "ArrowRight", "ArrowDown", "n", "N"].includes(e.key) || ([" ", "Enter"].includes(e.key) && !onCtl)) { lastKey = now; e.preventDefault(); if (onCtl) onCtl.blur(); showStep(step + 1); }
   else if (["PageUp", "ArrowLeft", "ArrowUp", "p", "P"].includes(e.key)) { lastKey = now; e.preventDefault(); if (onCtl) onCtl.blur(); showStep(step - 1); }
   else if (e.key === "Escape" && sel.stage) go("map", true);
