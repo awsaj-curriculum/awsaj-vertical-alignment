@@ -107,11 +107,11 @@ library order with a cross to take one off (Tim: no Recent changes box; notes ar
 Line up, flags, connections, Stands alone, learner profile, PIN agreeing, practice version (only `?practice=1`, nothing saved, is
 left for testing). Picks still save to `pd_picks` through `pd_set_pick`. The old tool is kept as `site/priorities-v1.html` (not
 linked). The landing page's Part 2 card and the committee tab now open priorities.html. The facilitator guide PDF and pd-tour.html
-describe the old tool. When a list is Selected, a green box says "You are ready to move on to the Awsaj SAT Pathway Learning Map" with Copy all
+describe the old tool. When a list is Selected, a green box says "You are ready to move on to the Vertical Alignment Learning Map" with Copy all
 codes and links to the template (`site/files/Awsaj-Learning-Map-*.docx`; `PROFILE_DOC` in priorities.html, to be swapped for the
 Google Doc copy links) and the filled Grade 12 Pre-Calculus example. Copy format matches the template (Tim): one code per line; Copy all
 = each strand name, then its codes, a blank line between strands. Learning Map wording: "Evidence of learning" (no "(Do)", Tim).
-Full name (Tim, 17 Nov 2026): "Awsaj SAT Pathway Learning Map" (short form "Learning Map" after first mention; the Drive folder
+Full name (Tim, 17 Nov 2026; was "Awsaj SAT Pathway Learning Map"): "Vertical Alignment Learning Map" (short form "Learning Map" after first mention; the Drive folder
 keeps its name "Awsaj Learning Maps"). Every document, template and slide carries the draft note "This is our first draft: we will
 keep working on it and polish it in the future." The minimum is worded as "Pick all the standards that need to be taught in depth to
 succeed in this subject (at least a quarter)", never "reach the minimum". Slide 12 is "Your link takes you there" (grade link, subject
@@ -119,12 +119,12 @@ tab, We selected our focus standards, Open our Learning Map; the folder is a one
 (`#g=7`) has four subject tabs (high school shows the course), `#g=7&s=Math&v=choose`, `#g=7&v=focus`; `#s=Math` (subject list)
 still works by address. Drive (Tim allowed an exception to the read-only rule for this one folder only): shared folder "Awsaj Learning
 Maps" (`DRIVE_ROOT` in priorities.html) holds Templates and example, Elementary (K-5) > Kindergarten ... Grade 5, Secondary (6-12) >
-Grade 6 ... Grade 12, one Google Doc per grade and subject ("Grade 10 Science (Physics): Awsaj SAT Pathway Learning Map"); `DRIVE` maps each grade
+Grade 6 ... Grade 12, one Google Doc per grade and subject ("Grade 10 Science (Physics): Vertical Alignment Learning Map"); `DRIVE` maps each grade
 to [folder, Math, ELA, Science, Social Studies] doc ids; each subject page links to its document and grade folder. Access follows the
 shared folder's sharing (school domain, Editor or Contributor for staff). Progress and messages (`#v=progress`, `progressV()`,
 `buildMsg()`): every grade x subject status with links, and a message maker (all grades or one; Choose / Reminder / Next step:
 Learning Map) to copy or open in email; the site sends nothing itself and cannot see inside the Drive documents. Slides: "Where to
-find your Learning Map" (folder diagram) before the steps; the last slide has Secondary grade buttons. Name (Tim, 16 Nov 2026): the document is the "Awsaj SAT Pathway Learning Map" (was "learning profile"): "A unified Awsaj SAT Pathway Learning Map for each
+find your Learning Map" (folder diagram) before the steps; the last slide has Secondary grade buttons. Name (Tim, 16 Nov 2026): the document is the "Vertical Alignment Learning Map" (was "learning profile"): "A unified Vertical Alignment Learning Map for each
 grade and subject, in one place." The goal slide adds: it sits alongside our curriculum maps (the curriculum map says when we teach
 it); the Learning Map is a whole-school overview of what students learn, to serve our vertical alignment, not a detailed plan.
 Files: `site/files/Awsaj-Learning-Map-*.docx`. Choose page right panel (Tim, 17 Nov 2026): the chosen standards grouped by strand with Show Codes / Short text / Full text
@@ -134,7 +134,7 @@ Learning Map (picker title and home, landing card, committee tab "Part 2: Learni
 tab open journey.html again (the Part 2 start page with "Part 1: Start the all-staff session" and the Elementary / Secondary tiles).
 One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
 from each door on the picker home, in the header of every picker page (home: Help K-5 / Help 6-12), on the landing page under the cards and on the Part 2 start page. All-staff slides (Tim, 16 Nov 2026; `scripts/journey/pd.js`, 13 slides, also as PowerPoint, built privately with python-pptx): "Where we are headed today" previews the three parts, then The data (thank you, why /
-road, capacity, three facts), The goal (the goal: a unified Awsaj SAT Pathway Learning Map for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the Learning Map with
+road, capacity, three facts), The goal (the goal: a unified Vertical Alignment Learning Map for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the Learning Map with
 template pictures in `site/img/pd/`), How we get there (what is a standard, breaking down RI.11-12.10 = the same four parts as the
 profile, the filled Pre-Calculus example, the steps with QR, go to your groups: K-5 grade buttons, 6-12 subjects). The ponder,
 explore and staircase slides are gone; the start page's Part 2 box opens priorities.html; practice and walk-through links removed.
