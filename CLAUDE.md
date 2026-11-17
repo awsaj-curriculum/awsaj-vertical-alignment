@@ -42,6 +42,11 @@ Read `docs/HANDOFF.md` first (current status and next steps), then `docs/spec.md
   against official Common Core and Wisconsin 2021): Common Core 3.OA.C.7 (Grade 3) = Wisconsin M.3.OA.C.6 ("multiplicative
   thinking"); Wisconsin M.4.OA.D.6 ("Flexibly and efficiently ...", Grade 4) is new in 2021 with no Common Core code; the
   Hub's Grade 3 power standard "M.3.OA.C.7" (no such Wisconsin code) is read as Common Core 3.OA.C.7, so M.3.OA.C.6.
+  M.4.NF.B.3.a ("Understand addition and subtraction of fractions as joining and separating parts referring to the same
+  whole") was missing from the school sheet the Math data came from; added Nov 17, 2026 (Tim) by `cleanup_rules.py` (`MISSING_MATH`)
+  and in the live `standards` table (Grade 4 has not rated it yet). M.5.NF.B.7 and M.4.MD.C.5 hold their stem and parts a (and b)
+  in one row. The Math Coherence Map source is not in the repo: never run build_prereqs.py / build_sources.py without it (they
+  drop the 807 Coherence Map links); keep the committed prereqs.json and sources.json.
   Math: `parse_wi_math.py`, `parse_wi_ee_math.py`, `build_math_master.py`,
   `build_math_json.py`, `build_math_xlsx.py`. Other subjects: `scripts/ela|science|social_studies/`.
   `build_site_data.py` regenerates `site/data/` from `data/standards/`. `load_supabase.py` loads standards and
