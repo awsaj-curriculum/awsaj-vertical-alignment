@@ -451,6 +451,7 @@ body.presenting .story > .pd h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); } bod
 .stdcard { padding: 16px 22px; } .stdcard p { font-size: 1.12rem; } .kseg { gap: 10px; margin-top: 12px; } .krow { padding: 12px 18px; }
 @media (max-height: 820px) { .pd .pdlead { margin-bottom: 10px; } .pd .pdnote { margin-top: 10px; padding: 8px 14px; } .pdcards li { padding: 12px 18px; } .pdcards b { font-size: 1.15rem; } }
 #pickBand.pdstart { text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+.pdnotes { display: block; margin-top: 10px; font-size: .85rem; font-weight: 600; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; } .pdnotes:hover { color: var(--navy); }
 
 .pd .bridge { margin-top: 22px; padding: 14px 20px; border-radius: 14px; background: var(--navy); color: #fff; font-size: clamp(1.1rem, 1.6vw, 1.35rem); font-weight: 600; max-width: 62ch; display: flex; gap: 12px; align-items: baseline; }
 .pd .bridge span { color: var(--cta); font-weight: 800; } .pd .bridge { margin-left: auto; margin-right: auto; width: fit-content; justify-content: center; text-align: center; }   /* Tim, Nov 2026: the navy bridge lines are centred on every slide */
@@ -504,7 +505,7 @@ body.presenting .pd .farr { opacity: 0; transition: opacity .35s ease; } body.pr
 <div id="sky">
   <header id="nav"><div class="wrap"><a class="brand" href="#map" aria-label="Awsaj Academy, journey map">/*LOGO*/<span>Awsaj<br>Academy</span></a><a class="vaback" href="./" title="Back to the start page: Part 1 or Part 2">&larr; Home</a><nav id="navLinks" aria-label="Sections"></nav><button class="btn" id="presentBtn" type="button" hidden>Show all on one page</button><button class="btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button></div></header>
   <section id="hero" aria-label="Journey map">
-    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><a id="pickBand" class="pickhint pdstart" href="#staff">Part 1: Start the all-staff session <span class="arr">→</span></a></div>
+    <div id="heroText"><span class="eyebrow">Awsaj Academy · K-12 Vertical Alignment</span><h1>Our Curriculum Journey</h1><a id="pickBand" class="pickhint pdstart" href="#staff">Part 1: Start the all-staff session <span class="arr">→</span></a><a class="pdnotes" href="pdf/speaker-notes-part1.pdf" target="_blank" rel="noopener">Speaker notes (PDF) ↗</a></div>
     <svg id="map" role="group" aria-label="The route from Kindergarten to Grade 12. Choose a grade or a stage."></svg>
     <button class="btn" id="whole-route" type="button" hidden>← Whole route</button>
   </section>
@@ -643,6 +644,13 @@ let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() 
 const onScroll = () => $("#nav").classList.toggle("solid", scrollY > 8); addEventListener("scroll", onScroll, { passive: true });
 const NAV_HIDE = ["whole", "k-5", "g6-8", "g9-12", "next"];   // Tim, Nov 2026: off the Part 2 start page and menu
 const go = (h, fromMap) => { render.fromMap = fromMap; if (location.hash === "#" + h) render(false); else location.hash = h; };
+/* Tim, 17 Nov 2026: while presenting, a mouse click anywhere on the slide moves forward (links, buttons and the bar keep their own job) */
+document.addEventListener("click", (e) => {
+  if (!presenting || e.button !== 0 || e.defaultPrevented) return;
+  if (e.target.closest("a, button, summary, input, select, textarea, label, #pbar, header, nav, .helpbox, [role=dialog], #reflect")) return;
+  if (getSelection && String(getSelection()).length) return;
+  showStep(step + 1);
+});
 document.addEventListener("click", (e) => {
   if (e.target.closest("#map .cp, #map .stg")) return;   // the route is a picture only (Tim, Nov 2026)
   if (e.target.closest("#whole-route")) return go("map", true);
