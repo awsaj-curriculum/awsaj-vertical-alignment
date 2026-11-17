@@ -131,14 +131,14 @@ Files: `site/files/Awsaj-Learning-Map-*.docx`. Choose page right panel (Tim, 17 
 (`FMODE`, localStorage `pd_fmode`, shared with the print page), Copy codes per strand, Copy all codes, a cross on each; "Print our
 focus standards" opens the print page (`v=focus`). Naming (Tim, 17 Nov 2026): Part 2 is "Vertical Alignment Learning Maps" with two parts, 1. Select Focus Standards and 2. Complete
 Learning Map (picker title and home, landing card, committee tab "Part 2: Learning Maps", Part 2 start page). The landing card and
-tab open journey.html again (the Part 2 start page with "Part 1: Start the all-staff session" and the Elementary / Secondary tiles).
+tab open journey.html again; on its start page the green "Part 2: Vertical Alignment Learning Maps" label is the link to priorities.html (the Elementary / Secondary tiles were removed, Tim, 17 Nov 2026) (the Part 2 start page with "Part 1: Start the all-staff session" and the Elementary / Secondary tiles).
 One-page step-by-step help PDFs (Tim): `site/pdf/help-focus-standards-K-5.pdf` and `-6-12.pdf` (screenshots in practice mode), linked
 from each door on the picker home, in the header of every picker page (home: Help K-5 / Help 6-12), on the landing page under the cards and on the Part 2 start page. All-staff slides (Tim, 16 Nov 2026; `scripts/journey/pd.js`, 13 slides, also as PowerPoint, built privately with python-pptx): "Where we are headed today" previews the three parts, then The data (thank you, why /
 road, capacity, three facts), The goal (the goal: a unified Vertical Alignment Learning Map for each grade and subject, in one place, bringing together focus standards, organized by strand, and what students learn; the Learning Map with
 template pictures in `site/img/pd/`), How we get there (what is a standard, breaking down RI.11-12.10 = the same four parts as the
 profile, the filled Pre-Calculus example, the steps with QR, go to your groups: K-5 grade buttons, 6-12 subjects). The ponder,
 explore and staircase slides are gone; the start page's Part 2 box opens priorities.html; practice and walk-through links removed.
-Part 1 all-staff session, reorganized (Tim, 17 Nov 2026; `scripts/journey/pd.js`, 16 slides, about 25 minutes, three parts of
+Part 1 all-staff session, reorganized (Tim, 17 Nov 2026; `scripts/journey/pd.js`, 19 slides with three full-width section slides, "So what did we learn?" (after Why), "So where are we headed?" (before Our goal) and "So how do we get there?" (before the walkthrough), which replace the old bridges there; Step 1 of the walkthrough starts on the site's front page (Open Part 2), then the Part 2 start page (Part 2: Vertical Alignment Learning Maps), then the Learning Maps home; about 25 minutes, three parts of
 about the same length): 1. Introduction and data (today with minutes per part, thanks, why, pattern, facts), 2. Our goal: a unified
 Vertical Alignment Learning Map (goal; the Learning Map shown with the filled Pre-Calculus example, "From our focus standards, we
 build a comprehensive vision..."; what is a standard; Breaking down a standard = a mock Learning Map row for RI.11-12.10, `pdFill()`,
