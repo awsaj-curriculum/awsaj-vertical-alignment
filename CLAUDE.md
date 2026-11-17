@@ -115,7 +115,7 @@ linked). The landing page's Part 2 card and the committee tab now open learningm
 describe the old tool. When a list is Selected, a green box says "You are ready to move on to the Vertical Alignment Learning Map" with Copy all
 codes and links to the template (`site/files/Awsaj-Learning-Map-*.docx`; `PROFILE_DOC` in learningmaps.html, to be swapped for the
 Google Doc copy links) and the filled Grade 12 Pre-Calculus example. Copy format matches the template (Tim): one code per line; Copy all
-= each strand name, then its codes, a blank line between strands. Learning Map wording: "Evidence of learning" (no "(Do)", Tim).
+= each strand name, then its codes, a blank line between strands. Learning Map wording: "Evidence of learning" (no "(Do)", Tim). Vocabulary column (Tim, 17 Nov 2026): "Key words students need to know to access the standard or topic: words from the standard, plus academic and subject terms" (broader than the words in the standard; ELA adds ", including grammar terms"), in all 52 Drive docs, both templates, the example, the site downloads and the slides.
 Full name (Tim, 17 Nov 2026; was "Awsaj SAT Pathway Learning Map"): "Vertical Alignment Learning Map" (short form "Learning Map" after first mention; the Drive folder
 keeps its name "Awsaj Learning Maps"). Every document, template and slide carries the draft note "This is our first draft: we will
 keep working on it and polish it in the future." The minimum is worded as "Pick all the standards that need to be taught in depth to

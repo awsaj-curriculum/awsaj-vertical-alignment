@@ -91,7 +91,7 @@ function walkShow(el, k) {
 /* "Breaking down a standard" as a mock Learning Map row that fills in one column per click (Tim, 17 Nov 2026) */
 const FILL = [["Knowledge", "What students know and understand", ["Literary nonfiction", "How complex texts communicate information and ideas"]],
   ["Skills", "What students learn to do (start with a verb)", ["Read and comprehend complex texts independently", "Make sense of a whole text, not just parts of it"]],
-  ["Vocabulary", "Words from the standards, academic and subject terms", ["literary nonfiction", "text complexity", "comprehension", "independently, proficiently"]],
+  ["Vocabulary", "Key words students need to access the standard: from the standard, plus academic and subject terms", ["literary nonfiction", "text complexity", "comprehension", "central idea", "author's purpose"]],
   ["Evidence of learning", "Tasks and products that show it", ["Independently read a complex literary nonfiction text and show understanding"]]];
 function pdFill() {
   const cell = (k, items) => `<td class="fc" data-s="${k}"><ul>${items.map((x) => `<li>${x}</li>`).join("")}</ul></td>`;
