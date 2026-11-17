@@ -187,6 +187,28 @@ dialog { border: 0; border-radius: 18px; padding: 22px; max-width: 440px; box-sh
   .codes span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .doc th { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .doc tr, .fgroup { break-inside: avoid; } .doc h2, .fgroup h3 { break-after: avoid; }
 }
+
+/* home (Tim, 17 Nov 2026 mock-up): hero with a two-step stepper, grade tiles under coloured headings */
+.hero2 { display: grid; grid-template-columns: 1fr 1.15fr; gap: 28px 44px; padding: clamp(22px, 3vw, 36px) clamp(22px, 4vw, 60px); border-radius: 22px; background: linear-gradient(135deg, rgba(232,238,252,.92), rgba(242,246,253,.85)); border: 1px solid #C9D6EE; }
+.hero2 .pill.p2 { background: #D9E4FA; color: var(--navy); margin-bottom: 10px; } .hero2 h1 { font-size: clamp(2.1rem, 3.6vw, 3rem); }
+.hsub { display: flex; gap: 10px; align-items: center; font-size: 1.15rem; color: var(--navy-2); margin: 10px 0 8px; font-weight: 500; }
+.pill.draft { background: #FFF4E0; border: 1.5px solid var(--amber); color: #A55F00; }
+.hero2 .lead { font-size: 1.12rem; max-width: 36ch; } .dnote { font-size: .85rem; color: var(--muted); margin-top: 8px; }
+.vsteps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; align-content: center; position: relative; }
+.vsteps::before { content: ""; position: absolute; left: 17px; top: 36px; bottom: 30px; width: 2px; background: #B9C8E6; }
+.vsteps li { display: grid; grid-template-columns: 36px 1fr; column-gap: 26px; position: relative; } .vsteps li > b { font-size: 1.45rem; font-weight: 800; }
+.vsteps li > span:not(.n) { grid-column: 2; color: var(--navy-2); font-size: 1rem; }
+.vsteps .n { grid-row: span 2; width: 36px; height: 36px; border-radius: 50%; background: #D9E4FA; border: 2px solid #fff; display: grid; place-items: center; font-weight: 800; z-index: 1; }
+.getgo { text-align: center; font-size: 1.45rem; font-weight: 800; margin: 14px 0 4px; }
+.doors { gap: clamp(20px, 3vw, 44px); } .door { padding: 0; } .door h2 { font-size: clamp(1.6rem, 2.4vw, 2rem); padding-bottom: 10px; border-bottom: 3px solid var(--lime); margin-bottom: 12px; } .door.sec h2 { border-bottom-color: var(--blue); }
+.door .lead { font-size: 1rem; margin-bottom: 12px; } .door .gbtns { margin-top: 14px; }
+.gbtn { display: grid; justify-items: center; align-content: start; gap: 6px; padding: 18px 6px 14px; border-radius: 16px; background: #fff; border: 1px solid #DCE2EC; border-top: 4px solid var(--lime); box-shadow: 0 6px 18px rgba(16,24,70,.06); text-decoration: none; min-height: 128px; }
+.gbtns.sec .gbtn { border-top-color: var(--blue); } .gbtn:hover { box-shadow: 0 10px 26px rgba(16,24,70,.14); transform: translateY(-1px); }
+.gbtn b { font-size: 1.6rem; font-weight: 800; } .gbtn small { font-size: .82rem; font-weight: 500; color: var(--navy-2); text-align: center; line-height: 1.2; }
+.gbar { width: 70%; height: 6px; border-radius: 999px; background: #E3E7EF; overflow: hidden; } .gbar i { display: block; height: 100%; background: var(--lime); } .gbtns.sec .gbar i { background: var(--blue); }
+.tlink { display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; padding: 4px 2px; font-weight: 600; font-size: .95rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; color: var(--navy); }
+.tlink svg, .btn svg { width: 18px; height: 18px; flex: none; } .tsep { width: 1px; height: 22px; background: var(--line); margin: 0 6px; }
+@media (max-width: 900px) { .hero2 { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -395,6 +417,7 @@ const isK5 = (g) => K5.includes(g);
 /* where a grade + subject page sits: K-5 under its grade, 6-12 under its subject */
 const chooseHref = (s, g) => href({ g, s, v: "choose" });
 
+const IC = {"msg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 5h16v11H9l-5 4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/></svg>", "xl": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"/><path d=\"M4 10h16M4 15h16M10 4v16\" stroke=\"currentColor\" stroke-width=\"1.6\"/></svg>", "home": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 11l8-7 8 7v9h-5v-6H9v6H4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/></svg>"};
 function header(r) {
   const c = [`<a href="#">Learning Maps</a>`];
   if (r.g) { c.push(`<span>/</span><a href="${href({ g: r.g })}">${gname(r.g)}</a>`); if (r.s) c.push(`<span>/</span><a href="${chooseHref(r.s, r.g)}">${esc(course(r.s, r.g) ? `${r.s} (${course(r.s, r.g)})` : r.s)}</a>`); }
@@ -402,8 +425,8 @@ function header(r) {
   const lab = { focus: "Our focus standards", paper: "Print this list", progress: "Progress and messages" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
   $("#crumbs").innerHTML = c.join("");
   $("#who").innerHTML = (PRACTICE ? `<span class="pill practice">Practice: nothing is saved</span>` : "") + (TEAM ? `<span class="pill team">Team: ${esc(TEAM)}</span>` : "")
-    + (r.g ? helpLink(isK5(r.g) ? "k5" : "ms") : r.s ? helpLink("ms") : `<a class="btn small" href="${HELP_PDF.k5}" target="_blank" rel="noopener">Help K-5 (PDF) ↗</a><a class="btn small" href="${HELP_PDF.ms}" target="_blank" rel="noopener">Help 6-12 (PDF) ↗</a>`)
-    + (FRAMED ? `<a class="btn small" href="${esc(location.href)}" target="_blank" rel="noopener" title="Open this page in its own tab">Open full page ↗</a>` : "") + `<a class="btn small" href="./">Home</a>`;
+    + (r.g ? helpLink(isK5(r.g) ? "k5" : "ms") : r.s ? helpLink("ms") : r.v ? "" : `<a class="tlink" href="#v=progress">${IC.msg}Progress and messages</a><span class="tsep" aria-hidden="true"></span><button class="tlink" type="button" data-excel="">${IC.xl}Excel: all subjects</button>${help("exports")}<span class="tsep" aria-hidden="true"></span>`)
+    + (FRAMED ? `<a class="btn small" href="${esc(location.href)}" target="_blank" rel="noopener" title="Open this page in its own tab">Open full page ↗</a>` : "") + `<a class="btn small" href="./">${IC.home}Home</a>`;
 }
 
 async function render(keep) {
@@ -422,15 +445,16 @@ async function render(keep) {
 }
 
 function homeV() {
-  return `<div class="stack"><div class="panel stack"><p class="pill">Part 2</p><h1>Vertical Alignment Learning Maps${help("home")}</h1>
-    <p class="lead">Each grade chooses its focus standards, sees them by strand, and uses them in its Vertical Alignment Learning Map.</p><p class="notice" style="font-weight:600">This is our first draft: we will keep working on it and polish it in the future.</p>
-    <p class="expect"><b>Focus standards</b>The standards required for success toward graduation and success in the course. Pick all the standards that need to be taught in depth to succeed in each subject.</p>
-    <div class="steps2"><div><b>1. Select Focus Standards</b>Pick all the standards that need to be taught in depth to succeed in the subject. See them by strand and copy the codes.</div><div><b>2. Complete Learning Map</b>Open your grade and subject's Vertical Alignment Learning Map and fill it in, starting with your focus standards.</div></div>
-    <div class="row-acts"><a class="btn small" href="#v=progress">Progress and messages</a><button class="btn small" type="button" data-excel="">Excel: all subjects</button>${help("exports")}</div></div>
-    <div class="doors"><section class="panel door"><h2>Elementary (K-5)</h2><p class="lead">Choose your grade. You will see your four subjects.</p><p style="margin:-6px 0 12px">${helpLink("k5")}</p>
-      <div class="gbtns">${K5.map((g) => { const done = SUBJ.filter(([s]) => statusOf(s, g) === "selected").length; return `<a class="gbtn" href="${href({ g })}">${g}<small>${done} of 4 selected</small></a>`; }).join("")}</div></section>
-    <section class="panel door"><h2>Secondary (6-12)</h2><p class="lead">Choose your grade. You will see your four subjects (in high school, your course).</p><p style="margin:-6px 0 12px">${helpLink("ms")}</p>
-      <div class="gbtns sec">${G612.map((g) => { const done = SUBJ.filter(([s]) => statusOf(s, g) === "selected").length; return `<a class="gbtn" href="${href({ g })}">${g}<small>${done} of 4 selected</small></a>`; }).join("")}</div></section></div>
+  const tiles = (gs) => gs.map((g) => { const done = SUBJ.filter(([s]) => statusOf(s, g) === "selected").length;
+    return `<a class="gbtn" href="${href({ g })}" aria-label="${esc(gname(g))}: ${done} of 4 subjects selected"><b>${g}</b><small>${done} of 4<br>selected</small>${done ? `<span class="gbar"><i style="width:${done * 25}%"></i></span>` : ""}</a>`; }).join("");
+  return `<div class="stack"><div class="hero2"><div class="hl"><p class="pill p2">Part 2</p><h1>Vertical Alignment Learning Maps${help("home")}</h1>
+      <p class="hsub">Awsaj SAT / US Diploma pathway <span class="pill draft" title="This is our first draft: we will keep working on it and polish it in the future.">Draft</span></p>
+      <p class="lead">Select your focus standards, then add them to your Learning Map.</p><p class="dnote">This is our first draft: we will keep working on it and polish it in the future.</p></div>
+    <ol class="vsteps"><li><span class="n">1</span><b>Select focus standards</b><span>Pick all the standards that need to be taught in depth to succeed in the subject (the standards required for success toward graduation and success in the course). See them by strand and copy the codes.</span></li>
+      <li><span class="n">2</span><b>Complete the Learning Map</b><span>Open your grade and subject's Learning Map and enter your focus standards first.</span></li></ol></div>
+    <p class="getgo">Choose your grade below to get started.</p>
+    <div class="doors"><section class="door k5"><h2>Elementary (K-5)</h2><p class="lead">Choose a grade to see its four subjects.</p><p>${helpLink("k5")}</p><div class="gbtns">${tiles(K5)}</div></section>
+      <section class="door sec"><h2>Secondary (6-12)</h2><p class="lead">Choose a grade to see its subjects or high school courses.</p><p>${helpLink("ms")}</p><div class="gbtns sec">${tiles(G612)}</div></section></div>
     <p class="saved">All the Learning Map documents are in the shared Drive folder <a href="${DRIVE_ROOT}" target="_blank" rel="noopener">Awsaj Learning Maps ↗</a>: Elementary (K-5) and Secondary (6-12), one folder per grade.</p></div>`;
 }
 
