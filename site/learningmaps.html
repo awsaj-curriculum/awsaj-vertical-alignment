@@ -150,6 +150,7 @@ main { padding: 26px 0 80px; } .stack > * + * { margin-top: 18px; }
 .cross:hover { background: var(--magenta); color: #fff; }
 .ptable { overflow-x: auto; } .ptable table { width: 100%; border-collapse: separate; border-spacing: 4px; font-size: .9rem; }
 .ptable th { text-align: left; padding: 4px 8px; white-space: nowrap; } .ptable td.pc { background: #fff; border-radius: 10px; padding: 6px 10px; border-left: 5px solid var(--line); }
+.ptable td.pc small.pcc { display: block; font-size: .72rem; color: var(--muted); font-weight: 700; margin-top: 4px; }
 .ptable td.pc.selected { border-left-color: var(--lime); background: #F4FAE6; } .ptable td.pc a { display: block; text-decoration: none; font-weight: 700; } .ptable td.pc a.docl { font-weight: 600; font-size: .8rem; color: var(--navy-2); text-decoration: underline; }
 #msgText { width: 100%; font-family: inherit; font-size: .92rem; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px; background: #fff; }
 .pshow { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 10px; }
@@ -239,7 +240,17 @@ const CFG = window.VA_CONFIG, H = { apikey: CFG.supabaseKey, Authorization: "Bea
 const SUBJ = [["Math", "math", "var(--lime)"], ["ELA", "ela", "var(--blue)"], ["Science", "science", "var(--magenta)"], ["Social Studies", "social_studies", "var(--amber)"]];
 const K5 = ["K", "1", "2", "3", "4", "5"], G612 = ["6", "7", "8", "9", "10", "11", "12"], ALLG = [...K5, ...G612];
 const COURSE = { Math: { 9: "Algebra 1", 10: "Geometry", 11: "Algebra 2", 12: "Pre-Calculus" }, ELA: { 9: "English 9", 10: "English 10", 11: "English 11", 12: "English 12" },
-  Science: { 9: "Earth Environmental Science", 10: "Physics", 11: "Biology", 12: "Chemistry" }, "Social Studies": { 9: "Geography", 10: "World History 10", 11: "Economics", 12: "World History 12" } };
+  Science: { 9: "Earth Environmental Science", 10: "Physics", 11: "Biology", 12: "Chemistry" }, "Social Studies": { 9: "Geography", 10: "World History 10", 11: "Economics", 12: "World History 12", "12G": "Global Challenges and Interconnected Societies" } };
+/* Tim, 18 Nov 2026: a possible second Grade 12 Social Studies course, Global Challenges and Interconnected Societies, with its own
+   list (stored as grade "12G"). Its standards are the Wisconsin Social Studies high school standards the course team listed. */
+const GC = "12G";
+const GC_CODES = ["Inq1.a", "Inq1.b", "Inq2.a", "Inq2.b", "Inq3.a", "Inq3.b", "Inq3.c", "Inq4.a", "Inq4.b", "BH1.b", "BH2.a", "BH2.b", "BH3.a", "BH4.a",
+  "Econ2.a", "Econ2.b", "Econ2.c", "Econ3.a", "Econ3.b", "Econ3.c", "Econ4.a", "Econ4.b", "Econ4.c", "Econ4.d", "Econ4.e",
+  "Geog1.b", "Geog2.a", "Geog2.b", "Geog2.c", "Geog2.d", "Geog3.a", "Geog3.b", "Geog4.a", "Geog5.a",
+  "Hist1.a", "Hist1.b", "Hist2.a", "Hist2.b", "Hist2.c", "Hist3.a", "Hist3.b", "Hist3.c", "PS1.a", "PS2.a", "PS2.b", "PS2.c", "PS4.a", "PS4.b"].map((c) => `SS.${c}.h`);
+const pg = (g) => (g === GC ? "12" : g);   // the grade a list belongs to
+const vars = (s, g) => (s === "Social Studies" && g === "12" ? ["12", GC] : [g]);   // the lists of one subject in one grade
+const listsOf = (g) => SUBJ.flatMap(([s, , c]) => vars(s, g).map((x) => [s, c, x]));
 const RATING = { 2: ["r2", "Rated: in depth"], 1: ["r1", "Rated: introduced"], 0: ["r0", "Rated: not taught"] };
 const RWORD = { 2: "Taught in depth", 1: "Introduced", 0: "Not taught" };
 const STATUS = { draft: "Draft", selected: "Selected our focus standards" };
@@ -269,8 +280,9 @@ const DRIVE = {
   11: ["1JuTQW8rx2vlJYwsFsdKx2KjEx4wzeSWM", "1LauxuC6tKFypdtw_Q48wuKpiVxu8Ux9jQOi15l5eolU", "1Nk6FGj0njtLhnf2nkHFsx2L-rUp3tAm5TrizKOSWWZA", "1ZXxlNYDIFGPL-pi0SdKziGRjXbiD4T3S-2MWZXNqykk", "1yu95uYWF7_YPLi6oPbOsK2LnrVnO9iAYQC39IqcKVq4"],
   12: ["1OXLTgL4ixN53VpUiNS-_CmFoufwNOdKc", "1ag3i-YWxg3WI7vE-_1eVr_F1ilA_x0oOLBQXcSqSmVQ", "1kwcSPVTwZdvotHtfQIIKQAzY5r-7UYB7ifPZSeAD3Ec", "1PAFddZclwQRAj0mGwbRJ18txk2rXH8XynC71cDpM6fk", "1Z2U6ayPbjpLFOMGeQS8_mGEJWpZnxivoYzNHwmuYhk8"]
 };
-const mapDoc = (s, g) => { const d = DRIVE[g]; const i = SUBJ.findIndex((x) => x[0] === s); return d && i >= 0 ? `https://docs.google.com/document/d/${d[i + 1]}/edit` : profileDoc(s); };
-const gradeFolder = (g) => (DRIVE[g] ? `https://drive.google.com/drive/folders/${DRIVE[g][0]}` : DRIVE_ROOT);
+/* the possible course has no Drive document yet: its Learning Map link gives the template */
+const mapDoc = (s, g) => { if (g === GC) return profileDoc(s); const d = DRIVE[g]; const i = SUBJ.findIndex((x) => x[0] === s); return d && i >= 0 ? `https://docs.google.com/document/d/${d[i + 1]}/edit` : profileDoc(s); };
+const gradeFolder = (g) => (g = pg(g), DRIVE[g] ? `https://drive.google.com/drive/folders/${DRIVE[g][0]}` : DRIVE_ROOT);
 const mapLinks = (s, g, small) => `<a class="btn${small ? " small" : ""}" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Open our ${esc(gname(g))} ${esc(s)}${course(s, g) ? ` (${esc(course(s, g))})` : ""} Learning Map ↗</a><a class="btn small" href="${gradeFolder(g)}" target="_blank" rel="noopener">${esc(gname(g))} folder ↗</a>`;
 const HELP = {
   home: "Vertical Alignment Learning Maps has two parts for every grade and subject. 1. Select Focus Standards: pick all the standards that need to be taught in depth to succeed in the subject (the standards required for success toward graduation and success in the subject); see them by strand and copy the codes. 2. Complete Learning Map: open your grade and subject's Vertical Alignment Learning Map (a Google Doc in the shared folder) and fill it in. Elementary (K-5) and Secondary (6-12) both work by grade, with a tab for each subject (in high school, the course). Step-by-step help (PDF) shows each step with pictures. This is our first draft: we will keep working on it and polish it in the future.",
@@ -290,7 +302,7 @@ const Q = new URLSearchParams(location.search), PRACTICE = Q.get("practice") ===
 const FRAMED = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const gname = (g) => (g === "K" ? "Kindergarten" : "Grade " + g);
+const gname = (g) => (g === "K" ? "Kindergarten" : "Grade " + pg(g));
 const course = (s, g) => (COURSE[s] && COURSE[s][g]) || "";
 const glab = (s, g) => (course(s, g) ? `${gname(g)}<small>${esc(course(s, g))}</small>` : gname(g));
 const gtext = (s, g) => (course(s, g) ? `${gname(g)} (${course(s, g)})` : gname(g));
@@ -333,8 +345,8 @@ let DENS = ["short", "line", "full"].includes(store.get("pd_text")) ? store.get(
 let FMODE = ["codes", "short", "full"].includes(store.get("pd_fmode")) ? store.get("pd_fmode") : "codes";   // codes (default), short, full; this laptop remembers
 
 /* the standards a grade or course chooses from: its grade-level standards in the set the school uses (no Essential Elements) */
-const mainFW = (s, g) => { const k = K5.includes(g); return s === "Math" ? ["WI-CC-MATH"] : s === "ELA" ? ["WI-CC-ELA"] : s === "Science" ? [k ? "AERO-SCI" : "NGSS"] : [k ? "AERO-SS" : "WI-SS"]; };
-const library = (s, g) => (D.idx[s] || []).filter((e) => mainFW(s, g).includes(e.f) && (e.pl || []).includes(g));
+const mainFW = (s, g) => { const k = K5.includes(pg(g)); return s === "Math" ? ["WI-CC-MATH"] : s === "ELA" ? ["WI-CC-ELA"] : s === "Science" ? [k ? "AERO-SCI" : "NGSS"] : [k ? "AERO-SS" : "WI-SS"]; };
+const library = (s, g) => (D.idx[s] || []).filter((e) => mainFW(s, g).includes(e.f) && (g === GC ? GC_CODES.includes(e.c) : (e.pl || []).includes(g)));
 const key = (e) => `${e.f}|${e.c}`;
 const findStd = (s, k) => (D.idx[s] || []).find((e) => key(e) === k);
 const stdOf = (s, p) => findStd(s, `${p.framework}|${p.code}`) || { c: p.code, f: p.framework, t: "", s: "" };
@@ -347,7 +359,7 @@ const minOf = (s, g) => Math.ceil(library(s, g).length / 4);   // Tim: no upper 
 const rawStatus = (s, g) => (D.status.find((x) => x.subject === s && x.grade === g) || {}).status || "draft";
 /* "Selected our focus standards" is stored as "ready"; it only counts while the list holds the minimum */
 const statusOf = (s, g) => (rawStatus(s, g) !== "draft" && picksOf(s, g).length >= minOf(s, g) && picksOf(s, g).length > 0 ? "selected" : "draft");
-const prMark = (e, g) => ((e.pr || []).includes(g) ? (K5.includes(g) ? "Power" : "Priority") : "");
+const prMark = (e, g) => ((e.pr || []).includes(pg(g)) ? (K5.includes(pg(g)) ? "Power" : "Priority") : "");
 function ccss(e) { const m = e.f === "WI-CC-MATH" && e.c.match(/^M\.([K0-9]+|N|A|F|G|SP)\.([A-Z]{1,4})\.([A-D])\.(\d+)(?:\.([a-z]))?$/); if (m) { const [, d, dom, clu, n, sub] = m, t = `${clu}.${n}${sub || ""}`; return "CCSS " + (/^[K0-9]+$/.test(d) ? `${d}.${dom}.${t}` : `HS${d === "SP" ? "S" : d}-${dom}.${t}`); }
   if (e.f === "WI-CC-ELA") return e.cw && e.cw.length ? "CCSS " + e.cw.join(" · ") : "New in Wisconsin 2020 (no CCSS code)";
   if (e.wi) return "Wisconsin match: " + e.wi.join(" · ");
@@ -407,10 +419,10 @@ async function exportExcel(only) {
     const subs = only ? [only] : SUBJ.map((x) => x[0]); await Promise.all(subs.map(loadSubject)); await Promise.all(subs.map((s) => D.det[s])); if (!PRACTICE) await loadPD();
     const X = await loadXlsx(), wb = X.utils.book_new(), today = new Date().toISOString().slice(0, 10);
     const picks = [], lists = [];
-    subs.forEach((s) => ALLG.forEach((g) => { const st = statusOf(s, g), n = picksOf(s, g).length;
-      lists.push({ Subject: s, Grade: g, Course: course(s, g), Status: stLabel(st, n), "Focus standards chosen": n, "Standards to choose from": library(s, g).length, "Minimum (a quarter)": minOf(s, g) });
-      groups(s, g).forEach(([strand, list]) => list.forEach((e) => { const p = picksOf(s, g).find((x) => `${x.framework}|${x.code}` === key(e)) || {}, lv = D.ratings.get(`${key(e)}|${g}`);
-        picks.push({ Subject: s, Grade: g, Course: course(s, g), Status: stLabel(st, 1), Strand: strand, Code: e.c, "Other code": e.f ? ccss(e) : "", Set: e.f, Standard: e.t || "", Note: p.note || "", "Part 1 rating": lv != null ? RWORD[lv] : "Not rated", "School Priority / Power": prMark(e, g) }); })); }));
+    subs.forEach((s) => ALLG.flatMap((x) => vars(s, x)).forEach((g) => { const st = statusOf(s, g), n = picksOf(s, g).length;
+      lists.push({ Subject: s, Grade: pg(g), Course: course(s, g), Status: stLabel(st, n), "Focus standards chosen": n, "Standards to choose from": library(s, g).length, "Minimum (a quarter)": minOf(s, g) });
+      groups(s, g).forEach(([strand, list]) => list.forEach((e) => { const p = picksOf(s, g).find((x) => `${x.framework}|${x.code}` === key(e)) || {}, lv = D.ratings.get(`${key(e)}|${pg(g)}`);
+        picks.push({ Subject: s, Grade: pg(g), Course: course(s, g), Status: stLabel(st, 1), Strand: strand, Code: e.c, "Other code": e.f ? ccss(e) : "", Set: e.f, Standard: e.t || "", Note: p.note || "", "Part 1 rating": lv != null ? RWORD[lv] : "Not rated", "School Priority / Power": prMark(e, g) }); })); }));
     const about = [{ Item: "What this is", Value: "Focus standards chosen by each grade or course, grouped by strand." }, { Item: "Subjects", Value: subs.join(", ") }, { Item: "Exported", Value: today }, { Item: "Source", Value: PRACTICE ? "Practice mode (not saved)" : "Live database" }];
     const add = (rows, name, w) => { const ws = X.utils.json_to_sheet(rows.length ? rows : [{ Note: "Nothing yet." }]); if (w) ws["!cols"] = w.map((x) => ({ wch: x })); X.utils.book_append_sheet(wb, ws, name); };
     add(about, "About", [14, 90]); add(picks, "Focus standards", [14, 6, 24, 26, 30, 16, 24, 12, 80, 40, 16, 12]); add(lists, "Status of each list", [14, 6, 24, 28, 10, 12, 12, 12]);
@@ -424,14 +436,14 @@ const href = (o) => "#" + new URLSearchParams(Object.entries(o).filter(([, v]) =
 const help = (k) => `<span class="qwrap"><button class="qbtn" type="button" data-help="${k}" aria-expanded="false" aria-label="What is this?">?</button><span class="helpbox" data-helpbox="${k}" role="note" hidden>${esc(HELP[k])}</span></span>`;
 const closeHelp = (except) => $$(".helpbox:not([hidden])").forEach((b) => { if (b !== except) { b.hidden = true; const q = b.previousElementSibling; if (q) q.setAttribute("aria-expanded", "false"); } });
 const fw = (e) => `<span class="code">${esc(e.c)}</span><span class="alt">${esc(ccss(e))}</span>`;
-const isK5 = (g) => K5.includes(g);
+const isK5 = (g) => K5.includes(pg(g));
 /* where a grade + subject page sits: K-5 under its grade, 6-12 under its subject */
 const chooseHref = (s, g) => href({ g, s, v: "choose" });
 
 const IC = {"msg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 5h16v11H9l-5 4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/></svg>", "xl": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"/><path d=\"M4 10h16M4 15h16M10 4v16\" stroke=\"currentColor\" stroke-width=\"1.6\"/></svg>", "home": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 11l8-7 8 7v9h-5v-6H9v6H4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/></svg>"};
 function header(r) {
   const c = [`<a href="#">Learning Maps</a>`];
-  if (r.g) { c.push(`<span>/</span><a href="${href({ g: r.g })}">${gname(r.g)}</a>`); if (r.s) c.push(`<span>/</span><a href="${chooseHref(r.s, r.g)}">${esc(course(r.s, r.g) ? `${r.s} (${course(r.s, r.g)})` : r.s)}</a>`); }
+  if (r.g) { c.push(`<span>/</span><a href="${href({ g: pg(r.g) })}">${gname(r.g)}</a>`); if (r.s) c.push(`<span>/</span><a href="${chooseHref(r.s, r.g)}">${esc(course(r.s, r.g) ? `${r.s} (${course(r.s, r.g)})` : r.s)}</a>`); }
   else { if (r.s) c.push(`<span>/</span><a href="${href({ s: r.s })}">${esc(r.s)}</a>`); if (r.g) c.push(`<span>/</span><a href="${chooseHref(r.s, r.g)}">${esc(gtext(r.s, r.g))}</a>`); }
   const lab = { focus: "Our focus standards", paper: "Print this list", progress: "Progress and messages" }[r.v]; if (lab) c.push(`<span>/</span><span>${lab}</span>`);
   $("#crumbs").innerHTML = c.join("");
@@ -447,7 +459,7 @@ async function render(keep) {
   if (r.s && r.g && r.v === "choose" && !D.ev[r.s + "|" + r.g]) { D.ev[r.s + "|" + r.g] = []; loadEvents(r.s, r.g).then(() => { if (!editingText()) render(true); }); }
   const note = !PRACTICE && !D.dbReady ? `<p class="notice">Saving is not working right now: the page cannot reach the database. Reload the page; if it stays, use Print this list and tell the curriculum coordinator.</p>` : "";
   const v = r.v === "progress" ? progressV() : !r.s && !r.g ? homeV()
-    : !r.s && r.g ? (r.v === "focus" ? focusV(SUBJ.map((x) => x[0]), r.g) : gradeV(r.g))
+    : !r.s && r.g ? (r.v === "focus" ? focusV(SUBJ.map((x) => x[0]), pg(r.g)) : gradeV(pg(r.g)))
     : r.s && !r.g ? subjectV(r.s)
     : r.v === "focus" ? focusV([r.s], r.g) : r.v === "paper" ? paperV(r.s, r.g) : chooseV(r.s, r.g);
   document.body.classList.toggle("wide", r.v === "choose");
@@ -461,8 +473,8 @@ async function render(keep) {
 }
 
 function homeV() {
-  const tiles = (gs) => gs.map((g) => { const done = SUBJ.filter(([s]) => statusOf(s, g) === "selected").length;
-    return `<a class="gbtn" href="${href({ g })}" aria-label="${esc(gname(g))}: ${done} of 4 subjects selected"><b>${g}</b><small>${done} of 4<br>selected</small>${done ? `<span class="gbar"><i style="width:${done * 25}%"></i></span>` : ""}</a>`; }).join("");
+  const tiles = (gs) => gs.map((g) => { const L = listsOf(g), done = L.filter(([s, , x]) => statusOf(s, x) === "selected").length;
+    return `<a class="gbtn" href="${href({ g })}" aria-label="${esc(gname(g))}: ${done} of ${L.length} lists selected"><b>${g}</b><small>${done} of ${L.length}<br>selected</small>${done ? `<span class="gbar"><i style="width:${(done / L.length) * 100}%"></i></span>` : ""}</a>`; }).join("");
   return `<div class="stack"><div class="hero2"><div class="hl"><p class="pill p2">Part 2</p><h1>Vertical Alignment Learning Maps${help("home")}</h1>
       <p class="hsub">Awsaj SAT / US Diploma pathway <span class="pill draft" title="This is our first draft: we will keep working on it and polish it in the future.">Draft</span></p>
       <p class="lead">Select your focus standards, then add them to your Learning Map.</p><p class="dnote">This is our first draft: we will keep working on it and polish it in the future.</p></div>
@@ -482,16 +494,16 @@ const stLabel = (st, n) => (st === "selected" ? "Selected" : n ? "In progress" :
 const stPill = (st, n) => `<span class="pill st-${st}${st !== "selected" && n ? " prog" : ""}">${stLabel(st, n)}</span>`;
 
 function gradeV(g) {
-  const cards = SUBJ.map(([s, , c]) => { const n = picksOf(s, g).length, lib = library(s, g).length, st = statusOf(s, g);
+  const cards = listsOf(g).map(([s, c, g]) => { const n = picksOf(s, g).length, lib = library(s, g).length, st = statusOf(s, g);
     const k = st === "selected" ? "done" : n ? "prog" : "none", lab = { done: "Selected", prog: "In progress", none: "Not started" }[k];
     return `<div class="gcard ${k}" style="--c:${c}"><div class="gtop"><b>${s}${course(s, g) ? `<small style="display:block;font-size:.9rem;font-weight:600;color:var(--muted)">${esc(course(s, g))}</small>` : ""}</b><span class="gmark" aria-hidden="true">${k === "done" ? "&#10003;" : ""}</span></div><span class="gstate">${lab}</span><span>${n} of ${lib} chosen</span><a class="btn small${k === "done" ? "" : " cta"}" href="${chooseHref(s, g)}">${k === "done" ? `Review ${esc(s)} standards` : `Choose ${esc(s)} standards`}</a><a class="btn small${k === "done" ? " cta" : ""}" href="${mapDoc(s, g)}" target="_blank" rel="noopener">${k === "done" ? "Open our Learning Map ↗" : "Learning Map ↗"}</a></div>`; }).join("");
-  return `<div class="stack"><div class="panel stack"><h1>${gname(g)}: our focus standards${help("grade")}</h1><p class="lead">For each of your four subjects, pick all the standards that need to be taught in depth to succeed in it.</p>
+  return `<div class="stack"><div class="panel stack"><h1>${gname(g)}: our focus standards${help("grade")}</h1><p class="lead">For each of your four subjects, pick all the standards that need to be taught in depth to succeed in it.${g === "12" ? " Social Studies has two courses, each with its own list: World History 12 and Global Challenges and Interconnected Societies." : ""}</p>
     <div class="row-acts"><a class="btn cta" href="${href({ g, v: "focus" })}">Our focus standards by strand (all subjects)</a><a class="btn" href="${gradeFolder(g)}" target="_blank" rel="noopener">Our ${esc(gname(g))} Learning Maps folder ↗</a><a class="btn" href="${DRIVE_EXAMPLE}" target="_blank" rel="noopener">See an example: the Grade 12 Pre-Calculus Learning Map ↗</a></div></div>
     <div class="gcards">${cards}</div></div>`;
 }
 
 function subjectV(s) {
-  const rows = G612.map((g) => { const n = picksOf(s, g).length, st = statusOf(s, g), lib = library(s, g).length; const bc = ["9", "10", "11", "12"].includes(g) ? "var(--magenta)" : "var(--blue)";
+  const rows = G612.flatMap((x) => vars(s, x)).map((g) => { const n = picksOf(s, g).length, st = statusOf(s, g), lib = library(s, g).length; const bc = ["9", "10", "11", "12"].includes(pg(g)) ? "var(--magenta)" : "var(--blue)";
     return `<div class="lrow" style="--bc:${bc}"><div class="g">${glab(s, g)}</div><div class="meta">${stPill(st, n)}<span>${n} of ${lib} chosen</span></div>
       <div class="acts"><a class="btn small cta" href="${chooseHref(s, g)}">Choose</a><a class="btn small" href="${href({ s, g, v: "focus" })}">By strand</a></div></div>`; }).join("");
   return `<div class="stack"><div class="panel stack"><h1>${esc(s)}: focus standards, Grades 6 to 12${help("ladder")}</h1><p class="lead">Choose your grade or course. Any grade can start at any time.</p>
@@ -514,7 +526,7 @@ function changesHTML(s, g, ed) {
 }
 const lastNote = (ev, k) => { const p = ev.find((x) => x.kind === "pick" && `${x.framework}|${x.code}` === k && x.detail); return p ? p.detail : ""; };
 
-const subjTabs = (g, cur) => g ? `<nav class="tabs" aria-label="Subjects">${SUBJ.map(([s, , c]) => `<a class="tab${statusOf(s, g) === "selected" ? " done" : ""}" style="--c:${c}" href="${chooseHref(s, g)}"${s === cur ? ' aria-current="page"' : ""}><b>${statusOf(s, g) === "selected" ? '<i class="tchk" aria-hidden="true">&#10003;</i>' : ""}${s}${course(s, g) ? ` · ${esc(course(s, g))}` : ""}</b><span>${picksOf(s, g).length} of ${library(s, g).length} · ${statusOf(s, g) === "selected" ? "Selected" : picksOf(s, g).length ? "In progress" : "Not started"}</span></a>`).join("")}</nav>` : "";
+const subjTabs = (g0, cur) => g0 ? `<nav class="tabs" aria-label="Subjects">${listsOf(pg(g0)).map(([s, c, g]) => `<a class="tab${statusOf(s, g) === "selected" ? " done" : ""}" style="--c:${c}" href="${chooseHref(s, g)}"${s === cur && g === g0 ? ' aria-current="page"' : ""}><b>${statusOf(s, g) === "selected" ? '<i class="tchk" aria-hidden="true">&#10003;</i>' : ""}${s}${course(s, g) ? ` · ${esc(course(s, g))}` : ""}</b><span>${picksOf(s, g).length} of ${library(s, g).length} · ${statusOf(s, g) === "selected" ? "Selected" : picksOf(s, g).length ? "In progress" : "Not started"}</span></a>`).join("")}</nav>` : "";
 
 /* Tim, 16 Nov 2026: once a subject's focus standards are selected, move on to the Vertical Alignment Learning Map */
 const nextBox = (s, g) => statusOf(s, g) !== "selected" ? "" : `<div class="nextbox"><b>You are ready to move on to the Vertical Alignment Learning Map.${help("next")}</b><p>Open your Learning Map, then copy one strand at a time: press <b>Copy codes</b> beside a strand (on the right) and paste it into that strand's row. This is our first draft: we will keep working on it and polish it in the future.</p>
@@ -523,8 +535,8 @@ function chooseV(s, g) {
   const lib = library(s, g), picked = picksOf(s, g), st = statusOf(s, g), ed = canEdit(), min = minOf(s, g), n = picked.length;
   const f = chooseV.f = chooseV.f && chooseV.f.k === s + g ? chooseV.f : { k: s + g, q: "", strand: "", only: "" }; if (!chooseV.open || chooseV.openK !== s + g) { chooseV.open = new Set(); chooseV.openK = s + g; }
   const strands = [...new Set(lib.map((e) => e.s))];
-  const rows = lib.filter((e) => (!f.q || (e.c + " " + e.t).toLowerCase().includes(f.q.toLowerCase())) && (!f.strand || e.s === f.strand) && (f.only !== "pr" || (e.pr || []).includes(g)) && (f.only !== "on" || isPicked(s, g, key(e))));
-  let last = ""; const items = rows.map((e) => { const k = key(e), on = isPicked(s, g, k), lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g); const sh = e.s !== last ? `<p class="strandh">${esc(e.s)}</p>` : ""; last = e.s;
+  const rows = lib.filter((e) => (!f.q || (e.c + " " + e.t).toLowerCase().includes(f.q.toLowerCase())) && (!f.strand || e.s === f.strand) && (f.only !== "pr" || (e.pr || []).includes(pg(g))) && (f.only !== "on" || isPicked(s, g, key(e))));
+  let last = ""; const items = rows.map((e) => { const k = key(e), on = isPicked(s, g, k), lv = D.ratings.get(`${e.f}|${e.c}|${pg(g)}`), pm = prMark(e, g); const sh = e.s !== last ? `<p class="strandh">${esc(e.s)}</p>` : ""; last = e.s;
     const op = chooseV.open.has(k);
     return `${sh}<div class="std${on ? " on" : ""}${op ? " open" : ""}"><button class="tick" type="button" data-pick="${esc(k)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(e.c)}"${ed ? "" : " disabled"}>${on ? "&#10003;" : "+"}</button><div class="sbody"><span class="shead">${fw(e)}</span><p class="stext" data-more="${esc(k)}">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}" title="${RATING[lv][1]}">${RATING[lv][1]}</span>` : ""}${pm ? `<span class="h pr" title="School ${pm.toLowerCase()} standard">&#9733;<span class="w"> School ${pm.toLowerCase()} standard</span></span>` : ""}</div><button class="more" type="button" data-more="${esc(k)}" aria-haspopup="dialog">Show all</button></div></div>`; }).join("");
   /* Tim, 16 Nov 2026: a numbered list of what is chosen, in the order of the standards; a cross takes one off */
@@ -564,14 +576,14 @@ function buildMsg(g, kind) {
     map: "Dear colleagues,\n\nThank you for selecting your focus standards. You are ready to move on to the Vertical Alignment Learning Map: open your Learning Map and copy one strand at a time: Copy codes beside each strand on the site, then paste into that strand's row." }[kind];
   out.push(head, "");
   grades.forEach((x) => {
-    const subs = SUBJ.map(([s]) => s).filter((s) => kind === "start" || (kind === "remind" ? statusOf(s, x) !== "selected" : statusOf(s, x) === "selected"));
+    const subs = listsOf(x).map(([s, , y]) => [s, y]).filter(([s, y]) => kind === "start" || (kind === "remind" ? statusOf(s, y) !== "selected" : statusOf(s, y) === "selected"));
     if (!subs.length) return;
     out.push(`${gname(x)}: ${SITE_URL}#g=${x}`);
-    subs.forEach((s) => {
-      const n = picksOf(s, x).length, min = minOf(s, x);
-      if (kind === "remind") out.push(`  ${subjLabel(s, x)}: ${n} chosen so far. ${SITE_URL}#g=${x}&s=${encodeURIComponent(s)}&v=choose`);
-      else if (kind === "map") out.push(`  ${subjLabel(s, x)} Learning Map: ${mapDoc(s, x)}`);
-      else out.push(`  ${subjLabel(s, x)}: ${SITE_URL}#g=${x}&s=${encodeURIComponent(s)}&v=choose`);
+    subs.forEach(([s, y]) => {
+      const n = picksOf(s, y).length;
+      if (kind === "remind") out.push(`  ${subjLabel(s, y)}: ${n} chosen so far. ${SITE_URL}#g=${y}&s=${encodeURIComponent(s)}&v=choose`);
+      else if (kind === "map") out.push(`  ${subjLabel(s, y)} Learning Map: ${mapDoc(s, y)}`);
+      else out.push(`  ${subjLabel(s, y)}: ${SITE_URL}#g=${y}&s=${encodeURIComponent(s)}&v=choose`);
     });
     out.push("");
   });
@@ -581,9 +593,9 @@ function buildMsg(g, kind) {
 }
 const MSG_SUBJECT = { start: "Please choose your focus standards", remind: "Reminder: focus standards still to choose", map: "Next step: your Vertical Alignment Learning Map" };
 function progressV() {
-  const lists = ALLG.length * SUBJ.length, done = ALLG.reduce((a, g) => a + SUBJ.filter(([s]) => statusOf(s, g) === "selected").length, 0);
-  const rows = ALLG.map((g) => `<tr><th><a href="${href({ g })}">${esc(gname(g))}</a></th>${SUBJ.map(([s]) => { const n = picksOf(s, g).length, min = minOf(s, g), st = statusOf(s, g);
-    return `<td class="pc ${st}"><a href="${chooseHref(s, g)}" title="${esc(subjLabel(s, g))}">${st === "selected" ? "&#10003; Selected" : n ? `In progress, ${n} chosen` : "Not started"}</a><a class="docl" href="${mapDoc(s, g)}" target="_blank" rel="noopener">Learning Map ↗</a></td>`; }).join("")}</tr>`).join("");
+  const lists = ALLG.reduce((a, g) => a + listsOf(g).length, 0), done = ALLG.reduce((a, g) => a + listsOf(g).filter(([s, , x]) => statusOf(s, x) === "selected").length, 0);
+  const rows = ALLG.map((g) => `<tr><th><a href="${href({ g })}">${esc(gname(g))}</a></th>${SUBJ.map(([s]) => { const V = vars(s, g), st = V.every((x) => statusOf(s, x) === "selected") ? "selected" : "draft";
+    return `<td class="pc ${st}">${V.map((x) => { const n = picksOf(s, x).length, sx = statusOf(s, x); return `${V.length > 1 ? `<small class="pcc">${esc(course(s, x))}</small>` : ""}<a href="${chooseHref(s, x)}" title="${esc(subjLabel(s, x))}">${sx === "selected" ? "&#10003; Selected" : n ? `In progress, ${n} chosen` : "Not started"}</a><a class="docl" href="${mapDoc(s, x)}" target="_blank" rel="noopener">Learning Map ↗</a>`; }).join("")}</td>`; }).join("")}</tr>`).join("");
   const text = buildMsg(MSG.g, MSG.kind), mail = `mailto:?subject=${encodeURIComponent(MSG_SUBJECT[MSG.kind])}&body=${encodeURIComponent(text)}`;
   return `<div class="stack"><div class="panel stack"><h1>Progress and messages${help("progress")}</h1><p class="lead">${done} of ${lists} lists have selected their focus standards. Click a cell to open that list.</p>
     <div class="ptable"><table><thead><tr><th>Grade</th>${SUBJ.map(([s]) => `<th>${s}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>
@@ -611,13 +623,13 @@ function focusV(subs, g) {
   return `<div class="stack"><div class="row-acts noprint"><button class="btn cta" type="button" onclick="print()">Print</button><a class="btn" href="${back}">Back</a>
       <span class="dens" role="group" aria-label="What to show" style="margin:0 0 0 8px">Show:${[["codes", "Codes only"], ["short", "Codes and short text"], ["full", "Codes and full text"]].map(([k, t]) => `<button class="chip" type="button" data-fmode="${k}" aria-pressed="${FMODE === k}">${t}</button>`).join("")}</span>${help("focus")}</div>
     <article class="doc"><h1>Our focus standards: ${one ? esc(gtext(subs[0], g)) + " " + esc(subs[0]) : esc(gname(g))}</h1><p class="sub">Grouped by strand. ${today}.</p>
-    ${subs.map((s) => focusOne(s, g)).join("")}</article></div>`;
+    ${(one ? subs.map((s) => [s, g]) : subs.flatMap((s) => vars(s, g).map((x) => [s, x]))).map(([s, x]) => focusOne(s, x)).join("")}</article></div>`;
 }
 
 /* paper: every standard one grade or course can choose from, with tick boxes and note lines */
 function paperV(s, g) {
   const lib = library(s, g);
-  let last = ""; const rows = lib.map((e) => { const lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g), sh = e.s !== last ? `<tr><td colspan="3" style="font-weight:800;background:#F3F4F8">${esc(e.s)}</td></tr>` : ""; last = e.s;
+  let last = ""; const rows = lib.map((e) => { const lv = D.ratings.get(`${e.f}|${e.c}|${pg(g)}`), pm = prMark(e, g), sh = e.s !== last ? `<tr><td colspan="3" style="font-weight:800;background:#F3F4F8">${esc(e.s)}</td></tr>` : ""; last = e.s;
     return `${sh}<tr><td style="width:34px"><span class="box"></span></td><td style="width:24%">${fw(e)}${lv != null ? `<span class="alt">Part 1: ${RWORD[lv]}</span>` : ""}${pm ? `<span class="alt">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}</td><td>${esc(e.t)}<div class="noteline"></div></td></tr>`; }).join("");
   return `<div class="stack"><div class="row-acts noprint"><button class="btn cta" type="button" onclick="print()">Print</button><a class="btn" href="${chooseHref(s, g)}">Back</a>${help("paper")}</div>
     <article class="doc"><h1>Focus standards: ${esc(gtext(s, g))} ${esc(s)}</h1><p class="sub">Tick the standards every class must teach in depth (${lib.length} to choose from).</p>
@@ -627,7 +639,7 @@ function paperV(s, g) {
 
 /* the whole standard in a popup: full text, its Part 1 rating, the school's mark, and Add / Remove */
 function openStd(s, g, k) {
-  const e = findStd(s, k); if (!e) return; const lv = D.ratings.get(`${e.f}|${e.c}|${g}`), pm = prMark(e, g), on = isPicked(s, g, k), p = picksOf(s, g).find((x) => `${x.framework}|${x.code}` === k);
+  const e = findStd(s, k); if (!e) return; const lv = D.ratings.get(`${e.f}|${e.c}|${pg(g)}`), pm = prMark(e, g), on = isPicked(s, g, k), p = picksOf(s, g).find((x) => `${x.framework}|${x.code}` === k);
   $("#sdBody").innerHTML = `<p class="strandl">${esc(gtext(s, g))} ${esc(s)} · ${esc(e.s || "")}</p><h3 id="sdCode" style="margin-top:6px;font-size:1.4rem">${esc(e.c)}</h3><span class="alt">${esc(ccss(e))}</span>
     <p class="sdtext">${esc(e.t)}</p><div class="hints">${lv != null ? `<span class="h ${RATING[lv][0]}">${RATING[lv][1]}</span>` : `<span class="h">Not rated in Part 1</span>`}${pm ? `<span class="h pr">&#9733; School ${pm.toLowerCase()} standard</span>` : ""}${on ? `<span class="h st-selected">Chosen as a focus standard</span>` : ""}</div>
     ${p && p.note ? `<p class="saved" style="margin-top:10px"><b>Note:</b> ${esc(p.note)}</p>` : ""}
